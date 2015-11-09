@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/frag_map_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="4dp"
+            android:drawablePadding="4dp"
+            android:drawableLeft="@drawable/ic_search"
+            android:background="@drawable/shape_search_round_white"
+            android:textSize="14sp"
+            android:textColor="@color/color_a9a9a9"
+            android:hint="输入小区名称或楼盘名称" />
+
+        <TextView
+            android:id="@+id/frag_map_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical"
+            android:text="列表"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <LinearLayout
+            android:id="@+id/frag_map_find_house_area_llt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/frag_map_find_house_area_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/frag_map_area"
+                android:textColor="@color/color_383838" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_triangle" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/theme_gray" />
+
+        <LinearLayout
+            android:id="@+id/frag_map_find_house_total_price_llt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/frag_map_find_house_total_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/frag_map_total_money"
+                android:textColor="@color/color_383838" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_triangle" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/theme_gray" />
+
+        <LinearLayout
+            android:id="@+id/frag_map_find_house_type_llt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/frag_map_find_house_type_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/frag_map_house_type"
+                android:textColor="@color/color_383838" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_triangle" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/theme_gray" />
+
+        <LinearLayout
+            android:id="@+id/frag_map_find_house_more_llt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/frag_map_find_house_more_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/frag_map_more"
+                android:textColor="@color/color_383838" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:src="@drawable/ic_triangle" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:background="@color/transparent" >
+
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:drawableTop="@drawable/ic_map_locate"
+                    android:drawablePadding="2dp"
+                    android:padding="8dp"
+                    android:gravity="center"
+                    android:text="@string/frag_map_locate"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:background="@drawable/shape_round_corner_white"
+                    app:top_width="20dp"
+                    app:top_height="20dp" />
+
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="4dp"
+                    android:drawablePadding="2dp"
+                    android:padding="8dp"
+                    android:drawableTop="@drawable/ic_map_subway"
+                    android:gravity="center"
+                    android:text="@string/frag_map_subway"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:background="@drawable/shape_round_corner_white"
+                    app:top_width="20dp"
+                    app:top_height="20dp" />
+
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="4dp"
+                    android:drawablePadding="2dp"
+                    android:padding="8dp"
+                    android:drawableTop="@drawable/ic_map_nearby"
+                    android:gravity="center"
+                    android:text="@string/frag_map_nearby"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:background="@drawable/shape_round_corner_white"
+                    app:top_width="20dp"
+                    app:top_height="20dp" />
+            </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

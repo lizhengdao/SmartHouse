@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color> <!-- 透明 -->
+    
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_a0a0a0">#a0a0a0</color>
+    <color name="color_15901b">#15901b</color>
+    <color name="color_747474">#747474</color>
+    <color name="color_6d6d6d">#6d6d6d</color>
+    <color name="color_46b30e">#46b30e</color>
+    <color name="color_626262">#626262</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_383838">#383838</color>
+    <color name="color_9c9c9c">#9c9c9c</color>
+    <color name="color_777777">#777777</color>
+    <color name="color_45ba0a">#45ba0a</color>
+    <color name="color_c9c9c9">#c9c9c9</color>
+    <color name="color_a2a2a2">#a2a2a2</color>
+    <color name="color_504f4f">#504f4f</color>
+    <color name="color_b5b4b4">#b5b4b4</color>
+    <color name="color_4c4c4c">#4c4c4c</color>
+    <color name="color_66b978">#66b978</color>
+    <color name="color_a5a5a5">#a5a5a5</color>
+    <color name="color_ff9000">#ff9000</color>
+    <color name="color_e9663a">#e9663a</color>
+    <color name="color_e2e2e2">#e2e2e2</color>
+    <color name="color_e0e0e0">#e0e0e0</color>
+    <color name="color_aaaaaa">#aaaaaa</color>
+    <color name="color_4ac20b">#4ac20b</color>
+    <color name="color_8d8d8d">#8d8d8d</color>
+    <color name="color_a9a9a9">#a9a9a9</color>
+    
+    <color name="color_app_theme">#21a535</color>
+    <color name="theme_red_alpha">#33e23c1b</color>
+    <color name="theme_red">#e23c1b</color>
+    <color name="theme_white">#ffffff</color>
+    <color name="theme_gray">#e0e0e0</color>
+    <color name="theme_gray_l1">#f1f1f1</color>
+    <color name="theme_hint">#cccccc</color>
+    <color name="theme_black">#000000</color>
+    <color name="theme_brown">#8e236b</color>
+    <color name="theme_green">#51ad52</color>
+    <color name="color_b3000000">#b3000000</color>
+    <color name="color_cecece">#cecece</color>
+    
+    
+</resources>

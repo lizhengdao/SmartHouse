@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_search_house_artifact_result_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/act_search_house_artifact_result_title"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/act_search_house_artifact_result_change_another"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:drawableLeft="@drawable/ic_change_another"
+            android:gravity="center_vertical"
+            android:paddingRight="8dp"
+            android:text="@string/act_search_house_artifact_result_change_another"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <cn.com.zzwfang.pullview.AbPullToRefreshView
+        android:id="@+id/pull_search_house_artifact_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lst_search_house_artifact_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/color_cecece"
+            android:dividerHeight="1dp" />
+    </cn.com.zzwfang.pullview.AbPullToRefreshView>
+
+</LinearLayout>

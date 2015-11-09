@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusableInTouchMode="true" >
+    
+    <TextView 
+        android:id="@+id/view_city_list_header_locate_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_eeeeee"
+        android:text="当前定位的城市"/>
+    
+    <TextView 
+        android:id="@+id/view_city_list_header_locate_city_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:text="成都"/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
+        android:clickable="false"
+        android:background="@color/color_eeeeee"
+        android:text="所有城市"/>
+
+</LinearLayout>

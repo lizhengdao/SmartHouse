@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/white" >
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_settings_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/act_settings"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_settings_change_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_settings_change_pwd"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_settings_change_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_settings_msg_push"/>
+        
+        <cn.com.zzwfang.view.ToggleButton
+            android:id="@+id/act_settings_msg_push_toggle"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            app:borderWidth="0.5sp"
+            app:offBorderColor="#aaa"
+            app:offColor="#fff"
+            app:onColor="@color/theme_red"
+            app:spotColor="#fff"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_settings_clear_cache"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_settings_clear_cache"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_settings_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_settings_about_us"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_settings_common_questions"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_settings_common_questions"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_settings_check_updates"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_settings_check_updates"/>
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="最新版本"/>
+    </FrameLayout>
+    
+    <TextView 
+        android:id="@+id/act_settings_logout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:gravity="center"
+        android:text="@string/act_settings_logout"/>
+
+</LinearLayout>

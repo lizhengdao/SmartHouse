@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <cn.com.zzwfang.view.ptz.PullToZoomListViewEx
+            android:id="@+id/frag_home_ptz"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        
+        <ImageView 
+            android:id="@+id/iv_frag_home_shangjinglieren"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="200dp"
+            android:src="@drawable/ic_shangjinlieren"/>
+    </FrameLayout>
+
+</LinearLayout>

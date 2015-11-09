@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true" >
+    
+    <LinearLayout
+        android:id="@+id/act_main_guider_llt"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_eeeeee"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <cn.com.zzwfang.view.GuiderView
+            android:id="@+id/act_main_guider_home"
+            style="@style/GuiderView"
+            app:icon="@drawable/ic_menu_home"
+            app:color="@color/color_app_theme"
+            app:text="@string/act_main_home_page" />
+
+        <cn.com.zzwfang.view.GuiderView
+            android:id="@+id/act_main_guider_map"
+            style="@style/GuiderView"
+            app:icon="@drawable/ic_menu_map_house"
+            app:color="@color/color_app_theme"
+            app:text="@string/act_main_map_find_house" />
+
+        <cn.com.zzwfang.view.GuiderView
+            android:id="@+id/act_main_guider_consultant"
+            style="@style/GuiderView"
+            app:icon="@drawable/ic_menu_consultant"
+            app:color="@color/color_app_theme"
+            app:text="@string/act_main_consultant" />
+
+        <cn.com.zzwfang.view.GuiderView
+            android:id="@+id/act_main_guider_mine"
+            style="@style/GuiderView"
+            app:icon="@drawable/ic_menu_me"
+            app:color="@color/color_app_theme"
+            app:text="@string/act_main_me" />
+    </LinearLayout>
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/act_main_content_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/act_main_guider_llt"/>
+
+</RelativeLayout>

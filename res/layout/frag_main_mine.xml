@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/frag_mine_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/frag_mine_back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/frag_mine"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            android:text="@string/frag_mine_be_fee_hunter"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_eeeeee"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@drawable/bg_mine_top"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <cn.com.zzwfang.view.PathImage
+                    android:id="@+id/frag_mine_avatar"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_mine_unlogin_avatar"
+                    app:shape="circle" />
+
+                <TextView
+                    android:id="@+id/view_userinfo_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="李政道"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/frag_mine_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawableLeft="@drawable/ic_mine_phone"
+                        android:drawableRight="@drawable/ic_right_arrow"
+                        android:drawablePadding="4dp"
+                        android:gravity="center"
+                        android:text="13882034203"
+                        android:textColor="@color/color_8d8d8d"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/theme_gray" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_msg_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    
+                    android:layout_gravity="left"
+                    android:drawableLeft="@drawable/ic_msg"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_msg"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_attention_house_source_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawableLeft="@drawable/ic_i_concerned_source"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:text="@string/frag_mine_house_source_i_attention"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_my_proxy_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_my_proxy"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_my_proxy"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow"/>
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_browse_record_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_launcher"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_browse_record"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+            
+            <FrameLayout
+                android:id="@+id/frag_mine_my_demand_flt"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:background="@color/white"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_my_demand"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_my_demand"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_my_house_resources_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_my_house_sources"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_my_house_resources"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_mortgage_calculator_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_my_mortgage_calculator"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_mortgage_calculator"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+            
+            <FrameLayout
+                android:id="@+id/frag_mine_feedback_flt"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:background="@color/white"
+                android:layout_marginTop="8dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_feedback"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_feedback"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <FrameLayout
+                android:id="@+id/frag_mine_settings_flt"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="41dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="8dp"
+                    android:drawableLeft="@drawable/ic_setting"
+                    android:gravity="center_vertical"
+                    android:text="@string/frag_mine_settings"
+                    android:textColor="@color/color_8d8d8d"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

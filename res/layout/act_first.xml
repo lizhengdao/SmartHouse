@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@+id/act_first_lst"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/act_first_down_scroll_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="60dp"
+        android:drawableTop="@drawable/ic_down_scroll"
+        android:gravity="center"
+        android:text="@string/scroll_down"
+        android:textColor="@color/color_46b30e"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/act_first_up_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/act_first_up_scroll_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_up_scroll"
+            android:gravity="center"
+            android:text="@string/scroll_up"
+            android:textColor="@color/color_46b30e"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/act_first_start_find_house_tv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_start_find_house"
+            android:gravity="center"
+            android:text="@string/start_find_house"
+            android:textColor="@color/color_46b30e"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</FrameLayout>

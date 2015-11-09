@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <cn.com.zzwfang.view.AutoDrawableTextView
+            android:id="@+id/frag_home_second_hand_house"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_second_hand_house"
+            android:gravity="center"
+            app:top_height="50dp"
+            app:top_width="50dp"
+            android:text="@string/frag_home_second_hand_house"
+            android:textColor="@color/color_747474"
+            android:textSize="16sp" />
+
+        <cn.com.zzwfang.view.AutoDrawableTextView
+            android:id="@+id/frag_home_new_house"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_new_house"
+            android:gravity="center"
+            app:top_height="50dp"
+            app:top_width="50dp"
+            android:text="@string/frag_home_new_house"
+            android:textColor="@color/color_747474"
+            android:textSize="16sp" />
+
+        <cn.com.zzwfang.view.AutoDrawableTextView
+            android:id="@+id/frag_home_rent_house"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_rent_house"
+            android:gravity="center"
+            app:top_height="50dp"
+            app:top_width="50dp"
+            android:text="@string/frag_home_rent_house"
+            android:textColor="@color/color_747474"
+            android:textSize="16sp" />
+
+        <cn.com.zzwfang.view.AutoDrawableTextView
+            android:id="@+id/frag_home_search_house"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_find_house_artifact"
+            android:gravity="center"
+            app:top_height="50dp"
+            app:top_width="50dp"
+            android:text="@string/frag_home_find_house_artifact"
+            android:textColor="@color/color_747474"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_eeeeee" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:drawableLeft="@drawable/ic_frag_home_recommend"
+            android:drawablePadding="8dp"
+            android:text="@string/frag_home_recommend_house_source"
+            android:textColor="@color/color_6d6d6d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="12dp"
+            android:drawableRight="@drawable/ic_right_arrow"
+            android:text="@string/frag_home_more"
+            android:textColor="@color/color_6d6d6d"
+            android:textSize="16sp" />
+    </FrameLayout>
+
+</LinearLayout>

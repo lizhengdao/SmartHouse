@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_forget_pwd_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/act_forget_pwd"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/shape_round_stroke_color_app_theme"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/act_forget_pwd_phone_num_edt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@color/color_eeeeee"
+            android:hint="输入您的手机号码"
+            android:inputType="phone"
+            android:textColor="@color/color_a2a2a2"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/act_forget_pwd_resend_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/shape_round_color_c9c9c9"
+            android:drawableLeft="@drawable/ic_resend_auth_code"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="59秒后重新发送"
+            android:textColor="@color/color_a2a2a2"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/act_forget_pwd_input_auth_code_edt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/shape_round_stroke_color_app_theme"
+        android:hint="输入验证码"
+        android:paddingBottom="2dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="2dp"
+        android:textColor="@color/color_a2a2a2"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/act_forget_pwd_next_step_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_login_btn"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

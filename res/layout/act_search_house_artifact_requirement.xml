@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_search_house_artifact_requirement_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/act_search_house_artifact_requirement"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_budget"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:text="@string/act_search_house_artifact_budget"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/ic_down_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/act_search_house_artifact_select_price"
+                    android:textColor="@color/color_b5b4b4"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_location_to_buy"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:text="@string/act_search_house_artifact_where"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/ic_down_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/act_search_house_artifact_select_area"
+                    android:textColor="@color/color_b5b4b4"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_location_to_buy"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:text="@string/act_search_house_month_pay"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/ic_down_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/act_search_house_month_pay_hint"
+                    android:textColor="@color/color_b5b4b4"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:text="@string/act_search_house_artifact_addition"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_down_arrow"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="长按说出找房意向"
+                    android:textColor="@color/color_b5b4b4"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_room"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:drawablePadding="8dp"
+                    android:text="@string/act_search_house_artifact_how_many_rooms"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4" >
+
+                    <RadioButton
+                        android:id="@+id/rb_one_room"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="@string/act_search_house_artifact_one_room"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                    
+                    <RadioButton
+                        android:id="@+id/rb_two_rooms"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="@string/act_search_house_artifact_two_rooms"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                    
+                    <RadioButton
+                        android:id="@+id/rb_three_rooms"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="@string/act_search_house_artifact_three_rooms"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                    
+                    <RadioButton
+                        android:id="@+id/rb_four_rooms"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="@string/act_search_house_artifact_four_rooms"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                </RadioGroup>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_room"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:drawablePadding="8dp"
+                    android:text="补充信息（多选项）"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <LinearLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+                    
+                    <CheckBox
+                        android:id="@+id/rb_subway_house"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:checked="true"
+                        android:text="地铁房"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                    
+                    <CheckBox
+                        android:id="@+id/rb_school_house"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="学区房"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                    
+                    <CheckBox
+                        android:id="@+id/rb_electric_house"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="电梯房"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                    
+                    <CheckBox
+                        android:id="@+id/rb_car_space_house"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:button="@null"
+                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                        android:text="带车位"
+                        android:textColor="@color/color_504f4f"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+            
+            <TextView 
+                android:id="@+id/act_search_house_artifact_requirement_commit_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:background="@drawable/bg_login_btn"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:text="提交"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

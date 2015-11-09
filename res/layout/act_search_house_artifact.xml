@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_search_house_artifact_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/act_search_house_artifact_back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/act_search_house_artifact"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/act_search_house_artifact_hint"
+        android:textColor="@color/color_9c9c9c" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <RadioButton
+            android:id="@+id/act_house_artifact_live_house_rb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_live_house"
+            android:button="@null"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/act_house_artifact_commercial_house_rb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_commercial_house"
+            android:button="@null" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/act_house_artifact_disposable_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginRight="43dp"
+        android:layout_marginTop="65dp"
+        android:background="@drawable/bg_login_btn"
+        android:gravity="center"
+        android:text="@string/act_search_house_artifact_disposable"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/act_house_artifact_mortgage_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginRight="43dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg_round_yellow"
+        android:gravity="center"
+        android:text="@string/act_search_house_artifact_mortgage"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    
+    <Space 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_search_house_artifact"/>
+
+</LinearLayout>

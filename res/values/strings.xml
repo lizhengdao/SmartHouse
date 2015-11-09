@@ -1,0 +1,168 @@
+<resources>
+
+    <string name="app_name">SmartHouse</string>
+    <string name="back">返回</string>
+    
+    <!-- 导航页 -->
+    <string name="start_find_house">开始找房</string>
+    <string name="scroll_up">向上滑动</string>
+    <string name="scroll_down">向下滑动</string>
+    <string name="page_one_desc_one">100%真实房源</string>
+    <string name="page_one_desc_two">等你体验</string>
+    <string name="page_two_desc_one">地图找房</string>
+    <string name="page_two_desc_two">更容易，so easy</string>
+    <string name="page_three_desc_one">赏金猎人</string>
+    <string name="page_three_desc_two">全民卖房，赏金不停！</string>
+    <string name="page_four_desc_one">快捷找房</string>
+    <string name="page_four_desc_two">多位经纪人为你推荐，沟通更快捷</string>
+    
+    <!-- 登录界面 -->
+    <string name="login">登录</string>
+    <string name="register_account">注册账号</string>
+    <string name="input_phone_num">请输入手机号码</string>
+    <string name="input_pwd">请输入密码</string>
+    <string name="forget_pwd">忘记密码？</string>
+    <string name="broker_login">经纪人账号登录</string>
+    
+    <!-- 注册 -->
+    <string name="register">注册</string>
+    
+    <!-- 智住网协议 -->
+    <string name="smart_house_protocol">智住网用户协议</string>
+    
+    <!-- 主界面 -->
+    <string name="act_main_exitapp">再次点击退出应用</string>
+    <string name="act_main_home_page">首页</string>
+    <string name="act_main_map_find_house">地图找房</string>
+    <string name="act_main_consultant">咨询</string>
+    <string name="act_main_me">我</string>
+    
+    <!-- 首页 -->
+    <string name="frag_home_second_hand_house">二手房</string>
+    <string name="frag_home_new_house">新房</string>
+    <string name="frag_home_rent_house">租房</string>
+    <string name="frag_home_find_house_artifact">找房神器</string>
+    <string name="frag_home_recommend_house_source">推荐房源</string>
+    <string name="frag_home_more">更多</string>
+    <string name="frag_home_search_hint">输入小区名或楼盘名称</string>
+    
+    <!-- 城市列表 -->
+    <string name="act_city_list">选择城市</string>
+
+    <!-- 地图找房 -->
+    <string name="frag_map_area">区域</string>
+    <string name="frag_map_total_money">总价</string>
+    <string name="frag_map_house_type">房型</string>
+    <string name="frag_map_more">更多</string>
+    <string name="frag_map_rent_money">租金</string>
+    
+    <string name="frag_map_locate">定位</string>
+    <string name="frag_map_subway">地铁</string>
+    <string name="frag_map_nearby">周边</string>
+    
+    <!-- 咨询  -->
+    <string name="frag_consultation">咨询</string>
+    <string name="frag_consultation_headline">头条</string>
+    <string name="frag_consultation_shopping_guide">导购</string>
+    <string name="frag_consultation_q_and_a">问答</string>
+    <string name="frag_consultation_more">更多&#8230;</string>
+    
+    <!-- 个人 -->
+    <string name="frag_mine_back">返回</string>
+    <string name="frag_mine">我的</string>
+    <string name="frag_mine_be_fee_hunter">成为赏金猎人</string>
+    <string name="frag_mine_msg">消息</string>
+    <string name="frag_mine_house_source_i_attention">我关注的房源</string>
+    <string name="frag_mine_my_proxy">我的委托</string>
+    <string name="frag_mine_browse_record">浏览记录</string>
+    <string name="frag_mine_my_demand">我的需求</string>
+    <string name="frag_mine_my_house_resources">我的房源</string>
+    <string name="frag_mine_mortgage_calculator">房贷计算器</string>
+    <string name="frag_mine_feedback">意见反馈</string>
+    <string name="frag_mine_settings">设置</string>
+    
+    <!-- 找房神器 -->
+    <string name="act_search_house_artifact_hint">请设置你的购房意向，我们为你匹配最适合的专家</string>
+    <string name="act_search_house_artifact_disposable">一次性</string>
+    <string name="act_search_house_artifact_mortgage">按揭贷款</string>
+    <string name="act_search_house_artifact_requirement">找房神器</string>
+    <string name="act_search_house_artifact_budget">您的价格预算：</string>
+    <string name="act_search_house_artifact_select_price">请选择价格</string>
+    <string name="act_search_house_artifact_where">您想在哪里买：</string>
+    <string name="act_search_house_artifact_select_area">请选择区域</string>
+    <string name="act_search_house_artifact_addition">补充说点什么吧~</string>
+    <string name="act_search_house_artifact_how_many_rooms">您想买几居：</string>
+    <string name="act_search_house_artifact_one_room">一房</string>
+    <string name="act_search_house_artifact_two_rooms">二房</string>
+    <string name="act_search_house_artifact_three_rooms">三房</string>
+    <string name="act_search_house_artifact_four_rooms">四房</string>
+    <string name="act_search_house_month_pay">您的预计月供范围：</string>
+    <string name="act_search_house_month_pay_hint">请选择月供范围</string>
+    <string name="act_search_house_artifact_result_title">我要咨询</string>
+    <string name="act_search_house_artifact_result_change_another">换一批</string>
+    <string name="act_proxy_detail_dial">呼叫</string>
+    <string name="act_proxy_detail_msg">消息</string>
+    
+    <!-- 设置    -->
+    <string name="act_settings">设置</string>
+    <string name="act_settings_change_pwd">修改密码</string>
+    <string name="act_settings_msg_push">信息推送</string>
+    <string name="act_settings_clear_cache">清除缓存</string>
+    <string name="act_settings_about_us">关于我们</string>
+    <string name="act_settings_common_questions">常见问题</string>
+    <string name="act_settings_check_updates">检查更新</string>
+    <string name="act_settings_logout">退出账号</string>
+    
+    <!-- 意见反馈   -->
+    <string name="act_feedback">意见反馈</string>
+    <string name="act_feedback_hint">请输入反馈，我们将不断改进</string>
+    <string name="act_feedback_phone_hint">输入电话号码（选填）</string>
+    
+    <!-- 我的需求 -->
+    <string name="act_my_demand">我的需求</string>
+    <string name="act_my_demand_back">返回</string>
+    <string name="act_my_demand_advised_house_resources">推荐房源</string>
+    <string name="act_my_demand_my_buy_house">我的购房</string>
+    
+    <!-- 房贷计算器   -->
+    <string name="act_mortgage_calculator_back">返回</string>
+    <string name="act_mortgage_calculator">房贷计算器</string>
+    
+    <!-- 我的房源   -->
+    <string name="act_my_house_resources_back">返回</string>
+    <string name="act_my_house_resources">我的房源</string>
+    <string name="act_my_house_resources_my_house">我的房</string>
+    <string name="act_my_house_resources_see_house_detail">看房明细</string>
+    <string name="act_my_house_resources_msg_changes">信息变动</string>
+    
+    
+    <!-- 浏览记录   -->
+    <string name="act_browse_record_back">返回</string>
+    <string name="act_browse_record">浏览记录</string>
+    
+    <!-- 消息   -->
+    <string name="act_message_back">返回</string>
+    <string name="act_message">消息</string>
+    
+    <!-- 我关注的房源 -->
+    <string name="act_concern_house_back">返回</string>
+    <string name="act_concern_house">我关注的房源</string>
+    
+    <!-- 我的委托 -->
+    <string name="act_my_proxy_back">返回</string>
+    <string name="act_my_proxy">我的委托</string>
+    
+    <!-- 二手房 -->
+    <string name="act_second_hand_house_back">返回</string>
+    <string name="act_second_hand_house_hint">试试输入楼盘名称</string>
+    <string name="act_second_hand_house_list">列表</string>
+    <string name="act_second_hand_house_map">地图</string>
+    
+    <!-- 找房神器 -->
+    <string name="act_search_house_artifact">找房神器</string>
+    <string name="act_search_house_artifact_back">返回</string>
+    
+    <!-- 忘记密码 -->
+    <string name="act_forget_pwd">忘记密码</string>
+    
+</resources>

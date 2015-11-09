@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_my_demand_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_my_demand_back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/act_my_demand"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_my_demand_flt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_my_demand"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_my_demand_advised_house_resources_flt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_my_demand_advised_house_resources"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+    
+    <FrameLayout 
+        android:id="@+id/act_my_demand_my_buy_house_flt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_act_settings_item">
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/act_my_demand_my_buy_house"/>
+        
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_launcher"/>
+    </FrameLayout>
+
+</LinearLayout>
