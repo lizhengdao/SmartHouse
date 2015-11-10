@@ -30,5 +30,36 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
+    
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/bg_shangjinlieren_act"/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="赏金猎人规则："/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="为了能使用本服务，您同意一下事项："/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="（1）依本服务注册表的提示提供您本人真实、正确、最新及完整的资料；"/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="（2）维持更新您个人用户信息，确保其真实正确"/>
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="注册赏金猎人"/>
 
 </LinearLayout>
