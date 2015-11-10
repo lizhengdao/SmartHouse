@@ -11,11 +11,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
 import cn.com.zzwfang.activity.SearchHouseActivity;
+import cn.com.zzwfang.activity.ShangJinLieRenActivity;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.RecommendHouseSourceBean;
@@ -43,11 +46,12 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	
 	private TextView tvLocation, edtSearchProperties;
 	
-	private LinearLayout zoomLlt;
+	private FrameLayout zoomLlt;
 	
 	private PullToZoomListViewEx ptzListView;
 	private LinearLayout headerLlt;
 	private HomeRecommendHouseAdapter adapter;
+	private ImageView imgShangjin;
 	
 	private ArrayList<RecommendHouseSourceBean> recommendSources = new ArrayList<RecommendHouseSourceBean>();
 	
@@ -62,11 +66,12 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	
 	private void initView(View view) {
 		
-		zoomLlt = (LinearLayout) View.inflate(getActivity(), R.layout.view_frag_home_zoom, null);
+		zoomLlt = (FrameLayout) View.inflate(getActivity(), R.layout.view_frag_home_zoom, null);
 		headerLlt = (LinearLayout) View.inflate(getActivity(), R.layout.view_frag_home_header, null);
 		tvLocation = (TextView) headerLlt.findViewById(R.id.tv_frag_home_location);
 		edtSearchProperties = (TextView) headerLlt.findViewById(R.id.edt_search_properties);
 		
+		imgShangjin = (ImageView) view.findViewById(R.id.iv_frag_home_shangjinglieren);
 		ptzListView = (PullToZoomListViewEx) view.findViewById(R.id.frag_home_ptz);
 		ptzListView.setHeaderView(headerLlt);
 		ptzListView.setZoomView(zoomLlt);
@@ -80,6 +85,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		
 		tvLocation.setOnClickListener(this);
 		edtSearchProperties.setOnClickListener(this);
+		imgShangjin.setOnClickListener(this);
 		
 //		RSAUtil.testRsa();
 	}
@@ -102,6 +108,14 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
             .setBackInAnimation(R.anim.activity_alpha_in)
             .setBackOutAnimation(R.anim.activity_push_out_right)
             .jump(this, SearchHouseActivity.class);
+			break;
+		case R.id.iv_frag_home_shangjinglieren:  // 赏金猎人
+			Jumper.newJumper()
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
+            .jump(this, ShangJinLieRenActivity.class);
 			break;
 		}
 	}

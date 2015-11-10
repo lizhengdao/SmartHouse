@@ -165,4 +165,7 @@
     <!-- 忘记密码 -->
     <string name="act_forget_pwd">忘记密码</string>
     
+    <!-- 赏金猎人 -->
+    <string name="act_shangjinlieren">赏金猎人</string>
+    
 </resources>

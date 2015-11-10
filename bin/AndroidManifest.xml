@@ -56,6 +56,7 @@
         <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactResultActivity" />
         <activity android:name="cn.com.zzwfang.activity.SecondHandHouseDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.ProxyDetailActivity" />
+        <activity android:name="cn.com.zzwfang.activity.ShangJinLieRenActivity" />
         
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
