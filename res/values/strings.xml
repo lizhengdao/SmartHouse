@@ -171,4 +171,7 @@
     <!-- 填写银行卡 -->
     <string name="act_fill_bank_card_info">填写银行卡</string>
     
+    <!-- 赏金猎人个人中心 -->
+    <string name="act_shangjinlieren_info">赏金猎人个人中心</string>
+    
 </resources>

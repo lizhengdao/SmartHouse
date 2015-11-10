@@ -47,19 +47,23 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="收款人a：" />
+                    android:text="收款人：" />
 
                 <EditText
                     android:id="@+id/act_fill_card_info_name_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
+                    android:background="@color/white"
                     android:hint="请输入收款人姓名" />
             </LinearLayout>
 
@@ -75,6 +79,9 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -88,6 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
+                    android:background="@color/white"
                     android:hint="请输入银行卡号"
                     android:inputType="number" />
             </LinearLayout>
@@ -104,6 +112,9 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -132,6 +143,9 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -160,6 +174,9 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:background="@color/white"
                 android:orientation="horizontal" >
 
                 <TextView
