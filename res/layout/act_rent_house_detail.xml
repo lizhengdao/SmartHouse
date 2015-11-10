@@ -56,15 +56,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <android.support.v4.view.ViewPager
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:visibility="gone" />
+                android:layout_height="wrap_content" >
 
-            <ImageView
-                android:id="@+id/act_second_house_detail_photo"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/act_rent_house_detail_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <TextView
+                    android:id="@+id/act_rent_house_detail_photo_index_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,10 +84,10 @@
                 <TextView
                     android:id="@+id/act_rent_house_detail_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="25dp"
                     android:background="@color/white"
-                    android:text="绝版套三双卫  客厅带超大观景阳台   赠送入户"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -117,7 +125,6 @@
                             android:id="@+id/act_rent_house_detail_rent_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="108万"
                             android:textColor="@color/color_e9663a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -148,7 +155,6 @@
                             android:id="@+id/act_rent_house_detail_house_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3室2厅"
                             android:textColor="@color/color_e9663a"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -179,144 +185,7 @@
                             android:id="@+id/act_rent_house_detail_square"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="119平米"
                             android:textColor="@color/color_e9663a"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/color_e0e0e0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="特点："
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/act_second_house_detail_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="地铁房"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/color_e0e0e0" />
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white" >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="单价："
-                            android:textColor="@color/color_aaaaaa"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/act_second_hand_house_detail_unit_price_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:text="9076元/m2"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/act_second_hand_house_detail_calculator_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:drawableLeft="@drawable/ic_mortgage_calculator"
-                        android:drawablePadding="8dp"
-                        android:gravity="center_vertical"
-                        android:text="房贷计算器"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </FrameLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/color_e0e0e0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    android:weightSum="2" >
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="首付："
-                            android:textColor="@color/color_aaaaaa"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/act_second_hand_house_detail_partialprice_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="32.4万"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="月供："
-                            android:textColor="@color/color_aaaaaa"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:id="@+id/act_second_hand_house_detail_monthly_pay_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="4128元"
-                            android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -348,11 +217,10 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/act_second_hand_house_detail_floor_tv"
+                            android:id="@+id/act_rent_house_detail_floor_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="高楼层/16层"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -372,11 +240,10 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/act_second_hand_house_detail_direction_tv"
+                            android:id="@+id/act_rent_house_detail_direction_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="北"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -409,11 +276,70 @@
                             android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/act_second_hand_house_detail_decoration_tv"
+                            android:id="@+id/act_rent_house_detail_decoration_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:text="毛坯"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="供暖："
+                            android:textColor="@color/color_aaaaaa"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/act_rent_house_detail_Heating_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e0e0e0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="年代："
+                            android:textColor="@color/color_aaaaaa"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/act_rent_house_detail_year_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -433,6 +359,7 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/act_rent_house_detail_house_type_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
@@ -457,15 +384,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="年代："
+                        android:text="小区："
                         android:textColor="@color/color_aaaaaa"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/act_rent_house_detail_estatename_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="2009年"
+                        android:text="中华名园二期"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -478,72 +406,34 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@color/white"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="小区："
+                        android:text="编号："
                         android:textColor="@color/color_aaaaaa"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/act_second_hand_house_detail_estatename_tv"
+                        android:id="@+id/act_rent_house_detail_num_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="中华名园二期"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:background="@color/color_eeeeee" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/color_e0e0e0" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:text="客户看房记录"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_e0e0e0" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:text="近一月新增31位看房客户，共52位"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/color_e0e0e0" />
 
@@ -558,183 +448,15 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <ImageView
-                android:layout_width="match_parent"
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/act_rent_house_detail_map"
+                android:layout_width="fill_parent"
                 android:layout_height="200dp"
-                android:src="@drawable/ic_frag_home_header" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:text="小区成交历史（2）"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:clickable="true" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_e0e0e0" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:weightSum="2" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="户型："
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="3室2厅"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="成交价："
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="173万"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_e0e0e0" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="签约日期："
-                    android:textColor="@color/color_aaaaaa"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="2015-05-20"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_e0e0e0" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:weightSum="2" >
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="房源价格走势："
-                    android:textColor="@color/color_aaaaaa"
-                    android:textSize="16sp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:weightSum="3" >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="本小区"
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="本区域"
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="本市"
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:background="@color/color_e0e0e0" />
 
             <LinearLayout
@@ -767,16 +489,20 @@
                         android:orientation="vertical" >
 
                         <TextView
-                            android:id="@+id/act_second_hand_house_detail_agent_name"
+                            android:id="@+id/act_rent_house_detail_agent_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="张三" />
+                            android:text="张三"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/act_second_hand_house_detail_agent_phone"
+                            android:id="@+id/act_rent_house_detail_agent_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="15881818888" />
+                            android:text="15881818888"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
 

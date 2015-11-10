@@ -1,10 +1,17 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.PhotoPagerAdapter;
+import cn.com.zzwfang.bean.AgentBean;
+import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.RentHouseDetailBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -12,15 +19,30 @@ import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.MapView;
 
-public class RentHouseDetailActivity extends BaseActivity implements OnClickListener {
+/**
+ *  租房详情页
+ * @author lzd
+ *
+ */
+public class RentHouseDetailActivity extends BaseActivity implements OnClickListener,
+OnPageChangeListener {
 
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
 	private String houseSourceId = null;
 	private RentHouseDetailBean rentHouseDetailBean;
 	
 	private TextView tvBack, tvPageTitle, tvShare, tvTitle,
-	tvRentPrice, tvHouseType, tvSquare;
+	tvRentPrice, tvHouseType, tvSquare, tvFloor, tvDirection,
+	tvDecoration, tvYear, tvEstateName, tvHouseNum, tvAgentName,
+	tvAgentPhone, tvPhotoIndex;
+	
+	private ViewPager photoPager;
+	private PhotoPagerAdapter photoAdapter;
+	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
+	
+	private MapView mapView;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -39,8 +61,25 @@ public class RentHouseDetailActivity extends BaseActivity implements OnClickList
 		tvRentPrice = (TextView) findViewById(R.id.act_rent_house_detail_rent_price);
 		tvHouseType = (TextView) findViewById(R.id.act_rent_house_detail_house_type);
 		tvSquare = (TextView) findViewById(R.id.act_rent_house_detail_square);
+		tvFloor = (TextView) findViewById(R.id.act_rent_house_detail_floor_tv);
+		tvDirection = (TextView) findViewById(R.id.act_rent_house_detail_direction_tv);
+		tvDecoration = (TextView) findViewById(R.id.act_rent_house_detail_decoration_tv);
+		tvYear = (TextView) findViewById(R.id.act_rent_house_detail_year_tv);
+		tvEstateName = (TextView) findViewById(R.id.act_rent_house_detail_estatename_tv);
+		tvHouseNum = (TextView) findViewById(R.id.act_rent_house_detail_num_tv);
+		
+		tvAgentName = (TextView) findViewById(R.id.act_rent_house_detail_agent_name);
+		tvAgentPhone = (TextView) findViewById(R.id.act_rent_house_detail_agent_phone);
+		tvPhotoIndex = (TextView) findViewById(R.id.act_rent_house_detail_photo_index_tv);
+		
+		photoPager = (ViewPager) findViewById(R.id.act_rent_house_detail_pager);
+		photoAdapter = new PhotoPagerAdapter(this, photos);
+		photoPager.setAdapter(photoAdapter);
+		
+		mapView = (MapView) findViewById(R.id.act_rent_house_detail_map);
 		
 		tvBack.setOnClickListener(this);
+		photoPager.setOnPageChangeListener(this);
 	}
 	
 	@Override
@@ -54,11 +93,31 @@ public class RentHouseDetailActivity extends BaseActivity implements OnClickList
 	
 	private void rendUI() {
 		if (rentHouseDetailBean != null) {
+			
+			photos.addAll(rentHouseDetailBean.getPhoto());
+			photoAdapter.notifyDataSetChanged();
+			int photoTotalNum = photoAdapter.getCount();
+			String txt = photoTotalNum + "/1";
+			tvPhotoIndex.setText(txt);
+			
 			tvPageTitle.setText(rentHouseDetailBean.getTitle());
 			tvTitle.setText(rentHouseDetailBean.getTitle());
 			tvRentPrice.setText(rentHouseDetailBean.getRentPrice() + "元/月");
 			tvHouseType.setText(rentHouseDetailBean.getFloor() + "室" + rentHouseDetailBean.getTypeT() + "厅");
 			tvSquare.setText(rentHouseDetailBean.getSquare() + "㎡");
+			tvFloor.setText(rentHouseDetailBean.getFloor() + "层/" + rentHouseDetailBean.getTotalFloor() + "层");
+			tvDirection.setText(rentHouseDetailBean.getDirection());
+			tvDecoration.setText(rentHouseDetailBean.getDecoration());
+			tvYear.setText(rentHouseDetailBean.getBuildYear());
+			tvEstateName.setText(rentHouseDetailBean.getEstateName());
+			tvHouseNum.setText(rentHouseDetailBean.getNo());
+			
+			AgentBean agentBean = rentHouseDetailBean.getAgent();
+			if (agentBean != null) {
+				tvAgentName.setText(agentBean.getName());
+				tvAgentPhone.setText(agentBean.getTel());
+			}
+			
 		}
 	}
 	
@@ -81,6 +140,23 @@ public class RentHouseDetailActivity extends BaseActivity implements OnClickList
 				rendUI();
 			}
 		});
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		int photoTotalNum = photoAdapter.getCount();
+		String txt = photoTotalNum + "/" + (arg0 + 1);
+		tvPhotoIndex.setText(txt);
 	}
 
 	

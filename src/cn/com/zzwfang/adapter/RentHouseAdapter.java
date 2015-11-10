@@ -59,7 +59,7 @@ public class RentHouseAdapter extends BaseAdapter {
 		tvDesc.setText(desc); 
 		
 		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_rent_house_est_name);
-		tvEstName.setText(rentHouseBean.getEstateName());
+		tvEstName.setText(rentHouseBean.getEsateName());
 		
 		TextView tvTotalPrice = (TextView) convertView.findViewById(R.id.adapter_rent_house_rent_price);
 		tvTotalPrice.setText(rentHouseBean.getRentPrice() + "元/月");

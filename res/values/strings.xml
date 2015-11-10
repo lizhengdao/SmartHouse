@@ -174,4 +174,7 @@
     <!-- 赏金猎人个人中心 -->
     <string name="act_shangjinlieren_info">赏金猎人个人中心</string>
     
+    <!-- 推荐房源 -->
+    <string name="act_recommend_house_detail">推荐房源</string>
+    
 </resources>

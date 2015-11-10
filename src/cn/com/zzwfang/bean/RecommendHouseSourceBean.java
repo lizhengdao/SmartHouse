@@ -18,6 +18,12 @@ public class RecommendHouseSourceBean extends BaseBean {
      * 小区名称
      */
     private String EstateName;
+    
+    /**
+     * 楼盘id
+     */
+    private String EstateId;
+    
     /**
      * 几房
      */
@@ -38,6 +44,10 @@ public class RecommendHouseSourceBean extends BaseBean {
      * 房源id
      */
     private String Id;
+    
+    
+    
+    
 	public String getPhoto() {
 		return Photo;
 	}
@@ -91,6 +101,12 @@ public class RecommendHouseSourceBean extends BaseBean {
 	}
 	public void setId(String id) {
 		Id = id;
+	}
+	public String getEstateId() {
+		return EstateId;
+	}
+	public void setEstateId(String estateId) {
+		EstateId = estateId;
 	}
     
 }

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
+import cn.com.zzwfang.activity.RecommendHouseDetailActivity;
 import cn.com.zzwfang.activity.SearchHouseActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
@@ -125,6 +126,13 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			long id) {
 		ToastUtils.SHORT.toast(getActivity(), "position == " + position);
 		RecommendHouseSourceBean recommendHouse = recommendSources.get(position - 2);
+		
+		Jumper.newJumper()
+        .setAheadInAnimation(R.anim.activity_push_in_right)
+        .setAheadOutAnimation(R.anim.activity_alpha_out)
+        .setBackInAnimation(R.anim.activity_alpha_in)
+        .setBackOutAnimation(R.anim.activity_push_out_right)
+        .jump(this, RecommendHouseDetailActivity.class);
 	}
 	
 	@Override

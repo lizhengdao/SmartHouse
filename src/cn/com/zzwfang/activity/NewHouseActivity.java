@@ -140,7 +140,7 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 		getConditionList(FloorRange);
 		getConditionList(RentPriceRange);
 		getConditionList(Direction);
-		getConditionList(Sort);
+//		getConditionList(Sort);
 	}
 	
 	private void initView() {

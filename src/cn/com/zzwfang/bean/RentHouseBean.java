@@ -35,7 +35,7 @@ public class RentHouseBean extends BaseBean {
 	/**
 	 * 小区名字
 	 */
-	private String EstateName;
+	private String EsateName;
 	
 	/**
 	 * 接盘日期
@@ -100,12 +100,12 @@ public class RentHouseBean extends BaseBean {
 		Direction = direction;
 	}
 
-	public String getEstateName() {
-		return EstateName;
+	public String getEsateName() {
+		return EsateName;
 	}
 
-	public void setEstateName(String estateName) {
-		EstateName = estateName;
+	public void setEsateName(String estateName) {
+		EsateName = estateName;
 	}
 
 	public String getAddTime() {

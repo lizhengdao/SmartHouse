@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 public class RentHouseDetailBean extends BaseBean {
 
+	private AgentBean Agent;
 	/**
 	 * 图片
 	 */
-	private String Photo;
+	private ArrayList<PhotoBean> Photo;
 	
 	/**
 	 * 标题
@@ -69,18 +70,12 @@ public class RentHouseDetailBean extends BaseBean {
 	 */
 	private String BuildYear;
 	
-	/**
-	 * 地铁站
-	 */
-	private ArrayList<String> Metros;
-
-	public String getPhoto() {
-		return Photo;
-	}
-
-	public void setPhoto(String photo) {
-		Photo = photo;
-	}
+	private long Lat;
+	
+	private long Lng;
+	
+	private String No;
+	
 
 	public String getTitle() {
 		return Title;
@@ -178,13 +173,46 @@ public class RentHouseDetailBean extends BaseBean {
 		BuildYear = buildYear;
 	}
 
-	public ArrayList<String> getMetros() {
-		return Metros;
+	public AgentBean getAgent() {
+		return Agent;
 	}
 
-	public void setMetros(ArrayList<String> metros) {
-		Metros = metros;
+	public void setAgent(AgentBean agent) {
+		Agent = agent;
 	}
+
+	public ArrayList<PhotoBean> getPhoto() {
+		return Photo;
+	}
+
+	public void setPhoto(ArrayList<PhotoBean> photo) {
+		Photo = photo;
+	}
+
+	public long getLat() {
+		return Lat;
+	}
+
+	public void setLat(long lat) {
+		Lat = lat;
+	}
+
+	public long getLng() {
+		return Lng;
+	}
+
+	public void setLng(long lng) {
+		Lng = lng;
+	}
+
+	public String getNo() {
+		return No;
+	}
+
+	public void setNo(String no) {
+		No = no;
+	}
+
 	
 	
 }
