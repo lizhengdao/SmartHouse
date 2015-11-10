@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/color_eeeeee" >
     
     <FrameLayout
         android:layout_width="match_parent"
@@ -33,33 +34,49 @@
     
     <ImageView 
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/bg_shangjinlieren_act"/>
     
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="16dp"
         android:text="赏金猎人规则："/>
     
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="16dp"
         android:text="为了能使用本服务，您同意一下事项："/>
     
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="16dp"
         android:text="（1）依本服务注册表的提示提供您本人真实、正确、最新及完整的资料；"/>
     
     <TextView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="16dp"
         android:text="（2）维持更新您个人用户信息，确保其真实正确"/>
     
     <TextView 
+        android:id="@+id/act_shangjinlieren_register_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:background="@drawable/bg_login_btn"
         android:text="注册赏金猎人"/>
 
 </LinearLayout>
