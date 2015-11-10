@@ -59,7 +59,7 @@
         <activity android:name="cn.com.zzwfang.activity.ShangJinLieRenActivity" />
         <activity android:name="cn.com.zzwfang.activity.FillBankCardInfoActivity" />
         <activity android:name="cn.com.zzwfang.activity.ShangJinLieRenInfoActivity" />
-        
+        <activity android:name="cn.com.zzwfang.activity.RentHouseDetailActivity" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="开发者 key" />

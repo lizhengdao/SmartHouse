@@ -243,14 +243,49 @@ public class PopViewHelper {
 				case 3:  //  标签
 					lstDetail.setAdapter(labelAdapter);
 					break;
-				case 4:  //  楼龄
+				case 4:  //  楼层
 					break;
-				case 5:  //  楼层
-					break;
-				case 6:  //  房源编号
+				case 5:  //  房源编号
 					break;
 				}
 			}
 		});
 	}
+	
+	/**
+	 * 房型选择
+	 */
+	public static void showSelectRentPricePopWindow(Context context, View anchorView,
+			final ArrayList<TextValueBean> conditions, final OnConditionSelectListener onConditionSelectListener) {
+		View view = View.inflate(context, R.layout.popup_condition, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+	    ConditionAdapter adapter = new ConditionAdapter(context, conditions);
+	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				popupWindow.dismiss();
+				if (onConditionSelectListener != null) {
+					onConditionSelectListener.onConditionSelect(conditions.get(position));
+				}
+			}
+		});
+	    
+	    lstCondition.setAdapter(adapter);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	}
+	
+	
 }

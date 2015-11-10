@@ -7,7 +7,7 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	/**
 	 * 图片
 	 */
-	private String Photo;
+	private ArrayList<String> Photo;
 	
 	/**
 	 * 标题
@@ -20,9 +20,14 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	private String Price;
 	
 	/**
-	 * 几厅
+	 * 几房
 	 */
 	private int TypeF;
+	
+	/**
+	 * 几厅
+	 */
+	private int TypeT;
 	
 	/**
 	 * 面积
@@ -32,7 +37,7 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	/**
 	 * 标签
 	 */
-	private String Label;
+	private ArrayList<String> Label;
 	
 	/**
 	 * 单价
@@ -82,18 +87,29 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	/**
 	 * 带看记录
 	 */
-//	private ArrayList<String> InqFollowList; 
+	private ArrayList<InqFollowListBean> InqFollowList; 
 	
 	/**
 	 * 经纪人
 	 */
-//	private String Agent;
+	private AgentBean Agent;
+	
+	/**
+	 * 360展示
+	 */
+	private String Prp360;
+	
+	/**
+	 * 沙盘图
+	 */
+	private String Estate360;
+	
 
-	public String getPhoto() {
+	public ArrayList<String> getPhoto() {
 		return Photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(ArrayList<String> photo) {
 		Photo = photo;
 	}
 
@@ -129,13 +145,6 @@ public class SecondHandHouseDetailBean extends BaseBean {
 		Square = square;
 	}
 
-	public String getLabel() {
-		return Label;
-	}
-
-	public void setLabel(String label) {
-		Label = label;
-	}
 
 	public String getUnitPrice() {
 		return UnitPrice;
@@ -207,6 +216,54 @@ public class SecondHandHouseDetailBean extends BaseBean {
 
 	public void setEstateId(String estateId) {
 		EstateId = estateId;
+	}
+
+	public int getTypeT() {
+		return TypeT;
+	}
+
+	public void setTypeT(int typeT) {
+		TypeT = typeT;
+	}
+
+	public ArrayList<String> getLabel() {
+		return Label;
+	}
+
+	public void setLabel(ArrayList<String> label) {
+		Label = label;
+	}
+
+	public ArrayList<InqFollowListBean> getInqFollowList() {
+		return InqFollowList;
+	}
+
+	public void setInqFollowList(ArrayList<InqFollowListBean> inqFollowList) {
+		InqFollowList = inqFollowList;
+	}
+
+	public AgentBean getAgent() {
+		return Agent;
+	}
+
+	public void setAgent(AgentBean agent) {
+		Agent = agent;
+	}
+
+	public String getPrp360() {
+		return Prp360;
+	}
+
+	public void setPrp360(String prp360) {
+		Prp360 = prp360;
+	}
+
+	public String getEstate360() {
+		return Estate360;
+	}
+
+	public void setEstate360(String estate360) {
+		Estate360 = estate360;
 	}
 	
 

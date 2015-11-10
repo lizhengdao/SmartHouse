@@ -645,4 +645,91 @@ public class ActionImpl implements Action {
 		DataWorker worker = DataWorker.getWorker(context);
 		worker.load(requestEntity);
 	}
+
+	@Override
+	public void getRentHouseList(String cityId, TextValueBean areaCondition,
+			TextValueBean priceCondition, TextValueBean squareCondition, String sort,
+			String keyWords, String direction, TextValueBean roomTypeCondition,
+			int pageSize, int pageIndex, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("siteId", cityId);
+		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {
+			requestParams.put("area", areaCondition.getValue());
+		}
+		requestParams.put("direction", direction);
+		if (squareCondition != null && !TextUtils.isEmpty(squareCondition.getValue())) {
+			requestParams.put("square", squareCondition.getValue());
+		}
+		if (priceCondition != null && !TextUtils.isEmpty(priceCondition.getValue())) {
+			requestParams.put("price", priceCondition.getValue());
+		}
+		if (roomTypeCondition != null && !TextUtils.isEmpty(roomTypeCondition.getValue())) {
+			requestParams.put("roomType", roomTypeCondition.getValue());
+		}
+		if (!TextUtils.isEmpty(sort)) {
+			requestParams.put("sort", sort);
+		}
+		requestParams.put("pageSize", pageSize + "");
+		requestParams.put("pageNum", pageIndex + "");
+
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.GET_RENT_HOUSE_LIST));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+
+	@Override
+	public void getRentHouseDetail(String proId, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("proId", proId);
+
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.GET_RENT_HOUSE_DETAIL));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
 }

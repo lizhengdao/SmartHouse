@@ -157,4 +157,28 @@ public interface Action {
 	 * @param callback
 	 */
 	void getSecondHandHouseDetail(String proId, ResultHandlerCallback callback);
+	
+	/**
+	 * @param cityId  城市ID
+	 * @param areaId  区域ID
+	 * @param rentPriceRange  租金区间
+	 * @param square   面积范围
+	 * @param sort   排序
+	 * @param keyWords   关键字
+	 * @param direction   朝向
+	 * @param roomTypeCondition   房型
+	 * @param pageSize  分页大小
+	 * @param pageIndex  页码
+	 * @param callback
+	 */
+	void getRentHouseList(String cityId, TextValueBean areaCondition,
+			TextValueBean priceCondition, TextValueBean squareCondition, String sort,
+			String keyWords, String direction, TextValueBean roomTypeCondition,
+			int pageSize, int pageIndex, ResultHandlerCallback callback);
+	
+	/**
+	 * @param proId  房源ID
+	 * @param callback
+	 */
+	void getRentHouseDetail(String proId, ResultHandlerCallback callback);
 }

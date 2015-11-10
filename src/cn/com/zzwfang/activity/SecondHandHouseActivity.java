@@ -183,9 +183,6 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		lltHouseType.setOnClickListener(this);
 		lltMore.setOnClickListener(this);
 		
-		SecondHandHouseBean temp = new SecondHandHouseBean();
-		secondHandHouses.add(temp);
-		secondHandHouses.add(temp);
 		adapter = new SecondHandHouseAdapter(this, secondHandHouses);
 		lstSecondHandHouseView.setAdapter(adapter);
 		lstSecondHandHouseView.setOnItemClickListener(this);
@@ -231,7 +228,6 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		moreType.add("朝向");
 		moreType.add("面积");
 		moreType.add("标签");
-		moreType.add("楼龄");
 		moreType.add("楼层");
 		moreType.add("房源编号");
 		getSecondHandHouseList(cityId, areaCondition, "", squareCondition, labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, pageIndex);
@@ -263,12 +259,13 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		// TODO Auto-generated method stub
+		SecondHandHouseBean temp = secondHandHouses.get(position);
 		Jumper.newJumper()
         .setAheadInAnimation(R.anim.activity_push_in_right)
         .setAheadOutAnimation(R.anim.activity_alpha_out)
         .setBackInAnimation(R.anim.activity_alpha_in)
         .setBackOutAnimation(R.anim.activity_push_out_right)
+        .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, temp.getId())
         .jump(this, SecondHandHouseDetailActivity.class);
 	}
 
@@ -324,6 +321,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
 						ToastUtils.SHORT.toast(SecondHandHouseActivity.this, "ssss");
+						ArrayList<SecondHandHouseBean> temp = (ArrayList<SecondHandHouseBean>) JSON.parseArray(result.getData(), SecondHandHouseBean.class);
+						secondHandHouses.addAll(temp);
+						adapter.notifyDataSetChanged();
 					}
 				});
 	}

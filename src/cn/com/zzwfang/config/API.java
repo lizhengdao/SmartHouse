@@ -89,5 +89,9 @@ public class API {
     public static final String GET_AREA_LIST = "Dictionary/GetAreaList";
     
     public static final String GET_SECOND_HAND_HOUSE_DETAIL = "Property/GetPropertyDetailJson";
+    
+    public static final String GET_RENT_HOUSE_LIST = "Property/GetRentPropertyListJson";
+    
+    public static final String GET_RENT_HOUSE_DETAIL = "Property/GetRentPropertyDetailJson";
 
 }
