@@ -62,6 +62,7 @@
         <activity android:name="cn.com.zzwfang.activity.RentHouseDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.PictureBrowseActivity" />
         <activity android:name="cn.com.zzwfang.activity.RecommendHouseDetailActivity" />
+        <activity android:name="cn.com.zzwfang.activity.NewHouseDetailActivity" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="开发者 key" />

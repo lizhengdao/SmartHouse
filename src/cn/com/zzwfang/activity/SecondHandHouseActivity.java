@@ -131,6 +131,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private TextValueBean roomTypeCondition;
 	private String buildYear, floor, proNum, sort;
 	private int pageIndex = 0;
+	private int pageTotal = 0;
 	
 
 	@Override
@@ -139,17 +140,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		setContentView(R.layout.act_second_hand_house);
 		cityId = getIntent().getStringExtra(HomeRecommendHouseAdapter.INTENT_CITY_ID);
 		initView();
+		setListener();
 		initData();
-		getConditionList(SalePriceRange);
-		getConditionList(HouseType);
-		getConditionList(PrpUsage);
-		getConditionList(EstateLabel);
-		getConditionList(EstateStatus);
-		getConditionList(FloorRange);
-		getConditionList(RentPriceRange);
-		getConditionList(Direction);
-		getConditionList(Sort);
-		getAreaList();
 	}
 
 	private void initView() {
@@ -170,7 +162,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		lltMore = (LinearLayout) findViewById(R.id.act_second_hand_house_more_llt);
 		
 		mapView.showZoomControls(false);
-
+	}
+	
+	private void setListener() {
 		tvBack.setOnClickListener(this);
 		cbxListAndMap.setOnCheckedChangeListener(this);
 		pullView.setPullRefreshEnable(true);
@@ -194,7 +188,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 				totalPriceCondition = txtValueBean;
 				tvTotalPrice.setText(txtValueBean.getText());
 				getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
-						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, pageIndex);
+						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, true);
 			}
 		};
 		
@@ -205,7 +199,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 				roomTypeCondition = txtValueBean;
 				tvHouseType.setText(txtValueBean.getText());
 				getSecondHandHouseList(cityId, areaCondition, "", squareCondition, labelCondition,
-						totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, pageIndex);
+						totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, true);
 			}
 		};
 		
@@ -216,21 +210,31 @@ public class SecondHandHouseActivity extends BaseActivity implements
 				areaCondition = txtValueBean;
 				tvArea.setText(txtValueBean.getText());
 				getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
-						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, pageIndex);
+						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, true);
 			}
 		};
 	}
 	
 	private void initData() {
-//		getSecondHandHouseList("511100", "455fsdf","南北", "60-120", "地铁",
-//				0, 0, "1", 1, 20, 1);
 		moreType.add("排序");
 		moreType.add("朝向");
 		moreType.add("面积");
 		moreType.add("标签");
 		moreType.add("楼层");
 		moreType.add("房源编号");
-		getSecondHandHouseList(cityId, areaCondition, "", squareCondition, labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, pageIndex);
+		getConditionList(SalePriceRange);
+		getConditionList(HouseType);
+		getConditionList(PrpUsage);
+		getConditionList(EstateLabel);
+		getConditionList(EstateStatus);
+		getConditionList(FloorRange);
+		getConditionList(RentPriceRange);
+		getConditionList(Direction);
+		getConditionList(Sort);
+		getAreaList();
+		getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+				labelCondition, totalPriceCondition, roomTypeCondition,
+				buildYear, floor, proNum, sort, 10, true);
 	}
 
 	@Override
@@ -254,6 +258,75 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType, sorts, directions, estateLabels, lltMore);
 			break;
 		}
+	}
+	
+	
+	
+	@Override
+	public void onHeaderRefresh(AbPullToRefreshView view) {  // 下拉刷新
+		getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+				labelCondition, totalPriceCondition, roomTypeCondition,
+				buildYear, floor, proNum, sort, 10, true);
+	}
+
+	@Override
+	public void onFooterLoad(AbPullToRefreshView view) {  // 上拉加载更多
+
+		if (pageIndex > pageTotal) {
+			pullView.onFooterLoadFinish();
+			return;
+		}
+		getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+				labelCondition, totalPriceCondition, roomTypeCondition,
+				buildYear, floor, proNum, sort, 10, false);
+		
+	}
+	
+	private void getSecondHandHouseList(String cityId, TextValueBean areaCondition, String direction,
+			TextValueBean squareCondition, TextValueBean labelCondition, 
+			TextValueBean priceCondition, TextValueBean roomTypeCondition,
+			String buildYear, String floor, String proNum, String sort,
+			int pageSize, final boolean isRefresh) {
+		if (isRefresh) {
+			pageIndex = 0;
+		}
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getSecondHandHouseList(cityId, areaCondition, direction,
+				squareCondition, labelCondition, 
+				priceCondition, roomTypeCondition,
+				buildYear, floor, proNum, sort,
+				pageSize, pageIndex, new ResultHandlerCallback() {
+					
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+						
+					}
+					
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+						
+					}
+					
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						pageTotal = result.getTotal();
+						ToastUtils.SHORT.toast(SecondHandHouseActivity.this, "ssss");
+						ArrayList<SecondHandHouseBean> temp = (ArrayList<SecondHandHouseBean>) JSON.parseArray(result.getData(), SecondHandHouseBean.class);
+						if (isRefresh) {
+							secondHandHouses.clear();
+						}
+						secondHandHouses.addAll(temp);
+						if (temp != null) {
+							pageIndex++;
+						}
+						adapter.notifyDataSetChanged();
+						if (isRefresh) {
+							pullView.onHeaderRefreshFinish();
+						} else {
+							pullView.onFooterLoadFinish();
+						}
+					}
+				});
 	}
 	
 	@Override
@@ -282,50 +355,6 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			}
 			break;
 		}
-	}
-	
-	@Override
-	public void onHeaderRefresh(AbPullToRefreshView view) {  // 下拉刷新
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onFooterLoad(AbPullToRefreshView view) {  // 上拉加载更多
-		// TODO Auto-generated method stub
-
-	}
-	
-	private void getSecondHandHouseList(String cityId, TextValueBean areaCondition, String direction,
-			TextValueBean squareCondition, TextValueBean labelCondition, 
-			TextValueBean priceCondition, TextValueBean roomTypeCondition,
-			String buildYear, String floor, String proNum, String sort,
-			int pageSize, int pageIndex) {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getSecondHandHouseList(cityId, areaCondition, direction,
-				squareCondition, labelCondition, 
-				priceCondition, roomTypeCondition,
-				buildYear, floor, proNum, sort,
-				pageSize, pageIndex, new ResultHandlerCallback() {
-					
-					@Override
-					public void rc999(RequestEntity entity, Result result) {
-						
-					}
-					
-					@Override
-					public void rc3001(RequestEntity entity, Result result) {
-						
-					}
-					
-					@Override
-					public void rc0(RequestEntity entity, Result result) {
-						ToastUtils.SHORT.toast(SecondHandHouseActivity.this, "ssss");
-						ArrayList<SecondHandHouseBean> temp = (ArrayList<SecondHandHouseBean>) JSON.parseArray(result.getData(), SecondHandHouseBean.class);
-						secondHandHouses.addAll(temp);
-						adapter.notifyDataSetChanged();
-					}
-				});
 	}
 	
 	public void getConditionList(final String conditionName) {

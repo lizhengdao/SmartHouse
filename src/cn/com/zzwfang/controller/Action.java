@@ -117,8 +117,17 @@ public interface Action {
 	 * @param pageNum 页码
 	 * @param callback
 	 */
-	void getNewHouseList(String areaId, String price, int roomType, int usage,
-			int specials, int status, String cityId, int pageSize, int pageNum, ResultHandlerCallback callback);
+	void getNewHouseList(String cityId, TextValueBean areaCondition, TextValueBean priceCondition,
+			TextValueBean roomTypeCondition, TextValueBean usageCondition,
+			TextValueBean labelCondition, TextValueBean statusCondition,
+			String keyWords, int pageSize, int pageNum, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取新房详情
+	 * @param estateId  小区ID
+	 * @param callback
+	 */
+	void getNewHouseDetail(String estateId, ResultHandlerCallback callback);
 	
 	/**
 	 * (总价SalePriceRange、户型HouseType、物业类型PrpUsage、特色标签EstateLabel、售卖状态EstateStatus)、楼层范围（FloorRange）、租价范围（RentPriceRange）

@@ -7,6 +7,8 @@ import com.baidu.mapapi.map.MapView;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
+import cn.com.zzwfang.adapter.NewHouseAdapter;
+import cn.com.zzwfang.bean.NewHouseBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -15,6 +17,7 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
+import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
@@ -23,6 +26,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
@@ -32,19 +37,24 @@ import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class NewHouseActivity extends BaseActivity implements OnClickListener,
-OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
+		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
+		OnItemClickListener {
 
-	private TextView tvBack;
+	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
 	private CheckBox cbxListAndMap;
 	private MapView mapView;
 	private FrameLayout mapViewFlt;
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
+	
 
 	private AbPullToRefreshView pullView;
-	private ListView lstSecondHandHouseView;
+	private ListView lstNewHouseView;
 	
+	private ArrayList<NewHouseBean> newHouses = new ArrayList<NewHouseBean>();
+	private NewHouseAdapter adapter;
+
 	private String cityId = "";
-	
+
 	public static final String SalePriceRange = "SalePriceRange";
 	public static final String HouseType = "HouseType";
 	public static final String PrpUsage = "PrpUsage";
@@ -52,9 +62,9 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 	public static final String EstateStatus = "EstateStatus";
 	public static final String FloorRange = "FloorRange";
 	public static final String RentPriceRange = "RentPriceRange";
-	public static final String Direction ="Direction";
+	public static final String Direction = "Direction";
 	public static final String Sort = "Sort";
-	
+
 	/**
 	 * 区域
 	 */
@@ -71,37 +81,37 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 	 * 物业类型
 	 */
 	private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 特色标签
 	 */
 	private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 售卖状态
 	 */
 	private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 楼层范围
 	 */
 	private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 租价范围
 	 */
 	private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 朝向
 	 */
 	private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 排序
 	 */
 	private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
-	
+
 	/**
 	 * 区域
 	 */
@@ -114,24 +124,30 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 	 * 房型
 	 */
 	private OnConditionSelectListener onHouseTypeSelectListener;
-	
+
 	private ArrayList<String> moreType = new ArrayList<String>();
-	
+
 	private TextValueBean areaCondition;
 	private TextValueBean totalPriceCondition;
 	private TextValueBean squareCondition;
 	private TextValueBean labelCondition;
 	private TextValueBean roomTypeCondition;
+	private TextValueBean usageCondition;
+	private TextValueBean statusCondition;
 	private String buildYear, floor, proNum, sort;
 	private int pageIndex = 0;
-	
+	private int pageTotal = 0;
+	private String keyWords;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.act_new_house);
-		cityId = getIntent().getStringExtra(HomeRecommendHouseAdapter.INTENT_CITY_ID);
+		cityId = getIntent().getStringExtra(
+				HomeRecommendHouseAdapter.INTENT_CITY_ID);
 		initView();
-		
+		setListener();
+
 		getConditionList(SalePriceRange);
 		getConditionList(HouseType);
 		getConditionList(PrpUsage);
@@ -140,22 +156,31 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 		getConditionList(FloorRange);
 		getConditionList(RentPriceRange);
 		getConditionList(Direction);
-//		getConditionList(Sort);
+		// getConditionList(Sort);
 	}
-	
+
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_new_house_back);
 		cbxListAndMap = (CheckBox) findViewById(R.id.act_new_house_list_map);
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_new_house);
-		lstSecondHandHouseView = (ListView) findViewById(R.id.lst_new_house);
+		lstNewHouseView = (ListView) findViewById(R.id.lst_new_house);
 		mapView = (MapView) findViewById(R.id.act_new_house_map);
 		mapViewFlt = (FrameLayout) findViewById(R.id.act_new_house_map_flt);
-		
+
 		lltArea = (LinearLayout) findViewById(R.id.act_new_house_area_llt);
 		lltTotalPrice = (LinearLayout) findViewById(R.id.act_new_house_total_price_llt);
 		lltHouseType = (LinearLayout) findViewById(R.id.act_new_house_type_llt);
 		lltMore = (LinearLayout) findViewById(R.id.act_new_house_more_llt);
 		
+		tvArea = (TextView) findViewById(R.id.act_new_house_area_tv);
+		tvTotalPrice = (TextView) findViewById(R.id.act_new_house_total_price_tv);
+		tvHouseType = (TextView) findViewById(R.id.act_new_house_type_tv);
+		tvMore = (TextView) findViewById(R.id.act_new_house_more_tv);
+		
+		adapter = new NewHouseAdapter(this, newHouses);
+		lstNewHouseView.setAdapter(adapter);
+		lstNewHouseView.setOnItemClickListener(this);
+
 		mapView.showZoomControls(false);
 
 		tvBack.setOnClickListener(this);
@@ -168,29 +193,163 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 		lltTotalPrice.setOnClickListener(this);
 		lltHouseType.setOnClickListener(this);
 		lltMore.setOnClickListener(this);
-		getNewHouseList();
+		getNewHouseList(cityId, areaCondition, totalPriceCondition,
+				roomTypeCondition, usageCondition, labelCondition,
+				statusCondition, keyWords, 10, true);
+	}
+
+	private void setListener() {
+
+		onTotalPriceSelectListener = new OnConditionSelectListener() {
+
+			@Override
+			public void onConditionSelect(TextValueBean txtValueBean) {
+				totalPriceCondition = txtValueBean;
+				tvTotalPrice.setText(txtValueBean.getText());
+				getNewHouseList(cityId, areaCondition,
+						totalPriceCondition, roomTypeCondition,
+						usageCondition, labelCondition,
+						statusCondition, keyWords, 10,
+						true);
+			}
+		};
+
+		onHouseTypeSelectListener = new OnConditionSelectListener() {
+
+			@Override
+			public void onConditionSelect(TextValueBean txtValueBean) {
+				roomTypeCondition = txtValueBean;
+				tvHouseType.setText(txtValueBean.getText());
+				getNewHouseList(cityId, areaCondition,
+						totalPriceCondition, roomTypeCondition,
+						usageCondition, labelCondition,
+						statusCondition, keyWords, 10,
+						true);
+			}
+		};
+
+		onAreaSelectListener = new OnConditionSelectListener() {
+
+			@Override
+			public void onConditionSelect(TextValueBean txtValueBean) {
+				areaCondition = txtValueBean;
+				tvArea.setText(txtValueBean.getText());
+				getNewHouseList(cityId, areaCondition,
+						totalPriceCondition, roomTypeCondition,
+						usageCondition, labelCondition,
+						statusCondition, keyWords, 10,
+						true);
+			}
+		};
+	}
+	
+	@Override
+	public void onHeaderRefresh(AbPullToRefreshView view) {
+		getNewHouseList(cityId, areaCondition,
+				totalPriceCondition, roomTypeCondition,
+				usageCondition, labelCondition,
+				statusCondition, keyWords, 10,
+				true);
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		NewHouseBean newHouseBean = newHouses.get(position);
+		
+		Jumper.newJumper()
+        .setAheadInAnimation(R.anim.activity_push_in_right)
+        .setAheadOutAnimation(R.anim.activity_alpha_out)
+        .setBackInAnimation(R.anim.activity_alpha_in)
+        .setBackOutAnimation(R.anim.activity_push_out_right)
+        .putString(NewHouseDetailActivity.INTENT_ESTATE_ID, newHouseBean.getId())
+        .jump(this, NewHouseDetailActivity.class);
+	}
+	
+	
+	@Override
+	public void onFooterLoad(AbPullToRefreshView view) {
+		if (pageIndex > pageTotal) {
+			pullView.onFooterLoadFinish();
+			return;
+		}
+		getNewHouseList(cityId, areaCondition,
+				totalPriceCondition, roomTypeCondition,
+				usageCondition, labelCondition,
+				statusCondition, keyWords, 10,
+				false);
+	}
+
+	
+
+	private void getNewHouseList(String cityId, TextValueBean areaCondition,
+			TextValueBean priceCondition, TextValueBean roomTypeCondition,
+			TextValueBean usageCondition, TextValueBean labelCondition,
+			TextValueBean statusCondition, String keyWords, int pageSize,
+			final boolean isRefresh) {
+
+		if (isRefresh) {
+			pageIndex = 0;
+		}
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getNewHouseList(cityId, areaCondition, priceCondition,
+				roomTypeCondition, usageCondition, labelCondition,
+				statusCondition, keyWords, 10, pageIndex, new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						pageTotal = result.getTotal();
+						ArrayList<NewHouseBean> temp = (ArrayList<NewHouseBean>) JSON.parseArray(result.getData(), NewHouseBean.class);
+						if (isRefresh) {
+							newHouses.clear();
+						}
+						newHouses.addAll(temp);
+						adapter.notifyDataSetChanged();
+						pageIndex++;
+						if (isRefresh) {
+							pullView.onHeaderRefreshFinish();
+						} else {
+							pullView.onFooterLoadFinish();
+						}
+						
+					}
+				});
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.act_new_house_back: // 返回
 			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+			imm.hideSoftInputFromWindow(getWindow().getDecorView()
+					.getWindowToken(), 0);
 			finish();
 			break;
-		case R.id.act_new_house_area_llt:  // 区域
-			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas, onAreaSelectListener);
+		case R.id.act_new_house_area_llt: // 区域
+			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
+					onAreaSelectListener);
 			break;
-		case R.id.act_new_house_total_price_llt:   //  总价
-			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice, salePriceRanges, onTotalPriceSelectListener);
+		case R.id.act_new_house_total_price_llt: // 总价
+			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice,
+					salePriceRanges, onTotalPriceSelectListener);
 			break;
-		case R.id.act_new_house_type_llt:  //  房型
-			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType, houseTypes, onHouseTypeSelectListener);
+		case R.id.act_new_house_type_llt: // 房型
+			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
+					houseTypes, onHouseTypeSelectListener);
 			break;
-		case R.id.act_new_house_more_llt:  //  更多
-			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType, sorts, directions, estateLabels, lltMore);
+		case R.id.act_new_house_more_llt: // 更多
+			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
+					sorts, directions, estateLabels, lltMore);
 			break;
 		}
 	}
@@ -199,91 +358,62 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 		switch (buttonView.getId()) {
 		case R.id.act_new_house_list_map:
-			if (isChecked) {  // 列表
+			if (isChecked) { // 列表
 				mapViewFlt.setVisibility(View.GONE);
 				pullView.setVisibility(View.VISIBLE);
-			} else {  // 地图
+			} else { // 地图
 				mapViewFlt.setVisibility(View.VISIBLE);
 				pullView.setVisibility(View.GONE);
 			}
 			break;
 		}
-		
+
 	}
 
-	@Override
-	public void onFooterLoad(AbPullToRefreshView view) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void onHeaderRefresh(AbPullToRefreshView view) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private void getNewHouseList() {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getNewHouseList(cityId, "6000", 1, 1, 1, 1, "1", 10, 0, new ResultHandlerCallback() {
-			
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				ToastUtils.SHORT.toast(NewHouseActivity.this, "aaa");
-			}
-		});
-	}
-	
 	public void getConditionList(final String conditionName) {
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getConditionByName(conditionName, new ResultHandlerCallback() {
-			
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON.parseArray(result.getData(), TextValueBean.class);
-				if (SalePriceRange.equals(conditionName)) {
-					salePriceRanges.addAll(temp);
-				} else if (HouseType.equals(conditionName)) {
-					houseTypes.addAll(temp);
-				} else if (PrpUsage.equals(conditionName)) {
-					prpUsages.addAll(temp);
-				} else if (EstateLabel.equals(conditionName)) {
-					estateLabels.addAll(temp);
-				} else if (EstateStatus.equals(conditionName)) {
-					estateStatus.addAll(temp);
-				} else if (FloorRange.equals(conditionName)) {
-					floorRanges.addAll(temp);
-				} else if (RentPriceRange.equals(conditionName)) {
-					rentPriceRanges.addAll(temp);
-				} else if (Direction.equals(conditionName)) {
-					directions.addAll(temp);
-				} else if (Sort.equals(conditionName)) {
-					sorts.addAll(temp);
-				}
-			}
-		});
+		actionImpl.getConditionByName(conditionName,
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
+								.parseArray(result.getData(),
+										TextValueBean.class);
+						if (SalePriceRange.equals(conditionName)) {
+							salePriceRanges.addAll(temp);
+						} else if (HouseType.equals(conditionName)) {
+							houseTypes.addAll(temp);
+						} else if (PrpUsage.equals(conditionName)) {
+							prpUsages.addAll(temp);
+						} else if (EstateLabel.equals(conditionName)) {
+							estateLabels.addAll(temp);
+						} else if (EstateStatus.equals(conditionName)) {
+							estateStatus.addAll(temp);
+						} else if (FloorRange.equals(conditionName)) {
+							floorRanges.addAll(temp);
+						} else if (RentPriceRange.equals(conditionName)) {
+							rentPriceRanges.addAll(temp);
+						} else if (Direction.equals(conditionName)) {
+							directions.addAll(temp);
+						} else if (Sort.equals(conditionName)) {
+							sorts.addAll(temp);
+						}
+					}
+				});
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -304,4 +434,6 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener {
 		// activity 销毁时同时销毁地图控件
 		mapView.onDestroy();
 	}
+
+	
 }

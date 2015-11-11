@@ -432,22 +432,38 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void getNewHouseList(String areaId, String price, int roomType,
-			int usage, int specials, int status, String cityId, int pageSize,
-			int pageNum, ResultHandlerCallback callback) {
+	public void getNewHouseList(String cityId, TextValueBean areaCondition, TextValueBean priceCondition,
+			TextValueBean roomTypeCondition, TextValueBean usageCondition,
+			TextValueBean labelCondition, TextValueBean statusCondition,
+			String keyWords, int pageSize, int pageNum, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
 		requestParams.put("sign", "1111");
 		requestParams.put("timestamp", "2222");
 		
-		requestParams.put("areaId", areaId);
-		requestParams.put("price", price);
-		requestParams.put("roomType", roomType + "");
-		requestParams.put("usage", usage + "");
-		requestParams.put("specials", specials + "");
-		requestParams.put("status", status + "");
-		requestParams.put("siteId", cityId + "");
+		requestParams.put("siteId", cityId);
+		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {
+			requestParams.put("area", areaCondition.getValue());
+		}
+		if (priceCondition != null && !TextUtils.isEmpty(priceCondition.getValue())) {
+			requestParams.put("price", priceCondition.getValue());
+		}
+		if (roomTypeCondition != null && !TextUtils.isEmpty(roomTypeCondition.getValue())) {
+			requestParams.put("type", roomTypeCondition.getValue());
+		}
+		if (usageCondition != null && !TextUtils.isEmpty(usageCondition.getValue())) {
+			requestParams.put("house", usageCondition.getValue());
+		}
+		if (labelCondition != null && !TextUtils.isEmpty(labelCondition.getValue())) {
+			requestParams.put("label", labelCondition.getValue());
+		}
+		if (statusCondition != null && !TextUtils.isEmpty(statusCondition.getValue())) {
+			requestParams.put("status", statusCondition.getValue());
+		}
+		if (!TextUtils.isEmpty(keyWords)) {
+			requestParams.put("key", keyWords);
+		}
 		requestParams.put("pageSize", pageSize + "");
 		requestParams.put("pageNum", pageNum + "");
 
@@ -460,6 +476,40 @@ public class ActionImpl implements Action {
 
 		RequestEntity requestEntity = new RequestEntity();
 		requestEntity.setUrl(getAbsoluteUrl(API.GET_NEW_HOUSE_LIST));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+	
+	@Override
+	public void getNewHouseDetail(String estateId,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("estateId", estateId);
+
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.GET_NEW_HOUSE_DETAIL));
 		requestEntity.setRequestParams(requestParams);
 		requestEntity.setType(RequestEntity.GET);
 
@@ -732,4 +782,6 @@ public class ActionImpl implements Action {
 		DataWorker worker = DataWorker.getWorker(context);
 		worker.load(requestEntity);
 	}
+
+	
 }

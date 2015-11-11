@@ -82,6 +82,8 @@ public class API {
     
     public static final String GET_NEW_HOUSE_LIST = "NewEstate/GetEstateListJson";
     
+    public static final String GET_NEW_HOUSE_DETAIL = "NewEstate/GetEstateDetailJson";
+    
     public static final String GET_SECNOD_HAND_LIST = "Property/GetPropertyListJson";
     
     public static final String GET_CONDITION_LIST_BY_NAME = "Dictionary/Index";
