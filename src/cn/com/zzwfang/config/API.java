@@ -95,5 +95,12 @@ public class API {
     public static final String GET_RENT_HOUSE_LIST = "Property/GetRentPropertyListJson";
     
     public static final String GET_RENT_HOUSE_DETAIL = "Property/GetRentPropertyDetailJson";
+    
+    /**
+     * 资讯类别
+     */
+    public static final String GET_NEWS_TYPE = "News/Type";
+    
+    public static final String GET_NEWS_DETAIL = "News/Detail";
 
 }

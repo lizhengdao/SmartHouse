@@ -177,4 +177,7 @@
     <!-- 推荐房源 -->
     <string name="act_recommend_house_detail">推荐房源</string>
     
+    <!-- 资讯详情 -->
+    <string name="act_news_detail">详情</string>
+    
 </resources>

@@ -8,6 +8,14 @@ public class NewHouseDetailBean extends BaseBean {
 	
 	private String GreeningRate;
 	
+	private String FloorArea;
+	
+	private String MgtCompany;
+	
+	private String Decoration;
+	
+	private String Builder;
+	
 	private long Lat;
 	
 	private long Lng;
@@ -21,9 +29,43 @@ public class NewHouseDetailBean extends BaseBean {
 	private String UnitPrice;
 	
 //	private ArrayList<PriceTrendBean> priceTrend;
+	
+	
 
 	public AgentBean getAgent() {
 		return Agent;
+	}
+
+	public String getBuilder() {
+		return Builder;
+	}
+
+	public void setBuilder(String builder) {
+		Builder = builder;
+	}
+
+	public String getDecoration() {
+		return Decoration;
+	}
+
+	public void setDecoration(String decoration) {
+		Decoration = decoration;
+	}
+
+	public String getMgtCompany() {
+		return MgtCompany;
+	}
+
+	public void setMgtCompany(String mgtCompany) {
+		MgtCompany = mgtCompany;
+	}
+
+	public String getFloorArea() {
+		return FloorArea;
+	}
+
+	public void setFloorArea(String floorArea) {
+		FloorArea = floorArea;
 	}
 
 	public void setAgent(AgentBean agent) {

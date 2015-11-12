@@ -186,8 +186,22 @@ public interface Action {
 			int pageSize, int pageIndex, ResultHandlerCallback callback);
 	
 	/**
+	 * 获取租房详情
 	 * @param proId  房源ID
 	 * @param callback
 	 */
 	void getRentHouseDetail(String proId, ResultHandlerCallback callback);
+	
+	/**
+	 * 资讯类别
+	 * @param callback
+	 */
+	void getNewsType(ResultHandlerCallback callback);
+	
+	/**
+	 * @param newsTypeId
+	 * @param callback
+	 */
+	void getNewsDetail(String newsTypeId, ResultHandlerCallback callback);
+	
 }
