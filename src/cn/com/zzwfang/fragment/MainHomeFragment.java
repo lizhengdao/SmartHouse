@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +28,7 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.ptz.PullToZoomListViewEx;
@@ -81,6 +83,17 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		adapter = new HomeRecommendHouseAdapter(getActivity(), recommendSources);
 		ptzListView.setAdapter(adapter);
 		ptzListView.setHideHeader(false);
+		
+		CityBean cityBean = ContentUtils.getCityBean(getActivity());
+		if (cityBean != null) {
+			String cityName = cityBean.getName();
+			String cityId = cityBean.getSiteId();
+			if (!TextUtils.isEmpty(cityName) && !TextUtils.isEmpty(cityId)) {
+				tvLocation.setText(cityBean.getName());
+				adapter.setCityId(cityId);
+				getRecommendHouseSourceList(cityId);
+			}
+		}
 		
 		ptzListView.setOnItemClickListener(this);
 		
@@ -142,6 +155,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			switch (requestCode) {
 			case CODE_SELECT_CITY:
 				CityBean cityBean = (CityBean) data.getSerializableExtra(CityListActivity.INTENT_CITY);
+				ContentUtils.saveCityBeanData(getActivity(), cityBean);
+				tvLocation.setText(cityBean.getName());
 				adapter.setCityId(cityBean.getSiteId());
 				getRecommendHouseSourceList(cityBean.getSiteId());
 				break;

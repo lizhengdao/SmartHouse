@@ -8,11 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.constant.Constants;
 import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
@@ -197,7 +201,7 @@ public final class ContentUtils {
 			String field) {
 		SharedPreferences sp = (SharedPreferences) mContext
 				.getSharedPreferences(whichSp, 0);
-		String s = sp.getString(field, "0");// 如果该字段没对应值，则取出字符串0
+		String s = sp.getString(field, "");// 如果该字段没对应值，则取出字符串0
 		return s;
 	}
 
@@ -256,6 +260,58 @@ public final class ContentUtils {
 		SharedPreferences sp = (SharedPreferences) mContext
 				.getSharedPreferences(whichSp, 0);
 		sp.edit().clear();
+	}
+	
+	/**
+	 * 保存登录用户信息
+	 * @param context
+	 * @param userInfo
+	 */
+	public static void saveUserInfo(Context context, UserInfoBean userInfo) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		Editor editor = sp.edit();
+		editor.putString(Constants.ZZWFANG_USER_NAME, userInfo.getUserName());
+		editor.putString(Constants.USER_ID, userInfo.getId());
+		editor.putBoolean(Constants.USER_SEX, userInfo.isSex());
+		editor.putString(Constants.USER_PHOTO, userInfo.getPhoto());
+		editor.commit();
+	}
+	
+	/**
+	 * 用户退出登录，清除登录信息
+	 * @param context
+	 */
+	public static void clearUserInfo(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		sp.edit().remove(Constants.ZZWFANG_USER_NAME)
+		.remove(Constants.USER_ID)
+		.remove(Constants.USER_SEX)
+		.remove(Constants.USER_PHOTO)
+		.commit();
+	}
+	
+	public static void saveCityBeanData(Context context, CityBean cityBean) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		Editor editor = sp.edit();
+		editor.putString(Constants.CITY_NAME, cityBean.getName());
+		editor.putString(Constants.CITY_ID, cityBean.getSiteId());
+		editor.commit();
+	}
+	
+	public static CityBean getCityBean(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		
+		String cityName = sp.getString(Constants.CITY_NAME, null);
+		String cityId = sp.getString(Constants.CITY_ID, null);
+		
+		CityBean cityBean = new CityBean();
+		cityBean.setName(cityName);
+		cityBean.setSiteId(cityId);
+		return cityBean;
 	}
 
 //	public static void putNearByFlag(Context context, boolean flag) {

@@ -2,7 +2,7 @@ package cn.com.zzwfang.constant;
 
 public class Constants {
 
-	public static final String SHARED_PREFERENCE_NAME = "TRAVEL_SHARED_PREFERENCE";
+	public static final String SHARED_PREFERENCE_NAME = "SMART_SHARED_PREFERENCE";
 	
 	public static final String TOKEN = "csrftoken";
 	
@@ -22,6 +22,18 @@ public class Constants {
      *   SharedPreference 中的字段  保存登录的密码
      */
     public static final String PASS_WORD = "password";
+    
+    public static final String ZZWFANG_USER_NAME = "zzwfang_user_name";
+    
+    public static final String USER_ID = "user_id";
+    
+    public static final String USER_PHOTO = "user_photo";
+    
+    public static final String USER_SEX = "user_sex";
+    
+    public static final String CITY_NAME = "city_name";
+    
+    public static final String CITY_ID = "city_id";
 	
 	/**
      *   定位是否成功标识

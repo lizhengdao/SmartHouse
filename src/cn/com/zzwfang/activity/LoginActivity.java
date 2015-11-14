@@ -14,6 +14,7 @@ import cn.com.zzwfang.constant.URL;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.MD5Util;
 import cn.com.zzwfang.util.RSAUtil;
@@ -119,6 +120,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
+				ContentUtils.saveUserInfo(LoginActivity.this, userInfo);
 				ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
 				Jumper.newJumper()
 	            .setAheadInAnimation(R.anim.zoom_in_style1)
