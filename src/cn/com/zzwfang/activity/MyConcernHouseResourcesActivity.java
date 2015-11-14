@@ -2,12 +2,15 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import com.alibaba.fastjson.JSON;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.AttentionAdapter;
 import cn.com.zzwfang.bean.AttentionBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -35,6 +38,8 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 	
 	private ArrayList<AttentionBean> attentions = new ArrayList<AttentionBean>();
 	
+	private AttentionAdapter adapter;
+	
 	private int pageIndex = 1;
 	
 	private int pageNum = 0;
@@ -52,6 +57,9 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 		tvBack = (TextView) findViewById(R.id.act_concern_house_back);
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_my_concern);
 		lstConcern = (ListView) findViewById(R.id.lst_my_concern);
+		
+		adapter = new AttentionAdapter(this, attentions);
+		lstConcern.setAdapter(adapter);
 		
 		pullView.setPullRefreshEnable(true);
 		pullView.setLoadMoreEnable(true);
@@ -88,7 +96,7 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 
 	
 	
-	private void getMyAttentionList(boolean isRefresh) {
+	private void getMyAttentionList(final boolean isRefresh) {
 		
 		if (isRefresh) {
 			pageIndex = 1;
@@ -108,6 +116,12 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				pageNum = result.getTotal();
+				ArrayList<AttentionBean> temp = (ArrayList<AttentionBean>) JSON.parseArray(result.getData(), AttentionBean.class);
+				if (isRefresh) {
+					attentions.clear();
+				}
+				attentions.addAll(temp);
+				adapter.notifyDataSetChanged();
 			}
 		});
 	}

@@ -1,35 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
-    
-    <FrameLayout
+
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_my_proxy" />
+
+    <TextView
+        android:id="@+id/act_my_proxy_back"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:background="@color/color_app_theme" >
+        android:drawableLeft="@drawable/ic_back"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:text="@string/act_my_proxy_back"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="135dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/bg_main_char" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="55dp"
+        android:background="@color/transparent"
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/act_my_proxy_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawableLeft="@drawable/ic_back"
-            android:paddingLeft="8dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_my_proxy_back"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/act_my_proxy_sell_house"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/bg_login_btn"
             android:gravity="center"
-            android:text="@string/act_my_proxy"
+            android:text="@string/act_my_proxy_sell_house"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/act_my_proxy_i_buy_house"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_login_yellow"
+            android:gravity="center"
+            android:text="@string/act_my_proxy_i_buy_house"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>

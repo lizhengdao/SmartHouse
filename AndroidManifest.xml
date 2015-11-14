@@ -66,6 +66,12 @@
         <activity android:name="cn.com.zzwfang.activity.NewsDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.SeeHouseRecordActivity" />
         <activity android:name="cn.com.zzwfang.activity.MyHouseListActivity" />
+        <activity android:name="cn.com.zzwfang.activity.ProxySellHouseActivity" />
+        <activity android:name="cn.com.zzwfang.activity.IWantBuyHouseActivity" />
+        <activity android:name="cn.com.zzwfang.activity.ChangePwdActivity" />
+        <activity android:name="cn.com.zzwfang.activity.AboutUsActivity" />
+        <activity android:name="cn.com.zzwfang.activity.CommonProblemsActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterInfoActivity" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="开发者 key" />

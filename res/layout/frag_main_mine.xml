@@ -31,14 +31,14 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
+        <ImageView
+            android:id="@+id/frag_mine_fee_hunter"
+            android:layout_width="80dp"
+            android:layout_height="23dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="8dp"
             android:gravity="center_vertical"
-            android:text="@string/frag_mine_be_fee_hunter"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:src="@drawable/ic_fee_hunter" />
     </FrameLayout>
 
     <ScrollView

@@ -300,18 +300,21 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void changePwd(String oldpwd, String newpwd1, String newpwd2,
+	public void changePwd(String phoneNum, String oldPwd, String newPwd,
 			ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
-		requestParams.put("platform", "a");
-		requestParams.put("password", oldpwd);
-		requestParams.put("password_1", newpwd1);
-		requestParams.put("password_2", newpwd2);
+		
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("tel", phoneNum);
+		requestParams.put("password", oldPwd);
+		requestParams.put("nPassword", newPwd);
 
 		RequestEntity requestEntity = new RequestEntity();
 		requestEntity.setUrl(getAbsoluteUrl(API.POST_CHANGE_PWD));
 		requestEntity.setRequestParams(requestParams);
-		requestEntity.setType(RequestEntity.POST);
+		requestEntity.setType(RequestEntity.GET);
 
 		Options opts = new Options();
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(

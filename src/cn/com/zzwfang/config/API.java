@@ -51,9 +51,9 @@ public class API {
 	public static final String POST_REGISTER = "User/Register";
 
 	/**
-	 * 修改密码 http://wiki.lianbi.com.cn/pages/viewpage.action?pageId=9143997
+	 * 修改密码
 	 */
-	public static final String POST_CHANGE_PWD = "/auth/password/change/";
+	public static final String POST_CHANGE_PWD = "User/UpdatePwd";
 	/**
 	 * 忘记密码 http://wiki.lianbi.com.cn/pages/viewpage.action?pageId=9144000
 	 */

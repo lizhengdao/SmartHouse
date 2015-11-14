@@ -58,7 +58,7 @@ public interface Action {
 	/**
 	 * 修改密码
 	 */
-	void changePwd(String oldpwd, String newpwd1, String newpwd2,
+	void changePwd(String phoneNum, String oldPwd, String newPwd,
 			ResultHandlerCallback callback);
 
 	/**

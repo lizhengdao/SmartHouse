@@ -45,15 +45,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:text="@string/act_my_demand"/>
         
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_right_arrow"/>
     </FrameLayout>
     
     <FrameLayout 
@@ -69,15 +70,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:text="@string/act_my_demand_advised_house_resources"/>
         
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_right_arrow"/>
     </FrameLayout>
     
     <FrameLayout 
@@ -93,15 +95,16 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
             android:text="@string/act_my_demand_my_buy_house"/>
         
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_right_arrow"/>
     </FrameLayout>
 
 </LinearLayout>

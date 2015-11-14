@@ -41,6 +41,13 @@
     <color name="color_484c58">#484c58</color>
     <color name="color_a3a3a3">#a3a3a3</color>
     <color name="color_f4f4f4">#f4f4f4</color>
+    <color name="color_d86048">#d86048</color>
+    <color name="color_eaeaea">#eaeaea</color>
+    <color name="color_ff9c00">#ff9c00</color>
+    <color name="color_fcd1ae">#fcd1ae</color>
+    <color name="color_da6846">#da6846</color>
+    <color name="color_dddddd">#dddddd</color>
+    <color name="color_fbd0ad">#fbd0ad</color>
     
     <color name="color_app_theme">#21a535</color>
     <color name="theme_red_alpha">#33e23c1b</color>

@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.activity.BaseActivity;
-import cn.com.zzwfang.activity.BrowseRecordActivity;
+import cn.com.zzwfang.activity.FeeHunterInfoActivity;
 import cn.com.zzwfang.activity.FeedbackActivity;
 import cn.com.zzwfang.activity.MainActivity;
 import cn.com.zzwfang.activity.MessageActivity;
@@ -22,7 +22,6 @@ import cn.com.zzwfang.activity.MyConcernHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyDemandActivity;
 import cn.com.zzwfang.activity.MyHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyProxyActivity;
-import cn.com.zzwfang.activity.NewHouseActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.PathImage;
@@ -41,6 +40,8 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	
 	private FrameLayout msgFlt, attentionHouseSourceFlt, myProxyFlt,
 	myDemandFlt, myHouseResourcesFlt, mortgageCalculatorFlt, feedbackFlt, settingsFlt;
+	
+	private ImageView imgFeeHunter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +62,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		mortgageCalculatorFlt = (FrameLayout) view.findViewById(R.id.frag_mine_mortgage_calculator_flt);
 		feedbackFlt = (FrameLayout) view.findViewById(R.id.frag_mine_feedback_flt);
 		settingsFlt = (FrameLayout) view.findViewById(R.id.frag_mine_settings_flt);
+		imgFeeHunter = (ImageView) view.findViewById(R.id.frag_mine_fee_hunter);
 
 		tvBack.setOnClickListener(this);
 		avatar.setOnClickListener(this);
@@ -72,6 +74,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		mortgageCalculatorFlt.setOnClickListener(this);
 		feedbackFlt.setOnClickListener(this);
 		settingsFlt.setOnClickListener(this);
+		imgFeeHunter.setOnClickListener(this);
 	}
 
 	
@@ -80,6 +83,14 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		switch (v.getId()) {
 		case R.id.frag_mine_back:
 			((MainActivity)getActivity()).backToHomeFragment();
+			break;
+		case R.id.frag_mine_fee_hunter:   // 赏金猎人个人中心
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, FeeHunterInfoActivity.class);
 			break;
 		case R.id.frag_mine_avatar:   //  修改头像
 			startPickPhotoFromAlbumWithCrop();

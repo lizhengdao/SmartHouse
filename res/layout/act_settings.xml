@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:background="@color/white" >
+    android:background="@color/color_eeeeee" >
     
     <FrameLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:drawableLeft="@drawable/ic_back"
             android:paddingLeft="8dp"
             android:gravity="center_vertical"
-            android:text="返回"
+            android:text="@string/back"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -38,42 +38,47 @@
         android:id="@+id/act_settings_change_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_act_settings_item">
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/white">
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="@string/act_settings_change_pwd"/>
+            android:text="@string/act_settings_change_pwd"
+            android:textColor="@color/color_626262"
+            android:textSize="15sp"/>
         
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_right_arrow"/>
     </FrameLayout>
     
     <FrameLayout 
         android:id="@+id/act_settings_change_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_act_settings_item">
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/white">
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="@string/act_settings_msg_push"/>
+            android:text="@string/act_settings_msg_push"
+            android:textColor="@color/color_626262"
+            android:textSize="15sp"/>
         
         <cn.com.zzwfang.view.ToggleButton
             android:id="@+id/act_settings_msg_push_toggle"
@@ -92,97 +97,117 @@
         android:id="@+id/act_settings_clear_cache"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_act_settings_item">
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/white">
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="@string/act_settings_clear_cache"/>
+            android:text="@string/act_settings_clear_cache"
+            android:textColor="@color/color_626262"
+            android:textSize="15sp"/>
         
-        <ImageView 
+        <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:gravity="center_vertical"
+            android:drawableRight="@drawable/ic_right_arrow"
+            android:drawablePadding="40dp"
+            android:textColor="@color/color_fbd0ad"
+            android:textSize="16sp"
+            android:text="2.5M"/>
     </FrameLayout>
     
     <FrameLayout 
         android:id="@+id/act_settings_about_us"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_act_settings_item">
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/white">
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="@string/act_settings_about_us"/>
+            android:text="@string/act_settings_about_us"
+            android:textColor="@color/color_626262"
+            android:textSize="15sp"/>
         
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_right_arrow"/>
     </FrameLayout>
     
     <FrameLayout 
         android:id="@+id/act_settings_common_questions"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_act_settings_item">
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/white">
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="@string/act_settings_common_questions"/>
+            android:text="@string/act_settings_common_questions"
+            android:textColor="@color/color_626262"
+            android:textSize="15sp"/>
         
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_right_arrow"/>
     </FrameLayout>
     
     <FrameLayout 
         android:id="@+id/act_settings_check_updates"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/shape_act_settings_item">
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/white">
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="@string/act_settings_check_updates"/>
+            android:text="@string/act_settings_check_updates"
+            android:textColor="@color/color_626262"
+            android:textSize="15sp"/>
         
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_gravity="right"
+            android:drawableRight="@drawable/ic_right_arrow"
             android:gravity="center"
-            android:text="最新版本"/>
+            android:text="最新版本"
+            android:textColor="@color/color_dddddd"
+            android:textSize="16sp"/>
     </FrameLayout>
     
     <TextView 
@@ -191,7 +216,11 @@
         android:layout_height="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="@string/act_settings_logout"/>
+        android:text="@string/act_settings_logout"
+        android:textSize="16sp"
+        android:textColor="@color/color_da6846"
+        android:background="@drawable/shape_login_out"/>
 
 </LinearLayout>

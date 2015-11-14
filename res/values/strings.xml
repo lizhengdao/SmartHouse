@@ -27,6 +27,9 @@
     <!-- 注册 -->
     <string name="register">注册</string>
     
+    <!-- 修改密码 -->
+    <string name="act_change_pwd">修改密码</string>
+    
     <!-- 智住网协议 -->
     <string name="smart_house_protocol">智住网用户协议</string>
     
@@ -111,7 +114,7 @@
     <string name="act_settings_about_us">关于我们</string>
     <string name="act_settings_common_questions">常见问题</string>
     <string name="act_settings_check_updates">检查更新</string>
-    <string name="act_settings_logout">退出账号</string>
+    <string name="act_settings_logout">退出登录</string>
     
     <!-- 意见反馈   -->
     <string name="act_feedback">意见反馈</string>
@@ -153,7 +156,8 @@
     <!-- 我的委托 -->
     <string name="act_my_proxy_back">返回</string>
     <string name="act_my_proxy">我的委托</string>
-    
+    <string name="act_my_proxy_sell_house">委托售房</string>
+    <string name="act_my_proxy_i_buy_house">我要买房</string>
     <!-- 二手房 -->
     <string name="act_second_hand_house_back">返回</string>
     <string name="act_second_hand_house_hint">试试输入楼盘名称</string>
@@ -184,5 +188,20 @@
     
     <!-- 看房记录 -->
     <string name="act_see_house_record">看房记录</string>
+    
+    <!-- 委托售房 -->
+    <string name="act_proxy_sell_house">委托售房</string>
+    
+    <!-- 我要买房 -->
+    <string name="act_i_want_buy_house">我要买房</string>
+    
+    <!-- 关于我们 -->
+    <string name="act_about_us">关于我们</string>
+    
+    <!-- 常见问题 -->
+    <string name="act_common_problems">常见问题</string>
+    
+    <!-- 赏金猎人个人中心 -->
+    <string name="act_fee_hunter_info">赏金猎人个人中心</string>
     
 </resources>
