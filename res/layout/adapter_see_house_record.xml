@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/white" >
+    
+    <ImageView 
+        android:id="@+id/adapter_see_house_record_avtar"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
+    
+    <TextView 
+        android:id="@+id/adapter_see_house_record_name"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/color_a3a3a3"
+        android:textSize="16sp"/>
+    
+    <cn.com.zzwfang.view.AutoDrawableTextView
+        android:id="@+id/adapter_see_house_record_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:drawableRight="@drawable/ic_phone_green"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/color_a3a3a3"
+        android:textSize="16sp"
+        app:right_width="20dp"
+        app:right_height="20dp"/>
+
+</LinearLayout>

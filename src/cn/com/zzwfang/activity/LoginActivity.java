@@ -94,7 +94,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void login() {
-		String phoneNum = edtPhoneNum.getText().toString();
+		final String phoneNum = edtPhoneNum.getText().toString();
 		String pwd = edtPwd.getText().toString();
 		if (TextUtils.isEmpty(phoneNum)) {
 			ToastUtils.SHORT.toast(this, "请输入手机号码");
@@ -121,6 +121,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			public void rc0(RequestEntity entity, Result result) {
 				UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
 				ContentUtils.saveUserInfo(LoginActivity.this, userInfo);
+				ContentUtils.saveLoginPhone(LoginActivity.this, phoneNum);
 				ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
 				Jumper.newJumper()
 	            .setAheadInAnimation(R.anim.zoom_in_style1)

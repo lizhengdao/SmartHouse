@@ -7,7 +7,7 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	/**
 	 * 图片
 	 */
-	private ArrayList<String> Photo;
+	private ArrayList<PhotoBean> Photo;
 	
 	/**
 	 * 标题
@@ -87,7 +87,7 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	/**
 	 * 带看记录
 	 */
-	private ArrayList<InqFollowListBean> InqFollowList; 
+	private ArrayList<InqFollowListBean> InqFollowList;
 	
 	/**
 	 * 经纪人
@@ -95,7 +95,7 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	private AgentBean Agent;
 	
 	/**
-	 * 360展示
+	 * 360展示  网页展示
 	 */
 	private String Prp360;
 	
@@ -104,12 +104,16 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	 */
 	private String Estate360;
 	
+	private long Lat;
+	
+	private long Lng;
+	
 
-	public ArrayList<String> getPhoto() {
+	public ArrayList<PhotoBean> getPhoto() {
 		return Photo;
 	}
 
-	public void setPhoto(ArrayList<String> photo) {
+	public void setPhoto(ArrayList<PhotoBean> photo) {
 		Photo = photo;
 	}
 
@@ -264,6 +268,22 @@ public class SecondHandHouseDetailBean extends BaseBean {
 
 	public void setEstate360(String estate360) {
 		Estate360 = estate360;
+	}
+
+	public long getLat() {
+		return Lat;
+	}
+
+	public void setLat(long lat) {
+		Lat = lat;
+	}
+
+	public long getLng() {
+		return Lng;
+	}
+
+	public void setLng(long lng) {
+		Lng = lng;
 	}
 	
 

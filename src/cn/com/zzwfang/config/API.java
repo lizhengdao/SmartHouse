@@ -68,6 +68,8 @@ public class API {
 	
 	
 	////////////////////////////////////////////////////////////////////////////////
+	
+	public static final String CHECK_PHONE_HAS_REGISTERED = "User/CheckPhone";
 	/**
 	 * 返回推荐房源
 	 */
@@ -102,5 +104,25 @@ public class API {
     public static final String GET_NEWS_TYPE = "News/Type";
     
     public static final String GET_NEWS_DETAIL = "News/Detail";
+    
+    /**
+     * 意见反馈
+     */
+    public static final String POST_COMMIT_FEEDBACK = "Other/Feedback";
+    
+    /**
+     * 我关注的房源
+     */
+    public static final String GET_MY_ATTENTION_LIST = "Attention/Detail";
+    
+    /**
+     * 关注房源
+     */
+    public static final String GET_ATTENTION_TO_PROPERTY = "User/Focus";
+    
+    /**
+     * 获取我的房屋列表
+     */
+    public static final String GET_MY_HOUSE_LIST = "MyProperty/myProperyty";
 
 }

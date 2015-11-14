@@ -2,18 +2,29 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.adapter.PhotoPagerAdapter;
 import cn.com.zzwfang.bean.AgentBean;
+import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SecondHandHouseDetailBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.ToastUtils;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.PathImage;
 
 import com.alibaba.fastjson.JSON;
@@ -23,13 +34,23 @@ import com.alibaba.fastjson.JSON;
  * @author lzd
  *
  */
-public class SecondHandHouseDetailActivity extends BaseActivity implements OnClickListener {
+public class SecondHandHouseDetailActivity extends BaseActivity implements OnClickListener,
+OnPageChangeListener {
 
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
 	private TextView tvBack, tvTitle, tvShare, tvDetailtitle;
 	private TextView tvTotalPrice, tvHouseType, tvSquare, tvLabel, tvUnitPrice;
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
-	tvDecoration, tvEstateName, tvAgentName, tvAgentPhone, tvAgentDial, tvAgentMsg;
+	tvDecoration, tvEstateName, tvAgentName, tvAgentPhone, tvAgentDial, tvAgentMsg,
+	tvPhotoIndex, tvSeeHouseRecord, tvAttention;
+	
+	private AutoDrawableTextView tvDial, tvMsg;
+	
+	private TextView tvMortgageCalculate;
+	
+	private ViewPager photoPager;
+	private PhotoPagerAdapter photoAdapter;
+	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
 	
 	private PathImage agentAvatar;
 	private String houseSourceId = null;
@@ -66,26 +87,85 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements OnCli
 		tvAgentPhone = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_phone);
 		tvAgentDial = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
 		tvAgentMsg = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
+		tvPhotoIndex = (TextView) findViewById(R.id.act_second_house_detail_photo_index_tv);
+		tvSeeHouseRecord = (TextView) findViewById(R.id.act_second_handhouse_see_house_record_tv);
+		tvMortgageCalculate = (TextView) findViewById(R.id.act_second_hand_house_detail_calculator_tv);
+		tvDial = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
+		tvMsg = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
+		tvAttention = (TextView) findViewById(R.id.act_second_handhouse_attenton_tv);
+		
+		photoPager = (ViewPager) findViewById(R.id.act_second_house_detail_pager);
+		photoAdapter = new PhotoPagerAdapter(this, photos);
+		photoPager.setAdapter(photoAdapter);
 	
 		tvBack.setOnClickListener(this);
 		tvShare.setOnClickListener(this);
+		tvSeeHouseRecord.setOnClickListener(this);
+		photoPager.setOnPageChangeListener(this);
+		tvMortgageCalculate.setOnClickListener(this);
+		tvDial.setOnClickListener(this);
+		tvMsg.setOnClickListener(this);
+		tvAttention.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.act_search_house_artifact_back:
+		case R.id.act_second_hand_house_detail_back:
 			finish();
 			break;
 		case R.id.act_second_hand_house_detail_title:  // 详情title
 			break;
 		case R.id.act_second_hand_house_detail_share:   //  分享
 			break;
+		case R.id.act_second_handhouse_see_house_record_tv:  // 看房记录
+			
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .putSerializable(SeeHouseRecordActivity.INTENT_RECORD, secondHandHouseDetail.getInqFollowList())
+	        .jump(this, SeeHouseRecordActivity.class);
+			break;
+			
+		case R.id.act_second_hand_house_detail_calculator_tv:  //  房贷计算器
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, MortgageCalculatorActivity.class);
+			break;
+		case R.id.act_second_hand_house_detail_agent_dial:  // 拨打经纪人电话
+			if (secondHandHouseDetail != null) {
+				AgentBean agent = secondHandHouseDetail.getAgent();
+				String phone = agent.getTel();
+				if (!TextUtils.isEmpty(phone)) {
+					Intent intent = new Intent(Intent.ACTION_CALL);
+					intent.setData(Uri.parse("tel:" + phone));
+					startActivity(intent);
+				}
+			}
+			break;
+		case R.id.act_second_hand_house_detail_agent_msg:   //  给经纪人发消息
+			
+			break;
+			
+		case R.id.act_second_handhouse_attenton_tv:   //  关注
+			attentionToHouse();
+			break;
 		}
 	}
 	
 	private void rendUI() {
 		if (secondHandHouseDetail != null) {
+			photos.addAll(secondHandHouseDetail.getPhoto());
+			photoAdapter.notifyDataSetChanged();
+			int photoTotalNum = photoAdapter.getCount();
+			String txt = photoTotalNum + "/1";
+			tvPhotoIndex.setText(txt);
+			
 			tvTitle.setText(secondHandHouseDetail.getTitle());
 			tvDetailtitle.setText(secondHandHouseDetail.getTitle());
 			tvTotalPrice.setText(secondHandHouseDetail.getPrice() + "万");
@@ -110,7 +190,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements OnCli
 			if (agentBean != null) {
 				tvAgentName.setText(agentBean.getName());
 				tvAgentPhone.setText(agentBean.getTel());
-				ImageAction.displayAvatar(agentBean.getPhoto(), agentAvatar);
+				ImageAction.displayBrokerAvatar(agentBean.getPhoto(), agentAvatar);
 			}
 			
 			
@@ -133,6 +213,48 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements OnCli
 			public void rc0(RequestEntity entity, Result result) {
 				secondHandHouseDetail = JSON.parseObject(result.getData(), SecondHandHouseDetailBean.class);
 				rendUI();
+			}
+		});
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		// TODO Auto-generated method stub
+		int photoTotalNum = photoAdapter.getCount();
+		String txt = photoTotalNum + "/" + (arg0 + 1);
+		tvPhotoIndex.setText(txt);
+	}
+	
+	private void attentionToHouse() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		String userId = ContentUtils.getUserId(this);
+		actionImpl.attentionToHouse(userId, houseSourceId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				ToastUtils.SHORT.toast(SecondHandHouseDetailActivity.this, "关注成功");
 			}
 		});
 	}

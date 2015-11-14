@@ -37,7 +37,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class SecondHandHouseActivity extends BaseActivity implements
-		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener, OnItemClickListener {
+		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener,
+		OnCheckedChangeListener, OnItemClickListener {
 
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
 	private CheckBox cbxListAndMap;

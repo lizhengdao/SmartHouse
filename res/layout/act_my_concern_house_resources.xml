@@ -31,5 +31,20 @@
             android:textSize="18sp" />
 
     </FrameLayout>
+    
+    <cn.com.zzwfang.pullview.AbPullToRefreshView
+            android:id="@+id/pull_my_concern"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/lst_my_concern"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/color_cecece"
+                android:dividerHeight="1dp" />
+        </cn.com.zzwfang.pullview.AbPullToRefreshView>
+    
 
 </LinearLayout>

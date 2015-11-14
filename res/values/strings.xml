@@ -115,7 +115,7 @@
     
     <!-- 意见反馈   -->
     <string name="act_feedback">意见反馈</string>
-    <string name="act_feedback_hint">请输入反馈，我们将不断改进</string>
+    <string name="act_feedback_hint">请输入反馈，我们将不断改进!</string>
     <string name="act_feedback_phone_hint">输入电话号码（选填）</string>
     
     <!-- 我的需求 -->
@@ -135,6 +135,8 @@
     <string name="act_my_house_resources_see_house_detail">看房明细</string>
     <string name="act_my_house_resources_msg_changes">信息变动</string>
     
+    <!-- 我的房屋  列表  -->
+    <string name="act_my_house_list">我的房屋</string>
     
     <!-- 浏览记录   -->
     <string name="act_browse_record_back">返回</string>
@@ -146,7 +148,7 @@
     
     <!-- 我关注的房源 -->
     <string name="act_concern_house_back">返回</string>
-    <string name="act_concern_house">我关注的房源</string>
+    <string name="act_concern_house">我的关注</string>
     
     <!-- 我的委托 -->
     <string name="act_my_proxy_back">返回</string>
@@ -179,5 +181,8 @@
     
     <!-- 资讯详情 -->
     <string name="act_news_detail">详情</string>
+    
+    <!-- 看房记录 -->
+    <string name="act_see_house_record">看房记录</string>
     
 </resources>

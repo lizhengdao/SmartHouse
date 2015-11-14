@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/color_f4f4f4"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
@@ -28,7 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:gravity="center"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -56,15 +59,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <android.support.v4.view.ViewPager
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:visibility="gone" />
-            
-            <ImageView 
-                android:id="@+id/act_second_house_detail_photo"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="wrap_content" >
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/act_second_house_detail_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <TextView
+                    android:id="@+id/act_second_house_detail_photo_index_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,9 +89,9 @@
                 <TextView
                     android:id="@+id/act_second_house_detail_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_height="50dp"
                     android:background="@color/white"
+                    android:gravity="center_vertical"
                     android:text="绝版套三双卫  客厅带超大观景阳台   赠送入户"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -94,8 +107,8 @@
                     android:layout_height="60dp"
                     android:background="@color/white"
                     android:orientation="horizontal"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:weightSum="3" >
 
                     <LinearLayout
@@ -252,9 +265,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_round_solid_white_stroke_color_aaaaaa"
                         android:drawableLeft="@drawable/ic_mortgage_calculator"
                         android:drawablePadding="8dp"
                         android:gravity="center_vertical"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
                         android:text="房贷计算器"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -500,10 +518,15 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <Space 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e0e0e0" />
+
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:background="@color/color_eeeeee"/>
+                android:background="@color/color_f4f4f4" />
             
             <View
                 android:layout_width="match_parent"
@@ -511,6 +534,24 @@
                 android:background="@color/color_e0e0e0" />
 
             <TextView
+                android:id="@+id/act_second_handhouse_attenton_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="关注"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e0e0e0" />
+
+            <TextView
+                android:id="@+id/act_second_handhouse_see_house_record_tv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
@@ -524,8 +565,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:background="@color/color_e0e0e0" />
 
             <TextView
@@ -542,9 +581,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="15dp"
+                android:background="@color/color_e0e0e0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/color_f4f4f4" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:background="@color/color_e0e0e0" />
 
             <TextView
@@ -558,10 +604,31 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <ImageView
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e0e0e0" />
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/act_second_hand_house_detail_map_view"
+                android:layout_width="fill_parent"
                 android:layout_height="200dp"
-                android:src="@drawable/ic_frag_home_header" />
+                android:clickable="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e0e0e0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:background="@color/color_f4f4f4" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e0e0e0" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -577,8 +644,6 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 android:background="@color/color_e0e0e0" />
 
             <LinearLayout
@@ -770,13 +835,17 @@
                             android:id="@+id/act_second_hand_house_detail_agent_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="张三" />
+                            android:text="张三"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/act_second_hand_house_detail_agent_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="15881818888" />
+                            android:text="15881818888"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -787,7 +856,7 @@
                     android:gravity="center"
                     android:orientation="horizontal" >
 
-                    <TextView
+                    <cn.com.zzwfang.view.AutoDrawableTextView
                         android:id="@+id/act_second_hand_house_detail_agent_dial"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
@@ -795,9 +864,12 @@
                         android:drawableTop="@drawable/ic_phone_white"
                         android:gravity="center"
                         android:text="呼叫"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        app:top_height="20dp"
+                        app:top_width="20dp" />
 
-                    <TextView
+                    <cn.com.zzwfang.view.AutoDrawableTextView
                         android:id="@+id/act_second_hand_house_detail_agent_msg"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
@@ -805,7 +877,10 @@
                         android:drawableTop="@drawable/ic_message_white"
                         android:gravity="center"
                         android:text="消息"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        app:top_height="20dp"
+                        app:top_width="20dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

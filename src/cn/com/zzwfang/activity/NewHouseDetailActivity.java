@@ -3,14 +3,21 @@ package cn.com.zzwfang.activity;
 import com.alibaba.fastjson.JSON;
 
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
+import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.NewHouseDetailBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.view.AutoDrawableTextView;
+import cn.com.zzwfang.view.PathImage;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -23,9 +30,14 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 	tvAveragePrice, tvConsultant, tvArea, tvSquare, tvPropertyType,
 	tvPlotRatio, tvDecoration, tvGreenRatio, tvMgtCompany,
 	tvBuilderCompany;
+	
+	private PathImage brokerAvatar;
+	private TextView tvBrokerName, tvBrokerPhone;
+	
 	private ViewPager viewPager;
 	private PhotoPagerAdapter photoPagerAdapter;
     
+	private AutoDrawableTextView tvDial, tvMsg;
 	
 	private String estateId;
 	
@@ -56,8 +68,15 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 		tvGreenRatio = (TextView) findViewById(R.id.act_new_house_detail_greening_rate_tv);
 		tvMgtCompany = (TextView) findViewById(R.id.act_new_house_detail_mgt_company_tv);
 		tvBuilderCompany = (TextView) findViewById(R.id.act_new_house_detail_builder_company_tv);
+		tvDial = (AutoDrawableTextView) findViewById(R.id.act_new_house_detail_agent_dial);
+		tvMsg = (AutoDrawableTextView) findViewById(R.id.act_new_house_detail_agent_msg);
+		brokerAvatar = (PathImage) findViewById(R.id.act_new_house_detail_agent_avatar);
+		tvBrokerName = (TextView) findViewById(R.id.act_new_house_detail_agent_name);
+		tvBrokerPhone = (TextView) findViewById(R.id.act_new_house_detail_agent_phone);
 		
 		tvBack.setOnClickListener(this);
+		tvDial.setOnClickListener(this);
+		tvMsg.setOnClickListener(this);
 	}
 
 	@Override
@@ -65,6 +84,19 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 		switch (v.getId()) {
 		case R.id.act_new_house_detail_back:
 			finish();
+			break;
+		case R.id.act_new_house_detail_agent_dial:  // 打经纪人电话
+			if (newHouseDetailBean != null) {
+				AgentBean agent = newHouseDetailBean.getAgent();
+				String phone = agent.getTel();
+				if (!TextUtils.isEmpty(phone)) {
+					Intent intent = new Intent(Intent.ACTION_CALL);
+					intent.setData(Uri.parse("tel:" + phone));
+					startActivity(intent);
+				}
+			}
+			break;
+		case R.id.act_new_house_detail_agent_msg:   // 经纪人发消息
 			break;
 		}
 	}
@@ -82,6 +114,16 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 			tvGreenRatio.setText(newHouseDetailBean.getGreeningRate());
 			tvMgtCompany.setText(newHouseDetailBean.getMgtCompany());
 			tvBuilderCompany.setText(newHouseDetailBean.getBuilder());
+			
+			AgentBean agent = newHouseDetailBean.getAgent();
+			if (agent != null) {
+				tvBrokerName.setText(agent.getName());
+				tvBrokerPhone.setText(agent.getTel());
+				String url = agent.getPhoto();
+				if (!TextUtils.isEmpty(url)) {
+					ImageAction.displayBrokerAvatar(url, brokerAvatar);
+				}
+			}
 		}
 		
 	}

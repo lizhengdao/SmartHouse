@@ -292,6 +292,27 @@ public final class ContentUtils {
 		.commit();
 	}
 	
+	public static void saveLoginPhone(Context context, String phone) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		Editor editor = sp.edit();
+		editor.putString(Constants.USER_LOGIN_PHONE, phone).commit();
+	}
+	
+	public static String getLoginPhone(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		String userLoginPhone = sp.getString(Constants.USER_LOGIN_PHONE, "");
+		return userLoginPhone;
+	}
+	
+	public static String getUserId(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		String userId = sp.getString(Constants.USER_ID, "");
+		return userId;
+	}
+	
 	public static void saveCityBeanData(Context context, CityBean cityBean) {
 		SharedPreferences sp = (SharedPreferences) context
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);

@@ -31,6 +31,8 @@ public class Constants {
     
     public static final String USER_SEX = "user_sex";
     
+    public static final String USER_LOGIN_PHONE = "user_login_phone";
+    
     public static final String CITY_NAME = "city_name";
     
     public static final String CITY_ID = "city_id";

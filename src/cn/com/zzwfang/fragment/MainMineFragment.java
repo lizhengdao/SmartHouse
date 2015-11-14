@@ -39,7 +39,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 
 	private PathImage avatar;
 	
-	private FrameLayout msgFlt, attentionHouseSourceFlt, myProxyFlt, browseRecordFlt,
+	private FrameLayout msgFlt, attentionHouseSourceFlt, myProxyFlt,
 	myDemandFlt, myHouseResourcesFlt, mortgageCalculatorFlt, feedbackFlt, settingsFlt;
 
 	@Override
@@ -56,7 +56,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		msgFlt = (FrameLayout) view.findViewById(R.id.frag_mine_msg_flt);
 		attentionHouseSourceFlt = (FrameLayout) view.findViewById(R.id.frag_mine_attention_house_source_flt);
 		myProxyFlt = (FrameLayout) view.findViewById(R.id.frag_mine_my_proxy_flt);
-		browseRecordFlt = (FrameLayout) view.findViewById(R.id.frag_mine_browse_record_flt);
 		myDemandFlt = (FrameLayout) view.findViewById(R.id.frag_mine_my_demand_flt);
 		myHouseResourcesFlt = (FrameLayout) view.findViewById(R.id.frag_mine_my_house_resources_flt);
 		mortgageCalculatorFlt = (FrameLayout) view.findViewById(R.id.frag_mine_mortgage_calculator_flt);
@@ -68,7 +67,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		msgFlt.setOnClickListener(this);
 		attentionHouseSourceFlt.setOnClickListener(this);
 		myProxyFlt.setOnClickListener(this);
-		browseRecordFlt.setOnClickListener(this);
 		myDemandFlt.setOnClickListener(this);
 		myHouseResourcesFlt.setOnClickListener(this);
 		mortgageCalculatorFlt.setOnClickListener(this);
@@ -110,14 +108,14 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(this, MyProxyActivity.class);
 			break;
-		case R.id.frag_mine_browse_record_flt:  //  浏览记录
-			Jumper.newJumper()
-	        .setAheadInAnimation(R.anim.activity_push_in_right)
-	        .setAheadOutAnimation(R.anim.activity_alpha_out)
-	        .setBackInAnimation(R.anim.activity_alpha_in)
-	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(this, BrowseRecordActivity.class);
-			break;
+//		case R.id.frag_mine_browse_record_flt:  //  浏览记录
+//			Jumper.newJumper()
+//	        .setAheadInAnimation(R.anim.activity_push_in_right)
+//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	        .setBackInAnimation(R.anim.activity_alpha_in)
+//	        .setBackOutAnimation(R.anim.activity_push_out_right)
+//	        .jump(this, BrowseRecordActivity.class);
+//			break;
 		case R.id.frag_mine_my_demand_flt:  // 我的需求
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)

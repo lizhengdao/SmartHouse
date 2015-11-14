@@ -137,7 +137,7 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
         .putString(INTENT_CITY_ID, cityId)
         .jump((BaseActivity)context, SecondHandHouseActivity.class);
 		break;
-	case R.id.frag_home_new_house:   //  新房(目前跟二手房的界面一样)
+	case R.id.frag_home_new_house:   //  新房
 		Jumper.newJumper()
         .setAheadInAnimation(R.anim.activity_push_in_right)
         .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -146,7 +146,7 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
         .putString(INTENT_CITY_ID, cityId)
         .jump((BaseActivity)context, NewHouseActivity.class);
 		break;
-	case R.id.frag_home_rent_house:   //   租房(目前跟二手房的界面一样)
+	case R.id.frag_home_rent_house:   //   租房
 		Jumper.newJumper()
         .setAheadInAnimation(R.anim.activity_push_in_right)
         .setAheadOutAnimation(R.anim.activity_alpha_out)

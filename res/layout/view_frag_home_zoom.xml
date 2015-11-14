@@ -23,5 +23,5 @@
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
         android:scaleType="centerInside"
-        android:src="@drawable/bg_main_char"/>
+        android:src="@drawable/ic_hundrand_true"/>
 </FrameLayout>

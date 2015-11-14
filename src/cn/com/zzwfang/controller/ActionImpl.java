@@ -66,15 +66,16 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void register(String phoneNum, String pwd, String captcha,
+	public void register(String phoneNum, String pwd, String captcha, int type,
 			ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
 		requestParams.put("sign", "1111");
 		requestParams.put("timestamp", "2222");
 		requestParams.put("tel", phoneNum);
-		requestParams.put("tassword", pwd);
+		requestParams.put("password", pwd);
 		requestParams.put("code", captcha);
+		requestParams.put("type", type + "");
 
 		Options opt = new Options();
 		opt.fromDiskCacheAble = false;
@@ -116,7 +117,7 @@ public class ActionImpl implements Action {
 		opt.toMemCacheAble = false;
 
 		RequestEntity requestEntity = new RequestEntity();
-		requestEntity.setUrl(getAbsoluteUrl(API.POST_REGISTER));
+		requestEntity.setUrl(getAbsoluteUrl(API.CHECK_PHONE_HAS_REGISTERED));
 		requestEntity.setRequestParams(requestParams);
 		requestEntity.setType(RequestEntity.GET);
 
@@ -833,6 +834,151 @@ public class ActionImpl implements Action {
 
 		RequestEntity requestEntity = new RequestEntity();
 		requestEntity.setUrl(getAbsoluteUrl(API.GET_NEWS_DETAIL));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+
+	@Override
+	public void commitFeedback(String userId, String content, String phone,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("userId", userId);
+		requestParams.put("content", content);
+		if (!TextUtils.isEmpty(phone)) {
+			requestParams.put("tel", phone);
+		}
+		
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.POST_COMMIT_FEEDBACK));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+
+	@Override
+	public void getAttentionList(String userId, int pageSize, int pageIndex,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("userId", userId);
+//		requestParams.put("pageSize", pageSize + "");
+//		requestParams.put("pageIndex", pageIndex + "");
+		
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.GET_MY_ATTENTION_LIST));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+
+	@Override
+	public void attentionToHouse(String userId, String propertyId,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("userId", userId);
+		requestParams.put("propertyId", propertyId);
+		
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.GET_ATTENTION_TO_PROPERTY));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+				context, "请稍后...");
+		handler.setResultHandlerCallback(callback);
+
+		requestEntity.setOpts(opt);
+		requestEntity.setProcessCallback(handler);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+
+	@Override
+	public void getMyHouseList(String userPhone, int pageSize, int pageIndex,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("userId", userPhone);
+		requestParams.put("pageSize", pageSize + "");
+		requestParams.put("pageIndex", pageIndex + "");
+		
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		opt.toMemCacheAble = false;
+
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.GET_MY_HOUSE_LIST));
 		requestEntity.setRequestParams(requestParams);
 		requestEntity.setType(RequestEntity.GET);
 

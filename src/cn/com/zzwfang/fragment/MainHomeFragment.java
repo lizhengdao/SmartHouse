@@ -20,6 +20,7 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
 import cn.com.zzwfang.activity.RecommendHouseDetailActivity;
 import cn.com.zzwfang.activity.SearchHouseActivity;
+import cn.com.zzwfang.activity.SecondHandHouseDetailActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.bean.CityBean;
@@ -145,7 +146,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
         .setAheadOutAnimation(R.anim.activity_alpha_out)
         .setBackInAnimation(R.anim.activity_alpha_in)
         .setBackOutAnimation(R.anim.activity_push_out_right)
-        .jump(this, RecommendHouseDetailActivity.class);
+        .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, recommendHouse.getId())
+        .jump(this, SecondHandHouseDetailActivity.class);
 	}
 	
 	@Override

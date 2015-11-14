@@ -22,7 +22,7 @@ public interface Action {
 	 * @param captcha   验证码
 	 * @param callback
 	 */
-	void register(String phoneNum, String pwd, String captcha, ResultHandlerCallback callback);
+	void register(String phoneNum, String pwd, String captcha, int type, ResultHandlerCallback callback);
 	
 	/**
 	 * 检查手机号是否已经被注册
@@ -203,5 +203,33 @@ public interface Action {
 	 * @param callback
 	 */
 	void getNewsDetail(String newsTypeId, ResultHandlerCallback callback);
+	
+	void commitFeedback(String userId, String content, String phone, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取我的关注列表
+	 * @param userId    用户Id  
+	 * @param pageSize   每页条数
+	 * @param pageIndex   当前页
+	 * @param callback
+	 */
+	void getAttentionList(String userId, int pageSize, int pageIndex, ResultHandlerCallback callback);
+	
+	/**
+	 * 关注房源
+	 * @param userId   用户的id
+	 * @param propertyId  房源id
+	 * @param callback
+	 */
+	void attentionToHouse(String userId, String propertyId, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取我的房屋列表
+	 * @param userPhone  用户的UserID(手机号)
+	 * @param pageSize  每页条数
+	 * @param pageIndex  当前页
+	 * @param callback
+	 */
+	void getMyHouseList(String userPhone, int pageSize, int pageIndex, ResultHandlerCallback callback);
 	
 }

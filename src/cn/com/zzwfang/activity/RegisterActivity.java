@@ -24,7 +24,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	
 	private CheckBox cbxProtocol;
 	
-	private String authCode = "1234";
+	private String authCode;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -82,6 +82,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		ActionImpl action = ActionImpl.newInstance(this);
 		String phoneNum = edtPhone.getText().toString();
 		String pwd = edtPwd.getText().toString();
+		authCode = edtAuthCode.getText().toString().trim();
 		if (TextUtils.isEmpty(phoneNum)) {
 			ToastUtils.SHORT.toast(this, "请输入手机号码");
 			return;
@@ -92,7 +93,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		}
 		
 		pwd = MD5Util.md5(pwd);
-		action.register(phoneNum, pwd, authCode, new ResultHandlerCallback() {
+		action.register(phoneNum, pwd, authCode, 1, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
