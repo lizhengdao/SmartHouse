@@ -55,9 +55,9 @@ public class API {
 	 */
 	public static final String POST_CHANGE_PWD = "User/UpdatePwd";
 	/**
-	 * 忘记密码 http://wiki.lianbi.com.cn/pages/viewpage.action?pageId=9144000
+	 * 忘记密码
 	 */
-	public static final String POST_RESET_PWD = "/auth/password/reset/";
+	public static final String POST_RESET_PWD = "User/ResetPwd";
 	
 	/**
 	 * 版本更新getAppVersionCheck

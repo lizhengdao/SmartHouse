@@ -64,8 +64,7 @@ public interface Action {
 	/**
 	 * 忘记密码（重置密码）
 	 */
-	void resetPwd(String username, String password_1, String password_2,
-			String captcha, String client, ResultHandlerCallback callback);
+	void resetPwd(String tel, String password, String captcha, ResultHandlerCallback callback);
 	
 	public void getAppVersionCheck(String version, String client,
 			ResultHandlerCallback callback);

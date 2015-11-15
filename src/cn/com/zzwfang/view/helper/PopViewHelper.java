@@ -12,6 +12,7 @@ import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
@@ -284,6 +285,63 @@ public class PopViewHelper {
             popupWindow.dismiss();
         } else {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	}
+	
+	public interface OnFeeHunterRecommendHouseTypeSelecetListener {
+		public void onFeeHunterRecommendHouseTypeSelecet(int type);
+		
+		public static final int FEE_HUNTER_HOUSE_TYPE_NEW_HOUSE = 1;
+		
+		public static final int FEE_HUNTER_HOUSE_TYPE_SECOND_HAND_HOUSE = 2;
+	}
+	/**
+	 * 赏金猎人  推荐买房卖房弹出框
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showFeeHunterRecommendBuyAndSell(Context context, View anchorView,
+			final OnFeeHunterRecommendHouseTypeSelecetListener listener) {
+		View view = View.inflate(context, R.layout.popup_fee_hunter_recommend_buy_sell, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+	    
+	    TextView tvNewHouse = (TextView) view.findViewById(R.id.popwindow_fee_hunter_recommend_new_house);
+	    TextView tvSecondHandHouse = (TextView) view.findViewById(R.id.popwindow_fee_hunter_recommend_second_hand_house);
+	    
+	    OnClickListener clickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.popwindow_fee_hunter_recommend_new_house:
+					popupWindow.dismiss();
+					if (listener != null) {
+						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_NEW_HOUSE);
+					}
+					break;
+				case R.id.popwindow_fee_hunter_recommend_second_hand_house:
+					popupWindow.dismiss();
+					if (listener != null) {
+						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_SECOND_HAND_HOUSE);
+					}
+					break;
+				}
+			}
+		};
+		
+		tvNewHouse.setOnClickListener(clickListener);
+		tvSecondHandHouse.setOnClickListener(clickListener);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+//            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
         }
 	}
 	

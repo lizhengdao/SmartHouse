@@ -1,6 +1,7 @@
 package cn.com.zzwfang.activity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.activity.ForgetPwdActivity.MyCount;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -25,6 +27,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	private CheckBox cbxProtocol;
 	
 	private String authCode;
+	
+	private MyCount count;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -59,7 +63,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.act_register_auth_code_tv:  //  获取验证码
-			getAuthCode();
+			checkPhoneNumRegistered();
 			break;
 			
 		case R.id.act_register_protocol_tv:  //  智住网协议
@@ -76,7 +80,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
 	
 	private void register() {
 		ActionImpl action = ActionImpl.newInstance(this);
@@ -113,7 +116,36 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	/**
-	 * 获取验证码    测试成功
+	 * 检查手机号是否已被注册
+	 */
+	private void checkPhoneNumRegistered() {
+		String phoneNum = edtPhone.getText().toString();
+		if (TextUtils.isEmpty(phoneNum)) {
+			ToastUtils.SHORT.toast(this, "请输入手机号码");
+			return;
+		}
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.checkPhoneNumRegistered(phoneNum, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				getAuthCode();
+			}
+		});
+	}
+	
+	/**
+	 * 获取验证码
 	 */
 	private void getAuthCode() {
 		String phoneNum = edtPhone.getText().toString();
@@ -136,30 +168,33 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				
+				count = new MyCount(60000, 1000);
+				count.start();
+				ToastUtils.SHORT.toast(RegisterActivity.this, "短信验证码已发送!");
 			}
 		});
 	}
 	
-	private void checkPhoneNumRegistered() {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.checkPhoneNumRegistered("13882034203", new ResultHandlerCallback() {
-			
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				
-			}
-		});
+	class MyCount extends CountDownTimer {
+
+		public MyCount(long millisInFuture, long countDownInterval) {
+			super(millisInFuture, countDownInterval);
+
+		}
+
+		@Override
+		public void onTick(long millisUntilFinished) {
+			tvFetchAuthCode.setText("请等待(" + millisUntilFinished / 1000
+					+ ")...");
+			tvFetchAuthCode.setClickable(false);
+		}
+
+		@Override
+		public void onFinish() {
+			// 在这里进行设置解决时间停留的问题
+			tvFetchAuthCode.setText("获取验证码");
+			tvFetchAuthCode.setClickable(true);
+		}
 	}
 	
 }

@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
-import cn.com.zzwfang.activity.RecommendHouseDetailActivity;
 import cn.com.zzwfang.activity.SearchHouseActivity;
 import cn.com.zzwfang.activity.SecondHandHouseDetailActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
@@ -31,7 +30,6 @@ import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.ptz.PullToZoomListViewEx;
 
 import com.alibaba.fastjson.JSON;
@@ -79,8 +77,6 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		ptzListView = (PullToZoomListViewEx) view.findViewById(R.id.frag_home_ptz);
 		ptzListView.setHeaderView(headerLlt);
 		ptzListView.setZoomView(zoomLlt);
-		RecommendHouseSourceBean first = new RecommendHouseSourceBean();
-//		recommendSources.add(first);
 		adapter = new HomeRecommendHouseAdapter(getActivity(), recommendSources);
 		ptzListView.setAdapter(adapter);
 		ptzListView.setHideHeader(false);
@@ -108,7 +104,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.tv_frag_home_location:   // 定位
+		case R.id.tv_frag_home_location:   // 定位选择城市
 			Jumper.newJumper()
             .setAheadInAnimation(R.anim.activity_push_in_right)
             .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -116,7 +112,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
             .setBackOutAnimation(R.anim.activity_push_out_right)
             .jumpForResult(this, CityListActivity.class, CODE_SELECT_CITY);
 			break;
-		case R.id.edt_search_properties:
+		case R.id.edt_search_properties:    //  搜索
 			Jumper.newJumper()
             .setAheadInAnimation(R.anim.activity_push_in_right)
             .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -138,9 +134,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		ToastUtils.SHORT.toast(getActivity(), "position == " + position);
 		RecommendHouseSourceBean recommendHouse = recommendSources.get(position - 2);
-		
 		Jumper.newJumper()
         .setAheadInAnimation(R.anim.activity_push_in_right)
         .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -166,6 +160,10 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		}
 	}
 	
+	/**
+	 * 获取推荐列表
+	 * @param cityId
+	 */
 	private void getRecommendHouseSourceList(String cityId) {
 		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
 		actionImpl.getRecommendHouseSource(cityId, new ResultHandlerCallback() {

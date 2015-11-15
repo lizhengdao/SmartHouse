@@ -204,4 +204,25 @@
     <!-- 赏金猎人个人中心 -->
     <string name="act_fee_hunter_info">赏金猎人个人中心</string>
     
+    <!-- 赏金猎人  我的客户  -->
+    <string name="act_fee_hunter_my_customer">我的客户</string>
+    
+    <!-- 赏金猎人  推荐买房卖房    推荐新房-->
+    <string name="act_fee_hunter_recommend_new_house">推荐新房</string>
+    
+    <!-- 赏金猎人  推荐买房卖房    推荐二手房-->
+    <string name="act_fee_hunter_recommend_second_hand_house">推荐二手房</string>
+    
+    <!-- 赏金猎人  购买进度  -->
+    <string name="act_fee_hunter_buy_progress">购买进度</string>
+    
+    <!-- 赏金猎人  业主进度  -->
+    <string name="act_fee_hunter_owner_progress">业主进度</string>
+    
+    <!-- 赏金猎人  赏金信息  -->
+    <string name="act_fee_hunter_msg">赏金信息</string>
+    
+    <!-- 赏金猎人  活动规则  -->
+    <string name="act_fee_hunter_rule">活动规则</string>
+    
 </resources>

@@ -58,7 +58,6 @@
         <activity android:name="cn.com.zzwfang.activity.ProxyDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.ShangJinLieRenActivity" />
         <activity android:name="cn.com.zzwfang.activity.FillBankCardInfoActivity" />
-        <activity android:name="cn.com.zzwfang.activity.ShangJinLieRenInfoActivity" />
         <activity android:name="cn.com.zzwfang.activity.RentHouseDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.PictureBrowseActivity" />
         <activity android:name="cn.com.zzwfang.activity.RecommendHouseDetailActivity" />
@@ -72,6 +71,13 @@
         <activity android:name="cn.com.zzwfang.activity.AboutUsActivity" />
         <activity android:name="cn.com.zzwfang.activity.CommonProblemsActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeeHunterInfoActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterMyCustomerActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendNewHouseActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendSecondHandHouseActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterBuyProgressActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterOwnerProgressActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterMsgActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterRuleActivity" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="开发者 key" />

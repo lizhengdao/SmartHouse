@@ -204,19 +204,20 @@ public class ActionImpl implements Action {
 	 * 忘记密码
 	 */
 	@Override
-	public void resetPwd(String username, String password_1, String password_2,
-			String captcha, String client, ResultHandlerCallback callback) {
+	public void resetPwd(String tel, String password, String captcha, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
-		requestParams.put("username", username);
-		requestParams.put("password_1", password_1);
-		requestParams.put("password_2", password_2);
-		requestParams.put("captcha", captcha);
-		requestParams.put("client", client);
-		requestParams.put("platform", "a");
+		
+		requestParams.put("sign", "1111");
+		requestParams.put("timestamp", "2222");
+		
+		requestParams.put("tel", tel);
+		requestParams.put("password", password);
+		requestParams.put("code", captcha);
+		
 		RequestEntity requestEntity = new RequestEntity();
 		requestEntity.setUrl(getAbsoluteUrl(API.POST_RESET_PWD));
 		requestEntity.setRequestParams(requestParams);
-		requestEntity.setType(RequestEntity.POST);
+		requestEntity.setType(RequestEntity.GET);
 
 		Options opts = new Options();
 

@@ -42,7 +42,7 @@ public class FillBankCardInfoActivity extends BaseActivity implements OnClickLis
             .setAheadOutAnimation(R.anim.activity_alpha_out)
             .setBackInAnimation(R.anim.activity_alpha_in)
             .setBackOutAnimation(R.anim.activity_push_out_right)
-            .jump(this, ShangJinLieRenInfoActivity.class);
+            .jump(this, FeeHunterInfoActivity.class);
 			break;
 		}
 	}
