@@ -37,6 +37,14 @@ public class ShangJinLieRenActivity extends BaseActivity implements OnClickListe
 			finish();
 			break;
 		case R.id.act_shangjinlieren_register_tv:  // 注册赏金猎人
+//			Jumper.newJumper()
+//            .setAheadInAnimation(R.anim.activity_push_in_right)
+//            .setAheadOutAnimation(R.anim.activity_alpha_out)
+//            .setBackInAnimation(R.anim.activity_alpha_in)
+//            .setBackOutAnimation(R.anim.activity_push_out_right)
+//            .putInt(RegisterActivity.INTENT_REGISTER_TYPE, 2)
+//            .jump(this, RegisterActivity.class);
+			
 			Jumper.newJumper()
             .setAheadInAnimation(R.anim.activity_push_in_right)
             .setAheadOutAnimation(R.anim.activity_alpha_out)

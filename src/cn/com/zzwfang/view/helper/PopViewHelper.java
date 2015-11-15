@@ -8,6 +8,7 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.ConditionAdapter;
 import cn.com.zzwfang.adapter.MoreDetailAdapter;
 import cn.com.zzwfang.adapter.MoreTypeAdapter;
+import cn.com.zzwfang.adapter.MortgageYearsAdapter;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 import android.content.Context;
@@ -340,10 +341,97 @@ public class PopViewHelper {
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
-//            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
             popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
         }
 	}
 	
+	public interface OnMortgageTypeSelectListener {
+		public static int MORTGAGE_TYPE_BENJIN = 1;
+		public static int MORTGAGE_TYPE_BENXI = 2;
+		void onMortgageTypeSelect(String typeName, int typeId);
+	}
+	/**
+	 * 选择贷款方式  等额本金  等额本息
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showMortgageType(Context context, View anchorView,
+			final OnMortgageTypeSelectListener listener) {
+		View view = View.inflate(context, R.layout.popup_mortgage_type, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+	    
+	    TextView tvBenJin = (TextView) view.findViewById(R.id.popwindow_mortgage_type_benjin);
+	    TextView tvBenXi = (TextView) view.findViewById(R.id.popwindow_mortgage_type_benxi);
+	    
+	    OnClickListener clickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.popwindow_mortgage_type_benjin:
+					popupWindow.dismiss();
+					if (listener != null) {
+						listener.onMortgageTypeSelect("等额本金", OnMortgageTypeSelectListener.MORTGAGE_TYPE_BENJIN);
+					}
+					break;
+				case R.id.popwindow_mortgage_type_benxi:
+					popupWindow.dismiss();
+					if (listener != null) {
+						listener.onMortgageTypeSelect("等额本息", OnMortgageTypeSelectListener.MORTGAGE_TYPE_BENXI);
+					}
+					break;
+				}
+			}
+		};
+		
+		tvBenJin.setOnClickListener(clickListener);
+		tvBenXi.setOnClickListener(clickListener);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+        }
+	}
+	
+	public interface OnMortgageYearSelectListener {
+		void onMortgageYearSelect(int index);
+	}
+	
+	public static void showSelectMortgageYears(Context context, View anchorView, String [] years, final OnMortgageYearSelectListener listener) {
+		View view = View.inflate(context, R.layout.popup_mortgage_years, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, DevUtils.getScreenTools(context).dip2px(300));
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    ListView lstYears = (ListView) view.findViewById(R.id.popup_mortgage_years_lst);
+	    MortgageYearsAdapter adapter = new MortgageYearsAdapter(context, years);
+	    lstYears.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				popupWindow.dismiss();
+				if (listener != null) {
+					listener.onMortgageYearSelect(position);
+				}
+			}
+		});
+	    
+	    lstYears.setAdapter(adapter);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+        	popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+        }
+	}
 	
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
-    
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/ic_back"
-            android:paddingLeft="8dp"
             android:gravity="center_vertical"
+            android:paddingLeft="8dp"
             android:text="@string/act_mortgage_calculator_back"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -29,7 +29,263 @@
             android:text="@string/act_mortgage_calculator"
             android:textColor="@color/white"
             android:textSize="18sp" />
-
     </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="3" >
+
+                <RadioButton
+                    android:id="@+id/act_mortgage_cal_funds_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_producttab"
+                    android:button="@color/transparent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="公积金贷款"
+                    android:textColor="@drawable/selector_mortgage_text_color" />
+
+                <RadioButton
+                    android:id="@+id/act_mortgage_cal_business_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_producttab"
+                    android:button="@color/transparent"
+                    android:gravity="center"
+                    android:text="商业贷款"
+                    android:textColor="@drawable/selector_mortgage_text_color" />
+
+                <RadioButton
+                    android:id="@+id/act_mortgage_cal_mix_rb"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_producttab"
+                    android:button="@color/transparent"
+                    android:gravity="center"
+                    android:text="组合贷款"
+                    android:textColor="@drawable/selector_mortgage_text_color" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="贷款总额"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/act_mortgage_cal_total_money"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:gravity="right|center_vertical"
+                        android:hint="0"
+                        android:inputType="numberDecimal"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/color_app_theme"
+                        android:textColorHint="@color/color_app_theme"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="万元"
+                        android:textColor="@color/color_app_theme"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/color_e2e2e2" />
+
+                <LinearLayout
+                    android:id="@+id/act_mortgage_years_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="贷款年限"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/act_mortgage_years_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/color_app_theme"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:text="年"
+                        android:textColor="@color/color_app_theme"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/color_e2e2e2" />
+
+                <LinearLayout
+                    android:id="@+id/act_mortgage_type_llt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="贷款方式"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/act_mortgage_type_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="8dp"
+                        android:drawableRight="@drawable/ic_right_arrow"
+                        android:gravity="center_vertical"
+                        android:text="等额本金"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/color_e2e2e2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="贷款利率"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="8dp"
+                        android:drawableRight="@drawable/ic_right_arrow"
+                        android:gravity="center_vertical"
+                        android:text="最新基准利率"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e2e2e2" />
+
+                <TextView
+                    android:id="@+id/act_mortgage_calculate_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bg_login_btn"
+                    android:gravity="center"
+                    android:text="提交"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <include 
+                    android:id="@+id/act_mortgage_calculate_funds_result_llt"
+                    layout="@layout/view_mortgage_funds" />
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

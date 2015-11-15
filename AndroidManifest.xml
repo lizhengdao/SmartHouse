@@ -38,7 +38,8 @@
         <activity android:name="cn.com.zzwfang.activity.SettingsActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeedbackActivity" />
         <activity android:name="cn.com.zzwfang.activity.MyDemandActivity" />
-        <activity android:name="cn.com.zzwfang.activity.MortgageCalculatorActivity" />
+        <activity android:name="cn.com.zzwfang.activity.MortgageCalculatorActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="cn.com.zzwfang.activity.MyHouseResourcesActivity" />
         <activity android:name="cn.com.zzwfang.activity.BrowseRecordActivity" />
         <activity android:name="cn.com.zzwfang.activity.MessageActivity" />

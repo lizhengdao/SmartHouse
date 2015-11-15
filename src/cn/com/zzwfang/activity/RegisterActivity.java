@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.activity.ForgetPwdActivity.MyCount;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -19,8 +18,10 @@ import cn.com.zzwfang.util.MD5Util;
 import cn.com.zzwfang.util.ToastUtils;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
+	
+	public static final String INTENT_REGISTER_TYPE = "intent_register_type";
 
-	private TextView tvBack, tvFetchAuthCode, tvRegister, tvProtocol;
+	private TextView tvBack, tvFeeHunter, tvFetchAuthCode, tvRegister, tvProtocol;
 	
 	private EditText edtPhone, edtAuthCode, edtPwd;
 	
@@ -30,18 +31,23 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	
 	private MyCount count;
 	
+	/**
+	 * 1（普通会员），2（赏金猎人）
+	 */
+	private int registerType = 1;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		registerType = getIntent().getIntExtra(INTENT_REGISTER_TYPE, 1);
 		setContentView(R.layout.act_register);
 		
 		initView();
-		checkPhoneNumRegistered();
 	}
 	
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_register_back);
+		tvFeeHunter = (TextView) findViewById(R.id.act_register_fee_hunter_tv);
 		edtPhone = (EditText) findViewById(R.id.act_register_phone_num_edt);
 		edtAuthCode = (EditText) findViewById(R.id.act_register_input_auth_code_edt);
 		edtPwd = (EditText) findViewById(R.id.act_register_input_pwd_edt);
@@ -49,6 +55,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		tvProtocol = (TextView) findViewById(R.id.act_register_protocol_tv);
 		tvRegister = (TextView) findViewById(R.id.act_register_tv);
 		cbxProtocol = (CheckBox) findViewById(R.id.act_register_protocol_cbx);
+		
+		if (registerType == 2) {
+			tvFeeHunter.setVisibility(View.VISIBLE);
+		}
 		
 		tvBack.setOnClickListener(this);
 		tvFetchAuthCode.setOnClickListener(this);

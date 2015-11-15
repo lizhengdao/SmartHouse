@@ -76,8 +76,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			
 		case R.id.act_login_register:   // 账号注册
 			Jumper.newJumper()
-            .setAheadInAnimation(R.anim.alpha_out_style1)
-            .setAheadOutAnimation(R.anim.alpha_in_style1)
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
+            .putInt(RegisterActivity.INTENT_REGISTER_TYPE, 1)
             .jump(this, RegisterActivity.class);
 			break;
 		

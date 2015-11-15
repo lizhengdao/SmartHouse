@@ -31,6 +31,18 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
+    
+    <TextView 
+        android:id="@+id/act_register_fee_hunter_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="赏金猎人"
+        android:textColor="@color/color_app_theme"
+        android:textSize="18sp"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
