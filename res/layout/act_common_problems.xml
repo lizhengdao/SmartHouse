@@ -31,5 +31,10 @@
             android:textSize="18sp" />
     </FrameLayout>
     
+    <ListView
+        android:id="@+id/act_common_problems_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    
 
 </LinearLayout>

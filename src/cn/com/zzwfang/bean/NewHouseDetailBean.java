@@ -22,7 +22,7 @@ public class NewHouseDetailBean extends BaseBean {
 	
 	private String Name;
 	
-	private ArrayList<String> Photo;
+	private ArrayList<PhotoBean> Photo;
 	
 	private String PlotRatio;
 	
@@ -104,11 +104,11 @@ public class NewHouseDetailBean extends BaseBean {
 		Name = name;
 	}
 
-	public ArrayList<String> getPhoto() {
+	public ArrayList<PhotoBean> getPhoto() {
 		return Photo;
 	}
 
-	public void setPhoto(ArrayList<String> photo) {
+	public void setPhoto(ArrayList<PhotoBean> photo) {
 		Photo = photo;
 	}
 

@@ -231,4 +231,10 @@ public interface Action {
 	 */
 	void getMyHouseList(String userPhone, int pageSize, int pageIndex, ResultHandlerCallback callback);
 	
+	/**
+	 * 获取常见问题列表
+	 * @param callback
+	 */
+	void getCommonProblemList(ResultHandlerCallback callback);
+	
 }
