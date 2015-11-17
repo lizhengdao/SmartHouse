@@ -126,5 +126,10 @@ public class API {
      * 获取常见问题列表
      */
     public static final String GET_COMMON_PROBLEM = "Other/Question";
+    
+    /**
+     * 根据userid查看个人钱包
+     */
+    public static final String GET_WALLET_INFO = "Bounty/Wallet";
 
 }

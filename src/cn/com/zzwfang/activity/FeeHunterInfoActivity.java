@@ -1,18 +1,20 @@
 package cn.com.zzwfang.activity;
 
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.view.helper.PopViewHelper;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnFeeHunterRecommendHouseTypeSelecetListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnFeeHunterRecommendHouseTypeSelecetListener;
 
 public class FeeHunterInfoActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack, tvMyCustomer, tvBuyProgress, tvOwnerProgress, tvFeeHunterMsg, tvFeeHunterRule;
+	
+	private TextView tvBindedCards;
 	
 	private LinearLayout lltRecommendBuy, lltRecommendSell;
 	
@@ -38,7 +40,9 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		tvBuyProgress = (TextView) findViewById(R.id.act_fee_hunter_info_buy_progress);
 		tvOwnerProgress = (TextView) findViewById(R.id.act_fee_hunter_info_owner_progress);
 		tvFeeHunterMsg = (TextView) findViewById(R.id.act_fee_hunter_info_fee_hunter_msg);
-		tvFeeHunterRule = (TextView) findViewById(R.id.act_fee_hunter_info_hunter_rule);	
+		tvFeeHunterRule = (TextView) findViewById(R.id.act_fee_hunter_info_hunter_rule);
+		
+		tvBindedCards = (TextView) findViewById(R.id.act_fee_hunter_info_binded_card);
 		
 		tvBack.setOnClickListener(this);
 		
@@ -49,6 +53,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		tvOwnerProgress.setOnClickListener(this);
 		tvFeeHunterMsg.setOnClickListener(this);
 		tvFeeHunterRule.setOnClickListener(this);
+		tvBindedCards.setOnClickListener(this);
 	}
 	
 	private void initListener() {
@@ -146,7 +151,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(FeeHunterInfoActivity.this, FeeHunterMsgActivity.class);
+	        .jump(FeeHunterInfoActivity.this, FeeHunterWalletActivity.class);
 			break;
 		case R.id.act_fee_hunter_info_hunter_rule:   // 活动规则
 			Jumper.newJumper()
@@ -156,6 +161,16 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(FeeHunterInfoActivity.this, FeeHunterRuleActivity.class);
 			break;
+		case R.id.act_fee_hunter_info_binded_card:  // 已绑定的银行卡
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(FeeHunterInfoActivity.this, FeeHunterWalletActivity.class);
+			break;
 		}
 	}
+	
+	
 }

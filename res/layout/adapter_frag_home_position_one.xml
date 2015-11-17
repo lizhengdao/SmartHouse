@@ -99,7 +99,8 @@
             android:drawableRight="@drawable/ic_right_arrow"
             android:text="@string/frag_home_more"
             android:textColor="@color/color_6d6d6d"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
     </FrameLayout>
 
 </LinearLayout>

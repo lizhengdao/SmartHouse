@@ -3,6 +3,8 @@ package cn.com.zzwfang.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 
@@ -15,6 +17,8 @@ public class FeeHunterRuleActivity extends BaseActivity implements OnClickListen
 
 	private TextView tvBack;
 	
+	private WebView webView;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -25,7 +29,13 @@ public class FeeHunterRuleActivity extends BaseActivity implements OnClickListen
 		setContentView(R.layout.act_fee_hunter_rule);
 		
 		tvBack = (TextView) findViewById(R.id.act_fee_hunter_rule_back);
-		
+		webView = (WebView) findViewById(R.id.act_fee_hunter_rule_webview);
+		WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(false);
+        String url = "http://www.zzwfang.com:7894/Other/Activity?sign=1111&timestamp=2222";
+        webView.loadUrl(url);
+        
 		tvBack.setOnClickListener(this);
 	}
 

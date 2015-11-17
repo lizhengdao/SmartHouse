@@ -237,4 +237,11 @@ public interface Action {
 	 */
 	void getCommonProblemList(ResultHandlerCallback callback);
 	
+	/**
+	 * 根据userid查看个人钱包
+	 * @param userId  用户名
+	 * @param callback
+	 */
+	void getWalletInfo(String userId, ResultHandlerCallback callback);
+	
 }
