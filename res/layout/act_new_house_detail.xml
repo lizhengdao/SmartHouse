@@ -398,6 +398,7 @@
                     android:layout_gravity="right"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
                     android:background="@drawable/shape_round_solid_white_stroke_color_aaaaaa"
                     android:drawableLeft="@drawable/ic_mortgage_calculator"
                     android:drawablePadding="8dp"

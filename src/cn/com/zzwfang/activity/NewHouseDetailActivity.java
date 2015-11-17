@@ -1,5 +1,7 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
 import com.alibaba.fastjson.JSON;
 
 import cn.com.zzwfang.R;
@@ -7,10 +9,12 @@ import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
 import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.NewHouseDetailBean;
+import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.PathImage;
 import android.content.Intent;
@@ -29,7 +33,7 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 	private TextView tvBack, tvPageTitle, tvTitle, tvPhotoIndex,
 	tvAveragePrice, tvConsultant, tvArea, tvSquare, tvPropertyType,
 	tvPlotRatio, tvDecoration, tvGreenRatio, tvMgtCompany,
-	tvBuilderCompany;
+	tvBuilderCompany, tvMortgageCalculate;
 	
 	private PathImage brokerAvatar;
 	private TextView tvBrokerName, tvBrokerPhone;
@@ -42,6 +46,10 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 	private String estateId;
 	
 	private NewHouseDetailBean newHouseDetailBean;
+	
+	private ViewPager photoPager;
+    private PhotoPagerAdapter photoAdapter;
+    private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -73,10 +81,16 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 		brokerAvatar = (PathImage) findViewById(R.id.act_new_house_detail_agent_avatar);
 		tvBrokerName = (TextView) findViewById(R.id.act_new_house_detail_agent_name);
 		tvBrokerPhone = (TextView) findViewById(R.id.act_new_house_detail_agent_phone);
+		tvMortgageCalculate = (TextView) findViewById(R.id.act_new_house_detail_calculator_tv);
+		
+		photoPager = (ViewPager) findViewById(R.id.act_new_house_detail_pager);
+		photoAdapter = new PhotoPagerAdapter(this, photos);
+        photoPager.setAdapter(photoAdapter);
 		
 		tvBack.setOnClickListener(this);
 		tvDial.setOnClickListener(this);
 		tvMsg.setOnClickListener(this);
+		tvMortgageCalculate.setOnClickListener(this);
 	}
 
 	@Override
@@ -98,6 +112,15 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 			break;
 		case R.id.act_new_house_detail_agent_msg:   // 经纪人发消息
 			break;
+			
+		case R.id.act_new_house_detail_calculator_tv:   //  房贷计算器
+		    Jumper.newJumper()
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
+            .jump(this, MortgageCalculatorActivity.class);
+		    break;
 		}
 	}
 	
@@ -124,6 +147,9 @@ public class NewHouseDetailActivity extends BaseActivity implements OnClickListe
 					ImageAction.displayBrokerAvatar(url, brokerAvatar);
 				}
 			}
+			
+			photos.addAll(newHouseDetailBean.getPhoto());
+            photoAdapter.notifyDataSetChanged();
 		}
 		
 	}
