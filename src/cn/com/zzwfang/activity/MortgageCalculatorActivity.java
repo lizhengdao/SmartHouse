@@ -28,15 +28,27 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 
 	private TextView tvBack, tvMortgageType, tvMortgageYears, tvCalculate;
 	
-	private LinearLayout lltFundsResult;
+	private LinearLayout lltFundsBuness, lltMix;
 	
 	private TextView tvFundsTotalLoan, tvFundsTotalInterests, tvFundsTotalPay, tvFundsMonthPay, tvFundsMonths;
+	
+	private LinearLayout lltFundsResult, lltBusinessResult, lltMixResult;
+	
+	private TextView tvBusinessTotalLoan, tvBusinessTotalInterests, tvBusinessTotalPay, tvBusinessMonthPay, tvBusinessMonths;
 	
 	private RadioButton rbFund, rbBusiness, rbMix;
 	
 	private EditText edtTotalMoney;
 	
 	private LinearLayout lltMortgageType, lltMortgageYears;
+	
+	private EditText edtMixFundsMoney, edtMixBusinessMoney;
+	
+	private LinearLayout lltMortgageMixYears, lltMortgageMixType;
+	
+	private TextView tvMixYears, tvMixType;
+	
+	private TextView tvMixTotalLoan, tvMixTotalInterests, tvMixTotalPay, tvMixMonthPay, tvMixMonths;
 	
 	private OnMortgageTypeSelectListener onMortgageTypeSelectListener;
 	
@@ -100,12 +112,37 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 		tvMortgageYears = (TextView) findViewById(R.id.act_mortgage_years_tv);
 		tvCalculate = (TextView) findViewById(R.id.act_mortgage_calculate_tv);
 		
+		lltFundsBuness = (LinearLayout) findViewById(R.id.act_mortgage_funds_business);
+		
 		lltFundsResult = (LinearLayout) findViewById(R.id.act_mortgage_calculate_funds_result_llt);
 		tvFundsTotalLoan = (TextView) findViewById(R.id.view_mortgage_funds_loan_total);
 		tvFundsTotalInterests = (TextView) findViewById(R.id.view_mortgage_funds_loan_interests);
 		tvFundsTotalPay = (TextView) findViewById(R.id.view_mortgage_funds_loan_total_pay);
 		tvFundsMonthPay = (TextView) findViewById(R.id.view_mortgage_funds_loan_month_pay);
 		tvFundsMonths = (TextView) findViewById(R.id.view_mortgage_funds_loan_months);
+		
+		lltBusinessResult = (LinearLayout) findViewById(R.id.act_mortgage_calculate_business_result_llt);
+		tvBusinessTotalLoan = (TextView) findViewById(R.id.view_mortgage_business_loan_total);
+		tvBusinessTotalInterests = (TextView) findViewById(R.id.view_mortgage_business_loan_interests);
+		tvBusinessTotalPay = (TextView) findViewById(R.id.view_mortgage_business_loan_total_pay);
+		tvBusinessMonthPay = (TextView) findViewById(R.id.view_mortgage_business_loan_month_pay);
+		tvBusinessMonths = (TextView) findViewById(R.id.view_mortgage_business_loan_months);
+		
+		lltMix = (LinearLayout) findViewById(R.id.act_mortgage_mix);
+		
+		edtMixFundsMoney = (EditText) findViewById(R.id.act_mortgage_cal_mix_funds_money);
+		edtMixBusinessMoney = (EditText) findViewById(R.id.act_mortgage_cal_mix_business_money);
+		lltMortgageMixYears = (LinearLayout) findViewById(R.id.act_mortgage_mix_years_llt);
+		lltMortgageMixType = (LinearLayout) findViewById(R.id.act_mortgage_mix_type_llt);
+		tvMixYears = (TextView) findViewById(R.id.act_mortgage_mix_years_tv);
+		tvMixType = (TextView) findViewById(R.id.act_mortgage_mix_type_tv);
+		
+		lltMixResult = (LinearLayout) findViewById(R.id.act_mortgage_calculate_mix_result_llt);
+		tvMixTotalLoan = (TextView) findViewById(R.id.view_mortgage_mix_loan_total);
+		tvMixTotalInterests = (TextView) findViewById(R.id.view_mortgage_mix_loan_interests);
+		tvMixTotalPay = (TextView) findViewById(R.id.view_mortgage_mix_loan_total_pay);
+		tvMixMonthPay = (TextView) findViewById(R.id.view_mortgage_mix_loan_month_pay);
+		tvMixMonths = (TextView) findViewById(R.id.view_mortgage_mix_loan_months);
 		
 		tvBack.setOnClickListener(this);
 		rbFund.setOnCheckedChangeListener(this);
@@ -115,12 +152,16 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 		lltMortgageYears.setOnClickListener(this);
 		tvCalculate.setOnClickListener(this);
 		
+		lltMortgageMixYears.setOnClickListener(this);
+		lltMortgageMixType.setOnClickListener(this);
+		
 		onMortgageTypeSelectListener = new OnMortgageTypeSelectListener() {
 			
 			@Override
 			public void onMortgageTypeSelect(String typeName, int typeId) {
 				mortgageType = typeId;
 				tvMortgageType.setText(typeName);
+				tvMixType.setText(typeName);
 			}
 		};
 		
@@ -133,6 +174,7 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 				indexYear= index;
                 String year = text.substring(0, text.indexOf("年"));
                 mortgageMonths = Integer.valueOf(year) * 12;
+                tvMixYears.setText(text);
 			}
 		};
 	}
@@ -140,6 +182,7 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 	private void initData() {
 		years = getResources().getStringArray(R.array.loan_years_array);
 		tvMortgageYears.setText(years[indexYear]);
+		tvMixYears.setText(years[indexYear]);
 	}
 
 	@Override
@@ -159,6 +202,12 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 		case R.id.act_mortgage_calculate_tv:  // 计算房贷
 			calculateMortgage();
 			break;
+		case R.id.act_mortgage_mix_years_llt:   // 混合贷款年限
+			PopViewHelper.showSelectMortgageYears(this, this.getWindow().getDecorView(), years, onMortgageYearSelectListener);
+			break;
+		case R.id.act_mortgage_mix_type_llt:  //  混合贷款方式
+			PopViewHelper.showMortgageType(this, getWindow().getDecorView(), onMortgageTypeSelectListener);
+			break;
 		
 		}
 	}
@@ -169,15 +218,27 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 			switch (buttonView.getId()) {
 			case R.id.act_mortgage_cal_funds_rb:   //  公积金贷款
 				mortgageCategory = 1;
+				lltFundsBuness.setVisibility(View.VISIBLE);
 				lltFundsResult.setVisibility(View.VISIBLE);
+				lltBusinessResult.setVisibility(View.GONE);
+				lltMix.setVisibility(View.GONE);
+				lltMixResult.setVisibility(View.GONE);
 				break;
 			case R.id.act_mortgage_cal_business_rb:   //  商业贷款
 				mortgageCategory = 2;
+				lltFundsBuness.setVisibility(View.VISIBLE);
 				lltFundsResult.setVisibility(View.GONE);
+				lltBusinessResult.setVisibility(View.VISIBLE);
+				lltMix.setVisibility(View.GONE);
+				lltMixResult.setVisibility(View.GONE);
 				break;
 			case R.id.act_mortgage_cal_mix_rb:   //  组合贷款
 				mortgageCategory = 3;
+				lltFundsBuness.setVisibility(View.GONE);
 				lltFundsResult.setVisibility(View.GONE);
+				lltBusinessResult.setVisibility(View.GONE);
+				lltMix.setVisibility(View.VISIBLE);
+				lltMixResult.setVisibility(View.VISIBLE);
 				break;
 			}
 		}
@@ -188,9 +249,11 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
 		case 1:  // 公积金
 			calculateFundMortgage();
 			break;
-		case 2:
+		case 2:  // 商贷
+			calculateBusinessMortgage();
 			break;
 		case 3:
+			calculateFundsBusinessMixMortgage();
 			break;
 		}
 	}
@@ -237,8 +300,134 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
             tvFundsTotalInterests.setText(tempTotalInterest1 + "元");
 			break;
 		}
+	}
+	
+	/**
+	 * 计算商业贷款
+	 */
+	private void calculateBusinessMortgage() {
+		String loanBusinessTotalStr = edtTotalMoney.getText().toString();
+		if (TextUtils.isEmpty(loanBusinessTotalStr)) {
+			return;
+		}
+		
+		double loanBusinessTotal = Double.valueOf(loanBusinessTotalStr) * 10000;
+		tvBusinessTotalLoan.setText(loanBusinessTotal + "元");
+		tvBusinessMonths.setText(mortgageMonths + "月");
+		
+		switch (mortgageType) {
+		case OnMortgageTypeSelectListener.MORTGAGE_TYPE_BENJIN:  // 等额本金
+			double monthBusinessPrincipal = loanBusinessTotal / mortgageMonths; // 商贷每月还的本金
+	        double businessTotalInterest = 0;  // 商贷总利息
+	        for (int i = 0; i < mortgageMonths; i++) {
+	        	double bInterest = (loanBusinessTotal - monthBusinessPrincipal * i) * fundsRate;
+	        	businessTotalInterest += bInterest;
+	        }
+	        double totalPay = businessTotalInterest + loanBusinessTotal;
+	        String tempTotalPay = df.format(totalPay);
+	        tvBusinessTotalInterests.setText(df.format(businessTotalInterest) + "元");
+	        tvBusinessTotalPay.setText(tempTotalPay + "元");
+	        
+	        //  等额本金每月还款不一样，暂时算平均值
+	        double monthFundsPayTemp = totalPay / mortgageMonths;
+	        tvBusinessMonthPay.setText(df.format(monthFundsPayTemp) + "元");
+	        
+			break;
+		case OnMortgageTypeSelectListener.MORTGAGE_TYPE_BENXI:  // 等额本息
+			
+			double monthBusinessPay = calculateMonthBenxi(loanBusinessTotal, mortgageMonths,
+                    businessRate);
+            totalPay = monthBusinessPay * mortgageMonths;
+            double totalInterest = totalPay - loanBusinessTotal;
+            String tempMonthBusinessPay = df.format(monthBusinessPay);
+            tvBusinessMonthPay.setText(tempMonthBusinessPay + "元");
+            String tempTotalPay1 = df.format(totalPay);
+            tvBusinessTotalPay.setText(tempTotalPay1 + "元");
+            String tempTotalInterest = df.format(totalInterest);
+            tvBusinessTotalInterests.setText(tempTotalInterest + "元");
+			break;
+		}
+	}
+	
+	/**
+	 * 计算混合贷款
+	 */
+	private void calculateFundsBusinessMixMortgage() {
+		String loanFundsTotalStr = edtMixFundsMoney.getText().toString();
+		if (TextUtils.isEmpty(loanFundsTotalStr)) {
+			return;
+		}
+		
+		String loanBusinessTotalStr = edtMixBusinessMoney.getText().toString();
+		if (TextUtils.isEmpty(loanBusinessTotalStr)) {
+			return;
+		}
+		
+		double loanFundsTotal = Double.valueOf(loanFundsTotalStr) * 10000;
+		double loanBusinessTotal = Double.valueOf(loanBusinessTotalStr) * 10000;
+		
+		
+		tvMixTotalLoan.setText((loanFundsTotal + loanBusinessTotal) + "元");
+		tvMixMonths.setText(mortgageMonths + "月");
+		
+		switch (mortgageType) {
+		case OnMortgageTypeSelectListener.MORTGAGE_TYPE_BENJIN:  // 等额本金:
+			
+			double monthFundsPrincipal = loanFundsTotal / mortgageMonths; // 公积金每月还的本金
+	        double fundsTotalInterest = 0;
+			
+			double monthBusinessPrincipal = loanBusinessTotal / mortgageMonths; // 商贷每月还的本金
+	        double businessTotalInterest = 0;
+
+	        if (loanBusinessTotal > 0 || loanFundsTotal > 0) {
+	            for (int i = 0; i < mortgageMonths; i++) {
+	            	
+	            	double fundsInterest = (loanFundsTotal - monthFundsPrincipal * i) * fundsRate;
+	                fundsTotalInterest += fundsInterest;
+	            	
+	                double bInterest = (loanBusinessTotal - monthBusinessPrincipal * i) * businessRate;
+	                businessTotalInterest += bInterest;
+
+	                double monthPay = monthBusinessPrincipal + monthFundsPrincipal + bInterest
+	                        + fundsInterest;
+
+//	                String temp = df.format(monthPay);
+//	                payPerMonth.add(temp + "元");
+	            }
+	        }
+
+	        double totalPay = businessTotalInterest + loanBusinessTotal + fundsTotalInterest
+	                + loanFundsTotal;
+	        String tempTotalPay = df.format(totalPay);
+	        tvMixTotalPay.setText(tempTotalPay + "元");
+
+	        double totalInterest = businessTotalInterest + fundsTotalInterest;
+	        String tempTotalInterest = df.format(totalInterest);
+	        tvMixTotalInterests.setText(tempTotalInterest + "元");
+			
+			break;
+		case OnMortgageTypeSelectListener.MORTGAGE_TYPE_BENXI:  // 等额本息
+			
+			double monthBusinessMixPay = calculateMonthBenxi(loanBusinessTotal, mortgageMonths,
+                    businessRate);
+            double monthFundsMixPay = calculateMonthBenxi(loanFundsTotal, mortgageMonths,
+                    fundsRate);
+            double totalMonth = monthBusinessMixPay + monthFundsMixPay;
+            double totalMixPay = totalMonth * mortgageMonths;
+            totalInterest = totalMixPay - loanBusinessTotal - loanFundsTotal;
+            String tempTotalMonth = df.format(totalMonth);
+            tvMixMonthPay.setText(tempTotalMonth + "元");
+            String tempTotalMixPay = df.format(totalMixPay);
+            tvMixTotalPay.setText(tempTotalMixPay + "元");
+            String tempTotalInterest2 = df.format(totalInterest);
+            tvMixTotalInterests.setText(tempTotalInterest2 + "元");
+			break;
+		}
 		
 	}
+	
+	
+	
 	
 	private double calculateMonthBenxi(double loanTotal, int months, double rate) {
         return (double) (loanTotal * rate * StrictMath.pow(1.0 + rate, months) / (StrictMath.pow(

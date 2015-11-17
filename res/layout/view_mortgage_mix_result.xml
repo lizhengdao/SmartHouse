@@ -21,7 +21,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/view_mortgage_business_loan_total"
+            android:id="@+id/view_mortgage_mix_loan_total"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -53,7 +53,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/view_mortgage_business_loan_total_pay"
+            android:id="@+id/view_mortgage_mix_loan_total_pay"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -85,7 +85,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/view_mortgage_business_loan_months"
+            android:id="@+id/view_mortgage_mix_loan_months"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -116,7 +116,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/view_mortgage_business_loan_interests"
+            android:id="@+id/view_mortgage_mix_loan_interests"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -148,7 +148,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/view_mortgage_business_loan_month_pay"
+            android:id="@+id/view_mortgage_mix_loan_month_pay"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -162,4 +162,5 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@color/color_e2e2e2" />
+
 </LinearLayout>
