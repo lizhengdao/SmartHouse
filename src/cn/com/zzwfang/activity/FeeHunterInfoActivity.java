@@ -16,11 +16,11 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	
 	private TextView tvBindedCards;
 	
-	private LinearLayout lltRecommendBuy, lltRecommendSell;
+	private LinearLayout lltRecommendBuy, lltRecommendSell, lltRecommendCustomer, lltRecommendOwner;
 	
 	private OnFeeHunterRecommendHouseTypeSelecetListener recommendBuyListener;
 	
-	private OnFeeHunterRecommendHouseTypeSelecetListener recommendSellListener;
+	private OnFeeHunterRecommendHouseTypeSelecetListener recommendCustomerListener;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -35,6 +35,8 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		
 		lltRecommendBuy = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_buy);
 		lltRecommendSell = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_sell);
+		lltRecommendCustomer = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_customer);
+		lltRecommendOwner = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_owner);
 		tvMyCustomer = (TextView) findViewById(R.id.act_fee_hunter_info_my_customer);
 		
 		tvBuyProgress = (TextView) findViewById(R.id.act_fee_hunter_info_buy_progress);
@@ -48,6 +50,8 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		
 		lltRecommendBuy.setOnClickListener(this);
 		lltRecommendSell.setOnClickListener(this);
+		lltRecommendCustomer.setOnClickListener(this);
+		lltRecommendOwner.setOnClickListener(this);
 		tvMyCustomer.setOnClickListener(this);
 		tvBuyProgress.setOnClickListener(this);
 		tvOwnerProgress.setOnClickListener(this);
@@ -82,7 +86,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 			}
 		};
 		
-		recommendSellListener = new OnFeeHunterRecommendHouseTypeSelecetListener() {
+		recommendCustomerListener = new OnFeeHunterRecommendHouseTypeSelecetListener() {
 			
 			@Override
 			public void onFeeHunterRecommendHouseTypeSelecet(int type) {
@@ -115,11 +119,27 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		case R.id.act_fee_hunter_info_back:
 			finish();
 			break;
-		case R.id.act_fee_hunter_info_recommend_buy:   //  推荐买房
+		case R.id.act_fee_hunter_info_recommend_buy:   //  推荐买房  推荐客户一样的逻辑
 			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendBuyListener);
 			break;
 		case R.id.act_fee_hunter_info_recommend_sell:  //  推荐卖房
-			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendSellListener);
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendSecondHandHouseActivity.class);
+			break;
+		case R.id.act_fee_hunter_info_recommend_customer:  // 推荐客户
+			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendCustomerListener);
+			break;
+		case R.id.act_fee_hunter_info_recommend_owner:   //  推荐业主
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendOwnerActivity.class);
 			break;
 		case R.id.act_fee_hunter_info_my_customer:   //  我的客户
 			Jumper.newJumper()

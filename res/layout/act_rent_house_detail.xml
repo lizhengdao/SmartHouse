@@ -48,7 +48,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/white" >
 
         <LinearLayout
@@ -455,88 +456,88 @@
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
                 android:clickable="true" />
+        </LinearLayout>
+    </ScrollView>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_e0e0e0" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_e0e0e0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/color_4ac20b"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <cn.com.zzwfang.view.PathImage
+                android:id="@+id/act_rent_house_detail_agent_avatar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_broker_avatar_round"
+                app:shape="circle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@color/color_4ac20b"
-                android:orientation="horizontal"
-                android:weightSum="2" >
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/act_rent_house_detail_agent_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张三"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
-                    <cn.com.zzwfang.view.PathImage
-                        android:id="@+id/act_rent_house_detail_agent_avatar"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:src="@drawable/ic_broker_avatar_round"
-                        app:shape="circle" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/act_rent_house_detail_agent_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="张三"
-                            android:textColor="@color/white"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/act_rent_house_detail_agent_phone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="15881818888"
-                            android:textColor="@color/white"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/act_rent_house_detail_agent_dial"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="25dp"
-                        android:drawableTop="@drawable/ic_phone_white"
-                        android:gravity="center"
-                        android:text="呼叫"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:id="@+id/act_rent_house_detail_agent_msg"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:drawableTop="@drawable/ic_message_white"
-                        android:gravity="center"
-                        android:text="消息"
-                        android:textColor="@color/white" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/act_rent_house_detail_agent_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="15881818888"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/act_rent_house_detail_agent_dial"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:drawableTop="@drawable/ic_phone_white"
+                android:gravity="center"
+                android:text="呼叫"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/act_rent_house_detail_agent_msg"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:drawableTop="@drawable/ic_message_white"
+                android:gravity="center"
+                android:text="消息"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

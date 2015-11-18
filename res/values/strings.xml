@@ -228,6 +228,10 @@
     <!-- 赏金猎人  钱包  -->
     <string name="act_fee_hunter_wallet">钱包</string>
     
+    <!-- 赏金猎人  推荐业主  -->
+    <string name="act_fee_hunter_recommend_owner">推荐业主</string>
+    
+    
     <string-array name="loan_years_array">
         <item>1年  (12期)</item>
         <item>2年  (24期)</item>

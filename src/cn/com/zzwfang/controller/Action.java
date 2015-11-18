@@ -244,4 +244,6 @@ public interface Action {
 	 */
 	void getWalletInfo(String userId, ResultHandlerCallback callback);
 	
+//	void getFeeHunterMyCustomer();
+//	void getMyHouseSourceInfoChanges();
 }

@@ -281,6 +281,7 @@
                 android:background="@color/color_e2e2e2" />
 
             <LinearLayout
+                android:id="@+id/act_fee_hunter_info_recommend_customer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -321,6 +322,7 @@
                     android:background="@color/color_e2e2e2" />
 
                 <LinearLayout
+                    android:id="@+id/act_fee_hunter_info_recommend_owner"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
