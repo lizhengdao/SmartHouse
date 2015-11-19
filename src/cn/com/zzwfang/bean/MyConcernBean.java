@@ -1,6 +1,5 @@
-package cn.com.zzwfang.adapter;
+package cn.com.zzwfang.bean;
 
-import cn.com.zzwfang.bean.BaseBean;
 
 public class MyConcernBean extends BaseBean {
 

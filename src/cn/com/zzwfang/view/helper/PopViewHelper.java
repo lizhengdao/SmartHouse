@@ -9,6 +9,8 @@ import cn.com.zzwfang.adapter.ConditionAdapter;
 import cn.com.zzwfang.adapter.MoreDetailAdapter;
 import cn.com.zzwfang.adapter.MoreTypeAdapter;
 import cn.com.zzwfang.adapter.MortgageYearsAdapter;
+import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
+import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 import android.content.Context;
@@ -431,6 +433,45 @@ public class PopViewHelper {
             popupWindow.dismiss();
         } else {
         	popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+        }
+	}
+	
+	
+	public interface OnMyCustomerConditionSelectListener {
+		void onMyCustomerConditonSelect(FeeHunterMyCustomerConditionBean conditon);
+	}
+	/**
+	 * 赏金猎人   我的客户筛选条件
+	 */
+	public static void showSelectMyCustomerConditionPopWindow(Context context, View anchorView,
+			final ArrayList<FeeHunterMyCustomerConditionBean> conditions, final OnMyCustomerConditionSelectListener onMyCustomerConditionSelectListener) {
+		View view = View.inflate(context, R.layout.popup_condition, null);
+		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), DevUtils.getScreenTools(context).dip2px(200));
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+	    MyCustomerConditionAdapter adapter = new MyCustomerConditionAdapter(context, conditions);
+	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				popupWindow.dismiss();
+				if (onMyCustomerConditionSelectListener != null) {
+					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(conditions.get(position));
+				}
+			}
+		});
+	    
+	    lstCondition.setAdapter(adapter);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
 	}
 	

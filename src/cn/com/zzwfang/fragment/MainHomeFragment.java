@@ -55,6 +55,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	private HomeRecommendHouseAdapter adapter;
 	private ImageView imgShangjin;
 	
+	private String cityId;
+	
 	private ArrayList<RecommendHouseSourceBean> recommendSources = new ArrayList<RecommendHouseSourceBean>();
 	
 	@Override
@@ -118,6 +120,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
             .setAheadOutAnimation(R.anim.activity_alpha_out)
             .setBackInAnimation(R.anim.activity_alpha_in)
             .setBackOutAnimation(R.anim.activity_push_out_right)
+            .putString(HomeRecommendHouseAdapter.INTENT_CITY_ID, cityId)
             .jump(this, SearchHouseActivity.class);
 			break;
 		case R.id.iv_frag_home_shangjinglieren:  // 赏金猎人
@@ -151,6 +154,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			switch (requestCode) {
 			case CODE_SELECT_CITY:
 				CityBean cityBean = (CityBean) data.getSerializableExtra(CityListActivity.INTENT_CITY);
+				cityId = cityBean.getSiteId();
 				ContentUtils.saveCityBeanData(getActivity(), cityBean);
 				tvLocation.setText(cityBean.getName());
 				adapter.setCityId(cityBean.getSiteId());

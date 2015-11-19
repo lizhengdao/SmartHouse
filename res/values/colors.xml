@@ -61,6 +61,9 @@
     <color name="color_f8f8f8">#f8f8f8</color>
     <color name="color_c4c4c4">#c4c4c4</color>
     <color name="color_f5dfb6">#f5dfb6</color>
+    <color name="color_afafaf">#afafaf</color>
+    <color name="color_fdb36a">#fdb36a</color>
+    <color name="color_5dca43">#5dca43</color>
     
     <color name="color_app_theme">#21a535</color>
     <color name="theme_red_alpha">#33e23c1b</color>

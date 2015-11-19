@@ -244,6 +244,31 @@ public interface Action {
 	 */
 	void getWalletInfo(String userId, ResultHandlerCallback callback);
 	
-//	void getFeeHunterMyCustomer();
+	/**
+	 * 赏金猎人  我的客户筛选条件
+	 * @param callback
+	 */
+	void getFeeHunterMyCustomerCondition(ResultHandlerCallback callback);
+	
+	/**
+	 * 赏金猎人  我的客户列表
+	 * @param callback
+	 */
+	void getFeeHunterMyCustomerList(ResultHandlerCallback callback);
 //	void getMyHouseSourceInfoChanges();
+	
+	/**
+	 * 返回搜索楼盘搜索列表
+	 * @param area   区域Id
+	 * @param totalPrice   总价范围
+	 * @param house   房型
+	 * @param type   类型
+	 * @param label   特色
+	 * @param status  售卖状态
+	 * @param key  搜索关键字
+	 * @param callback
+	 */
+	void getSearchHouseList(TextValueBean area, TextValueBean totalPrice,
+			TextValueBean house, TextValueBean type, TextValueBean label,
+			TextValueBean status, String key, ResultHandlerCallback callback);
 }
