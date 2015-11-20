@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.RentHouseBean;
+import cn.com.zzwfang.util.DateUtils;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,8 @@ public class RentHouseAdapter extends BaseAdapter {
 		tvTotalPrice.setText(rentHouseBean.getRentPrice() + "元/月");
 		
 		TextView tvPublishTime = (TextView) convertView.findViewById(R.id.adapter_rent_house_publish_time);
-		tvPublishTime.setText(rentHouseBean.getAddTime());
+		String time = DateUtils.formatDate(rentHouseBean.getAddTime());
+		tvPublishTime.setText(time);
 		
 		return convertView;
 	}

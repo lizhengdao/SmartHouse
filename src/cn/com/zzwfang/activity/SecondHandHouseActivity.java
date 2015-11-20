@@ -2,9 +2,21 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-import com.baidu.mapapi.map.MapView;
-
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.SecondHandHouseAdapter;
@@ -21,26 +33,16 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
-import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.MapView;
 
 public class SecondHandHouseActivity extends BaseActivity implements
 		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener,
 		OnCheckedChangeListener, OnItemClickListener {
 
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
+	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
 	private MapView mapView;
 	private FrameLayout mapViewFlt;
@@ -147,6 +149,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_second_hand_house_back);
+		edtKeyWords = (EditText) findViewById(R.id.act_second_hand_house_key_words);
 		cbxListAndMap = (CheckBox) findViewById(R.id.act_second_hand_house_list_map);
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_second_hand_house);
 		lstSecondHandHouseView = (ListView) findViewById(R.id.lst_second_hand_house);

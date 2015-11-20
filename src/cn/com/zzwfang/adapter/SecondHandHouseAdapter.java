@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.SecondHandHouseBean;
+import cn.com.zzwfang.util.DateUtils;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,8 @@ public class SecondHandHouseAdapter extends BaseAdapter {
 		tvTotalPrice.setText(secondHandHouseBean.getPrice() + "万");
 		
 		TextView tvPublishTime = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_publish_time);
-		tvPublishTime.setText(secondHandHouseBean.getAddTime());
+		String time = DateUtils.formatDate(secondHandHouseBean.getAddTime());
+		tvPublishTime.setText(time);
 		
 		
 		return convertView;

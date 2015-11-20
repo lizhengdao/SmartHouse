@@ -140,5 +140,10 @@ public class API {
      * 返回搜索楼盘搜索列表
      */
     public static final String GET_SEARCH_HOUSE_LIST = "Map/GetEstate";
+    
+    /**
+     * 获取资讯列表
+     */
+    public static final String GET_NEWS_LIST = "News/Index";
 
 }

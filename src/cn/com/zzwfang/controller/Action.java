@@ -271,4 +271,14 @@ public interface Action {
 	void getSearchHouseList(TextValueBean area, TextValueBean totalPrice,
 			TextValueBean house, TextValueBean type, TextValueBean label,
 			TextValueBean status, String key, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取资讯列表
+	 * @param newsId  类别ID
+	 * @param pageSize   当前页条数
+	 * @param pageIndex  当前页码
+	 * @param callback
+	 */
+	void getNewsList(String newsId, int pageSize, int pageIndex, ResultHandlerCallback callback);
+	
 }

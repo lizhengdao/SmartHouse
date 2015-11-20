@@ -2,36 +2,36 @@ package cn.com.zzwfang.adapter;
 
 import java.util.ArrayList;
 
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.bean.IdTitleBean;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.NewsItemBean;
 
-public class NewsTypeAdapter extends BaseAdapter {
+public class NewsItemAdapter extends BaseAdapter {
 
 	private Context context;
 	
-	private ArrayList<IdTitleBean> newsTypes;
+	private ArrayList<NewsItemBean> news;
 	
-	public NewsTypeAdapter(Context context, ArrayList<IdTitleBean> newsTypes) {
+	public NewsItemAdapter(Context context, ArrayList<NewsItemBean> news) {
 		this.context = context;
-		this.newsTypes = newsTypes;
+		this.news = news;
 	}
 	
 	@Override
 	public int getCount() {
-		if (newsTypes == null) {
+		if (news == null) {
 			return 0;
 		}
-		return newsTypes.size();
+		return news.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return newsTypes.get(position);
+		return news.get(position);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class NewsTypeAdapter extends BaseAdapter {
 		}
 		
 		TextView tvNewsName = (TextView) convertView.findViewById(R.id.adapter_news_type_name);
-		tvNewsName.setText(newsTypes.get(position).getTitle());
+		tvNewsName.setText(news.get(position).getTitle());
 		return convertView;
 	}
 

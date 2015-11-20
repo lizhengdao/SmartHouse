@@ -47,15 +47,18 @@
                 android:orientation="horizontal" >
 
                 <EditText
+                    android:id="@+id/act_search_house_key_words"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:drawableLeft="@drawable/ic_search"
                     android:drawablePadding="8dp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch" />
 
                 <ImageView
+                    android:id="@+id/act_search_house_clear_key_wrods"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerInside"

@@ -1180,5 +1180,43 @@ public class ActionImpl implements Action {
         worker.load(requestEntity);
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.com.zzwfang.controller.Action#getNewsList(java.lang.String, int, int, cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback)
+	 */
+	@Override
+	public void getNewsList(String newsId, int pageSize, int pageIndex,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        requestParams.put("type", newsId);
+        requestParams.put("pageSize", pageSize + "");
+        requestParams.put("pageIndex", pageIndex + "");
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_NEWS_LIST));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
 	
 }

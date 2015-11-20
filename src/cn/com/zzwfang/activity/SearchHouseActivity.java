@@ -2,19 +2,20 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.SearchHouseAdapter;
-import cn.com.zzwfang.adapter.SecondHandHouseAdapter;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SearchHouseItemBean;
 import cn.com.zzwfang.bean.TextValueBean;
@@ -28,12 +29,16 @@ import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseTypeSelectListener;
 
+import com.alibaba.fastjson.JSON;
+
 public class SearchHouseActivity extends BaseActivity implements
 		OnClickListener, OnHouseTypeSelectListener, OnHeaderRefreshListener,
 		OnFooterLoadListener, OnItemClickListener {
 
 	private TextView tvCancel, tvHouseType, tvArea, tvTotalPrice,
 			tvHouseRoomsType, tvMore;
+	private EditText edtKeyWords;
+	private ImageView imgClearKeyWords;
 
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
 
@@ -49,17 +54,13 @@ public class SearchHouseActivity extends BaseActivity implements
 	public static final String PrpUsage = "PrpUsage";
 	public static final String EstateLabel = "EstateLabel";
 	public static final String EstateStatus = "EstateStatus";
-	public static final String FloorRange = "FloorRange";
-	public static final String RentPriceRange = "RentPriceRange";
-	public static final String Direction = "Direction";
-	public static final String Sort = "Sort";
 
 	/**
 	 * 区域
 	 */
 	private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
 	/**
-	 * 总价
+	 * 总价范围
 	 */
 	private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
 	/**
@@ -82,26 +83,6 @@ public class SearchHouseActivity extends BaseActivity implements
 	private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
 
 	/**
-	 * 楼层范围
-	 */
-	private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-
-	/**
-	 * 租价范围
-	 */
-	private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-
-	/**
-	 * 朝向
-	 */
-	private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-
-	/**
-	 * 排序
-	 */
-	private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
-
-	/**
 	 * 区域
 	 */
 	private OnConditionSelectListener onAreaSelectListener;
@@ -113,24 +94,30 @@ public class SearchHouseActivity extends BaseActivity implements
 	 * 房型
 	 */
 	private OnConditionSelectListener onHouseTypeSelectListener;
-	
+
+	private ArrayList<String> moreType = new ArrayList<String>();
+
 	private TextValueBean areaCondition;
 	private TextValueBean totalPriceCondition;
-	private TextValueBean squareCondition;
 	private TextValueBean labelCondition;
+	private TextValueBean statusCondition;
 	private TextValueBean roomTypeCondition;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		initView();
+		setListener();
+		initData();
 	}
 
 	private void initView() {
 		setContentView(R.layout.act_search_house);
 
 		tvCancel = (TextView) findViewById(R.id.act_search_house_cancel_tv);
+		edtKeyWords = (EditText) findViewById(R.id.act_search_house_key_words);
 		tvHouseType = (TextView) findViewById(R.id.act_search_house_house_type_tv);
+		imgClearKeyWords = (ImageView) findViewById(R.id.act_search_house_clear_key_wrods);
 
 		lltArea = (LinearLayout) findViewById(R.id.act_search_house_area_llt);
 		lltTotalPrice = (LinearLayout) findViewById(R.id.act_search_house_total_price_llt);
@@ -144,14 +131,15 @@ public class SearchHouseActivity extends BaseActivity implements
 
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_search_house);
 		lstSearchHouseView = (ListView) findViewById(R.id.lst_search_house);
-
-		tvCancel.setOnClickListener(this);
-		tvHouseType.setOnClickListener(this);
 	}
 
 	private void setListener() {
-		pullView.setPullRefreshEnable(true);
-		pullView.setLoadMoreEnable(true);
+		tvCancel.setOnClickListener(this);
+		tvHouseType.setOnClickListener(this);
+		imgClearKeyWords.setOnClickListener(this);
+
+		pullView.setPullRefreshEnable(false);
+		pullView.setLoadMoreEnable(false);
 		pullView.setOnHeaderRefreshListener(this);
 		pullView.setOnFooterLoadListener(this);
 
@@ -170,10 +158,7 @@ public class SearchHouseActivity extends BaseActivity implements
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				totalPriceCondition = txtValueBean;
 				tvTotalPrice.setText(txtValueBean.getText());
-//				getSecondHandHouseList(cityId, areaCondition, "",
-//						squareCondition, labelCondition, totalPriceCondition,
-//						roomTypeCondition, buildYear, floor, proNum, sort, 10,
-//						true);
+				getSearchHouseList();
 			}
 		};
 
@@ -183,10 +168,7 @@ public class SearchHouseActivity extends BaseActivity implements
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				roomTypeCondition = txtValueBean;
 				tvHouseType.setText(txtValueBean.getText());
-//				getSecondHandHouseList(cityId, areaCondition, "",
-//						squareCondition, labelCondition, totalPriceCondition,
-//						roomTypeCondition, buildYear, floor, proNum, sort, 10,
-//						true);
+				getSearchHouseList();
 			}
 		};
 
@@ -196,12 +178,37 @@ public class SearchHouseActivity extends BaseActivity implements
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				areaCondition = txtValueBean;
 				tvArea.setText(txtValueBean.getText());
-//				getSecondHandHouseList(cityId, areaCondition, "",
-//						squareCondition, labelCondition, totalPriceCondition,
-//						roomTypeCondition, buildYear, floor, proNum, sort, 10,
-//						true);
+				getSearchHouseList();
 			}
 		};
+		edtKeyWords
+				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+					@Override
+					public boolean onEditorAction(TextView v, int actionId,
+							KeyEvent event) {
+						if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+							getSearchHouseList();
+							return true;
+						}
+						return false;
+					}
+
+				});
+	}
+
+	private void initData() {
+		moreType.add("朝向");
+		moreType.add("面积");
+		moreType.add("标签");
+		moreType.add("楼层");
+		moreType.add("房源编号");
+		getAreaList();
+		getConditionList(SalePriceRange);
+		getConditionList(HouseType);
+		getConditionList(PrpUsage);
+		getConditionList(EstateLabel);
+		getConditionList(EstateStatus);
+		getSearchHouseList();
 	}
 
 	@Override
@@ -213,12 +220,80 @@ public class SearchHouseActivity extends BaseActivity implements
 		case R.id.act_search_house_house_type_tv:
 			PopViewHelper.showSearchHouseTypePopWindow(this, tvHouseType, this);
 			break;
+		case R.id.act_search_house_clear_key_wrods: // 清除关键字
+			edtKeyWords.setText("");
+			break;
+		case R.id.act_search_house_area_llt: // 区域
+			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
+					onAreaSelectListener);
+			break;
+		case R.id.act_search_house_total_price_llt: // 总价
+			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice,
+					salePriceRanges, onTotalPriceSelectListener);
+			break;
+		case R.id.act_search_house_type_llt: // 类型
+			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
+					houseTypes, onHouseTypeSelectListener);
+			break;
+		case R.id.act_search_house_more_llt: // 更多
+			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
+					null, null, estateLabels, lltMore);
+			break;
+
 		}
 	}
 
 	@Override
 	public void onHouseTypeSelect(int houseType, String houseTypeTxt) {
 		tvHouseType.setText(houseTypeTxt);
+	}
+
+	@Override
+	public void onFooterLoad(AbPullToRefreshView view) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onHeaderRefresh(AbPullToRefreshView view) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void getSearchHouseList() {
+		String keyWords = edtKeyWords.getText().toString();
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, null,
+				null, labelCondition, statusCondition, keyWords,
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						searchHouses.clear();
+						ArrayList<SearchHouseItemBean> temp = (ArrayList<SearchHouseItemBean>) JSON
+								.parseArray(result.getData(),
+										SearchHouseItemBean.class);
+						searchHouses.addAll(temp);
+						adapter.notifyDataSetChanged();
+					}
+				});
 	}
 
 	public void getConditionList(final String conditionName) {
@@ -251,14 +326,6 @@ public class SearchHouseActivity extends BaseActivity implements
 							estateLabels.addAll(temp);
 						} else if (EstateStatus.equals(conditionName)) {
 							estateStatus.addAll(temp);
-						} else if (FloorRange.equals(conditionName)) {
-							floorRanges.addAll(temp);
-						} else if (RentPriceRange.equals(conditionName)) {
-							rentPriceRanges.addAll(temp);
-						} else if (Direction.equals(conditionName)) {
-							directions.addAll(temp);
-						} else if (Sort.equals(conditionName)) {
-							sorts.addAll(temp);
 						}
 					}
 				});
@@ -288,22 +355,4 @@ public class SearchHouseActivity extends BaseActivity implements
 		});
 	}
 
-	@Override
-	public void onFooterLoad(AbPullToRefreshView view) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onHeaderRefresh(AbPullToRefreshView view) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		// TODO Auto-generated method stub
-		
-	}
 }
