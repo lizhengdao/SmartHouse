@@ -6,9 +6,12 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.NewsItemBean;
+import cn.com.zzwfang.util.DateUtils;
 
 public class NewsItemAdapter extends BaseAdapter {
 
@@ -42,11 +45,22 @@ public class NewsItemAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = View.inflate(context, R.layout.adapter_news_type, null);
+			convertView = View.inflate(context, R.layout.adapter_news_item, null);
 		}
 		
-		TextView tvNewsName = (TextView) convertView.findViewById(R.id.adapter_news_type_name);
-		tvNewsName.setText(news.get(position).getTitle());
+		NewsItemBean newsItemBean = news.get(position);
+		ImageView imgNewsPhoto = (ImageView) convertView.findViewById(R.id.adapter_news_item_photo);
+		TextView tvNewsName = (TextView) convertView.findViewById(R.id.adapter_news_item_name);
+		tvNewsName.setText(newsItemBean.getTitle());
+		
+		TextView tvTime = (TextView) convertView.findViewById(R.id.adapter_news_item_time);
+		String time = DateUtils.formatDate(newsItemBean.getAddTime());
+		tvTime.setText(time);
+		ArrayList<String> photos = newsItemBean.getImages();
+		if (photos != null && photos.size() > 0) {
+			ImageAction.displayImage(photos.get(0), imgNewsPhoto);
+		}
+		
 		return convertView;
 	}
 

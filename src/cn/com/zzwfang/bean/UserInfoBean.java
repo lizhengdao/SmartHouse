@@ -1,5 +1,9 @@
 package cn.com.zzwfang.bean;
 
+/**
+ * @author MISS-万
+ *
+ */
 public class UserInfoBean extends BaseBean {
 
 	private String Id;
@@ -17,6 +21,16 @@ public class UserInfoBean extends BaseBean {
 	private String Photo;
 	
 	private String Profession;
+	
+	private boolean IsBindBank;
+	
+	private int RecommendClientsNum;
+	
+	private int RecommendOwners;
+	
+	private int Bounty;
+	
+	private int serType;
 	
 	private boolean Sex;
 
@@ -91,6 +105,47 @@ public class UserInfoBean extends BaseBean {
 	public void setSex(boolean sex) {
 		Sex = sex;
 	}
+
+	public boolean isIsBindBank() {
+		return IsBindBank;
+	}
+
+	public void setIsBindBank(boolean isBindBank) {
+		IsBindBank = isBindBank;
+	}
+
+	public int getRecommendClientsNum() {
+		return RecommendClientsNum;
+	}
+
+	public void setRecommendClientsNum(int recommendClientsNum) {
+		RecommendClientsNum = recommendClientsNum;
+	}
+
+	public int getRecommendOwners() {
+		return RecommendOwners;
+	}
+
+	public void setRecommendOwners(int recommendOwners) {
+		RecommendOwners = recommendOwners;
+	}
+
+	public int getBounty() {
+		return Bounty;
+	}
+
+	public void setBounty(int bounty) {
+		Bounty = bounty;
+	}
+
+	public int getSerType() {
+		return serType;
+	}
+
+	public void setSerType(int serType) {
+		this.serType = serType;
+	}
+	
 	
 	
 }

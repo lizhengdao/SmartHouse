@@ -2,17 +2,7 @@ package cn.com.zzwfang.view.helper;
 
 
 import java.util.ArrayList;
-import java.util.jar.Attributes.Name;
 
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.adapter.ConditionAdapter;
-import cn.com.zzwfang.adapter.MoreDetailAdapter;
-import cn.com.zzwfang.adapter.MoreTypeAdapter;
-import cn.com.zzwfang.adapter.MortgageYearsAdapter;
-import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
-import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
-import cn.com.zzwfang.bean.TextValueBean;
-import cn.com.zzwfang.util.DevUtils;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -24,6 +14,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.ConditionAdapter;
+import cn.com.zzwfang.adapter.MoreDetailAdapter;
+import cn.com.zzwfang.adapter.MoreTypeAdapter;
+import cn.com.zzwfang.adapter.MortgageYearsAdapter;
+import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
+import cn.com.zzwfang.adapter.NewsMoreAdapter;
+import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
+import cn.com.zzwfang.bean.IdTitleBean;
+import cn.com.zzwfang.bean.NewsItemBean;
+import cn.com.zzwfang.bean.TextValueBean;
+import cn.com.zzwfang.util.DevUtils;
 
 public class PopViewHelper {
 
@@ -475,4 +477,41 @@ public class PopViewHelper {
         }
 	}
 	
+	public interface OnNewsMoreSelectedListener {
+		void onOnNewsMoreSelected(int position, IdTitleBean newsType);
+	}
+	/**
+	 * 咨询更多
+	 */
+	public static void showNewsMorePopWindow(Context context, View anchorView,
+			final ArrayList<IdTitleBean> news, final OnNewsMoreSelectedListener onNewsMoreSelectedListener) {
+		View view = View.inflate(context, R.layout.popup_condition, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+	    NewsMoreAdapter adapter = new NewsMoreAdapter(context, news);
+	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				popupWindow.dismiss();
+				if (onNewsMoreSelectedListener != null) {
+					onNewsMoreSelectedListener.onOnNewsMoreSelected(position, news.get(position));
+				}
+			}
+		});
+	    
+	    lstCondition.setAdapter(adapter);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	}
 }

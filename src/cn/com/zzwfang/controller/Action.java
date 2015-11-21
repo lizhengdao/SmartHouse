@@ -281,4 +281,6 @@ public interface Action {
 	 */
 	void getNewsList(String newsId, int pageSize, int pageIndex, ResultHandlerCallback callback);
 	
+	void createIMAccount(String id, String pwd, ResultHandlerCallback callback);
+	
 }

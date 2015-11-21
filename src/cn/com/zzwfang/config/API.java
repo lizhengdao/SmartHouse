@@ -145,5 +145,10 @@ public class API {
      * 获取资讯列表
      */
     public static final String GET_NEWS_LIST = "News/Index";
+    
+    /**
+     * 创建即时通讯账号
+     */
+    public static final String GET_CREATE_IM_ACCOUNT = "Message/CreateAccount";
 
 }

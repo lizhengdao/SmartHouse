@@ -105,7 +105,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			return;
 		}
 		
-		pwd = MD5Util.md5(pwd);
+//		pwd = MD5Util.md5(pwd);
 		action.register(phoneNum, pwd, authCode, 1, new ResultHandlerCallback() {
 			
 			@Override

@@ -50,6 +50,7 @@
             android:text="@string/frag_consultation_headline" />
 
         <View
+            android:id="@+id/frag_main_news_line_one"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
@@ -67,6 +68,7 @@
             android:text="@string/frag_consultation_shopping_guide" />
 
         <View
+            android:id="@+id/frag_main_news_line_two"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
@@ -84,6 +86,7 @@
             android:text="@string/frag_consultation_q_and_a" />
 
         <View
+            android:id="@+id/frag_main_news_line_three"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
@@ -107,18 +110,11 @@
         android:layout_marginBottom="1dp"
         android:background="@color/color_e0e0e0" />
 
-    <android.support.v4.view.ViewPager
+    <cn.com.zzwfang.view.UnScrollableViewPager
         android:id="@+id/frag_news_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1" />
-
-    <FrameLayout
-        android:id="@+id/frag_consultation_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" >
-    </FrameLayout>
 
 </LinearLayout>

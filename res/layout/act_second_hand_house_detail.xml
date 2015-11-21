@@ -595,6 +595,7 @@
                 android:background="@color/color_e0e0e0" />
 
             <TextView
+                android:id="@+id/act_second_handhouse_nearby_detail_tv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"

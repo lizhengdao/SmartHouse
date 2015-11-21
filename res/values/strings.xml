@@ -231,6 +231,8 @@
     <!-- 赏金猎人  推荐业主  -->
     <string name="act_fee_hunter_recommend_owner">推荐业主</string>
     
+    <!-- 周边详情  -->
+    <string name="act_nearby_detail">周边详情</string>
     
     <string-array name="loan_years_array">
         <item>1年  (12期)</item>

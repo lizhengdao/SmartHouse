@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_nearby_detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/act_nearby_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/act_nearby_detail"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/act_nearby_detail_map_view"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:clickable="true" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/white"
+            android:layout_gravity="bottom|center_horizontal" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:orientation="horizontal" >
+
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_bank"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_bank"
+                    android:gravity="center"
+                    android:text="银行"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_bus"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_bus"
+                    android:gravity="center"
+                    android:text="公交"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_subway"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_subway"
+                    android:gravity="center"
+                    android:text="地铁"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_school"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_school"
+                    android:gravity="center"
+                    android:text="教育"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_hostipal"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_hostipal"
+                    android:gravity="center"
+                    android:text="医院"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_leisure"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_leisure"
+                    android:gravity="center"
+                    android:text="休闲"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_shopping"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_shopping"
+                    android:gravity="center"
+                    android:text="购物"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_body_building"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_body_building"
+                    android:gravity="center"
+                    android:text="健身"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+                
+                <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_nearby_detail_foods"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/ic_foods"
+                    android:gravity="center"
+                    android:text="美食"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:top_height="20dp"
+                    app:top_width="20dp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+    </FrameLayout>
+
+</LinearLayout>

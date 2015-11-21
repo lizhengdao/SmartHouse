@@ -3,7 +3,7 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 
 import cn.com.zzwfang.fragment.MainHomeFragment;
-import cn.com.zzwfang.fragment.MainConsultationFragment;
+import cn.com.zzwfang.fragment.MainNewsFragment;
 import cn.com.zzwfang.fragment.MainMineFragment;
 import cn.com.zzwfang.fragment.MainMapFindHouseFragment;
 import android.support.v4.app.Fragment;
@@ -15,7 +15,7 @@ public class MainContentPagerAdapter extends FragmentPagerAdapter {
 	
 	private MainHomeFragment homeFragment = null;
 	private MainMapFindHouseFragment mapFragment = null;
-	private MainConsultationFragment consultationFragment = null;
+	private MainNewsFragment consultationFragment = null;
 	private MainMineFragment mineFragment = null;
 
 //	ArrayList<String> title = new ArrayList<String>();
@@ -46,7 +46,7 @@ public class MainContentPagerAdapter extends FragmentPagerAdapter {
 			break;
 		case 2:
 			if (consultationFragment == null) {
-				consultationFragment = new MainConsultationFragment();
+				consultationFragment = new MainNewsFragment();
 			}
 			fragment = consultationFragment;
 			break;

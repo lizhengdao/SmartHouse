@@ -12,11 +12,13 @@ import cn.com.zzwfang.view.helper.PopViewHelper.OnFeeHunterRecommendHouseTypeSel
 
 public class FeeHunterInfoActivity extends BaseActivity implements OnClickListener {
 
-	private TextView tvBack, tvMyCustomer, tvBuyProgress, tvOwnerProgress, tvFeeHunterMsg, tvFeeHunterRule;
+	private TextView tvBack, tvMyCustomer, tvOwnerProgress, tvFeeHunterMsg, tvFeeHunterRule;
+//	tvBuyProgress
 	
 	private TextView tvBindedCards;
 	
-	private LinearLayout lltRecommendBuy, lltRecommendSell, lltRecommendCustomer, lltRecommendOwner;
+	private LinearLayout lltRecommendBuy, lltRecommendSell;
+//	, lltRecommendCustomer, lltRecommendOwner;
 	
 	private OnFeeHunterRecommendHouseTypeSelecetListener recommendBuyListener;
 	
@@ -35,11 +37,11 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		
 		lltRecommendBuy = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_buy);
 		lltRecommendSell = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_sell);
-		lltRecommendCustomer = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_customer);
-		lltRecommendOwner = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_owner);
+//		lltRecommendCustomer = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_customer);
+//		lltRecommendOwner = (LinearLayout) findViewById(R.id.act_fee_hunter_info_recommend_owner);
 		tvMyCustomer = (TextView) findViewById(R.id.act_fee_hunter_info_my_customer);
 		
-		tvBuyProgress = (TextView) findViewById(R.id.act_fee_hunter_info_buy_progress);
+//		tvBuyProgress = (TextView) findViewById(R.id.act_fee_hunter_info_buy_progress);
 		tvOwnerProgress = (TextView) findViewById(R.id.act_fee_hunter_info_owner_progress);
 		tvFeeHunterMsg = (TextView) findViewById(R.id.act_fee_hunter_info_fee_hunter_msg);
 		tvFeeHunterRule = (TextView) findViewById(R.id.act_fee_hunter_info_hunter_rule);
@@ -50,10 +52,10 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		
 		lltRecommendBuy.setOnClickListener(this);
 		lltRecommendSell.setOnClickListener(this);
-		lltRecommendCustomer.setOnClickListener(this);
-		lltRecommendOwner.setOnClickListener(this);
+//		lltRecommendCustomer.setOnClickListener(this);
+//		lltRecommendOwner.setOnClickListener(this);
 		tvMyCustomer.setOnClickListener(this);
-		tvBuyProgress.setOnClickListener(this);
+//		tvBuyProgress.setOnClickListener(this);
 		tvOwnerProgress.setOnClickListener(this);
 		tvFeeHunterMsg.setOnClickListener(this);
 		tvFeeHunterRule.setOnClickListener(this);
@@ -119,10 +121,8 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		case R.id.act_fee_hunter_info_back:
 			finish();
 			break;
-		case R.id.act_fee_hunter_info_recommend_buy:   //  推荐买房  推荐客户一样的逻辑
-			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendBuyListener);
-			break;
-		case R.id.act_fee_hunter_info_recommend_sell:  //  推荐卖房
+		case R.id.act_fee_hunter_info_recommend_buy:   //  推荐买房  改成 推荐客户  跳推荐二手房页
+//			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendBuyListener);
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -130,10 +130,13 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendSecondHandHouseActivity.class);
 			break;
-		case R.id.act_fee_hunter_info_recommend_customer:  // 推荐客户
-			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendCustomerListener);
-			break;
-		case R.id.act_fee_hunter_info_recommend_owner:   //  推荐业主
+		case R.id.act_fee_hunter_info_recommend_sell:  //  推荐卖房 改成推荐房源  跳推荐业主表单页
+//			Jumper.newJumper()
+//	        .setAheadInAnimation(R.anim.activity_push_in_right)
+//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	        .setBackInAnimation(R.anim.activity_alpha_in)
+//	        .setBackOutAnimation(R.anim.activity_push_out_right)
+//	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendSecondHandHouseActivity.class);
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -141,6 +144,17 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendOwnerActivity.class);
 			break;
+//		case R.id.act_fee_hunter_info_recommend_customer:  // 推荐客户
+//			PopViewHelper.showFeeHunterRecommendBuyAndSell(this, getWindow().getDecorView(), recommendCustomerListener);
+//			break;
+//		case R.id.act_fee_hunter_info_recommend_owner:   //  推荐业主
+//			Jumper.newJumper()
+//	        .setAheadInAnimation(R.anim.activity_push_in_right)
+//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	        .setBackInAnimation(R.anim.activity_alpha_in)
+//	        .setBackOutAnimation(R.anim.activity_push_out_right)
+//	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendOwnerActivity.class);
+//			break;
 		case R.id.act_fee_hunter_info_my_customer:   //  我的客户
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
@@ -149,15 +163,15 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(this, FeeHunterMyCustomerActivity.class);
 			break;
-		case R.id.act_fee_hunter_info_buy_progress:    //   购买进度
-			Jumper.newJumper()
-	        .setAheadInAnimation(R.anim.activity_push_in_right)
-	        .setAheadOutAnimation(R.anim.activity_alpha_out)
-	        .setBackInAnimation(R.anim.activity_alpha_in)
-	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(FeeHunterInfoActivity.this, FeeHunterBuyProgressActivity.class);
-			break;
-		case R.id.act_fee_hunter_info_owner_progress:   //  业主进度
+//		case R.id.act_fee_hunter_info_buy_progress:    //   购买进度
+//			Jumper.newJumper()
+//	        .setAheadInAnimation(R.anim.activity_push_in_right)
+//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	        .setBackInAnimation(R.anim.activity_alpha_in)
+//	        .setBackOutAnimation(R.anim.activity_push_out_right)
+//	        .jump(FeeHunterInfoActivity.this, FeeHunterBuyProgressActivity.class);
+//			break;
+		case R.id.act_fee_hunter_info_owner_progress:   //  业主进度    改成推荐房源
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)

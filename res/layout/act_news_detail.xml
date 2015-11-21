@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/white" >
     
     <FrameLayout
         android:layout_width="match_parent"
@@ -31,5 +32,10 @@
             android:textSize="18sp" />
 
     </FrameLayout>
+    
+    <WebView 
+        android:id="@+id/act_news_detail_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

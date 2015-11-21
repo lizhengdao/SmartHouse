@@ -1,31 +1,28 @@
 package cn.com.zzwfang.activity;
 
-import org.apache.http.Header;
-
-import com.alibaba.fastjson.JSON;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.nostra13.universalimageloader.utils.L;
-
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.bean.Result;
-import cn.com.zzwfang.bean.UserInfoBean;
-import cn.com.zzwfang.constant.URL;
-import cn.com.zzwfang.controller.ActionImpl;
-import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
-import cn.com.zzwfang.http.RequestEntity;
-import cn.com.zzwfang.util.ContentUtils;
-import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.util.MD5Util;
-import cn.com.zzwfang.util.RSAUtil;
-import cn.com.zzwfang.util.ToastUtils;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.ToastUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMGroupManager;
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
 
@@ -34,6 +31,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	private TextView tvLogin, tvRegister, tvForgetPwd;
 	
 	private LinearLayout lltBrokerLogin;
+	
+	private ActionImpl actionImpl;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -57,6 +56,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		edtPhoneNum.setText("18683525229");
 		edtPwd.setText("123456");
 		
+		actionImpl = ActionImpl.newInstance(this);
 		tvLogin.setOnClickListener(this);
 		tvRegister.setOnClickListener(this);
 		lltBrokerLogin.setOnClickListener(this);
@@ -107,9 +107,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			ToastUtils.SHORT.toast(this, "请输入密码");
 			return;
 		}
-		pwd = MD5Util.md5(pwd);
+//		pwd = MD5Util.md5(pwd);
 //		pwd = "E10ADC3949BA59ABBE56E057F20F883E";
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		
 		actionImpl.login(phoneNum, pwd, new ResultHandlerCallback() {
 			
 			@Override
@@ -122,14 +122,80 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
+				final UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
 				ContentUtils.saveUserInfo(LoginActivity.this, userInfo);
 				ContentUtils.saveLoginPhone(LoginActivity.this, phoneNum);
-				ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
-				Jumper.newJumper()
-	            .setAheadInAnimation(R.anim.zoom_in_style1)
-	            .setAheadOutAnimation(R.anim.zoom_out_style1)
-	            .jump(LoginActivity.this, MainActivity.class);
+				
+				actionImpl.createIMAccount(userInfo.getId(), userInfo.getId(), new ResultHandlerCallback() {
+					
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+						
+					}
+					
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+						
+					}
+					
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						loginOnHx(userInfo.getId(), userInfo.getId());
+					}
+				});
+//				ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
+//				Jumper.newJumper()
+//	            .setAheadInAnimation(R.anim.zoom_in_style1)
+//	            .setAheadOutAnimation(R.anim.zoom_out_style1)
+//	            .jump(LoginActivity.this, MainActivity.class);
+			}
+		});
+	}
+	
+	private void loginOnHx(String easeId, String easePwd) {
+		EMChatManager.getInstance().login(easeId, easePwd, new EMCallBack() {
+			
+			@Override
+			public void onSuccess() {
+				try {
+					EMGroupManager.getInstance().loadAllGroups();
+					EMChatManager.getInstance().loadAllConversations();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				runOnUiThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
+						Jumper.newJumper()
+			            .setAheadInAnimation(R.anim.zoom_in_style1)
+			            .setAheadOutAnimation(R.anim.zoom_out_style1)
+			            .jump(LoginActivity.this, MainActivity.class);
+					}
+				});
+				
+				
+//				Handler handler = new Handler();
+//				handler.postDelayed(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						
+//					}
+//				}, 1000);
+				
+			}
+			
+			@Override
+			public void onProgress(int arg0, String arg1) {
+				
+			}
+			
+			@Override
+			public void onError(int arg0, String arg1) {
+				
 			}
 		});
 	}

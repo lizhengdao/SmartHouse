@@ -27,7 +27,7 @@ import cn.com.zzwfang.view.helper.PopViewHelper.OnMyCustomerConditionSelectListe
  */
 public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClickListener {
 
-	private TextView tvBack, tvCondition, tvRecommendBuyHouse;
+	private TextView tvBack, tvCondition;
 	
 	private ListView lstMyCustomer;
 	
@@ -55,7 +55,6 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 		
 		tvBack = (TextView) findViewById(R.id.act_fee_hunter_my_customer_back);
 		tvCondition = (TextView) findViewById(R.id.act_fee_hunter_my_customer_condition);
-		tvRecommendBuyHouse = (TextView) findViewById(R.id.act_fee_hunter_my_customer_recommend_buy_house);
 		
 		lstMyCustomer = (ListView) findViewById(R.id.act_fee_hunter_my_customer_lst);
 		adapter = new FeeHunterMyCustomerAdapter(this, myCustomers);
