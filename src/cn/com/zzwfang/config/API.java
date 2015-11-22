@@ -150,5 +150,15 @@ public class API {
      * 创建即时通讯账号
      */
     public static final String GET_CREATE_IM_ACCOUNT = "Message/CreateAccount";
+    
+    /**
+     * 获取小区历史成交记录
+     */
+    public static final String GET_RESIDENTIAL_TRANSACTION_HISTORY = "Contract/GetHisRecordJson";
+    
+    /**
+     * 获取地图找房默认显示状态
+     */
+    public static final String GET_MAP_FIND_HOUSE_DATA = "Map/GetArea";
 
 }

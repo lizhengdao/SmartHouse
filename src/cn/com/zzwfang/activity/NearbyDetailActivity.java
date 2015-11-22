@@ -6,10 +6,19 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.location.LocationService;
+import cn.com.zzwfang.location.LocationService.OnLocationListener;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.overlayutil.PoiOverlay;
 import com.baidu.mapapi.search.core.CityInfo;
@@ -45,6 +54,8 @@ public class NearbyDetailActivity extends BaseActivity implements
 	private PoiSearch mPoiSearch = null;
 	private SuggestionSearch mSuggestionSearch = null;
 	private BaiduMap mBaiduMap = null;
+
+	private LatLng curLatLng;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -83,7 +94,41 @@ public class NearbyDetailActivity extends BaseActivity implements
 		mSuggestionSearch = SuggestionSearch.newInstance();
 		mSuggestionSearch.setOnGetSuggestionResultListener(this);
 		mBaiduMap = mapView.getMap();
-		
+
+		// BDLocation location = new BDLocation();
+		// location.setLatitude(30.67 / 1000000);
+		// location.setLongitude(104.06 / 1000000);
+		// LatLng ll = new LatLng(location.getLatitude(),
+		// location.getLongitude());
+		// MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
+		// mBaiduMap.animateMapStatus(u);
+
+		final LocationService locationService = LocationService
+				.getInstance(this);
+		locationService.startLocationService(new OnLocationListener() {
+
+			@Override
+			public void onLocationCompletion(BDLocation location) {
+				curLatLng = new LatLng(location.getLatitude(), location
+						.getLongitude());
+				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+				mBaiduMap.animateMapStatus(u);
+				locationService.stopLocationService();
+
+				// OverlayOptions curOption = new
+				// mBaiduMap.addOverlay(option)
+
+				// 构建Marker图标
+				BitmapDescriptor bitmap = BitmapDescriptorFactory
+						.fromResource(R.drawable.ic_cur_location);
+				// 构建MarkerOption，用于在地图上添加Marker
+				OverlayOptions option = new MarkerOptions().position(curLatLng)
+						.icon(bitmap);
+				// 在地图上添加Marker，并显示
+				mBaiduMap.addOverlay(option);
+			}
+		});
+
 	}
 
 	@Override
@@ -93,30 +138,42 @@ public class NearbyDetailActivity extends BaseActivity implements
 			finish();
 			break;
 		case R.id.act_nearby_detail_bank: // 银行
+			searchNearby("银行");
 			break;
 		case R.id.act_nearby_detail_bus: // 公交
+			searchNearby("公交");
 			break;
 		case R.id.act_nearby_detail_subway: // 地铁
+			searchNearby("地铁");
 			break;
 		case R.id.act_nearby_detail_school: // 教育
+			searchNearby("教育");
 			break;
 		case R.id.act_nearby_detail_hostipal: // 医院
+			searchNearby("医院");
 			break;
 		case R.id.act_nearby_detail_leisure: // 休闲
+			searchNearby("休闲");
 			break;
 		case R.id.act_nearby_detail_shopping: // 购物
+			searchNearby("购物");
 			break;
 		case R.id.act_nearby_detail_body_building: // 健身
+			searchNearby("健身");
 			break;
 		case R.id.act_nearby_detail_foods: // 美食
+			searchNearby("美食");
 			break;
 
 		}
 	}
-	
-	private void searchNearby() {
-//	    LatLng latlng = new LatLng(arg0, arg1)
-//	    mPoiSearch.searchNearby(new PoiNearbySearchOption().location(arg0))
+
+	private void searchNearby(String keyWords) {
+		if (curLatLng != null) {
+			mPoiSearch.searchNearby(new PoiNearbySearchOption()
+					.location(curLatLng).keyword(keyWords).pageNum(10)
+					.radius(10000));
+		}
 	}
 
 	@Override
@@ -124,22 +181,20 @@ public class NearbyDetailActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 
 		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
-			Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(this, result.getName() + ": " + result.getAddress(), Toast.LENGTH_SHORT)
-			.show();
+			Toast.makeText(this, result.getName() + ": " + result.getAddress(),
+					Toast.LENGTH_SHORT).show();
 		}
 	}
-	
+
 	@Override
 	public void onGetPoiResult(PoiResult result) {
 		// TODO Auto-generated method stub
 
 		if (result == null
 				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
-			Toast.makeText(this, "未找到结果", Toast.LENGTH_LONG)
-			.show();
+			Toast.makeText(this, "未找到结果", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
@@ -149,6 +204,13 @@ public class NearbyDetailActivity extends BaseActivity implements
 			overlay.setData(result);
 			overlay.addToMap();
 			overlay.zoomToSpan();
+			BitmapDescriptor bitmap = BitmapDescriptorFactory
+					.fromResource(R.drawable.ic_cur_location);
+			// 构建MarkerOption，用于在地图上添加Marker
+			OverlayOptions option = new MarkerOptions().position(curLatLng)
+					.icon(bitmap);
+			// 在地图上添加Marker，并显示
+			mBaiduMap.addOverlay(option);
 			return;
 		}
 		if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
@@ -160,47 +222,48 @@ public class NearbyDetailActivity extends BaseActivity implements
 				strInfo += ",";
 			}
 			strInfo += "找到结果";
-			Toast.makeText(this, strInfo, Toast.LENGTH_LONG)
-					.show();
+			Toast.makeText(this, strInfo, Toast.LENGTH_LONG).show();
 		}
 	}
-	
+
 	private class MyPoiOverlay extends PoiOverlay {
 
-        public MyPoiOverlay(BaiduMap baiduMap) {
-            super(baiduMap);
-        }
+		public MyPoiOverlay(BaiduMap baiduMap) {
+			super(baiduMap);
+		}
 
-        @Override
-        public boolean onPoiClick(int index) {
-            super.onPoiClick(index);
-            PoiInfo poi = getPoiResult().getAllPoi().get(index);
-            // if (poi.hasCaterDetails) {
-                mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
-                        .poiUid(poi.uid));
-            // }
-            return true;
-        }
-    }
+		@Override
+		public boolean onPoiClick(int index) {
+			super.onPoiClick(index);
+			PoiInfo poi = getPoiResult().getAllPoi().get(index);
+			// if (poi.hasCaterDetails) {
+			mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
+					.poiUid(poi.uid));
+			// }
+			return true;
+		}
+	}
 
 	@Override
 	public void onGetSuggestionResult(SuggestionResult arg0) {
-		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	protected void onPause() {
+		mapView.onPause();
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
+		mapView.onResume();
 		super.onResume();
 	}
 
 	@Override
 	protected void onDestroy() {
+		mapView.onDestroy();
 		mPoiSearch.destroy();
 		mSuggestionSearch.destroy();
 		super.onDestroy();

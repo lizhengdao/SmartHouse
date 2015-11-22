@@ -164,6 +164,9 @@
     <string name="act_second_hand_house_list">列表</string>
     <string name="act_second_hand_house_map">地图</string>
     
+    <!--  -->
+    <string name="act_residential_transaction_history"></string>
+    
     <!-- 找房神器 -->
     <string name="act_search_house_artifact">找房神器</string>
     <string name="act_search_house_artifact_back">返回</string>

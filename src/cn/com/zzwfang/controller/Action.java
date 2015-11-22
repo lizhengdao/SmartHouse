@@ -283,4 +283,20 @@ public interface Action {
 	
 	void createIMAccount(String id, String pwd, ResultHandlerCallback callback);
 	
+	/**
+	 * 获取小区成交历史
+	 * @param estId    小区ID
+	 * @param roomType    房型  0：不限 1：一居 2：两居 3：三居 4：四居
+	 * @param callback
+	 */
+	void getResidentialTransactionHistory(String estId, String roomType, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取   地图找房  默认显示状态
+	 * @param tradeType  出售/出租   (0是出售，1是出租)
+	 * @param cityId  城市id
+	 * @param callback
+	 */
+	void getMapFindHouseData(int tradeType, String cityId, ResultHandlerCallback callback);
+	
 }

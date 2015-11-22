@@ -1,6 +1,10 @@
 package com.baidu.mapapi.overlayutil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
+import cn.com.zzwfang.R;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -10,9 +14,6 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.search.poi.PoiResult;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 用于显示poi的overly
  */
@@ -21,6 +22,8 @@ public class PoiOverlay extends OverlayManager {
     private static final int MAX_POI_SIZE = 10;
 
     private PoiResult mPoiResult = null;
+    
+//    private Context context;
 
     /**
      * 构造函数
@@ -30,6 +33,7 @@ public class PoiOverlay extends OverlayManager {
      */
     public PoiOverlay(BaiduMap baiduMap) {
         super(baiduMap);
+//        this.context = context;
     }
 
     /**
@@ -57,10 +61,14 @@ public class PoiOverlay extends OverlayManager {
             markerSize++;
             Bundle bundle = new Bundle();
             bundle.putInt("index", i);
+//            markerList.add(new MarkerOptions()
+//                    .icon(BitmapDescriptorFactory.fromAssetWithDpi("Icon_mark"
+//                            + markerSize + ".png")).extraInfo(bundle)
+//                    .position(mPoiResult.getAllPoi().get(i).location));
+            
             markerList.add(new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromAssetWithDpi("Icon_mark"
-                            + markerSize + ".png")).extraInfo(bundle)
-                    .position(mPoiResult.getAllPoi().get(i).location));
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_other_location)).extraInfo(bundle)
+            .position(mPoiResult.getAllPoi().get(i).location));
             
         }
         return markerList;

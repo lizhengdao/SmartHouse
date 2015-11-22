@@ -514,4 +514,41 @@ public class PopViewHelper {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
 	}
+	
+	/**
+	 * 小区成交记录筛选条件选择
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showSelectTransactionHistoryFilterPopWindow(Context context, View anchorView,
+			final ArrayList<TextValueBean> filters, final OnConditionSelectListener onConditionSelectListener) {
+		View view = View.inflate(context, R.layout.popup_condition, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+	    ConditionAdapter adapter = new ConditionAdapter(context, filters);
+	    lstCondition.setAdapter(adapter);
+	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				popupWindow.dismiss();
+				if (onConditionSelectListener != null) {
+					onConditionSelectListener.onConditionSelect(filters.get(position));
+				}
+			}
+		});
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	}
 }

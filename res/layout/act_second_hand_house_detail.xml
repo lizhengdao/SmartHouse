@@ -616,6 +616,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
                 android:clickable="true" />
+            
+            <TextView
+                android:id="@+id/act_second_hand_house_detail_sand_table_display"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:text="沙盘楼盘查看"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -633,6 +645,7 @@
                 android:background="@color/color_e0e0e0" />
 
             <TextView
+                android:id="@+id/act_second_handhouse_transaction_history_tv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
