@@ -45,13 +45,15 @@
         <activity android:name="cn.com.zzwfang.activity.MessageActivity" />
         <activity android:name="cn.com.zzwfang.activity.MyConcernHouseResourcesActivity" />
         <activity android:name="cn.com.zzwfang.activity.MyProxyActivity" />
-        <activity android:name="cn.com.zzwfang.activity.SecondHandHouseActivity" />
+        <activity android:name="cn.com.zzwfang.activity.SecondHandHouseActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="cn.com.zzwfang.activity.NewHouseActivity" />
         <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactActivity" />
         <activity android:name="cn.com.zzwfang.activity.ForgetPwdActivity" />
         <activity android:name="cn.com.zzwfang.activity.CityListActivity" />
         <activity android:name="cn.com.zzwfang.activity.SearchHouseActivity" />
-        <activity android:name="cn.com.zzwfang.activity.RentHouseActivity" />
+        <activity android:name="cn.com.zzwfang.activity.RentHouseActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="cn.com.zzwfang.activity.SmartHouseProtocolActivity" />
         <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactRequirementActivity" />
         <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactResultActivity" />
@@ -62,7 +64,8 @@
         <activity android:name="cn.com.zzwfang.activity.RentHouseDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.PictureBrowseActivity" />
         <activity android:name="cn.com.zzwfang.activity.RecommendHouseDetailActivity" />
-        <activity android:name="cn.com.zzwfang.activity.NewHouseDetailActivity" />
+        <activity android:name="cn.com.zzwfang.activity.NewHouseDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name="cn.com.zzwfang.activity.NewsDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.SeeHouseRecordActivity" />
         <activity android:name="cn.com.zzwfang.activity.MyHouseListActivity" />
@@ -85,16 +88,24 @@
              android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name="cn.com.zzwfang.activity.NearbyDetailActivity" />
         
+        <!-- ===================================百度定位【start】=================================================================== -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
         
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="开发者 key" />
+            android:value="W154lf8ukfGTQ5CaTL5mV8CB" >
+        </meta-data>
+        <!-- ==================================百度定位【end】=================================================================== -->
         
         <!-- ===================================环信【start】=================================================================== -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="zzwfang#zzwim" />
         <!-- 声明sdk所需的service SDK核心功能-->
         <service android:name="com.easemob.chat.EMChatService" />
-<!-- =====================================环信【end】=================================================================== -->
+        <!-- =====================================环信【end】=================================================================== -->
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
