@@ -10,10 +10,15 @@ import cn.com.zzwfang.view.AutoDrawableTextView;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.overlayutil.PoiOverlay;
 import com.baidu.mapapi.search.core.CityInfo;
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
@@ -77,7 +82,8 @@ public class NearbyDetailActivity extends BaseActivity implements
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
 		mSuggestionSearch = SuggestionSearch.newInstance();
 		mSuggestionSearch.setOnGetSuggestionResultListener(this);
-		// LocationHelper.get
+		mBaiduMap = mapView.getMap();
+		
 	}
 
 	@Override
@@ -107,6 +113,11 @@ public class NearbyDetailActivity extends BaseActivity implements
 
 		}
 	}
+	
+	private void searchNearby() {
+//	    LatLng latlng = new LatLng(arg0, arg1)
+//	    mPoiSearch.searchNearby(new PoiNearbySearchOption().location(arg0))
+	}
 
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult result) {
@@ -120,7 +131,7 @@ public class NearbyDetailActivity extends BaseActivity implements
 			.show();
 		}
 	}
-
+	
 	@Override
 	public void onGetPoiResult(PoiResult result) {
 		// TODO Auto-generated method stub
@@ -132,12 +143,12 @@ public class NearbyDetailActivity extends BaseActivity implements
 			return;
 		}
 		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-//			mBaiduMap.clear();
-//			PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
-//			mBaiduMap.setOnMarkerClickListener(overlay);
-//			overlay.setData(result);
-//			overlay.addToMap();
-//			overlay.zoomToSpan();
+			mBaiduMap.clear();
+			PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);
+			mBaiduMap.setOnMarkerClickListener(overlay);
+			overlay.setData(result);
+			overlay.addToMap();
+			overlay.zoomToSpan();
 			return;
 		}
 		if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
@@ -153,6 +164,24 @@ public class NearbyDetailActivity extends BaseActivity implements
 					.show();
 		}
 	}
+	
+	private class MyPoiOverlay extends PoiOverlay {
+
+        public MyPoiOverlay(BaiduMap baiduMap) {
+            super(baiduMap);
+        }
+
+        @Override
+        public boolean onPoiClick(int index) {
+            super.onPoiClick(index);
+            PoiInfo poi = getPoiResult().getAllPoi().get(index);
+            // if (poi.hasCaterDetails) {
+                mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
+                        .poiUid(poi.uid));
+            // }
+            return true;
+        }
+    }
 
 	@Override
 	public void onGetSuggestionResult(SuggestionResult arg0) {
