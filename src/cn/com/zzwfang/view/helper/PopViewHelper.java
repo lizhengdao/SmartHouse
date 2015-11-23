@@ -551,4 +551,52 @@ public class PopViewHelper {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
 	}
+	
+	/**
+	 * 分享弹出框
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showSharePopupWindow(Context context, View anchorView) {
+		View view = View.inflate(context, R.layout.popwindow_share, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, DevUtils.getScreenTools(context).dip2px(140));
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+	    
+	    TextView tvShareByWeixin = (TextView) view.findViewById(R.id.popwindow_share_weixin);
+//	    TextView tvSecondHandHouse = (TextView) view.findViewById(R.id.popwindow_fee_hunter_recommend_second_hand_house);
+	    
+	    OnClickListener clickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.popwindow_share_weixin:
+					popupWindow.dismiss();
+//					if (listener != null) {
+//						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_NEW_HOUSE);
+//					}
+					break;
+//				case R.id.popwindow_fee_hunter_recommend_second_hand_house:
+//					popupWindow.dismiss();
+//					if (listener != null) {
+//						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_SECOND_HAND_HOUSE);
+//					}
+//					break;
+				}
+			}
+		};
+		
+		tvShareByWeixin.setOnClickListener(clickListener);
+//		tvSecondHandHouse.setOnClickListener(clickListener);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+        }
+	}
 }

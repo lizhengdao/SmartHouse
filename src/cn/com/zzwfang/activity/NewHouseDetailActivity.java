@@ -2,12 +2,14 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
-import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.NewHouseDetailBean;
 import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
@@ -15,17 +17,8 @@ import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.view.AutoDrawableTextView;
-import cn.com.zzwfang.view.PathImage;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
 
 public class NewHouseDetailActivity extends BaseActivity implements
 		OnClickListener, OnPageChangeListener {

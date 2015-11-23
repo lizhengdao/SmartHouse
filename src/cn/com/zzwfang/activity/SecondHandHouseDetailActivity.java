@@ -26,6 +26,7 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.PathImage;
+import cn.com.zzwfang.view.helper.PopViewHelper;
 
 import com.alibaba.fastjson.JSON;
 
@@ -42,11 +43,11 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private TextView tvBack, tvTitle, tvShare, tvDetailtitle;
 	private TextView tvTotalPrice, tvHouseType, tvSquare, tvLabel, tvUnitPrice;
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
-			tvDecoration, tvEstateName, tvAgentName, tvAgentPhone, tvAgentDial,
-			tvAgentMsg, tvPhotoIndex, tvSeeHouseRecord, tvAttention, tvNearbyDetail,
+			tvDecoration, tvEstateName, tvAgentName, tvAgentPhone,
+			tvPhotoIndex, tvSeeHouseRecord, tvAttention, tvNearbyDetail,
 			tvSandTableDisplay, tvTransactionHistory;
 
-	private AutoDrawableTextView tvDial, tvMsg;
+	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
 
 	private TextView tvMortgageCalculate;
 
@@ -88,13 +89,11 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		agentAvatar = (PathImage) findViewById(R.id.act_second_hand_house_detail_agent_avatar);
 		tvAgentName = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_name);
 		tvAgentPhone = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_phone);
-		tvAgentDial = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
-		tvAgentMsg = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
+		tvAgentDial = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
+		tvAgentMsg = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
 		tvPhotoIndex = (TextView) findViewById(R.id.act_second_house_detail_photo_index_tv);
 		tvSeeHouseRecord = (TextView) findViewById(R.id.act_second_handhouse_see_house_record_tv);
 		tvMortgageCalculate = (TextView) findViewById(R.id.act_second_hand_house_detail_calculator_tv);
-		tvDial = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
-		tvMsg = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
 		tvAttention = (TextView) findViewById(R.id.act_second_handhouse_attenton_tv);
 		tvNearbyDetail = (TextView) findViewById(R.id.act_second_handhouse_nearby_detail_tv);
 		tvSandTableDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_sand_table_display);
@@ -109,12 +108,12 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvSeeHouseRecord.setOnClickListener(this);
 		photoPager.setOnPageChangeListener(this);
 		tvMortgageCalculate.setOnClickListener(this);
-		tvDial.setOnClickListener(this);
-		tvMsg.setOnClickListener(this);
 		tvAttention.setOnClickListener(this);
 		tvNearbyDetail.setOnClickListener(this);
 		tvSandTableDisplay.setOnClickListener(this);
 		tvTransactionHistory.setOnClickListener(this);
+		tvAgentDial.setOnClickListener(this);
+		tvAgentMsg.setOnClickListener(this);
 	}
 
 	@Override
@@ -126,6 +125,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		case R.id.act_second_hand_house_detail_title: // 详情title
 			break;
 		case R.id.act_second_hand_house_detail_share: // 分享
+			PopViewHelper.showSharePopupWindow(this, getWindow().getDecorView());
 			break;
 		case R.id.act_second_handhouse_see_house_record_tv: // 看房记录
 
@@ -159,7 +159,12 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			}
 			break;
 		case R.id.act_second_hand_house_detail_agent_msg: // 给经纪人发消息
-
+			Jumper.newJumper()
+			.setAheadInAnimation(R.anim.activity_push_in_right)
+			.setAheadOutAnimation(R.anim.activity_alpha_out)
+			.setBackInAnimation(R.anim.activity_alpha_in)
+			.setBackOutAnimation(R.anim.activity_push_out_right)
+			.jump(this, ChatActivity.class);
 			break;
 
 		case R.id.act_second_handhouse_attenton_tv: // 关注

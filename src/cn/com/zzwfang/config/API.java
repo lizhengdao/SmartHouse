@@ -130,11 +130,14 @@ public class API {
     /**
      * 根据userid查看个人钱包
      */
-    public static final String GET_WALLET_INFO = "Bounty/Wallet";
+    public static final String GET_WALLET_INFO = "BountyHunter/Wallet";
     
     public static final String GET_FEE_HUNTER_MY_CUSTOMER_CONDITION = "Bounty/ClientState";
     
-    public static final String GET_FEE_HUNTER_MY_CUSTOMER = "Bounty/ClientState";
+    /**
+     * 我的客户-客户状态
+     */
+    public static final String GET_FEE_HUNTER_MY_CUSTOMER = "BountyHunter/ClientState";
     
     /**
      * 返回搜索楼盘搜索列表

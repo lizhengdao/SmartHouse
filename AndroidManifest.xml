@@ -90,6 +90,7 @@
         <activity android:name="cn.com.zzwfang.activity.NearbyDetailActivity" />
         <activity android:name="cn.com.zzwfang.activity.SandTableDisplayActivity" />
         <activity android:name="cn.com.zzwfang.activity.ResidentialTransactionHistoryActivity" />
+        <activity android:name="cn.com.zzwfang.activity.ChatActivity" />
         
         <!-- ===================================百度定位【start】=================================================================== -->
         <service
