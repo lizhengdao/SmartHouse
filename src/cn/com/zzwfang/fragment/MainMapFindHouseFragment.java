@@ -2,14 +2,19 @@ package cn.com.zzwfang.fragment;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.easemob.chat.core.ac;
-
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.MainActivity;
 import cn.com.zzwfang.bean.CityBean;
@@ -20,20 +25,19 @@ import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.util.ContentUtils;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
-import android.widget.CheckBox;
-import android.widget.Checkable;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.TextView;
+
+import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
+import com.baidu.mapapi.model.LatLng;
 
 public class MainMapFindHouseFragment extends BaseFragment implements OnClickListener, OnCheckedChangeListener {
 
@@ -48,6 +52,9 @@ public class MainMapFindHouseFragment extends BaseFragment implements OnClickLis
 	private String cityId;
 	
 	private ArrayList<MapFindHouseBean> areas = new ArrayList<MapFindHouseBean>();
+	
+	private Marker mMarkerA;
+    private Marker mMarkerB;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +84,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements OnClickLis
 		MapStatus status = new MapStatus.Builder().zoom(14).build();
 		MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory.newMapStatus(status);
 		baiduMap.setMapStatus(mapStatusUpdate);
+        initOverlay();
 		
 		cbxListAndMap.setOnCheckedChangeListener(this);
 		tvBack.setOnClickListener(this);
@@ -132,6 +140,27 @@ public class MainMapFindHouseFragment extends BaseFragment implements OnClickLis
 		});
 	}
 	
+	private void initOverlay() {
+	    
+	    LatLng llA = new LatLng(39.963175, 116.400244);
+        LatLng llB = new LatLng(39.942821, 116.369199);
+        
+        View view1 = View.inflate(getActivity(), R.layout.view_point, null);
+        Bitmap bmp1 = getViewBitmap(view1);
+        BitmapDescriptor bdA = BitmapDescriptorFactory.fromBitmap(bmp1);
+        
+        MarkerOptions ooA = new MarkerOptions().position(llA).icon(bdA)
+                .zIndex(9).draggable(true);
+        
+      //掉下动画
+        ooA.animateType(MarkerAnimateType.drop);
+        mMarkerA = (Marker) (baiduMap.addOverlay(ooA));
+        
+        MapStatusUpdate u = MapStatusUpdateFactory
+                .newLatLng(llA);
+        baiduMap.setMapStatus(u);
+	}
+	
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -149,7 +178,23 @@ public class MainMapFindHouseFragment extends BaseFragment implements OnClickLis
 		mapView.onDestroy();
 	}
 
-	
+	private Bitmap getViewBitmap(View addViewContent) {
+
+        addViewContent.setDrawingCacheEnabled(true);
+
+        addViewContent.measure(
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        addViewContent.layout(0, 0,
+                addViewContent.getMeasuredWidth(),
+                addViewContent.getMeasuredHeight());
+
+        addViewContent.buildDrawingCache();
+        Bitmap cacheBitmap = addViewContent.getDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+
+        return bitmap;
+    }
 
 	
 	
