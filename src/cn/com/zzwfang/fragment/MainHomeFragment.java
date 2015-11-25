@@ -59,12 +59,22 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	
 	private ArrayList<RecommendHouseSourceBean> recommendSources = new ArrayList<RecommendHouseSourceBean>();
 	
+	private OnCitySelectedListener onCitySelectedListener;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_main_home, null);
 		initView(view);
 		return view;
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+	    if (activity instanceof cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener) {
+	        onCitySelectedListener = (cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener) activity;
+	    }
+	    super.onAttach(activity);
 	}
 
 	
@@ -158,6 +168,9 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				ContentUtils.saveCityBeanData(getActivity(), cityBean);
 				tvLocation.setText(cityBean.getName());
 				adapter.setCityId(cityBean.getSiteId());
+				if (onCitySelectedListener != null) {
+				    onCitySelectedListener.onCitySelected(cityBean);
+				}
 				getRecommendHouseSourceList(cityBean.getSiteId());
 				break;
 			}
@@ -196,7 +209,9 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	}
 
 
-	
+	public interface OnCitySelectedListener {
+        void onCitySelected(CityBean cityBean);
+    }
 
 	
 }

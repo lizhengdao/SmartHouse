@@ -30,6 +30,7 @@ import cn.com.zzwfang.bean.SearchHouseItemBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.util.ContentUtils;
@@ -51,7 +52,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
 import com.baidu.mapapi.model.LatLng;
 
-public class MainMapFindHouseFragment extends BaseFragment implements OnClickListener, OnCheckedChangeListener {
+public class MainMapFindHouseFragment extends BaseFragment implements OnClickListener, OnCheckedChangeListener, OnCitySelectedListener {
 
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType,
 	tvHouseRoomsType, tvMore;
@@ -475,12 +476,10 @@ public class MainMapFindHouseFragment extends BaseFragment implements OnClickLis
 
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
-
 					}
 
 					@Override
 					public void rc3001(RequestEntity entity, Result result) {
-
 					}
 
 					@Override
@@ -514,23 +513,26 @@ public class MainMapFindHouseFragment extends BaseFragment implements OnClickLis
 
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
-
 			}
 
 			@Override
 			public void rc3001(RequestEntity entity, Result result) {
-
 			}
 
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
+			    areas.clear();
 				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
 						.parseArray(result.getData(), TextValueBean.class);
 				areas.addAll(temp);
 			}
 		});
 	}
+
+    @Override
+    public void onCitySelected(CityBean cityBean) {
+        getAreaList();
+    }
 
 	
 }

@@ -6,6 +6,8 @@ import com.baidu.mapapi.SDKInitializer;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.MainContentPagerAdapter;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.util.AppUtils;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.GuiderView;
@@ -15,7 +17,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class MainActivity extends BaseActivity implements OnPageChangeListener, OnClickListener {
+public class MainActivity extends BaseActivity implements OnPageChangeListener, OnClickListener, OnCitySelectedListener {
+    
 
 	private ViewPager contentPager;
 	
@@ -123,4 +126,9 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
 	public void backToHomeFragment() {
 		clickTab(0);
 	}
+
+    @Override
+    public void onCitySelected(CityBean cityBean) {
+        contentAdapter.onCitySelected(cityBean);
+    }
 }

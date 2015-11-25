@@ -1,8 +1,8 @@
 package cn.com.zzwfang.adapter;
 
-import java.util.ArrayList;
-
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.fragment.MainHomeFragment;
+import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.fragment.MainNewsFragment;
 import cn.com.zzwfang.fragment.MainMineFragment;
 import cn.com.zzwfang.fragment.MainMapFindHouseFragment;
@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-public class MainContentPagerAdapter extends FragmentPagerAdapter {
+public class MainContentPagerAdapter extends FragmentPagerAdapter implements OnCitySelectedListener {
 	
 	private MainHomeFragment homeFragment = null;
 	private MainMapFindHouseFragment mapFragment = null;
@@ -79,5 +79,12 @@ public class MainContentPagerAdapter extends FragmentPagerAdapter {
 	public CharSequence getPageTitle(int position) {
 		return "title";
 	}
+
+    @Override
+    public void onCitySelected(CityBean cityBean) {
+        if (mapFragment != null) {
+            mapFragment.onCitySelected(cityBean);
+        }
+    }
 
 }
