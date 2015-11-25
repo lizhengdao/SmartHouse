@@ -299,4 +299,8 @@ public interface Action {
 	 */
 	void getMapFindHouseData(int tradeType, String cityId, ResultHandlerCallback callback);
 	
+//	void getMapFindHouseEstate(TextValueBean area, TextValueBean totalPrice,
+//			TextValueBean house, TextValueBean type, TextValueBean label,
+//			TextValueBean status, String key, ResultHandlerCallback callback);
+	
 }

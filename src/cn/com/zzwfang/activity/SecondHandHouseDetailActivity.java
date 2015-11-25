@@ -128,15 +128,17 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			PopViewHelper.showSharePopupWindow(this, getWindow().getDecorView());
 			break;
 		case R.id.act_second_handhouse_see_house_record_tv: // 看房记录
-
-			Jumper.newJumper()
-					.setAheadInAnimation(R.anim.activity_push_in_right)
-					.setAheadOutAnimation(R.anim.activity_alpha_out)
-					.setBackInAnimation(R.anim.activity_alpha_in)
-					.setBackOutAnimation(R.anim.activity_push_out_right)
-					.putSerializable(SeeHouseRecordActivity.INTENT_RECORD,
-							secondHandHouseDetail.getInqFollowList())
-					.jump(this, SeeHouseRecordActivity.class);
+			if (secondHandHouseDetail != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putSerializable(SeeHouseRecordActivity.INTENT_RECORD,
+						secondHandHouseDetail.getInqFollowList())
+				.jump(this, SeeHouseRecordActivity.class);
+			}
+			
 			break;
 
 		case R.id.act_second_hand_house_detail_calculator_tv: // 房贷计算器

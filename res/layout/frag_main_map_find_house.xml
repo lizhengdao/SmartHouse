@@ -24,6 +24,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/frag_map_keywords_edt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
@@ -183,7 +184,8 @@
         <FrameLayout
             android:id="@+id/frag_map_find_house_map_flt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:visibility="gone" >
 
             <com.baidu.mapapi.map.MapView
                 android:id="@+id/bmapView"

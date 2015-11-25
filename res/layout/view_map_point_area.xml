@@ -7,13 +7,16 @@
     android:background="@drawable/ic_circle" >
     
     <TextView 
+        android:id="@+id/view_point_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="李政道"
-        android:textColor="#ffffff"/>
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
     <TextView 
+        android:id="@+id/view_point_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2"/>
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
 
 </LinearLayout>
