@@ -3,9 +3,13 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,10 +21,14 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.SecondHandHouseAdapter;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.MapFindHouseBean;
 import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.SearchHouseItemBean;
 import cn.com.zzwfang.bean.SecondHandHouseBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -29,22 +37,44 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
+import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
+import com.baidu.mapapi.model.LatLng;
 
 public class SecondHandHouseActivity extends BaseActivity implements
 		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener,
 		OnCheckedChangeListener, OnItemClickListener {
 
+    private int MODE_LIST = 1;
+	
+	private int MODE_MAP = 2;
+	
+	/**
+	 * 显示列表还是地图
+	 */
+	private int mode = MODE_LIST;
+	public static final String INTENT_KEYWORDS = "second_hand_house_key_words";
+	
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
 	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
 	private MapView mapView;
+	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
 	
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
@@ -133,15 +163,22 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private TextValueBean labelCondition;
 	private TextValueBean roomTypeCondition;
 	private String buildYear, floor, proNum, sort;
-	private int pageIndex = 0;
+	private int pageIndex = 1;
 	private int pageTotal = 0;
 	
+	private String key;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.act_second_hand_house);
 		cityId = getIntent().getStringExtra(HomeRecommendHouseAdapter.INTENT_CITY_ID);
+		key = getIntent().getStringExtra(INTENT_KEYWORDS);
+		if (TextUtils.isEmpty(cityId)) {
+			CityBean cityBean = ContentUtils.getCityBean(this);
+			cityId = cityBean.getSiteId();
+		}
+		
 		initView();
 		setListener();
 		initData();
@@ -165,6 +202,11 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		lltHouseType = (LinearLayout) findViewById(R.id.act_second_hand_house_type_llt);
 		lltMore = (LinearLayout) findViewById(R.id.act_second_hand_house_more_llt);
 		
+		if (!TextUtils.isEmpty(key)) {
+			edtKeyWords.setText(key);
+		}
+		
+		baiduMap = mapView.getMap();
 		mapView.showZoomControls(false);
 	}
 	
@@ -185,14 +227,29 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		lstSecondHandHouseView.setAdapter(adapter);
 		lstSecondHandHouseView.setOnItemClickListener(this);
 		
+		edtKeyWords.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
+					String keyWords = edtKeyWords.getText().toString();
+					getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+							labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+					return true;
+				}
+				return false;
+			}
+		});
+		
 		onTotalPriceSelectListener = new OnConditionSelectListener() {
 			
 			@Override
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				totalPriceCondition = txtValueBean;
 				tvTotalPrice.setText(txtValueBean.getText());
+				String keyWords = edtKeyWords.getText().toString();
 				getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
-						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, true);
+						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
 			}
 		};
 		
@@ -202,8 +259,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				roomTypeCondition = txtValueBean;
 				tvHouseType.setText(txtValueBean.getText());
+				String keyWords = edtKeyWords.getText().toString();
 				getSecondHandHouseList(cityId, areaCondition, "", squareCondition, labelCondition,
-						totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, true);
+						totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
 			}
 		};
 		
@@ -211,12 +269,55 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			
 			@Override
 			public void onConditionSelect(TextValueBean txtValueBean) {
-				areaCondition = txtValueBean;
-				tvArea.setText(txtValueBean.getText());
-				getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
-						labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, 10, true);
+				
+				if (areaCondition == null || areaCondition.getValue() == null || !areaCondition.getValue().equals(txtValueBean.getValue())) {
+					areaCondition = txtValueBean;
+					tvArea.setText(txtValueBean.getText());
+					
+					String keyWords = edtKeyWords.getText().toString();
+					getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+							labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+					
+					getMapFindHouseDataArea();
+				}
 			}
 		};
+		
+		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+
+				Bundle bundle = marker.getExtraInfo();
+				Object data = bundle.get("area");
+				if (data instanceof MapFindHouseBean) {
+					MapFindHouseBean area = (MapFindHouseBean) data;
+					if (area != null) {
+						// 点击了某小区域区域   加载该区域楼盘
+						TextValueBean textValueBeanArea = new TextValueBean();
+						textValueBeanArea.setValue(area.getId());
+						areaCondition = textValueBeanArea;
+						getMapFindHouseEstate();
+					}
+				} else if (data instanceof SearchHouseItemBean) {
+					//  点击某一楼盘，加载该楼盘  二手房列表页
+					SearchHouseItemBean estate = (SearchHouseItemBean) data;
+					key = estate.getName();
+					edtKeyWords.setText(key);
+					if (TextUtils.isEmpty(cityId)) {
+						CityBean cityBean = ContentUtils.getCityBean(SecondHandHouseActivity.this);
+						cityId = cityBean.getSiteId();
+					}
+					getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+							labelCondition, totalPriceCondition, roomTypeCondition,
+							buildYear, floor, proNum, sort, key, 10, true);
+					cbxListAndMap.setChecked(true);
+					
+				}
+
+				return true;
+			}
+		});
 	}
 	
 	private void initData() {
@@ -238,7 +339,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		getAreaList();
 		getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
 				labelCondition, totalPriceCondition, roomTypeCondition,
-				buildYear, floor, proNum, sort, 10, true);
+				buildYear, floor, proNum, sort, key, 10, true);
 	}
 
 	@Override
@@ -268,9 +369,10 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	
 	@Override
 	public void onHeaderRefresh(AbPullToRefreshView view) {  // 下拉刷新
+		String keyWords = edtKeyWords.getText().toString();
 		getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
 				labelCondition, totalPriceCondition, roomTypeCondition,
-				buildYear, floor, proNum, sort, 10, true);
+				buildYear, floor, proNum, sort,keyWords, 10, true);
 	}
 
 	@Override
@@ -280,16 +382,17 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			pullView.onFooterLoadFinish();
 			return;
 		}
+		String keyWords = edtKeyWords.getText().toString();
 		getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
 				labelCondition, totalPriceCondition, roomTypeCondition,
-				buildYear, floor, proNum, sort, 10, false);
+				buildYear, floor, proNum, sort, keyWords, 10, false);
 		
 	}
 	
 	private void getSecondHandHouseList(String cityId, TextValueBean areaCondition, String direction,
 			TextValueBean squareCondition, TextValueBean labelCondition, 
 			TextValueBean priceCondition, TextValueBean roomTypeCondition,
-			String buildYear, String floor, String proNum, String sort,
+			String buildYear, String floor, String proNum, String sort, String keyWords,
 			int pageSize, final boolean isRefresh) {
 		if (isRefresh) {
 			pageIndex = 0;
@@ -298,7 +401,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		actionImpl.getSecondHandHouseList(cityId, areaCondition, direction,
 				squareCondition, labelCondition, 
 				priceCondition, roomTypeCondition,
-				buildYear, floor, proNum, sort,
+				buildYear, floor, proNum, sort, keyWords,
 				pageSize, pageIndex, new ResultHandlerCallback() {
 					
 					@Override
@@ -313,8 +416,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
-						pageTotal = result.getTotal();
-						ToastUtils.SHORT.toast(SecondHandHouseActivity.this, "ssss");
+						int total = result.getTotal();
+						pageTotal = (int) Math.ceil(((double)total / (double)10));
+						
 						ArrayList<SecondHandHouseBean> temp = (ArrayList<SecondHandHouseBean>) JSON.parseArray(result.getData(), SecondHandHouseBean.class);
 						if (isRefresh) {
 							secondHandHouses.clear();
@@ -351,9 +455,11 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		switch (buttonView.getId()) {
 		case R.id.act_second_hand_house_list_map:
 			if (isChecked) {  // 列表
+				mode = MODE_LIST;
 				mapViewFlt.setVisibility(View.GONE);
 				pullView.setVisibility(View.VISIBLE);
 			} else {  // 地图
+				mode = MODE_MAP;
 				mapViewFlt.setVisibility(View.VISIBLE);
 				pullView.setVisibility(View.GONE);
 			}
@@ -444,8 +550,158 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		// activity 销毁时同时销毁地图控件
 		mapView.onDestroy();
 	}
+	
+	private ArrayList<MapFindHouseBean> mapAreas = new ArrayList<MapFindHouseBean>();
 
+	private ArrayList<SearchHouseItemBean> estates = new ArrayList<SearchHouseItemBean>();
+
+	/**
+	 * 获取某大区域的子区域列表， 获取后在地图上以圆形图标显示  已检查
+	 */
+	private void getMapFindHouseDataArea() {
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		if (cityBean == null) {
+			return;
+		}
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		//  默认传0，0代表出售，1代表出租
+		actionImpl.getMapFindHouseData(0, cityBean.getSiteId(),
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						mapAreas.clear();
+						ArrayList<MapFindHouseBean> temp = (ArrayList<MapFindHouseBean>) JSON
+								.parseArray(result.getData(),
+										MapFindHouseBean.class);
+						mapAreas.addAll(temp);
+						rendArea();
+					}
+				});
+	}
+	
+	/**
+	 * 在地图上以圆形展示子区域  已检查
+	 */
+	private void rendArea() {
+		if (mapAreas != null && mapAreas.size() > 0) {
+			baiduMap.clear();
+			View viewAreaPoint = View.inflate(this,
+					R.layout.view_map_point_area, null);
+			TextView tvEstate = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_title);
+			TextView tvNum = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_num);
+			for (MapFindHouseBean area : mapAreas) {
+				LatLng latLng = new LatLng(area.getLat(), area.getLng());
+				tvEstate.setText(area.getName());
+				tvNum.setText(area.getPrpCount());
+				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
+
+				BitmapDescriptor bdA = BitmapDescriptorFactory
+						.fromBitmap(bmpAreaPoint);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("area", area);
+				MarkerOptions ooA = new MarkerOptions().position(latLng)
+						.icon(bdA).zIndex(9).draggable(true).extraInfo(bundle);
+
+				ooA.animateType(MarkerAnimateType.drop);
+				baiduMap.addOverlay(ooA);
+			}
+			MapFindHouseBean area = mapAreas.get(0);
+			LatLng latLng = new LatLng(area.getLat(), area.getLng());
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+			baiduMap.setMapStatus(u);
+		}
+	}
+	
+	/**
+	 * 获取子区域楼盘数据(调用楼盘搜索列表接口)
+	 */
+	private void getMapFindHouseEstate() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, null,
+				null, labelCondition, null, null,
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						estates.clear();
+						ArrayList<SearchHouseItemBean> temp = (ArrayList<SearchHouseItemBean>) JSON
+								.parseArray(result.getData(),
+										SearchHouseItemBean.class);
+						estates.addAll(temp);
+						rendEstate();
+					}
+				});
+
+	}
+	
+	private void rendEstate() {
+		if (estates != null && estates.size() > 0) {
+			 baiduMap.clear();
+			View viewAreaPoint = View.inflate(this,
+					R.layout.view_map_point_estate, null);
+			TextView tvArea = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_estate_title);
+			TextView tvPrice = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_estate_price);
+			for (SearchHouseItemBean estate : estates) {
+				LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
+				tvArea.setText(estate.getName());
+				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
+				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
+
+				BitmapDescriptor bdA = BitmapDescriptorFactory
+						.fromBitmap(bmpAreaPoint);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("area", estate);
+				MarkerOptions ooA = new MarkerOptions().position(latLng)
+						.icon(bdA).zIndex(9).draggable(true).extraInfo(bundle);
+
+				ooA.animateType(MarkerAnimateType.drop);
+				baiduMap.addOverlay(ooA);
+			}
+			SearchHouseItemBean estate = estates.get(0);
+			LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+			baiduMap.setMapStatus(u);
+		}
+	}
 	
 	
-	
+	private Bitmap getViewBitmap(View addViewContent) {
+
+		addViewContent.setDrawingCacheEnabled(true);
+
+		addViewContent.measure(View.MeasureSpec.makeMeasureSpec(0,
+				View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
+				.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+		addViewContent.layout(0, 0, addViewContent.getMeasuredWidth(),
+				addViewContent.getMeasuredHeight());
+
+		addViewContent.buildDrawingCache();
+		Bitmap cacheBitmap = addViewContent.getDrawingCache();
+		Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+
+		return bitmap;
+	}
 }

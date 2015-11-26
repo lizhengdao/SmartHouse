@@ -2,15 +2,21 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-import com.baidu.mapapi.map.MapView;
-
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.RentHouseAdapter;
 import cn.com.zzwfang.bean.RentHouseBean;
 import cn.com.zzwfang.bean.Result;
-import cn.com.zzwfang.bean.SecondHandHouseBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -21,29 +27,14 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
-import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import com.alibaba.fastjson.JSON;
 
 public class RentHouseActivity extends BaseActivity implements OnClickListener,
-		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
+		OnHeaderRefreshListener, OnFooterLoadListener,
 		OnItemClickListener {
 
 	private TextView tvBack;
-	private CheckBox cbxListAndMap;
-	private MapView mapView;
-	private FrameLayout mapViewFlt;
 
 	private LinearLayout lltArea, lltRentPrice, lltHouseType, lltMore;
 	private TextView tvArea, tvRentPrice, tvHouseType;
@@ -148,11 +139,8 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_rent_house_back);
-		cbxListAndMap = (CheckBox) findViewById(R.id.act_rent_house_list_map);
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_rent_house);
 		lstRentHouseView = (ListView) findViewById(R.id.lst_rent_house);
-		mapView = (MapView) findViewById(R.id.act_rent_house_map);
-		mapViewFlt = (FrameLayout) findViewById(R.id.act_rent_house_map_flt);
 
 		lltArea = (LinearLayout) findViewById(R.id.act_rent_house_area_llt);
 		lltRentPrice = (LinearLayout) findViewById(R.id.act_rent_house_rent_price_llt);
@@ -163,10 +151,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 		tvRentPrice = (TextView) findViewById(R.id.act_rent_house_rent_price_tv);
 		tvHouseType = (TextView) findViewById(R.id.act_rent_house_type_tv);
 
-		mapView.showZoomControls(false);
-
 		tvBack.setOnClickListener(this);
-		cbxListAndMap.setOnCheckedChangeListener(this);
 		pullView.setPullRefreshEnable(true);
 		pullView.setLoadMoreEnable(true);
 		pullView.setOnHeaderRefreshListener(this);
@@ -274,21 +259,6 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 		}
 	}
 
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		switch (buttonView.getId()) {
-		case R.id.act_rent_house_list_map:
-			if (isChecked) { // 列表
-				mapViewFlt.setVisibility(View.GONE);
-				pullView.setVisibility(View.VISIBLE);
-			} else { // 地图
-				mapViewFlt.setVisibility(View.VISIBLE);
-				pullView.setVisibility(View.GONE);
-			}
-			break;
-		}
-
-	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -409,26 +379,6 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 				});
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		// activity 暂停时同时暂停地图控件
-		mapView.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		// activity 恢复时同时恢复地图控件
-		mapView.onResume();
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		// activity 销毁时同时销毁地图控件
-		mapView.onDestroy();
-	}
 
 	
 }

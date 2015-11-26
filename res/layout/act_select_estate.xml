@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/color_app_theme" >
+
+        <TextView
+            android:id="@+id/act_select_estate_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_back"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="@string/back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/act_select_estate_keywords_edt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/shape_search_round_white"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="4dp"
+            android:hint="输入小区名称或楼盘名称"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:inputType="text"
+            android:textColor="@color/color_a9a9a9"
+            android:textSize="14sp" />
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/fact_select_estate_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

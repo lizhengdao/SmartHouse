@@ -3,13 +3,24 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
+import com.baidu.mapapi.model.LatLng;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.NewHouseAdapter;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.MapFindHouseBean;
 import cn.com.zzwfang.bean.NewHouseBean;
 import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.SearchHouseItemBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -17,11 +28,12 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +42,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,9 +53,19 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
 		OnItemClickListener {
 
+    private int MODE_LIST = 1;
+	
+	private int MODE_MAP = 2;
+	
+	/**
+	 * 显示列表还是地图
+	 */
+	private int mode = MODE_LIST;
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
+	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
 	private MapView mapView;
+	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
 	
@@ -161,6 +184,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_new_house_back);
+		edtKeyWords = (EditText) findViewById(R.id.act_new_house_key_word_edt);
 		cbxListAndMap = (CheckBox) findViewById(R.id.act_new_house_list_map);
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_new_house);
 		lstNewHouseView = (ListView) findViewById(R.id.lst_new_house);
@@ -177,6 +201,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		tvHouseType = (TextView) findViewById(R.id.act_new_house_type_tv);
 		tvMore = (TextView) findViewById(R.id.act_new_house_more_tv);
 		
+		baiduMap = mapView.getMap();
 		adapter = new NewHouseAdapter(this, newHouses);
 		lstNewHouseView.setAdapter(adapter);
 		lstNewHouseView.setOnItemClickListener(this);
@@ -239,6 +264,23 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 						usageCondition, labelCondition,
 						statusCondition, keyWords, 10,
 						true);
+				
+				if (areaCondition == null || areaCondition.getValue() == null || !areaCondition.getValue().equals(txtValueBean.getValue())) {
+					areaCondition = txtValueBean;
+					tvArea.setText(txtValueBean.getText());
+					
+					String keyWords = edtKeyWords.getText().toString();
+					
+//					get
+//					getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
+//							labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+					
+					getMapFindHouseDataArea();
+				}
+				
+				
+				
+				
 			}
 		};
 	}
@@ -359,9 +401,11 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		switch (buttonView.getId()) {
 		case R.id.act_new_house_list_map:
 			if (isChecked) { // 列表
+				mode = MODE_LIST;
 				mapViewFlt.setVisibility(View.GONE);
 				pullView.setVisibility(View.VISIBLE);
 			} else { // 地图
+				mode = MODE_MAP;
 				mapViewFlt.setVisibility(View.VISIBLE);
 				pullView.setVisibility(View.GONE);
 			}
@@ -433,6 +477,160 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		super.onDestroy();
 		// activity 销毁时同时销毁地图控件
 		mapView.onDestroy();
+	}
+	
+	private ArrayList<MapFindHouseBean> mapAreas = new ArrayList<MapFindHouseBean>();
+
+	private ArrayList<SearchHouseItemBean> estates = new ArrayList<SearchHouseItemBean>();
+
+	/**
+	 * 获取某大区域的子区域列表， 获取后在地图上以圆形图标显示  已检查
+	 */
+	private void getMapFindHouseDataArea() {
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		if (cityBean == null) {
+			return;
+		}
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		//  默认传0，0代表出售，1代表出租
+		actionImpl.getMapFindHouseData(0, cityBean.getSiteId(),
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						mapAreas.clear();
+						ArrayList<MapFindHouseBean> temp = (ArrayList<MapFindHouseBean>) JSON
+								.parseArray(result.getData(),
+										MapFindHouseBean.class);
+						mapAreas.addAll(temp);
+						rendArea();
+					}
+				});
+	}
+	
+	/**
+	 * 在地图上以圆形展示子区域  已检查
+	 */
+	private void rendArea() {
+		if (mapAreas != null && mapAreas.size() > 0) {
+			baiduMap.clear();
+			View viewAreaPoint = View.inflate(this,
+					R.layout.view_map_point_area, null);
+			TextView tvEstate = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_title);
+			TextView tvNum = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_num);
+			for (MapFindHouseBean area : mapAreas) {
+				LatLng latLng = new LatLng(area.getLat(), area.getLng());
+				tvEstate.setText(area.getName());
+				tvNum.setText(area.getPrpCount());
+				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
+
+				BitmapDescriptor bdA = BitmapDescriptorFactory
+						.fromBitmap(bmpAreaPoint);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("area", area);
+				MarkerOptions ooA = new MarkerOptions().position(latLng)
+						.icon(bdA).zIndex(9).draggable(true).extraInfo(bundle);
+
+				ooA.animateType(MarkerAnimateType.drop);
+				baiduMap.addOverlay(ooA);
+			}
+			MapFindHouseBean area = mapAreas.get(0);
+			LatLng latLng = new LatLng(area.getLat(), area.getLng());
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+			baiduMap.setMapStatus(u);
+		}
+	}
+	
+	/**
+	 * 获取子区域楼盘数据(调用楼盘搜索列表接口)
+	 */
+	private void getMapFindHouseEstate() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, null,
+				null, labelCondition, null, null,
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						estates.clear();
+						ArrayList<SearchHouseItemBean> temp = (ArrayList<SearchHouseItemBean>) JSON
+								.parseArray(result.getData(),
+										SearchHouseItemBean.class);
+						estates.addAll(temp);
+						rendEstate();
+					}
+				});
+
+	}
+	
+	private void rendEstate() {
+		if (estates != null && estates.size() > 0) {
+			 baiduMap.clear();
+			View viewAreaPoint = View.inflate(this,
+					R.layout.view_map_point_estate, null);
+			TextView tvArea = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_estate_title);
+			TextView tvPrice = (TextView) viewAreaPoint
+					.findViewById(R.id.view_point_estate_price);
+			for (SearchHouseItemBean estate : estates) {
+				LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
+				tvArea.setText(estate.getName());
+				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
+				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
+
+				BitmapDescriptor bdA = BitmapDescriptorFactory
+						.fromBitmap(bmpAreaPoint);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("area", estate);
+				MarkerOptions ooA = new MarkerOptions().position(latLng)
+						.icon(bdA).zIndex(9).draggable(true).extraInfo(bundle);
+
+				ooA.animateType(MarkerAnimateType.drop);
+				baiduMap.addOverlay(ooA);
+			}
+			SearchHouseItemBean estate = estates.get(0);
+			LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+			baiduMap.setMapStatus(u);
+		}
+	}
+	
+	
+	private Bitmap getViewBitmap(View addViewContent) {
+
+		addViewContent.setDrawingCacheEnabled(true);
+
+		addViewContent.measure(View.MeasureSpec.makeMeasureSpec(0,
+				View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
+				.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+		addViewContent.layout(0, 0, addViewContent.getMeasuredWidth(),
+				addViewContent.getMeasuredHeight());
+
+		addViewContent.buildDrawingCache();
+		Bitmap cacheBitmap = addViewContent.getDrawingCache();
+		Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+
+		return bitmap;
 	}
 
 	

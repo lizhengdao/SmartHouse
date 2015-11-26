@@ -6,6 +6,8 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
+    <!-- 推荐二手房变成推荐客户 -->
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -27,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/act_fee_hunter_recommend_second_hand_house"
+            android:text="@string/act_fee_hunter_recommend_customer"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
@@ -41,45 +43,44 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            
             <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="4" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="4" >
 
-                    <RadioButton
-                        android:id="@+id/act_fee_hunter_recommend_second_hand_house_rb_buy"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:gravity="center"
-                        android:checked="true"
-                        android:button="@null"
-                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
-                        android:text="求购"
-                        android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
-                    
-                    <RadioButton
-                        android:id="@+id/act_fee_hunter_recommend_second_hand_house_rb_rent"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
-                        android:text="租求购"
-                        android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
-                </RadioGroup>
+                <RadioButton
+                    android:id="@+id/act_fee_hunter_recommend_second_hand_house_rb_buy"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="求购"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/act_fee_hunter_recommend_second_hand_house_rb_rent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_rect_color_app_theme_and_gray"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="租求购"
+                    android:textColor="@color/color_504f4f"
+                    android:textSize="15sp" />
+            </RadioGroup>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -100,6 +101,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/act_fee_hunter_recommend_customer_sys_contacts"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
@@ -121,59 +123,148 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="1dp"
+                android:inputType="phone"
+                android:maxLength="11"
                 android:background="@color/white"
-                android:hint="输入电话号码1"
+                android:hint="输入电话号码"
                 android:paddingLeft="10dp"
                 android:textColor="@color/color_b9b9b9"
                 android:textSize="15sp" />
 
-            <EditText
-                android:id="@+id/act_fee_hunter_recommend_second_hand_house_phone2"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="1dp"
+                android:gravity="center_vertical"
                 android:background="@color/white"
-                android:hint="输入电话号码2"
-                android:paddingLeft="10dp"
-                android:textColor="@color/color_b9b9b9"
-                android:textSize="15sp" />
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/act_fee_hunter_recommend_second_hand_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="意向总价"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+                
+                <LinearLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    
+                    <EditText 
+                        android:id="@+id/act_fee_hunter_recommend_customer_min_price"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/white"
+                        android:hint="意向总价最低范围"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
+                    
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="万  至"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                    
+                    <EditText 
+                        android:id="@+id/act_fee_hunter_recommend_customer_max_price"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:hint="意向总价最高范围"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
+                    
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="4dp"
+                        android:text="万 "
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/act_fee_hunter_recommend_second_hand_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="月供"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+                
+                <EditText 
+                        android:id="@+id/act_fee_hunter_recommend_customer_monthly_pay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/white"
+                        android:hint="月供"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"/>
+                
+                <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:text="元"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
+                
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/act_fee_hunter_recommend_second_hand_price"
+                android:id="@+id/act_fee_hunter_recommend_customer_estate_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:drawableRight="@drawable/ic_down_arrow"
+                android:drawableRight="@drawable/ic_right_arrow"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="意向总价"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/act_fee_hunter_recommend_second_hand_area"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableRight="@drawable/ic_down_arrow"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="意向区域"
+                android:text="请选择楼盘名称"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/act_fee_hunter_recommend_second_hand_mark"
+                android:id="@+id/act_fee_hunter_recommend_customer_mark"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginLeft="10dp"
@@ -187,7 +278,7 @@
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/act_fee_hunter_recommend_second_hand_house_commit"
+                android:id="@+id/act_fee_hunter_recommend_customer_commit"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="40dp"
@@ -202,10 +293,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:text="您推荐客户购买房成功，您可以获得购房百分之2的返现!"
                 android:textColor="@color/color_e9663a"

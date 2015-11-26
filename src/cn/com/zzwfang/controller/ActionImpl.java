@@ -533,7 +533,7 @@ public class ActionImpl implements Action {
 	public void getSecondHandHouseList(String cityId, TextValueBean areaCondition, String direction,
 			TextValueBean squareCondition, TextValueBean labelCondition, 
 			TextValueBean priceCondition, TextValueBean roomTypeCondition,
-			String buildYear, String floor, String proNum, String sort,
+			String buildYear, String floor, String proNum, String sort, String key,
 			int pageSize, int pageIndex, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
@@ -570,6 +570,9 @@ public class ActionImpl implements Action {
 		
 		if (!TextUtils.isEmpty(proNum)) {
 			requestParams.put("proNo", proNum);
+		}
+		if (!TextUtils.isEmpty(key)) {
+			requestParams.put("key", key);
 		}
 		requestParams.put("pageSize", pageSize + "");
 		requestParams.put("pageNum", pageIndex + "");
@@ -1318,6 +1321,139 @@ public class ActionImpl implements Action {
 
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
+	}
+
+	@Override
+	public void recommendFeeHunterCustomer(String estateId, String minPrice,
+			String maxPrice, String monthlPay, String contactName,
+			String phone, String remark, String userId, String citeId,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("estateId", estateId);
+        requestParams.put("maxPrice", maxPrice);
+        requestParams.put("minPrice", minPrice);
+        requestParams.put("monthlyPay", monthlPay);
+        requestParams.put("name", contactName);
+        requestParams.put("telNum", phone);
+        if (!TextUtils.isEmpty(remark)) {
+        	requestParams.put("reMark", remark);
+        }
+        requestParams.put("userId", userId);
+        requestParams.put("citeId", citeId);
+        
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		// opt.toHttpCacheAble = false;
+		opt.toMemCacheAble = false;
+		opt.isShowErrorMsg = false;
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.POST_FEE_HUNTER_RECOMMEND_CUSTOMER));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.POST);
+
+		ResultHandler handler = new ResultHandler();
+		handler.setResultHandlerCallback(callback);
+		requestEntity.setProcessCallback(handler);
+		requestEntity.setOpts(opt);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
+	}
+
+	@Override
+	public void getAutoCompleteEstate(String keywords, int top, int type,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("value", keywords);
+        if (top > 0) {
+        	requestParams.put("top", top + "");
+        }
+        if (type > 0) {
+        	requestParams.put("type", type + "");
+        }
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_ESTATE_AUTO_COMPLETE));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void recommendFeeHunterHouseSource(String estateId,
+			String rigdepole, String unit, String roomNo, String estateName,
+			String cityId, String floor, int trade, String contactName,
+			String telNum, String remark, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+		requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("estateId", estateId);
+        requestParams.put("ridgepole", rigdepole);
+        requestParams.put("unit", unit);
+        requestParams.put("roomNo", roomNo);
+        requestParams.put("estateName", estateName);
+        requestParams.put("siteId", cityId);
+        requestParams.put("floor", floor);
+        requestParams.put("trade", trade + "");
+        requestParams.put("name", contactName);
+        requestParams.put("telNum", telNum);
+        
+        if (!TextUtils.isEmpty(remark)) {
+        	requestParams.put("orientation", remark);
+        }
+        
+		Options opt = new Options();
+		opt.fromDiskCacheAble = false;
+		opt.fromHttpCacheAble = true;
+		opt.fromMemCacheAble = false;
+		opt.toDiskCacheAble = false;
+		// opt.toHttpCacheAble = false;
+		opt.toMemCacheAble = false;
+		opt.isShowErrorMsg = false;
+		RequestEntity requestEntity = new RequestEntity();
+		requestEntity.setUrl(getAbsoluteUrl(API.POST_FEE_HUNTER_RECOMMEND_HOUSE_SOURCE));
+		requestEntity.setRequestParams(requestParams);
+		requestEntity.setType(RequestEntity.GET);
+
+		ResultHandler handler = new ResultHandler();
+		handler.setResultHandlerCallback(callback);
+		requestEntity.setProcessCallback(handler);
+		requestEntity.setOpts(opt);
+
+		DataWorker worker = DataWorker.getWorker(context);
+		worker.load(requestEntity);
 	}
 
 	

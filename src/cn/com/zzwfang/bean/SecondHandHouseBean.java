@@ -35,7 +35,7 @@ public class SecondHandHouseBean extends BaseBean {
 	/**
 	 * 楼层
 	 */
-	private int Floor;
+	private String Floor;
 	
 	/**
 	 * 总楼层
@@ -130,11 +130,11 @@ public class SecondHandHouseBean extends BaseBean {
 		Square = square;
 	}
 
-	public int getFloor() {
+	public String getFloor() {
 		return Floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(String floor) {
 		Floor = floor;
 	}
 

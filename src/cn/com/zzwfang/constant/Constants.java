@@ -4,9 +4,9 @@ public class Constants {
 
 	public static final String SHARED_PREFERENCE_NAME = "SMART_SHARED_PREFERENCE";
 	
-	public static final String TOKEN = "csrftoken";
+//	public static final String TOKEN = "csrftoken";
 	
-	public static final String SESSION_ID = "sessionid";
+//	public static final String SESSION_ID = "sessionid";
 	
 	/**
      *   SharedPreference 中的字段  保存是否已经登录
@@ -36,6 +36,31 @@ public class Constants {
     public static final String CITY_NAME = "city_name";
     
     public static final String CITY_ID = "city_id";
+    
+    /**
+     * 是否绑定银行卡
+     */
+    public static final String IS_BIND_BANK_CARD = "is_bind_bank";
+    
+    /**
+     * 推荐客户数量
+     */
+    public static final String RECOMMEND_CLIENT_NUM = "recommend_client_num";
+    
+    /**
+     * 推荐房源数量
+     */
+    public static final String RECOMMEND_OWNERS = "recommend_owners";
+    
+    /**
+     * 猎人赏金
+     */
+    public static final String FEE_HUNTER_BOUNTY = "fee_hunter_bounty";
+    
+    /**
+     * 用户类型
+     */
+    public static final String USER_TYPE = "user_type";
 	
 	/**
      *   定位是否成功标识

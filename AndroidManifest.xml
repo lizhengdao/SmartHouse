@@ -91,6 +91,7 @@
         <activity android:name="cn.com.zzwfang.activity.SandTableDisplayActivity" />
         <activity android:name="cn.com.zzwfang.activity.ResidentialTransactionHistoryActivity" />
         <activity android:name="cn.com.zzwfang.activity.ChatActivity" />
+        <activity android:name="cn.com.zzwfang.activity.SelectEstateActivity" />
         
         <!-- ===================================百度定位【start】=================================================================== -->
         <service
@@ -123,6 +124,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     
     <uses-permission android:name="android.permission.CALL_PHONE"/>

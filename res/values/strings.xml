@@ -216,6 +216,9 @@
     <!-- 赏金猎人  推荐买房卖房    推荐二手房-->
     <string name="act_fee_hunter_recommend_second_hand_house">推荐二手房</string>
     
+    <!-- 赏金猎人  推荐客户-->
+    <string name="act_fee_hunter_recommend_customer">推荐客户</string>
+    
     <!-- 赏金猎人  购买进度  -->
     <string name="act_fee_hunter_buy_progress">购买进度</string>
     
@@ -231,8 +234,8 @@
     <!-- 赏金猎人  钱包  -->
     <string name="act_fee_hunter_wallet">钱包</string>
     
-    <!-- 赏金猎人  推荐业主  -->
-    <string name="act_fee_hunter_recommend_owner">推荐业主</string>
+    <!-- 赏金猎人  推荐业主  变成推荐房源  -->
+    <string name="act_fee_hunter_recommend_owner">推荐房源</string>
     
     <!-- 周边详情  -->
     <string name="act_nearby_detail">周边详情</string>

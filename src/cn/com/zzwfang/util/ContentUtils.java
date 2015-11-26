@@ -273,9 +273,49 @@ public final class ContentUtils {
 		Editor editor = sp.edit();
 		editor.putString(Constants.ZZWFANG_USER_NAME, userInfo.getUserName());
 		editor.putString(Constants.USER_ID, userInfo.getId());
-		editor.putBoolean(Constants.USER_SEX, userInfo.isSex());
 		editor.putString(Constants.USER_PHOTO, userInfo.getPhoto());
+		editor.putBoolean(Constants.IS_BIND_BANK_CARD, userInfo.isIsBindBank());
+		editor.putInt(Constants.RECOMMEND_CLIENT_NUM, userInfo.getRecommendClientsNum());
+		editor.putInt(Constants.RECOMMEND_OWNERS, userInfo.getRecommendOwners());
+		editor.putString(Constants.FEE_HUNTER_BOUNTY, userInfo.getBounty());
+		editor.putInt(Constants.USER_TYPE, userInfo.getUserType());
 		editor.commit();
+	}
+	
+	public static UserInfoBean getUserInfo(Context context) {
+		UserInfoBean userInfoBean = new UserInfoBean();
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		String userName = sp.getString(Constants.ZZWFANG_USER_NAME, "");
+		userInfoBean.setUserName(userName);
+		String userId = sp.getString(Constants.USER_ID, "");
+		userInfoBean.setId(userId);
+		String photo = sp.getString(Constants.USER_PHOTO, "");
+		userInfoBean.setPhoto(photo);
+		boolean isBindCard = sp.getBoolean(Constants.IS_BIND_BANK_CARD, false);
+		userInfoBean.setIsBindBank(isBindCard);
+		int recommendClientNum = sp.getInt(Constants.RECOMMEND_CLIENT_NUM, 0);
+		userInfoBean.setRecommendClientsNum(recommendClientNum);
+		int recommendOwners = sp.getInt(Constants.RECOMMEND_OWNERS, 0);
+		userInfoBean.setRecommendOwners(recommendOwners);
+		String bounty = sp.getString(Constants.FEE_HUNTER_BOUNTY, "");
+		userInfoBean.setBounty(bounty);
+		int userType = sp.getInt(Constants.USER_TYPE, 1);  //  用户类型    0经济人，1普通会员，2赏金猎人
+		userInfoBean.setUserType(userType);
+		return userInfoBean;
+	}
+	
+	/**
+	 * 获取登录用户的用户类型    0经济人，1普通会员，2赏金猎人
+	 * 
+	 *    默认为  1  普通会员
+	 * @param context
+	 * @return
+	 */
+	public static int getUserType(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		return sp.getInt(Constants.USER_TYPE, 1);  //  用户类型    0经济人，1普通会员，2赏金猎人
 	}
 	
 	/**
@@ -285,10 +325,15 @@ public final class ContentUtils {
 	public static void clearUserInfo(Context context) {
 		SharedPreferences sp = (SharedPreferences) context
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
-		sp.edit().remove(Constants.ZZWFANG_USER_NAME)
+		sp.edit()
+		.remove(Constants.ZZWFANG_USER_NAME)
 		.remove(Constants.USER_ID)
-		.remove(Constants.USER_SEX)
 		.remove(Constants.USER_PHOTO)
+		.remove(Constants.IS_BIND_BANK_CARD)
+		.remove(Constants.RECOMMEND_CLIENT_NUM)
+		.remove(Constants.RECOMMEND_OWNERS)
+		.remove(Constants.FEE_HUNTER_BOUNTY)
+		.remove(Constants.USER_TYPE)
 		.commit();
 	}
 	

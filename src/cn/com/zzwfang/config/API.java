@@ -163,5 +163,20 @@ public class API {
      * 获取地图找房默认显示状态
      */
     public static final String GET_MAP_FIND_HOUSE_DATA = "Map/GetArea";
+    
+    /**
+     * 赏金猎人  推荐客户
+     */
+    public static final String POST_FEE_HUNTER_RECOMMEND_CUSTOMER = "BountyHunter/RecommendClient";
+    
+    /**
+     *  首先通过“输入关键字获取楼盘列表”接口，返回楼盘的id和名称
+     */
+    public static final String GET_ESTATE_AUTO_COMPLETE = "Estate/AutoComplete";
+    
+    /**
+     *  赏金猎人    推荐房源
+     */
+    public static final String POST_FEE_HUNTER_RECOMMEND_HOUSE_SOURCE = "BountyHunter/RecommendPrp";
 
 }

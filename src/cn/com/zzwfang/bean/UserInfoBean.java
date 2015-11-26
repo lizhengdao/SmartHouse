@@ -1,41 +1,82 @@
 package cn.com.zzwfang.bean;
 
 /**
+ * 用户登录接口返回用户信息  Bean
  * @author MISS-万
  *
  */
 public class UserInfoBean extends BaseBean {
 
+	/**
+	 * 用户ID
+	 */
 	private String Id;
 	
+	/**
+	 * 用户名
+	 */
 	private String UserName;
 	
+	/**
+	 * 手机号
+	 */
 	private String Phone;
 	
-	private String Email;
+//	private String Email;
 	
-	private String Province;
+//	private String Province;
 	
-	private String City;
+//	private String City;
 	
+	/**
+	 * 头像
+	 */
 	private String Photo;
 	
-	private String Profession;
 	
+//	private String Profession;
+	
+	/**
+	 * 是否绑定银行卡
+	 */
 	private boolean IsBindBank;
 	
+	/**
+	 * 推荐客户数量
+	 */
 	private int RecommendClientsNum;
 	
+	/**
+	 * 推荐房源数量
+	 */
 	private int RecommendOwners;
 	
-	private int Bounty;
+	/**
+	 * 猎人赏金
+	 */
+	private String Bounty;
 	
-	private int serType;
+	/**
+	 * 用户类型    0经济人，1普通会员，2赏金猎人
+	 */
+	private int UserType;
 	
-	private boolean Sex;
+//	private int serType;
+	
+//	private boolean Sex;
+	
+	
 
 	public String getId() {
 		return Id;
+	}
+
+	public int getUserType() {
+		return UserType;
+	}
+
+	public void setUserType(int userType) {
+		UserType = userType;
 	}
 
 	public void setId(String id) {
@@ -58,29 +99,29 @@ public class UserInfoBean extends BaseBean {
 		Phone = phone;
 	}
 
-	public String getEmail() {
-		return Email;
-	}
-
-	public void setEmail(String email) {
-		Email = email;
-	}
-
-	public String getProvince() {
-		return Province;
-	}
-
-	public void setProvince(String province) {
-		Province = province;
-	}
-
-	public String getCity() {
-		return City;
-	}
-
-	public void setCity(String city) {
-		City = city;
-	}
+//	public String getEmail() {
+//		return Email;
+//	}
+//
+//	public void setEmail(String email) {
+//		Email = email;
+//	}
+//
+//	public String getProvince() {
+//		return Province;
+//	}
+//
+//	public void setProvince(String province) {
+//		Province = province;
+//	}
+//
+//	public String getCity() {
+//		return City;
+//	}
+//
+//	public void setCity(String city) {
+//		City = city;
+//	}
 
 	public String getPhoto() {
 		return Photo;
@@ -90,21 +131,21 @@ public class UserInfoBean extends BaseBean {
 		Photo = photo;
 	}
 
-	public String getProfession() {
-		return Profession;
-	}
+//	public String getProfession() {
+//		return Profession;
+//	}
+//
+//	public void setProfession(String profession) {
+//		Profession = profession;
+//	}
 
-	public void setProfession(String profession) {
-		Profession = profession;
-	}
-
-	public boolean isSex() {
-		return Sex;
-	}
-
-	public void setSex(boolean sex) {
-		Sex = sex;
-	}
+//	public boolean isSex() {
+//		return Sex;
+//	}
+//
+//	public void setSex(boolean sex) {
+//		Sex = sex;
+//	}
 
 	public boolean isIsBindBank() {
 		return IsBindBank;
@@ -130,21 +171,21 @@ public class UserInfoBean extends BaseBean {
 		RecommendOwners = recommendOwners;
 	}
 
-	public int getBounty() {
+	public String getBounty() {
 		return Bounty;
 	}
 
-	public void setBounty(int bounty) {
+	public void setBounty(String bounty) {
 		Bounty = bounty;
 	}
 
-	public int getSerType() {
-		return serType;
-	}
-
-	public void setSerType(int serType) {
-		this.serType = serType;
-	}
+//	public int getSerType() {
+//		return serType;
+//	}
+//
+//	public void setSerType(int serType) {
+//		this.serType = serType;
+//	}
 	
 	
 	

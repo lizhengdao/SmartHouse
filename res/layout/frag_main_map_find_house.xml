@@ -23,38 +23,14 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/frag_map_keywords_edt"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/shape_search_round_white"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="4dp"
-            android:hint="输入小区名称或楼盘名称"
-            android:textColor="@color/color_a9a9a9"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:text="地图找房"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-            <CheckBox
-                android:id="@+id/frag_map_list_map_cbx"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:button="@drawable/selector_map_list"
-                android:checked="true"
-                android:gravity="center" />
-        </LinearLayout>
     </FrameLayout>
 
     <LinearLayout
@@ -176,16 +152,11 @@
                 android:src="@drawable/ic_triangle" />
         </LinearLayout>
     </LinearLayout>
-
+    
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <FrameLayout
             android:id="@+id/frag_map_find_house_map_flt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" >
+            android:layout_height="match_parent" >
 
             <com.baidu.mapapi.map.MapView
                 android:id="@+id/bmapView"
@@ -247,20 +218,5 @@
                     app:top_width="20dp" />
             </LinearLayout>
         </FrameLayout>
-
-        <cn.com.zzwfang.pullview.AbPullToRefreshView
-            android:id="@+id/pull_frag_map_find_house"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <ListView
-                android:id="@+id/lst_frag_map_find_house"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="@color/color_cecece"
-                android:dividerHeight="1dp" />
-        </cn.com.zzwfang.pullview.AbPullToRefreshView>
-    </FrameLayout>
 
 </LinearLayout>

@@ -120,7 +120,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				
+				ToastUtils.SHORT.toast(RegisterActivity.this, "注册成功");
 			}
 		});
 	}

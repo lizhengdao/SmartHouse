@@ -16,10 +16,11 @@ public interface Action {
 	void fetchVerifyCode(String phoneNum, ResultHandlerCallback callback);
 	
 	/**
-	 * 注册接口
-	 * @param phoneNum  手机号
-	 * @param pwd       密码
-	 * @param captcha   验证码
+	 * 注册接口     已检查
+	 * @param phoneNum   手机号
+	 * @param pwd    密码
+	 * @param captcha  验证码
+	 * @param type  类型   （1：普通用户、2：赏金猎人）
 	 * @param callback
 	 */
 	void register(String phoneNum, String pwd, String captcha, int type, ResultHandlerCallback callback);
@@ -150,6 +151,7 @@ public interface Action {
 	 * @param floor  楼层  传1（低楼层）2（中楼层）3（高
 	 * @param proNum   房源编号
 	 * @param sort   排序  1（按价格升）、2（按价格降）、3(按面积升)、4（按面积降）
+	 * @param key    搜索关键字
 	 * @param pageSize  分页大小
 	 * @param pageIndex 页码
 	 * @param callback
@@ -157,7 +159,7 @@ public interface Action {
 	void getSecondHandHouseList(String cityId, TextValueBean areaCondition, String direction,
 			TextValueBean squareCondition, TextValueBean labelCondition, 
 			TextValueBean priceCondition, TextValueBean roomTypeCondition,
-			String buildYear, String floor, String proNum, String sort,
+			String buildYear, String floor, String proNum, String sort, String key,
 			int pageSize, int pageIndex, ResultHandlerCallback callback);
 	
 	/**
@@ -302,5 +304,51 @@ public interface Action {
 //	void getMapFindHouseEstate(TextValueBean area, TextValueBean totalPrice,
 //			TextValueBean house, TextValueBean type, TextValueBean label,
 //			TextValueBean status, String key, ResultHandlerCallback callback);
+	
+	/**
+	 * 赏金猎人推荐业主
+	 * @param estateId    楼盘ID
+	 * @param minPrice   最小价格
+	 * @param maxPrice  最大价格
+	 * @param monthlPay   月供
+	 * @param contactName  联系人名称
+	 * @param phone   联系人电话
+	 * @param remark  备注
+	 * @param userId  用户ID
+	 * @param citeId  站点ID
+	 * @param callback
+	 */
+	void recommendFeeHunterCustomer(String estateId, String minPrice, String maxPrice,
+			String monthlPay, String contactName, String phone,
+			String remark, String userId, String citeId, ResultHandlerCallback callback);
+	
+	/**
+	 * @param keywords  关键字
+	 * @param top  显示条数
+	 * @param type  来源类型
+	 * @param callback
+	 */
+	void getAutoCompleteEstate(String keywords, int top, int type, ResultHandlerCallback callback);
+	
+	/**
+	 * 赏金猎人  推荐房源
+	 * @param estateId   楼盘ID
+	 * @param rigdepole  楼栋号
+	 * @param unit   单元号
+	 * @param roomNo   房间号
+	 * @param eatateName  楼盘名称
+	 * @param cityId  站点ID
+	 * @param floor   楼层
+	 * @param trade   交易状态    “1”出租，”2”出售，”3”租售
+	 * @param contactName   客户名称
+	 * @param telNum   客户电话
+	 * @param remark   情况介绍
+	 * @param callback
+	 */
+	void recommendFeeHunterHouseSource(String estateId, String rigdepole,
+			String unit, String roomNo, String estateName,
+			String cityId, String floor, int trade,
+			String contactName, String telNum,
+			String remark, ResultHandlerCallback callback);
 	
 }

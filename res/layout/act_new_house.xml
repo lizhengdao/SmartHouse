@@ -24,6 +24,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/act_new_house_key_word_edt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"

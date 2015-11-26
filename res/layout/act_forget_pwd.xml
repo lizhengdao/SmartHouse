@@ -68,7 +68,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="59秒后重新发送"
+            android:text="获取验证码"
             android:textColor="@color/color_a2a2a2"
             android:textSize="15sp" />
     </LinearLayout>
