@@ -9,7 +9,9 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
 import com.baidu.mapapi.model.LatLng;
 
@@ -35,6 +37,7 @@ import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -158,7 +161,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	private TextValueBean usageCondition;
 	private TextValueBean statusCondition;
 	private String buildYear, floor, proNum, sort;
-	private int pageIndex = 0;
+	private int pageIndex = 1;
 	private int pageTotal = 0;
 	private String keyWords;
 
@@ -170,16 +173,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 				HomeRecommendHouseAdapter.INTENT_CITY_ID);
 		initView();
 		setListener();
-
-		getConditionList(SalePriceRange);
-		getConditionList(HouseType);
-		getConditionList(PrpUsage);
-		getConditionList(EstateLabel);
-		getConditionList(EstateStatus);
-		getConditionList(FloorRange);
-		getConditionList(RentPriceRange);
-		getConditionList(Direction);
-		// getConditionList(Sort);
+		initData();
 	}
 
 	private void initView() {
@@ -231,6 +225,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				totalPriceCondition = txtValueBean;
 				tvTotalPrice.setText(txtValueBean.getText());
+				keyWords = edtKeyWords.getText().toString();
 				getNewHouseList(cityId, areaCondition,
 						totalPriceCondition, roomTypeCondition,
 						usageCondition, labelCondition,
@@ -245,6 +240,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				roomTypeCondition = txtValueBean;
 				tvHouseType.setText(txtValueBean.getText());
+				keyWords = edtKeyWords.getText().toString();
 				getNewHouseList(cityId, areaCondition,
 						totalPriceCondition, roomTypeCondition,
 						usageCondition, labelCondition,
@@ -257,32 +253,78 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 			@Override
 			public void onConditionSelect(TextValueBean txtValueBean) {
-				areaCondition = txtValueBean;
-				tvArea.setText(txtValueBean.getText());
-				getNewHouseList(cityId, areaCondition,
-						totalPriceCondition, roomTypeCondition,
-						usageCondition, labelCondition,
-						statusCondition, keyWords, 10,
-						true);
-				
 				if (areaCondition == null || areaCondition.getValue() == null || !areaCondition.getValue().equals(txtValueBean.getValue())) {
 					areaCondition = txtValueBean;
 					tvArea.setText(txtValueBean.getText());
+					getNewHouseList(cityId, areaCondition,
+							totalPriceCondition, roomTypeCondition,
+							usageCondition, labelCondition,
+							statusCondition, keyWords, 10,
+							true);
 					
-					String keyWords = edtKeyWords.getText().toString();
-					
-//					get
-//					getSecondHandHouseList(cityId, areaCondition, "", squareCondition,
-//							labelCondition, totalPriceCondition, roomTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
-					
+				    keyWords = edtKeyWords.getText().toString();
 					getMapFindHouseDataArea();
 				}
-				
-				
-				
-				
 			}
 		};
+		
+		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+
+				Bundle bundle = marker.getExtraInfo();
+				Object data = bundle.get("area");
+				if (data instanceof MapFindHouseBean) {
+					MapFindHouseBean area = (MapFindHouseBean) data;
+					if (area != null) {
+						// 点击了某小区域区域   加载该区域楼盘
+						TextValueBean textValueBeanArea = new TextValueBean();
+						textValueBeanArea.setValue(area.getId());
+						areaCondition = textValueBeanArea;
+						getMapFindHouseEstate();
+					}
+				} else if (data instanceof SearchHouseItemBean) {
+					//  点击某一楼盘，加载该楼盘  二手房列表页
+					SearchHouseItemBean estate = (SearchHouseItemBean) data;
+					keyWords = estate.getName();
+					edtKeyWords.setText(keyWords);
+					if (TextUtils.isEmpty(cityId)) {
+						CityBean cityBean = ContentUtils.getCityBean(NewHouseActivity.this);
+						cityId = cityBean.getSiteId();
+					}
+					
+					getNewHouseList(cityId, areaCondition,
+							totalPriceCondition, roomTypeCondition,
+							usageCondition, labelCondition,
+							statusCondition, keyWords, 10,
+							true);
+					cbxListAndMap.setChecked(true);
+				}
+
+				return true;
+			}
+		});
+	}
+	
+	private void initData() {
+		moreType.add("排序");
+		moreType.add("朝向");
+		moreType.add("面积");
+		moreType.add("标签");
+		moreType.add("楼层");
+		moreType.add("房源编号");
+		getConditionList(SalePriceRange);
+		getConditionList(HouseType);
+		getConditionList(PrpUsage);
+		getConditionList(EstateLabel);
+		getConditionList(EstateStatus);
+		getConditionList(FloorRange);
+		getConditionList(RentPriceRange);
+		getConditionList(Direction);
+		getConditionList(Sort);
+		getAreaList();
+		
 	}
 	
 	@Override
@@ -350,7 +392,8 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
-						pageTotal = result.getTotal();
+						int total = result.getTotal();
+						pageTotal = (int) Math.ceil(((double)total / (double)10));
 						ArrayList<NewHouseBean> temp = (ArrayList<NewHouseBean>) JSON.parseArray(result.getData(), NewHouseBean.class);
 						if (isRefresh) {
 							newHouses.clear();
@@ -456,6 +499,29 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 						}
 					}
 				});
+	}
+	
+	private void getAreaList() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getAreaList(cityId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON.parseArray(result.getData(), TextValueBean.class);
+				areas.addAll(temp);
+			}
+		});
 	}
 
 	@Override

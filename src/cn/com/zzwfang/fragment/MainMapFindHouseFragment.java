@@ -24,12 +24,16 @@ import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.location.LocationService;
+import cn.com.zzwfang.location.LocationService.OnLocationListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -40,6 +44,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
 import com.baidu.mapapi.model.LatLng;
 
@@ -53,19 +58,16 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType,
 			tvHouseRoomsType, tvMore;
+	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
 	private MapView mapView;
 	private BaiduMap baiduMap;
-
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
-
 	private ArrayList<MapFindHouseBean> mapAreas = new ArrayList<MapFindHouseBean>();
-
 	private ArrayList<SearchHouseItemBean> estates = new ArrayList<SearchHouseItemBean>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-
 		View view = inflater.inflate(R.layout.frag_main_map_find_house, null);
 		initView(view);
 		setListener();
@@ -81,7 +83,6 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 
 	private void initView(View view) {
 		tvBack = (TextView) view.findViewById(R.id.frag_map_back);
-
 		tvArea = (TextView) view.findViewById(R.id.frag_map_find_house_area_tv);
 		tvTotalPrice = (TextView) view
 				.findViewById(R.id.frag_map_find_house_total_price_tv);
@@ -99,9 +100,12 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				.findViewById(R.id.frag_map_find_house_type_llt);
 		lltMore = (LinearLayout) view
 				.findViewById(R.id.frag_map_find_house_more_llt);
-
-		mapView = (MapView) view.findViewById(R.id.bmapView);
 		
+		autoTvLocate = (AutoDrawableTextView) view.findViewById(R.id.frag_map_find_house_locate);
+		autoTvSubway = (AutoDrawableTextView) view.findViewById(R.id.frag_map_find_house_subway);
+		autoTvNearby = (AutoDrawableTextView) view.findViewById(R.id.frag_map_find_house_nearby);
+		
+		mapView = (MapView) view.findViewById(R.id.bmapView);
 		mapView.showZoomControls(false);
 		baiduMap = mapView.getMap();
 		MapStatus status = new MapStatus.Builder().zoom(14).build();
@@ -111,12 +115,16 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	}
 
 	private void setListener() {
+		tvBack.setOnClickListener(this);
 		lltArea.setOnClickListener(this);
 		lltTotalPrice.setOnClickListener(this);
 		lltHouseType.setOnClickListener(this);
 		lltMore.setOnClickListener(this);
-
-		tvBack.setOnClickListener(this);
+		
+		autoTvLocate.setOnClickListener(this);
+		autoTvSubway.setOnClickListener(this);
+		autoTvNearby.setOnClickListener(this);
+		
 
 		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
@@ -192,19 +200,6 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				// getMapFindHouseEstate();
 			}
 		};
-//		edtKeyWords
-//				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//					@Override
-//					public boolean onEditorAction(TextView v, int actionId,
-//							KeyEvent event) {
-//						if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//							
-//							return true;
-//						}
-//						return false;
-//					}
-//
-//				});
 	}
 
 	@Override
@@ -229,7 +224,39 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			PopViewHelper.showSecondHandHouseMorePopWindow(getActivity(),
 					moreType, null, null, estateLabels, lltMore);
 			break;
+		case R.id.frag_map_find_house_locate:
+			locate();
+			break;
+		case R.id.frag_map_find_house_subway:
+			break;
+		case R.id.frag_map_find_house_nearby:
+			break;
 		}
+	}
+	
+	private void locate() {
+		final LocationService locationService = LocationService
+				.getInstance(getActivity());
+		locationService.startLocationService(new OnLocationListener() {
+
+			@Override
+			public void onLocationCompletion(BDLocation location) {
+				LatLng curLatLng = new LatLng(location.getLatitude(), location
+						.getLongitude());
+				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+				baiduMap.animateMapStatus(u);
+				locationService.stopLocationService();
+
+				// 构建Marker图标
+				BitmapDescriptor bitmap = BitmapDescriptorFactory
+						.fromResource(R.drawable.ic_cur_location);
+				// 构建MarkerOption，用于在地图上添加Marker
+				OverlayOptions option = new MarkerOptions().position(curLatLng)
+						.icon(bitmap);
+				// 在地图上添加Marker，并显示
+				baiduMap.addOverlay(option);
+			}
+		});
 	}
 
 	public static final String SalePriceRange = "SalePriceRange";

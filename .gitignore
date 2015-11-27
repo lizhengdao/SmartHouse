@@ -1,6 +1,5 @@
-/bin
+bin/*
 /gen
-bin
 .gitignore
 .classpath
 .settings/
