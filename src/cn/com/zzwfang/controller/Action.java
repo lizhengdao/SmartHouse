@@ -351,4 +351,11 @@ public interface Action {
 			String contactName, String telNum,
 			String remark, ResultHandlerCallback callback);
 	
+	/**
+	 * 获取置业经纪人详情，输入经纪人ID
+	 * @param agentId   经纪人ID
+	 * @param callback
+	 */
+	void getAgentInfoDetail(String agentId, ResultHandlerCallback callback);
+	
 }

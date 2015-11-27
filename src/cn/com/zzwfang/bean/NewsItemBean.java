@@ -22,7 +22,8 @@ public class NewsItemBean extends BaseBean {
 	/**
 	 * 图片集
 	 */
-	private ArrayList<String> Images;
+//	private ArrayList<String> Images;
+	private String Images;
 	
 	/**
 	 * 内容
@@ -50,16 +51,26 @@ public class NewsItemBean extends BaseBean {
 		Title = title;
 	}
 
-	public ArrayList<String> getImages() {
-		return Images;
-	}
-
-	public void setImages(ArrayList<String> images) {
-		Images = images;
-	}
+//	public ArrayList<String> getImages() {
+//		return Images;
+//	}
+//
+//	public void setImages(ArrayList<String> images) {
+//		Images = images;
+//	}
+	
+	
 
 	public String getContent() {
 		return Content;
+	}
+
+	public String getImages() {
+		return Images;
+	}
+
+	public void setImages(String images) {
+		Images = images;
 	}
 
 	public void setContent(String content) {

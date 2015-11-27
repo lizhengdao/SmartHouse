@@ -510,13 +510,45 @@
 
                     <TextView
                         android:id="@+id/act_second_hand_house_detail_estatename_tv"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:drawableRight="@drawable/ic_right_arrow"
                         android:gravity="center_vertical"
                         android:text="中华名园二期"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e0e0e0" />
+
+                <TextView
+                    android:id="@+id/act_second_hand_house_detail_inner_three_dimession_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:gravity="center_vertical"
+                    android:text="室内3D"
+                    android:textColor="@color/color_4ac20b"
+                    android:textSize="16sp" />
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e0e0e0" />
+
+                <TextView
+                    android:id="@+id/act_second_hand_house_detail_sand_table_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text="小区3D"
+                    android:textColor="@color/color_4ac20b"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <View
@@ -602,7 +634,8 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:text="位置及周边：[青羊]大石西路"
+                android:text="位置及周边"
+                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -616,18 +649,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
                 android:clickable="true" />
-            
-            <TextView
-                android:id="@+id/act_second_hand_house_detail_sand_table_display"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white"
-                android:gravity="center_vertical"
-                android:text="沙盘楼盘查看"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -827,6 +848,7 @@
         android:weightSum="2" >
 
         <LinearLayout
+            android:id="@+id/act_second_hand_house_detail_broker_info_llt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

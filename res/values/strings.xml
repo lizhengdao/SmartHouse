@@ -37,7 +37,7 @@
     <string name="act_main_exitapp">再次点击退出应用</string>
     <string name="act_main_home_page">首页</string>
     <string name="act_main_map_find_house">地图找房</string>
-    <string name="act_main_consultant">咨询</string>
+    <string name="act_main_consultant">咨讯</string>
     <string name="act_main_me">我</string>
     
     <!-- 首页 -->
@@ -64,7 +64,7 @@
     <string name="frag_map_nearby">周边</string>
     
     <!-- 咨询  -->
-    <string name="frag_consultation">咨询</string>
+    <string name="frag_consultation">咨讯</string>
     <string name="frag_consultation_headline">头条</string>
     <string name="frag_consultation_shopping_guide">导购</string>
     <string name="frag_consultation_q_and_a">问答</string>

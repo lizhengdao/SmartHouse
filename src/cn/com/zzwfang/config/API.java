@@ -132,7 +132,7 @@ public class API {
      */
     public static final String GET_WALLET_INFO = "BountyHunter/Wallet";
     
-    public static final String GET_FEE_HUNTER_MY_CUSTOMER_CONDITION = "Bounty/ClientState";
+    public static final String GET_FEE_HUNTER_MY_CUSTOMER_CONDITION = "BountyHunter/ClientState";
     
     /**
      * 我的客户-客户状态
@@ -178,5 +178,10 @@ public class API {
      *  赏金猎人    推荐房源
      */
     public static final String POST_FEE_HUNTER_RECOMMEND_HOUSE_SOURCE = "BountyHunter/RecommendPrp";
+    
+    /**
+     * 获取置业经纪人详情
+     */
+    public static final String GET_AGENT_INFO_DETAIL = "Employee/GetEmployeeDetail";
 
 }

@@ -92,6 +92,7 @@
         <activity android:name="cn.com.zzwfang.activity.ResidentialTransactionHistoryActivity" />
         <activity android:name="cn.com.zzwfang.activity.ChatActivity" />
         <activity android:name="cn.com.zzwfang.activity.SelectEstateActivity" />
+        <activity android:name="cn.com.zzwfang.activity.BrokerInfoActivity" />
         
         <!-- ===================================百度定位【start】=================================================================== -->
         <service

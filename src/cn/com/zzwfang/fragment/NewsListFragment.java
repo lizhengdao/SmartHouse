@@ -2,6 +2,10 @@ package cn.com.zzwfang.fragment;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.alibaba.fastjson.JSON;
 
 import cn.com.zzwfang.R;
@@ -112,13 +116,46 @@ public class NewsListFragment extends BaseFragment implements
 
 						@Override
 						public void rc0(RequestEntity entity, Result result) {
-							pageTotal = result.getTotal();
+							int total = result.getTotal();
+							pageTotal = (int) Math.ceil(((double)total / (double)10));
 							if (isRefresh) {
 								news.clear();
 							}
+							
+							
 							ArrayList<NewsItemBean> temp = (ArrayList<NewsItemBean>) JSON
 									.parseArray(result.getData(),
 											NewsItemBean.class);
+//							ArrayList<NewsItemBean> temp = new ArrayList<NewsItemBean>();
+//							try {
+//								JSONArray jArr = new JSONArray(result.getData());
+//								int length = jArr.length();
+//								for (int i = 0; i < length; i++) {
+//									JSONObject jObj = jArr.getJSONObject(i);
+//									String id = jObj.getString("Id");
+//									String title = jObj.getString("Title");
+//									String content = jObj.getString("Content");
+//									String addTime = jObj.getString("AddTime");
+//									ArrayList<String> images = new ArrayList<String>();
+//									JSONArray jArrImages = jObj.getJSONArray("Images");
+//									int imgsLen = jArrImages.length();
+//									for (int j = 0; j < imgsLen; j++) {
+//										images.add(jArrImages.getString(j));
+//									}
+//									
+//									NewsItemBean newsItemBean = new NewsItemBean();
+//									newsItemBean.setId(id);
+//									newsItemBean.setTitle(title);
+//									newsItemBean.setContent(content);
+//									newsItemBean.setAddTime(addTime);
+//									newsItemBean.setImages(images);
+//									temp.add(newsItemBean);
+//								}
+//								
+//							} catch (JSONException e) {
+//								e.printStackTrace();
+//							}
+							
 							news.addAll(temp);
 							adapter.notifyDataSetChanged();
 							pageIndex++;

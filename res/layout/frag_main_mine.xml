@@ -69,7 +69,6 @@
                     android:id="@+id/view_userinfo_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="李政道"
                     android:textColor="@color/color_8d8d8d"
                     android:textSize="16sp" />
 
@@ -87,7 +86,6 @@
                         android:drawableRight="@drawable/ic_right_arrow"
                         android:drawablePadding="4dp"
                         android:gravity="center"
-                        android:text="13882034203"
                         android:textColor="@color/color_8d8d8d"
                         android:textSize="15sp" />
                 </LinearLayout>

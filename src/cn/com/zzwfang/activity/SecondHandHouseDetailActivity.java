@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
@@ -45,7 +46,9 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
 			tvDecoration, tvEstateName, tvAgentName, tvAgentPhone,
 			tvPhotoIndex, tvSeeHouseRecord, tvAttention, tvNearbyDetail,
-			tvSandTableDisplay, tvTransactionHistory;
+			tvSandTableDisplay, tvTransactionHistory, tvInnerThreeDimensionDisplay;
+	
+	private LinearLayout lltBrokerInfo;
 
 	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
 
@@ -98,6 +101,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvNearbyDetail = (TextView) findViewById(R.id.act_second_handhouse_nearby_detail_tv);
 		tvSandTableDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_sand_table_display);
 		tvTransactionHistory = (TextView) findViewById(R.id.act_second_handhouse_transaction_history_tv);
+		lltBrokerInfo = (LinearLayout) findViewById(R.id.act_second_hand_house_detail_broker_info_llt);
+		tvInnerThreeDimensionDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_inner_three_dimession_display);
 
 		photoPager = (ViewPager) findViewById(R.id.act_second_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);
@@ -114,6 +119,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvTransactionHistory.setOnClickListener(this);
 		tvAgentDial.setOnClickListener(this);
 		tvAgentMsg.setOnClickListener(this);
+		lltBrokerInfo.setOnClickListener(this);
+		tvInnerThreeDimensionDisplay.setOnClickListener(this);
 	}
 
 	@Override
@@ -192,6 +199,16 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				.jump(this, SandTableDisplayActivity.class);
 			}
 			break;
+		case R.id.act_second_hand_house_detail_inner_three_dimession_display:
+			Jumper.newJumper()
+			.setAheadInAnimation(R.anim.activity_push_in_right)
+			.setAheadOutAnimation(R.anim.activity_alpha_out)
+			.setBackInAnimation(R.anim.activity_alpha_in)
+			.setBackOutAnimation(R.anim.activity_push_out_right)
+			.putString(SandTableDisplayActivity.INTENT_SAND_TABLE_DISPLAY_URL, secondHandHouseDetail.getPrp360())
+			.putString(SandTableDisplayActivity.INTENT_ESTATE_NAME, secondHandHouseDetail.getEstateName())
+			.jump(this, SandTableDisplayActivity.class);
+			break;
 			
 		case R.id.act_second_handhouse_transaction_history_tv:   //  小区成交记录
 			if (secondHandHouseDetail != null) {
@@ -203,6 +220,17 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				.putString(ResidentialTransactionHistoryActivity.INTENT_ESTATE_ID, secondHandHouseDetail.getEstateId())
 				.putString(ResidentialTransactionHistoryActivity.INTENT_ESTATE_NAME, secondHandHouseDetail.getEstateName())
 				.jump(this, ResidentialTransactionHistoryActivity.class);
+			}
+			break;
+		case R.id.act_second_hand_house_detail_broker_info_llt:  //  经纪人详情
+			if (secondHandHouseDetail != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putSerializable(BrokerInfoActivity.INTENT_AGENT_DATA, secondHandHouseDetail.getAgent())
+				.jump(this, BrokerInfoActivity.class);
 			}
 			break;
 		}
