@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -11,6 +12,11 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.AttentionBean;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
 
 /**
  * 我的关注列表Adapter
@@ -47,7 +53,7 @@ public class AttentionAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_my_attention, null);
 		}
@@ -58,9 +64,9 @@ public class AttentionAdapter extends BaseAdapter {
 		TextView tvEstateName = (TextView) convertView.findViewById(R.id.adapter_my_attention_estate_name);
 		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_attention_price);
 		TextView tvOnLineConsult = (TextView) convertView.findViewById(R.id.adapter_my_attention_online_consult);
-		TextView tvCollection = (TextView) convertView.findViewById(R.id.adapter_my_attention_collection);
+		TextView tvCancelCollection = (TextView) convertView.findViewById(R.id.adapter_my_attention_cancel_collection);
 		
-		AttentionBean attentionBean = attentions.get(position);
+		final AttentionBean attentionBean = attentions.get(position);
 		tvTitle.setText(attentionBean.getTitel());
 		tvEstateName.setText(attentionBean.getEstName());
 		tvPrice.setText(attentionBean.getPrice() + "万");
@@ -70,8 +76,39 @@ public class AttentionAdapter extends BaseAdapter {
 		tvDesc.setText(desc);
 		
 		ImageAction.displayImage(attentionBean.getPhoto(), img);
+		tvCancelCollection.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				deleteCollection(attentionBean, position);
+			}
+		});
 		
 		return convertView;
+	}
+	
+	private void deleteCollection(AttentionBean attentionBean, final int position) {
+		ActionImpl actionImpl = ActionImpl.newInstance(context);
+		String userId = ContentUtils.getUserId(context);
+		
+		actionImpl.deleteCollection(userId, attentionBean.getPropertyId(), new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				attentions.remove(position);
+				notifyDataSetChanged();
+			}
+		});
 	}
 
 }

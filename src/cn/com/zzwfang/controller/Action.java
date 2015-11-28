@@ -256,7 +256,7 @@ public interface Action {
 	 * 赏金猎人  我的客户列表
 	 * @param callback
 	 */
-	void getFeeHunterMyCustomerList(ResultHandlerCallback callback);
+	void getFeeHunterMyCustomerList(String userId, String status, int pageSize, int pageIndex, ResultHandlerCallback callback);
 //	void getMyHouseSourceInfoChanges();
 	
 	/**
@@ -357,5 +357,53 @@ public interface Action {
 	 * @param callback
 	 */
 	void getAgentInfoDetail(String agentId, ResultHandlerCallback callback);
+	
+	/**
+	 * 赏金猎人  活动规则
+	 * @param callback
+	 */
+	void getFeeHunterRule(ResultHandlerCallback callback);
+	
+	/**
+	 * 我的房源-赏金猎人（推荐房源列表）
+	 * @param userId   用户ID
+	 * @param pageSize   显示条数
+	 * @param pageIndex   当前页码
+	 * @param callback
+	 */
+	void getFeeHunterRecommendHouseSourceList(String userId, int pageSize,
+			int pageIndex, ResultHandlerCallback callback);
+	
+	/**
+	 * 房源的进度查看
+	 * @param houseSourceId
+	 * @param callback
+	 */
+	void getHouseSourceProgress(String houseSourceId, ResultHandlerCallback callback);
+	
+	/**
+	 * 删除我关注的房源
+	 * @param userId  用户ID
+	 * @param sourceId   房源ID
+	 * @param callback
+	 */
+	void deleteCollection(String userId, String sourceId, ResultHandlerCallback callback);
+	
+	/**
+	 * 我的需求条件
+	 * @param userId  用户ID
+	 * @param callback
+	 */
+	void getMyDemandInfo(String userId, ResultHandlerCallback callback);
+	
+	
+	/**
+	 * 发送消息
+	 * @param from
+	 * @param to
+	 * @param message
+	 * @param callback
+	 */
+	void sendMessage(String from, String to, String message, ResultHandlerCallback callback);
 	
 }

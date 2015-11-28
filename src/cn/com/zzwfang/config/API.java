@@ -110,12 +110,12 @@ public class API {
     /**
      * 我关注的房源
      */
-    public static final String GET_MY_ATTENTION_LIST = "Attention/Detail";
+    public static final String GET_MY_ATTENTION_LIST = "User/CollectionList";
     
     /**
      * 关注房源
      */
-    public static final String GET_ATTENTION_TO_PROPERTY = "User/Focus";
+    public static final String GET_ATTENTION_TO_PROPERTY = "User/CollectionAction";
     
     /**
      * 获取我的房屋列表
@@ -132,12 +132,16 @@ public class API {
      */
     public static final String GET_WALLET_INFO = "BountyHunter/Wallet";
     
-    public static final String GET_FEE_HUNTER_MY_CUSTOMER_CONDITION = "BountyHunter/ClientState";
-    
     /**
      * 我的客户-客户状态
      */
-    public static final String GET_FEE_HUNTER_MY_CUSTOMER = "BountyHunter/ClientState";
+    public static final String GET_FEE_HUNTER_MY_CUSTOMER_CONDITION = "BountyHunter/ClientState";
+    
+    /**
+     * 赏金猎人  我的客户
+     * 我推荐的客户列表
+     */
+    public static final String GET_FEE_HUNTER_MY_CUSTOMER = "BountyHunter/RecommendClient";
     
     /**
      * 返回搜索楼盘搜索列表
@@ -183,5 +187,32 @@ public class API {
      * 获取置业经纪人详情
      */
     public static final String GET_AGENT_INFO_DETAIL = "Employee/GetEmployeeDetail";
+    
+    /**
+     * 获取置业经纪人详情
+     */
+    public static final String GET_FEE_HUNTER_RULE = "Other/Activity";
+    
+    public static final String GET_FEE_HUNTER_RECOMMEND_HOUSE_SOURCE_LIST = "BountyHunter/RecommendPrpList";
+    
+    /**
+     * 房源的进度查看
+     */
+    public static final String GET_FEE_HUNTER_HOUSE_SOURCE_PROGRESS = "BountyHunter/PrpProgress";
+    
+    /**
+     * 删除我关注的房源
+     */
+    public static final String GET_DELETE_COLLECTION = "User/DelCollection";
+    
+    /**
+     * 我的需求条件
+     */
+    public static final String GET_MY_DEMAND_INFO = "User/MyDeMand";
+    
+    /**
+     * 发送消息
+     */
+    public static final String SEND_MESSAGE = "Message/Send";
 
 }

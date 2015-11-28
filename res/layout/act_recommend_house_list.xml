@@ -11,13 +11,13 @@
         android:background="@color/color_app_theme" >
 
         <TextView
-            android:id="@+id/act_fee_hunter_buy_progress_back"
+            android:id="@+id/act_recommend_house_list_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/ic_back"
             android:gravity="center_vertical"
             android:paddingLeft="8dp"
-            android:text="@string/back"
+            android:text="@string/act_message_back"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -26,10 +26,24 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/act_fee_hunter_buy_progress"
+            android:text="@string/act_recommend_house_list"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
+    
+    <cn.com.zzwfang.pullview.AbPullToRefreshView
+            android:id="@+id/pull_recommend_house_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/lst_act_recommend_house_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/color_cecece"
+                android:dividerHeight="1dp" />
+    </cn.com.zzwfang.pullview.AbPullToRefreshView>
     
 
 </LinearLayout>

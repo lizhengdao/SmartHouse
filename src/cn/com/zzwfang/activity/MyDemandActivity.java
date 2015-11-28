@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.util.Jumper;
 
 /**
  * 我的需求
@@ -46,6 +47,12 @@ public class MyDemandActivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.act_my_demand_flt:   //  我的需求
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, MyDemandInfoActivity.class);
 			break;
 		case R.id.act_my_demand_advised_house_resources_flt:  //  推荐房源
 			break;

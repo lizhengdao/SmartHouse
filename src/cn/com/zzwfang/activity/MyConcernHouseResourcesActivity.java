@@ -115,7 +115,8 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				pageNum = result.getTotal();
+				int total = result.getTotal();
+				pageNum = (int) Math.ceil(((double)total / (double)10));
 				ArrayList<AttentionBean> temp = (ArrayList<AttentionBean>) JSON.parseArray(result.getData(), AttentionBean.class);
 				if (isRefresh) {
 					attentions.clear();

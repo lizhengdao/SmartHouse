@@ -168,12 +168,20 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			}
 			break;
 		case R.id.act_second_hand_house_detail_agent_msg: // 给经纪人发消息
-			Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, ChatActivity.class);
+			if (secondHandHouseDetail != null) {
+				AgentBean agent = secondHandHouseDetail.getAgent();
+				if (agent != null) {
+					Jumper.newJumper()
+					.setAheadInAnimation(R.anim.activity_push_in_right)
+					.setAheadOutAnimation(R.anim.activity_alpha_out)
+					.setBackInAnimation(R.anim.activity_alpha_in)
+					.setBackOutAnimation(R.anim.activity_push_out_right)
+					.putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
+					.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
+					.jump(this, ChatActivity.class);
+				}
+			}
+			
 			break;
 
 		case R.id.act_second_handhouse_attenton_tv: // 关注
@@ -303,19 +311,16 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onPageSelected(int arg0) {
-		// TODO Auto-generated method stub
 		int photoTotalNum = photoAdapter.getCount();
 		String txt = photoTotalNum + "/" + (arg0 + 1);
 		tvPhotoIndex.setText(txt);

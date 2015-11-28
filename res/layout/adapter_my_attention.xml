@@ -77,7 +77,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/adapter_my_attention_collection"
+                android:id="@+id/adapter_my_attention_cancel_collection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

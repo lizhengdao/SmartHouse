@@ -6,6 +6,11 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 
+/**
+ * 我要买房
+ * @author lzd
+ *
+ */
 public class IWantBuyHouseActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack;

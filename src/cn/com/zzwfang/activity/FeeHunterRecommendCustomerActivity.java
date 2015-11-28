@@ -26,12 +26,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 /**
- * 赏金猎人 推荐客户(原为推荐二手房)
+ * 赏金猎人 推荐客户
  * 
  * @author MISS-万
  * 
  */
-public class FeeHunterRecommendSecondHandHouseActivity extends BaseActivity
+public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		implements OnClickListener, OnCheckedChangeListener {
 
 	private static final int REQUEST_CONTACT = 1;
@@ -178,7 +178,7 @@ public class FeeHunterRecommendSecondHandHouseActivity extends BaseActivity
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
-						ToastUtils.SHORT.toast(FeeHunterRecommendSecondHandHouseActivity.this, "推荐成功");
+						ToastUtils.SHORT.toast(FeeHunterRecommendCustomerActivity.this, "推荐成功");
 					}
 				});
 	}

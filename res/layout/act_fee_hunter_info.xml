@@ -182,8 +182,9 @@
                 android:orientation="horizontal"
                 android:weightSum="2" >
 
+                <!-- 推荐客户 -->
                 <LinearLayout
-                    android:id="@+id/act_fee_hunter_info_recommend_buy"
+                    android:id="@+id/act_fee_hunter_info_recommend_customer"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginBottom="10dp"
@@ -279,77 +280,6 @@
                 android:layout_height="1dp"
                 android:background="@color/color_e2e2e2" />
 
-            <!--  
-            <LinearLayout
-                android:id="@+id/act_fee_hunter_info_recommend_customer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_round_corner_color_9fc98a"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="推荐客户"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_fee_hunter_recommend_customer" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/color_e2e2e2" />
-
-                <LinearLayout
-                    android:id="@+id/act_fee_hunter_info_recommend_owner"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_round_corner_color_f4c960"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="推荐业主"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/ic_fee_hunter_recommend_owner" />
-                </LinearLayout>
-            </LinearLayout>   -->
 
             <TextView
                 android:id="@+id/act_fee_hunter_info_my_customer"
@@ -364,24 +294,6 @@
                 android:textColor="@color/color_4e4e4e"
                 android:textSize="15sp" />
 
-            <!--  
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_e2e2e2" />
-
-            <TextView
-                android:id="@+id/act_fee_hunter_info_buy_progress"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                android:drawableRight="@drawable/ic_right_arrow"
-                android:gravity="center_vertical"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="购买进度"
-                android:textColor="@color/color_4e4e4e"
-                android:textSize="15sp" />   -->
 
             <View
                 android:layout_width="match_parent"
@@ -389,7 +301,7 @@
                 android:background="@color/color_e2e2e2" />
 
             <TextView
-                android:id="@+id/act_fee_hunter_info_owner_progress"
+                android:id="@+id/act_fee_hunter_info_recommend_house_source_list"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/white"

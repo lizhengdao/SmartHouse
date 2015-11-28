@@ -447,29 +447,54 @@ public class PopViewHelper {
 	 */
 	public static void showSelectMyCustomerConditionPopWindow(Context context, View anchorView,
 			final ArrayList<FeeHunterMyCustomerConditionBean> conditions, final OnMyCustomerConditionSelectListener onMyCustomerConditionSelectListener) {
-		View view = View.inflate(context, R.layout.popup_condition, null);
-		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), DevUtils.getScreenTools(context).dip2px(200));
+		View view = View.inflate(context, R.layout.popup_fee_hunter_my_customer, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, DevUtils.getScreenTools(context).dip2px(200));
 		popupWindow.setFocusable(true);
 	    popupWindow.setOutsideTouchable(true);
 	    popupWindow.update();
 	    ColorDrawable dw = new ColorDrawable(0000000000);
 	    popupWindow.setBackgroundDrawable(dw);
 	    
-	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
-	    MyCustomerConditionAdapter adapter = new MyCustomerConditionAdapter(context, conditions);
-	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+	    ListView lstConditionLeft = (ListView) view.findViewById(R.id.popup_fee_hunter_my_customer_left_list);
+	    final ListView lstConditionRight = (ListView) view.findViewById(R.id.popup_fee_hunter_my_customer_right_list);
+	    
+	    MyCustomerConditionAdapter leftAdapter = new MyCustomerConditionAdapter(context, conditions);
+	    lstConditionLeft.setAdapter(leftAdapter);
+	    final ArrayList<FeeHunterMyCustomerConditionBean> rightListData = new ArrayList<FeeHunterMyCustomerConditionBean>();
+	    
+	    if (conditions.size() > 0) {
+	    	rightListData.addAll(conditions.get(0).getChildren());
+	    }
+	    final MyCustomerConditionAdapter rightAdapter = new MyCustomerConditionAdapter(context, rightListData);
+	    lstConditionRight.setAdapter(rightAdapter);
+	    
+	    lstConditionLeft.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				popupWindow.dismiss();
+				rightListData.clear();
+				rightListData.addAll(conditions.get(position).getChildren());
+				rightAdapter.notifyDataSetChanged();
 				if (onMyCustomerConditionSelectListener != null) {
 					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(conditions.get(position));
 				}
+				popupWindow.dismiss();
 			}
 		});
 	    
-	    lstCondition.setAdapter(adapter);
+	    lstConditionRight.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+//				FeeHunterMyCustomerConditionBean rightData = rightListData.get(position);
+//				if (onMyCustomerConditionSelectListener != null) {
+//					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(rightData);
+//				}
+			}
+		});
+	    
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {

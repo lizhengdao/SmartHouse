@@ -127,6 +127,9 @@
     <string name="act_my_demand_advised_house_resources">推荐房源</string>
     <string name="act_my_demand_my_buy_house">我的购房</string>
     
+    <!-- 我的需求 -->
+    <string name="act_my_demand_info">我的需求</string>
+    
     <!-- 房贷计算器   -->
     <string name="act_mortgage_calculator_back">返回</string>
     <string name="act_mortgage_calculator">房贷计算器</string>
@@ -186,6 +189,12 @@
     <!-- 推荐房源 -->
     <string name="act_recommend_house_detail">推荐房源</string>
     
+    <!-- 推荐房源 -->
+    <string name="act_recommend_house_list">推荐房源</string>
+    
+    <!-- 我的购房 -->
+    <string name="act_my_bought_houses">我的购房</string>
+    
     <!-- 资讯详情 -->
     <string name="act_news_detail">详情</string>
     
@@ -208,10 +217,10 @@
     <string name="act_fee_hunter_info">赏金猎人个人中心</string>
     
     <!-- 赏金猎人  我的客户  -->
-    <string name="act_fee_hunter_my_customer">我的客户</string>
+    <string name="act_fee_hunter_my_customer">推荐客户</string>
     
-    <!-- 赏金猎人  推荐买房卖房    推荐新房-->
-    <string name="act_fee_hunter_recommend_new_house">推荐新房</string>
+    <!-- 赏金猎人  推荐房源-->
+    <string name="act_fee_hunter_recommend_house_source">推荐房源</string>
     
     <!-- 赏金猎人  推荐买房卖房    推荐二手房-->
     <string name="act_fee_hunter_recommend_second_hand_house">推荐二手房</string>
@@ -219,11 +228,11 @@
     <!-- 赏金猎人  推荐客户-->
     <string name="act_fee_hunter_recommend_customer">推荐客户</string>
     
-    <!-- 赏金猎人  购买进度  -->
-    <string name="act_fee_hunter_buy_progress">购买进度</string>
+    <!-- 赏金猎人  进度详情  -->
+    <string name="act_fee_hunter_progress_detail">进度详情</string>
     
-    <!-- 赏金猎人  业主进度  -->
-    <string name="act_fee_hunter_owner_progress">业主进度</string>
+    <!-- 赏金猎人  推荐房源的房屋列表  -->
+    <string name="act_fee_hunter_recommend_house_source_list">房屋列表</string>
     
     <!-- 赏金猎人  赏金信息  -->
     <string name="act_fee_hunter_msg">赏金信息</string>
