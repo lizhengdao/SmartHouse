@@ -317,7 +317,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	 * 在地图上以圆形展示子区域  已检查
 	 */
 	private void rendArea() {
-		if (mapAreas != null && mapAreas.size() > 0) {
+		if (mapAreas != null && mapAreas.size() > 0 && baiduMap != null) {
 			baiduMap.clear();
 			View viewAreaPoint = View.inflate(getActivity(),
 					R.layout.view_map_point_area, null);
@@ -463,20 +463,26 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 
 	@Override
 	public void onResume() {
+        if (mapView != null) {
+            mapView.onResume();
+        }
 		super.onResume();
-		mapView.onResume();
 	}
 
 	@Override
 	public void onPause() {
+	    if (mapView != null) {
+	        mapView.onPause();
+	    }
 		super.onPause();
-		mapView.onPause();
 	}
 
 	@Override
 	public void onDestroy() {
+	    if (mapView != null) {
+	        mapView.onDestroy();
+	    }
 		super.onDestroy();
-		mapView.onDestroy();
 	}
 
 	private Bitmap getViewBitmap(View addViewContent) {

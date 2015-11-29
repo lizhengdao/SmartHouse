@@ -110,7 +110,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	        .jump(this, FeeHunterInfoActivity.class);
 			break;
 		case R.id.frag_mine_avatar:   //  修改头像
-			startPickPhotoFromAlbumWithCrop();
 			PopViewHelper.showUpdateAvatarPopupWindow(getActivity(), getView(), this);
 			break;
 		case R.id.frag_mine_msg_flt:  // 消息
@@ -192,6 +191,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	public void onPickedPhoto(File file, Bitmap bm) {
 		// TODO Auto-generated method stub
 		Log.e("--->", "onPickedPhoto bitmap = " + bm);
+		avatar.setImageBitmap(bm);
 	}
 
 	@Override
