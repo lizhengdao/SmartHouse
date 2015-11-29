@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:background="#55e0e0e0" >
+    
+    <TextView 
+        android:id="@+id/popup_update_avatar_from_camera_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="@string/popup_update_avatar_from_camera"
+        android:textSize="16sp"/>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_e2e2e2"/>
+    
+    <TextView 
+        android:id="@+id/popup_update_avatar_from_album_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="@string/popup_update_avatar_from_album"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+    
+    <TextView 
+        android:id="@+id/popup_exit_account_cancel_tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="@string/popup_update_avatar_cancel"
+        android:textSize="16sp"/>
+
+</LinearLayout>

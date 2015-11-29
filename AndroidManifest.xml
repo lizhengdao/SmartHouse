@@ -78,10 +78,10 @@
         <activity android:name="cn.com.zzwfang.activity.FeeHunterInfoActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeeHunterMyCustomerActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendNewHouseActivity" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendSecondHandHouseActivity"
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendCustomerActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterBuyProgressActivity" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterOwnerProgressActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterProgressDetailActivity" />
+        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendHouseSourceListActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeeHunterMsgActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeeHunterRuleActivity" />
         <activity android:name="cn.com.zzwfang.activity.FeeHunterWalletActivity" />
@@ -92,6 +92,8 @@
         <activity android:name="cn.com.zzwfang.activity.ResidentialTransactionHistoryActivity" />
         <activity android:name="cn.com.zzwfang.activity.ChatActivity" />
         <activity android:name="cn.com.zzwfang.activity.SelectEstateActivity" />
+        <activity android:name="cn.com.zzwfang.activity.BrokerInfoActivity" />
+        <activity android:name="cn.com.zzwfang.activity.MyDemandInfoActivity" />
         
         <!-- ===================================百度定位【start】=================================================================== -->
         <service
@@ -121,6 +123,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

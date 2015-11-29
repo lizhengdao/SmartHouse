@@ -4,6 +4,7 @@ import java.io.File;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
 import cn.com.zzwfang.activity.FeedbackActivity;
 import cn.com.zzwfang.activity.MainActivity;
@@ -23,18 +25,22 @@ import cn.com.zzwfang.activity.MyDemandActivity;
 import cn.com.zzwfang.activity.MyHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyProxyActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
+import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.PathImage;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnAvatarOptionsClickListener;
 
 /**
  * 我的
  * @author lzd
  *
  */
-public class MainMineFragment extends BasePickPhotoFragment implements OnClickListener {
+public class MainMineFragment extends BasePickPhotoFragment implements OnClickListener, OnAvatarOptionsClickListener {
 
 	
-	private TextView tvBack;
+	private TextView tvBack, tvUserName, tvPhone;
 
 	private PathImage avatar;
 	
@@ -53,6 +59,8 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 
 	private void initView(View view) {
 		tvBack = (TextView) view.findViewById(R.id.frag_mine_back);
+		tvUserName = (TextView) view.findViewById(R.id.view_userinfo_username);
+		tvPhone = (TextView) view.findViewById(R.id.frag_mine_phone);
 		avatar = (PathImage) view.findViewById(R.id.frag_mine_avatar);
 		msgFlt = (FrameLayout) view.findViewById(R.id.frag_mine_msg_flt);
 		attentionHouseSourceFlt = (FrameLayout) view.findViewById(R.id.frag_mine_attention_house_source_flt);
@@ -63,6 +71,15 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		feedbackFlt = (FrameLayout) view.findViewById(R.id.frag_mine_feedback_flt);
 		settingsFlt = (FrameLayout) view.findViewById(R.id.frag_mine_settings_flt);
 		imgFeeHunter = (ImageView) view.findViewById(R.id.frag_mine_fee_hunter);
+		
+		UserInfoBean userInfoBean = ContentUtils.getUserInfo(getActivity());
+		tvUserName.setText(userInfoBean.getUserName());
+		tvPhone.setText(userInfoBean.getPhone());
+		String avatarUrl = userInfoBean.getPhoto();
+		if (!TextUtils.isEmpty(avatarUrl)) {
+			ImageAction.displayAvatar(avatarUrl, avatar);
+		}
+		
 
 		tvBack.setOnClickListener(this);
 		avatar.setOnClickListener(this);
@@ -94,6 +111,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 			break;
 		case R.id.frag_mine_avatar:   //  修改头像
 			startPickPhotoFromAlbumWithCrop();
+			PopViewHelper.showUpdateAvatarPopupWindow(getActivity(), getView(), this);
 			break;
 		case R.id.frag_mine_msg_flt:  // 消息
 			Jumper.newJumper()
@@ -184,6 +202,35 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	@Override
 	public int getDisplayHeight() {
 		return 800;
+	}
+
+	@Override
+	public void onAvatarOptionClick(int action) {
+		// TODO Auto-generated method stub
+		switch (action) {
+        case OnAvatarOptionsClickListener.ACTION_CAMERA:   // 相机
+            
+            if (isCrop) {
+                startPickPhotoFromCameraWithCrop();
+            } else {
+                startPickPhotoFromCamara();
+            }
+            
+            break;
+        case OnAvatarOptionsClickListener.ACTION_ALBUM:   // 相册
+            if (isCrop) {
+                startPickPhotoFromAlbumWithCrop();
+            } else {
+                startPickPhotoFromAlbum();
+            }
+            break;
+        }
+	}
+	
+	@Override
+	public void onDestroy() {
+		cleanFile(cacheImageDir);
+		super.onDestroy();
 	}
 
 

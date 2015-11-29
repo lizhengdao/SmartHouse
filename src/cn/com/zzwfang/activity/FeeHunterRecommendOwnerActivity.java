@@ -1,7 +1,5 @@
 package cn.com.zzwfang.activity;
 
-import com.easemob.chat.core.ac;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,7 +14,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.IdNameBean;

@@ -1,5 +1,7 @@
 package cn.com.zzwfang.bean;
 
+import java.util.ArrayList;
+
 /**
  * 赏金猎人  我的客户Bean
  * @author lzd
@@ -11,7 +13,7 @@ public class FeeHunterMyCustomerConditionBean extends BaseBean {
 	
 	private String Name;
 	
-	private String ParentId;
+	private ArrayList<FeeHunterMyCustomerConditionBean> Children;
 
 	public String getId() {
 		return Id;
@@ -29,13 +31,15 @@ public class FeeHunterMyCustomerConditionBean extends BaseBean {
 		Name = name;
 	}
 
-	public String getParentId() {
-		return ParentId;
+	public ArrayList<FeeHunterMyCustomerConditionBean> getChildren() {
+		return Children;
 	}
 
-	public void setParentId(String parentId) {
-		ParentId = parentId;
+	public void setChildren(ArrayList<FeeHunterMyCustomerConditionBean> children) {
+		Children = children;
 	}
+
+	
 	
 	
 }

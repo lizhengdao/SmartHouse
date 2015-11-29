@@ -17,6 +17,7 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnMyCustomerConditionSelectListener;
 
@@ -41,12 +42,13 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 	
 	private FeeHunterMyCustomerAdapter adapter;
 	
+	private int pageIndex = 1;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		initView();
 		getMyCustomerCondition();
-		
 	}
 	
 	
@@ -91,24 +93,28 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 	}
 	
 	private void getMyCustomer() {
-//		ActionImpl actionImpl = ActionImpl.newInstance(this);
-//		actionImpl.getFeeHunterMyCustomerList(new ResultHandlerCallback() {
-//			
-//			@Override
-//			public void rc999(RequestEntity entity, Result result) {
-//				
-//			}
-//			
-//			@Override
-//			public void rc3001(RequestEntity entity, Result result) {
-//				
-//			}
-//			
-//			@Override
-//			public void rc0(RequestEntity entity, Result result) {
-//				
-//			}
-//		});
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		if (currentConditon != null) {
+			String userId = ContentUtils.getUserId(this);
+			actionImpl.getFeeHunterMyCustomerList(userId, currentConditon.getId(), 10, pageIndex, new ResultHandlerCallback() {
+				
+				@Override
+				public void rc999(RequestEntity entity, Result result) {
+					
+				}
+				
+				@Override
+				public void rc3001(RequestEntity entity, Result result) {
+					
+				}
+				
+				@Override
+				public void rc0(RequestEntity entity, Result result) {
+					
+				}
+			});
+		}
+		
 	}
 	
 	private void getMyCustomerCondition() {
@@ -129,10 +135,13 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 			public void rc0(RequestEntity entity, Result result) {
 				ArrayList<FeeHunterMyCustomerConditionBean> temp = (ArrayList<FeeHunterMyCustomerConditionBean>) JSON.parseArray(result.getData(), FeeHunterMyCustomerConditionBean.class);
 				conditions.addAll(temp);
-				if (conditions.size() > 0) {
-					currentConditon = conditions.get(0);
-					getMyCustomer();
-				}
+//				if (conditions.size() > 0) {
+//					currentConditon = conditions.get(0);
+//					if (currentConditon.getChildren().size() > 0) {
+//						currentConditon = currentConditon.getChildren().get(0);
+//					}
+//					getMyCustomer();
+//				}
 			}
 		});
 				

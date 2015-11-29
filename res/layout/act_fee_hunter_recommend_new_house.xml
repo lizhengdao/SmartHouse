@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/act_fee_hunter_recommend_new_house"
+            android:text="@string/act_fee_hunter_recommend_house_source"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>

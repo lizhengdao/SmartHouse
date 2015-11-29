@@ -3,6 +3,7 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -54,11 +55,16 @@ public class NewsItemAdapter extends BaseAdapter {
 		tvNewsName.setText(newsItemBean.getTitle());
 		
 		TextView tvTime = (TextView) convertView.findViewById(R.id.adapter_news_item_time);
-		String time = DateUtils.formatDate(newsItemBean.getAddTime());
-		tvTime.setText(time);
-		ArrayList<String> photos = newsItemBean.getImages();
-		if (photos != null && photos.size() > 0) {
-			ImageAction.displayImage(photos.get(0), imgNewsPhoto);
+//		String time = DateUtils.formatDate(newsItemBean.getAddTime());
+		tvTime.setText(newsItemBean.getAddTime());
+//		ArrayList<String> photos = newsItemBean.getImages();
+//		if (photos != null && photos.size() > 0) {
+//			ImageAction.displayImage(photos.get(0), imgNewsPhoto);
+//		}
+		
+		String url = newsItemBean.getImages();
+		if (!TextUtils.isEmpty(url)) {
+			ImageAction.displayImage(url, imgNewsPhoto);
 		}
 		
 		return convertView;

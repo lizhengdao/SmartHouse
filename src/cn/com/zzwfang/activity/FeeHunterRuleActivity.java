@@ -7,6 +7,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
 
 /**
  * 赏金猎人  活动规则页
@@ -23,6 +27,7 @@ public class FeeHunterRuleActivity extends BaseActivity implements OnClickListen
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		initView();
+		getRule();
 	}
 	
 	private void initView() {
@@ -33,8 +38,8 @@ public class FeeHunterRuleActivity extends BaseActivity implements OnClickListen
 		WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(false);
-        String url = "http://www.zzwfang.com:7894/Other/Activity?sign=1111&timestamp=2222";
-        webView.loadUrl(url);
+//        String url = "http://www.zzwfang.com:7894/Other/Activity?sign=1111&timestamp=2222";
+//        webView.loadUrl(url);
         
 		tvBack.setOnClickListener(this);
 	}
@@ -46,5 +51,24 @@ public class FeeHunterRuleActivity extends BaseActivity implements OnClickListen
 			finish();
 			break;
 		}
+	}
+	
+	private void getRule() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getFeeHunterRule(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				webView.loadData(result.getData(), "text/html", "utf-8");
+			}
+		});
 	}
 }

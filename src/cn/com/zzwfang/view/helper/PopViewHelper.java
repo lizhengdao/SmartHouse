@@ -3,6 +3,7 @@ package cn.com.zzwfang.view.helper;
 
 import java.util.ArrayList;
 
+import android.R.color;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -11,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -23,7 +25,6 @@ import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
 import cn.com.zzwfang.adapter.NewsMoreAdapter;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
 import cn.com.zzwfang.bean.IdTitleBean;
-import cn.com.zzwfang.bean.NewsItemBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 
@@ -447,29 +448,54 @@ public class PopViewHelper {
 	 */
 	public static void showSelectMyCustomerConditionPopWindow(Context context, View anchorView,
 			final ArrayList<FeeHunterMyCustomerConditionBean> conditions, final OnMyCustomerConditionSelectListener onMyCustomerConditionSelectListener) {
-		View view = View.inflate(context, R.layout.popup_condition, null);
-		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), DevUtils.getScreenTools(context).dip2px(200));
+		View view = View.inflate(context, R.layout.popup_fee_hunter_my_customer, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, DevUtils.getScreenTools(context).dip2px(200));
 		popupWindow.setFocusable(true);
 	    popupWindow.setOutsideTouchable(true);
 	    popupWindow.update();
 	    ColorDrawable dw = new ColorDrawable(0000000000);
 	    popupWindow.setBackgroundDrawable(dw);
 	    
-	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
-	    MyCustomerConditionAdapter adapter = new MyCustomerConditionAdapter(context, conditions);
-	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+	    ListView lstConditionLeft = (ListView) view.findViewById(R.id.popup_fee_hunter_my_customer_left_list);
+	    final ListView lstConditionRight = (ListView) view.findViewById(R.id.popup_fee_hunter_my_customer_right_list);
+	    
+	    MyCustomerConditionAdapter leftAdapter = new MyCustomerConditionAdapter(context, conditions);
+	    lstConditionLeft.setAdapter(leftAdapter);
+	    final ArrayList<FeeHunterMyCustomerConditionBean> rightListData = new ArrayList<FeeHunterMyCustomerConditionBean>();
+	    
+	    if (conditions.size() > 0) {
+	    	rightListData.addAll(conditions.get(0).getChildren());
+	    }
+	    final MyCustomerConditionAdapter rightAdapter = new MyCustomerConditionAdapter(context, rightListData);
+	    lstConditionRight.setAdapter(rightAdapter);
+	    
+	    lstConditionLeft.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				popupWindow.dismiss();
+				rightListData.clear();
+				rightListData.addAll(conditions.get(position).getChildren());
+				rightAdapter.notifyDataSetChanged();
 				if (onMyCustomerConditionSelectListener != null) {
 					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(conditions.get(position));
 				}
+				popupWindow.dismiss();
 			}
 		});
 	    
-	    lstCondition.setAdapter(adapter);
+	    lstConditionRight.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+//				FeeHunterMyCustomerConditionBean rightData = rightListData.get(position);
+//				if (onMyCustomerConditionSelectListener != null) {
+//					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(rightData);
+//				}
+			}
+		});
+	    
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
@@ -599,4 +625,58 @@ public class PopViewHelper {
             popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
         }
 	}
+	
+	//==========================更换头像【start】===========================================
+    public interface OnAvatarOptionsClickListener {
+        public static final int ACTION_CAMERA = 0;
+        public static final int ACTION_ALBUM = 1;
+        
+        /**
+         * 选择从相机或者系统相册更改头像
+         * @param action
+         */
+        void onAvatarOptionClick(int action);
+    }
+    public static void showUpdateAvatarPopupWindow(Context context, View anchor, final OnAvatarOptionsClickListener listener) {
+        
+        final PopupWindow avatarPopupWindow = new PopupWindow(context);
+        LinearLayout contentView = (LinearLayout) View.inflate(context, R.layout.popup_updateavatar, null);
+        avatarPopupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        avatarPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        
+        avatarPopupWindow.setContentView(contentView);
+        avatarPopupWindow.setFocusable(true);
+        avatarPopupWindow.setOutsideTouchable(true);
+        
+        ColorDrawable dw = new ColorDrawable(color.transparent);
+//        avatarPopupWindow.setBackgroundDrawable(dw);
+        avatarPopupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+        
+        OnClickListener clickListener = new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    switch (v.getId()) {
+                    case R.id.popup_update_avatar_from_camera_tv:
+                        listener.onAvatarOptionClick(OnAvatarOptionsClickListener.ACTION_CAMERA);
+                        break;
+                    case R.id.popup_update_avatar_from_album_tv:
+                        listener.onAvatarOptionClick(OnAvatarOptionsClickListener.ACTION_ALBUM);
+                        break;
+                    }
+                }
+                avatarPopupWindow.dismiss();
+            }
+        };
+        
+        TextView tvCamera = (TextView) contentView.findViewById(R.id.popup_update_avatar_from_camera_tv);
+        TextView tvAlbum = (TextView) contentView.findViewById(R.id.popup_update_avatar_from_album_tv);
+        TextView tvCancel = (TextView) contentView.findViewById(R.id.popup_exit_account_cancel_tv);
+        tvCamera.setOnClickListener(clickListener);
+        tvAlbum.setOnClickListener(clickListener);
+        tvCancel.setOnClickListener(clickListener);
+        avatarPopupWindow.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
+    }
+//==========================更换头像【end】===========================================
 }

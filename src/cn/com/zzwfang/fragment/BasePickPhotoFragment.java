@@ -358,7 +358,7 @@ public abstract class BasePickPhotoFragment extends BaseFragment {
 	 * @date 2014年9月30日
 	 * @param dir
 	 */
-	private void cleanFile(File dir) {
+	protected void cleanFile(File dir) {
 		if (dir == null)
 			return;
 		if (!dir.exists())
