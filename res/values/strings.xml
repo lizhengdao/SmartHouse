@@ -285,4 +285,8 @@
         <item>30年  (360期)</item>
     </string-array>
     
+    <!-- 小区详情 -->
+    <string name="act_court_detail">小区详情</string>
+    
+    
 </resources>

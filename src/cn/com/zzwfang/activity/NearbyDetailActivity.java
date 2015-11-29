@@ -1,5 +1,6 @@
 package cn.com.zzwfang.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +44,10 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
 public class NearbyDetailActivity extends BaseActivity implements
 		OnClickListener, OnGetPoiSearchResultListener,
 		OnGetSuggestionResultListener {
+	
+	public static final String INTENT_LAT = "intent_lat";
+	
+	public static final String INTENT_LNG = "intent_lng";
 
 	private TextView tvBack;
 
@@ -54,12 +59,19 @@ public class NearbyDetailActivity extends BaseActivity implements
 	private PoiSearch mPoiSearch = null;
 	private SuggestionSearch mSuggestionSearch = null;
 	private BaiduMap mBaiduMap = null;
+	
+	private long lat;
+	
+	private long lng;
 
 	private LatLng curLatLng;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		Intent intent = getIntent();
+		lat = intent.getLongExtra(INTENT_LAT, 0);
+		lng = intent.getLongExtra(INTENT_LNG, 0);
 		initView();
 	}
 
@@ -94,40 +106,45 @@ public class NearbyDetailActivity extends BaseActivity implements
 		mSuggestionSearch = SuggestionSearch.newInstance();
 		mSuggestionSearch.setOnGetSuggestionResultListener(this);
 		mBaiduMap = mapView.getMap();
+		
+		curLatLng = new LatLng(lat, lng);
+		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+		mBaiduMap.animateMapStatus(u);
 
-		// BDLocation location = new BDLocation();
-		// location.setLatitude(30.67 / 1000000);
-		// location.setLongitude(104.06 / 1000000);
-		// LatLng ll = new LatLng(location.getLatitude(),
-		// location.getLongitude());
-		// MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
-		// mBaiduMap.animateMapStatus(u);
+		// 构建Marker图标
+		BitmapDescriptor bitmap = BitmapDescriptorFactory
+				.fromResource(R.drawable.ic_cur_location);
+		// 构建MarkerOption，用于在地图上添加Marker
+		OverlayOptions option = new MarkerOptions().position(curLatLng)
+				.icon(bitmap);
+		// 在地图上添加Marker，并显示
+		mBaiduMap.addOverlay(option);
 
-		final LocationService locationService = LocationService
-				.getInstance(this);
-		locationService.startLocationService(new OnLocationListener() {
-
-			@Override
-			public void onLocationCompletion(BDLocation location) {
-				curLatLng = new LatLng(location.getLatitude(), location
-						.getLongitude());
-				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
-				mBaiduMap.animateMapStatus(u);
-				locationService.stopLocationService();
-
-				// OverlayOptions curOption = new
-				// mBaiduMap.addOverlay(option)
-
-				// 构建Marker图标
-				BitmapDescriptor bitmap = BitmapDescriptorFactory
-						.fromResource(R.drawable.ic_cur_location);
-				// 构建MarkerOption，用于在地图上添加Marker
-				OverlayOptions option = new MarkerOptions().position(curLatLng)
-						.icon(bitmap);
-				// 在地图上添加Marker，并显示
-				mBaiduMap.addOverlay(option);
-			}
-		});
+//		final LocationService locationService = LocationService
+//				.getInstance(this);
+//		locationService.startLocationService(new OnLocationListener() {
+//
+//			@Override
+//			public void onLocationCompletion(BDLocation location) {
+//				curLatLng = new LatLng(location.getLatitude(), location
+//						.getLongitude());
+//				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+//				mBaiduMap.animateMapStatus(u);
+//				locationService.stopLocationService();
+//
+//				// OverlayOptions curOption = new
+//				// mBaiduMap.addOverlay(option)
+//
+//				// 构建Marker图标
+//				BitmapDescriptor bitmap = BitmapDescriptorFactory
+//						.fromResource(R.drawable.ic_cur_location);
+//				// 构建MarkerOption，用于在地图上添加Marker
+//				OverlayOptions option = new MarkerOptions().position(curLatLng)
+//						.icon(bitmap);
+//				// 在地图上添加Marker，并显示
+//				mBaiduMap.addOverlay(option);
+//			}
+//		});
 
 	}
 

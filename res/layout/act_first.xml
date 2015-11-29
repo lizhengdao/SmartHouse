@@ -36,6 +36,7 @@
             android:id="@+id/act_first_up_scroll_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:drawableTop="@drawable/ic_up_scroll"
             android:gravity="center"
             android:text="@string/scroll_up"

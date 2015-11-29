@@ -151,6 +151,8 @@
             android:screenOrientation="portrait" />
         <activity android:name="cn.com.zzwfang.activity.MyDemandInfoActivity"
             android:screenOrientation="portrait" />
+        <activity android:name="cn.com.zzwfang.activity.CourtDetailActivity"
+            android:screenOrientation="portrait" />
         
         <!-- ===================================百度定位【start】=================================================================== -->
         <service

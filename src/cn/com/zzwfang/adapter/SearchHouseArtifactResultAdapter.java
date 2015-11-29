@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.SearchHouseArtifactResultBean;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -54,8 +55,8 @@ public class SearchHouseArtifactResultAdapter extends BaseAdapter{
 		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_name);
 		TextView tvPhone = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_phone);
 		TextView tvAccessQuantity = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_access_quantity);
-		TextView tvConsult = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_consult);
-		TextView tvDial = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_dial);
+		AutoDrawableTextView tvConsult = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_search_house_artifact_consult);
+		AutoDrawableTextView tvDial = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_search_house_artifact_dial);
 		
 		final SearchHouseArtifactResultBean artifactResult = artifactResults.get(position);
 		String url = artifactResult.getPhoto();

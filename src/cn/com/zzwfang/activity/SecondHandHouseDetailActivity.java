@@ -10,15 +10,19 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
 import cn.com.zzwfang.bean.AgentBean;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SecondHandHouseDetailBean;
+import cn.com.zzwfang.config.API;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
@@ -28,8 +32,19 @@ import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.PathImage;
 import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnMoreShareAndAttentionListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnShareTypeSelectListener;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 
 /**
  * 二手房详情
@@ -41,19 +56,20 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		OnClickListener, OnPageChangeListener {
 
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
-	private TextView tvBack, tvTitle, tvShare, tvDetailtitle;
+	private TextView tvBack, tvTitle, tvMore, tvDetailtitle;
 	private TextView tvTotalPrice, tvHouseType, tvSquare, tvLabel, tvUnitPrice;
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
 			tvDecoration, tvEstateName, tvAgentName, tvAgentPhone,
-			tvPhotoIndex, tvSeeHouseRecord, tvAttention, tvNearbyDetail,
+			tvPhotoIndex, tvSeeHouseRecord, tvNearbyDetail,
 			tvSandTableDisplay, tvTransactionHistory, tvInnerThreeDimensionDisplay;
 	
-	private LinearLayout lltBrokerInfo;
-
+	private TextView tvApartmentLayout, tvBidPrice, tvBidDate, tvFollowPersons;
+	
+	private LinearLayout lltBrokerInfo, lltCourt;
 	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
-
 	private TextView tvMortgageCalculate;
-
+	private MapView mapView;
+	private WebView webViewPriceTrend;
 	private ViewPager photoPager;
 	private PhotoPagerAdapter photoAdapter;
 	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
@@ -62,6 +78,10 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private String houseSourceId = null;
 
 	private SecondHandHouseDetailBean secondHandHouseDetail;
+	
+	private OnMoreShareAndAttentionListener onMoreShareAndAttentionListener;
+	
+	private OnShareTypeSelectListener onShareTypeSelectListener;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -76,7 +96,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 
 		tvBack = (TextView) findViewById(R.id.act_second_hand_house_detail_back);
 		tvTitle = (TextView) findViewById(R.id.act_second_hand_house_detail_title);
-		tvShare = (TextView) findViewById(R.id.act_second_hand_house_detail_share);
+		tvMore = (TextView) findViewById(R.id.act_second_hand_house_detail_more);
 		tvDetailtitle = (TextView) findViewById(R.id.act_second_house_detail_title);
 		tvTotalPrice = (TextView) findViewById(R.id.act_second_house_detail_total_price);
 		tvHouseType = (TextView) findViewById(R.id.act_second_house_detail_house_type);
@@ -97,23 +117,33 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvPhotoIndex = (TextView) findViewById(R.id.act_second_house_detail_photo_index_tv);
 		tvSeeHouseRecord = (TextView) findViewById(R.id.act_second_handhouse_see_house_record_tv);
 		tvMortgageCalculate = (TextView) findViewById(R.id.act_second_hand_house_detail_calculator_tv);
-		tvAttention = (TextView) findViewById(R.id.act_second_handhouse_attenton_tv);
 		tvNearbyDetail = (TextView) findViewById(R.id.act_second_handhouse_nearby_detail_tv);
 		tvSandTableDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_sand_table_display);
 		tvTransactionHistory = (TextView) findViewById(R.id.act_second_handhouse_transaction_history_tv);
 		lltBrokerInfo = (LinearLayout) findViewById(R.id.act_second_hand_house_detail_broker_info_llt);
 		tvInnerThreeDimensionDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_inner_three_dimession_display);
+		lltCourt = (LinearLayout) findViewById(R.id.act_second_hand_house_detail_court);
+		tvBidPrice = (TextView) findViewById(R.id.act_second_hand_house_detail_bid_price);
+		tvApartmentLayout = (TextView) findViewById(R.id.act_second_hand_house_detail_apartment_layout);
+		tvBidDate = (TextView) findViewById(R.id.act_second_hand_house_detail_bid_date);
+		tvFollowPersons = (TextView) findViewById(R.id.act_second_hand_house_detail_follow_persons);
+		
+		mapView = (MapView) findViewById(R.id.act_second_hand_house_detail_map_view);
+		
+		webViewPriceTrend = (WebView) findViewById(R.id.act_second_hand_house_detail_price_trend);
+		WebSettings ws = webViewPriceTrend.getSettings();
+		ws.setBuiltInZoomControls(false);
+		ws.setJavaScriptEnabled(true);
 
 		photoPager = (ViewPager) findViewById(R.id.act_second_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);
 		photoPager.setAdapter(photoAdapter);
 
 		tvBack.setOnClickListener(this);
-		tvShare.setOnClickListener(this);
+		tvMore.setOnClickListener(this);
 		tvSeeHouseRecord.setOnClickListener(this);
 		photoPager.setOnPageChangeListener(this);
 		tvMortgageCalculate.setOnClickListener(this);
-		tvAttention.setOnClickListener(this);
 		tvNearbyDetail.setOnClickListener(this);
 		tvSandTableDisplay.setOnClickListener(this);
 		tvTransactionHistory.setOnClickListener(this);
@@ -121,6 +151,32 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvAgentMsg.setOnClickListener(this);
 		lltBrokerInfo.setOnClickListener(this);
 		tvInnerThreeDimensionDisplay.setOnClickListener(this);
+		lltCourt.setOnClickListener(this);
+		
+		onMoreShareAndAttentionListener = new OnMoreShareAndAttentionListener() {
+			
+			@Override
+			public void onShare() {  //  分享
+				PopViewHelper.showSharePopupWindow(SecondHandHouseDetailActivity.this, getWindow().getDecorView(), onShareTypeSelectListener);
+			}
+			
+			@Override
+			public void onAttention() {  // 关注
+				attentionToHouse();
+			}
+		};
+		
+		onShareTypeSelectListener = new OnShareTypeSelectListener() {
+			
+			@Override
+			public void onShareTypeSelected(int shareType) {
+				switch (shareType) {
+				case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
+					// TODO
+					break;
+				}
+			}
+		};
 	}
 
 	@Override
@@ -131,8 +187,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			break;
 		case R.id.act_second_hand_house_detail_title: // 详情title
 			break;
-		case R.id.act_second_hand_house_detail_share: // 分享
-			PopViewHelper.showSharePopupWindow(this, getWindow().getDecorView());
+		case R.id.act_second_hand_house_detail_more: // 更多 （收藏  分享）
+			PopViewHelper.showMoreShareAndAttention(this, tvMore, onMoreShareAndAttentionListener);
 			break;
 		case R.id.act_second_handhouse_see_house_record_tv: // 看房记录
 			if (secondHandHouseDetail != null) {
@@ -183,17 +239,30 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			}
 			
 			break;
-
-		case R.id.act_second_handhouse_attenton_tv: // 关注
-			attentionToHouse();
+		case R.id.act_second_hand_house_detail_court:   // 跳小区详情
+			if (secondHandHouseDetail != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putString(CourtDetailActivity.INTENT_COURT_NAME, secondHandHouseDetail.getEstateName())
+				.putString(CourtDetailActivity.INTENT_COURT_ID, secondHandHouseDetail.getEstateId())
+				.jump(this, CourtDetailActivity.class);
+			}
 			break;
 		case R.id.act_second_handhouse_nearby_detail_tv:  //  周边详情
-			Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, NearbyDetailActivity.class);
+			if (secondHandHouseDetail != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putLong(NearbyDetailActivity.INTENT_LAT, secondHandHouseDetail.getLat())
+				.putLong(NearbyDetailActivity.INTENT_LNG, secondHandHouseDetail.getLng())
+				.jump(this, NearbyDetailActivity.class);
+			}
+			
 			break;
 		case R.id.act_second_hand_house_detail_sand_table_display:  // 沙盘展示
 			if (secondHandHouseDetail != null) {
@@ -266,7 +335,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			}
 			tvLabel.setText(label.toString());
 			tvUnitPrice.setText(secondHandHouseDetail.getUnitPrice() + "元");
-			tvPartialPrice.setText(secondHandHouseDetail.getPartialPrice());
+			tvPartialPrice.setText(secondHandHouseDetail.getPartialPrice() + "万");
 			tvMonthlyPay.setText(secondHandHouseDetail.getMonthlyPayment()
 					+ "元");
 			tvFloor.setText(secondHandHouseDetail.getFloor() + "/"
@@ -274,6 +343,26 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			tvDirection.setText(secondHandHouseDetail.getDirection());
 			tvDecoration.setText(secondHandHouseDetail.getDecoration());
 			tvEstateName.setText(secondHandHouseDetail.getEstateName());
+			
+			tvBidPrice.setText(secondHandHouseDetail.getPrice() + "万");
+			tvApartmentLayout.setText(houseType);
+			// 近一月新增31位看房客户，共52位
+			tvFollowPersons.setText("近一月新增" + secondHandHouseDetail.getMonthAddFollow()
+					+ "位看房客户，共" + secondHandHouseDetail.getTotalFollow() + "位");
+			
+			LatLng latLng = new LatLng(secondHandHouseDetail.getLat(), secondHandHouseDetail.getLng());
+			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+			BaiduMap baiduMap = mapView.getMap();
+			baiduMap.animateMapStatus(u);
+
+			// 构建Marker图标
+			BitmapDescriptor bitmap = BitmapDescriptorFactory
+					.fromResource(R.drawable.ic_cur_location);
+			// 构建MarkerOption，用于在地图上添加Marker
+			OverlayOptions option = new MarkerOptions().position(latLng)
+					.icon(bitmap);
+			// 在地图上添加Marker，并显示
+			baiduMap.addOverlay(option);
 
 			AgentBean agentBean = secondHandHouseDetail.getAgent();
 			if (agentBean != null) {
@@ -281,6 +370,17 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				tvAgentPhone.setText(agentBean.getTel());
 				ImageAction.displayBrokerAvatar(agentBean.getPhoto(),
 						agentAvatar);
+			}
+			
+			CityBean cityBean = ContentUtils.getCityBean(this);
+			if (cityBean != null) {
+//				String urlPriceTrend = API.host + "TrendChart/GetCityChartDataJson?siteId="
+//			                   + cityBean.getSiteId() + "&sign=1111&timestamp=2222";
+				
+				String urlPriceTrend = API.host + "Estate/Chart?id="
+		                   + secondHandHouseDetail.getEstateId() + "&sign=1111&timestamp=2222";
+				
+				webViewPriceTrend.loadUrl(urlPriceTrend);
 			}
 
 		}
@@ -348,5 +448,23 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 								SecondHandHouseDetailActivity.this, "关注成功");
 					}
 				});
+	}
+	
+	@Override
+	protected void onResume() {
+		mapView.onResume();
+		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		mapView.onPause();
+		super.onPause();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		mapView.onDestroy();
+		super.onDestroy();
 	}
 }

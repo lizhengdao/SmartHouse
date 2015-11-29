@@ -507,7 +507,7 @@ public class PopViewHelper {
 		void onOnNewsMoreSelected(int position, IdTitleBean newsType);
 	}
 	/**
-	 * 咨询更多
+	 * 咨讯更多
 	 */
 	public static void showNewsMorePopWindow(Context context, View anchorView,
 			final ArrayList<IdTitleBean> news, final OnNewsMoreSelectedListener onNewsMoreSelectedListener) {
@@ -578,12 +578,17 @@ public class PopViewHelper {
         }
 	}
 	
+	public interface OnShareTypeSelectListener {
+		public static final int Share_Type_WeiXin = 1;
+		
+		void onShareTypeSelected(int shareType);
+	}
 	/**
 	 * 分享弹出框
 	 * @param context
 	 * @param anchorView
 	 */
-	public static void showSharePopupWindow(Context context, View anchorView) {
+	public static void showSharePopupWindow(Context context, View anchorView, final OnShareTypeSelectListener onShareTypeSelectListener) {
 		View view = View.inflate(context, R.layout.popwindow_share, null);
 		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, DevUtils.getScreenTools(context).dip2px(140));
 		popupWindow.setFocusable(true);
@@ -603,6 +608,9 @@ public class PopViewHelper {
 				switch (v.getId()) {
 				case R.id.popwindow_share_weixin:
 					popupWindow.dismiss();
+					if (onShareTypeSelectListener != null) {
+						onShareTypeSelectListener.onShareTypeSelected(OnShareTypeSelectListener.Share_Type_WeiXin);
+					}
 //					if (listener != null) {
 //						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_NEW_HOUSE);
 //					}
@@ -679,4 +687,61 @@ public class PopViewHelper {
         avatarPopupWindow.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
     }
 //==========================更换头像【end】===========================================
+    
+  //==========================二手房详情   更多（分享  关注）【start】===========================================
+    public interface OnMoreShareAndAttentionListener {
+		void onShare();
+		void onAttention();
+	}
+	/**
+	 * 选择贷款方式  等额本金  等额本息
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showMoreShareAndAttention(Context context, View anchorView,
+			final OnMoreShareAndAttentionListener listener) {
+		View view = View.inflate(context, R.layout.popup_more_share_attention, null);
+		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+//	    popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+	    
+	    TextView tvShare = (TextView) view.findViewById(R.id.popwindow_more_share);
+	    TextView tvAttention = (TextView) view.findViewById(R.id.popwindow_more_attention);
+	    
+	    OnClickListener clickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				switch (v.getId()) {
+				case R.id.popwindow_more_share:
+					popupWindow.dismiss();
+					if (listener != null) {
+						listener.onShare();
+					}
+					break;
+				case R.id.popwindow_more_attention:
+					popupWindow.dismiss();
+					if (listener != null) {
+						listener.onAttention();
+					}
+					break;
+				}
+			}
+		};
+		
+		tvShare.setOnClickListener(clickListener);
+		tvAttention.setOnClickListener(clickListener);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+        	popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+//            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+        }
+	}
+	
+	//==========================二手房详情   更多（分享  关注）【end】===========================================
 }

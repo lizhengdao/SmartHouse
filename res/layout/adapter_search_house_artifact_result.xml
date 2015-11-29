@@ -7,7 +7,7 @@
     android:layout_marginTop="15dp"
     android:layout_marginBottom="15dp"
     android:layout_gravity="center_vertical"
-    android:background="@color/color_eeeeee" >
+    android:background="@color/color_eeeeee" xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang">
 
     <ImageView
         android:id="@+id/adapter_search_house_artifact_avatar"
@@ -15,6 +15,8 @@
         android:layout_height="110dp"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_broker_avatar_rect" />
 
@@ -137,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             
-            <TextView
+            <cn.com.zzwfang.view.AutoDrawableTextView
                 android:id="@+id/adapter_search_house_artifact_consult"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,12 +149,15 @@
                 android:paddingRight="2dp"
                 android:gravity="center_vertical"
                 android:drawableLeft="@drawable/ic_phone_white"
+                android:drawablePadding="4dp"
                 android:background="@drawable/shape_round_corner_color_app_theme"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:text="我要咨询" />
+                android:text="我要咨询"
+                app:left_width="20dp"
+                app:left_height="20dp" />
             
-            <TextView
+            <cn.com.zzwfang.view.AutoDrawableTextView
                 android:id="@+id/adapter_search_house_artifact_dial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,10 +169,13 @@
                 android:paddingRight="2dp"
                 android:gravity="center_vertical"
                 android:drawableLeft="@drawable/ic_phone_white"
+                android:drawablePadding="4dp"
                 android:background="@drawable/shape_round_corner_color_app_theme"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-                android:text="一键呼叫" />
+                android:text="一键呼叫"
+                app:left_width="20dp"
+                app:left_height="20dp" />
         </LinearLayout>
     </LinearLayout>
 

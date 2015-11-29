@@ -39,7 +39,7 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 	private SearchHouseArtifactResultAdapter adapter;
 	private int pageIndex = 1;
 	private String house = "1";
-	private int pageTotal = -1;
+	private int pageTotal = 0;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -65,7 +65,7 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 		pullView.setOnHeaderRefreshListener(this);
 		pullView.setOnFooterLoadListener(this);
 		
-		getSearchHouseArtifactResult(house, false);
+		getSearchHouseArtifactResult(house, true);
 		lstSearchHouseArtifactResult.setOnItemClickListener(this);
 	}
 
@@ -107,7 +107,7 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 		if (isRefresh) {
 			pageIndex = 1;
 		} else {
-			if (pageTotal >= 0 && pageIndex > pageTotal) {
+			if (pageIndex > pageTotal) {
 				pullView.onHeaderRefreshFinish();
 				return;
 			}
@@ -126,7 +126,8 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				pageTotal = result.getTotal();
+				int total = result.getTotal();
+				pageTotal = (int) Math.ceil(((double)total / (double)10));
 				ArrayList<SearchHouseArtifactResultBean> temp = (ArrayList<SearchHouseArtifactResultBean>) JSON.parseArray(result.getData(), SearchHouseArtifactResultBean.class);
 				if (temp != null) {
 					if (isRefresh) {

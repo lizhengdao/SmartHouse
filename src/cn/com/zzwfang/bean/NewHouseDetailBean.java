@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class NewHouseDetailBean extends BaseBean {
 
+	private String AeraName;
+	
 	private AgentBean Agent;
 	
 	private String GreeningRate;
@@ -28,9 +30,44 @@ public class NewHouseDetailBean extends BaseBean {
 	
 	private String UnitPrice;
 	
-//	private ArrayList<PriceTrendBean> priceTrend;
+	private String PropertyType;
 	
+	private String Remark;
 	
+	private String V360;
+	
+
+	public String getAeraName() {
+		return AeraName;
+	}
+
+	public void setAeraName(String aeraName) {
+		AeraName = aeraName;
+	}
+
+	public String getPropertyType() {
+		return PropertyType;
+	}
+
+	public void setPropertyType(String propertyType) {
+		PropertyType = propertyType;
+	}
+
+	public String getRemark() {
+		return Remark;
+	}
+
+	public void setRemark(String remark) {
+		Remark = remark;
+	}
+
+	public String getV360() {
+		return V360;
+	}
+
+	public void setV360(String v360) {
+		V360 = v360;
+	}
 
 	public AgentBean getAgent() {
 		return Agent;

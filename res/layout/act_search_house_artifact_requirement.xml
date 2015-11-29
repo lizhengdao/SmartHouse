@@ -42,6 +42,7 @@
             android:orientation="vertical" >
 
             <LinearLayout
+                android:id="@+id/act_search_house_artifact_budget_llt"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:layout_marginLeft="8dp"
@@ -74,6 +75,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/act_search_house_artifact_where_llt"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:layout_marginLeft="8dp"
@@ -106,6 +108,7 @@
             </LinearLayout>
             
             <LinearLayout
+                android:id="@+id/act_search_house_month_pay_llt"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
                 android:layout_marginLeft="8dp"
@@ -137,35 +140,6 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="41dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:text="@string/act_search_house_artifact_addition"
-                    android:textColor="@color/color_504f4f"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableLeft="@drawable/ic_down_arrow"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="长按说出找房意向"
-                    android:textColor="@color/color_b5b4b4"
-                    android:textSize="15sp" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -179,6 +153,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/ic_room"
                     android:gravity="center_vertical"
                     android:paddingLeft="16dp"
@@ -207,7 +182,8 @@
                         android:background="@drawable/selector_rect_color_app_theme_and_gray"
                         android:text="@string/act_search_house_artifact_one_room"
                         android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:checked="true" />
                     
                     <RadioButton
                         android:id="@+id/rb_two_rooms"

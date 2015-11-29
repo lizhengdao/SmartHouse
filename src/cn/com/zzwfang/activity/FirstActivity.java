@@ -3,12 +3,13 @@ package cn.com.zzwfang.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.FirstAdapter;
 import cn.com.zzwfang.util.Jumper;
 
@@ -34,6 +35,10 @@ public class FirstActivity extends BaseActivity implements OnClickListener {
 		tvDownScroll = (TextView) findViewById(R.id.act_first_down_scroll_tv);
 		tvUpScroll = (TextView) findViewById(R.id.act_first_up_scroll_tv);
 		tvStartFindHouse = (TextView) findViewById(R.id.act_first_start_find_house_tv);
+		
+		final Animation anim = AnimationUtils.loadAnimation(this, R.anim.shake_vertical);
+		tvUpScroll.startAnimation(anim);
+		tvDownScroll.startAnimation(anim);
 
 		adapter = new FirstAdapter(this);
 		listView.setAdapter(adapter);
@@ -48,9 +53,19 @@ public class FirstActivity extends BaseActivity implements OnClickListener {
 					if (view.getLastVisiblePosition() == view.getCount() -1) {
 						tvDownScroll.setVisibility(View.VISIBLE);
 						tvUpScroll.setVisibility(View.GONE);
+						
+						tvDownScroll.startAnimation(anim);
+						tvUpScroll.clearAnimation();
+						
 					} else {
-						tvDownScroll.setVisibility(View.GONE);
-						tvUpScroll.setVisibility(View.VISIBLE);
+						
+						if (tvUpScroll.getVisibility() == View.GONE) {
+							tvDownScroll.setVisibility(View.GONE);
+							tvUpScroll.setVisibility(View.VISIBLE);
+							tvUpScroll.startAnimation(anim);
+							tvDownScroll.clearAnimation();
+						}
+						
 					}
 					break;
 				}

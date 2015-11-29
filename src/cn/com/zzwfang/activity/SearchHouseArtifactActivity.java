@@ -10,6 +10,12 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+/**
+ * 找房神器
+ * 付款方式一次性或者按揭（Type,值为1或者0）
+ * @author lzd
+ *
+ */
 public class SearchHouseArtifactActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener {
 
 	private TextView tvBack, tvDisposable, tvMortgage;
@@ -43,20 +49,22 @@ public class SearchHouseArtifactActivity extends BaseActivity implements OnClick
 		case R.id.act_search_house_artifact_back:  // 返回
 			finish();
 			break;
-		case R.id.act_house_artifact_disposable_tv:  // 一次性
+		case R.id.act_house_artifact_disposable_tv:  // 一次性  付款方式一次性或者按揭（Type,值为1或者0）
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .putInt(SearchHouseArtifactRequirementActivity.INTENT_PAY_TYPE, 1)
 	        .jump(this, SearchHouseArtifactRequirementActivity.class);
 			break;
-		case R.id.act_house_artifact_mortgage_tv:  //  按揭贷款
+		case R.id.act_house_artifact_mortgage_tv:  //  按揭贷款  付款方式一次性或者按揭（Type,值为1或者0）
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .putInt(SearchHouseArtifactRequirementActivity.INTENT_PAY_TYPE, 0)
 	        .jump(this, SearchHouseArtifactRequirementActivity.class);
 			break;
 		}

@@ -108,6 +108,28 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	
 	private long Lng;
 	
+	private String MonthAddFollow;
+	
+	private String TotalFollow;
+	
+	
+	
+
+	public String getTotalFollow() {
+		return TotalFollow;
+	}
+
+	public void setTotalFollow(String totalFollow) {
+		TotalFollow = totalFollow;
+	}
+
+	public String getMonthAddFollow() {
+		return MonthAddFollow;
+	}
+
+	public void setMonthAddFollow(String monthAddFollow) {
+		MonthAddFollow = monthAddFollow;
+	}
 
 	public ArrayList<PhotoBean> getPhoto() {
 		return Photo;
