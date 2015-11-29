@@ -3,6 +3,7 @@ package cn.com.zzwfang.view.helper;
 
 import java.util.ArrayList;
 
+import android.R.color;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -11,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -23,7 +25,6 @@ import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
 import cn.com.zzwfang.adapter.NewsMoreAdapter;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
 import cn.com.zzwfang.bean.IdTitleBean;
-import cn.com.zzwfang.bean.NewsItemBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 
@@ -624,4 +625,58 @@ public class PopViewHelper {
             popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
         }
 	}
+	
+	//==========================更换头像【start】===========================================
+    public interface OnAvatarOptionsClickListener {
+        public static final int ACTION_CAMERA = 0;
+        public static final int ACTION_ALBUM = 1;
+        
+        /**
+         * 选择从相机或者系统相册更改头像
+         * @param action
+         */
+        void onAvatarOptionClick(int action);
+    }
+    public static void showUpdateAvatarPopupWindow(Context context, View anchor, final OnAvatarOptionsClickListener listener) {
+        
+        final PopupWindow avatarPopupWindow = new PopupWindow(context);
+        LinearLayout contentView = (LinearLayout) View.inflate(context, R.layout.popup_updateavatar, null);
+        avatarPopupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        avatarPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        
+        avatarPopupWindow.setContentView(contentView);
+        avatarPopupWindow.setFocusable(true);
+        avatarPopupWindow.setOutsideTouchable(true);
+        
+        ColorDrawable dw = new ColorDrawable(color.transparent);
+//        avatarPopupWindow.setBackgroundDrawable(dw);
+        avatarPopupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+        
+        OnClickListener clickListener = new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    switch (v.getId()) {
+                    case R.id.popup_update_avatar_from_camera_tv:
+                        listener.onAvatarOptionClick(OnAvatarOptionsClickListener.ACTION_CAMERA);
+                        break;
+                    case R.id.popup_update_avatar_from_album_tv:
+                        listener.onAvatarOptionClick(OnAvatarOptionsClickListener.ACTION_ALBUM);
+                        break;
+                    }
+                }
+                avatarPopupWindow.dismiss();
+            }
+        };
+        
+        TextView tvCamera = (TextView) contentView.findViewById(R.id.popup_update_avatar_from_camera_tv);
+        TextView tvAlbum = (TextView) contentView.findViewById(R.id.popup_update_avatar_from_album_tv);
+        TextView tvCancel = (TextView) contentView.findViewById(R.id.popup_exit_account_cancel_tv);
+        tvCamera.setOnClickListener(clickListener);
+        tvAlbum.setOnClickListener(clickListener);
+        tvCancel.setOnClickListener(clickListener);
+        avatarPopupWindow.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
+    }
+//==========================更换头像【end】===========================================
 }

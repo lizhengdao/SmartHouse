@@ -645,10 +645,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int act_message_back=0x7f050098;
         public static final int act_mortgage_cal_business_rb=0x7f05009b;
         public static final int act_mortgage_cal_funds_rb=0x7f05009a;
-        public static final int act_mortgage_cal_mix_business_money=0x7f050262;
-        public static final int act_mortgage_cal_mix_funds_money=0x7f050261;
+        public static final int act_mortgage_cal_mix_business_money=0x7f050265;
+        public static final int act_mortgage_cal_mix_funds_money=0x7f050264;
         public static final int act_mortgage_cal_mix_rb=0x7f05009c;
-        public static final int act_mortgage_cal_total_money=0x7f05025c;
+        public static final int act_mortgage_cal_total_money=0x7f05025f;
         public static final int act_mortgage_calculate_business_result_llt=0x7f0500a1;
         public static final int act_mortgage_calculate_funds_result_llt=0x7f0500a0;
         public static final int act_mortgage_calculate_mix_result_llt=0x7f0500a2;
@@ -656,14 +656,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int act_mortgage_calculator_back=0x7f050099;
         public static final int act_mortgage_funds_business=0x7f05009d;
         public static final int act_mortgage_mix=0x7f05009e;
-        public static final int act_mortgage_mix_type_llt=0x7f050265;
-        public static final int act_mortgage_mix_type_tv=0x7f050266;
-        public static final int act_mortgage_mix_years_llt=0x7f050263;
-        public static final int act_mortgage_mix_years_tv=0x7f050264;
-        public static final int act_mortgage_type_llt=0x7f05025f;
-        public static final int act_mortgage_type_tv=0x7f050260;
-        public static final int act_mortgage_years_llt=0x7f05025d;
-        public static final int act_mortgage_years_tv=0x7f05025e;
+        public static final int act_mortgage_mix_type_llt=0x7f050268;
+        public static final int act_mortgage_mix_type_tv=0x7f050269;
+        public static final int act_mortgage_mix_years_llt=0x7f050266;
+        public static final int act_mortgage_mix_years_tv=0x7f050267;
+        public static final int act_mortgage_type_llt=0x7f050262;
+        public static final int act_mortgage_type_tv=0x7f050263;
+        public static final int act_mortgage_years_llt=0x7f050260;
+        public static final int act_mortgage_years_tv=0x7f050261;
         public static final int act_my_bought_houses_back=0x7f0500a3;
         public static final int act_my_demand_advised_house_resources_flt=0x7f0500ab;
         public static final int act_my_demand_back=0x7f0500a9;
@@ -998,7 +998,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int bmapView=0x7f050226;
         public static final int circle=0x7f050001;
         public static final int dialog_1_text=0x7f050210;
-        public static final int edt_search_properties=0x7f05024c;
+        public static final int edt_search_properties=0x7f05024f;
         public static final int fact_select_estate_list=0x7f050194;
         public static final int frag_consultation_back=0x7f050211;
         public static final int frag_consultation_more_rb=0x7f050218;
@@ -1060,17 +1060,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pop_search_rent_house=0x7f050244;
         public static final int pop_search_second_hand_house=0x7f050243;
         public static final int popup_condition_lst=0x7f05023a;
+        public static final int popup_exit_account_cancel_tv=0x7f05024a;
         public static final int popup_fee_hunter_my_customer_left_list=0x7f05023b;
         public static final int popup_fee_hunter_my_customer_right_list=0x7f05023c;
         public static final int popup_mortgage_years_lst=0x7f050241;
         public static final int popup_second_hand_more_type_detail=0x7f050246;
         public static final int popup_second_hand_more_type_lst=0x7f050245;
         public static final int popup_second_hand_more_type_ok=0x7f050247;
+        public static final int popup_update_avatar_from_album_tv=0x7f050249;
+        public static final int popup_update_avatar_from_camera_tv=0x7f050248;
         public static final int popwindow_fee_hunter_recommend_new_house=0x7f05023d;
         public static final int popwindow_fee_hunter_recommend_second_hand_house=0x7f05023e;
         public static final int popwindow_mortgage_type_benjin=0x7f05023f;
         public static final int popwindow_mortgage_type_benxi=0x7f050240;
-        public static final int popwindow_share_weixin=0x7f050248;
+        public static final int popwindow_share_weixin=0x7f05024b;
         public static final int pull_act_my_bought_houses=0x7f0500a4;
         public static final int pull_chat=0x7f05001e;
         public static final int pull_fee_hunter_recommend_house_source_list=0x7f050043;
@@ -1095,30 +1098,30 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int roundRect=0x7f050004;
         public static final int scrollview=0x7f050009;
         public static final int triangle=0x7f050002;
-        public static final int tv_frag_home_location=0x7f05024b;
+        public static final int tv_frag_home_location=0x7f05024e;
         public static final int tv_toast_content=0x7f050239;
-        public static final int view_city_list_header_locate_city_tv=0x7f05024a;
-        public static final int view_city_list_header_locate_tv=0x7f050249;
-        public static final int view_frag_home_zoom_img=0x7f05024d;
-        public static final int view_mortgage_business_loan_interests=0x7f050255;
-        public static final int view_mortgage_business_loan_month_pay=0x7f050256;
-        public static final int view_mortgage_business_loan_months=0x7f050254;
-        public static final int view_mortgage_business_loan_total=0x7f050252;
-        public static final int view_mortgage_business_loan_total_pay=0x7f050253;
-        public static final int view_mortgage_funds_loan_interests=0x7f05025a;
-        public static final int view_mortgage_funds_loan_month_pay=0x7f05025b;
-        public static final int view_mortgage_funds_loan_months=0x7f050259;
-        public static final int view_mortgage_funds_loan_total=0x7f050257;
-        public static final int view_mortgage_funds_loan_total_pay=0x7f050258;
-        public static final int view_mortgage_mix_loan_interests=0x7f05026a;
-        public static final int view_mortgage_mix_loan_month_pay=0x7f05026b;
-        public static final int view_mortgage_mix_loan_months=0x7f050269;
-        public static final int view_mortgage_mix_loan_total=0x7f050267;
-        public static final int view_mortgage_mix_loan_total_pay=0x7f050268;
-        public static final int view_point_estate_price=0x7f050251;
-        public static final int view_point_estate_title=0x7f050250;
-        public static final int view_point_num=0x7f05024f;
-        public static final int view_point_title=0x7f05024e;
+        public static final int view_city_list_header_locate_city_tv=0x7f05024d;
+        public static final int view_city_list_header_locate_tv=0x7f05024c;
+        public static final int view_frag_home_zoom_img=0x7f050250;
+        public static final int view_mortgage_business_loan_interests=0x7f050258;
+        public static final int view_mortgage_business_loan_month_pay=0x7f050259;
+        public static final int view_mortgage_business_loan_months=0x7f050257;
+        public static final int view_mortgage_business_loan_total=0x7f050255;
+        public static final int view_mortgage_business_loan_total_pay=0x7f050256;
+        public static final int view_mortgage_funds_loan_interests=0x7f05025d;
+        public static final int view_mortgage_funds_loan_month_pay=0x7f05025e;
+        public static final int view_mortgage_funds_loan_months=0x7f05025c;
+        public static final int view_mortgage_funds_loan_total=0x7f05025a;
+        public static final int view_mortgage_funds_loan_total_pay=0x7f05025b;
+        public static final int view_mortgage_mix_loan_interests=0x7f05026d;
+        public static final int view_mortgage_mix_loan_month_pay=0x7f05026e;
+        public static final int view_mortgage_mix_loan_months=0x7f05026c;
+        public static final int view_mortgage_mix_loan_total=0x7f05026a;
+        public static final int view_mortgage_mix_loan_total_pay=0x7f05026b;
+        public static final int view_point_estate_price=0x7f050254;
+        public static final int view_point_estate_title=0x7f050253;
+        public static final int view_point_num=0x7f050252;
+        public static final int view_point_title=0x7f050251;
         public static final int view_userinfo_username=0x7f05022d;
         public static final int webview=0x7f050008;
     }
@@ -1226,26 +1229,27 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int popup_mortgage_years=0x7f030064;
         public static final int popup_search_house_type=0x7f030065;
         public static final int popup_second_hand_house_more=0x7f030066;
-        public static final int popwindow_share=0x7f030067;
-        public static final int view_city_list_header=0x7f030068;
-        public static final int view_frag_home_header=0x7f030069;
-        public static final int view_frag_home_zoom=0x7f03006a;
-        public static final int view_map_point_area=0x7f03006b;
-        public static final int view_map_point_estate=0x7f03006c;
-        public static final int view_mortgage_business=0x7f03006d;
-        public static final int view_mortgage_funds=0x7f03006e;
-        public static final int view_mortgage_funds_business=0x7f03006f;
-        public static final int view_mortgage_mix=0x7f030070;
-        public static final int view_mortgage_mix_result=0x7f030071;
+        public static final int popup_updateavatar=0x7f030067;
+        public static final int popwindow_share=0x7f030068;
+        public static final int view_city_list_header=0x7f030069;
+        public static final int view_frag_home_header=0x7f03006a;
+        public static final int view_frag_home_zoom=0x7f03006b;
+        public static final int view_map_point_area=0x7f03006c;
+        public static final int view_map_point_estate=0x7f03006d;
+        public static final int view_mortgage_business=0x7f03006e;
+        public static final int view_mortgage_funds=0x7f03006f;
+        public static final int view_mortgage_funds_business=0x7f030070;
+        public static final int view_mortgage_mix=0x7f030071;
+        public static final int view_mortgage_mix_result=0x7f030072;
     }
     public static final class string {
         /**  关于我们 
          */
-        public static final int act_about_us=0x7f070084;
-        public static final int act_browse_record=0x7f070069;
+        public static final int act_about_us=0x7f070087;
+        public static final int act_browse_record=0x7f07006c;
         /**  浏览记录   
          */
-        public static final int act_browse_record_back=0x7f070068;
+        public static final int act_browse_record_back=0x7f07006b;
         /**  修改密码 
          */
         public static final int act_change_pwd=0x7f070014;
@@ -1254,58 +1258,58 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int act_city_list=0x7f070022;
         /**  常见问题 
          */
-        public static final int act_common_problems=0x7f070085;
-        public static final int act_concern_house=0x7f07006d;
+        public static final int act_common_problems=0x7f070088;
+        public static final int act_concern_house=0x7f070070;
         /**  我关注的房源 
          */
-        public static final int act_concern_house_back=0x7f07006c;
+        public static final int act_concern_house_back=0x7f07006f;
         /**  赏金猎人个人中心 
          */
-        public static final int act_fee_hunter_info=0x7f070086;
+        public static final int act_fee_hunter_info=0x7f070089;
         /**  赏金猎人  赏金信息  
          */
-        public static final int act_fee_hunter_msg=0x7f07008d;
+        public static final int act_fee_hunter_msg=0x7f070090;
         /**  赏金猎人  我的客户  
          */
-        public static final int act_fee_hunter_my_customer=0x7f070087;
+        public static final int act_fee_hunter_my_customer=0x7f07008a;
         /**  赏金猎人  进度详情  
          */
-        public static final int act_fee_hunter_progress_detail=0x7f07008b;
+        public static final int act_fee_hunter_progress_detail=0x7f07008e;
         /**  赏金猎人  推荐客户
          */
-        public static final int act_fee_hunter_recommend_customer=0x7f07008a;
+        public static final int act_fee_hunter_recommend_customer=0x7f07008d;
         /**  赏金猎人  推荐房源
          */
-        public static final int act_fee_hunter_recommend_house_source=0x7f070088;
+        public static final int act_fee_hunter_recommend_house_source=0x7f07008b;
         /**  赏金猎人  推荐房源的房屋列表  
          */
-        public static final int act_fee_hunter_recommend_house_source_list=0x7f07008c;
+        public static final int act_fee_hunter_recommend_house_source_list=0x7f07008f;
         /**  赏金猎人  推荐业主  变成推荐房源  
          */
-        public static final int act_fee_hunter_recommend_owner=0x7f070090;
+        public static final int act_fee_hunter_recommend_owner=0x7f070093;
         /**  赏金猎人  推荐买房卖房    推荐二手房
          */
-        public static final int act_fee_hunter_recommend_second_hand_house=0x7f070089;
+        public static final int act_fee_hunter_recommend_second_hand_house=0x7f07008c;
         /**  赏金猎人  活动规则  
          */
-        public static final int act_fee_hunter_rule=0x7f07008e;
+        public static final int act_fee_hunter_rule=0x7f070091;
         /**  赏金猎人  钱包  
          */
-        public static final int act_fee_hunter_wallet=0x7f07008f;
+        public static final int act_fee_hunter_wallet=0x7f070092;
         /**  意见反馈   
          */
-        public static final int act_feedback=0x7f070058;
-        public static final int act_feedback_hint=0x7f070059;
-        public static final int act_feedback_phone_hint=0x7f07005a;
+        public static final int act_feedback=0x7f07005b;
+        public static final int act_feedback_hint=0x7f07005c;
+        public static final int act_feedback_phone_hint=0x7f07005d;
         /**  填写银行卡 
          */
-        public static final int act_fill_bank_card_info=0x7f07007b;
+        public static final int act_fill_bank_card_info=0x7f07007e;
         /**  忘记密码 
          */
-        public static final int act_forget_pwd=0x7f070079;
+        public static final int act_forget_pwd=0x7f07007c;
         /**  我要买房 
          */
-        public static final int act_i_want_buy_house=0x7f070083;
+        public static final int act_i_want_buy_house=0x7f070086;
         public static final int act_main_consultant=0x7f070019;
         /**  主界面 
          */
@@ -1313,111 +1317,111 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int act_main_home_page=0x7f070017;
         public static final int act_main_map_find_house=0x7f070018;
         public static final int act_main_me=0x7f07001a;
-        public static final int act_message=0x7f07006b;
+        public static final int act_message=0x7f07006e;
         /**  消息   
          */
-        public static final int act_message_back=0x7f07006a;
-        public static final int act_mortgage_calculator=0x7f070061;
+        public static final int act_message_back=0x7f07006d;
+        public static final int act_mortgage_calculator=0x7f070064;
         /**  房贷计算器   
          */
-        public static final int act_mortgage_calculator_back=0x7f070060;
+        public static final int act_mortgage_calculator_back=0x7f070063;
         /**  我的购房 
          */
-        public static final int act_my_bought_houses=0x7f07007f;
+        public static final int act_my_bought_houses=0x7f070082;
         /**  我的需求 
          */
-        public static final int act_my_demand=0x7f07005b;
-        public static final int act_my_demand_advised_house_resources=0x7f07005d;
-        public static final int act_my_demand_back=0x7f07005c;
+        public static final int act_my_demand=0x7f07005e;
+        public static final int act_my_demand_advised_house_resources=0x7f070060;
+        public static final int act_my_demand_back=0x7f07005f;
         /**  我的需求 
          */
-        public static final int act_my_demand_info=0x7f07005f;
-        public static final int act_my_demand_my_buy_house=0x7f07005e;
+        public static final int act_my_demand_info=0x7f070062;
+        public static final int act_my_demand_my_buy_house=0x7f070061;
         /**  我的房屋  列表  
          */
-        public static final int act_my_house_list=0x7f070067;
-        public static final int act_my_house_resources=0x7f070063;
+        public static final int act_my_house_list=0x7f07006a;
+        public static final int act_my_house_resources=0x7f070066;
         /**  我的房源   
          */
-        public static final int act_my_house_resources_back=0x7f070062;
-        public static final int act_my_house_resources_msg_changes=0x7f070066;
-        public static final int act_my_house_resources_my_house=0x7f070064;
-        public static final int act_my_house_resources_see_house_detail=0x7f070065;
-        public static final int act_my_proxy=0x7f07006f;
+        public static final int act_my_house_resources_back=0x7f070065;
+        public static final int act_my_house_resources_msg_changes=0x7f070069;
+        public static final int act_my_house_resources_my_house=0x7f070067;
+        public static final int act_my_house_resources_see_house_detail=0x7f070068;
+        public static final int act_my_proxy=0x7f070072;
         /**  我的委托 
          */
-        public static final int act_my_proxy_back=0x7f07006e;
-        public static final int act_my_proxy_i_buy_house=0x7f070071;
-        public static final int act_my_proxy_sell_house=0x7f070070;
+        public static final int act_my_proxy_back=0x7f070071;
+        public static final int act_my_proxy_i_buy_house=0x7f070074;
+        public static final int act_my_proxy_sell_house=0x7f070073;
         /**  周边详情  
          */
-        public static final int act_nearby_detail=0x7f070091;
+        public static final int act_nearby_detail=0x7f070094;
         /**  资讯详情 
          */
-        public static final int act_news_detail=0x7f070080;
-        public static final int act_proxy_detail_dial=0x7f07004e;
-        public static final int act_proxy_detail_msg=0x7f07004f;
+        public static final int act_news_detail=0x7f070083;
+        public static final int act_proxy_detail_dial=0x7f070051;
+        public static final int act_proxy_detail_msg=0x7f070052;
         /**  委托售房 
          */
-        public static final int act_proxy_sell_house=0x7f070082;
+        public static final int act_proxy_sell_house=0x7f070085;
         /**  推荐房源 
          */
-        public static final int act_recommend_house_detail=0x7f07007d;
+        public static final int act_recommend_house_detail=0x7f070080;
         /**  推荐房源 
          */
-        public static final int act_recommend_house_list=0x7f07007e;
+        public static final int act_recommend_house_list=0x7f070081;
         /**   
          */
-        public static final int act_residential_transaction_history=0x7f070076;
+        public static final int act_residential_transaction_history=0x7f070079;
         /**  找房神器 
          */
-        public static final int act_search_house_artifact=0x7f070077;
-        public static final int act_search_house_artifact_addition=0x7f070044;
-        public static final int act_search_house_artifact_back=0x7f070078;
-        public static final int act_search_house_artifact_budget=0x7f070040;
-        public static final int act_search_house_artifact_disposable=0x7f07003d;
-        public static final int act_search_house_artifact_four_rooms=0x7f070049;
+        public static final int act_search_house_artifact=0x7f07007a;
+        public static final int act_search_house_artifact_addition=0x7f070047;
+        public static final int act_search_house_artifact_back=0x7f07007b;
+        public static final int act_search_house_artifact_budget=0x7f070043;
+        public static final int act_search_house_artifact_disposable=0x7f070040;
+        public static final int act_search_house_artifact_four_rooms=0x7f07004c;
         /**  找房神器 
          */
-        public static final int act_search_house_artifact_hint=0x7f07003c;
-        public static final int act_search_house_artifact_how_many_rooms=0x7f070045;
-        public static final int act_search_house_artifact_mortgage=0x7f07003e;
-        public static final int act_search_house_artifact_one_room=0x7f070046;
-        public static final int act_search_house_artifact_requirement=0x7f07003f;
-        public static final int act_search_house_artifact_result_change_another=0x7f07004d;
-        public static final int act_search_house_artifact_result_title=0x7f07004c;
-        public static final int act_search_house_artifact_select_area=0x7f070043;
-        public static final int act_search_house_artifact_select_price=0x7f070041;
-        public static final int act_search_house_artifact_three_rooms=0x7f070048;
-        public static final int act_search_house_artifact_two_rooms=0x7f070047;
-        public static final int act_search_house_artifact_where=0x7f070042;
-        public static final int act_search_house_month_pay=0x7f07004a;
-        public static final int act_search_house_month_pay_hint=0x7f07004b;
+        public static final int act_search_house_artifact_hint=0x7f07003f;
+        public static final int act_search_house_artifact_how_many_rooms=0x7f070048;
+        public static final int act_search_house_artifact_mortgage=0x7f070041;
+        public static final int act_search_house_artifact_one_room=0x7f070049;
+        public static final int act_search_house_artifact_requirement=0x7f070042;
+        public static final int act_search_house_artifact_result_change_another=0x7f070050;
+        public static final int act_search_house_artifact_result_title=0x7f07004f;
+        public static final int act_search_house_artifact_select_area=0x7f070046;
+        public static final int act_search_house_artifact_select_price=0x7f070044;
+        public static final int act_search_house_artifact_three_rooms=0x7f07004b;
+        public static final int act_search_house_artifact_two_rooms=0x7f07004a;
+        public static final int act_search_house_artifact_where=0x7f070045;
+        public static final int act_search_house_month_pay=0x7f07004d;
+        public static final int act_search_house_month_pay_hint=0x7f07004e;
         /**  二手房 
          */
-        public static final int act_second_hand_house_back=0x7f070072;
-        public static final int act_second_hand_house_hint=0x7f070073;
-        public static final int act_second_hand_house_list=0x7f070074;
-        public static final int act_second_hand_house_map=0x7f070075;
+        public static final int act_second_hand_house_back=0x7f070075;
+        public static final int act_second_hand_house_hint=0x7f070076;
+        public static final int act_second_hand_house_list=0x7f070077;
+        public static final int act_second_hand_house_map=0x7f070078;
         /**  看房记录 
          */
-        public static final int act_see_house_record=0x7f070081;
+        public static final int act_see_house_record=0x7f070084;
         /**  设置    
          */
-        public static final int act_settings=0x7f070050;
-        public static final int act_settings_about_us=0x7f070054;
-        public static final int act_settings_change_pwd=0x7f070051;
-        public static final int act_settings_check_updates=0x7f070056;
-        public static final int act_settings_clear_cache=0x7f070053;
-        public static final int act_settings_common_questions=0x7f070055;
-        public static final int act_settings_logout=0x7f070057;
-        public static final int act_settings_msg_push=0x7f070052;
+        public static final int act_settings=0x7f070053;
+        public static final int act_settings_about_us=0x7f070057;
+        public static final int act_settings_change_pwd=0x7f070054;
+        public static final int act_settings_check_updates=0x7f070059;
+        public static final int act_settings_clear_cache=0x7f070056;
+        public static final int act_settings_common_questions=0x7f070058;
+        public static final int act_settings_logout=0x7f07005a;
+        public static final int act_settings_msg_push=0x7f070055;
         /**  赏金猎人 
          */
-        public static final int act_shangjinlieren=0x7f07007a;
+        public static final int act_shangjinlieren=0x7f07007d;
         /**  赏金猎人个人中心 
          */
-        public static final int act_shangjinlieren_info=0x7f07007c;
+        public static final int act_shangjinlieren_info=0x7f07007f;
         public static final int app_name=0x7f070000;
         public static final int back=0x7f070001;
         public static final int broker_login=0x7f070012;
@@ -1475,6 +1479,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int page_three_desc_two=0x7f07000a;
         public static final int page_two_desc_one=0x7f070007;
         public static final int page_two_desc_two=0x7f070008;
+        public static final int popup_update_avatar_cancel=0x7f07003e;
+        public static final int popup_update_avatar_from_album=0x7f07003d;
+        public static final int popup_update_avatar_from_camera=0x7f07003c;
         /**  注册 
          */
         public static final int register=0x7f070013;

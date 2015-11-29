@@ -29,13 +29,15 @@ import cn.com.zzwfang.bean.UserInfoBean;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.PathImage;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnAvatarOptionsClickListener;
 
 /**
  * 我的
  * @author lzd
  *
  */
-public class MainMineFragment extends BasePickPhotoFragment implements OnClickListener {
+public class MainMineFragment extends BasePickPhotoFragment implements OnClickListener, OnAvatarOptionsClickListener {
 
 	
 	private TextView tvBack, tvUserName, tvPhone;
@@ -109,6 +111,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 			break;
 		case R.id.frag_mine_avatar:   //  修改头像
 			startPickPhotoFromAlbumWithCrop();
+			PopViewHelper.showUpdateAvatarPopupWindow(getActivity(), getView(), this);
 			break;
 		case R.id.frag_mine_msg_flt:  // 消息
 			Jumper.newJumper()
@@ -199,6 +202,35 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	@Override
 	public int getDisplayHeight() {
 		return 800;
+	}
+
+	@Override
+	public void onAvatarOptionClick(int action) {
+		// TODO Auto-generated method stub
+		switch (action) {
+        case OnAvatarOptionsClickListener.ACTION_CAMERA:   // 相机
+            
+            if (isCrop) {
+                startPickPhotoFromCameraWithCrop();
+            } else {
+                startPickPhotoFromCamara();
+            }
+            
+            break;
+        case OnAvatarOptionsClickListener.ACTION_ALBUM:   // 相册
+            if (isCrop) {
+                startPickPhotoFromAlbumWithCrop();
+            } else {
+                startPickPhotoFromAlbum();
+            }
+            break;
+        }
+	}
+	
+	@Override
+	public void onDestroy() {
+		cleanFile(cacheImageDir);
+		super.onDestroy();
 	}
 
 

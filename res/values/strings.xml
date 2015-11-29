@@ -83,6 +83,9 @@
     <string name="frag_mine_mortgage_calculator">房贷计算器</string>
     <string name="frag_mine_feedback">意见反馈</string>
     <string name="frag_mine_settings">设置</string>
+    <string name="popup_update_avatar_from_camera">相机</string>
+    <string name="popup_update_avatar_from_album">相册</string>
+    <string name="popup_update_avatar_cancel">取消</string>
     
     <!-- 找房神器 -->
     <string name="act_search_house_artifact_hint">请设置你的购房意向，我们为你匹配最适合的专家</string>
