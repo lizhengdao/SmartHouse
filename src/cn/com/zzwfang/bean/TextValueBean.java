@@ -11,8 +11,20 @@ public class TextValueBean extends BaseBean {
 	 * 值
 	 */
 	private String Value;
+	
+	private boolean selected;
+	
+	
 
-	public String getText() {
+	public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public String getText() {
 		return Text;
 	}
 

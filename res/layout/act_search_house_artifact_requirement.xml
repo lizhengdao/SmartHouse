@@ -63,6 +63,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/act_search_house_artifact_budget_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_down_arrow"
@@ -96,6 +97,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/act_search_house_artifact_wheree_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_down_arrow"
@@ -129,6 +131,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/act_search_house_month_pay_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_down_arrow"
@@ -139,6 +142,11 @@
                     android:textColor="@color/color_b5b4b4"
                     android:textSize="15sp" />
             </LinearLayout>
+            
+            <GridView
+                android:id="@+id/act_search_house_additional_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
             <LinearLayout

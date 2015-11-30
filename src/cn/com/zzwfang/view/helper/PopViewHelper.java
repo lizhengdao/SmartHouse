@@ -139,7 +139,7 @@ public class PopViewHelper {
 	public static void showSelectTotalPricePopWindow(Context context, View anchorView,
 			final ArrayList<TextValueBean> conditions, final OnConditionSelectListener onConditionSelectListener) {
 		View view = View.inflate(context, R.layout.popup_condition, null);
-		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, DevUtils.getScreenTools(context).dip2px(200));
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		popupWindow.setFocusable(true);
 	    popupWindow.setOutsideTouchable(true);
 	    popupWindow.update();

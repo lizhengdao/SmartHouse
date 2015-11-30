@@ -406,4 +406,10 @@ public interface Action {
 	 */
 	void sendMessage(String from, String to, String message, ResultHandlerCallback callback);
 	
+	/**
+	 * 获取月供范围列表
+	 * @param callback
+	 */
+	void getMonthlyPayRange(ResultHandlerCallback callback);
+	
 }

@@ -32,6 +32,16 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 
 	public static final String INTENT_SEARCH_HOUSE_ARTIFACT_PROXY = "search_house_artifact_proxy";
+	/**
+     * 付款方式一次性或者按揭（Type,值为1或者0）
+     */
+    public static final String INTENT_PAY_TYPE = "intent_pay_type";
+	public static final String INTENT_BUDGET = "intent_budget";
+	public static final String INTENT_WHERE = "intent_where";
+	public static final String INTENT_MONTHLY_PAY = "intent_monthly_pay";
+	public static final String INTENT_ROOMS = "intent_rooms";
+	public static final String INTENT_REMARKS = "intent_remarks";
+	
 	private TextView tvBack, tvChangeAnother;
 	private AbPullToRefreshView pullView;
 	private ListView lstSearchHouseArtifactResult;

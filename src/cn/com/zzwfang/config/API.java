@@ -24,8 +24,12 @@ public class API {
 	/**
 	 * 目标主机地址  http://www.zzwfang.com:7894
 	 * http://118.119.254.72:7894/
+	 * 
+	 * http://www.zzwfang.com:7894/
+	 * http://yangmingbo.cn
+	 * http://110.189.90.40:7892/
 	 */
-	public static final String host = "http://www.zzwfang.com:7894/";
+	public static final String host = "http://110.189.90.40:7892/";
 
 	/**
 	 * 认证授权接口
@@ -214,5 +218,10 @@ public class API {
      * 发送消息
      */
     public static final String SEND_MESSAGE = "Message/Send";
+    
+    /**
+     * 获取月供范围列表
+     */
+    public static final String GET_MONTHLY_PAY_RANGE = "Other/MonthPay";
 
 }
