@@ -98,11 +98,17 @@ public interface Action {
 	
 	/**
 	 * 返回搜房神器列表
-	 * @param house
-	 * @param pageIndex
+	 * @param allPrice   总价范围
+	 * @param PartPrice  首付范围
+	 * @param type   类型
+	 * @param area   区域
+	 * @param rooms   几房
+	 * @param monthlyPay  月供
+	 * @param label   补充信息
+	 * @param pageIndex   当前页
 	 * @param callback
 	 */
-	void getSearchHouseArtifactResut(String house, int pageIndex, ResultHandlerCallback callback);
+	void getSearchHouseArtifactResut(String allPrice, String partPrice, int type, String area, String rooms, String monthlyPay, String label, int pageIndex, ResultHandlerCallback callback);
 	
 	/**
 	 * 新房列表页
@@ -412,4 +418,34 @@ public interface Action {
 	 */
 	void getMonthlyPayRange(ResultHandlerCallback callback);
 	
+	/**
+	 * @param userId   用户ID
+	 * @param realName   开户行用户姓名
+	 * @param bankCode   银行卡号
+	 * @param bankName   银行名称
+	 * @param bankCity   开户行城市
+	 * @param bankImage   身份证图片
+	 * @param openAccountBankName    开户行银行名称
+	 * @param callback
+	 */
+	void commitFeeHunterBankInfo(String userId, String realName,
+			String bankCode, String bankName, String bankCity,
+			File bankImage, String openAccountBankName, ResultHandlerCallback callback);
+	
+	/**
+	 * 根据我的需求条件推荐给我的房源列表
+	 * @param userId  用户ID
+	 * @param pageSize  显示条数
+	 * @param pageIndex  当前页码
+	 * @param callback
+	 */
+	void getHousesRecommendedToMe(String userId, int pageSize, int pageIndex, ResultHandlerCallback callback);
+	
+	/**
+	 * 我的购屋列表
+	 * 用户ID
+	 * @param userId
+	 * @param callback
+	 */
+	void getMyBoughtHouses(String userId, ResultHandlerCallback callback);
 }

@@ -25,6 +25,7 @@ import cn.com.zzwfang.activity.MyDemandActivity;
 import cn.com.zzwfang.activity.MyHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyProxyActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
+import cn.com.zzwfang.activity.ShangJinLieRenActivity;
 import cn.com.zzwfang.bean.UserInfoBean;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
@@ -102,12 +103,25 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 			((MainActivity)getActivity()).backToHomeFragment();
 			break;
 		case R.id.frag_mine_fee_hunter:   // 赏金猎人个人中心
-			Jumper.newJumper()
-	        .setAheadInAnimation(R.anim.activity_push_in_right)
-	        .setAheadOutAnimation(R.anim.activity_alpha_out)
-	        .setBackInAnimation(R.anim.activity_alpha_in)
-	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(this, FeeHunterInfoActivity.class);
+			/**
+			 * 用户类型    0经济人，1普通会员，2赏金猎人
+			 */
+			int userType = ContentUtils.getUserType(getActivity());
+			if (userType == 2) {
+				Jumper.newJumper()
+	            .setAheadInAnimation(R.anim.activity_push_in_right)
+	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+	            .setBackInAnimation(R.anim.activity_alpha_in)
+	            .setBackOutAnimation(R.anim.activity_push_out_right)
+	            .jump(this, FeeHunterInfoActivity.class);
+			} else {
+				Jumper.newJumper()
+	            .setAheadInAnimation(R.anim.activity_push_in_right)
+	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+	            .setBackInAnimation(R.anim.activity_alpha_in)
+	            .setBackOutAnimation(R.anim.activity_push_out_right)
+	            .jump(this, ShangJinLieRenActivity.class);
+			}
 			break;
 		case R.id.frag_mine_avatar:   //  修改头像
 			PopViewHelper.showUpdateAvatarPopupWindow(getActivity(), getView(), this);

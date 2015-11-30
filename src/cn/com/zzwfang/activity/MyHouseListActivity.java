@@ -114,7 +114,8 @@ public class MyHouseListActivity extends BaseActivity implements
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				pageTotal = result.getTotal();
+				int total = result.getTotal();
+				pageTotal = (int) Math.ceil(((double)total / (double)10));
 				ArrayList<MyHouseBean> temp = (ArrayList<MyHouseBean>) JSON.parseArray(result.getData(), MyHouseBean.class);
 				if (isRefresh) {
 					myHouses.clear();

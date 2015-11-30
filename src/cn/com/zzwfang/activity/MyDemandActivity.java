@@ -55,8 +55,20 @@ public class MyDemandActivity extends BaseActivity implements OnClickListener {
 	        .jump(this, MyDemandInfoActivity.class);
 			break;
 		case R.id.act_my_demand_advised_house_resources_flt:  //  推荐房源
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, HousesRecommendedToMeActivity.class);
 			break;
 		case R.id.act_my_demand_my_buy_house_flt:   //  我的购房
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, MyBoughtHousesActivity.class);
 			break;
 		}
 	}

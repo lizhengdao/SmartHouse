@@ -59,7 +59,7 @@
                     android:text="收款人：" />
 
                 <EditText
-                    android:id="@+id/act_fill_card_info_name_tv"
+                    android:id="@+id/act_fill_card_info_name_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -91,7 +91,7 @@
                     android:text="银行卡号：" />
 
                 <EditText
-                    android:id="@+id/act_fill_card_info_card_num_tv"
+                    android:id="@+id/act_fill_card_info_card_num_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -108,6 +108,7 @@
                 android:background="@color/theme_gray" />
 
             <LinearLayout
+                android:id="@+id/act_fill_card_info_bank_name_llt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
@@ -152,14 +153,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="开行户：" />
+                    android:text="开户行：" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/act_fill_card_info_open_bank_name_edt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableRight="@drawable/ic_down_arrow"
                     android:gravity="center_vertical"
-                    android:hint="请选择" />
+                    android:background="@color/white"
+                    android:hint="请输入开户行"
+                    android:inputType="number" />
             </LinearLayout>
 
             <View
@@ -170,6 +173,7 @@
                 android:background="@color/theme_gray" />
 
             <LinearLayout
+                android:id="@+id/act_fill_card_info_open_account_city_llt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
@@ -195,7 +199,13 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/bg_bank_pick_photo"
+                android:scaleType="centerInside"
+                android:background="@drawable/bg_bank_card" />
 
             <TextView
                 android:id="@+id/act_fill_card_info_commit_tv"

@@ -1,5 +1,8 @@
 package cn.com.zzwfang.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import android.content.Context;
 import android.text.TextUtils;
 import cn.com.zzwfang.bean.TextValueBean;
@@ -404,13 +407,36 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void getSearchHouseArtifactResut(String house, int pageIndex,
-			ResultHandlerCallback callback) {
+	public void getSearchHouseArtifactResut(String allPrice, String partPrice, int type,
+			String area, String rooms, String monthlyPay, String label, int pageIndex, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
 		requestParams.put("sign", "1111");
 		requestParams.put("timestamp", "2222");
-		requestParams.put("house", house);
+		
+		if (type == 1) {  // 一次性付款
+			requestParams.put("allPrice", allPrice);
+//			requestParams.put("area", area);
+//			requestParams.put("house", rooms);
+//			requestParams.put("label", label);
+		} else if (type == 0) {
+			requestParams.put("partPrice", partPrice);
+			requestParams.put("priceRange", monthlyPay);
+//			requestParams.put("area", area);
+//			requestParams.put("house", rooms);
+			
+		}
+		if (!TextUtils.isEmpty(area)) {
+			requestParams.put("area", area);
+		}
+		if (!TextUtils.isEmpty(rooms)) {
+			requestParams.put("house", rooms);
+		}
+		
+		if (!TextUtils.isEmpty(label)) {
+			requestParams.put("label", label);
+		}
+		requestParams.put("type", type + "");
 		requestParams.put("pageIndex", pageIndex + "");
 
 		Options opt = new Options();
@@ -1723,6 +1749,121 @@ public class ActionImpl implements Action {
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
     }
+
+	@Override
+	public void commitFeeHunterBankInfo(String userId, String realName,
+			String bankCode, String bankName, String bankCity, File bankImage,
+			String openAccountBankName, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("userId", userId);
+        requestParams.put("realName", realName);
+        requestParams.put("bankCode", bankCode);
+        requestParams.put("bankName", bankName);
+        requestParams.put("bankCity", bankCity);
+        
+        try {
+			requestParams.put("bankImage", bankImage);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        requestParams.put("openAccountName", openAccountBankName);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.POST_USER_BANK_INFO_TO_BE_FEE_HUNTER));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.POST);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getHousesRecommendedToMe(String userId, int pageSize,
+			int pageIndex, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("userId", userId);
+        requestParams.put("pageIndex", pageIndex + "");
+        requestParams.put("pageSize", pageSize + "");
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSES_RECOMMENDED_TO_ME));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getMyBoughtHouses(String userId, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("userId", userId);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_MY_BOUGHT_HOUSES));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
 
 	
 }

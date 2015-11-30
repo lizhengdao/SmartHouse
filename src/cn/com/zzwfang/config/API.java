@@ -29,7 +29,7 @@ public class API {
 	 * http://yangmingbo.cn
 	 * http://110.189.90.40:7892/
 	 */
-	public static final String host = "http://110.189.90.40:7892/";
+	public static final String host = "http://www.zzwfang.com:7894/";
 
 	/**
 	 * 认证授权接口
@@ -223,5 +223,20 @@ public class API {
      * 获取月供范围列表
      */
     public static final String GET_MONTHLY_PAY_RANGE = "Other/MonthPay";
+    
+    /**
+     * 获取月供范围列表
+     */
+    public static final String POST_USER_BANK_INFO_TO_BE_FEE_HUNTER = "User/AddBankInformation";
+    
+    /**
+     * 根据我的需求条件推荐给我的房源列表
+     */
+    public static final String GET_HOUSES_RECOMMENDED_TO_ME = "User/ToMeProperty";
+    
+    /**
+     * 我的购屋列表
+     */
+    public static final String GET_MY_BOUGHT_HOUSES = "User/MyBuyPrp";
 
 }

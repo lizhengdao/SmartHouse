@@ -43,18 +43,11 @@
             android:textSize="16sp" />
     </FrameLayout>
 
-    <cn.com.zzwfang.pullview.AbPullToRefreshView
-        android:id="@+id/pull_search_house_artifact_result"
+    <ListView
+        android:id="@+id/lst_search_house_artifact_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/lst_search_house_artifact_result"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@color/color_cecece"
-            android:dividerHeight="1dp" />
-    </cn.com.zzwfang.pullview.AbPullToRefreshView>
+        android:divider="@color/color_cecece"
+        android:dividerHeight="1dp" />
 
 </LinearLayout>

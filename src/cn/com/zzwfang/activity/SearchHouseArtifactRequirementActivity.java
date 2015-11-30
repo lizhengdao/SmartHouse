@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.SearchHouseArtifactRequirementAdapter;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.TextValueBean;
@@ -22,6 +23,7 @@ import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.DevUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
@@ -45,11 +47,11 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	
 	private TextView tvBack, tvCommit, tvBudget, tvWhere, tvMonthlyPay;
 	
-	private LinearLayout lltBudget, lltWhere, lltMonthlyPay;
+	private LinearLayout lltBudget, lltWhere, lltMonthlyPay, lltGridContainer;
 	private GridView gridView;
+	private SearchHouseArtifactRequirementAdapter adapter;
 	
 	private RadioButton rbOneRoom, rbTwoRooms, rbThreeRooms, rbFourRooms;
-	private CheckBox cbxSubwayHouse, cbxSchoolHouse, cbxElectricHouse, cbxCarSpaceHouse;
 	
 	private int payType = -1;
 	
@@ -123,22 +125,21 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		lltBudget = (LinearLayout) findViewById(R.id.act_search_house_artifact_budget_llt);
 		lltWhere = (LinearLayout) findViewById(R.id.act_search_house_artifact_where_llt);
 		lltMonthlyPay = (LinearLayout) findViewById(R.id.act_search_house_month_pay_llt);
+		lltGridContainer = (LinearLayout) findViewById(R.id.act_search_house_additional_info_grid_container);
 		
 		tvBudget = (TextView) findViewById(R.id.act_search_house_artifact_budget_tv);
 		tvWhere = (TextView) findViewById(R.id.act_search_house_artifact_wheree_tv);
 		tvMonthlyPay = (TextView) findViewById(R.id.act_search_house_month_pay_tv);
 		
 		gridView = (GridView) findViewById(R.id.act_search_house_additional_info);
+		adapter = new SearchHouseArtifactRequirementAdapter(this, estateLabels);
+		gridView.setAdapter(adapter);
 		
 		rbOneRoom = (RadioButton) findViewById(R.id.rb_one_room);
 		rbTwoRooms = (RadioButton) findViewById(R.id.rb_two_rooms);
 		rbThreeRooms = (RadioButton) findViewById(R.id.rb_three_rooms);
 		rbFourRooms = (RadioButton) findViewById(R.id.rb_four_rooms);
 		
-		cbxSubwayHouse = (CheckBox) findViewById(R.id.rb_subway_house);
-		cbxSchoolHouse = (CheckBox) findViewById(R.id.rb_school_house);
-		cbxElectricHouse = (CheckBox) findViewById(R.id.rb_electric_house);
-		cbxCarSpaceHouse = (CheckBox) findViewById(R.id.rb_car_space_house);
 		
 		tvCommit = (TextView) findViewById(R.id.act_search_house_artifact_requirement_commit_tv);
 		
@@ -153,10 +154,6 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		rbThreeRooms.setOnCheckedChangeListener(this);
 		rbFourRooms.setOnCheckedChangeListener(this);
 		
-		cbxSubwayHouse.setOnCheckedChangeListener(this);
-		cbxSchoolHouse.setOnCheckedChangeListener(this);
-		cbxElectricHouse.setOnCheckedChangeListener(this);
-		cbxCarSpaceHouse.setOnCheckedChangeListener(this);
 		
 		tvCommit.setOnClickListener(this);
 		
@@ -204,17 +201,35 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 			
 		case R.id.act_search_house_artifact_requirement_commit_tv:  //  提交
 		    Jumper jumper = Jumper.newJumper();
+		    String additionalInfo = "";
+		    for (TextValueBean temp : estateLabels) {
+		    	if (temp.isSelected()) {
+		    		additionalInfo += (temp.getValue() + ",");
+		    	}
+		    }
+		    
+		    if (additionalInfo.endsWith(",")) {
+		    	additionalInfo = additionalInfo.substring(0, additionalInfo.length() -1);
+		    }
 			
 		    jumper = jumper.setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .putInt(SearchHouseArtifactResultActivity.INTENT_PAY_TYPE, payType)
-	        .putString(SearchHouseArtifactResultActivity.INTENT_BUDGET, totalPriceCondition.getValue())
-	        .putString(SearchHouseArtifactResultActivity.INTENT_WHERE, areaCondition.getValue())
-	        .putString(SearchHouseArtifactResultActivity.INTENT_MONTHLY_PAY, monthlyPayCondition.getValue())
-	        .putInt(SearchHouseArtifactResultActivity.INTENT_ROOMS, rooms)
-			.putString(SearchHouseArtifactResultActivity.INTENT_REMARKS, "");
+	        .putInt(SearchHouseArtifactResultActivity.INTENT_PAY_TYPE, payType);
+		    
+		    if (totalPriceCondition != null) {
+		    	jumper = jumper.putString(SearchHouseArtifactResultActivity.INTENT_BUDGET, totalPriceCondition.getValue());
+		    }
+		    if (areaCondition != null) {
+		    	jumper = jumper.putString(SearchHouseArtifactResultActivity.INTENT_WHERE, areaCondition.getValue());
+		    }
+	        if (monthlyPayCondition != null) {
+	        	jumper = jumper.putString(SearchHouseArtifactResultActivity.INTENT_MONTHLY_PAY, monthlyPayCondition.getValue());
+	        }
+	        
+	        jumper.putInt(SearchHouseArtifactResultActivity.INTENT_ROOMS, rooms)
+			.putString(SearchHouseArtifactResultActivity.INTENT_REMARKS, additionalInfo);
 		    jumper.jump(this, SearchHouseArtifactResultActivity.class);
 			break;
 		case R.id.act_search_house_artifact_budget_llt:   //  预算
@@ -245,14 +260,6 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 			case R.id.rb_four_rooms:  // 四房
 				rooms = 4;
 				break;
-			case R.id.rb_subway_house:  // 地铁房
-				break;
-			case R.id.rb_school_house:  // 学区房
-				break;
-			case R.id.rb_electric_house:  // 电梯房
-				break;
-			case R.id.rb_car_space_house:  // 带车位
-				break;
 			}
 		}
 	}
@@ -278,6 +285,8 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
                     salePriceRanges.addAll(temp);
                 } else if (EstateLabel.equals(conditionName)) {
                     estateLabels.addAll(temp);
+                    adapter.notifyDataSetChanged();
+                    setGridHeight(gridView);
                 }
             }
         });
@@ -331,4 +340,26 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
             }
         });
 	}
+	
+	private void setGridHeight(GridView gridView) {
+		
+		int count = adapter.getCount();
+		int column = 4;
+        int displayRowNum = 0;
+        int tmp = count % column;
+        displayRowNum = tmp > 0 ? count/column + 1  : count / column ;
+
+       //使用此方法获取GridView Item 的高度，Adapte的布局必须使用LinearLayout，但是使用此方法获取的Item的宽度达不到预期效果
+       int gridHeight = 0;
+       if (gridView.getAdapter().getCount() > 0) {
+           View view = gridView.getAdapter().getView(gridView.getFirstVisiblePosition(), null, gridView);
+           view.measure(0, 0);
+           int itemHeight = view.getMeasuredHeight();
+           gridHeight = (int)((itemHeight) * displayRowNum + DevUtils.getScreenTools(this).dip2px(10) * (displayRowNum - 1));
+       }
+
+       LinearLayout.LayoutParams lpGrid = (LinearLayout.LayoutParams)gridView.getLayoutParams();
+       lpGrid.height = gridHeight;
+
+  }
 }

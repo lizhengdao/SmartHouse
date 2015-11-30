@@ -48,14 +48,14 @@
     </FrameLayout>
 
     <cn.com.zzwfang.pullview.AbPullToRefreshView
-        android:id="@+id/pull_search_house_artifact_result"
+        android:id="@+id/pull_act_proxy_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical" >
 
         <ListView
-            android:id="@+id/lst_search_house_artifact_result"
+            android:id="@+id/lst_act_proxy_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/color_cecece"
