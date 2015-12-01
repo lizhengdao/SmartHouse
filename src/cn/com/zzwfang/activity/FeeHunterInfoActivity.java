@@ -1,18 +1,26 @@
 package cn.com.zzwfang.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.view.PathImage;
 
 public class FeeHunterInfoActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack, tvMyCustomer, tvRecommendHouseSourceList, tvFeeHunterMsg, tvFeeHunterRule;
 	private TextView tvBindedCards;
 	private LinearLayout lltRecommendCustomer, lltRecommendSell;
+	private PathImage avatarImageView;
+	
+	private TextView tvRecommendedCustomers, tvRecommendedOwners, tvFeeHunterMoney;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -34,6 +42,22 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		tvFeeHunterRule = (TextView) findViewById(R.id.act_fee_hunter_info_hunter_rule);
 		
 		tvBindedCards = (TextView) findViewById(R.id.act_fee_hunter_info_binded_card);
+		
+		avatarImageView = (PathImage) findViewById(R.id.act_fee_hunter_info_avater);
+		tvRecommendedCustomers = (TextView) findViewById(R.id.act_fee_hunter_info_recommended_customers);
+		tvRecommendedOwners = (TextView) findViewById(R.id.act_fee_hunter_info_recommended_owners);
+		tvFeeHunterMoney = (TextView) findViewById(R.id.act_fee_hunter_info_money);
+		
+		UserInfoBean userInfoBean = ContentUtils.getUserInfo(this);
+//        tvUserName.setText(userInfoBean.getUserName());
+//        tvPhone.setText(userInfoBean.getPhone());
+        String avatarUrl = userInfoBean.getPhoto();
+        if (!TextUtils.isEmpty(avatarUrl)) {
+            ImageAction.displayAvatar(avatarUrl, avatarImageView);
+        }
+        tvRecommendedCustomers.setText(userInfoBean.getRecommendClientsNum() + "个");
+        tvRecommendedOwners.setText(userInfoBean.getRecommendOwners() + "套");
+        tvFeeHunterMoney.setText("￥" + userInfoBean.getBounty());
 		
 		tvBack.setOnClickListener(this);
 		lltRecommendCustomer.setOnClickListener(this);

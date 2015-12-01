@@ -448,4 +448,18 @@ public interface Action {
 	 * @param callback
 	 */
 	void getMyBoughtHouses(String userId, ResultHandlerCallback callback);
+	
+	/**
+	 * 第一次请求获取省份列表
+       第二次请求通过省份代码获取城市列表
+	 * @param cityCode
+	 * @param callback
+	 */
+	void getBankProvinceOrCity(String cityCode, ResultHandlerCallback callback);
+	
+	/**
+	 * 银行列表
+	 * @param callback
+	 */
+	void getBankNameList(ResultHandlerCallback callback);
 }

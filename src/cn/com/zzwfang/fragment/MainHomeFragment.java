@@ -140,22 +140,29 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			 * 用户类型    0经济人，1普通会员，2赏金猎人
 			 */
 			
-			int userType = ContentUtils.getUserType(getActivity());
-			if (userType == 2) {
-				Jumper.newJumper()
-	            .setAheadInAnimation(R.anim.activity_push_in_right)
-	            .setAheadOutAnimation(R.anim.activity_alpha_out)
-	            .setBackInAnimation(R.anim.activity_alpha_in)
-	            .setBackOutAnimation(R.anim.activity_push_out_right)
-	            .jump(this, FeeHunterInfoActivity.class);
-			} else {
-				Jumper.newJumper()
-	            .setAheadInAnimation(R.anim.activity_push_in_right)
-	            .setAheadOutAnimation(R.anim.activity_alpha_out)
-	            .setBackInAnimation(R.anim.activity_alpha_in)
-	            .setBackOutAnimation(R.anim.activity_push_out_right)
-	            .jump(this, ShangJinLieRenActivity.class);
-			}
+//			int userType = ContentUtils.getUserType(getActivity());
+//			if (userType == 2) {
+//				Jumper.newJumper()
+//	            .setAheadInAnimation(R.anim.activity_push_in_right)
+//	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	            .setBackInAnimation(R.anim.activity_alpha_in)
+//	            .setBackOutAnimation(R.anim.activity_push_out_right)
+//	            .jump(this, FeeHunterInfoActivity.class);
+//			} else {
+//				Jumper.newJumper()
+//	            .setAheadInAnimation(R.anim.activity_push_in_right)
+//	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	            .setBackInAnimation(R.anim.activity_alpha_in)
+//	            .setBackOutAnimation(R.anim.activity_push_out_right)
+//	            .jump(this, ShangJinLieRenActivity.class);
+//			}
+			
+			Jumper.newJumper()
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
+            .jump(this, ShangJinLieRenActivity.class);
 			
 			break;
 		}

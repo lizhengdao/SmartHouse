@@ -238,5 +238,19 @@ public class API {
      * 我的购屋列表
      */
     public static final String GET_MY_BOUGHT_HOUSES = "User/MyBuyPrp";
+    
+    /**
+     * 银行城市列表
+     * 第一次请求获取省份列表
+     * 第二次请求通过省份代码获取城市列表
+     */
+    public static final String GET_BANK_PROVINCE_OR_CITY = "Other/City";
+    
+    /**
+     * 银行城市列表
+     * 第一次请求获取省份列表
+     * 第二次请求通过省份代码获取城市列表
+     */
+    public static final String GET_BANK_NAME_LIST = "Other/Bank";
 
 }

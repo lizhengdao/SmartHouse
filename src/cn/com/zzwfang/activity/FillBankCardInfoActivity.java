@@ -1,6 +1,9 @@
 package cn.com.zzwfang.activity;
 
 import java.io.File;
+import java.util.ArrayList;
+
+import com.alibaba.fastjson.JSON;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -27,11 +31,19 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 	
 	private LinearLayout lltBankName, lltOpenAccountBankCity;
 	
+	private ArrayList<ProvinceCityBean> provinces = new ArrayList<ProvinceCityBean>();
+	
+	private ArrayList<ProvinceCityBean> cities = new ArrayList<ProvinceCityBean>();
+	
+	private ArrayList<String> bankNames = new ArrayList<String>();
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		
 		initView();
+		getProvinceOrCity(null);
+		getBankNameList();
 	}
 	
 	private void initView() {
@@ -138,4 +150,57 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 		// TODO Auto-generated method stub
 		return 200;
 	}
+	
+	private void getProvinceOrCity(final String cityCode) {
+	    
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    actionImpl.getBankProvinceOrCity(cityCode, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                ArrayList<ProvinceCityBean> temp = (ArrayList<ProvinceCityBean>) JSON.parseArray(result.getData(), ProvinceCityBean.class);
+                if (TextUtils.isEmpty(cityCode)) {
+                    provinces.addAll(temp);
+                } else {
+                    cities.clear();
+                    cities.addAll(temp);
+                }
+                
+                
+            }
+        });
+	}
+	
+	private void getBankNameList() {
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    actionImpl.getBankNameList(new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                ArrayList<String> temp = (ArrayList<String>) JSON.parseArray(result.getData(), String.class);
+                bankNames.addAll(temp);
+            }
+        });
+	}
+	
 }
