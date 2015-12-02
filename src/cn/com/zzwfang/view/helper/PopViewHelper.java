@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.BankNameAdapter;
+import cn.com.zzwfang.adapter.BankProvinceOrCityAdapter;
 import cn.com.zzwfang.adapter.ConditionAdapter;
 import cn.com.zzwfang.adapter.MoreDetailAdapter;
 import cn.com.zzwfang.adapter.MoreTypeAdapter;
@@ -25,6 +27,7 @@ import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
 import cn.com.zzwfang.adapter.NewsMoreAdapter;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
 import cn.com.zzwfang.bean.IdTitleBean;
+import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 
@@ -745,11 +748,15 @@ public class PopViewHelper {
 	
 	//==========================二手房详情   更多（分享  关注）【end】===========================================
 	
+	
+	public interface OnBankProvinceOrCitySelectedListener {
+		void onBankProvinceOrCitySelect(ProvinceCityBean data);
+	}
 	/**
      * 选择银行卡省或者城市
      */
     public static void showSelectBankProvinceOrCityPopWindow(Context context, View anchorView,
-            final ArrayList<TextValueBean> conditions, final OnConditionSelectListener onConditionSelectListener) {
+            final ArrayList<ProvinceCityBean> conditions, final OnBankProvinceOrCitySelectedListener onBankProvinceOrCitySelectedListener) {
         View view = View.inflate(context, R.layout.popup_condition, null);
         final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);
@@ -759,15 +766,16 @@ public class PopViewHelper {
         popupWindow.setBackgroundDrawable(dw);
         
         ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
-        ConditionAdapter adapter = new ConditionAdapter(context, conditions);
+        BankProvinceOrCityAdapter adapter = new BankProvinceOrCityAdapter(context, conditions);
+        
         lstCondition.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 popupWindow.dismiss();
-                if (onConditionSelectListener != null) {
-                    onConditionSelectListener.onConditionSelect(conditions.get(position));
+                if (onBankProvinceOrCitySelectedListener != null) {
+                	onBankProvinceOrCitySelectedListener.onBankProvinceOrCitySelect(conditions.get(position));
                 }
             }
         });
@@ -778,4 +786,44 @@ public class PopViewHelper {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
     }
+    
+    public interface OnBankNameSelectedListener {
+		void onBankNameSelect(String bankName);
+	}
+	/**
+     * 选择银行卡省或者城市
+     */
+    public static void showSelectBankNamePopWindow(Context context, View anchorView,
+            final ArrayList<String> conditions, final OnBankNameSelectedListener onBankNameSelectedListener) {
+        View view = View.inflate(context, R.layout.popup_condition, null);
+        final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
+        ColorDrawable dw = new ColorDrawable(0000000000);
+        popupWindow.setBackgroundDrawable(dw);
+        
+        ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+        BankNameAdapter adapter = new BankNameAdapter(context, conditions);
+        
+        lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                popupWindow.dismiss();
+                if (onBankNameSelectedListener != null) {
+                	onBankNameSelectedListener.onBankNameSelect(conditions.get(position));
+                }
+            }
+        });
+        lstCondition.setAdapter(adapter);
+        if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+    }
+    
+    
 }

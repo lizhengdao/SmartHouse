@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/act_main_guider_llt"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:background="@color/color_eeeeee"
         android:orientation="horizontal"

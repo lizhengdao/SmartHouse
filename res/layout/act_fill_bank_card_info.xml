@@ -56,7 +56,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="收款人：" />
+                    android:text="收款人："
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_fill_card_info_name_edt"
@@ -64,7 +65,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:background="@color/white"
-                    android:hint="请输入收款人姓名" />
+                    android:hint="请输入收款人姓名"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -88,7 +90,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="银行卡号：" />
+                    android:text="银行卡号："
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_fill_card_info_card_num_edt"
@@ -97,7 +100,8 @@
                     android:gravity="center_vertical"
                     android:background="@color/white"
                     android:hint="请输入银行卡号"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -122,14 +126,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="银行名称：" />
+                    android:text="银行名称："
+                    android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/act_fill_card_info_bank_name_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_down_arrow"
                     android:gravity="center_vertical"
-                    android:hint="请选择" />
+                    android:hint="请选择"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -153,7 +160,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="开户行：" />
+                    android:text="开户行："
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/act_fill_card_info_open_bank_name_edt"
@@ -162,7 +170,7 @@
                     android:gravity="center_vertical"
                     android:background="@color/white"
                     android:hint="请输入开户行"
-                    android:inputType="number" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <View
@@ -187,17 +195,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="开户行城市：" />
+                    android:text="开户行城市："
+                    android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/act_fill_card_info_addr_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_down_arrow"
                     android:gravity="center_vertical"
-                    android:hint="请选择" />
+                    android:hint="请选择"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/act_fill_card_info_banK_img"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
@@ -226,6 +238,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="提交成功后，佣金提现后会转到相应的账户，填写谨慎！"
                 android:textColor="@color/white"

@@ -65,6 +65,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	
 	private TextView tvApartmentLayout, tvBidPrice, tvBidDate, tvFollowPersons;
 	
+	private View lineSandTableDisplay, lineInnerThreeDimensionDisplay;
+	
 	private LinearLayout lltBrokerInfo, lltCourt;
 	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
 	private TextView tvMortgageCalculate;
@@ -127,6 +129,9 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvApartmentLayout = (TextView) findViewById(R.id.act_second_hand_house_detail_apartment_layout);
 		tvBidDate = (TextView) findViewById(R.id.act_second_hand_house_detail_bid_date);
 		tvFollowPersons = (TextView) findViewById(R.id.act_second_hand_house_detail_follow_persons);
+		
+		lineSandTableDisplay = findViewById(R.id.act_second_hand_house_detail_sand_table_display_line);
+		lineInnerThreeDimensionDisplay = findViewById(R.id.act_second_hand_house_detail_inner_three_dimession_display_line);
 		
 		mapView = (MapView) findViewById(R.id.act_second_hand_house_detail_map_view);
 		
@@ -315,6 +320,17 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 
 	private void rendUI() {
 		if (secondHandHouseDetail != null) {
+			
+			if (TextUtils.isEmpty(secondHandHouseDetail.getEstate360())) {
+				tvSandTableDisplay.setVisibility(View.GONE);
+				lineSandTableDisplay.setVisibility(View.GONE);
+			}
+			
+			if (TextUtils.isEmpty(secondHandHouseDetail.getPrp360())) {
+				tvInnerThreeDimensionDisplay.setVisibility(View.GONE);
+				lineInnerThreeDimensionDisplay.setVisibility(View.GONE);
+			}
+			
 			photos.addAll(secondHandHouseDetail.getPhoto());
 			photoAdapter.notifyDataSetChanged();
 			int photoTotalNum = photoAdapter.getCount();
@@ -422,7 +438,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	@Override
 	public void onPageSelected(int arg0) {
 		int photoTotalNum = photoAdapter.getCount();
-		String txt = photoTotalNum + "/" + (arg0 + 1);
+		String txt = (arg0 + 1) + "/" + photoTotalNum;
 		tvPhotoIndex.setText(txt);
 	}
 

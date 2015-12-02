@@ -515,6 +515,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/act_second_hand_house_detail_inner_three_dimession_display_line"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/color_e0e0e0" />
@@ -530,6 +531,7 @@
                     android:textSize="16sp" />
 
                 <View
+                    android:id="@+id/act_second_hand_house_detail_sand_table_display_line"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/color_e0e0e0" />
