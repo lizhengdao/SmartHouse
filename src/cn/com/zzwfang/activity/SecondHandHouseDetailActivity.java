@@ -272,8 +272,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				.setAheadOutAnimation(R.anim.activity_alpha_out)
 				.setBackInAnimation(R.anim.activity_alpha_in)
 				.setBackOutAnimation(R.anim.activity_push_out_right)
-				.putLong(NearbyDetailActivity.INTENT_LAT, secondHandHouseDetail.getLat())
-				.putLong(NearbyDetailActivity.INTENT_LNG, secondHandHouseDetail.getLng())
+				.putDouble(NearbyDetailActivity.INTENT_LAT, secondHandHouseDetail.getLat())
+				.putDouble(NearbyDetailActivity.INTENT_LNG, secondHandHouseDetail.getLng())
 				.jump(this, NearbyDetailActivity.class);
 			}
 			

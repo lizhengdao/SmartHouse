@@ -70,9 +70,9 @@ public class RentHouseDetailBean extends BaseBean {
 	 */
 	private String BuildYear;
 	
-	private long Lat;
+	private double Lat;
 	
-	private long Lng;
+	private double Lng;
 	
 	private String No;
 	
@@ -227,19 +227,19 @@ public class RentHouseDetailBean extends BaseBean {
 		Photo = photo;
 	}
 
-	public long getLat() {
+	public double getLat() {
 		return Lat;
 	}
 
-	public void setLat(long lat) {
+	public void setLat(double lat) {
 		Lat = lat;
 	}
 
-	public long getLng() {
+	public double getLng() {
 		return Lng;
 	}
 
-	public void setLng(long lng) {
+	public void setLng(double lng) {
 		Lng = lng;
 	}
 

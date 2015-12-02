@@ -56,7 +56,7 @@ OnPageChangeListener {
 	private TextView tvBack, tvPageTitle, tvShare, tvTitle,
 	tvRentPrice, tvHouseType, tvSquare, tvFloor, tvDirection,
 	tvDecoration, tvYear, tvEstateName, tvHouseNum, tvAgentName,
-	tvAgentPhone, tvPhotoIndex;
+	tvAgentPhone, tvPhotoIndex, tvNearbyDeatil;
 	
 	private TextView inner3D, court3D;
 	private View lineInner3D, lineCourt3D;
@@ -107,6 +107,7 @@ OnPageChangeListener {
 		court3D = (TextView) findViewById(R.id.act_rent_house_detail_sand_table_display);
 		lineInner3D = findViewById(R.id.act_rent_house_detail_inner_three_dimession_display_line);
 		lineCourt3D = findViewById(R.id.act_rent_house_detail_sand_table_display_line);
+		tvNearbyDeatil = (TextView) findViewById(R.id.act_rent_house_nearby_detail_tv);
 		
 		photoPager = (ViewPager) findViewById(R.id.act_rent_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);
@@ -126,6 +127,7 @@ OnPageChangeListener {
 		tvEstateName.setOnClickListener(this);
 		inner3D.setOnClickListener(this);
 		court3D.setOnClickListener(this);
+		tvNearbyDeatil.setOnClickListener(this);
 	}
 	
 	@Override
@@ -191,6 +193,18 @@ OnPageChangeListener {
                 .jump(this, SandTableDisplayActivity.class);
             }
 		    break;
+		case R.id.act_rent_house_nearby_detail_tv:
+			if (rentHouseDetailBean != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putDouble(NearbyDetailActivity.INTENT_LAT, rentHouseDetailBean.getLat())
+				.putDouble(NearbyDetailActivity.INTENT_LNG, rentHouseDetailBean.getLng())
+				.jump(this, NearbyDetailActivity.class);
+			}
+			break;
 		}
 	}
 	

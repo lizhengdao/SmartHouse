@@ -30,9 +30,6 @@ public class NewHouseDetailActivity extends BaseActivity implements
 			tvPlotRatio, tvDecoration, tvGreenRatio, tvMgtCompany,
 			tvBuilderCompany, tvMortgageCalculate;
 
-	private ViewPager viewPager;
-	private PhotoPagerAdapter photoPagerAdapter;
-
 	private String estateId;
 
 	private NewHouseDetailBean newHouseDetailBean;
@@ -55,7 +52,6 @@ public class NewHouseDetailActivity extends BaseActivity implements
 		tvBack = (TextView) findViewById(R.id.act_new_house_detail_back);
 		tvPageTitle = (TextView) findViewById(R.id.act_new_house_detail_title);
 		tvTitle = (TextView) findViewById(R.id.act_new_house_detail_title_tv);
-		viewPager = (ViewPager) findViewById(R.id.act_new_house_detail_pager);
 		tvPhotoIndex = (TextView) findViewById(R.id.act_new_house_detail_photo_index_tv);
 		tvAveragePrice = (TextView) findViewById(R.id.act_new_house_detail_average_price_tv);
 		tvArea = (TextView) findViewById(R.id.act_new_house_detail_area_tv);

@@ -60,9 +60,9 @@ public class NearbyDetailActivity extends BaseActivity implements
 	private SuggestionSearch mSuggestionSearch = null;
 	private BaiduMap mBaiduMap = null;
 	
-	private long lat;
+	private double lat;
 	
-	private long lng;
+	private double lng;
 
 	private LatLng curLatLng;
 
@@ -70,8 +70,8 @@ public class NearbyDetailActivity extends BaseActivity implements
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		Intent intent = getIntent();
-		lat = intent.getLongExtra(INTENT_LAT, 0);
-		lng = intent.getLongExtra(INTENT_LNG, 0);
+		lat = intent.getDoubleExtra(INTENT_LAT, 0);
+		lng = intent.getDoubleExtra(INTENT_LNG, 0);
 		initView();
 	}
 

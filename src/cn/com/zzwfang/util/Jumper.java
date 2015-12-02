@@ -46,6 +46,11 @@ public class Jumper {
         intent.putExtra(key, value);
         return this;
     }
+    
+    public Jumper putDouble(String key, double value) {
+    	intent.putExtra(key, value);
+    	return this;
+    }
 
     public Jumper putString(String key, String value) {
         intent.putExtra(key, value);

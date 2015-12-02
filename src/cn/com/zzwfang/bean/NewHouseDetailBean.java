@@ -18,9 +18,9 @@ public class NewHouseDetailBean extends BaseBean {
 	
 	private String Builder;
 	
-	private long Lat;
+	private double Lat;
 	
-	private long Lng;
+	private double Lng;
 	
 	private String Name;
 	
@@ -117,19 +117,19 @@ public class NewHouseDetailBean extends BaseBean {
 		GreeningRate = greeningRate;
 	}
 
-	public long getLat() {
+	public double getLat() {
 		return Lat;
 	}
 
-	public void setLat(long lat) {
+	public void setLat(double lat) {
 		Lat = lat;
 	}
 
-	public long getLng() {
+	public double getLng() {
 		return Lng;
 	}
 
-	public void setLng(long lng) {
+	public void setLng(double lng) {
 		Lng = lng;
 	}
 
