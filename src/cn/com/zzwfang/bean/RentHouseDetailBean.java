@@ -76,8 +76,46 @@ public class RentHouseDetailBean extends BaseBean {
 	
 	private String No;
 	
+	private String MonthAddFollow;
+	
+	/**
+     * 360展示  网页展示
+     */
+    private String Prp360;
+    
+    /**
+     * 沙盘图
+     */
+    private String Estate360;
+    
+    
+	
 
-	public String getTitle() {
+	public String getPrp360() {
+        return Prp360;
+    }
+
+    public void setPrp360(String prp360) {
+        Prp360 = prp360;
+    }
+
+    public String getEstate360() {
+        return Estate360;
+    }
+
+    public void setEstate360(String estate360) {
+        Estate360 = estate360;
+    }
+
+    public String getMonthAddFollow() {
+        return MonthAddFollow;
+    }
+
+    public void setMonthAddFollow(String monthAddFollow) {
+        MonthAddFollow = monthAddFollow;
+    }
+
+    public String getTitle() {
 		return Title;
 	}
 

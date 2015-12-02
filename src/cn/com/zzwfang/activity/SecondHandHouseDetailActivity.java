@@ -45,6 +45,9 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 
 /**
  * 二手房详情
@@ -53,7 +56,9 @@ import com.baidu.mapapi.model.LatLng;
  * 
  */
 public class SecondHandHouseDetailActivity extends BaseActivity implements
-		OnClickListener, OnPageChangeListener {
+		OnClickListener, OnPageChangeListener, IUiListener {
+    
+    public static final String Tencent_app_id = "";
 
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
 	private TextView tvBack, tvTitle, tvMore, tvDetailtitle;
@@ -84,10 +89,14 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private OnMoreShareAndAttentionListener onMoreShareAndAttentionListener;
 	
 	private OnShareTypeSelectListener onShareTypeSelectListener;
+	
+	private Tencent tencent;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		
+		tencent = Tencent.createInstance(Tencent_app_id, this.getApplicationContext());
 		initView();
 		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
 		getSecondHandHouseDetail();
@@ -334,9 +343,10 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			photos.addAll(secondHandHouseDetail.getPhoto());
 			photoAdapter.notifyDataSetChanged();
 			int photoTotalNum = photoAdapter.getCount();
-			String txt = photoTotalNum + "/1";
-			tvPhotoIndex.setText(txt);
-
+			if (photoTotalNum > 0) {
+			    String txt = "1/" + photoTotalNum;
+			    tvPhotoIndex.setText(txt);
+			}
 			tvTitle.setText(secondHandHouseDetail.getTitle());
 			tvDetailtitle.setText(secondHandHouseDetail.getTitle());
 			tvTotalPrice.setText(secondHandHouseDetail.getPrice() + "万");
@@ -483,4 +493,27 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		mapView.onDestroy();
 		super.onDestroy();
 	}
+
+    @Override
+    public void onCancel() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onComplete(Object arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void onError(UiError arg0) {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        tencent.onActivityResult(requestCode, resultCode, data);
+    }
 }

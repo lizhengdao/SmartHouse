@@ -153,7 +153,7 @@ public class NewHouseDetailActivity extends BaseActivity implements
 	public void onPageSelected(int arg0) {
 		// TODO Auto-generated method stub
 		int photoTotalNum = photoAdapter.getCount();
-		String txt = photoTotalNum + "/" + (arg0 + 1);
+		String txt = (arg0 + 1) + "/" + photoTotalNum;
 		tvPhotoIndex.setText(txt);
 	}
 

@@ -27,11 +27,11 @@
             android:id="@+id/act_rent_house_detail_page_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
-            android:layout_gravity="center"
-            android:singleLine="true"
             android:gravity="center"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -46,7 +46,8 @@
             android:paddingRight="8dp"
             android:text="分享"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
     </FrameLayout>
 
     <ScrollView
@@ -91,7 +92,7 @@
                     android:id="@+id/act_rent_house_detail_title"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="20dp"
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
@@ -354,7 +355,8 @@
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal"
+                        android:visibility="invisible" >
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -396,13 +398,47 @@
 
                     <TextView
                         android:id="@+id/act_rent_house_detail_estatename_tv"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:drawableRight="@drawable/ic_right_arrow"
                         android:gravity="center_vertical"
                         android:text="中华名园二期"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
+
+                <View
+                    android:id="@+id/act_rent_house_detail_inner_three_dimession_display_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e0e0e0" />
+
+                <TextView
+                    android:id="@+id/act_rent_house_detail_inner_three_dimession_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:gravity="center_vertical"
+                    android:text="室内3D"
+                    android:textColor="@color/color_4ac20b"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/act_rent_house_detail_sand_table_display_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e0e0e0" />
+
+                <TextView
+                    android:id="@+id/act_rent_house_detail_sand_table_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/white"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:gravity="center_vertical"
+                    android:text="小区3D"
+                    android:textColor="@color/color_4ac20b"
+                    android:textSize="16sp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -450,7 +486,7 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
-                android:text="位置及周边：[青羊]大石西路"
+                android:text="位置及周边："
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -459,6 +495,33 @@
                 android:layout_width="fill_parent"
                 android:layout_height="200dp"
                 android:clickable="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="房源价格走势："
+                android:textColor="@color/color_aaaaaa"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/color_e0e0e0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <WebView
+                    android:id="@+id/act_rent_house_detail_price_trend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

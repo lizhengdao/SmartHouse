@@ -8,14 +8,15 @@
         android:targetSdkVersion="19" />
 
     <application
-        android:allowBackup="true"
         android:name="cn.com.zzwfang.app.SmartHouseApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="true" >
-        <activity android:name="cn.com.zzwfang.activity.SplashActivity"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="cn.com.zzwfang.activity.SplashActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="cn.com.zzwfang.activity.FirstActivity"
             android:screenOrientation="portrait"
@@ -40,140 +40,213 @@
             android:name="cn.com.zzwfang.activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyDemandActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MortgageCalculatorActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyHouseResourcesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.BrowseRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyConcernHouseResourcesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyProxyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SecondHandHouseActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="cn.com.zzwfang.activity.NewHouseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SearchHouseArtifactActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ForgetPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.CityListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SearchHouseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.RentHouseActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SmartHouseProtocolActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SearchHouseArtifactRequirementActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SearchHouseArtifactResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SecondHandHouseDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ProxyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ShangJinLieRenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FillBankCardInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.RentHouseDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.PictureBrowseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.RecommendHouseDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.NewHouseDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="cn.com.zzwfang.activity.NewsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SeeHouseRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyHouseListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ProxySellHouseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.IWantBuyHouseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ChangePwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.CommonProblemsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterMyCustomerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterRecommendNewHouseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterRecommendCustomerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterProgressDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterRecommendHouseSourceListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterMsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterRuleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterWalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterRecommendOwnerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="cn.com.zzwfang.activity.NearbyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SandTableDisplayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ResidentialTransactionHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.SelectEstateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.BrokerInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyDemandInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.CourtDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.HousesRecommendedToMeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.MyBoughtHousesActivity"
+            android:screenOrientation="portrait" />
         
-        <activity android:name="cn.com.zzwfang.activity.SettingsActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeedbackActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MyDemandActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MortgageCalculatorActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="cn.com.zzwfang.activity.MyHouseResourcesActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.BrowseRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MessageActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MyConcernHouseResourcesActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MyProxyActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SecondHandHouseActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="cn.com.zzwfang.activity.NewHouseActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ForgetPwdActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.CityListActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SearchHouseActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.RentHouseActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="cn.com.zzwfang.activity.SmartHouseProtocolActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactRequirementActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SearchHouseArtifactResultActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SecondHandHouseDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ProxyDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ShangJinLieRenActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FillBankCardInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.RentHouseDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.PictureBrowseActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.RecommendHouseDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.NewHouseDetailActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="cn.com.zzwfang.activity.NewsDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SeeHouseRecordActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MyHouseListActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ProxySellHouseActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.IWantBuyHouseActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ChangePwdActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.AboutUsActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.CommonProblemsActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterMyCustomerActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendNewHouseActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendCustomerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterProgressDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendHouseSourceListActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterMsgActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterRuleActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterWalletActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.FeeHunterRecommendOwnerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name="cn.com.zzwfang.activity.NearbyDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SandTableDisplayActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ResidentialTransactionHistoryActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.ChatActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.SelectEstateActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.BrokerInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MyDemandInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.CourtDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.HousesRecommendedToMeActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name="cn.com.zzwfang.activity.MyBoughtHousesActivity"
-            android:screenOrientation="portrait" />
         
+        
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent你的AppId" />
+            </intent-filter>
+        </activity>
+
         <!-- ===================================百度定位【start】=================================================================== -->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" >
         </service>
-        
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="W154lf8ukfGTQ5CaTL5mV8CB" >
         </meta-data>
         <!-- ==================================百度定位【end】=================================================================== -->
-        
+
+
         <!-- ===================================环信【start】=================================================================== -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="zzwfang#zzwim" />
-        <!-- 声明sdk所需的service SDK核心功能-->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="zzwfang#zzwim" />
+        <!-- 声明sdk所需的service SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
         <!-- =====================================环信【end】=================================================================== -->
     </application>
@@ -186,14 +259,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-
-    
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -201,7 +271,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>  
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -209,4 +279,5 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 </manifest>

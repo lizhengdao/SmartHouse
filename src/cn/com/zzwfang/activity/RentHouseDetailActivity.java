@@ -10,21 +10,36 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
 import cn.com.zzwfang.bean.AgentBean;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.RentHouseDetailBean;
 import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.config.API;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
+import cn.com.zzwfang.view.PathImage;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 
 /**
  *  租房详情页
@@ -43,13 +58,19 @@ OnPageChangeListener {
 	tvDecoration, tvYear, tvEstateName, tvHouseNum, tvAgentName,
 	tvAgentPhone, tvPhotoIndex;
 	
+	private TextView inner3D, court3D;
+	private View lineInner3D, lineCourt3D;
+	
 	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
+	
+	private PathImage agentAvatar;
 	
 	private ViewPager photoPager;
 	private PhotoPagerAdapter photoAdapter;
 	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
 	
 	private MapView mapView;
+	private WebView webViewPriceTrend;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -80,6 +101,12 @@ OnPageChangeListener {
 		tvPhotoIndex = (TextView) findViewById(R.id.act_rent_house_detail_photo_index_tv);
 		tvAgentDial = (AutoDrawableTextView) findViewById(R.id.act_rent_house_detail_agent_dial);
 		tvAgentMsg = (AutoDrawableTextView) findViewById(R.id.act_rent_house_detail_agent_msg);
+		agentAvatar = (PathImage) findViewById(R.id.act_rent_house_detail_agent_avatar);
+		
+		inner3D = (TextView) findViewById(R.id.act_rent_house_detail_inner_three_dimession_display);
+		court3D = (TextView) findViewById(R.id.act_rent_house_detail_sand_table_display);
+		lineInner3D = findViewById(R.id.act_rent_house_detail_inner_three_dimession_display_line);
+		lineCourt3D = findViewById(R.id.act_rent_house_detail_sand_table_display_line);
 		
 		photoPager = (ViewPager) findViewById(R.id.act_rent_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);
@@ -87,10 +114,18 @@ OnPageChangeListener {
 		
 		mapView = (MapView) findViewById(R.id.act_rent_house_detail_map);
 		
+		webViewPriceTrend = (WebView) findViewById(R.id.act_rent_house_detail_price_trend);
+		WebSettings ws = webViewPriceTrend.getSettings();
+        ws.setBuiltInZoomControls(false);
+        ws.setJavaScriptEnabled(true);
+		
 		tvBack.setOnClickListener(this);
 		photoPager.setOnPageChangeListener(this);
 		tvAgentDial.setOnClickListener(this);
 		tvAgentMsg.setOnClickListener(this);
+		tvEstateName.setOnClickListener(this);
+		inner3D.setOnClickListener(this);
+		court3D.setOnClickListener(this);
 	}
 	
 	@Override
@@ -118,18 +153,67 @@ OnPageChangeListener {
 			.setBackOutAnimation(R.anim.activity_push_out_right)
 			.jump(this, ChatActivity.class);
 			break;
+			
+		case R.id.act_rent_house_detail_estatename_tv:  //  小区详情
+		    if (rentHouseDetailBean != null) {
+                Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putString(CourtDetailActivity.INTENT_COURT_NAME, rentHouseDetailBean.getEstateName())
+                .putString(CourtDetailActivity.INTENT_COURT_ID, rentHouseDetailBean.getEstateId())
+                .jump(this, CourtDetailActivity.class);
+            }
+		    break;
+		case R.id.act_rent_house_detail_inner_three_dimession_display:
+		    if (rentHouseDetailBean != null) {
+		        Jumper.newJumper()
+	            .setAheadInAnimation(R.anim.activity_push_in_right)
+	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+	            .setBackInAnimation(R.anim.activity_alpha_in)
+	            .setBackOutAnimation(R.anim.activity_push_out_right)
+	            .putString(SandTableDisplayActivity.INTENT_SAND_TABLE_DISPLAY_URL, rentHouseDetailBean.getPrp360())
+	            .putString(SandTableDisplayActivity.INTENT_ESTATE_NAME, rentHouseDetailBean.getEstateName())
+	            .jump(this, SandTableDisplayActivity.class);
+		    }
+		    
+            break;
+		case R.id.act_rent_house_detail_sand_table_display:
+		    if (rentHouseDetailBean != null) {
+                Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putString(SandTableDisplayActivity.INTENT_SAND_TABLE_DISPLAY_URL, rentHouseDetailBean.getEstate360())
+                .putString(SandTableDisplayActivity.INTENT_ESTATE_NAME, rentHouseDetailBean.getEstateName())
+                .jump(this, SandTableDisplayActivity.class);
+            }
+		    break;
 		}
 	}
 	
 	private void rendUI() {
 		if (rentHouseDetailBean != null) {
+		    
+		    if (TextUtils.isEmpty(rentHouseDetailBean.getEstate360())) {
+		        court3D.setVisibility(View.GONE);
+		        lineCourt3D.setVisibility(View.GONE);
+            }
+            
+            if (TextUtils.isEmpty(rentHouseDetailBean.getPrp360())) {
+                inner3D.setVisibility(View.GONE);
+                lineInner3D.setVisibility(View.GONE);
+            }
 			
 			photos.addAll(rentHouseDetailBean.getPhoto());
 			photoAdapter.notifyDataSetChanged();
 			int photoTotalNum = photoAdapter.getCount();
-			String txt = photoTotalNum + "/1";
-			tvPhotoIndex.setText(txt);
-			
+			if (photoTotalNum > 0) {
+			    String txt = "1/" + photoTotalNum;
+	            tvPhotoIndex.setText(txt);
+			}
 			tvPageTitle.setText(rentHouseDetailBean.getTitle());
 			tvTitle.setText(rentHouseDetailBean.getTitle());
 			tvRentPrice.setText(rentHouseDetailBean.getRentPrice() + "元/月");
@@ -142,12 +226,40 @@ OnPageChangeListener {
 			tvEstateName.setText(rentHouseDetailBean.getEstateName());
 			tvHouseNum.setText(rentHouseDetailBean.getNo());
 			
-			AgentBean agentBean = rentHouseDetailBean.getAgent();
-			if (agentBean != null) {
-				tvAgentName.setText(agentBean.getName());
-				tvAgentPhone.setText(agentBean.getTel());
-			}
 			
+			
+			LatLng latLng = new LatLng(rentHouseDetailBean.getLat(), rentHouseDetailBean.getLng());
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+            BaiduMap baiduMap = mapView.getMap();
+            baiduMap.animateMapStatus(u);
+
+            // 构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.ic_cur_location);
+            // 构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions().position(latLng)
+                    .icon(bitmap);
+            // 在地图上添加Marker，并显示
+            baiduMap.addOverlay(option);
+
+            AgentBean agentBean = rentHouseDetailBean.getAgent();
+            if (agentBean != null) {
+                tvAgentName.setText(agentBean.getName());
+                tvAgentPhone.setText(agentBean.getTel());
+                ImageAction.displayBrokerAvatar(agentBean.getPhoto(),
+                        agentAvatar);
+            }
+            
+            CityBean cityBean = ContentUtils.getCityBean(this);
+            if (cityBean != null) {
+//              String urlPriceTrend = API.host + "TrendChart/GetCityChartDataJson?siteId="
+//                             + cityBean.getSiteId() + "&sign=1111&timestamp=2222";
+                
+                String urlPriceTrend = API.host + "Estate/Chart?id="
+                           + rentHouseDetailBean.getEstateId() + "&sign=1111&timestamp=2222";
+                
+                webViewPriceTrend.loadUrl(urlPriceTrend);
+            }
 		}
 	}
 	
@@ -185,7 +297,7 @@ OnPageChangeListener {
 	@Override
 	public void onPageSelected(int arg0) {
 		int photoTotalNum = photoAdapter.getCount();
-		String txt = photoTotalNum + "/" + (arg0 + 1);
+		String txt = (arg0 + 1) + "/" + photoTotalNum;
 		tvPhotoIndex.setText(txt);
 	}
 
