@@ -252,5 +252,22 @@ public class API {
      * 第二次请求通过省份代码获取城市列表
      */
     public static final String GET_BANK_NAME_LIST = "Other/Bank";
+    
+    /**
+     * 获取联系人列表（含历史聊天记录）
+     */
+    public static final String GET_CONTACTS_LIST = "Message/GetContacks";
+    
+    /**
+     * 接口：获取单个联系人（含历史聊天记录，发起聊天时调用）
+     */
+    public static final String GET_MESSGAE_RECORD_WITH_SOMEBODY = "Message/GetContack";
+    
+    /**
+     * 接口：判断联系人在线状态(逗号分隔联系人id)
+     */
+    public static final String GET_CONTACTS_ONLINE_STATUS = "Message/JudgeOnlineUser";
+    
+    public static final String READ_MESSAGES = "Message/ReadMessages";
 
 }

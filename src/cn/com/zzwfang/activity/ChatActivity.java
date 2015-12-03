@@ -1,5 +1,7 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -45,6 +48,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
     private EMGroup emGroup;
     private EMGroupChangeListener emGroupChangeListener;
     private EMChatRoom emChatRoom;
+    
+    private ArrayList<IMMessageBean> imMessages = new ArrayList<IMMessageBean>();
     
     private String messageTo;
     private String messageName;
