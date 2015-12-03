@@ -156,8 +156,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void onSuccess() {
 				try {
-					EMGroupManager.getInstance().loadAllGroups();
-					EMChatManager.getInstance().loadAllConversations();
+//					EMGroupManager.getInstance().loadAllGroups();
+//					EMChatManager.getInstance().loadAllConversations();
+//					EMChatManager.getInstance().
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -173,17 +174,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			            .jump(LoginActivity.this, MainActivity.class);
 					}
 				});
-				
-				
-//				Handler handler = new Handler();
-//				handler.postDelayed(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						
-//					}
-//				}, 1000);
-				
 			}
 			
 			@Override

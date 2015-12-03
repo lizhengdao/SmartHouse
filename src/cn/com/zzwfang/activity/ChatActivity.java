@@ -10,13 +10,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.ChatAdapter;
 import cn.com.zzwfang.bean.IMMessageBean;
+import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.im.MessageSendCallback.OnMessageSendListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
+import cn.com.zzwfang.util.AsyncUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 
@@ -29,6 +32,7 @@ import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
+import com.easemob.chat.EMMessage.ChatType;
 
 public class ChatActivity extends BaseActivity implements OnClickListener, EMEventListener, OnMessageSendListener {
 
@@ -49,7 +53,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
     private EMGroupChangeListener emGroupChangeListener;
     private EMChatRoom emChatRoom;
     
-    private ArrayList<IMMessageBean> imMessages = new ArrayList<IMMessageBean>();
+    private IMMessageBean imMessages;
+    private ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
+    
+    private ChatAdapter adapter;
     
     private String messageTo;
     private String messageName;
@@ -73,6 +80,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		listView = (ListView) findViewById(R.id.lst_chat);
 		
 		tvTitle.setText(messageName);
+		
+		adapter = new ChatAdapter(this, messages);
+		listView.setAdapter(adapter);
 		
 		tvBack.setOnClickListener(this);
 		tvSendMessage.setOnClickListener(this);
@@ -120,7 +130,45 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	@Override
 	public void onEvent(EMNotifierEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		ToastUtils.SHORT.toast(this, "新消息来了");
+		switch (arg0.getEvent()) {
+        case EventConversationListChanged:
+            break;
+        case EventDeliveryAck:
+            break;
+        case EventLogout:
+            break;
+        case EventMessageChanged:
+            break;
+        case EventNewCMDMessage:
+            break;
+        case EventNewMessage:
+            final EMMessage message = (EMMessage) arg0.getData();
+            String username = null;
+            if(message.getChatType() == ChatType.GroupChat || message.getChatType() == ChatType.ChatRoom){
+                username = message.getTo();
+            }
+            else{
+                username = message.getFrom();
+            }
+            if(username.equals(remoteId)){
+                AsyncUtils.postRunnable(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+//                        adapter.add(message);
+//                        ptrListView.getRefreshableView().setSelection(adapter.getCount());
+                    }
+                });
+            }
+            break;
+        case EventOfflineMessage:
+            break;
+        case EventReadAck:
+            break;
+        default:
+            break;
+    }
 	}
 
 	@Override

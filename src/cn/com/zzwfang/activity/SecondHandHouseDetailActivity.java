@@ -96,7 +96,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		
-		tencent = Tencent.createInstance(Tencent_app_id, this.getApplicationContext());
+//		tencent = Tencent.createInstance(Tencent_app_id, this.getApplicationContext());
 		initView();
 		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
 		getSecondHandHouseDetail();

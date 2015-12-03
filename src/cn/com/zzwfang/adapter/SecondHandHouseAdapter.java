@@ -7,6 +7,7 @@ import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.SecondHandHouseBean;
 import cn.com.zzwfang.util.DateUtils;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -53,9 +54,22 @@ public class SecondHandHouseAdapter extends BaseAdapter {
 		TextView tvTitle  = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_title);
 		tvTitle.setText(secondHandHouseBean.getTitle());
 		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_desc);
-		String desc = secondHandHouseBean.getTypeF() + "室" + 
-		secondHandHouseBean.getTypeT() + "厅    " + secondHandHouseBean.getDirection() + "   "  +
-		secondHandHouseBean.getStructure() + "/" + secondHandHouseBean.getFloor() + "层";
+		String desc =  "";
+		if  (!TextUtils.isEmpty(secondHandHouseBean.getTypeF() + "")) {
+			desc += (secondHandHouseBean.getTypeF() + "室"); 
+		}
+        if  (!TextUtils.isEmpty(secondHandHouseBean.getTypeT() + "")) {
+        	desc += (secondHandHouseBean.getTypeT() + "厅    ");
+		}
+        if  (!TextUtils.isEmpty(secondHandHouseBean.getDirection())) {
+	        desc += (secondHandHouseBean.getDirection() + "   ");
+        }
+        if  (!TextUtils.isEmpty(secondHandHouseBean.getStructure())) {
+        	desc += (secondHandHouseBean.getStructure() + "/");
+        }
+        if  (!TextUtils.isEmpty(secondHandHouseBean.getFloor())) {
+        	desc += (secondHandHouseBean.getFloor() + "层");
+        }
 		tvDesc.setText(desc);
 		
 		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_est_name);

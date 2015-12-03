@@ -76,6 +76,7 @@
             
             <!-- 房屋类型 -->
             <LinearLayout
+                android:id="@+id/act_proxy_sell_house_select_house_type"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
@@ -99,6 +100,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
+                    android:id="@+id/act_proxy_sell_house_type_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginRight="16dp"
@@ -461,7 +463,9 @@
                     android:id="@+id/act_proxy_sell_house_source_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:textColor="@color/color_626262"
+                    android:textSize="16sp" />
             </LinearLayout>
             
             <!-- 房源描述 -->
@@ -487,7 +491,9 @@
                     android:id="@+id/act_proxy_sell_house_source_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:textColor="@color/color_626262"
+                    android:textSize="16sp" />
             </LinearLayout>
             
             <!-- 姓名 -->
@@ -513,7 +519,9 @@
                     android:id="@+id/act_proxy_sell_house_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:textColor="@color/color_626262"
+                    android:textSize="16sp" />
             </LinearLayout>
             
             <!-- 性别 -->
@@ -570,11 +578,14 @@
                     android:textColor="@color/color_626262"
                     android:textSize="16sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/act_proxy_sell_house_phone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white" />
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/color_626262"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <TextView

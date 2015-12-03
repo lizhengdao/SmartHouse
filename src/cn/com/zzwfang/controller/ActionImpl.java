@@ -1706,7 +1706,7 @@ public class ActionImpl implements Action {
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.SEND_MESSAGE));
         requestEntity.setRequestParams(requestParams);
-        requestEntity.setType(RequestEntity.GET);
+        requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
                 context, "请稍后...");
@@ -1951,7 +1951,7 @@ public class ActionImpl implements Action {
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_CONTACTS_LIST));
         requestEntity.setRequestParams(requestParams);
-        requestEntity.setType(RequestEntity.GET);
+        requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
                 context, "请稍后...");
@@ -2045,6 +2045,80 @@ public class ActionImpl implements Action {
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.READ_MESSAGES));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void entrustSellHouse(String estateId, String estateName,
+			String ridgepole, String unit, String roomNo, String type,
+			String price, String countFang, String halls, String wc,
+			String square, String direction, String totalFloor, String floor,
+			String decoration, String title, String cityId, String userId,
+			String Name, boolean sex, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("estateId", estateId);
+        requestParams.put("estateName", estateName);
+        requestParams.put("ridgepole", ridgepole);
+        requestParams.put("unit", unit);
+        requestParams.put("roomNo", roomNo);
+        if (!TextUtils.isEmpty(type)) {
+        	requestParams.put("type", type);
+        }
+        if (!TextUtils.isEmpty(price)) {
+        	
+        }
+//        requestParams.put("price", "50");
+        requestParams.put("countFang", countFang);
+        requestParams.put("hall", halls);
+        requestParams.put("wc", wc);
+        requestParams.put("acreage", square);
+        if (!TextUtils.isEmpty(direction)) {
+        	requestParams.put("propertyDirection", direction);
+        }
+        
+        requestParams.put("floorAll", totalFloor);
+        requestParams.put("floor", floor);
+        if (!TextUtils.isEmpty(decoration)) {
+        	requestParams.put("renovated", decoration);
+        }
+        
+        requestParams.put("title", title);
+        
+        requestParams.put("siteId", cityId);
+        requestParams.put("userId", userId);
+        requestParams.put("name", Name);
+        if (sex) {
+        	requestParams.put("sex", "true");
+        } else {
+        	requestParams.put("sex", "false");
+        }
+        
+        
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.ENTRUST_SELL_HOUSE));
         requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 

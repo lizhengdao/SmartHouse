@@ -654,4 +654,36 @@ public interface Action {
 	 * @param callback
 	 */
 	void readMessage(String ids, ResultHandlerCallback callback);
+	
+	/**
+	 * 委托售房
+	 * @param estateId   楼盘ID
+	 * @param estateName   楼盘名称
+	 * @param ridgepole   楼栋号
+	 * @param unit    单元号
+	 * @param roomNo   房间号
+	 * @param type   房屋类型
+	 * @param price   价格
+	 * @param countFang   户型-房
+	 * @param halls   户型-厅
+	 * @param wc  户型-卫
+	 * @param square  面积
+	 * @param direction  朝向
+	 * @param totalFloor   总楼层
+	 * @param floor   房源楼层
+	 * @param decoration   装修
+	 * @param title  标题 
+	 * @param cityId  站点ID
+	 * @param userId  用户ID
+	 * @param Name  用户名称
+	 * @param sex  用户性别
+	 * @param callback
+	 */
+	void entrustSellHouse(String estateId, String estateName, String ridgepole,
+			String unit, String roomNo, String type, String price,
+			String countFang, String halls, String wc, String square,
+			String direction, String totalFloor, String floor,
+			String decoration, String title, String cityId,
+			String userId, String Name, boolean sex, ResultHandlerCallback callback);
+	
 }

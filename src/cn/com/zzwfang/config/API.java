@@ -28,6 +28,8 @@ public class API {
 	 * http://www.zzwfang.com:7894/
 	 * http://yangmingbo.cn
 	 * http://110.189.90.40:7892/
+	 * 
+	 * http://110.189.90.40:7892/
 	 */
 	public static final String host = "http://www.zzwfang.com:7894/";
 
@@ -246,7 +248,7 @@ public class API {
      */
     public static final String GET_BANK_PROVINCE_OR_CITY = "Other/City";
     
-    /**
+    /** 
      * 银行城市列表
      * 第一次请求获取省份列表
      * 第二次请求通过省份代码获取城市列表
@@ -269,5 +271,8 @@ public class API {
     public static final String GET_CONTACTS_ONLINE_STATUS = "Message/JudgeOnlineUser";
     
     public static final String READ_MESSAGES = "Message/ReadMessages";
+    
+    public static final String ENTRUST_SELL_HOUSE = "User/EntrustSell";
+    
 
 }

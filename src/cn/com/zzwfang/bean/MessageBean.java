@@ -1,5 +1,9 @@
 package cn.com.zzwfang.bean;
 
+/**
+ * @author MISS-万
+ *
+ */
 public class MessageBean extends BaseBean {
 
 	private String _id;
@@ -13,6 +17,10 @@ public class MessageBean extends BaseBean {
 	private String createDate;
 	
 	private boolean isRead;
+	
+    private String userId;
+	
+	private String userName;
 
 	public String get_id() {
 		return _id;
@@ -61,6 +69,23 @@ public class MessageBean extends BaseBean {
 	public void setRead(boolean isRead) {
 		this.isRead = isRead;
 	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
 	
 	
 }
