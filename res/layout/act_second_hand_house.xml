@@ -36,7 +36,8 @@
             android:hint="@string/act_second_hand_house_hint"
             android:textSize="14sp"
             android:imeOptions="actionSearch"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:inputType="text" />
 
         <LinearLayout
             android:layout_width="55dp"

@@ -55,6 +55,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
 		OnItemClickListener {
+	
+	public static final String INTENT_KEY_WORDS = "NewHouseActivity.intent_key_words";
 
     private int MODE_LIST = 1;
 	

@@ -3,7 +3,6 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
-import com.easemob.chat.core.ac;
 
 import android.os.Bundle;
 import android.view.View;

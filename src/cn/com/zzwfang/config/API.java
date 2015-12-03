@@ -31,7 +31,7 @@ public class API {
 	 * 
 	 * http://110.189.90.40:7892/
 	 */
-	public static final String host = "http://www.zzwfang.com:7894/";
+	public static final String host = "http://110.189.90.40:7892/";
 
 	/**
 	 * 认证授权接口
@@ -167,7 +167,7 @@ public class API {
     /**
      * 获取小区历史成交记录
      */
-    public static final String GET_RESIDENTIAL_TRANSACTION_HISTORY = "Contract/GetHisRecordJson";
+    public static final String GET_RESIDENTIAL_TRANSACTION_HISTORY = "Estate/GetHisRecordJson";
     
     /**
      * 获取地图找房默认显示状态
@@ -270,8 +270,14 @@ public class API {
      */
     public static final String GET_CONTACTS_ONLINE_STATUS = "Message/JudgeOnlineUser";
     
+    /**
+     * 读消息
+     */
     public static final String READ_MESSAGES = "Message/ReadMessages";
     
+    /**
+     * 委托卖房
+     */
     public static final String ENTRUST_SELL_HOUSE = "User/EntrustSell";
     
 

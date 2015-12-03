@@ -3,7 +3,6 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
-import com.easemob.chat.core.ac;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -200,7 +199,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 			case REQUEST_ESTATE:
 				idNameBean = (IdNameBean) data
 				.getSerializableExtra(SelectEstateActivity.INTENT_ESTATE);
-		tvSelectEstateName.setText(idNameBean.getName());
+		        tvSelectEstateName.setText(idNameBean.getName());
 				break;
 			}
 		}

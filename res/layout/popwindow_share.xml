@@ -8,16 +8,44 @@
 
     <cn.com.zzwfang.view.AutoDrawableTextView
         android:id="@+id/popwindow_share_weixin"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="25dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:drawableTop="@drawable/ic_msg_green"
+        android:drawableTop="@drawable/ic_share_weixin"
         android:gravity="center"
         android:text="微信"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:top_height="30dp"
-        app:top_width="30dp" />
+        app:top_height="50dp"
+        app:top_width="50dp" />
+    
+    <cn.com.zzwfang.view.AutoDrawableTextView
+        android:id="@+id/popwindow_share_qq"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:drawableTop="@drawable/ic_share_qq"
+        android:gravity="center"
+        android:text="QQ"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:top_height="50dp"
+        app:top_width="50dp" />
+    
+    <cn.com.zzwfang.view.AutoDrawableTextView
+        android:id="@+id/popwindow_share_sina_weibo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:drawableTop="@drawable/ic_share_sina_weibo"
+        android:gravity="center"
+        android:text="新浪微博"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:top_height="50dp"
+        app:top_width="50dp" />
 
 </LinearLayout>

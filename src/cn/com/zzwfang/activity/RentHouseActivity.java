@@ -33,6 +33,7 @@ import com.alibaba.fastjson.JSON;
 public class RentHouseActivity extends BaseActivity implements OnClickListener,
         OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 
+	public static final String INTENT_KEY_WORDS = "RentHouseActivity.intent_keywords";
     private TextView tvBack;
 
     private LinearLayout lltArea, lltRentPrice, lltHouseType, lltMore;

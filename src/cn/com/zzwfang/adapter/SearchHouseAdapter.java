@@ -12,6 +12,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 搜索列表（现在没用了）
+ * @author lzd
+ *
+ */
 public class SearchHouseAdapter extends BaseAdapter {
 
 	

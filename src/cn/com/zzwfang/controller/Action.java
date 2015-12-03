@@ -686,4 +686,23 @@ public interface Action {
 			String decoration, String title, String cityId,
 			String userId, String Name, boolean sex, ResultHandlerCallback callback);
 	
+	/**
+	 * 委托买房
+	 * @param userId  用户ID
+	 * @param estateId   楼盘ID
+	 * @param budget  买房预算
+	 * @param minSquare   最小面积
+	 * @param maxSquare    最大面积
+	 * @param monthlyPay   月供需求
+	 * @param countFang   户型-房
+	 * @param hall    户型-厅
+	 * @param require  其他要求 
+	 * @param name   用户名称
+	 * @param sex   性别
+	 * @param callback
+	 */
+	void entrustBuyHouse(String userId, String estateId, double budget,
+			int minSquare, int maxSquare, String monthlyPay,
+			int countFang, int hall, String require,
+			String name, boolean sex, ResultHandlerCallback callback);
 }

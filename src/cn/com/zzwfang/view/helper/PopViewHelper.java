@@ -584,6 +584,10 @@ public class PopViewHelper {
 	public interface OnShareTypeSelectListener {
 		public static final int Share_Type_WeiXin = 1;
 		
+		public static final int Share_Type_QQ = 2;
+		
+		public static final int Share_Type_Sina_Weibo = 3;
+		
 		void onShareTypeSelected(int shareType);
 	}
 	/**
@@ -602,7 +606,8 @@ public class PopViewHelper {
 	    popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
 	    
 	    TextView tvShareByWeixin = (TextView) view.findViewById(R.id.popwindow_share_weixin);
-//	    TextView tvSecondHandHouse = (TextView) view.findViewById(R.id.popwindow_fee_hunter_recommend_second_hand_house);
+	    TextView tvShareByQQ = (TextView) view.findViewById(R.id.popwindow_share_qq);
+	    TextView tvShareBySinaWeibo = (TextView) view.findViewById(R.id.popwindow_share_sina_weibo);
 	    
 	    OnClickListener clickListener = new OnClickListener() {
 			
@@ -614,22 +619,24 @@ public class PopViewHelper {
 					if (onShareTypeSelectListener != null) {
 						onShareTypeSelectListener.onShareTypeSelected(OnShareTypeSelectListener.Share_Type_WeiXin);
 					}
-//					if (listener != null) {
-//						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_NEW_HOUSE);
-//					}
 					break;
-//				case R.id.popwindow_fee_hunter_recommend_second_hand_house:
-//					popupWindow.dismiss();
-//					if (listener != null) {
-//						listener.onFeeHunterRecommendHouseTypeSelecet(OnFeeHunterRecommendHouseTypeSelecetListener.FEE_HUNTER_HOUSE_TYPE_SECOND_HAND_HOUSE);
-//					}
-//					break;
+				case R.id.popwindow_share_qq:
+					if (onShareTypeSelectListener != null) {
+						onShareTypeSelectListener.onShareTypeSelected(OnShareTypeSelectListener.Share_Type_QQ);
+					}
+					break;
+				case R.id.popwindow_share_sina_weibo:
+					if (onShareTypeSelectListener != null) {
+						onShareTypeSelectListener.onShareTypeSelected(OnShareTypeSelectListener.Share_Type_Sina_Weibo);
+					}
+					break;
 				}
 			}
 		};
 		
 		tvShareByWeixin.setOnClickListener(clickListener);
-//		tvSecondHandHouse.setOnClickListener(clickListener);
+		tvShareByQQ.setOnClickListener(clickListener);
+		tvShareBySinaWeibo.setOnClickListener(clickListener);
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {

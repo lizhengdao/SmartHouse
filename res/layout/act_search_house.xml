@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
@@ -54,8 +55,8 @@
                     android:background="@color/white"
                     android:drawableLeft="@drawable/ic_search"
                     android:drawablePadding="8dp"
-                    android:singleLine="true"
-                    android:imeOptions="actionSearch" />
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true" />
 
                 <ImageView
                     android:id="@+id/act_search_house_clear_key_wrods"
@@ -76,145 +77,9 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/act_search_house_auto_complete"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:orientation="horizontal"
-        android:weightSum="4" >
-
-        <LinearLayout
-            android:id="@+id/act_search_house_area_llt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/act_search_house_area_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/frag_map_area"
-                android:textColor="@color/color_383838" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_triangle" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/theme_gray" />
-
-        <LinearLayout
-            android:id="@+id/act_search_house_total_price_llt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/act_search_house_total_price_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/frag_map_total_money"
-                android:textColor="@color/color_383838" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_triangle" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/theme_gray" />
-
-        <LinearLayout
-            android:id="@+id/act_search_house_type_llt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/act_search_house_rooms_type_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/frag_map_house_type"
-                android:textColor="@color/color_383838" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_triangle" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@color/theme_gray" />
-
-        <LinearLayout
-            android:id="@+id/act_search_house_more_llt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/act_search_house_more_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/frag_map_more"
-                android:textColor="@color/color_383838" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:src="@drawable/ic_triangle" />
-        </LinearLayout>
-    </LinearLayout>
-    
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/theme_gray" />
-
-    <cn.com.zzwfang.pullview.AbPullToRefreshView
-        android:id="@+id/pull_search_house"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/lst_search_house"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@color/color_cecece"
-            android:dividerHeight="1dp" />
-    </cn.com.zzwfang.pullview.AbPullToRefreshView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
