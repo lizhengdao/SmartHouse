@@ -229,7 +229,7 @@ public class API {
     /**
      * 填写银行卡信息
      */
-    public static final String POST_USER_BANK_INFO_TO_BE_FEE_HUNTER = "User/AddBankInformation";
+    public static final String POST_USER_BANK_INFO_TO_BE_FEE_HUNTER = "User/AddBandInformation";
     
     /**
      * 根据我的需求条件推荐给我的房源列表

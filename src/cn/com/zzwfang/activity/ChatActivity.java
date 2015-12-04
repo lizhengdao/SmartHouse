@@ -60,6 +60,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
     
     private String messageTo;
     private String messageName;
+    
+    
 	
 	@Override
 	protected void onCreate(Bundle arg0) {

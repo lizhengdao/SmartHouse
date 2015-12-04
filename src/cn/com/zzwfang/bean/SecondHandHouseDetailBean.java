@@ -22,12 +22,12 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	/**
 	 * 几房
 	 */
-	private int TypeF;
+	private String TypeF;
 	
 	/**
 	 * 几厅
 	 */
-	private int TypeT;
+	private String TypeT;
 	
 	/**
 	 * 面积
@@ -112,10 +112,20 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	
 	private String TotalFollow;
 	
+	private String Share;
+	
 	
 	
 
-	public String getTotalFollow() {
+	public String getShare() {
+        return Share;
+    }
+
+    public void setShare(String share) {
+        Share = share;
+    }
+
+    public String getTotalFollow() {
 		return TotalFollow;
 	}
 
@@ -155,11 +165,11 @@ public class SecondHandHouseDetailBean extends BaseBean {
 		Price = price;
 	}
 
-	public int getTypeF() {
+	public String getTypeF() {
 		return TypeF;
 	}
 
-	public void setTypeF(int typeF) {
+	public void setTypeF(String typeF) {
 		TypeF = typeF;
 	}
 
@@ -244,11 +254,11 @@ public class SecondHandHouseDetailBean extends BaseBean {
 		EstateId = estateId;
 	}
 
-	public int getTypeT() {
+	public String getTypeT() {
 		return TypeT;
 	}
 
-	public void setTypeT(int typeT) {
+	public void setTypeT(String typeT) {
 		TypeT = typeT;
 	}
 

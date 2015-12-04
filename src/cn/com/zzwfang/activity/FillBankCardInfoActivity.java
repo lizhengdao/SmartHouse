@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 
 
+
 import com.alibaba.fastjson.JSON;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -33,6 +35,8 @@ import cn.com.zzwfang.view.helper.PopViewHelper.OnBankProvinceOrCitySelectedList
 
 public class FillBankCardInfoActivity extends BasePickPhotoActivity implements OnClickListener, OnAvatarOptionsClickListener {
 
+    private static final int CODE_BIND_CARD_INFO  = 1200;
+    
 	private TextView tvBack, tvCommit, tvAddr, tvBankName;
 	
 	private ImageView imgBank;
@@ -205,16 +209,35 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+					    
+					    /**
+					     * 用户类型    0经济人，1普通会员，2赏金猎人
+					     */
+					    ContentUtils.updateUserType(FillBankCardInfoActivity.this, 2);
 						Jumper.newJumper()
 			            .setAheadInAnimation(R.anim.activity_push_in_right)
 			            .setAheadOutAnimation(R.anim.activity_alpha_out)
 			            .setBackInAnimation(R.anim.activity_alpha_in)
 			            .setBackOutAnimation(R.anim.activity_push_out_right)
-			            .jump(FillBankCardInfoActivity.this, FeeHunterInfoActivity.class);
+			            .jumpForResult(FillBankCardInfoActivity.this, FeeHunterInfoActivity.class, CODE_BIND_CARD_INFO);
 					}
 				});
 	}
 
+	
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    super.onActivityResult(requestCode, resultCode, data);
+	    if (resultCode == RESULT_OK) {
+	        switch (requestCode) {
+	        case CODE_BIND_CARD_INFO:
+	            finish();
+	            break;
+	        }
+	    }
+	}
+	
 	@Override
 	public void onPickedPhoto(File file, Bitmap bm) {
 		// TODO Auto-generated method stub

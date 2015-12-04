@@ -282,6 +282,14 @@ public final class ContentUtils {
 		editor.commit();
 	}
 	
+	public static void updateUserType(Context context, int userType) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putInt(Constants.USER_TYPE, userType);
+        editor.commit();
+	}
+	
 	public static UserInfoBean getUserInfo(Context context) {
 		UserInfoBean userInfoBean = new UserInfoBean();
 		SharedPreferences sp = (SharedPreferences) context

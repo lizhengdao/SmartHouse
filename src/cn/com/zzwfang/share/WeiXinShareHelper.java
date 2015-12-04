@@ -70,6 +70,21 @@ public class WeiXinShareHelper {
         api.sendReq(req);
     }
     
+    public void shareWebpage(IWXAPI api, String webpageTitle, String webpageDesc, String webpageUrl) {
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = webpageUrl;
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = webpageTitle;
+        msg.description = webpageTitle;
+        
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = buildTransaction("webpage");
+        req.message = msg;
+//        req.scene = isTimelineCb.isChecked() ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        api.sendReq(req);
+    }
+    
     
     private String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();

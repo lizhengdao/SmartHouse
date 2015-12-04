@@ -30,7 +30,7 @@ public class SecondHandHouseBean extends BaseBean {
 	/**
 	 * 面积
 	 */
-	private float Square;
+	private String Square;
 	
 	/**
 	 * 楼层
@@ -55,7 +55,7 @@ public class SecondHandHouseBean extends BaseBean {
 	/**
 	 * 销售价格
 	 */
-	private float Price;
+	private String Price;
 	
 	/**
 	 * 发布时间
@@ -75,12 +75,12 @@ public class SecondHandHouseBean extends BaseBean {
 	/**
 	 * 经度
 	 */
-	private long Lng;
+	private double Lng;
 	
 	/**
 	 * 纬度
 	 */
-	private long Lat;
+	private double Lat;
 
 	public String getId() {
 		return Id;
@@ -122,11 +122,11 @@ public class SecondHandHouseBean extends BaseBean {
 		TypeT = typeT;
 	}
 
-	public float getSquare() {
+	public String getSquare() {
 		return Square;
 	}
 
-	public void setSquare(float square) {
+	public void setSquare(String square) {
 		Square = square;
 	}
 
@@ -162,11 +162,11 @@ public class SecondHandHouseBean extends BaseBean {
 		Direction = direction;
 	}
 
-	public float getPrice() {
+	public String getPrice() {
 		return Price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(String price) {
 		Price = price;
 	}
 
@@ -194,19 +194,19 @@ public class SecondHandHouseBean extends BaseBean {
 		Structure = structure;
 	}
 
-	public long getLng() {
+	public double getLng() {
 		return Lng;
 	}
 
-	public void setLng(long lng) {
+	public void setLng(double lng) {
 		Lng = lng;
 	}
 
-	public long getLat() {
+	public double getLat() {
 		return Lat;
 	}
 
-	public void setLat(long lat) {
+	public void setLat(double lat) {
 		Lat = lat;
 	}
 	

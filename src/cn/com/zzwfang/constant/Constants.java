@@ -4,9 +4,6 @@ public class Constants {
 
 	public static final String SHARED_PREFERENCE_NAME = "SMART_SHARED_PREFERENCE";
 	
-//	public static final String TOKEN = "csrftoken";
-	
-//	public static final String SESSION_ID = "sessionid";
 	
 	/**
      *   SharedPreference 中的字段  保存是否已经登录
@@ -61,21 +58,10 @@ public class Constants {
      * 用户类型
      */
     public static final String USER_TYPE = "user_type";
-	
-	/**
-     *   定位是否成功标识
-     */
-    public static final String LOCATE_STATUS = "locate_status";
     
-    /**
-     *   SharedPreference 中的字段  保存景区名字
-     */
-    public static final String SCENE_NAME = "scene_name";
-
-    /**
-     *   SharedPreference 中的字段  保存景区id
-     */
-    public static final String SCENE_ID = "scene_id";
+    public static final String App_Id_Weixin = "wx6deb6a79d73c7554";
+	
+    
     
     /**
      *   当前位置经度
@@ -97,27 +83,7 @@ public class Constants {
      */
     public static final String NEED_LOGIN = "need_login";
     
-    /**
-     *   是否开启附近的人
-     */
-    public static final String NEAR_BY = "near_by";
     
-    /**
-     *   是否接收系统消息
-     */
-    public static final String SYSTEM_MESSAGE = "system_message";
     
-    /**
-     *   是否接收用户消息
-     */
-    public static final String USER_MESSAGE = "user_message";
-    /**
-     * 是否点单txm
-     */
-    public static final String HAS_ORDER = "has_order";
-    /**
-     * 订单idtxm
-     */
-    public static final String ORDER_ID = "order_id";
     
 }

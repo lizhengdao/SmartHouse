@@ -23,6 +23,7 @@ import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SecondHandHouseDetailBean;
 import cn.com.zzwfang.config.API;
+import cn.com.zzwfang.constant.Constants;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
@@ -46,6 +47,8 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -92,11 +95,13 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private OnShareTypeSelectListener onShareTypeSelectListener;
 	
 	private Tencent tencent;
+	
+	private IWXAPI apiWeixin;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		apiWeixin = WXAPIFactory.createWXAPI(this, Constants.App_Id_Weixin);
 //		tencent = Tencent.createInstance(Tencent_app_id, this.getApplicationContext());
 		initView();
 		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
@@ -186,17 +191,21 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			
 			@Override
 			public void onShareTypeSelected(int shareType) {
-				switch (shareType) {
-				case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
-					// TODO
-					WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
-//					weixinShareHelper.shareImage(api, bmp);
-					break;
-				case OnShareTypeSelectListener.Share_Type_QQ:
-					break;
-				case OnShareTypeSelectListener.Share_Type_Sina_Weibo:
-					break;
-				}
+			    if (secondHandHouseDetail != null) {
+			        switch (shareType) {
+	                case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
+	                    // TODO
+	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
+	                    weixinShareHelper.shareWebpage(apiWeixin,
+	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
+	                    break;
+	                case OnShareTypeSelectListener.Share_Type_QQ:
+	                    break;
+	                case OnShareTypeSelectListener.Share_Type_Sina_Weibo:
+	                    break;
+	                }
+			    }
+				
 			}
 		};
 	}

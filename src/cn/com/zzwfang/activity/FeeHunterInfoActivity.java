@@ -25,6 +25,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		setResult(RESULT_OK);
 		initView();
 	}
 	

@@ -2,6 +2,7 @@ package cn.com.zzwfang.activity;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.util.Jumper;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 public class ShangJinLieRenActivity extends BaseActivity implements OnClickListener {
 
+    private static final int CODE_BIND_CARD_INFO = 100;
 	private TextView tvBack, tvRegister;
 	
 	
@@ -50,8 +52,20 @@ public class ShangJinLieRenActivity extends BaseActivity implements OnClickListe
             .setAheadOutAnimation(R.anim.activity_alpha_out)
             .setBackInAnimation(R.anim.activity_alpha_in)
             .setBackOutAnimation(R.anim.activity_push_out_right)
-            .jump(this, FillBankCardInfoActivity.class);
+            .jumpForResult(this, FillBankCardInfoActivity.class, CODE_BIND_CARD_INFO);
 			break;
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+	    super.onActivityResult(arg0, arg1, arg2);
+	    if (arg1 == RESULT_OK) {
+	        switch (arg0) {
+	        case CODE_BIND_CARD_INFO:
+	            finish();
+	            break;
+	        }
+	    }
 	}
 }
