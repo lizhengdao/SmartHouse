@@ -227,7 +227,7 @@ public class API {
     public static final String GET_MONTHLY_PAY_RANGE = "Other/MonthPay";
     
     /**
-     * 获取月供范围列表
+     * 填写银行卡信息
      */
     public static final String POST_USER_BANK_INFO_TO_BE_FEE_HUNTER = "User/AddBankInformation";
     

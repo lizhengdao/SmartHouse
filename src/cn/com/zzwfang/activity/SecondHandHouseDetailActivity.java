@@ -26,6 +26,7 @@ import cn.com.zzwfang.config.API;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.share.WeiXinShareHelper;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
@@ -171,7 +172,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			
 			@Override
 			public void onShare() {  //  分享
-				PopViewHelper.showSharePopupWindow(SecondHandHouseDetailActivity.this, getWindow().getDecorView(), onShareTypeSelectListener);
+				PopViewHelper.showSharePopupWindow(SecondHandHouseDetailActivity.this,
+						getWindow().getDecorView(), onShareTypeSelectListener);
 			}
 			
 			@Override
@@ -187,6 +189,12 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				switch (shareType) {
 				case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
 					// TODO
+					WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
+//					weixinShareHelper.shareImage(api, bmp);
+					break;
+				case OnShareTypeSelectListener.Share_Type_QQ:
+					break;
+				case OnShareTypeSelectListener.Share_Type_Sina_Weibo:
 					break;
 				}
 			}
