@@ -5,6 +5,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
 
 /**
  * 关于我们
@@ -19,6 +23,7 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		initView();
+		getAboutUsData();
 	}
 	
 	private void initView() {
@@ -36,5 +41,24 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		}
+	}
+	
+	private void getAboutUsData() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getAboutUsData(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				
+			}
+		});
 	}
 }

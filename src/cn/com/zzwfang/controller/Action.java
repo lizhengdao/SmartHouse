@@ -634,7 +634,7 @@ public interface Action {
 	 * "53b176e9926da80f4800160f", "message" : "你好，在吗？", "createDate" :
 	 * "2015-11-05 11:22:30", "isRead" : true }] }]
 	 * 
-	 * @param contactId
+	 * @param contactId  单个联系人Id
 	 * @param callback
 	 */
 	void getMessageRecordsWithSomeBody(String contactId,
@@ -705,4 +705,6 @@ public interface Action {
 			int minSquare, int maxSquare, String monthlyPay,
 			int countFang, int hall, String require,
 			String name, boolean sex, ResultHandlerCallback callback);
+	
+	void getAboutUsData(ResultHandlerCallback callback);
 }

@@ -211,6 +211,9 @@
         <activity
             android:name="cn.com.zzwfang.activity.MyBoughtHousesActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.com.zzwfang.activity.NickNameUpdateActivity"
+            android:screenOrientation="portrait" />
         
         
         

@@ -2,6 +2,10 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,41 +21,29 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
-import cn.com.zzwfang.im.MessageSendCallback.OnMessageSendListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
-import cn.com.zzwfang.util.AsyncUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 
-import com.easemob.EMEventListener;
 import com.easemob.EMGroupChangeListener;
-import com.easemob.EMNotifierEvent;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatRoom;
 import com.easemob.chat.EMConversation;
 import com.easemob.chat.EMGroup;
-import com.easemob.chat.EMGroupManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.ChatType;
+import com.easemob.chat.EMMessage.Type;
+import com.easemob.chat.TextMessageBody;
 
-public class ChatActivity extends BaseActivity implements OnClickListener, EMEventListener, OnMessageSendListener {
+public class ChatActivity extends BaseActivity implements OnClickListener{  // , EMEventListener, OnMessageSendListener 
 
 	public static final String INTENT_MESSAGE_TO_ID = "intent_message_to_user_id";
 	public static final String INTENT_MESSAGE_TO_NAME = "intent_message_to_user_name";
 	private TextView tvBack, tvTitle, tvSendMessage;
 	private EditText edtMessage;
-	private AbPullToRefreshView pullView;
 	private ListView listView;
 	
-	private int chatType;
-    private String remoteId;
-    
     private ActionImpl actionImpl;
-    
-    private EMConversation emConversation;
-    private EMGroup emGroup;
-    private EMGroupChangeListener emGroupChangeListener;
-    private EMChatRoom emChatRoom;
     
     private IMMessageBean imMessages;
     private ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
@@ -60,16 +52,27 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
     
     private String messageTo;
     private String messageName;
-    
-    
+    private NewMessageBroadcastReceiver msgReceiver;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		
+	    msgReceiver = new NewMessageBroadcastReceiver();
+		IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
+		intentFilter.setPriority(3);
+		registerReceiver(msgReceiver, intentFilter);
+		
 		messageTo = getIntent().getStringExtra(INTENT_MESSAGE_TO_ID);
 		messageName = getIntent().getStringExtra(INTENT_MESSAGE_TO_NAME);
 		actionImpl = ActionImpl.newInstance(this);
+		
 		initView();
+		String userId = ContentUtils.getUserId(this);
+		if (!TextUtils.isEmpty(userId)) {
+			getHistoryMsg(userId);
+		}
+			
 	}
 	
 	private void initView() {
@@ -78,7 +81,6 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 		tvTitle = (TextView) findViewById(R.id.act_chat_title);
 		edtMessage = (EditText) findViewById(R.id.act_chat_content_edt);
 		tvSendMessage = (TextView) findViewById(R.id.act_chat_send_tv);
-		pullView = (AbPullToRefreshView) findViewById(R.id.pull_chat);
 		listView = (ListView) findViewById(R.id.lst_chat);
 		
 		tvTitle.setText(messageName);
@@ -105,99 +107,18 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 	@Override
 	protected void onResume() {
 		super.onResume();
-		EMChatManager.getInstance().registerEventListener(
-                this,
-                new EMNotifierEvent.Event[] { EMNotifierEvent.Event.EventNewMessage,EMNotifierEvent.Event.EventOfflineMessage,
-                        EMNotifierEvent.Event.EventDeliveryAck, EMNotifierEvent.Event.EventReadAck });
+
 	}
 	
-	@Override
-    protected void onStop() {
-        EMChatManager.getInstance().unregisterEventListener(this);
-        super.onStop();
-    }
-    
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(emGroupChangeListener != null){
-            EMGroupManager.getInstance().removeGroupChangeListener(emGroupChangeListener);
-        }
-    }
-	
-	
 
-	
-
-	@Override
-	public void onEvent(EMNotifierEvent arg0) {
-		// TODO Auto-generated method stub
-		ToastUtils.SHORT.toast(this, "新消息来了");
-		switch (arg0.getEvent()) {
-        case EventConversationListChanged:
-            break;
-        case EventDeliveryAck:
-            break;
-        case EventLogout:
-            break;
-        case EventMessageChanged:
-            break;
-        case EventNewCMDMessage:
-            break;
-        case EventNewMessage:
-            final EMMessage message = (EMMessage) arg0.getData();
-            String username = null;
-            if(message.getChatType() == ChatType.GroupChat || message.getChatType() == ChatType.ChatRoom){
-                username = message.getTo();
-            }
-            else{
-                username = message.getFrom();
-            }
-            if(username.equals(remoteId)){
-                AsyncUtils.postRunnable(new Runnable() {
-                    
-                    @Override
-                    public void run() {
-//                        adapter.add(message);
-//                        ptrListView.getRefreshableView().setSelection(adapter.getCount());
-                    }
-                });
-            }
-            break;
-        case EventOfflineMessage:
-            break;
-        case EventReadAck:
-            break;
-        default:
-            break;
-    }
-	}
-
-	@Override
-	public void onSuccess(EMMessage message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onProgress(EMMessage message, int arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onError(EMMessage message, int arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	private void sendMessage() {
-		String message = edtMessage.getText().toString().trim();
+		final String message = edtMessage.getText().toString().trim();
 		if (TextUtils.isEmpty(message)) {
 			ToastUtils.SHORT.toast(this, "请输入消息内容");
 			return;
 		}
-		String userId = ContentUtils.getUserId(this);
+		final String userId = ContentUtils.getUserId(this);
 		actionImpl.sendMessage(userId, messageTo, message, new ResultHandlerCallback() {
 			
 			@Override
@@ -210,7 +131,96 @@ public class ChatActivity extends BaseActivity implements OnClickListener, EMEve
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
+				edtMessage.setText("");
+				MessageBean msg = new MessageBean();
+				msg.setFromUser(userId);
+				msg.setMessage(message);
+				adapter.addMessage(msg);
 			}
 		});
 	}
+	
+	private class NewMessageBroadcastReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+		    // 注销广播
+			abortBroadcast();
+	 
+			// 消息id（每条消息都会生成唯一的一个id，目前是SDK生成）
+			String msgId = intent.getStringExtra("msgid");
+			//发送方
+			String username = intent.getStringExtra("from");
+			// 收到这个广播的时候，message已经在db和内存里了，可以通过id获取mesage对象
+			EMMessage message = EMChatManager.getInstance().getMessage(msgId);
+//			EMConversation	conversation = EMChatManager.getInstance().getConversation(username);
+			
+			// 如果是群聊消息，获取到group id
+//			if (message.getChatType() == ChatType.GroupChat) {
+//				username = message.getTo();
+//			}
+//			if (!username.equals(username)) {
+//				// 消息不是发给当前会话，return
+//				return;
+//			}
+			if (message.getType() == Type.TXT) {
+				TextMessageBody txtBody = (TextMessageBody) message.getBody();
+				MessageBean msg = new MessageBean();
+				msg.setFromUser(message.getFrom());
+				msg.setMessage(txtBody.getMessage());
+				adapter.addMessage(msg);
+			}
+			
+			
+		}
+	}
+	
+	private void getHistoryMsg(String contactId) {
+		actionImpl.getMessageRecordsWithSomeBody(contactId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		actionImpl.getContactsList(contactId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	
+	@Override
+		protected void onDestroy() {
+		unregisterReceiver(msgReceiver);
+			super.onDestroy();
+		}
 }

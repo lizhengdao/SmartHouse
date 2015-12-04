@@ -280,5 +280,7 @@ public class API {
      */
     public static final String ENTRUST_SELL_HOUSE = "User/EntrustSell";
     
+    public static final String GET_ABOUT_US = "Other/About";
+    
 
 }

@@ -14,7 +14,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 
 	private TextView tvBack, tvLogout;
 	
-	private FrameLayout changePwdFlt, clearCacheFlt, aboutUsFlt, commonQuestionFlt, checkUpdatesFlt;
+	private FrameLayout changeNickNameFlt, changePwdFlt, clearCacheFlt, aboutUsFlt, commonQuestionFlt, checkUpdatesFlt;
 	
 	private ToggleButton msgPushToggleBtn;
 	
@@ -30,6 +30,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	private void initView() {
 		
 		tvBack = (TextView) findViewById(R.id.act_settings_back);
+		changeNickNameFlt = (FrameLayout) findViewById(R.id.act_settings_change_nickname);
 		changePwdFlt = (FrameLayout) findViewById(R.id.act_settings_change_pwd);
 		msgPushToggleBtn = (ToggleButton) findViewById(R.id.act_settings_msg_push_toggle);
 		clearCacheFlt = (FrameLayout) findViewById(R.id.act_settings_clear_cache);
@@ -40,6 +41,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		
 		msgPushToggleBtn.setOnToggleChanged(this);
 		tvBack.setOnClickListener(this);
+		changeNickNameFlt.setOnClickListener(this);
 		changePwdFlt.setOnClickListener(this);
 		clearCacheFlt.setOnClickListener(this);
 		aboutUsFlt.setOnClickListener(this);
@@ -53,6 +55,14 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		switch (v.getId()) {
 		case R.id.act_settings_back:  // 返回
 			finish();
+			break;
+		case R.id.act_settings_change_nickname:  // 修改昵称
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, NickNameUpdateActivity.class);
 			break;
 		case R.id.act_settings_change_pwd:  // 修改密码
 			Jumper.newJumper()

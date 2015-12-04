@@ -12,6 +12,7 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.view.PathImage;
 
 public class ChatAdapter extends BaseAdapter {
 	
@@ -28,6 +29,13 @@ public class ChatAdapter extends BaseAdapter {
 		this.context = context;
 		this.messages = messages;
 		myId = ContentUtils.getUserId(context);
+	}
+	
+	public void addMessage(MessageBean msg) {
+		if (msg != null && messages != null) {
+			messages.add(msg);
+			notifyDataSetChanged();
+		}
 	}
 	
 	static class ViewType {
@@ -83,7 +91,7 @@ public class ChatAdapter extends BaseAdapter {
 			case 0:   // 左边
 				viewHolderLeft = new ViewHolderLeft();
 				convertView = View.inflate(context, R.layout.item_appointment_msg_left, null);
-				viewHolderLeft.ivAvatar = (ImageView) convertView.findViewById(R.id.iv_avatar);
+				viewHolderLeft.ivAvatar = (PathImage) convertView.findViewById(R.id.iv_avatar);
 				viewHolderLeft.tvName = (TextView) convertView.findViewById(R.id.tv_name);
 				viewHolderLeft.tvMsgContent = (TextView) convertView.findViewById(R.id.tv_msg_content);
 				convertView.setTag(viewHolderLeft);
@@ -91,7 +99,7 @@ public class ChatAdapter extends BaseAdapter {
 			case 1:   // 右边
 				viewHolderRight = new ViewHolderRight();
 				convertView = View.inflate(context, R.layout.item_appointment_msg_right, null);
-				viewHolderRight.ivAvatarRight = (ImageView) convertView.findViewById(R.id.iv_avatar_right);
+				viewHolderRight.ivAvatarRight = (PathImage) convertView.findViewById(R.id.iv_avatar_right);
 				viewHolderRight.tvMsgRight = (TextView) convertView.findViewById(R.id.tv_msg_content_right);
 				convertView.setTag(viewHolderRight);
 				break;
@@ -131,7 +139,7 @@ public class ChatAdapter extends BaseAdapter {
 	
     static class ViewHolderLeft {
 		
-		ImageView ivAvatar;
+    	PathImage ivAvatar;
 		
 		TextView tvName;
 		
@@ -141,7 +149,7 @@ public class ChatAdapter extends BaseAdapter {
 	
 	static class ViewHolderRight {
 		
-		ImageView ivAvatarRight;
+		PathImage ivAvatarRight;
 		
 		TextView tvMsgRight;
 	}
