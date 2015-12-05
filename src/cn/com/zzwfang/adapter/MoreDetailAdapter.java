@@ -8,6 +8,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class MoreDetailAdapter extends BaseAdapter {
@@ -46,7 +47,12 @@ public class MoreDetailAdapter extends BaseAdapter {
 		}
 		
 		TextView tvMoreDetail = (TextView) convertView.findViewById(R.id.adapter_more_detail_txt);
-		tvMoreDetail.setText(moreDetails.get(position).getText());
+		CheckBox cbx = (CheckBox) convertView.findViewById(R.id.adapter_more_detail_cbx);
+		
+		TextValueBean tvb = moreDetails.get(position);
+		tvMoreDetail.setText(tvb.getText());
+		cbx.setChecked(tvb.isSelected());
+		
 		return convertView;
 	}
 

@@ -2,14 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
     
     <TextView 
         android:id="@+id/adapter_more_detail_txt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:paddingLeft="32dp"
         android:textColor="@color/black"/>
+    
+    <CheckBox 
+        android:id="@+id/adapter_more_detail_cbx"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="center_vertical"
+        android:focusable="false"
+        android:enabled="false"
+        android:button="@null"
+        android:checked="true"
+        android:background="@drawable/selector_condition_cbx"/>
 
 </LinearLayout>

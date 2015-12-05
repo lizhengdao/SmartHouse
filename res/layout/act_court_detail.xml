@@ -46,7 +46,8 @@
             android:paddingRight="8dp"
             android:text="分享"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
     </FrameLayout>
 
     <ScrollView

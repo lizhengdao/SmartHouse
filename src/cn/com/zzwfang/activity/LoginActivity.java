@@ -20,7 +20,6 @@ import cn.com.zzwfang.util.ToastUtils;
 import com.alibaba.fastjson.JSON;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMGroupManager;
 
 public class LoginActivity extends BaseActivity implements OnClickListener {
 

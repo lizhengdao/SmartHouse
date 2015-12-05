@@ -28,6 +28,11 @@
             android:background="@color/color_eeeeee" />
     </LinearLayout>
     
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_e2e2e2"/>
+    
     <TextView 
         android:id="@+id/popup_second_hand_more_type_ok"
         android:layout_width="match_parent"

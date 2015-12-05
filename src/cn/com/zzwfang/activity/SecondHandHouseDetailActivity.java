@@ -101,7 +101,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		apiWeixin = WXAPIFactory.createWXAPI(this, Constants.App_Id_Weixin);
+		apiWeixin = WXAPIFactory.createWXAPI(this, Constants.App_Id_Weixin, false);
+		apiWeixin.registerApp(Constants.App_Id_Weixin);
 //		tencent = Tencent.createInstance(Tencent_app_id, this.getApplicationContext());
 		initView();
 		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
@@ -196,7 +197,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	                case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
 	                    // TODO
 	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
-	                    weixinShareHelper.shareWebpage(apiWeixin,
+	                    weixinShareHelper.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
 	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:

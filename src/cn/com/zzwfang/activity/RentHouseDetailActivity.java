@@ -22,13 +22,19 @@ import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.RentHouseDetailBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.config.API;
+import cn.com.zzwfang.constant.Constants;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.share.WeiXinShareHelper;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.PathImage;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnMoreShareAndAttentionListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnShareTypeSelectListener;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.map.BaiduMap;
@@ -40,6 +46,8 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
  *  租房详情页
@@ -53,7 +61,7 @@ OnPageChangeListener {
 	private String houseSourceId = null;
 	private RentHouseDetailBean rentHouseDetailBean;
 	
-	private TextView tvBack, tvPageTitle, tvShare, tvTitle,
+	private TextView tvBack, tvPageTitle, tvMore, tvTitle,
 	tvRentPrice, tvHouseType, tvSquare, tvFloor, tvDirection,
 	tvDecoration, tvYear, tvEstateName, tvHouseNum, tvAgentName,
 	tvAgentPhone, tvPhotoIndex, tvNearbyDeatil;
@@ -72,11 +80,18 @@ OnPageChangeListener {
 	private MapView mapView;
 	private WebView webViewPriceTrend;
 	
+	private OnMoreShareAndAttentionListener onMoreShareAndAttentionListener;
+	private OnShareTypeSelectListener onShareTypeSelectListener;
+	
+	private IWXAPI apiWeixin;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		initView();
+		apiWeixin = WXAPIFactory.createWXAPI(this, Constants.App_Id_Weixin, false);
+		apiWeixin.registerApp(Constants.App_Id_Weixin);
 		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
+		initView();
+		initListener();
 		getRentHouseDetail();
 	}
 	
@@ -84,7 +99,7 @@ OnPageChangeListener {
 		setContentView(R.layout.act_rent_house_detail);
 		tvBack = (TextView) findViewById(R.id.act_rent_house_detail_back);
 		tvPageTitle = (TextView) findViewById(R.id.act_rent_house_detail_page_title);
-		tvShare = (TextView) findViewById(R.id.act_rent_house_detail_share);
+		tvMore = (TextView) findViewById(R.id.act_rent_house_detail_more);
 		tvTitle = (TextView) findViewById(R.id.act_rent_house_detail_title);
 		tvRentPrice = (TextView) findViewById(R.id.act_rent_house_detail_rent_price);
 		tvHouseType = (TextView) findViewById(R.id.act_rent_house_detail_house_type);
@@ -119,8 +134,11 @@ OnPageChangeListener {
 		WebSettings ws = webViewPriceTrend.getSettings();
         ws.setBuiltInZoomControls(false);
         ws.setJavaScriptEnabled(true);
-		
+	}
+	
+	private void initListener() {
 		tvBack.setOnClickListener(this);
+		tvMore.setOnClickListener(this);
 		photoPager.setOnPageChangeListener(this);
 		tvAgentDial.setOnClickListener(this);
 		tvAgentMsg.setOnClickListener(this);
@@ -128,6 +146,41 @@ OnPageChangeListener {
 		inner3D.setOnClickListener(this);
 		court3D.setOnClickListener(this);
 		tvNearbyDeatil.setOnClickListener(this);
+        onMoreShareAndAttentionListener = new OnMoreShareAndAttentionListener() {
+			
+			@Override
+			public void onShare() {  //  分享
+				PopViewHelper.showSharePopupWindow(RentHouseDetailActivity.this,
+						getWindow().getDecorView(), onShareTypeSelectListener);
+			}
+			
+			@Override
+			public void onAttention() {  // 关注
+				attentionToHouse();
+			}
+		};
+		
+        onShareTypeSelectListener = new OnShareTypeSelectListener() {
+			
+			@Override
+			public void onShareTypeSelected(int shareType) {
+			    if (rentHouseDetailBean != null) {
+			        switch (shareType) {
+	                case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
+	                    // TODO
+	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
+	                    weixinShareHelper.shareWebpage(RentHouseDetailActivity.this, apiWeixin,
+	                            "智住网", rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare());
+	                    break;
+	                case OnShareTypeSelectListener.Share_Type_QQ:
+	                    break;
+	                case OnShareTypeSelectListener.Share_Type_Sina_Weibo:
+	                    break;
+	                }
+			    }
+				
+			}
+		};
 	}
 	
 	@Override
@@ -135,6 +188,9 @@ OnPageChangeListener {
 		switch (v.getId()) {
 		case R.id.act_rent_house_detail_back:
 			finish();
+			break;
+		case R.id.act_rent_house_detail_more:  // // 更多 （收藏  分享）
+			PopViewHelper.showMoreShareAndAttention(this, tvMore, onMoreShareAndAttentionListener);
 			break;
 		case R.id.act_rent_house_detail_agent_dial:   // 拨打经纪人电话
 			if (rentHouseDetailBean != null) {
@@ -313,6 +369,30 @@ OnPageChangeListener {
 		int photoTotalNum = photoAdapter.getCount();
 		String txt = (arg0 + 1) + "/" + photoTotalNum;
 		tvPhotoIndex.setText(txt);
+	}
+	
+	private void attentionToHouse() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		String userId = ContentUtils.getUserId(this);
+		actionImpl.attentionToHouse(userId, houseSourceId,
+				new ResultHandlerCallback() {
+
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+
+					}
+
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						ToastUtils.SHORT.toast(
+								RentHouseDetailActivity.this, "关注成功");
+					}
+				});
 	}
 
 	

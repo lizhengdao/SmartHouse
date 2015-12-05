@@ -27,9 +27,29 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnRentHouseMoreConditionListener;
 
 import com.alibaba.fastjson.JSON;
 
+/**
+ * 租房列表页
+ * 获取租房列表，输入
+ * 城市ID、
+ * 区域ID、
+ * 租金范围、
+ * 面积范围、
+ * 排序（0：默认 1：租金低到高 2：租金高到低）、
+ * 分页大小、页码。
+ * 
+ * 租金区间
+ * 面积范围
+ * 排序
+ * 朝向
+ * 房型
+ * 
+ * @author lzd
+ *
+ */
 public class RentHouseActivity extends BaseActivity implements OnClickListener,
         OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 
@@ -43,88 +63,64 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
     private ListView lstRentHouseView;
     private RentHouseAdapter adapter;
 
-    public static final String SalePriceRange = "SalePriceRange";
-    public static final String HouseType = "HouseType";
-    public static final String PrpUsage = "PrpUsage";
-    public static final String EstateLabel = "EstateLabel";
-    public static final String EstateStatus = "EstateStatus";
-    public static final String FloorRange = "FloorRange";
-    public static final String RentPriceRange = "RentPriceRange";
-    public static final String Direction = "Direction";
-    public static final String Sort = "Sort";
+//    public static final String SalePriceRange = "SalePriceRange";
+    public static final String HouseType = "HouseType";  //  房型
+//    public static final String PrpUsage = "PrpUsage";
+//    public static final String EstateLabel = "EstateLabel";
+//    public static final String EstateStatus = "EstateStatus";
+//    public static final String FloorRange = "FloorRange";
+    public static final String RentPriceRange = "RentPriceRange"; // 租金区间
+    
+    //  TODO 面积范围  的字符串还需要问问
+    public static final String SquareRange = "SquareRange";  // 面积范围
+    public static final String Direction = "Direction";  //  朝向
+//    public static final String Sort = "Sort";  // 排序 写死
 
     private String cityId = "";
 
     private ArrayList<RentHouseBean> rentHouses = new ArrayList<RentHouseBean>();
 
-    /**
-     * 区域
-     */
+    // 区域
     private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
-    /**
-     * 总价
-     */
-    private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
-    /**
-     * 户型
-     */
+    // 总价
+//    private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
+    // 户型
     private ArrayList<TextValueBean> houseTypes = new ArrayList<TextValueBean>();
-    /**
-     * 物业类型
-     */
-    private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
+    // 物业类型
+//    private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
 
-    /**
-     * 特色标签
-     */
-    private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
+    // 特色标签
+//    private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
+    //  售卖状态
+//    private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
+    //  楼层范围
+//    private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
 
-    /**
-     * 售卖状态
-     */
-    private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
-
-    /**
-     * 楼层范围
-     */
-    private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-
-    /**
-     * 租价范围
-     */
+    //  租价范围
     private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-
-    /**
-     * 朝向
-     */
+    // 朝向
     private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-
-    /**
-     * 排序
-     */
+    // 面积
+    private ArrayList<TextValueBean> squareRanges = new ArrayList<TextValueBean>();
+    //  排序
     private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
 
-    /**
-     * 区域
-     */
+    //  区域监听
     private OnConditionSelectListener onAreaSelectListener;
-    /**
-     * 总价
-     */
+    //  租金范围监听
     private OnConditionSelectListener onRentPriceSelectListener;
-    /**
-     * 房型
-     */
+    //  房型监听
     private OnConditionSelectListener onHouseTypeSelectListener;
 
     private ArrayList<String> moreType = new ArrayList<String>();
+    private OnRentHouseMoreConditionListener onRentHouseMoreConditionListener;
 
     private TextValueBean areaCondition;
     private TextValueBean rentPriceCondition;
     private TextValueBean squareCondition;
-    private TextValueBean labelCondition;
+//    private TextValueBean labelCondition;
     private TextValueBean roomTypeCondition;
-    private String sort, keyWords;
+    private String sort, keyWords, direction;
     private int pageIndex = 0;
     private int pageTotal = 0;
 
@@ -174,7 +170,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                 rentPriceCondition = txtValueBean;
                 tvRentPrice.setText(txtValueBean.getText());
                 getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, null,
+                        squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);
             }
         };
@@ -186,7 +182,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                 roomTypeCondition = txtValueBean;
                 tvHouseType.setText(txtValueBean.getText());
                 getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, null,
+                        squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);
             }
         };
@@ -198,38 +194,61 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                 areaCondition = txtValueBean;
                 tvArea.setText(txtValueBean.getText());
                 getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, null,
+                        squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);
             }
         };
+        
+        onRentHouseMoreConditionListener = new OnRentHouseMoreConditionListener() {
+			
+			@Override
+			public void onRentHouseMoreConditon(TextValueBean sortConditionData,
+					TextValueBean squareConditionData,
+					TextValueBean directionConditonData) {
+				// TODO Auto-generated method stub
+				if (sortConditionData != null) {
+					sort = sortConditionData.getValue();
+				}
+				squareCondition = squareConditionData;
+				if (directionConditonData != null) {
+					direction = directionConditonData.getValue();
+				}
+				getRentHouseList(cityId, areaCondition, rentPriceCondition,
+                        squareCondition, sort, keyWords, direction,
+                        roomTypeCondition, 10, true);
+			}
+		};
     }
 
     private void initData() {
+    	initSortsData();
         moreType.add("排序");
+        moreType.add("面积范围");
         moreType.add("朝向");
-        moreType.add("面积");
-        moreType.add("标签");
-        moreType.add("楼层");
-        moreType.add("房源编号");
-        getConditionList(SalePriceRange);
+        
+//        moreType.add("标签");
+//        moreType.add("楼层");
+//        moreType.add("房源编号");
+//        getConditionList(SalePriceRange);
         getConditionList(HouseType);
-        getConditionList(PrpUsage);
-        getConditionList(EstateLabel);
-        getConditionList(EstateStatus);
-        getConditionList(FloorRange);
+//        getConditionList(PrpUsage);
+//        getConditionList(EstateLabel);
+//        getConditionList(EstateStatus);
+//        getConditionList(FloorRange);
         getConditionList(RentPriceRange);
         getConditionList(Direction);
-        getConditionList(Sort);
+        getConditionList(SquareRange);
+        
+//        getConditionList(Sort);
         getAreaList();
 
         getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                squareCondition, sort, keyWords, null, roomTypeCondition, 10,
+                squareCondition, sort, keyWords, direction, roomTypeCondition, 10,
                 true);
     }
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         switch (v.getId()) {
         case R.id.act_rent_house_back: // 返回
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -250,8 +269,11 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                     houseTypes, onHouseTypeSelectListener);
             break;
         case R.id.act_rent_house_more_llt: // 更多
-            PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
-                    sorts, directions, estateLabels, lltMore);
+        	// TODO
+//            PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
+//                    sorts, directions, estateLabels, lltMore);
+        	PopViewHelper.showRentHouseMorePopWindow(this, moreType, sorts,
+        			squareRanges, directions, lltMore, onRentHouseMoreConditionListener);
             break;
         }
     }
@@ -259,7 +281,6 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
-        // TODO Auto-generated method stub
         RentHouseBean rentHouseBean = rentHouses.get(position);
         Jumper.newJumper()
                 .setAheadInAnimation(R.anim.activity_push_in_right)
@@ -273,19 +294,17 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 
     @Override
     public void onFooterLoad(AbPullToRefreshView view) {
-        // TODO Auto-generated method stub
         if (pageIndex > pageTotal) {
             getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                    squareCondition, sort, keyWords, null,
+                    squareCondition, sort, keyWords, direction,
                     roomTypeCondition, 10, false);
         }
     }
 
     @Override
     public void onHeaderRefresh(AbPullToRefreshView view) {
-        // TODO Auto-generated method stub
         getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                squareCondition, sort, keyWords, null,
+                squareCondition, sort, keyWords, direction,
                 roomTypeCondition, 10, true);
     }
 
@@ -309,25 +328,31 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                         ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
                                 .parseArray(result.getData(),
                                         TextValueBean.class);
-                        if (SalePriceRange.equals(conditionName)) {
-                            salePriceRanges.addAll(temp);
-                        } else if (HouseType.equals(conditionName)) {
+//                        if (SalePriceRange.equals(conditionName)) {
+//                            salePriceRanges.addAll(temp);
+//                        } else 
+                        if (HouseType.equals(conditionName)) {
                             houseTypes.addAll(temp);
-                        } else if (PrpUsage.equals(conditionName)) {
-                            prpUsages.addAll(temp);
-                        } else if (EstateLabel.equals(conditionName)) {
-                            estateLabels.addAll(temp);
-                        } else if (EstateStatus.equals(conditionName)) {
-                            estateStatus.addAll(temp);
-                        } else if (FloorRange.equals(conditionName)) {
-                            floorRanges.addAll(temp);
-                        } else if (RentPriceRange.equals(conditionName)) {
+                        }
+//                        else if (PrpUsage.equals(conditionName)) {
+//                            prpUsages.addAll(temp);
+//                        } else if (EstateLabel.equals(conditionName)) {
+//                            estateLabels.addAll(temp);
+//                        } else if (EstateStatus.equals(conditionName)) {
+//                            estateStatus.addAll(temp);
+//                        } else if (FloorRange.equals(conditionName)) {
+//                            floorRanges.addAll(temp);
+//                        }
+                        else if (RentPriceRange.equals(conditionName)) {
                             rentPriceRanges.addAll(temp);
                         } else if (Direction.equals(conditionName)) {
                             directions.addAll(temp);
-                        } else if (Sort.equals(conditionName)) {
-                            sorts.addAll(temp);
+                        } else if (SquareRange.equals(conditionName)) {
+                        	squareRanges.addAll(temp);
                         }
+//                        else if (Sort.equals(conditionName)) {
+//                            sorts.addAll(temp);
+//                        }
                     }
                 });
     }
@@ -348,7 +373,6 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 
             @Override
             public void rc0(RequestEntity entity, Result result) {
-                // TODO Auto-generated method stub
                 ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
                         .parseArray(result.getData(), TextValueBean.class);
                 areas.addAll(temp);
@@ -415,5 +439,27 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                     }
                 });
     }
+    
+	/**
+	 * 排序    0：默认     1：租金低到高     2：租金高到低
+	 */
+	private void initSortsData() {
+		TextValueBean tv1 = new TextValueBean();
+		tv1.setText("默认");
+		tv1.setValue("0");
+		tv1.setSelected(true);
+		
+		TextValueBean tv2 = new TextValueBean();
+		tv2.setText("租金低到高");
+		tv2.setValue("1");
+		
+		TextValueBean tv3 = new TextValueBean();
+		tv3.setText("租金高到低");
+		tv3.setValue("2");
+		
+		sorts.add(tv1);
+		sorts.add(tv2);
+		sorts.add(tv3);
+	}
 
 }

@@ -1,12 +1,16 @@
 package cn.com.zzwfang.bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author MISS-万
  *
  */
 public class MessageBean extends BaseBean {
 
-	private String _id;
+	private String id;
 	
 	private String fromUser;
 	
@@ -16,18 +20,30 @@ public class MessageBean extends BaseBean {
 	
 	private String createDate;
 	
+	private long createDateLong;
+	
 	private boolean isRead;
 	
     private String userId;
 	
 	private String userName;
+	
+	
 
-	public String get_id() {
-		return _id;
+	public long getCreateDateLong() {
+		return createDateLong;
 	}
 
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setCreateDateLong(long createDateLong) {
+		this.createDateLong = createDateLong;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getFromUser() {
@@ -60,6 +76,15 @@ public class MessageBean extends BaseBean {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date;
+		try {
+			date = sdf.parse(createDate);
+			setCreateDateLong(date.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public boolean isRead() {

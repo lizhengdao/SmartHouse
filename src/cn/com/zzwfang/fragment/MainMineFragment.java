@@ -2,6 +2,8 @@ package cn.com.zzwfang.fragment;
 
 import java.io.File;
 
+import com.alibaba.fastjson.JSON;
+
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,9 +28,15 @@ import cn.com.zzwfang.activity.MyHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyProxyActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
+import cn.com.zzwfang.bean.FileUploadResultBean;
+import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.PathImage;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnAvatarOptionsClickListener;
@@ -72,15 +80,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		feedbackFlt = (FrameLayout) view.findViewById(R.id.frag_mine_feedback_flt);
 		settingsFlt = (FrameLayout) view.findViewById(R.id.frag_mine_settings_flt);
 		imgFeeHunter = (ImageView) view.findViewById(R.id.frag_mine_fee_hunter);
-		
-		UserInfoBean userInfoBean = ContentUtils.getUserInfo(getActivity());
-		tvUserName.setText(userInfoBean.getUserName());
-		tvPhone.setText(userInfoBean.getPhone());
-		String avatarUrl = userInfoBean.getPhoto();
-		if (!TextUtils.isEmpty(avatarUrl)) {
-			ImageAction.displayAvatar(avatarUrl, avatar);
-		}
-		
 
 		tvBack.setOnClickListener(this);
 		avatar.setOnClickListener(this);
@@ -93,6 +92,18 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		feedbackFlt.setOnClickListener(this);
 		settingsFlt.setOnClickListener(this);
 		imgFeeHunter.setOnClickListener(this);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		UserInfoBean userInfoBean = ContentUtils.getUserInfo(getActivity());
+		tvUserName.setText(userInfoBean.getUserName());
+		tvPhone.setText(userInfoBean.getPhone());
+		String avatarUrl = userInfoBean.getPhoto();
+		if (!TextUtils.isEmpty(avatarUrl)) {
+			ImageAction.displayAvatar(avatarUrl, avatar);
+		}
 	}
 
 	
@@ -204,8 +215,8 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	@Override
 	public void onPickedPhoto(File file, Bitmap bm) {
 		// TODO Auto-generated method stub
-		Log.e("--->", "onPickedPhoto bitmap = " + bm);
 		avatar.setImageBitmap(bm);
+		upLoadAvatar(file);
 	}
 
 	@Override
@@ -239,6 +250,50 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
             }
             break;
         }
+	}
+	
+	private void upLoadAvatar(File file) {
+		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
+		actionImpl.otherFileUpload(file, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				FileUploadResultBean fileUploadResultBean = JSON.parseObject(result.getData(), FileUploadResultBean.class);
+				ContentUtils.updateUserAvatar(getActivity(), fileUploadResultBean.getShowPath());
+				updateUserInfoAvatar(fileUploadResultBean.getFilePath());
+			}
+		});
+	}
+	
+	private void updateUserInfoAvatar(String avatarUrl) {
+		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
+		String userId = ContentUtils.getUserId(getActivity());
+		actionImpl.updateUserInfo(userId, null, avatarUrl, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				ToastUtils.SHORT.toast(getActivity(), "头像上传成功");
+			}
+		});
 	}
 	
 	@Override

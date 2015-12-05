@@ -88,8 +88,16 @@ public class RentHouseDetailBean extends BaseBean {
      */
     private String Estate360;
     
+    private String Share;
     
-	
+
+	public String getShare() {
+		return Share;
+	}
+
+	public void setShare(String share) {
+		Share = share;
+	}
 
 	public String getPrp360() {
         return Prp360;

@@ -34,6 +34,7 @@ import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnNewHouseMoreConditionListener;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -52,6 +53,28 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
+/**
+ * 新房列表页
+ * 
+ * 获取新房列表页，
+ * 输入区域ID、
+ * 价格区间（用“-”进行分隔，如60-80代表60-80万）、
+ * 房屋用途（0：不限 1：普通住宅 2：别墅 3：商住两用）、
+ * 特色（0：不限 1：精装 2：地铁房）、
+ * 售卖状态（0：不限 1：即将开盘 2：排卡中 3：在售 4：售罄）、
+ * 城市ID、页码、页面大小
+ * 和所查房型（0：不限 1：一居 2：两居 3：三居 4：四居）
+ * 区域
+ * 
+ * 价格区间
+ * 房型
+ * 房屋用途
+ * 特色
+ * 售卖状态
+ * 
+ * @author lzd
+ *
+ */
 public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
 		OnItemClickListener {
@@ -85,6 +108,9 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 	public static final String SalePriceRange = "SalePriceRange";
 	public static final String HouseType = "HouseType";
+	
+	// TODO 这个 房屋用途 的字符串是多少要问问
+	public static final String HouseUsage = "House"; // 房屋用途
 	public static final String PrpUsage = "PrpUsage";
 	public static final String EstateLabel = "EstateLabel";
 	public static final String EstateStatus = "EstateStatus";
@@ -93,76 +119,48 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	public static final String Direction = "Direction";
 	public static final String Sort = "Sort";
 
-	/**
-	 * 区域
-	 */
+	// 区域
 	private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
-	/**
-	 * 总价
-	 */
+	// 总价
 	private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
-	/**
-	 * 户型
-	 */
+	// 户型
 	private ArrayList<TextValueBean> houseTypes = new ArrayList<TextValueBean>();
-	/**
-	 * 物业类型
-	 */
-	private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
-
-	/**
-	 * 特色标签
-	 */
+	// 房屋用途
+	private ArrayList<TextValueBean> houseUsages = new ArrayList<TextValueBean>();
+	// 物业类型
+//	private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
+	// 特色标签
 	private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
-
-	/**
-	 * 售卖状态
-	 */
+	// 售卖状态
 	private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
+	// 楼层范围
+//	private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
+    // 租价范围
+//	private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
+	//  朝向
+//	private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
+	// 排序
+//	private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
 
-	/**
-	 * 楼层范围
-	 */
-	private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-
-	/**
-	 * 租价范围
-	 */
-	private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-
-	/**
-	 * 朝向
-	 */
-	private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-
-	/**
-	 * 排序
-	 */
-	private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
-
-	/**
-	 * 区域
-	 */
+	// 区域监听
 	private OnConditionSelectListener onAreaSelectListener;
-	/**
-	 * 总价
-	 */
+	// 总价监听
 	private OnConditionSelectListener onTotalPriceSelectListener;
-	/**
-	 * 房型
-	 */
+	// 房型监听
 	private OnConditionSelectListener onHouseTypeSelectListener;
 
 	private ArrayList<String> moreType = new ArrayList<String>();
+	
+	private OnNewHouseMoreConditionListener onNewHouseMoreConditionListener;
 
 	private TextValueBean areaCondition;
 	private TextValueBean totalPriceCondition;
-	private TextValueBean squareCondition;
-	private TextValueBean labelCondition;
-	private TextValueBean roomTypeCondition;
-	private TextValueBean usageCondition;
-	private TextValueBean statusCondition;
-	private String buildYear, floor, proNum, sort;
+//	private TextValueBean squareCondition;
+	private TextValueBean labelCondition;   //  特色标签
+	private TextValueBean roomTypeCondition;  //  房屋类型
+	private TextValueBean usageCondition;  // 用途
+	private TextValueBean statusCondition;  // 售卖状态
+	private String proNum;    //  buildYear, floor, sort
 	private int pageIndex = 1;
 	private int pageTotal = 0;
 	private String keyWords;
@@ -270,6 +268,25 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			}
 		};
 		
+		onNewHouseMoreConditionListener = new OnNewHouseMoreConditionListener() {
+			
+			@Override
+			public void onNewHouseMoreConditon(
+					TextValueBean houseUsageConditionData,
+					TextValueBean labelConditionData,
+					TextValueBean saleStatusConditonData) {
+				// TODO Auto-generated method stub
+				usageCondition = houseUsageConditionData;
+				labelCondition = labelConditionData;
+				statusCondition = saleStatusConditonData;
+				getNewHouseList(cityId, areaCondition,
+						totalPriceCondition, roomTypeCondition,
+						usageCondition, labelCondition,
+						statusCondition, keyWords, 10,
+						true);
+			}
+		};
+		
 		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
 			@Override
@@ -310,21 +327,27 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	}
 	
 	private void initData() {
-		moreType.add("排序");
-		moreType.add("朝向");
-		moreType.add("面积");
-		moreType.add("标签");
-		moreType.add("楼层");
-		moreType.add("房源编号");
-		getConditionList(SalePriceRange);
-		getConditionList(HouseType);
+		
+//		moreType.add("排序");
+//		moreType.add("朝向");
+//		moreType.add("面积");
+//		moreType.add("标签");
+//		moreType.add("楼层");
+//		moreType.add("房源编号");
+		moreType.add("房屋用途");
+		moreType.add("特色标签");
+		moreType.add("售卖状态");
+		getConditionList(SalePriceRange);  // 价格范围
+		getConditionList(HouseType);  // 房型
+		getConditionList(HouseUsage);  // 房屋用途
+		
 		getConditionList(PrpUsage);
 		getConditionList(EstateLabel);
 		getConditionList(EstateStatus);
-		getConditionList(FloorRange);
-		getConditionList(RentPriceRange);
-		getConditionList(Direction);
-		getConditionList(Sort);
+//		getConditionList(FloorRange);
+//		getConditionList(RentPriceRange);
+//		getConditionList(Direction);
+//		getConditionList(Sort);
 		getAreaList();
 		
 	}
@@ -384,12 +407,20 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
-
+						if (isRefresh) {
+							pullView.onHeaderRefreshFinish();
+						} else {
+							pullView.onFooterLoadFinish();
+						}
 					}
 
 					@Override
 					public void rc3001(RequestEntity entity, Result result) {
-
+						if (isRefresh) {
+							pullView.onHeaderRefreshFinish();
+						} else {
+							pullView.onFooterLoadFinish();
+						}
 					}
 
 					@Override
@@ -408,7 +439,6 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 						} else {
 							pullView.onFooterLoadFinish();
 						}
-						
 					}
 				});
 	}
@@ -435,8 +465,12 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 					houseTypes, onHouseTypeSelectListener);
 			break;
 		case R.id.act_new_house_more_llt: // 更多
-			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
-					sorts, directions, estateLabels, lltMore);
+			// TODO
+//			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
+//					sorts, directions, estateLabels, lltMore);
+			PopViewHelper.showNewHouseMorePopWindow(this, moreType,
+					houseUsages, estateLabels,
+					estateStatus, lltMore, onNewHouseMoreConditionListener);
 			break;
 		}
 	}
@@ -484,21 +518,27 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 							salePriceRanges.addAll(temp);
 						} else if (HouseType.equals(conditionName)) {
 							houseTypes.addAll(temp);
-						} else if (PrpUsage.equals(conditionName)) {
-							prpUsages.addAll(temp);
-						} else if (EstateLabel.equals(conditionName)) {
+						} else if (HouseUsage.equals(conditionName)) {
+							houseUsages.addAll(temp);
+						}
+//						else if (PrpUsage.equals(conditionName)) {
+//							prpUsages.addAll(temp);
+//						}
+						else if (EstateLabel.equals(conditionName)) {
 							estateLabels.addAll(temp);
 						} else if (EstateStatus.equals(conditionName)) {
 							estateStatus.addAll(temp);
-						} else if (FloorRange.equals(conditionName)) {
-							floorRanges.addAll(temp);
-						} else if (RentPriceRange.equals(conditionName)) {
-							rentPriceRanges.addAll(temp);
-						} else if (Direction.equals(conditionName)) {
-							directions.addAll(temp);
-						} else if (Sort.equals(conditionName)) {
-							sorts.addAll(temp);
 						}
+						
+//						else if (FloorRange.equals(conditionName)) {
+//							floorRanges.addAll(temp);
+//						} else if (RentPriceRange.equals(conditionName)) {
+//							rentPriceRanges.addAll(temp);
+//						} else if (Direction.equals(conditionName)) {
+//							directions.addAll(temp);
+//						} else if (Sort.equals(conditionName)) {
+//							sorts.addAll(temp);
+//						}
 					}
 				});
 	}

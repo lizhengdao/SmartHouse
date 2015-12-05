@@ -706,5 +706,24 @@ public interface Action {
 			int countFang, int hall, String require,
 			String name, boolean sex, ResultHandlerCallback callback);
 	
+	/**
+	 * 关于我们
+	 * @param callback
+	 */
 	void getAboutUsData(ResultHandlerCallback callback);
+	
+	/**
+	 * 上传文件
+	 * @param file
+	 * @param callback
+	 */
+	void otherFileUpload(File file, ResultHandlerCallback callback);
+	
+	/**
+	 * 修改个人信息
+	 * @param userId
+	 * @param nickName
+	 * @param avatarUrl
+	 */
+	void updateUserInfo(String userId, String nickName, String avatarUrl, ResultHandlerCallback callback);
 }

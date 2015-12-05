@@ -3,6 +3,8 @@ package cn.com.zzwfang.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.Result;
@@ -19,6 +21,7 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack;
 	
+	private WebView webView;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -30,6 +33,10 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.act_about_us);
 		
 		tvBack = (TextView) findViewById(R.id.act_about_us_back);
+		webView = (WebView) findViewById(R.id.act_about_us_webview);
+		WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setBuiltInZoomControls(false);
 		
 		tvBack.setOnClickListener(this);
 	}
@@ -57,7 +64,7 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				
+				webView.loadData(result.getData(), "text/html", "utf-8");
 			}
 		});
 	}

@@ -16,7 +16,7 @@ import cn.com.zzwfang.view.PathImage;
 public class FeeHunterInfoActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack, tvMyCustomer, tvRecommendHouseSourceList, tvFeeHunterMsg, tvFeeHunterRule;
-	private TextView tvBindedCards;
+	private TextView tvBindedCards, tvUserName;
 	private LinearLayout lltRecommendCustomer, lltRecommendSell;
 	private PathImage avatarImageView;
 	
@@ -49,9 +49,10 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		tvRecommendedOwners = (TextView) findViewById(R.id.act_fee_hunter_info_recommended_owners);
 		tvFeeHunterMoney = (TextView) findViewById(R.id.act_fee_hunter_info_money);
 		
+		tvUserName = (TextView) findViewById(R.id.act_fee_hunter_info_name);
+		
 		UserInfoBean userInfoBean = ContentUtils.getUserInfo(this);
-//        tvUserName.setText(userInfoBean.getUserName());
-//        tvPhone.setText(userInfoBean.getPhone());
+        tvUserName.setText(userInfoBean.getUserName());
         String avatarUrl = userInfoBean.getPhoto();
         if (!TextUtils.isEmpty(avatarUrl)) {
             ImageAction.displayAvatar(avatarUrl, avatarImageView);

@@ -4,14 +4,17 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.TimeUtils;
 import cn.com.zzwfang.view.PathImage;
 
 public class ChatAdapter extends BaseAdapter {
@@ -21,6 +24,7 @@ public class ChatAdapter extends BaseAdapter {
 	private ArrayList<MessageBean> messages;
 	
 	private String myId;
+	private String myAvaterUrl;
 	
 	private ViewHolderLeft viewHolderLeft = null;
 	private ViewHolderRight viewHolderRight = null;
@@ -29,6 +33,7 @@ public class ChatAdapter extends BaseAdapter {
 		this.context = context;
 		this.messages = messages;
 		myId = ContentUtils.getUserId(context);
+		myAvaterUrl = ContentUtils.getUserAvatar(context);
 	}
 	
 	public void addMessage(MessageBean msg) {
@@ -37,6 +42,14 @@ public class ChatAdapter extends BaseAdapter {
 			notifyDataSetChanged();
 		}
 	}
+	
+	public void addMessages(ArrayList<MessageBean> msgs) {
+		if (messages != null && msgs != null && msgs.size() > 0) {
+			messages.addAll(msgs);
+			notifyDataSetChanged();
+		}
+	}
+	
 	
 	static class ViewType {
         private static final int TYPE_COUNT = 2;
@@ -91,8 +104,8 @@ public class ChatAdapter extends BaseAdapter {
 			case 0:   // 左边
 				viewHolderLeft = new ViewHolderLeft();
 				convertView = View.inflate(context, R.layout.item_appointment_msg_left, null);
-				viewHolderLeft.ivAvatar = (PathImage) convertView.findViewById(R.id.iv_avatar);
-				viewHolderLeft.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+				viewHolderLeft.ivAvatar = (PathImage) convertView.findViewById(R.id.adapter_chat_left_avatar);
+				viewHolderLeft.tvTime = (TextView) convertView.findViewById(R.id.adapter_chat_left_time);
 				viewHolderLeft.tvMsgContent = (TextView) convertView.findViewById(R.id.tv_msg_content);
 				convertView.setTag(viewHolderLeft);
 				break;
@@ -101,6 +114,7 @@ public class ChatAdapter extends BaseAdapter {
 				convertView = View.inflate(context, R.layout.item_appointment_msg_right, null);
 				viewHolderRight.ivAvatarRight = (PathImage) convertView.findViewById(R.id.iv_avatar_right);
 				viewHolderRight.tvMsgRight = (TextView) convertView.findViewById(R.id.tv_msg_content_right);
+				viewHolderRight.tvTime = (TextView) convertView.findViewById(R.id.adapter_chat_right_time);
 				convertView.setTag(viewHolderRight);
 				break;
 			}
@@ -120,8 +134,9 @@ public class ChatAdapter extends BaseAdapter {
 //		String avatarUrl = msg.getAvatar();
 		switch (type) {
 		case 0:
-			viewHolderLeft.tvName.setText(msg.getUserName());
 			viewHolderLeft.tvMsgContent.setText(msg.getMessage());
+			String time = TimeUtils.levelSimple(context, msg.getCreateDateLong());
+			viewHolderLeft.tvTime.setText(time);
 			
 //			if (!TextUtils.isEmpty(avatarUrl)) {
 //				ImageAction.displayAvatar(avatarUrl, viewHolderLeft.ivAvatar);
@@ -129,9 +144,12 @@ public class ChatAdapter extends BaseAdapter {
 			break;
 		case 1:
 			viewHolderRight.tvMsgRight.setText(msg.getMessage());
-//			if (!TextUtils.isEmpty(avatarUrl)) {
-//				ImageAction.displayAvatar(avatarUrl, viewHolderRight.ivAvatarRight);
-//			}
+			String timeRight = TimeUtils.levelSimple(context, msg.getCreateDateLong());
+			viewHolderRight.tvTime.setText(timeRight);
+			
+			if (!TextUtils.isEmpty(myAvaterUrl)) {
+				ImageAction.displayAvatar(myAvaterUrl, viewHolderRight.ivAvatarRight);
+			}
 			break;
 		}
 		return convertView;
@@ -140,8 +158,8 @@ public class ChatAdapter extends BaseAdapter {
     static class ViewHolderLeft {
 		
     	PathImage ivAvatar;
-		
-		TextView tvName;
+    	
+    	TextView tvTime;
 		
 		TextView tvMsgContent;
 		
@@ -152,6 +170,8 @@ public class ChatAdapter extends BaseAdapter {
 		PathImage ivAvatarRight;
 		
 		TextView tvMsgRight;
+		
+		TextView tvTime;
 	}
 
 }

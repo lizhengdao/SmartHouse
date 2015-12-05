@@ -221,8 +221,9 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 					lltHouseType, houseTypes, onHouseTypeSelectListener);
 			break;
 		case R.id.frag_map_find_house_more_tv:// 更多
-			PopViewHelper.showSecondHandHouseMorePopWindow(getActivity(),
-					moreType, null, null, estateLabels, lltMore);
+			// TODO
+//			PopViewHelper.showSecondHandHouseMorePopWindow(getActivity(),
+//					moreType, null, null, estateLabels, lltMore);
 			break;
 		case R.id.frag_map_find_house_locate:
 			locate();

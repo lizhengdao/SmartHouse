@@ -1,6 +1,9 @@
 package cn.com.zzwfang.share;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import cn.com.zzwfang.R;
 
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
@@ -70,12 +73,15 @@ public class WeiXinShareHelper {
         api.sendReq(req);
     }
     
-    public void shareWebpage(IWXAPI api, String webpageTitle, String webpageDesc, String webpageUrl) {
+    public void shareWebpage(Context context, IWXAPI api, String webpageTitle, String webpageDesc, String webpageUrl) {
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = webpageUrl;
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = webpageTitle;
-        msg.description = webpageTitle;
+        msg.description = webpageDesc;
+        
+        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);  
+        msg.setThumbImage(thumb);  
         
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("webpage");

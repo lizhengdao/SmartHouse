@@ -280,7 +280,20 @@ public class API {
      */
     public static final String ENTRUST_SELL_HOUSE = "User/EntrustSell";
     
+    /**
+     * 关于我们
+     */
     public static final String GET_ABOUT_US = "Other/About";
+    
+    /**
+     * 文件上传（填写银行卡上传图片）
+     */
+    public static final String POST_OTHER_UPLOAD = "Other/Upload";
+    
+    /**
+     * 上传个人资料
+     */
+    public static final String GET_UPDATE_USER_INFO = "User/UpdateInfo";
     
 
 }

@@ -22,19 +22,11 @@ public class UserInfoBean extends BaseBean {
 	 */
 	private String Phone;
 	
-//	private String Email;
-	
-//	private String Province;
-	
-//	private String City;
 	
 	/**
 	 * 头像
 	 */
 	private String Photo;
-	
-	
-//	private String Profession;
 	
 	/**
 	 * 是否绑定银行卡
@@ -61,12 +53,9 @@ public class UserInfoBean extends BaseBean {
 	 */
 	private int UserType;
 	
-//	private int serType;
 	
-//	private boolean Sex;
+	private boolean Sex;
 	
-	
-
 	public String getId() {
 		return Id;
 	}
@@ -99,30 +88,6 @@ public class UserInfoBean extends BaseBean {
 		Phone = phone;
 	}
 
-//	public String getEmail() {
-//		return Email;
-//	}
-//
-//	public void setEmail(String email) {
-//		Email = email;
-//	}
-//
-//	public String getProvince() {
-//		return Province;
-//	}
-//
-//	public void setProvince(String province) {
-//		Province = province;
-//	}
-//
-//	public String getCity() {
-//		return City;
-//	}
-//
-//	public void setCity(String city) {
-//		City = city;
-//	}
-
 	public String getPhoto() {
 		return Photo;
 	}
@@ -131,21 +96,13 @@ public class UserInfoBean extends BaseBean {
 		Photo = photo;
 	}
 
-//	public String getProfession() {
-//		return Profession;
-//	}
-//
-//	public void setProfession(String profession) {
-//		Profession = profession;
-//	}
+	public boolean isSex() {
+		return Sex;
+	}
 
-//	public boolean isSex() {
-//		return Sex;
-//	}
-//
-//	public void setSex(boolean sex) {
-//		Sex = sex;
-//	}
+	public void setSex(boolean sex) {
+		Sex = sex;
+	}
 
 	public boolean isIsBindBank() {
 		return IsBindBank;

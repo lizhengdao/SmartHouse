@@ -21,17 +21,12 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
-import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 
-import com.easemob.EMGroupChangeListener;
+import com.alibaba.fastjson.JSON;
 import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMChatRoom;
-import com.easemob.chat.EMConversation;
-import com.easemob.chat.EMGroup;
 import com.easemob.chat.EMMessage;
-import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chat.TextMessageBody;
 
@@ -39,20 +34,29 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 
 	public static final String INTENT_MESSAGE_TO_ID = "intent_message_to_user_id";
 	public static final String INTENT_MESSAGE_TO_NAME = "intent_message_to_user_name";
+	public static final String INTENT_HISTORY_MSG = "intent_history_msg";
 	private TextView tvBack, tvTitle, tvSendMessage;
 	private EditText edtMessage;
 	private ListView listView;
 	
     private ActionImpl actionImpl;
     
+    /**
+     * 从其他地方进来单聊，获取历史消息
+     */
     private IMMessageBean imMessages;
     private ArrayList<MessageBean> messages = new ArrayList<MessageBean>();
+    /**
+     * 从消息列表传来
+     */
+    private ArrayList<MessageBean> historyMsgs;
     
     private ChatAdapter adapter;
     
     private String messageTo;
     private String messageName;
     private NewMessageBroadcastReceiver msgReceiver;
+    
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -65,13 +69,11 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 		
 		messageTo = getIntent().getStringExtra(INTENT_MESSAGE_TO_ID);
 		messageName = getIntent().getStringExtra(INTENT_MESSAGE_TO_NAME);
+		historyMsgs = (ArrayList<MessageBean>) getIntent().getSerializableExtra(INTENT_HISTORY_MSG);
 		actionImpl = ActionImpl.newInstance(this);
 		
 		initView();
-		String userId = ContentUtils.getUserId(this);
-		if (!TextUtils.isEmpty(userId)) {
-			getHistoryMsg(userId);
-		}
+		
 			
 	}
 	
@@ -87,9 +89,19 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 		
 		adapter = new ChatAdapter(this, messages);
 		listView.setAdapter(adapter);
-		
 		tvBack.setOnClickListener(this);
 		tvSendMessage.setOnClickListener(this);
+		// 从消息列表页来
+		if (historyMsgs != null && historyMsgs.size() > 0) {
+			messages.addAll(historyMsgs);
+			adapter.notifyDataSetChanged();
+			readMessage(historyMsgs);
+		} else {  //  从其他聊天页来
+			if (!TextUtils.isEmpty(messageTo)) {
+				getHistoryMsg(messageTo);
+			}
+		}
+		
 	}
 	
 	@Override
@@ -135,6 +147,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 				MessageBean msg = new MessageBean();
 				msg.setFromUser(userId);
 				msg.setMessage(message);
+				msg.setCreateDateLong(System.currentTimeMillis());
 				adapter.addMessage(msg);
 			}
 		});
@@ -167,6 +180,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 				MessageBean msg = new MessageBean();
 				msg.setFromUser(message.getFrom());
 				msg.setMessage(txtBody.getMessage());
+				msg.setCreateDateLong(message.getMsgTime());
 				adapter.addMessage(msg);
 			}
 			
@@ -179,43 +193,80 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void rc3001(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				
+				imMessages = JSON.parseObject(result.getData(), IMMessageBean.class);
+				if (imMessages != null) {
+					ArrayList<MessageBean> messages = imMessages.getMessages();
+					if (messages != null) {
+						adapter.addMessages(messages);
+					}
+				}
 			}
 		});
 		
-		actionImpl.getContactsList(contactId, new ResultHandlerCallback() {
+//		actionImpl.getContactsList(contactId, new ResultHandlerCallback() {
+//			
+//			@Override
+//			public void rc999(RequestEntity entity, Result result) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void rc3001(RequestEntity entity, Result result) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void rc0(RequestEntity entity, Result result) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+	}
+	
+	private void readMessage(ArrayList<MessageBean> messages) {
+		if (messages == null && messages.size() == 0) {
+			return;
+		}
+		String ids = "";
+		for (MessageBean msg : messages) {
+			if (!msg.isRead()) {
+				ids += msg.getId()+ ",";
+			}
+		}
+		if (!TextUtils.isEmpty(ids) && ids.endsWith(",")) {
+			ids = ids.substring(0, ids.length() - 1);
+		} else {
+			return;
+		}
+		
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.readMessage(ids, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void rc3001(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				
 			}
 		});
+		
 	}
 	
 	@Override

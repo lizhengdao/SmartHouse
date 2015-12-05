@@ -36,18 +36,15 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/act_rent_house_detail_share"
-            android:layout_width="wrap_content"
+            android:id="@+id/act_rent_house_detail_more"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|right"
-            android:drawableLeft="@drawable/ic_share"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:paddingRight="8dp"
-            android:text="分享"
+            android:text="更多"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:textSize="16sp" />
     </FrameLayout>
 
     <ScrollView

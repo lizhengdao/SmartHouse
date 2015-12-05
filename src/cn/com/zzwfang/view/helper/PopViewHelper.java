@@ -205,14 +205,34 @@ public class PopViewHelper {
         }
 	}
 	
+	public interface OnSecondHandHouseMoreConditionListener {
+		void onSecondHandHouseMoreConditon(TextValueBean sortCondition,
+				TextValueBean directionCondition, TextValueBean squareCondition,
+				TextValueBean labelCondition, TextValueBean buildingAgeCondition,
+				TextValueBean floorRangeCondition);
+	}
 	/**
 	 * 二手房更多选择
+	 * @param context
+	 * @param types
+	 * @param sorts
+	 * @param directions
+	 * @param squares
+	 * @param estateLabels
+	 * @param buildingAges
+	 * @param floorRanges
+	 * @param anchorView
 	 */
 	public static void showSecondHandHouseMorePopWindow(Context context, ArrayList<String> types,
-			ArrayList<TextValueBean> detail, ArrayList<TextValueBean> directions,
-			ArrayList<TextValueBean> estateLabels, View anchorView) {
+			final ArrayList<TextValueBean> sorts,
+			final ArrayList<TextValueBean> directions,
+			final ArrayList<TextValueBean> squares,
+			final ArrayList<TextValueBean> estateLabels,
+			final ArrayList<TextValueBean> buildingAges,
+			final ArrayList<TextValueBean> floorRanges,
+			View anchorView, final OnSecondHandHouseMoreConditionListener onSecondHandHouseMoreConditionListener) {
 		View view = View.inflate(context, R.layout.popup_second_hand_house_more, null);
-		PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		popupWindow.setFocusable(true);
 	    popupWindow.setOutsideTouchable(true);
 	    popupWindow.update();
@@ -226,15 +246,26 @@ public class PopViewHelper {
 	    
 	    ListView lstType = (ListView) view.findViewById(R.id.popup_second_hand_more_type_lst);
 	    final ListView lstDetail = (ListView) view.findViewById(R.id.popup_second_hand_more_type_detail);
+	    TextView tvOk = (TextView) view.findViewById(R.id.popup_second_hand_more_type_ok);
 	    
 	    MoreTypeAdapter moreTypeAdapter = new MoreTypeAdapter(context, types);
 	    lstType.setAdapter(moreTypeAdapter);
 	    
-	    final MoreDetailAdapter sortAdapter = new MoreDetailAdapter(context, detail);
+	    // 排序Adapter
+	    final MoreDetailAdapter sortAdapter = new MoreDetailAdapter(context, sorts);
 	    lstDetail.setAdapter(sortAdapter);
-	    
+	    // 朝向Adapter
 	    final MoreDetailAdapter directionAdapter = new MoreDetailAdapter(context, directions);
+	    // 面积Adapter
+	    final MoreDetailAdapter squareAdapter = new MoreDetailAdapter(context, squares);
+	    // 标签Adapter
 	    final MoreDetailAdapter labelAdapter = new MoreDetailAdapter(context, estateLabels);
+	    // 楼龄Adapter
+	    final MoreDetailAdapter buildingAgeAdapter = new MoreDetailAdapter(context, buildingAges);
+	    // 楼层Adapter
+	    final MoreDetailAdapter floorAdapter = new MoreDetailAdapter(context, floorRanges);
+	    
+	    lstDetail.setTag(0);
 	    
 	    lstType.setOnItemClickListener(new OnItemClickListener() {
 
@@ -244,19 +275,480 @@ public class PopViewHelper {
 				switch (position) {
 				case 0:  //  排序
 					lstDetail.setAdapter(sortAdapter);
+					lstDetail.setTag(0);
 					break;
 				case 1:  //  朝向
 					lstDetail.setAdapter(directionAdapter);
+					lstDetail.setTag(1);
 					break;
 				case 2:  //  面积
+					lstDetail.setAdapter(squareAdapter);
+					lstDetail.setTag(2);
 					break;
 				case 3:  //  标签
 					lstDetail.setAdapter(labelAdapter);
+					lstDetail.setTag(3);
 					break;
-				case 4:  //  楼层
+				case 4:  //  楼龄
+					lstDetail.setAdapter(buildingAgeAdapter);
+					lstDetail.setTag(4);
 					break;
-				case 5:  //  房源编号
+				case 5:  //  楼层
+					lstDetail.setAdapter(floorAdapter);
+					lstDetail.setTag(5);
 					break;
+				}
+			}
+		});
+	    lstDetail.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				int tag = (Integer) lstDetail.getTag();
+				switch (tag) {
+				case 0:  //  排序
+					if (sorts.get(position).isSelected()) {
+						sorts.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < sorts.size(); i++) {
+							if (i == position) {
+								sorts.get(i).setSelected(true);
+							} else {
+								sorts.get(i).setSelected(false);
+							}
+						}
+					}
+					sortAdapter.notifyDataSetChanged();
+					break;
+				case 1:  //  朝向
+					if (directions.get(position).isSelected()) {
+						directions.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < directions.size(); i++) {
+							if (i == position) {
+								directions.get(i).setSelected(true);
+							} else {
+								directions.get(i).setSelected(false);
+							}
+						}
+					}
+					directionAdapter.notifyDataSetChanged();
+					break;
+				case 2:  //  面积
+					if (squares.get(position).isSelected()) {
+						squares.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < squares.size(); i++) {
+							if (i == position) {
+								squares.get(i).setSelected(true);
+							} else {
+								squares.get(i).setSelected(false);
+							}
+						}
+					}
+					squareAdapter.notifyDataSetChanged();
+					break;
+				case 3:  //  标签
+					if (estateLabels.get(position).isSelected()) {
+						estateLabels.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < estateLabels.size(); i++) {
+							if (i == position) {
+								estateLabels.get(i).setSelected(true);
+							} else {
+								estateLabels.get(i).setSelected(false);
+							}
+						}
+					}
+					labelAdapter.notifyDataSetChanged();
+					break;
+				case 4:  //  楼龄
+					if (buildingAges.get(position).isSelected()) {
+						buildingAges.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < buildingAges.size(); i++) {
+							if (i == position) {
+								buildingAges.get(i).setSelected(true);
+							} else {
+								buildingAges.get(i).setSelected(false);
+							}
+						}
+					}
+					buildingAgeAdapter.notifyDataSetChanged();
+					break;
+				case 5:  //  楼层
+					if (floorRanges.get(position).isSelected()) {
+						floorRanges.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < floorRanges.size(); i++) {
+							if (i == position) {
+								floorRanges.get(i).setSelected(true);
+							} else {
+								floorRanges.get(i).setSelected(false);
+							}
+						}
+					}
+					floorAdapter.notifyDataSetChanged();
+					break;
+				}
+			}
+		});
+	    
+	    OnClickListener clickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				TextValueBean sortCondition = null;
+				TextValueBean directionCondition = null;
+				TextValueBean squareCondition = null;
+				TextValueBean labelCondition = null;
+				TextValueBean buildingAgeCondition = null;
+				TextValueBean floorRangeCondition = null;
+				switch (v.getId()) {
+				case R.id.popup_second_hand_more_type_ok:
+					for (TextValueBean tvb : sorts) {
+						if (tvb.isSelected()) {
+							sortCondition = tvb;
+							break;
+						}
+					}
+					for (TextValueBean tvb : directions) {
+						if (tvb.isSelected()) {
+							directionCondition = tvb;
+							break;
+						}
+					}
+					for (TextValueBean tvb : squares) {
+						if (tvb.isSelected()) {
+							squareCondition = tvb;
+							break;
+						}
+					}
+					for (TextValueBean tvb : estateLabels) {
+						if (tvb.isSelected()) {
+							labelCondition = tvb;
+							break;
+						}
+					}
+					for (TextValueBean tvb : buildingAges) {
+						if (tvb.isSelected()) {
+							buildingAgeCondition = tvb;
+							break;
+						}
+					}
+					for (TextValueBean tvb : floorRanges) {
+						if (tvb.isSelected()) {
+							floorRangeCondition = tvb;
+							break;
+						}
+					}
+					break;
+				}
+				popupWindow.dismiss();
+				if (onSecondHandHouseMoreConditionListener != null) {
+					onSecondHandHouseMoreConditionListener.onSecondHandHouseMoreConditon(sortCondition,
+							directionCondition, squareCondition, labelCondition, buildingAgeCondition, floorRangeCondition);
+				}
+			}
+		};
+		tvOk.setOnClickListener(clickListener);
+	}
+	
+	public interface OnNewHouseMoreConditionListener {
+		void onNewHouseMoreConditon(TextValueBean houseUsageConditionData,
+				TextValueBean labelConditionData, TextValueBean saleStatusConditonData);
+	}
+	/**
+	 * 新房更多选择
+	 */
+	public static void showNewHouseMorePopWindow(Context context, ArrayList<String> types,
+			final ArrayList<TextValueBean> houseUsages, final ArrayList<TextValueBean> estateLabels,
+			final ArrayList<TextValueBean> estateStatus, View anchorView,
+			final OnNewHouseMoreConditionListener onNewHouseMoreConditionListener) {
+		View view = View.inflate(context, R.layout.popup_second_hand_house_more, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	    
+	    ListView lstType = (ListView) view.findViewById(R.id.popup_second_hand_more_type_lst);
+	    final ListView lstDetail = (ListView) view.findViewById(R.id.popup_second_hand_more_type_detail);
+	    TextView tvOk = (TextView) view.findViewById(R.id.popup_second_hand_more_type_ok);
+	    
+	    MoreTypeAdapter moreTypeAdapter = new MoreTypeAdapter(context, types);
+	    lstType.setAdapter(moreTypeAdapter);
+	    
+	    //  房屋用途Adapter
+	    final MoreDetailAdapter usageAdapter = new MoreDetailAdapter(context, houseUsages);
+	    lstDetail.setAdapter(usageAdapter);
+	    //  特色标签Adapter
+	    final MoreDetailAdapter labelAdapter = new MoreDetailAdapter(context, estateLabels);
+	    //  售卖状态Adapter
+	    final MoreDetailAdapter saleStatusAdapter = new MoreDetailAdapter(context, estateStatus);
+	    lstDetail.setTag(0);
+	    lstType.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				switch (position) {
+				case 0:  //  房屋用途
+					lstDetail.setTag(0);
+					lstDetail.setAdapter(usageAdapter);
+					break;
+				case 1:  //  标签
+					lstDetail.setTag(1);
+					lstDetail.setAdapter(labelAdapter);
+					break;
+				case 2:  //  售卖状态
+					lstDetail.setTag(2);
+					lstDetail.setAdapter(saleStatusAdapter);
+					break;
+				}
+			}
+		});
+	    
+	    lstDetail.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				int tag = (Integer) lstDetail.getTag();
+				switch (tag) {
+				case 0:  //  房屋用途
+					if (houseUsages.get(position).isSelected()) {
+						houseUsages.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < houseUsages.size(); i++) {
+							if (i == position) {
+								houseUsages.get(i).setSelected(true);
+							} else {
+								houseUsages.get(i).setSelected(false);
+							}
+						}
+					}
+					usageAdapter.notifyDataSetChanged();
+					break;
+				case 1:  //  标签
+					if (estateLabels.get(position).isSelected()) {
+						estateLabels.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < estateLabels.size(); i++) {
+							if (i == position) {
+								estateLabels.get(i).setSelected(true);
+							} else {
+								estateLabels.get(i).setSelected(false);
+							}
+						}
+					}
+					labelAdapter.notifyDataSetChanged();
+					break;
+				case 2:  //  售卖状态
+					if (estateStatus.get(position).isSelected()) {
+						estateStatus.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < estateStatus.size(); i++) {
+							if (i == position) {
+								estateStatus.get(i).setSelected(true);
+							} else {
+								estateStatus.get(i).setSelected(false);
+							}
+						}
+					}
+					saleStatusAdapter.notifyDataSetChanged();
+					break;
+				}
+			}
+		});
+	    
+	    tvOk.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				TextValueBean usageCondition = null;
+				TextValueBean labelCondition = null;
+				TextValueBean saleStatusCondition = null;
+				for (TextValueBean tvb : houseUsages) {  // 房屋用途
+					if (tvb.isSelected()) {
+						usageCondition = tvb;
+						break;
+					}
+				}
+				for (TextValueBean tvb : estateLabels) {  // 标签
+					if (tvb.isSelected()) {
+						labelCondition = tvb;
+						break;
+					}
+				}
+				for (TextValueBean tvb : estateStatus) {  // 售卖状态
+					if (tvb.isSelected()) {
+						saleStatusCondition = tvb;
+						break;
+					}
+				}
+				
+				popupWindow.dismiss();
+				if (onNewHouseMoreConditionListener != null) {
+					onNewHouseMoreConditionListener.onNewHouseMoreConditon(
+							usageCondition, labelCondition, saleStatusCondition);
+				}
+				
+			}
+		});
+	}
+	
+	public interface OnRentHouseMoreConditionListener {
+		void onRentHouseMoreConditon(TextValueBean sortConditionData,
+				TextValueBean squareConditionData, TextValueBean directionConditonData);
+	}
+	/**
+	 * 租房房更多选择
+	 */
+	public static void showRentHouseMorePopWindow(Context context, ArrayList<String> types,
+			final ArrayList<TextValueBean> sorts, final ArrayList<TextValueBean> squares, final ArrayList<TextValueBean> directions,
+		    View anchorView, final OnRentHouseMoreConditionListener onRentHouseMoreConditionListener) {
+		View view = View.inflate(context, R.layout.popup_second_hand_house_more, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	    
+	    ListView lstType = (ListView) view.findViewById(R.id.popup_second_hand_more_type_lst);
+	    final ListView lstDetail = (ListView) view.findViewById(R.id.popup_second_hand_more_type_detail);
+	    TextView tvOk = (TextView) view.findViewById(R.id.popup_second_hand_more_type_ok);
+	    
+	    MoreTypeAdapter moreTypeAdapter = new MoreTypeAdapter(context, types);
+	    lstType.setAdapter(moreTypeAdapter);
+	    // 排序Adapter
+	    final MoreDetailAdapter sortAdapter = new MoreDetailAdapter(context, sorts);
+	    lstDetail.setAdapter(sortAdapter);
+	    // 面积范围Adapter
+	    final MoreDetailAdapter squareAdapter = new MoreDetailAdapter(context, squares);
+	    // 朝向Adapter
+	    final MoreDetailAdapter directionAdapter = new MoreDetailAdapter(context, directions);
+	    
+	    lstDetail.setTag(0);
+	    lstType.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				switch (position) {
+				case 0:  //  排序
+					lstDetail.setTag(0);
+					lstDetail.setAdapter(sortAdapter);
+					break;
+				case 1:  //  面积
+					lstDetail.setTag(1);
+					lstDetail.setAdapter(squareAdapter);
+					break;
+				case 2:  //  朝向
+					lstDetail.setTag(2);
+					lstDetail.setAdapter(directionAdapter);
+					break;
+				}
+			}
+		});
+	    
+	    lstDetail.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				int tag = (Integer) lstDetail.getTag();
+				switch (tag) {
+				case 0:  //  排序
+					if (sorts.get(position).isSelected()) {
+						sorts.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < sorts.size(); i++) {
+							if (i == position) {
+								sorts.get(i).setSelected(true);
+							} else {
+								sorts.get(i).setSelected(false);
+							}
+						}
+					}
+					sortAdapter.notifyDataSetChanged();
+					break;
+				case 1:  //  面积
+					if (squares.get(position).isSelected()) {
+						squares.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < squares.size(); i++) {
+							if (i == position) {
+								squares.get(i).setSelected(true);
+							} else {
+								squares.get(i).setSelected(false);
+							}
+						}
+					}
+					squareAdapter.notifyDataSetChanged();
+					break;
+				case 2:  //  朝向
+					if (directions.get(position).isSelected()) {
+						directions.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < directions.size(); i++) {
+							if (i == position) {
+								directions.get(i).setSelected(true);
+							} else {
+								directions.get(i).setSelected(false);
+							}
+						}
+					}
+					directionAdapter.notifyDataSetChanged();
+					break;
+				}
+			}
+		});
+	    
+	    tvOk.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				TextValueBean sortCondition = null;
+				TextValueBean squareCondition = null;
+				TextValueBean directionCondition = null;
+				for (TextValueBean tvb : sorts) {  // 排序
+					if (tvb.isSelected()) {
+						sortCondition = tvb;
+						break;
+					}
+				}
+				for (TextValueBean tvb : squares) {  // 面积
+					if (tvb.isSelected()) {
+						squareCondition = tvb;
+						break;
+					}
+				}
+				for (TextValueBean tvb : directions) {  // 售卖状态
+					if (tvb.isSelected()) {
+						directionCondition = tvb;
+						break;
+					}
+				}
+				
+				popupWindow.dismiss();
+				if (onRentHouseMoreConditionListener != null) {
+					onRentHouseMoreConditionListener.onRentHouseMoreConditon(
+							sortCondition, squareCondition, directionCondition);
 				}
 			}
 		});

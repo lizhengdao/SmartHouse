@@ -74,7 +74,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name="cn.com.zzwfang.activity.NewHouseActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name="cn.com.zzwfang.activity.SearchHouseArtifactActivity"
             android:screenOrientation="portrait" />
@@ -214,6 +215,19 @@
         <activity
             android:name="cn.com.zzwfang.activity.NickNameUpdateActivity"
             android:screenOrientation="portrait" />
+        
+        <!--  -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:exported="true"
+            android:launchMode="singleTop">
+            
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         
         
         

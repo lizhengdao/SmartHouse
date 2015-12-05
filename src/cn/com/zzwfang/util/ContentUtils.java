@@ -273,11 +273,13 @@ public final class ContentUtils {
 		Editor editor = sp.edit();
 		editor.putString(Constants.ZZWFANG_USER_NAME, userInfo.getUserName());
 		editor.putString(Constants.USER_ID, userInfo.getId());
+		editor.putString(Constants.USER_PHONE, userInfo.getPhone());
 		editor.putString(Constants.USER_PHOTO, userInfo.getPhoto());
 		editor.putBoolean(Constants.IS_BIND_BANK_CARD, userInfo.isIsBindBank());
 		editor.putInt(Constants.RECOMMEND_CLIENT_NUM, userInfo.getRecommendClientsNum());
 		editor.putInt(Constants.RECOMMEND_OWNERS, userInfo.getRecommendOwners());
 		editor.putString(Constants.FEE_HUNTER_BOUNTY, userInfo.getBounty());
+		editor.putBoolean(Constants.USER_SEX, userInfo.isSex());
 		editor.putInt(Constants.USER_TYPE, userInfo.getUserType());
 		editor.commit();
 	}
@@ -300,6 +302,10 @@ public final class ContentUtils {
 		userInfoBean.setId(userId);
 		String photo = sp.getString(Constants.USER_PHOTO, "");
 		userInfoBean.setPhoto(photo);
+		String userPhone = sp.getString(Constants.USER_PHONE, "");
+		userInfoBean.setPhone(userPhone);
+		boolean sex = sp.getBoolean(Constants.USER_SEX, true);
+		userInfoBean.setSex(sex);
 		boolean isBindCard = sp.getBoolean(Constants.IS_BIND_BANK_CARD, false);
 		userInfoBean.setIsBindBank(isBindCard);
 		int recommendClientNum = sp.getInt(Constants.RECOMMEND_CLIENT_NUM, 0);
@@ -325,6 +331,27 @@ public final class ContentUtils {
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		return sp.getInt(Constants.USER_TYPE, 1);  //  用户类型    0经济人，1普通会员，2赏金猎人
 	}
+	
+	public static void updateUserAvatar(Context context, String avatarUrl) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		Editor editor = sp.edit();
+		editor.putString(Constants.USER_PHOTO, avatarUrl).commit();
+	}
+	
+	public static String getUserAvatar(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		return sp.getString(Constants.USER_PHOTO, "");
+	}
+	
+	public static void updateUserNickName(Context context, String nickName) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		Editor editor = sp.edit();
+		editor.putString(Constants.ZZWFANG_USER_NAME, nickName).commit();
+	}
+	
 	
 	/**
 	 * 用户退出登录，清除登录信息

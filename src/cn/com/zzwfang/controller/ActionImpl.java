@@ -571,7 +571,9 @@ public class ActionImpl implements Action {
 		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {
 			requestParams.put("area", areaCondition.getValue());
 		}
-		requestParams.put("direction", direction);
+		if (!TextUtils.isEmpty(direction)) {
+			requestParams.put("direction", direction);
+		}
 		if (squareCondition != null && !TextUtils.isEmpty(squareCondition.getValue())) {
 			requestParams.put("square", squareCondition.getValue());
 		}
@@ -2200,6 +2202,80 @@ public class ActionImpl implements Action {
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_ABOUT_US));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void otherFileUpload(File file, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        try {
+			requestParams.put("requestFile", file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.POST_OTHER_UPLOAD));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.POST);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void updateUserInfo(String userId, String nickName, String avatarUrl, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        
+        requestParams.put("userId", userId);
+        
+        if (!TextUtils.isEmpty(nickName)) {
+        	requestParams.put("name", nickName);
+        }
+        if (!TextUtils.isEmpty(avatarUrl)) {
+        	requestParams.put("photo", avatarUrl);
+        }
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_UPDATE_USER_INFO));
         requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 

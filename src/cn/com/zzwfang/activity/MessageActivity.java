@@ -1,8 +1,6 @@
 package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.MessageAdapter;
-import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -22,9 +19,11 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 
+import com.alibaba.fastjson.JSON;
+
 
 /**
- * 消息
+ * 消息列表页
  * @author lzd
  *
  */
@@ -101,6 +100,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 		.setBackOutAnimation(R.anim.activity_push_out_right)
 		.putString(ChatActivity.INTENT_MESSAGE_TO_ID, imMessageBean.getUserId())
 		.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, imMessageBean.getUserName())
+		.putSerializable(ChatActivity.INTENT_HISTORY_MSG, imMessageBean.getMessages())
 		.jump(this, ChatActivity.class);
 	}
 }
