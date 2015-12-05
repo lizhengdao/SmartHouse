@@ -2,19 +2,27 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
-import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
-import com.baidu.mapapi.model.LatLng;
-
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.NewHouseAdapter;
@@ -27,31 +35,42 @@ import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.location.LocationService;
+import cn.com.zzwfang.location.LocationService.OnLocationListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnNewHouseMoreConditionListener;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+
+import com.alibaba.fastjson.JSON;
+import com.baidu.location.BDLocation;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.overlayutil.PoiOverlay;
+import com.baidu.mapapi.search.core.CityInfo;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 
 /**
  * 新房列表页
@@ -77,7 +96,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
  */
 public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
-		OnItemClickListener {
+		OnItemClickListener, OnGetPoiSearchResultListener {
 	
 	public static final String INTENT_KEY_WORDS = "NewHouseActivity.intent_key_words";
 
@@ -96,10 +115,13 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
-	
 
 	private AbPullToRefreshView pullView;
 	private ListView lstNewHouseView;
+	
+	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
+	private PoiSearch mPoiSearch = null;
+	private LatLng curLatLng;
 	
 	private ArrayList<NewHouseBean> newHouses = new ArrayList<NewHouseBean>();
 	private NewHouseAdapter adapter;
@@ -195,12 +217,19 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		tvHouseType = (TextView) findViewById(R.id.act_new_house_type_tv);
 		tvMore = (TextView) findViewById(R.id.act_new_house_more_tv);
 		
+		autoTvLocate = (AutoDrawableTextView) findViewById(R.id.act_new_house_locate);
+		autoTvSubway = (AutoDrawableTextView) findViewById(R.id.act_new_house_subway);
+		autoTvNearby = (AutoDrawableTextView) findViewById(R.id.act_new_house_nearby);
+		
 		baiduMap = mapView.getMap();
 		adapter = new NewHouseAdapter(this, newHouses);
 		lstNewHouseView.setAdapter(adapter);
 		lstNewHouseView.setOnItemClickListener(this);
 
 		mapView.showZoomControls(false);
+		// 初始化搜索模块，注册搜索事件监听
+	    mPoiSearch = PoiSearch.newInstance();
+	    mPoiSearch.setOnGetPoiSearchResultListener(this);
 
 		tvBack.setOnClickListener(this);
 		cbxListAndMap.setOnCheckedChangeListener(this);
@@ -212,12 +241,33 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		lltTotalPrice.setOnClickListener(this);
 		lltHouseType.setOnClickListener(this);
 		lltMore.setOnClickListener(this);
+		autoTvLocate.setOnClickListener(this);
+		autoTvSubway.setOnClickListener(this);
+		autoTvNearby.setOnClickListener(this);
+		
 		getNewHouseList(cityId, areaCondition, totalPriceCondition,
 				roomTypeCondition, usageCondition, labelCondition,
 				statusCondition, keyWords, 10, true);
 	}
 
 	private void setListener() {
+		
+        edtKeyWords.setOnEditorActionListener(new OnEditorActionListener() {
+			
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
+					String keyWords = edtKeyWords.getText().toString();
+					getNewHouseList(cityId, areaCondition,
+							totalPriceCondition, roomTypeCondition,
+							usageCondition, labelCondition,
+							statusCondition, keyWords, 10,
+							true);
+					return true;
+				}
+				return false;
+			}
+		});
 
 		onTotalPriceSelectListener = new OnConditionSelectListener() {
 
@@ -398,7 +448,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			final boolean isRefresh) {
 
 		if (isRefresh) {
-			pageIndex = 0;
+			pageIndex = 1;
 		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		actionImpl.getNewHouseList(cityId, areaCondition, priceCondition,
@@ -471,6 +521,24 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			PopViewHelper.showNewHouseMorePopWindow(this, moreType,
 					houseUsages, estateLabels,
 					estateStatus, lltMore, onNewHouseMoreConditionListener);
+			break;
+		case R.id.act_new_house_locate:  // 定位
+			locate();
+			break;
+		case R.id.act_new_house_subway:  // 地铁
+			searchNearby("地铁");
+			break;
+		case R.id.act_new_house_nearby:  // 周边
+			if (curLatLng != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putDouble(NearbyDetailActivity.INTENT_LAT, curLatLng.latitude)
+				.putDouble(NearbyDetailActivity.INTENT_LNG, curLatLng.longitude)
+				.jump(this, NearbyDetailActivity.class);
+			}
 			break;
 		}
 	}
@@ -739,6 +807,105 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
 
 		return bitmap;
+	}
+	
+	private void locate() {
+		final LocationService locationService = LocationService
+				.getInstance(this);
+		locationService.startLocationService(new OnLocationListener() {
+
+			@Override
+			public void onLocationCompletion(BDLocation location) {
+				curLatLng = new LatLng(location.getLatitude(), location
+						.getLongitude());
+				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+				baiduMap.animateMapStatus(u);
+				locationService.stopLocationService();
+
+				// 构建Marker图标
+				BitmapDescriptor bitmap = BitmapDescriptorFactory
+						.fromResource(R.drawable.ic_cur_location);
+				// 构建MarkerOption，用于在地图上添加Marker
+				OverlayOptions option = new MarkerOptions().position(curLatLng)
+						.icon(bitmap);
+				// 在地图上添加Marker，并显示
+				baiduMap.addOverlay(option);
+			}
+		});
+	}
+
+	@Override
+	public void onGetPoiDetailResult(PoiDetailResult result) {
+		// TODO Auto-generated method stub
+		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
+			Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, result.getName() + ": " + result.getAddress(),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	public void onGetPoiResult(PoiResult result) {
+		// TODO Auto-generated method stub
+		if (result == null
+				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+			Toast.makeText(this, "未找到结果", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+			baiduMap.clear();
+			PoiOverlay overlay = new MyPoiOverlay(baiduMap);
+			baiduMap.setOnMarkerClickListener(overlay);
+			overlay.setData(result);
+			overlay.addToMap();
+			overlay.zoomToSpan();
+			BitmapDescriptor bitmap = BitmapDescriptorFactory
+					.fromResource(R.drawable.ic_cur_location);
+			// 构建MarkerOption，用于在地图上添加Marker
+			OverlayOptions option = new MarkerOptions().position(curLatLng)
+					.icon(bitmap);
+			// 在地图上添加Marker，并显示
+			baiduMap.addOverlay(option);
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
+
+			// 当输入关键字在本市没有找到，但在其他城市找到时，返回包含该关键字信息的城市列表
+			String strInfo = "在";
+			for (CityInfo cityInfo : result.getSuggestCityList()) {
+				strInfo += cityInfo.city;
+				strInfo += ",";
+			}
+			strInfo += "找到结果";
+			Toast.makeText(this, strInfo, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	private void searchNearby(String keyWords) {
+		if (curLatLng != null) {
+			mPoiSearch.searchNearby(new PoiNearbySearchOption()
+					.location(curLatLng).keyword(keyWords).pageNum(10)
+					.radius(10000));
+		}
+	}
+	
+	private class MyPoiOverlay extends PoiOverlay {
+
+		public MyPoiOverlay(BaiduMap baiduMap) {
+			super(baiduMap);
+		}
+
+		@Override
+		public boolean onPoiClick(int index) {
+			super.onPoiClick(index);
+			PoiInfo poi = getPoiResult().getAllPoi().get(index);
+			// if (poi.hasCaterDetails) {
+			mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
+					.poiUid(poi.uid));
+			// }
+			return true;
+		}
 	}
 
 	

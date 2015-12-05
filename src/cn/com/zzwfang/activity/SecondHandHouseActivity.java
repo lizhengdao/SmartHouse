@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.SecondHandHouseAdapter;
@@ -34,16 +35,20 @@ import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.location.LocationService;
+import cn.com.zzwfang.location.LocationService.OnLocationListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnSecondHandHouseMoreConditionListener;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -54,7 +59,18 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.overlayutil.PoiOverlay;
+import com.baidu.mapapi.search.core.CityInfo;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 
 /**
  * 二手房列表
@@ -80,7 +96,7 @@ import com.baidu.mapapi.model.LatLng;
  */
 public class SecondHandHouseActivity extends BaseActivity implements
 		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener,
-		OnCheckedChangeListener, OnItemClickListener {
+		OnCheckedChangeListener, OnItemClickListener, OnGetPoiSearchResultListener {
 
     private int MODE_LIST = 1;
 	
@@ -92,17 +108,21 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private int mode = MODE_LIST;
 	public static final String INTENT_KEYWORDS = "second_hand_house_key_words";
 	
-	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
+	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType;
 	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
 	private MapView mapView;
 	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
+	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
 	
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
 	private AbPullToRefreshView pullView;
 	private ListView lstSecondHandHouseView;
 	private SecondHandHouseAdapter adapter;
+	
+	private PoiSearch mPoiSearch = null;
+	private LatLng curLatLng;
 	
 	private String cityId = "";
 	private ArrayList<SecondHandHouseBean> secondHandHouses = new ArrayList<SecondHandHouseBean>();
@@ -149,8 +169,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private TextValueBean totalPriceCondition;  // 总价
 	private TextValueBean houseTypeCondition;  // 房型
 	
-	private TextValueBean sortCondition;  // 排序
-	private TextValueBean directionCondition;  // 朝向
+//	private TextValueBean sortCondition;  // 排序
+//	private TextValueBean directionCondition;  // 朝向
 	private TextValueBean squareCondition;  // 面积
 	private TextValueBean labelCondition;  // 标签
 	
@@ -199,12 +219,15 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		tvArea = (TextView) findViewById(R.id.act_second_hand_house_area_tv);
 		tvTotalPrice = (TextView) findViewById(R.id.act_second_hand_house_total_price_tv);
 		tvHouseType = (TextView) findViewById(R.id.act_second_hand_house_type_tv);
-		tvMore = (TextView) findViewById(R.id.act_second_hand_house_more_tv);
 		
 		lltArea = (LinearLayout) findViewById(R.id.act_second_hand_house_area_llt);
 		lltTotalPrice = (LinearLayout) findViewById(R.id.act_second_hand_house_total_price_llt);
 		lltHouseType = (LinearLayout) findViewById(R.id.act_second_hand_house_type_llt);
 		lltMore = (LinearLayout) findViewById(R.id.act_second_hand_house_more_llt);
+		
+		autoTvLocate = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_locate);
+		autoTvSubway = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_subway);
+		autoTvNearby = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_nearby);
 		
 		if (!TextUtils.isEmpty(key)) {
 			edtKeyWords.setText(key);
@@ -212,6 +235,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		
 		baiduMap = mapView.getMap();
 		mapView.showZoomControls(false);
+		// 初始化搜索模块，注册搜索事件监听
+	    mPoiSearch = PoiSearch.newInstance();
+	    mPoiSearch.setOnGetPoiSearchResultListener(this);
 	}
 	
 	private void setListener() {
@@ -226,6 +252,10 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		lltTotalPrice.setOnClickListener(this);
 		lltHouseType.setOnClickListener(this);
 		lltMore.setOnClickListener(this);
+		
+		autoTvLocate.setOnClickListener(this);
+		autoTvSubway.setOnClickListener(this);
+		autoTvNearby.setOnClickListener(this);
 		
 		adapter = new SecondHandHouseAdapter(this, secondHandHouses);
 		lstSecondHandHouseView.setAdapter(adapter);
@@ -402,10 +432,6 @@ public class SecondHandHouseActivity extends BaseActivity implements
 				buildYear, floor, proNum, sort, key, 10, true);
 	}
 	
-	
-	
-	
-
 	/**
 	 * 二手房列表
 	 *  条件：
@@ -443,6 +469,24 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType, sorts,
 					directions, squares, estateLabels, buildingAges, floorRanges, lltMore, onSecondHandHouseMoreConditionListener);
 			break;
+		case R.id.act_second_hand_house_locate:  // 定位
+			locate();
+			break;
+		case R.id.act_second_hand_house_subway:  // 地铁
+			searchNearby("地铁");
+			break;
+		case R.id.act_second_hand_house_nearby:  // 周边
+			if (curLatLng != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putDouble(NearbyDetailActivity.INTENT_LAT, curLatLng.latitude)
+				.putDouble(NearbyDetailActivity.INTENT_LNG, curLatLng.longitude)
+				.jump(this, NearbyDetailActivity.class);
+			}
+			break;
 		}
 	}
 	
@@ -476,7 +520,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			String buildYear, String floor, String proNum, String sort, String keyWords,
 			int pageSize, final boolean isRefresh) {
 		if (isRefresh) {
-			pageIndex = 0;
+			pageIndex = 1;
 		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		actionImpl.getSecondHandHouseList(cityId, areaCondition, direction,
@@ -882,5 +926,104 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		buildingAges.add(tv2);
 		buildingAges.add(tv3);
 		buildingAges.add(tv4);
+	}
+
+	@Override
+	public void onGetPoiDetailResult(PoiDetailResult result) {
+		// TODO Auto-generated method stub
+		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
+			Toast.makeText(this, "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(this, result.getName() + ": " + result.getAddress(),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	public void onGetPoiResult(PoiResult result) {
+		// TODO Auto-generated method stub
+		if (result == null
+				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+			Toast.makeText(this, "未找到结果", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+			baiduMap.clear();
+			PoiOverlay overlay = new MyPoiOverlay(baiduMap);
+			baiduMap.setOnMarkerClickListener(overlay);
+			overlay.setData(result);
+			overlay.addToMap();
+			overlay.zoomToSpan();
+			BitmapDescriptor bitmap = BitmapDescriptorFactory
+					.fromResource(R.drawable.ic_cur_location);
+			// 构建MarkerOption，用于在地图上添加Marker
+			OverlayOptions option = new MarkerOptions().position(curLatLng)
+					.icon(bitmap);
+			// 在地图上添加Marker，并显示
+			baiduMap.addOverlay(option);
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
+
+			// 当输入关键字在本市没有找到，但在其他城市找到时，返回包含该关键字信息的城市列表
+			String strInfo = "在";
+			for (CityInfo cityInfo : result.getSuggestCityList()) {
+				strInfo += cityInfo.city;
+				strInfo += ",";
+			}
+			strInfo += "找到结果";
+			Toast.makeText(this, strInfo, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	private void locate() {
+		final LocationService locationService = LocationService
+				.getInstance(this);
+		locationService.startLocationService(new OnLocationListener() {
+
+			@Override
+			public void onLocationCompletion(BDLocation location) {
+				curLatLng = new LatLng(location.getLatitude(), location
+						.getLongitude());
+				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+				baiduMap.animateMapStatus(u);
+				locationService.stopLocationService();
+
+				// 构建Marker图标
+				BitmapDescriptor bitmap = BitmapDescriptorFactory
+						.fromResource(R.drawable.ic_cur_location);
+				// 构建MarkerOption，用于在地图上添加Marker
+				OverlayOptions option = new MarkerOptions().position(curLatLng)
+						.icon(bitmap);
+				// 在地图上添加Marker，并显示
+				baiduMap.addOverlay(option);
+			}
+		});
+	}
+	
+	private void searchNearby(String keyWords) {
+		if (curLatLng != null) {
+			mPoiSearch.searchNearby(new PoiNearbySearchOption()
+					.location(curLatLng).keyword(keyWords).pageNum(10)
+					.radius(10000));
+		}
+	}
+	
+	private class MyPoiOverlay extends PoiOverlay {
+
+		public MyPoiOverlay(BaiduMap baiduMap) {
+			super(baiduMap);
+		}
+
+		@Override
+		public boolean onPoiClick(int index) {
+			super.onPoiClick(index);
+			PoiInfo poi = getPoiResult().getAllPoi().get(index);
+			// if (poi.hasCaterDetails) {
+			mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
+					.poiUid(poi.uid));
+			// }
+			return true;
+		}
 	}
 }

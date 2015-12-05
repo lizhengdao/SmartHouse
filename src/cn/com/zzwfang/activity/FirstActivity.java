@@ -11,6 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.FirstAdapter;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.Jumper;
 
 public class FirstActivity extends BaseActivity implements OnClickListener {
@@ -26,7 +30,7 @@ public class FirstActivity extends BaseActivity implements OnClickListener {
 		super.onCreate(arg0);
 		setContentView(R.layout.act_first);
 		initView();
-		
+		getGuiderPageData();
 	}
 
 	private void initView() {
@@ -90,5 +94,27 @@ public class FirstActivity extends BaseActivity implements OnClickListener {
             finish();
 			break;
 		}
+	}
+	
+	private void getGuiderPageData() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getGuiderPageData(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 }

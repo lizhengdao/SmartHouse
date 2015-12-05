@@ -12,7 +12,6 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.MyBoughtHouseAdapter;
 import cn.com.zzwfang.bean.MyBoughtHouseBean;
-import cn.com.zzwfang.bean.MyHouseBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -106,8 +105,11 @@ public class MyBoughtHousesActivity extends BaseActivity implements
 				if (isRefresh) {
 					houses.clear();
 				}
-				houses.addAll(temp);
-				adapter.notifyDataSetChanged();
+				if (temp != null) {
+					houses.addAll(temp);
+					adapter.notifyDataSetChanged();
+				}
+				
 				if (isRefresh) {
 					pullView.onHeaderRefreshFinish();
 				} else {

@@ -210,6 +210,7 @@
                 android:background="@color/transparent" >
 
                 <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_second_hand_house_locate"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:drawableTop="@drawable/ic_map_locate"
@@ -224,6 +225,7 @@
                     app:top_height="20dp" />
 
                 <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_second_hand_house_subway"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="4dp"
@@ -239,6 +241,7 @@
                     app:top_height="20dp" />
 
                 <cn.com.zzwfang.view.AutoDrawableTextView
+                    android:id="@+id/act_second_hand_house_nearby"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="4dp"

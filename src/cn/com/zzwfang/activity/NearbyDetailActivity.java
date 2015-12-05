@@ -7,11 +7,8 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.location.LocationService;
-import cn.com.zzwfang.location.LocationService.OnLocationListener;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 
-import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -100,6 +97,7 @@ public class NearbyDetailActivity extends BaseActivity implements
 		tvBodyBuilding.setOnClickListener(this);
 		tvFoods.setOnClickListener(this);
 
+		mapView.showZoomControls(false);
 		// 初始化搜索模块，注册搜索事件监听
 		mPoiSearch = PoiSearch.newInstance();
 		mPoiSearch.setOnGetPoiSearchResultListener(this);

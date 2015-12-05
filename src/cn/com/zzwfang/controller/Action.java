@@ -726,4 +726,10 @@ public interface Action {
 	 * @param avatarUrl
 	 */
 	void updateUserInfo(String userId, String nickName, String avatarUrl, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取引导页列表
+	 * @param callback
+	 */
+	void getGuiderPageData(ResultHandlerCallback callback);
 }

@@ -295,5 +295,10 @@ public class API {
      */
     public static final String GET_UPDATE_USER_INFO = "User/UpdateInfo";
     
+    /**
+     * 引导页数据
+     */
+    public static final String GET_GUIDER_PAGE_DATA = "Other/Guide";
+    
 
 }

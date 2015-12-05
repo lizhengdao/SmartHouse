@@ -216,7 +216,7 @@
             android:name="cn.com.zzwfang.activity.NickNameUpdateActivity"
             android:screenOrientation="portrait" />
         
-        <!--  -->
+        <!--  
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:label="@string/app_name"
@@ -227,7 +227,7 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-        </activity>
+        </activity>  -->
         
         
         

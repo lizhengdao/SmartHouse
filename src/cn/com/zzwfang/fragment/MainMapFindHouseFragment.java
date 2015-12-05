@@ -11,9 +11,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.MainActivity;
+import cn.com.zzwfang.activity.NearbyDetailActivity;
 import cn.com.zzwfang.activity.SecondHandHouseActivity;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.MapFindHouseBean;
@@ -31,6 +33,7 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnMapFindHouseMoreConditionListener;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
@@ -47,6 +50,16 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.overlayutil.PoiOverlay;
+import com.baidu.mapapi.search.core.CityInfo;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 
 /**
  * 地图找房  默认显示二手房
@@ -54,16 +67,19 @@ import com.baidu.mapapi.model.LatLng;
  *
  */
 public class MainMapFindHouseFragment extends BaseFragment implements
-		OnClickListener, OnCitySelectedListener {
+		OnClickListener, OnCitySelectedListener, OnGetPoiSearchResultListener {
 	
-	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType,
-			tvHouseRoomsType, tvMore;
+	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType;
 	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
 	private MapView mapView;
 	private BaiduMap baiduMap;
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
 	private ArrayList<MapFindHouseBean> mapAreas = new ArrayList<MapFindHouseBean>();
 	private ArrayList<SearchHouseItemBean> estates = new ArrayList<SearchHouseItemBean>();
+	private OnMapFindHouseMoreConditionListener onMapFindHouseMoreConditionListener;
+	
+	private PoiSearch mPoiSearch = null;
+	private LatLng curLatLng;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,6 +87,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 		View view = inflater.inflate(R.layout.frag_main_map_find_house, null);
 		initView(view);
 		setListener();
+		initMapData();
 		return view;
 	}
 
@@ -88,16 +105,13 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				.findViewById(R.id.frag_map_find_house_total_price_tv);
 		tvHouseType = (TextView) view
 				.findViewById(R.id.frag_map_find_house_type_tv);
-		// tvHouseRoomsType = (TextView)
-		// view.findViewById(R.id.frag_map_find_house_area_tv);
-		tvMore = (TextView) view.findViewById(R.id.frag_map_find_house_more_tv);
 
 		lltArea = (LinearLayout) view
 				.findViewById(R.id.frag_map_find_house_area_llt);
 		lltTotalPrice = (LinearLayout) view
 				.findViewById(R.id.frag_map_find_house_total_price_llt);
 		lltHouseType = (LinearLayout) view
-				.findViewById(R.id.frag_map_find_house_type_llt);
+				.findViewById(R.id.frag_map_find_house_type_llt); 
 		lltMore = (LinearLayout) view
 				.findViewById(R.id.frag_map_find_house_more_llt);
 		
@@ -155,13 +169,6 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 									estate.getName())
 							.jump((BaseActivity) getActivity(),
 									SecondHandHouseActivity.class);
-					
-					
-//					CityBean cityBean = ContentUtils.getCityBean(getActivity());
-//					if (cityBean == null) {
-//						return true;
-//					}
-					
 				}
 
 				return true;
@@ -197,7 +204,18 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				areaCondition = txtValueBean;
 				tvArea.setText(txtValueBean.getText());
 				getMapFindHouseDataArea();
-				// getMapFindHouseEstate();
+			}
+		};
+		
+		onMapFindHouseMoreConditionListener = new OnMapFindHouseMoreConditionListener() {
+			
+			@Override
+			public void onMapFindHouseMoreConditon(TextValueBean typeConditionData,
+					TextValueBean labelConditionData,
+					TextValueBean saleStatusConditonData) {
+				usageTypeCondition = typeConditionData;
+				labelCondition = labelConditionData;
+				statusCondition = saleStatusConditonData;
 			}
 		};
 	}
@@ -220,18 +238,44 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			PopViewHelper.showSelectHouseTypePopWindow(getActivity(),
 					lltHouseType, houseTypes, onHouseTypeSelectListener);
 			break;
-		case R.id.frag_map_find_house_more_tv:// 更多
+		case R.id.frag_map_find_house_more_llt:// 更多
 			// TODO
-//			PopViewHelper.showSecondHandHouseMorePopWindow(getActivity(),
-//					moreType, null, null, estateLabels, lltMore);
+			
+			PopViewHelper.showMapFindHouseMorePopWindow(getActivity(), moreType,
+					prpUsages, estateLabels, estateStatus, lltMore, onMapFindHouseMoreConditionListener);
 			break;
-		case R.id.frag_map_find_house_locate:
+		case R.id.frag_map_find_house_locate:  //  定位
 			locate();
 			break;
-		case R.id.frag_map_find_house_subway:
+		case R.id.frag_map_find_house_subway:  // 地铁
+			searchNearby("地铁");
 			break;
-		case R.id.frag_map_find_house_nearby:
+		case R.id.frag_map_find_house_nearby:  // 周边
+			if (curLatLng != null) {
+				Jumper.newJumper()
+				.setAheadInAnimation(R.anim.activity_push_in_right)
+				.setAheadOutAnimation(R.anim.activity_alpha_out)
+				.setBackInAnimation(R.anim.activity_alpha_in)
+				.setBackOutAnimation(R.anim.activity_push_out_right)
+				.putDouble(NearbyDetailActivity.INTENT_LAT, curLatLng.latitude)
+				.putDouble(NearbyDetailActivity.INTENT_LNG, curLatLng.longitude)
+				.jump(this, NearbyDetailActivity.class);
+			}
 			break;
+		}
+	}
+	
+	private void initMapData() {
+		// 初始化搜索模块，注册搜索事件监听
+		mPoiSearch = PoiSearch.newInstance();
+		mPoiSearch.setOnGetPoiSearchResultListener(this);
+	}
+	
+	private void searchNearby(String keyWords) {
+		if (curLatLng != null) {
+			mPoiSearch.searchNearby(new PoiNearbySearchOption()
+					.location(curLatLng).keyword(keyWords).pageNum(10)
+					.radius(10000));
 		}
 	}
 	
@@ -242,7 +286,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 
 			@Override
 			public void onLocationCompletion(BDLocation location) {
-				LatLng curLatLng = new LatLng(location.getLatitude(), location
+				curLatLng = new LatLng(location.getLatitude(), location
 						.getLongitude());
 				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
 				baiduMap.animateMapStatus(u);
@@ -267,11 +311,9 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	public static final String EstateStatus = "EstateStatus";
 
 	private void initData() {
-		moreType.add("朝向");
-		moreType.add("面积");
-		moreType.add("标签");
-		moreType.add("楼层");
-		moreType.add("房源编号");
+		moreType.add("类型");
+		moreType.add("特色标签");
+		moreType.add("售卖状态");
 		getConditionList(SalePriceRange);
 		getConditionList(HouseType);
 		getConditionList(PrpUsage);
@@ -392,19 +434,39 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	private ArrayList<String> moreType = new ArrayList<String>();
 	
 
+	/**
+	 * 区域
+	 */
 	private TextValueBean areaCondition;
+	/**
+	 * 总价
+	 */
 	private TextValueBean totalPriceCondition;
+	/**
+	 * 标签
+	 */
 	private TextValueBean labelCondition;
+	/**
+	 * 售卖状态
+	 */
 	private TextValueBean statusCondition;
-	private TextValueBean roomTypeCondition;
+	/**
+	 * 房型
+	 */
+	private TextValueBean roomTypeCondition;  // 房型
+	
+	/**
+	 * 用途类型
+	 */
+	private TextValueBean usageTypeCondition;
 
 	/**
 	 * 获取子区域楼盘数据(调用楼盘搜索列表接口)
 	 */
 	private void getMapFindHouseEstate() {
 		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
-		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, null,
-				null, labelCondition, statusCondition, null,
+		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, roomTypeCondition,
+				usageTypeCondition, labelCondition, statusCondition, null,
 				new ResultHandlerCallback() {
 
 					@Override
@@ -574,6 +636,72 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 						areas.addAll(temp);
 					}
 				});
+	}
+
+	@Override
+	public void onGetPoiDetailResult(PoiDetailResult result) {
+		// TODO Auto-generated method stub
+		if (result.error != SearchResult.ERRORNO.NO_ERROR) {
+			Toast.makeText(getActivity(), "抱歉，未找到结果", Toast.LENGTH_SHORT).show();
+		} else {
+			Toast.makeText(getActivity(), result.getName() + ": " + result.getAddress(),
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	@Override
+	public void onGetPoiResult(PoiResult result) {
+		// TODO Auto-generated method stub
+		if (result == null
+				|| result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+			Toast.makeText(getActivity(), "未找到结果", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+			baiduMap.clear();
+			PoiOverlay overlay = new MyPoiOverlay(baiduMap);
+			baiduMap.setOnMarkerClickListener(overlay);
+			overlay.setData(result);
+			overlay.addToMap();
+			overlay.zoomToSpan();
+			BitmapDescriptor bitmap = BitmapDescriptorFactory
+					.fromResource(R.drawable.ic_cur_location);
+			// 构建MarkerOption，用于在地图上添加Marker
+			OverlayOptions option = new MarkerOptions().position(curLatLng)
+					.icon(bitmap);
+			// 在地图上添加Marker，并显示
+			baiduMap.addOverlay(option);
+			return;
+		}
+		if (result.error == SearchResult.ERRORNO.AMBIGUOUS_KEYWORD) {
+
+			// 当输入关键字在本市没有找到，但在其他城市找到时，返回包含该关键字信息的城市列表
+			String strInfo = "在";
+			for (CityInfo cityInfo : result.getSuggestCityList()) {
+				strInfo += cityInfo.city;
+				strInfo += ",";
+			}
+			strInfo += "找到结果";
+			Toast.makeText(getActivity(), strInfo, Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	private class MyPoiOverlay extends PoiOverlay {
+
+		public MyPoiOverlay(BaiduMap baiduMap) {
+			super(baiduMap);
+		}
+
+		@Override
+		public boolean onPoiClick(int index) {
+			super.onPoiClick(index);
+			PoiInfo poi = getPoiResult().getAllPoi().get(index);
+			// if (poi.hasCaterDetails) {
+			mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
+					.poiUid(poi.uid));
+			// }
+			return true;
+		}
 	}
 
 }

@@ -754,6 +754,158 @@ public class PopViewHelper {
 		});
 	}
 	
+	
+	public interface OnMapFindHouseMoreConditionListener {
+		void onMapFindHouseMoreConditon(TextValueBean typeConditionData,
+				TextValueBean labelConditionData, TextValueBean saleStatusConditonData);
+	}
+	/**
+	 * 地图找房更多选择
+	 */
+	public static void showMapFindHouseMorePopWindow(Context context, ArrayList<String> types,
+			final ArrayList<TextValueBean> propertyTypes, final ArrayList<TextValueBean> labels,
+			final ArrayList<TextValueBean> saleStatus,
+		    View anchorView, final OnMapFindHouseMoreConditionListener onMapFindHouseMoreConditionListener) {
+		View view = View.inflate(context, R.layout.popup_second_hand_house_more, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	    
+	    ListView lstType = (ListView) view.findViewById(R.id.popup_second_hand_more_type_lst);
+	    final ListView lstDetail = (ListView) view.findViewById(R.id.popup_second_hand_more_type_detail);
+	    TextView tvOk = (TextView) view.findViewById(R.id.popup_second_hand_more_type_ok);
+	    
+	    MoreTypeAdapter moreTypeAdapter = new MoreTypeAdapter(context, types);
+	    lstType.setAdapter(moreTypeAdapter);
+	    // 类型Adapter
+	    // TODO  具体什么类型，接口文档没说清楚，要问
+	    final MoreDetailAdapter typeAdapter = new MoreDetailAdapter(context, propertyTypes);
+	    lstDetail.setAdapter(typeAdapter);
+	    // 特色标签Adapter
+	    final MoreDetailAdapter labelAdapter = new MoreDetailAdapter(context, labels);
+	    // 售卖状态Adapter
+	    final MoreDetailAdapter saleStatusAdapter = new MoreDetailAdapter(context, saleStatus);
+	    
+	    lstDetail.setTag(0);
+	    lstType.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				switch (position) {
+				case 0:  //  类型
+					lstDetail.setTag(0);
+					lstDetail.setAdapter(typeAdapter);
+					break;
+				case 1:  //  特色标签
+					lstDetail.setTag(1);
+					lstDetail.setAdapter(labelAdapter);
+					break;
+				case 2:  //  售卖状态
+					lstDetail.setTag(2);
+					lstDetail.setAdapter(saleStatusAdapter);
+					break;
+				}
+			}
+		});
+	    
+	    lstDetail.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				int tag = (Integer) lstDetail.getTag();
+				switch (tag) {
+				case 0:  //  类型
+					if (propertyTypes.get(position).isSelected()) {
+						propertyTypes.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < propertyTypes.size(); i++) {
+							if (i == position) {
+								propertyTypes.get(i).setSelected(true);
+							} else {
+								propertyTypes.get(i).setSelected(false);
+							}
+						}
+					}
+					typeAdapter.notifyDataSetChanged();
+					break;
+				case 1:  //  特色标签
+					if (labels.get(position).isSelected()) {
+						labels.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < labels.size(); i++) {
+							if (i == position) {
+								labels.get(i).setSelected(true);
+							} else {
+								labels.get(i).setSelected(false);
+							}
+						}
+					}
+					labelAdapter.notifyDataSetChanged();
+					break;
+				case 2:  //  售卖状态
+					if (saleStatus.get(position).isSelected()) {
+						saleStatus.get(position).setSelected(false);
+					} else {
+						for (int i = 0; i < saleStatus.size(); i++) {
+							if (i == position) {
+								saleStatus.get(i).setSelected(true);
+							} else {
+								saleStatus.get(i).setSelected(false);
+							}
+						}
+					}
+					saleStatusAdapter.notifyDataSetChanged();
+					break;
+				}
+			}
+		});
+	    
+	    tvOk.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				TextValueBean typeCondition = null;
+				TextValueBean labelCondition = null;
+				TextValueBean saleStatusCondition = null;
+				for (TextValueBean tvb : propertyTypes) {  // 类型
+					if (tvb.isSelected()) {
+						typeCondition = tvb;
+						break;
+					}
+				}
+				for (TextValueBean tvb : labels) {  // 特色标签
+					if (tvb.isSelected()) {
+						labelCondition = tvb;
+						break;
+					}
+				}
+				for (TextValueBean tvb : saleStatus) {  // 售卖状态
+					if (tvb.isSelected()) {
+						saleStatusCondition = tvb;
+						break;
+					}
+				}
+				
+				popupWindow.dismiss();
+				if (onMapFindHouseMoreConditionListener != null) {
+					onMapFindHouseMoreConditionListener.onMapFindHouseMoreConditon(
+							typeCondition, labelCondition, saleStatusCondition);
+				}
+			}
+		});
+	}
+	
 	/**
 	 * 房型选择
 	 */

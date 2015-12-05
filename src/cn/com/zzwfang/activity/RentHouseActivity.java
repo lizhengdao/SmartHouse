@@ -121,7 +121,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 //    private TextValueBean labelCondition;
     private TextValueBean roomTypeCondition;
     private String sort, keyWords, direction;
-    private int pageIndex = 0;
+    private int pageIndex = 1;
     private int pageTotal = 0;
 
     @Override
@@ -387,7 +387,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
             final boolean isRefresh) {
 
         if (isRefresh) {
-            pageIndex = 0;
+            pageIndex = 1;
         }
 
         ActionImpl actionImpl = ActionImpl.newInstance(this);
