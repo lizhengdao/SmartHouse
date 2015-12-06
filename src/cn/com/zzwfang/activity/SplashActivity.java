@@ -2,6 +2,7 @@ package cn.com.zzwfang.activity;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.util.AppUtils;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ResLoader;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ public class SplashActivity extends BaseActivity {
 		super.onCreate(arg0);
 		
 		setContentView(R.layout.act_splash);
+		ContentUtils.clearUserInfo(this);
+		ContentUtils.setUserLoginStatus(this, false);
 		
 		handler = new Handler();
 		handler.postDelayed(new Runnable() {
@@ -31,10 +34,14 @@ public class SplashActivity extends BaseActivity {
 		            .jump(SplashActivity.this, FirstActivity.class);
 					finish();
 				} else {
+//					Jumper.newJumper()
+//		            .setAheadInAnimation(R.anim.activity_alpha_appear_in)
+//		            .setAheadOutAnimation(R.anim.activity_alpha_out)
+//		            .jump(SplashActivity.this, LoginActivity.class);
 					Jumper.newJumper()
 		            .setAheadInAnimation(R.anim.activity_alpha_appear_in)
 		            .setAheadOutAnimation(R.anim.activity_alpha_out)
-		            .jump(SplashActivity.this, LoginActivity.class);
+		            .jump(SplashActivity.this, MainActivity.class);
 				}
 			}
 		}, 800);

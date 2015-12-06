@@ -25,7 +25,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 
 	private EditText edtPhoneNum, edtPwd;
 	
-	private TextView tvLogin, tvRegister, tvForgetPwd;
+	private TextView tvBack, tvLogin, tvRegister, tvForgetPwd;
 	
 	private LinearLayout lltBrokerLogin;
 	
@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	}
 	
 	private void initView() {
-		
+		tvBack = (TextView) findViewById(R.id.act_login_back);
 		edtPhoneNum = (EditText) findViewById(R.id.act_login_phone_num_edt);
 		edtPwd = (EditText) findViewById(R.id.act_login_pwd_edt);
 		
@@ -54,6 +54,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		edtPwd.setText("123456");
 		
 		actionImpl = ActionImpl.newInstance(this);
+		tvBack.setOnClickListener(this);
 		tvLogin.setOnClickListener(this);
 		tvRegister.setOnClickListener(this);
 		lltBrokerLogin.setOnClickListener(this);
@@ -63,11 +64,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.act_login_back:
+			finish();
+			break;
 		case R.id.act_login_login_tv:   //  登录
-//			Jumper.newJumper()
-//            .setAheadInAnimation(R.anim.alpha_out_style1)
-//            .setAheadOutAnimation(R.anim.alpha_in_style1)
-//            .jump(this, MainActivity.class);
 			login();
 			break;
 			
@@ -140,11 +140,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 						loginOnHx(userInfo.getId(), userInfo.getId());
 					}
 				});
-//				ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
-//				Jumper.newJumper()
-//	            .setAheadInAnimation(R.anim.zoom_in_style1)
-//	            .setAheadOutAnimation(R.anim.zoom_out_style1)
-//	            .jump(LoginActivity.this, MainActivity.class);
 			}
 		});
 	}
@@ -166,6 +161,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
+						ContentUtils.setUserLoginStatus(LoginActivity.this, true);
 						ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
 						Jumper.newJumper()
 			            .setAheadInAnimation(R.anim.zoom_in_style1)

@@ -9,6 +9,8 @@ import cn.com.zzwfang.adapter.MainContentPagerAdapter;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.util.AppUtils;
+import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.GuiderView;
 import android.os.Bundle;
@@ -107,6 +109,18 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
 		for (GuiderView guider : guidIndicators) {
 			guider.setIconAlpha(0.0f);
 		}
+		if (position == 3) {
+			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+			if (!loginStatus) {
+				Jumper.newJumper()
+	            .setAheadInAnimation(R.anim.slide_in_style1)
+                .setAheadOutAnimation(R.anim.alpha_out_style1)
+                .setBackInAnimation(R.anim.alpha_in_style1)
+                .setBackOutAnimation(R.anim.slide_out_style1)
+	            .jump(this, LoginActivity.class);
+				return;
+			}
+		}
 		guidIndicators.get(position).setIconAlpha(1.0f);
 		contentPager.setCurrentItem(position, false);
 	}
@@ -115,6 +129,8 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
 	public void onBackPressed() {
 //		super.onBackPressed();
 		if (AppUtils.isDoubleClick(this)) {
+			ContentUtils.clearUserInfo(this);
+			ContentUtils.setUserLoginStatus(this, false);
 			exitApplication(true);
 //			moveTaskToBack(true);
         } else {

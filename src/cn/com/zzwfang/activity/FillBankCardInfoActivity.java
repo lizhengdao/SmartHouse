@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 
 
+
+
+
 import com.alibaba.fastjson.JSON;
 
 import android.content.Intent;
@@ -20,6 +23,9 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.bean.BindBankCardInfoBean;
+import cn.com.zzwfang.bean.FileUploadResultBean;
 import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -35,6 +41,11 @@ import cn.com.zzwfang.view.helper.PopViewHelper.OnBankProvinceOrCitySelectedList
 
 public class FillBankCardInfoActivity extends BasePickPhotoActivity implements OnClickListener, OnAvatarOptionsClickListener {
 
+	/**
+	 * 从赏金猎人跳转来更新银行卡信息，先获取银行卡信息
+	 */
+	public static final String INTENT_UPDATE_BANK_INFO = "intent_update_bank_info";
+	
     private static final int CODE_BIND_CARD_INFO  = 1200;
     
 	private TextView tvBack, tvCommit, tvAddr, tvBankName;
@@ -65,13 +76,18 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 	
 	private File bankFile;
 	
+	private boolean isUpdateBankInfo = false;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		isUpdateBankInfo = getIntent().getBooleanExtra(INTENT_UPDATE_BANK_INFO, false);
 		initView();
 		getProvinceOrCity(null);
 		getBankNameList();
+		if (isUpdateBankInfo) {
+			getBankInfo();
+		}
 	}
 	
 	private void initView() {
@@ -142,7 +158,7 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 			break;
 			
 		case R.id.act_fill_card_info_commit_tv:   //  跳转赏金猎人个人中心
-			commitBankInfo();
+			upLoadBankImage(bankFile);
 			break;
 		case R.id.act_fill_card_info_bank_name_llt:   //  银行名称选择
 			// TODO
@@ -158,44 +174,55 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 		}
 	}
 	
-	private void commitBankInfo() {
+	public void getBankInfo() {
 		String userId = ContentUtils.getUserId(this);
-		String realName = edtUserName.getText().toString();
-		if (TextUtils.isEmpty(realName)) {
-			ToastUtils.SHORT.toast(this, "请输入收款人姓名");
-			return;
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getBindBankInfo(userId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				BindBankCardInfoBean bankInfo = JSON.parseObject(result.getData(), BindBankCardInfoBean.class);
+				rendUI(bankInfo);
+			}
+		});
+	}
+	
+	private void rendUI(BindBankCardInfoBean bankInfo) {
+		if (bankInfo != null) {
+			edtUserName.setText(bankInfo.getRealName());
+			edtBankCode.setText(bankInfo.getBankCode());
+			tvBankName.setText(bankInfo.getBankName());
+			edtOpenAccountBankName.setText(bankInfo.getOpenAccountName());
+			String url = bankInfo.getShowImage();
+			if (!TextUtils.isEmpty(url)) {
+				imgBank.setScaleType(ScaleType.CENTER_CROP);
+				ImageAction.displayImage(url, imgBank);
+			}
 		}
-		String bankCode = edtBankCode.getText().toString();
-        if (TextUtils.isEmpty(bankCode)) {
-        	ToastUtils.SHORT.toast(this, "请输入银行卡号");
-			return;
-		}
-        
-        if (TextUtils.isEmpty(bankNameSelected)) {
-        	ToastUtils.SHORT.toast(this, "请选择银行名称");
-			return;
-        }
-        
-        String openAccountBankName = edtOpenAccountBankName.getText().toString();
-        if (TextUtils.isEmpty(openAccountBankName)) {
-        	ToastUtils.SHORT.toast(this, "请输入开户行");
-			return;
-		}
-        
-        if (city == null) {
-        	ToastUtils.SHORT.toast(this, "请选择开户行城市");
-			return;
-        }
-        
-        if (bankFile == null) {
+	}
+	
+	private void commitBankInfo(String realName, String bankCode, String cityCode, String bankImageUrl, String openAccountBankName) {
+		String userId = ContentUtils.getUserId(this);
+		
+		if ((bankFile == null || TextUtils.isEmpty(bankImageUrl)) && !isUpdateBankInfo) {
         	ToastUtils.SHORT.toast(this, "请上传银行卡正面照");
 			return;
         }
 		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		actionImpl.commitFeeHunterBankInfo(userId, realName,
-				bankCode, bankNameSelected, city.getCode(),
-				bankFile, openAccountBankName, new ResultHandlerCallback() {
+				bankCode, bankNameSelected, cityCode,
+				bankImageUrl, openAccountBankName, new ResultHandlerCallback() {
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
@@ -220,6 +247,7 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
 			            .setBackInAnimation(R.anim.activity_alpha_in)
 			            .setBackOutAnimation(R.anim.activity_push_out_right)
 			            .jumpForResult(FillBankCardInfoActivity.this, FeeHunterInfoActivity.class, CODE_BIND_CARD_INFO);
+						finish();
 					}
 				});
 	}
@@ -331,6 +359,75 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements O
             }
             break;
         }
+	}
+	
+	private void upLoadBankImage(File file) {
+		
+		final String realName = edtUserName.getText().toString();
+		if (TextUtils.isEmpty(realName) && !isUpdateBankInfo) {
+			ToastUtils.SHORT.toast(this, "请输入收款人姓名");
+			return;
+		}
+		final String bankCode = edtBankCode.getText().toString();
+        if (TextUtils.isEmpty(bankCode) && !isUpdateBankInfo) {
+        	ToastUtils.SHORT.toast(this, "请输入银行卡号");
+			return;
+		}
+        
+        if (TextUtils.isEmpty(bankNameSelected) && !isUpdateBankInfo) {
+        	ToastUtils.SHORT.toast(this, "请选择银行名称");
+			return;
+        }
+        
+        final String openAccountBankName = edtOpenAccountBankName.getText().toString();
+        if (TextUtils.isEmpty(openAccountBankName) && !isUpdateBankInfo) {
+        	ToastUtils.SHORT.toast(this, "请输入开户行");
+			return;
+		}
+        
+        String cityCodeTemp = null;
+        if (isUpdateBankInfo) {
+        	if (city != null) {
+        		cityCodeTemp = city.getCode();
+        	}
+        } else {
+        	if (city == null) {
+        		ToastUtils.SHORT.toast(this, "请选择开户行城市");
+    			return;
+        	} else {
+        		cityCodeTemp = city.getCode();
+        	}
+        }
+        final String cityCode = cityCodeTemp;
+        
+		if (bankFile == null && !isUpdateBankInfo) {
+        	ToastUtils.SHORT.toast(this, "请上传银行卡正面照");
+			return;
+        }
+		if (bankFile == null && isUpdateBankInfo) {
+			commitBankInfo(realName, bankCode, cityCode, null, openAccountBankName);
+		} else {
+			ActionImpl actionImpl = ActionImpl.newInstance(this);
+			actionImpl.otherFileUpload(file, new ResultHandlerCallback() {
+				
+				@Override
+				public void rc999(RequestEntity entity, Result result) {
+					
+				}
+				
+				@Override
+				public void rc3001(RequestEntity entity, Result result) {
+					
+				}
+				
+				@Override
+				public void rc0(RequestEntity entity, Result result) {
+					// TODO Auto-generated method stub
+					FileUploadResultBean fileUploadResultBean = JSON.parseObject(result.getData(), FileUploadResultBean.class);
+					commitBankInfo(realName, bankCode, cityCode, fileUploadResultBean.getFilePath(), openAccountBankName);
+				}
+			});
+		}
 	}
 	
 }

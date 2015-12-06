@@ -2,7 +2,9 @@ package cn.com.zzwfang.bean;
 
 public class FeeHunterRecommendClientBean extends BaseBean {
 
-    /**
+	private static final long serialVersionUID = -1236347681005886495L;
+
+	/**
      * 客户ID
      */
     private String Id;

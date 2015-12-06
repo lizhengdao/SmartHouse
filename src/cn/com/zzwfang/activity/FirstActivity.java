@@ -87,10 +87,14 @@ public class FirstActivity extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.act_first_start_find_house_tv:
+//			Jumper.newJumper()
+//            .setAheadInAnimation(R.anim.alpha_out_style1)
+//            .setAheadOutAnimation(R.anim.alpha_in_style1)
+//            .jump(FirstActivity.this, LoginActivity.class);
 			Jumper.newJumper()
             .setAheadInAnimation(R.anim.alpha_out_style1)
             .setAheadOutAnimation(R.anim.alpha_in_style1)
-            .jump(FirstActivity.this, LoginActivity.class);
+            .jump(FirstActivity.this, MainActivity.class);
             finish();
 			break;
 		}

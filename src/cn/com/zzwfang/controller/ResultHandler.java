@@ -67,6 +67,9 @@ public class ResultHandler implements ProcessCallback {
 						break;
 					case API.ERROR_FAILURE:
 						ToastUtils.SHORT.toast(context, r.getMessage());
+						if (callback != null) {
+							callback.rc999(entity, r);
+						}
 						break;
 					case API.ERROR_TOKEN_INVALID:
 						// token失效，此时需要重新获取网络数据,次处不做处理,在Task中做处理

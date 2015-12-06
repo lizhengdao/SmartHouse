@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
-    
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -29,25 +29,32 @@
             android:text="@string/act_fee_hunter_my_customer"
             android:textColor="@color/white"
             android:textSize="18sp" />
-        
+
         <TextView
             android:id="@+id/act_fee_hunter_my_customer_condition"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:paddingRight="8dp"
             android:gravity="center"
+            android:paddingRight="8dp"
             android:text="所有客户"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </FrameLayout>
-    
-    <ListView
-        android:id="@+id/act_fee_hunter_my_customer_lst"
+
+    <cn.com.zzwfang.pullview.AbPullToRefreshView
+        android:id="@+id/pull_act_fee_hunter_my_customer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:dividerHeight="4dp"
-        android:divider="@null"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/act_fee_hunter_my_customer_lst"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@null"
+            android:dividerHeight="4dp" />
+    </cn.com.zzwfang.pullview.AbPullToRefreshView>
 
 </LinearLayout>

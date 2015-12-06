@@ -137,7 +137,8 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(FeeHunterInfoActivity.this, FeeHunterWalletActivity.class);
+	        .putBoolean(FillBankCardInfoActivity.INTENT_UPDATE_BANK_INFO, true)
+	        .jump(FeeHunterInfoActivity.this, FillBankCardInfoActivity.class);
 			break;
 		}
 	}

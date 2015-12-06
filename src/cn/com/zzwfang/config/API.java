@@ -305,5 +305,9 @@ public class API {
      */
     public static final String GET_CLIENT_PROGRESS = "BountyHunter/ClientProgress";
     
+    /**
+     * 获取银行卡信息
+     */
+    public static final String GET_BIND_BANK_CARD_INFO = "User/GetBankInfo";
 
 }

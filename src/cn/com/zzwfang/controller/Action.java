@@ -576,7 +576,7 @@ public interface Action {
 	 * @param callback
 	 */
 	void commitFeeHunterBankInfo(String userId, String realName,
-			String bankCode, String bankName, String bankCity, File bankImage,
+			String bankCode, String bankName, String bankCity, String bankImage,
 			String openAccountBankName, ResultHandlerCallback callback);
 
 	/**
@@ -739,4 +739,11 @@ public interface Action {
 	 * @param callback
 	 */
 	void getClientProgress(String id, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取银行卡信息
+	 * @param userId  用户ID
+	 * @param callback
+	 */
+	void getBindBankInfo(String userId, ResultHandlerCallback callback);
 }

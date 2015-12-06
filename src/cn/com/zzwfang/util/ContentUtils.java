@@ -284,6 +284,19 @@ public final class ContentUtils {
 		editor.commit();
 	}
 	
+	public static void setUserLoginStatus(Context context, boolean loginStatus) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		Editor editor = sp.edit();
+		editor.putBoolean(Constants.LOGINED_IN, loginStatus).commit();
+	}
+	
+	public static boolean getUserLoginStatus(Context context) {
+		SharedPreferences sp = (SharedPreferences) context
+				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		return sp.getBoolean(Constants.LOGINED_IN, false);
+	}
+	
 	public static void updateUserType(Context context, int userType) {
 	    SharedPreferences sp = (SharedPreferences) context
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);

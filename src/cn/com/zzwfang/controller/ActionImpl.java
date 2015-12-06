@@ -1755,7 +1755,7 @@ public class ActionImpl implements Action {
 
 	@Override
 	public void commitFeeHunterBankInfo(String userId, String realName,
-			String bankCode, String bankName, String bankCity, File bankImage,
+			String bankCode, String bankName, String bankCity, String bankImage,
 			String openAccountBankName, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
@@ -1764,17 +1764,29 @@ public class ActionImpl implements Action {
         requestParams.put("timestamp", "2222");
         
         requestParams.put("userId", userId);
-        requestParams.put("realName", realName);
-        requestParams.put("bankCode", bankCode);
-        requestParams.put("bankName", bankName);
-        requestParams.put("bankCity", bankCity);
+        if (!TextUtils.isEmpty(realName)) {
+        	requestParams.put("realName", realName);
+        }
         
-        try {
-			requestParams.put("bankImage", bankImage);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-        requestParams.put("openAccountName", openAccountBankName);
+        if (!TextUtils.isEmpty(bankCode)) {
+        	requestParams.put("bankCode", bankCode);
+        }
+        
+        if (!TextUtils.isEmpty(bankName)) {
+        	requestParams.put("bankName", bankName);
+        }
+        
+        if (!TextUtils.isEmpty(bankCity)) {
+	        requestParams.put("bankCity", bankCity);
+        }
+        
+        if (!TextUtils.isEmpty(bankImage)) {
+        	requestParams.put("bankImage", bankImage);
+        }
+        
+        if (!TextUtils.isEmpty(openAccountBankName)) {
+        	requestParams.put("openAccountName", openAccountBankName);
+        }
         
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2354,6 +2366,38 @@ public class ActionImpl implements Action {
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
     }
+
+	@Override
+	public void getBindBankInfo(String userId, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+        requestParams.put("sign", "1111");
+        requestParams.put("timestamp", "2222");
+        requestParams.put("userid", userId);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_BIND_BANK_CARD_INFO));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍后...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
 
 
 	

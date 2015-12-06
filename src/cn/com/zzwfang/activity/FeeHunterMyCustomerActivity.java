@@ -18,6 +18,9 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.pullview.AbPullToRefreshView;
+import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
+import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnMyCustomerConditionSelectListener;
@@ -27,11 +30,14 @@ import cn.com.zzwfang.view.helper.PopViewHelper.OnMyCustomerConditionSelectListe
  * @author lzd
  *
  */
-public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClickListener {
+public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClickListener, OnHeaderRefreshListener,
+OnFooterLoadListener {
 
 	private TextView tvBack, tvCondition;
 	
 	private ListView lstMyCustomer;
+	
+	private AbPullToRefreshView pullView;
 	
 	private ArrayList<FeeHunterMyCustomerConditionBean> conditions = new ArrayList<FeeHunterMyCustomerConditionBean>();
 	
@@ -44,6 +50,7 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 	private FeeHunterMyCustomerAdapter adapter;
 	
 	private int pageIndex = 1;
+	private int pageTotal = 0;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -60,8 +67,14 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 		tvCondition = (TextView) findViewById(R.id.act_fee_hunter_my_customer_condition);
 		
 		lstMyCustomer = (ListView) findViewById(R.id.act_fee_hunter_my_customer_lst);
-		adapter = new FeeHunterMyCustomerAdapter(this, myCustomers);
+		pullView = (AbPullToRefreshView) findViewById(R.id.pull_act_fee_hunter_my_customer);
 		
+		pullView.setPullRefreshEnable(true);
+		pullView.setLoadMoreEnable(true);
+		pullView.setOnHeaderRefreshListener(this);
+		pullView.setOnFooterLoadListener(this);
+		
+		adapter = new FeeHunterMyCustomerAdapter(this, myCustomers);
 		lstMyCustomer.setAdapter(adapter);
 		
 		tvBack.setOnClickListener(this);
@@ -74,7 +87,7 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 					FeeHunterMyCustomerConditionBean conditon) {
 				if (!conditon.equals(currentConditon)) {
 					currentConditon = conditon;
-					getMyCustomer();
+					getMyCustomer(true);
 				}
 			}
 		};
@@ -93,7 +106,10 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 		}
 	}
 	
-	private void getMyCustomer() {
+	private void getMyCustomer(final boolean isRefresh) {
+		if (isRefresh) {
+			pageIndex = 1;
+		}
 	    CityBean cityBean = ContentUtils.getCityBean(this);
 	    if (cityBean == null) {
 	        return;
@@ -106,19 +122,46 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 				
 				@Override
 				public void rc999(RequestEntity entity, Result result) {
-					
+					if (isRefresh) {
+						pullView.onHeaderRefreshFinish();
+					} else {
+						pullView.onFooterLoadFinish();
+					}
 				}
 				
 				@Override
 				public void rc3001(RequestEntity entity, Result result) {
-					
+					if (isRefresh) {
+						pullView.onHeaderRefreshFinish();
+					} else {
+						pullView.onFooterLoadFinish();
+					}
 				}
 				
 				@Override
 				public void rc0(RequestEntity entity, Result result) {
-					
+					int total = result.getTotal();
+					pageTotal = (int) Math
+							.ceil(((double) total / (double) 10));
+					if (isRefresh) {
+						myCustomers.clear();
+					}
+					ArrayList<FeeHunterRecommendClientBean> temp = (ArrayList<FeeHunterRecommendClientBean>) JSON.parseArray(result.getData(), FeeHunterRecommendClientBean.class);
+					myCustomers.addAll(temp);
+					adapter.notifyDataSetChanged();
+					if (isRefresh) {
+						pullView.onHeaderRefreshFinish();
+					} else {
+						pullView.onFooterLoadFinish();
+					}
 				}
 			});
+		} else {
+			if (isRefresh) {
+				pullView.onHeaderRefreshFinish();
+			} else {
+				pullView.onFooterLoadFinish();
+			}
 		}
 		
 	}
@@ -141,15 +184,24 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 			public void rc0(RequestEntity entity, Result result) {
 				ArrayList<FeeHunterMyCustomerConditionBean> temp = (ArrayList<FeeHunterMyCustomerConditionBean>) JSON.parseArray(result.getData(), FeeHunterMyCustomerConditionBean.class);
 				conditions.addAll(temp);
-//				if (conditions.size() > 0) {
-//					currentConditon = conditions.get(0);
-//					if (currentConditon.getChildren().size() > 0) {
-//						currentConditon = currentConditon.getChildren().get(0);
-//					}
-//					getMyCustomer();
-//				}
 			}
 		});
 				
+	}
+
+
+	@Override
+	public void onFooterLoad(AbPullToRefreshView view) {
+		if (pageIndex > pageTotal) {
+			pullView.onFooterLoadFinish();
+			return;
+		}
+		getMyCustomer(false);
+	}
+
+
+	@Override
+	public void onHeaderRefresh(AbPullToRefreshView view) {
+		getMyCustomer(true);
 	}
 }

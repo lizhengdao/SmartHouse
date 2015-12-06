@@ -9,7 +9,7 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.util.Jumper;
 
 /**
- * 我的房源
+ * 我的房源  (现在此页没用了 2015-12-07)
  * @author lzd
  *
  */

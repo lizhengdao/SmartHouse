@@ -2,12 +2,9 @@ package cn.com.zzwfang.fragment;
 
 import java.io.File;
 
-import com.alibaba.fastjson.JSON;
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,7 +21,7 @@ import cn.com.zzwfang.activity.MessageActivity;
 import cn.com.zzwfang.activity.MortgageCalculatorActivity;
 import cn.com.zzwfang.activity.MyConcernHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyDemandActivity;
-import cn.com.zzwfang.activity.MyHouseResourcesActivity;
+import cn.com.zzwfang.activity.MyHouseListActivity;
 import cn.com.zzwfang.activity.MyProxyActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
@@ -40,6 +37,8 @@ import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.PathImage;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnAvatarOptionsClickListener;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 我的
@@ -178,12 +177,19 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	        .jump(this, MyDemandActivity.class);
 			break;
 		case R.id.frag_mine_my_house_resources_flt:  // 我的房源
+//			Jumper.newJumper()
+//	        .setAheadInAnimation(R.anim.activity_push_in_right)
+//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	        .setBackInAnimation(R.anim.activity_alpha_in)
+//	        .setBackOutAnimation(R.anim.activity_push_out_right)
+//	        .jump(this, MyHouseResourcesActivity.class);
+			
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(this, MyHouseResourcesActivity.class);
+	        .jump(this, MyHouseListActivity.class);
 			break;
 		case R.id.frag_mine_mortgage_calculator_flt:  // 房贷计算器
 			Jumper.newJumper()
