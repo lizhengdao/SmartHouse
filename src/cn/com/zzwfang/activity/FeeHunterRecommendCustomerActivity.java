@@ -144,6 +144,13 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 			ToastUtils.SHORT.toast(this, "请输入最高总价");
 			return;
 		}
+		
+		float minPriceFloat = Integer.valueOf(minPrice);
+		float maxPriceFloat = Integer.valueOf(maxPrice);
+		if (minPriceFloat >= maxPriceFloat) {
+		    ToastUtils.SHORT.toast(this, "最低总价应小于最高总价");
+		    return;
+		}
 
 		String monthlyPay = edtMonthlyPay.getText().toString();
 		if (TextUtils.isEmpty(monthlyPay)) {

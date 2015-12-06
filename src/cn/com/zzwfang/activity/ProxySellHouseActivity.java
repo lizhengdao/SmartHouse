@@ -244,6 +244,13 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 			ToastUtils.SHORT.toast(this, "请输入总楼层");
 			return;
 		}
+		int floorInt = Integer.valueOf(floor);
+		int totalFloorInt = Integer.valueOf(totalFloor);
+		if (floorInt > totalFloorInt) {
+		    ToastUtils.SHORT.toast(this, "楼层应小于等于总楼层"); 
+            return;
+		}
+		
 		String square = edtSquare.getText().toString();
 		if (TextUtils.isEmpty(square)) {
 			ToastUtils.SHORT.toast(this, "请输入房屋面积");

@@ -13,6 +13,11 @@ import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.PathImage;
 
+/**
+ * 赏金猎人个人中心
+ * @author doer06
+ *
+ */
 public class FeeHunterInfoActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack, tvMyCustomer, tvRecommendHouseSourceList, tvFeeHunterMsg, tvFeeHunterRule;

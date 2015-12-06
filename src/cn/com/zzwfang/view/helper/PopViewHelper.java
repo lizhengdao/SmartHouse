@@ -1108,6 +1108,7 @@ public class PopViewHelper {
 	    
 	    MyCustomerConditionAdapter leftAdapter = new MyCustomerConditionAdapter(context, conditions);
 	    lstConditionLeft.setAdapter(leftAdapter);
+	    
 	    final ArrayList<FeeHunterMyCustomerConditionBean> rightListData = new ArrayList<FeeHunterMyCustomerConditionBean>();
 	    
 	    if (conditions.size() > 0) {
@@ -1124,10 +1125,10 @@ public class PopViewHelper {
 				rightListData.clear();
 				rightListData.addAll(conditions.get(position).getChildren());
 				rightAdapter.notifyDataSetChanged();
-				if (onMyCustomerConditionSelectListener != null) {
-					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(conditions.get(position));
-				}
-				popupWindow.dismiss();
+//				if (onMyCustomerConditionSelectListener != null) {
+//					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(conditions.get(position));
+//				}
+//				popupWindow.dismiss();
 			}
 		});
 	    
@@ -1136,10 +1137,11 @@ public class PopViewHelper {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-//				FeeHunterMyCustomerConditionBean rightData = rightListData.get(position);
-//				if (onMyCustomerConditionSelectListener != null) {
-//					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(rightData);
-//				}
+			    popupWindow.dismiss();
+				FeeHunterMyCustomerConditionBean rightData = rightListData.get(position);
+				if (onMyCustomerConditionSelectListener != null) {
+					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(rightData);
+				}
 			}
 		});
 	    

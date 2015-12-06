@@ -142,7 +142,6 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/act_fee_hunter_recommend_second_hand_price"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:background="@color/white"
@@ -167,6 +166,8 @@
                         android:layout_gravity="center_vertical"
                         android:background="@color/white"
                         android:hint="意向总价最低范围"
+                        android:gravity="center"
+                        android:singleLine="true"
                         android:inputType="numberDecimal"
                         android:textColor="@color/black"
                         android:textSize="12sp"/>
@@ -187,6 +188,8 @@
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:hint="意向总价最高范围"
+                        android:gravity="center"
+                        android:singleLine="true"
                         android:inputType="numberDecimal"
                         android:textColor="@color/black"
                         android:textSize="12sp"/>
@@ -213,7 +216,6 @@
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/act_fee_hunter_recommend_second_hand_price"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:background="@color/white"

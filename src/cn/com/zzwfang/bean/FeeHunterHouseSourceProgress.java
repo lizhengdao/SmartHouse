@@ -6,10 +6,6 @@ import java.util.ArrayList;
  * @author lzd
  *
  */
-/**
- * @author lzd
- *
- */
 public class FeeHunterHouseSourceProgress extends BaseBean {
 
 	/**

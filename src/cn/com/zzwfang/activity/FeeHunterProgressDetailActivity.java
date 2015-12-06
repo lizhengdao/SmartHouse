@@ -24,7 +24,17 @@ import com.alibaba.fastjson.JSON;
  */
 public class FeeHunterProgressDetailActivity extends BaseActivity implements OnClickListener {
 
+	/**
+	 * 从推荐房源（房源列表）跳进来，查看房源进度
+	 */
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
+	
+	/**
+	 * 从我的客户（推荐客户）跳进来，查看客户进度
+	 */
+	public static final String INTENT_CLIENT_ID = "intent_client_id";
+	
+	
 	private TextView tvBack, tvProgressStateOne, tvProgressStateTwo, tvProgressStateThree, tvProgressStateFour;
 	private ImageView imgProgress;
 	
@@ -32,10 +42,13 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 	
 	private String houseSourceId;
 	
+	private String clientId;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
+		clientId = getIntent().getStringExtra(INTENT_CLIENT_ID);
 		initView();
 		initData();
 	}
@@ -61,6 +74,8 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 	private void initData() {
 		if (!TextUtils.isEmpty(houseSourceId)) {
 			getHouseSourceProgress();
+		} else if (!TextUtils.isEmpty(clientId)) {
+		    getClientSourceProgress();
 		}
 	}
 
@@ -135,6 +150,31 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 				rendUI(progressData);
 			}
 		});
+	}
+	
+	private void getClientSourceProgress() {
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    actionImpl.getClientProgress(clientId, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                FeeHunterHouseSourceProgress progressData = JSON.parseObject(result.getData(), FeeHunterHouseSourceProgress.class);
+                rendUI(progressData);
+            }
+        });
 	}
 	
 }

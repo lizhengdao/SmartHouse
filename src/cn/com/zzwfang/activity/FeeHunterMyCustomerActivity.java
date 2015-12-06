@@ -11,8 +11,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.FeeHunterMyCustomerAdapter;
-import cn.com.zzwfang.bean.FeeHunterMyCustomerBean;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
+import cn.com.zzwfang.bean.FeeHunterRecommendClientBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -38,7 +39,7 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 	
 	private OnMyCustomerConditionSelectListener onMyCustomerConditionSelectListener;
 	
-	private ArrayList<FeeHunterMyCustomerBean> myCustomers = new ArrayList<FeeHunterMyCustomerBean>();
+	private ArrayList<FeeHunterRecommendClientBean> myCustomers = new ArrayList<FeeHunterRecommendClientBean>();
 	
 	private FeeHunterMyCustomerAdapter adapter;
 	
@@ -93,10 +94,15 @@ public class FeeHunterMyCustomerActivity extends BaseActivity implements OnClick
 	}
 	
 	private void getMyCustomer() {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    CityBean cityBean = ContentUtils.getCityBean(this);
+	    if (cityBean == null) {
+	        return;
+	    }
 		if (currentConditon != null) {
 			String userId = ContentUtils.getUserId(this);
-			actionImpl.getFeeHunterMyCustomerList(userId, currentConditon.getId(), 10, pageIndex, new ResultHandlerCallback() {
+			ActionImpl actionImpl = ActionImpl.newInstance(this);
+			
+			actionImpl.getFeeHunterMyCustomerList(userId, cityBean.getSiteId(), currentConditon.getId(), 10, pageIndex, new ResultHandlerCallback() {
 				
 				@Override
 				public void rc999(RequestEntity entity, Result result) {

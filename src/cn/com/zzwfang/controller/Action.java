@@ -336,7 +336,7 @@ public interface Action {
 	 * 
 	 * @param callback
 	 */
-	void getFeeHunterMyCustomerList(String userId, String status, int pageSize,
+	void getFeeHunterMyCustomerList(String userId, String cityId, String status, int pageSize,
 			int pageIndex, ResultHandlerCallback callback);
 
 	// void getMyHouseSourceInfoChanges();
@@ -732,4 +732,11 @@ public interface Action {
 	 * @param callback
 	 */
 	void getGuiderPageData(ResultHandlerCallback callback);
+	
+	/**
+	 * 客户进度   客源公用的带看记录
+	 * @param id
+	 * @param callback
+	 */
+	void getClientProgress(String id, ResultHandlerCallback callback);
 }
