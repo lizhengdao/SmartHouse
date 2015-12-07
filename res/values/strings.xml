@@ -147,6 +147,9 @@
     <!-- 我的房屋  列表  -->
     <string name="act_my_house_list">我的房屋</string>
     
+    <!-- 房源信息变动  -->
+    <string name="act_house_source_info_changes">信息变动</string>
+    
     <!-- 推荐房源  列表  （系统根据我的委托找房推荐给我的房）-->
     <string name="act_houses_recommended_to_me">推荐房源</string>
     

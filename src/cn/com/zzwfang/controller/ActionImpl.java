@@ -1001,7 +1001,7 @@ public class ActionImpl implements Action {
 		requestParams.put("sign", "1111");
 		requestParams.put("timestamp", "2222");
 		
-		requestParams.put("userId", userPhone);
+		requestParams.put("tel", userPhone);
 		requestParams.put("pageSize", pageSize + "");
 		requestParams.put("pageIndex", pageIndex + "");
 		

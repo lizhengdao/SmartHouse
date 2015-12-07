@@ -5,14 +5,21 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.MyHouseBean;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 我的 -> 我的房源  Adapter
+ * @author doer06
+ *
+ */
 public class MyHouseAdapter extends BaseAdapter {
 
 	
@@ -56,20 +63,45 @@ public class MyHouseAdapter extends BaseAdapter {
 		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_my_house_desc);
 		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_my_house_date);
 		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_house_price);
+		AutoDrawableTextView infoChanges = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_my_house_source_info_change);
 		
 		tvTitle.setText(myHouseBean.getTitle());
+		String desc = "";
+		if (!TextUtils.isEmpty(myHouseBean.getTypeF())) {
+		    desc += myHouseBean.getTypeF() + "室";
+		}
+		if (!TextUtils.isEmpty(myHouseBean.getTypeT())) {
+		    desc += myHouseBean.getTypeT() + "厅";
+		}
+		if (!TextUtils.isEmpty(myHouseBean.getTypeW())) {
+		    desc += myHouseBean.getTypeW() + "卫";
+		}
+		if (!TextUtils.isEmpty(myHouseBean.getTypeY())) {
+		    desc += myHouseBean.getTypeY() + "阳台  ";
+		}
+		if (!TextUtils.isEmpty(myHouseBean.getSquare())) {
+		    desc += myHouseBean.getSquare() + "㎡   ";
+		}
+		if (!TextUtils.isEmpty(myHouseBean.getDirection())) {
+		    desc += myHouseBean.getDirection();
+		}
 		
-		String desc = myHouseBean.getTypeF() + "室" + myHouseBean.getTypeT()
-				+ "厅    " + myHouseBean.getSquare() + "㎡   " + myHouseBean.getDirection();
 		tvDesc.setText(desc);
-		tvDate.setText(myHouseBean.getPublishDate());
+		tvDate.setText("接盘时间：" + myHouseBean.getPublishDate());
 		tvPrice.setText(myHouseBean.getPrice() + "万");
 		
 		String url = myHouseBean.getImagePath();
-	    if (TextUtils.isEmpty(url)) {
-	    	
+	    if (!TextUtils.isEmpty(url)) {
+	        ImageAction.displayImage(url, img);
 	    }
-		ImageAction.displayImage(url, img);
+	    infoChanges.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                
+            }
+        });
 		return convertView;
 	}
 

@@ -8,7 +8,7 @@ public class MyHouseBean extends BaseBean {
 	private String Direction;
 	
 	/**
-	 * 代理人id
+	 * 经纪人ID
 	 */
 	private String EmployeId;
 	
@@ -33,7 +33,7 @@ public class MyHouseBean extends BaseBean {
 	private String Square;
 	
 	/**
-	 * 标题
+	 * 房源标题
 	 */
 	private String Title;
 	

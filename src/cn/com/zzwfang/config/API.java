@@ -126,7 +126,7 @@ public class API {
     /**
      * 获取我的房屋列表
      */
-    public static final String GET_MY_HOUSE_LIST = "MyProperty/myProperyty";
+    public static final String GET_MY_HOUSE_LIST = "User/MySellPrp";
     
     /**
      * 获取常见问题列表
