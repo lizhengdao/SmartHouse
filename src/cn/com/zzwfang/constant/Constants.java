@@ -63,7 +63,9 @@ public class Constants {
     
     public static final String App_Id_Weixin = "wx6deb6a79d73c7554";
 	
+    public static final String LAT_SELECTED_CITY = "lat_selected_city";
     
+    public static final String LNG_SELECTED_CITY = "lng_selected_city";
     
     /**
      *   当前位置经度
@@ -74,11 +76,6 @@ public class Constants {
      *   当前位置纬度
      */
     public static final String LAT_CURRENT_LOCATION = "lat_current_location";
-    
-    /**
-     *   当前位置纬度
-     */
-    public static final String AUDIO_INTRODUCTION = "audio_introduction_auto_play";
     
     /**
      *   是否需要登录

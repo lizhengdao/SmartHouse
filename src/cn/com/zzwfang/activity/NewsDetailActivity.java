@@ -1,5 +1,7 @@
 package cn.com.zzwfang.activity;
 
+import com.alibaba.fastjson.JSON;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -7,7 +9,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.NewsDetailBean;
 import cn.com.zzwfang.bean.NewsItemBean;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
 
 public class NewsDetailActivity extends BaseActivity implements OnClickListener {
 	
@@ -22,6 +29,8 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener 
 	
 	private NewsItemBean newsItemBean;
 	
+	private NewsDetailBean newsDetailBean;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -29,6 +38,9 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener 
 		newsItemBean = (NewsItemBean) getIntent().getSerializableExtra(INTENT_NEWS_DATA);
 		initView();
 //		getNewsDetail(newsTypeId);
+		if (newsItemBean != null) {
+		    getNewsDetail(newsItemBean.getId());
+		}
 	}
 	
 	private void initView() {
@@ -38,9 +50,9 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener 
 		WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(false);
-		if (newsItemBean != null) {
-			webView.loadDataWithBaseURL(null, newsItemBean.getContent(), "text/html", "utf-8", null);
-		}
+//		if (newsItemBean != null) {
+//			webView.loadDataWithBaseURL(null, newsItemBean.getContent(), "text/html", "utf-8", null);
+//		}
 		
 		tvBack.setOnClickListener(this);
 	}
@@ -54,24 +66,29 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener 
 		}
 	}
 	
-//	private void getNewsDetail(String newsTypeId) {
-//		ActionImpl actionImpl = ActionImpl.newInstance(this);
-//		actionImpl.getNewsDetail(newsTypeId, new ResultHandlerCallback() {
-//			
-//			@Override
-//			public void rc999(RequestEntity entity, Result result) {
-//				
-//			}
-//			
-//			@Override
-//			public void rc3001(RequestEntity entity, Result result) {
-//				
-//			}
-//			
-//			@Override
-//			public void rc0(RequestEntity entity, Result result) {
-//				
-//			}
-//		});
-//	}
+	private void getNewsDetail(String newsTypeId) {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getNewsDetail(newsTypeId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+			     
+			    newsDetailBean = JSON.parseObject(result.getData(), NewsDetailBean.class);
+			    if (newsDetailBean != null) {
+			        webView.loadDataWithBaseURL(null, newsDetailBean.getContent(), "text/html", "utf-8", null);
+			    }
+			}
+
+		});
+	}
 }

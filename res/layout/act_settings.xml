@@ -89,7 +89,6 @@
     </FrameLayout>
     
     <FrameLayout 
-        android:id="@+id/act_settings_change_pwd"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="12dp"
@@ -116,7 +115,7 @@
             app:borderWidth="0.5sp"
             app:offBorderColor="#aaa"
             app:offColor="#fff"
-            app:onColor="@color/theme_red"
+            app:onColor="@color/color_app_theme"
             app:spotColor="#fff"/>
     </FrameLayout>
     
@@ -149,7 +148,7 @@
             android:drawablePadding="40dp"
             android:textColor="@color/color_fbd0ad"
             android:textSize="16sp"
-            android:text="2.5M"/>
+            android:text=""/>
     </FrameLayout>
     
     <FrameLayout 

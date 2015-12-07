@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
@@ -40,6 +41,7 @@ public class SandTableDisplayActivity extends BaseActivity implements OnClickLis
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		webSettings.setAllowFileAccess(true);
+		webSettings.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
 		webSettings.setUseWideViewPort(true);
 		
 		tvTitle.setText(title);

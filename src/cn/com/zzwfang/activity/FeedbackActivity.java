@@ -1,6 +1,11 @@
 package cn.com.zzwfang.activity;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +21,11 @@ import cn.com.zzwfang.util.ToastUtils;
 
 public class FeedbackActivity extends BaseActivity implements OnClickListener {
 
+    /**手机号码输入匹配正则*/
+    public static final String REGX_MOBILE = "^1$|^1[34578]$|^1[3-8]\\d{0,9}$" ;
+    /**手机号码提交验证正则*/
+    public static final String REGX_MOBILE_FINAL = "^1[34578]\\d{9}$";
+    
 	private TextView tvBack, tvCommt;
 	private EditText edtContent, edtPhone;
 	@Override
@@ -34,6 +44,24 @@ public class FeedbackActivity extends BaseActivity implements OnClickListener {
 		edtContent = (EditText) findViewById(R.id.act_feedback_content_edt);
 		edtPhone = (EditText) findViewById(R.id.act_feedback_phone_edt);
 		tvCommt = (TextView) findViewById(R.id.act_feedback_commit);
+		
+		edtPhone.setFilters(new InputFilter [] { new InputFilter(){
+
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end,
+                       Spanned dest, int dstart, int dend) {
+                 String content = dest.toString().substring(0, dstart)
+                             + source
+                             + dest.toString().substring(dend,
+                                         dest.toString().length());
+                  if (TextUtils.isEmpty(content))
+                        return source;
+                  if (content.matches(REGX_MOBILE))
+                        return source;
+                  else
+                        return "" ;
+           }
+     }});
 		
 		tvBack.setOnClickListener(this);
 		tvCommt.setOnClickListener(this);
@@ -66,6 +94,13 @@ public class FeedbackActivity extends BaseActivity implements OnClickListener {
 //			return;
 //		}
 		
+		if (!TextUtils.isEmpty(phone)) {
+		    if (!phone.matches(REGX_MOBILE_FINAL)) {
+                ContentUtils. showMsg(this, "请输入正确的手机号" );
+                 return;
+            }
+		}
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		actionImpl.commitFeedback(userId, content, phone, new ResultHandlerCallback() {
 			
@@ -83,4 +118,11 @@ public class FeedbackActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
+	
+	//判断，返回布尔值  
+	private boolean isPhoneNumber(String input){  
+	    String regex="1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}";  
+	    Pattern p = Pattern.compile(regex);
+	    return p.matches(regex, input);
+	}  
 }

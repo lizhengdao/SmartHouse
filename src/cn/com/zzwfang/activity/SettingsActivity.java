@@ -1,12 +1,18 @@
 package cn.com.zzwfang.activity;
 
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
+
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.util.AsyncUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.ToggleButton;
 import cn.com.zzwfang.view.ToggleButton.OnToggleChanged;
 
@@ -73,6 +79,8 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	        .jump(this, ChangePwdActivity.class);
 			break;
 		case R.id.act_settings_clear_cache:  //  清除缓存
+		    ImageAction.clearCache();
+		    ToastUtils.SHORT.toast(this, "缓存已清除");
 			break;
 		case R.id.act_settings_about_us:  //  关于我们
 			Jumper.newJumper()
@@ -93,6 +101,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		case R.id.act_settings_check_updates:   //  检查更新
 			break;
 		case R.id.act_settings_logout:   //  退出账号
+		    logoutHX();
 			break;
 		}
 	}
@@ -100,5 +109,41 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	@Override
 	public void onToggle(ToggleButton button, boolean on) {
 		
+	}
+	
+	private void logoutHX() {
+	  //此方法为异步方法
+	    AsyncUtils.executeRunnable(new Runnable() {
+            
+            @Override
+            public void run() {
+                EMChatManager.getInstance().logout(new EMCallBack() {
+                    
+                    @Override
+                    public void onSuccess() {
+                        // TODO Auto-generated method stub
+                 
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                ToastUtils.SHORT.toast(SettingsActivity.this, "已退出登录");
+                            }
+                        });
+                        
+                    }
+                 
+                    @Override
+                    public void onProgress(int progress, String status) {
+                 
+                    }
+                 
+                    @Override
+                    public void onError(int code, String message) {
+                 
+                    }
+                });
+            }
+        });
+	    
+	    
 	}
 }

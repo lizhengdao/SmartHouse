@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -155,6 +156,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		WebSettings ws = webViewPriceTrend.getSettings();
 		ws.setBuiltInZoomControls(false);
 		ws.setJavaScriptEnabled(true);
+		ws.setLayoutAlgorithm(LayoutAlgorithm.NARROW_COLUMNS);
+		ws.setUseWideViewPort(true);
 
 		photoPager = (ViewPager) findViewById(R.id.act_second_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);

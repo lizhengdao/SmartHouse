@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.baidu.mapapi.model.LatLng;
+
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.UserInfoBean;
@@ -363,6 +365,24 @@ public final class ContentUtils {
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putString(Constants.ZZWFANG_USER_NAME, nickName).commit();
+	}
+	
+	public static void saveSelectedCityLatLng(Context context, double lat, double lng) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putString(Constants.LAT_SELECTED_CITY, String.valueOf(lat));
+        editor.putString(Constants.LNG_SELECTED_CITY, String.valueOf(lng));
+        editor.commit();
+	}
+	
+	public static LatLng getSelectedCityLatLng(Context context) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+	    double lat = Double.valueOf(sp.getString(Constants.LAT_SELECTED_CITY, "0"));
+	    double lng = Double.valueOf(sp.getString(Constants.LNG_SELECTED_CITY, "0"));
+	    LatLng latLng = new LatLng(lat, lng);
+	    return latLng;
 	}
 	
 	

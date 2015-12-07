@@ -52,8 +52,9 @@ public class NewsItemAdapter extends BaseAdapter {
 		NewsItemBean newsItemBean = news.get(position);
 		ImageView imgNewsPhoto = (ImageView) convertView.findViewById(R.id.adapter_news_item_photo);
 		TextView tvNewsName = (TextView) convertView.findViewById(R.id.adapter_news_item_name);
+		TextView tvContent = (TextView) convertView.findViewById(R.id.adapter_news_item_content);
 		tvNewsName.setText(newsItemBean.getTitle());
-		
+		tvContent.setText(newsItemBean.getContent());
 		TextView tvTime = (TextView) convertView.findViewById(R.id.adapter_news_item_time);
 //		String time = DateUtils.formatDate(newsItemBean.getAddTime());
 		tvTime.setText(newsItemBean.getAddTime());

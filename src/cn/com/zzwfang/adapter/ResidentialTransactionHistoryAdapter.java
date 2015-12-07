@@ -4,11 +4,15 @@ import java.util.ArrayList;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.activity.BaseActivity;
+import cn.com.zzwfang.activity.ChatActivity;
 import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.ResidentialTransactionHistoryBean;
 import cn.com.zzwfang.util.DateUtils;
+import cn.com.zzwfang.util.Jumper;
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -49,7 +53,7 @@ public class ResidentialTransactionHistoryAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_residential_transaction_history, null);
 		}
 		
-		ResidentialTransactionHistoryBean temp = historys.get(position);
+		final ResidentialTransactionHistoryBean temp = historys.get(position);
 		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_residential_transaction_history_photo);
 		ArrayList<PhotoBean> photos = temp.getPhoto();
 		if (photos != null && photos.size() > 0) {
@@ -73,6 +77,22 @@ public class ResidentialTransactionHistoryAdapter extends BaseAdapter {
 		
 		TextView tvBrokerName = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_broker_name);
 		tvBrokerName.setText(temp.getAgentName());
+		
+		TextView tvConsult = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_consult);
+		tvConsult.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putString(ChatActivity.INTENT_MESSAGE_TO_ID, temp.getAgentId())
+                .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, temp.getAgentName())
+                .jump((BaseActivity)context, ChatActivity.class);
+            }
+        });
 		
 		return convertView;
 	}

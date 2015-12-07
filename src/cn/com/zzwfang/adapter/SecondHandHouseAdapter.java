@@ -63,12 +63,13 @@ public class SecondHandHouseAdapter extends BaseAdapter {
         if  (!TextUtils.isEmpty(secondHandHouseBean.getDirection())) {
 	        desc += (secondHandHouseBean.getDirection() + "   ");
         }
-        if  (!TextUtils.isEmpty(secondHandHouseBean.getStructure())) {
-        	desc += (secondHandHouseBean.getStructure() + "/");
-        }
         if  (!TextUtils.isEmpty(secondHandHouseBean.getFloor())) {
-        	desc += (secondHandHouseBean.getFloor() + "层");
+        	desc += (secondHandHouseBean.getFloor() + "/");
         }
+        desc += (secondHandHouseBean.getTotalFloor() + "层");
+//        if  (!TextUtils.isEmpty(secondHandHouseBean.getTotalFloor())) {
+//            
+//        }
 		tvDesc.setText(desc);
 		
 		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_est_name);

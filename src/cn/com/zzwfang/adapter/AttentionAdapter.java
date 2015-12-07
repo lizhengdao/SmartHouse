@@ -11,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.activity.BaseActivity;
+import cn.com.zzwfang.activity.ChatActivity;
 import cn.com.zzwfang.bean.AttentionBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
 
 /**
  * 我的关注列表Adapter
@@ -83,6 +86,22 @@ public class AttentionAdapter extends BaseAdapter {
 				deleteCollection(attentionBean, position);
 			}
 		});
+		
+		tvOnLineConsult.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                
+                Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putString(ChatActivity.INTENT_MESSAGE_TO_ID, attentionBean.getAgentId())
+                .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, "经纪人")
+                .jump((BaseActivity)context, ChatActivity.class);
+            }
+        });
 		
 		return convertView;
 	}

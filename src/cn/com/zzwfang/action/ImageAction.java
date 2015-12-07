@@ -60,6 +60,14 @@ public final class ImageAction {
 
 		initOptions(conetxt);
 	}
+	
+//	public void getCacheSize() {
+//	}
+	
+	public static void clearCache() {
+	    loader.clearMemoryCache();
+	    loader.clearDiskCache();
+	}
 
 	private static void initOptions(Context conetxt) {
 		DIP_AVATAR = new DisplayImageOptions.Builder()

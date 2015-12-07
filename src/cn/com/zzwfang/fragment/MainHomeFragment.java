@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
@@ -35,13 +36,18 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.ptz.PullToZoomListViewEx;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeResult;
+import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 
 /**
  * 首页Fragment
  * @author lzd
  *
  */
-public class MainHomeFragment extends BaseFragment implements OnClickListener, OnItemClickListener {
+public class MainHomeFragment extends BaseFragment implements OnClickListener, OnItemClickListener, OnGetGeoCoderResultListener {
 
 	/**
 	 * 跳转选择城市
@@ -58,6 +64,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	private ImageView imgShangjin;
 	
 	private String cityId;
+	private GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
 	
 	private ArrayList<RecommendHouseSourceBean> recommendSources = new ArrayList<RecommendHouseSourceBean>();
 	
@@ -198,6 +205,9 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				    onCitySelectedListener.onCitySelected(cityBean);
 				}
 				getRecommendHouseSourceList(cityBean.getSiteId());
+			    // 初始化搜索模块，注册事件监听
+				mSearch = GeoCoder.newInstance();
+				mSearch.setOnGetGeoCodeResultListener(MainHomeFragment.this);
 				break;
 			}
 		}
@@ -237,6 +247,24 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 
 	public interface OnCitySelectedListener {
         void onCitySelected(CityBean cityBean);
+    }
+
+
+    @Override
+    public void onGetGeoCodeResult(GeoCodeResult result) {
+        // TODO Auto-generated method stub
+        if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            Toast.makeText(getActivity(), "抱歉，未能找到结果", Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+        ContentUtils.saveSelectedCityLatLng(getActivity(), result.getLocation().latitude, result.getLocation().longitude);
+    }
+
+    @Override
+    public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
+        // TODO Auto-generated method stub
+        
     }
 
 	
