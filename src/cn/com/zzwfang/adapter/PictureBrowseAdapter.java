@@ -7,17 +7,15 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.senab.photoview.PhotoView;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.PhotoBean;
-import cn.com.zzwfang.view.ProgressImageAware;
 
 
 /**
@@ -64,15 +62,15 @@ public class PictureBrowseAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = View.inflate(context, R.layout.adapter_picture_browse, null);
         
-        ImageView zMg = (ImageView) view.findViewById(R.id.adapter_picturebrowse_zmg);
-        ProgressBar pb = (ProgressBar) view.findViewById(R.id.adapter_picturebrowse_pb);
+        PhotoView zMg = (PhotoView) view.findViewById(R.id.adapter_picturebrowse_zmg);
+//        ProgressBar pb = (ProgressBar) view.findViewById(R.id.adapter_picturebrowse_pb);
         
-        ProgressImageAware pia = new ProgressImageAware(zMg, pb);
+//        ProgressImageAware pia = new ProgressImageAware(zMg, pb);
         
         viewPool.put(position, view);
         container.addView(view);
         
-        ImageAction.displayImage(photos.get(position).getPath(), pia, pia, pia);
+        ImageAction.displayImage(photos.get(position).getPath(), zMg);
         
         return position;
     }

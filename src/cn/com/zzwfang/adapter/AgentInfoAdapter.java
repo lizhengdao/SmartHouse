@@ -7,6 +7,7 @@ import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.AgentInfoItemBean;
 import cn.com.zzwfang.util.DateUtils;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -56,8 +57,22 @@ public class AgentInfoAdapter extends BaseAdapter {
 		TextView tvTitle  = (TextView) convertView.findViewById(R.id.adapter_agent_info_title);
 		tvTitle.setText(agentInfoItemBean.getTitle());
 		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_agent_info_desc);
-		String desc = agentInfoItemBean.getTypeF() + "室" + 
-				agentInfoItemBean.getTypeT() + "厅    " + agentInfoItemBean.getDiretion() + "   " + agentInfoItemBean.getFloor() + "层";
+		String desc = "";
+		if (!TextUtils.isEmpty(agentInfoItemBean.getTypeF())) {
+		    desc += agentInfoItemBean.getTypeF() + "室";
+		}
+		if (!TextUtils.isEmpty(agentInfoItemBean.getTypeT())) {
+		    desc += agentInfoItemBean.getTypeT() + "厅  ";
+		}
+		if (!TextUtils.isEmpty(agentInfoItemBean.getDiretion())) {
+		    desc += agentInfoItemBean.getDiretion() + "  ";
+		}
+		if (!TextUtils.isEmpty(agentInfoItemBean.getFloor())) {
+		    desc += agentInfoItemBean.getFloor();
+		}
+		if (!TextUtils.isEmpty(agentInfoItemBean.getTotalFloor())) {
+		    desc += "/" + agentInfoItemBean.getTotalFloor() + "层";
+		}
 		tvDesc.setText(desc);
 		
 		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_agent_info_est_name);

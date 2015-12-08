@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,6 +61,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 	public static final String INTENT_KEY_WORDS = "RentHouseActivity.intent_keywords";
     private TextView tvBack;
 
+    private EditText edtKeyWords;
     private LinearLayout lltArea, lltRentPrice, lltHouseType, lltMore;
     private TextView tvArea, tvRentPrice, tvHouseType;
 
@@ -130,12 +136,14 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         setContentView(R.layout.act_rent_house);
         cityId = getIntent().getStringExtra(
                 HomeRecommendHouseAdapter.INTENT_CITY_ID);
+        keyWords = getIntent().getStringExtra(INTENT_KEY_WORDS);
         initView();
         initData();
     }
 
     private void initView() {
         tvBack = (TextView) findViewById(R.id.act_rent_house_back);
+        edtKeyWords = (EditText) findViewById(R.id.act_rent_house_search_edt);
         pullView = (AbPullToRefreshView) findViewById(R.id.pull_rent_house);
         lstRentHouseView = (ListView) findViewById(R.id.lst_rent_house);
 
@@ -147,6 +155,10 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         tvArea = (TextView) findViewById(R.id.act_rent_house_area_tv);
         tvRentPrice = (TextView) findViewById(R.id.act_rent_house_rent_price_tv);
         tvHouseType = (TextView) findViewById(R.id.act_rent_house_type_tv);
+        
+        if (!TextUtils.isEmpty(keyWords)) {
+            edtKeyWords.setText(keyWords);
+        }
 
         tvBack.setOnClickListener(this);
         pullView.setPullRefreshEnable(true);
@@ -162,6 +174,21 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         adapter = new RentHouseAdapter(this, rentHouses);
         lstRentHouseView.setAdapter(adapter);
         lstRentHouseView.setOnItemClickListener(this);
+        
+        edtKeyWords.setOnEditorActionListener(new OnEditorActionListener() {
+            
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
+                    keyWords = edtKeyWords.getText().toString();
+                    getRentHouseList(cityId, areaCondition, rentPriceCondition,
+                            squareCondition, sort, keyWords, direction,
+                            roomTypeCondition, 10, true);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         onRentPriceSelectListener = new OnConditionSelectListener() {
 
@@ -169,6 +196,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
             public void onConditionSelect(TextValueBean txtValueBean) {
                 rentPriceCondition = txtValueBean;
                 tvRentPrice.setText(txtValueBean.getText());
+                keyWords = edtKeyWords.getText().toString();
                 getRentHouseList(cityId, areaCondition, rentPriceCondition,
                         squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);
@@ -181,6 +209,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
             public void onConditionSelect(TextValueBean txtValueBean) {
                 roomTypeCondition = txtValueBean;
                 tvHouseType.setText(txtValueBean.getText());
+                keyWords = edtKeyWords.getText().toString();
                 getRentHouseList(cityId, areaCondition, rentPriceCondition,
                         squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);
@@ -193,6 +222,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
             public void onConditionSelect(TextValueBean txtValueBean) {
                 areaCondition = txtValueBean;
                 tvArea.setText(txtValueBean.getText());
+                keyWords = edtKeyWords.getText().toString();
                 getRentHouseList(cityId, areaCondition, rentPriceCondition,
                         squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);
@@ -213,6 +243,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 				if (directionConditonData != null) {
 					direction = directionConditonData.getValue();
 				}
+				keyWords = edtKeyWords.getText().toString();
 				getRentHouseList(cityId, areaCondition, rentPriceCondition,
                         squareCondition, sort, keyWords, direction,
                         roomTypeCondition, 10, true);

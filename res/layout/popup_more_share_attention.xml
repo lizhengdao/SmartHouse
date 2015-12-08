@@ -12,7 +12,8 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="分享"/>
+        android:text="分享"
+        android:visibility="gone"/>
     
     <View 
         android:layout_width="match_parent"

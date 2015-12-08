@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
+import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.NewHouseDetailBean;
 import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
@@ -63,6 +64,7 @@ public class NewHouseDetailActivity extends BaseActivity implements
 		tvMgtCompany = (TextView) findViewById(R.id.act_new_house_detail_mgt_company_tv);
 		tvBuilderCompany = (TextView) findViewById(R.id.act_new_house_detail_builder_company_tv);
 		tvMortgageCalculate = (TextView) findViewById(R.id.act_new_house_detail_calculator_tv);
+		tvConsultant = (TextView) findViewById(R.id.act_new_house_detail_consult_tv);
 
 		photoPager = (ViewPager) findViewById(R.id.act_new_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);
@@ -70,6 +72,7 @@ public class NewHouseDetailActivity extends BaseActivity implements
 
 		tvBack.setOnClickListener(this);
 		tvMortgageCalculate.setOnClickListener(this);
+		tvConsultant.setOnClickListener(this);
 	}
 
 	@Override
@@ -87,6 +90,21 @@ public class NewHouseDetailActivity extends BaseActivity implements
 					.setBackOutAnimation(R.anim.activity_push_out_right)
 					.jump(this, MortgageCalculatorActivity.class);
 			break;
+		case R.id.act_new_house_detail_consult_tv:
+		    if (newHouseDetailBean != null) {
+                AgentBean agent = newHouseDetailBean.getAgent();
+                if (agent != null) {
+                    Jumper.newJumper()
+                    .setAheadInAnimation(R.anim.activity_push_in_right)
+                    .setAheadOutAnimation(R.anim.activity_alpha_out)
+                    .setBackInAnimation(R.anim.activity_alpha_in)
+                    .setBackOutAnimation(R.anim.activity_push_out_right)
+                    .putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
+                    .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
+                    .jump(this, ChatActivity.class);
+                }
+            }
+		    break;
 		}
 	}
 

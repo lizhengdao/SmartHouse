@@ -31,7 +31,7 @@ public class API {
 	 * 
 	 * http://110.189.90.40:7892/
 	 */
-	public static final String host = "http://www.zzwfang.com:7894/";
+	public static final String host = "http://110.189.90.40:7892/";
 
 	/**
 	 * 认证授权接口
@@ -309,5 +309,11 @@ public class API {
      * 获取银行卡信息
      */
     public static final String GET_BIND_BANK_CARD_INFO = "User/GetBankInfo";
+    
+    /**
+     * 获取小区详情
+     */
+    public static final String GET_COURT_DETAIL = "Estate/GetEstateDes";
+    
 
 }

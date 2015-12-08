@@ -8,13 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.PhotoPagerAdapter;
 import cn.com.zzwfang.bean.AgentBean;
-import cn.com.zzwfang.bean.NewHouseDetailBean;
+import cn.com.zzwfang.bean.CourtDetailBean;
 import cn.com.zzwfang.bean.PhotoBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -48,12 +49,14 @@ public class CourtDetailActivity extends BaseActivity implements OnClickListener
 	/**
 	 * 小区详情页，调用的是新房详情接口
 	 */
-	private NewHouseDetailBean newHouseDetailBean;
+//	private NewHouseDetailBean newHouseDetailBean;
 	private ViewPager photoPager;
 	private PhotoPagerAdapter photoAdapter;
 	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
 	
 	private OnShareTypeSelectListener onShareTypeSelectListener;
+	
+	private CourtDetailBean courtDetailBean;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -118,8 +121,8 @@ public class CourtDetailActivity extends BaseActivity implements OnClickListener
 			PopViewHelper.showSharePopupWindow(this, getWindow().getDecorView(), onShareTypeSelectListener);
 			break;
 		case R.id.act_court_detail_consult_tv:   //  我要咨询
-			if (newHouseDetailBean != null) {
-				AgentBean agent = newHouseDetailBean.getAgent();
+			if (courtDetailBean != null) {
+				AgentBean agent = courtDetailBean.getAgent();
 				if (agent != null) {
 					Jumper.newJumper()
 					.setAheadInAnimation(R.anim.activity_push_in_right)
@@ -136,26 +139,43 @@ public class CourtDetailActivity extends BaseActivity implements OnClickListener
 	}
 	
 	private void rendUI() {
-		if (newHouseDetailBean != null) {
-			tvPageTitle.setText(newHouseDetailBean.getName());
-			tvTitle.setText(newHouseDetailBean.getName());
+		if (courtDetailBean != null) {
+			tvPageTitle.setText(courtDetailBean.getName());
+			tvTitle.setText(courtDetailBean.getName());
 			
-			tvGreenRatio.setText(newHouseDetailBean.getGreeningRate());
-			tvPlotRatio.setText(newHouseDetailBean.getPlotRatio());
-			tvHouseType.setText(newHouseDetailBean.getPropertyType());
-//			tvBuildingType.setText(newHouseDetailBean.getPropertyType());
+			if (!TextUtils.isEmpty(courtDetailBean.getGreeningRate())) {
+			    tvGreenRatio.setText(courtDetailBean.getGreeningRate());
+			}
 			
-//			tvAveragePrice.setText(newHouseDetailBean.getUnitPrice());
-//			tvArea.setText(newHouseDetailBean.getFloorArea());
-//			tvSquare.setText(newHouseDetailBean.getFloorArea());
-//			tvPropertyType.setText(newHouseDetailBean.getMgtCompany());
-//			tvPlotRatio.setText(newHouseDetailBean.getPlotRatio());
-//			tvDecoration.setText(newHouseDetailBean.getDecoration());
-//			tvGreenRatio.setText(newHouseDetailBean.getGreeningRate());
-//			tvMgtCompany.setText(newHouseDetailBean.getMgtCompany());
-//			tvBuilderCompany.setText(newHouseDetailBean.getBuilder());
+            if (!TextUtils.isEmpty(courtDetailBean.getPlotRatio())) {
+                tvPlotRatio.setText(courtDetailBean.getPlotRatio());
+            }
+			
+            if (!TextUtils.isEmpty(courtDetailBean.getPropertyType())) {
+                tvHouseType.setText(courtDetailBean.getPropertyType());
+            }
+			
+            if (!TextUtils.isEmpty(courtDetailBean.getMgtPrice())) {
+                tvPropertyManageFee.setText(courtDetailBean.getMgtPrice());
+            }
+			
+            if (!TextUtils.isEmpty(courtDetailBean.getUintNum())) {
+                tvBuildings.setText(courtDetailBean.getUintNum());
+            }
+			
+            if (!TextUtils.isEmpty(courtDetailBean.getPropertyNum())) {
+                tvHouses.setText(courtDetailBean.getPropertyNum());
+            }
+			
+            if (!TextUtils.isEmpty(courtDetailBean.getBuildYear())) {
+                tvBuildYear.setText(courtDetailBean.getBuildYear());
+            }
+			
+            if (!TextUtils.isEmpty(courtDetailBean.getBuildType())) {
+                tvBuildingType.setText(courtDetailBean.getBuildType());
+            }
 
-			photos.addAll(newHouseDetailBean.getPhoto());
+			photos.addAll(courtDetailBean.getPhoto());
 			photoAdapter.notifyDataSetChanged();
 		}
 	}
@@ -165,25 +185,49 @@ public class CourtDetailActivity extends BaseActivity implements OnClickListener
 	 */
 	private void getCourtDetail() {
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getNewHouseDetail(courtId, new ResultHandlerCallback() {
-
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-
-			}
-
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-
-			}
-
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				newHouseDetailBean = JSON.parseObject(result.getData(),
-						NewHouseDetailBean.class);
-				rendUI();
-			}
-		});
+		actionImpl.getCourtDetail(courtId, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                courtDetailBean = JSON.parseObject(result.getData(), CourtDetailBean.class);
+                rendUI();
+            }
+        });
+		
+		
+		
+//		actionImpl.getNewHouseDetail(courtId, new ResultHandlerCallback() {
+//
+//			@Override
+//			public void rc999(RequestEntity entity, Result result) {
+//
+//			}
+//
+//			@Override
+//			public void rc3001(RequestEntity entity, Result result) {
+//
+//			}
+//
+//			@Override
+//			public void rc0(RequestEntity entity, Result result) {
+//				newHouseDetailBean = JSON.parseObject(result.getData(),
+//						NewHouseDetailBean.class);
+//				rendUI();
+//			}
+//		});
 	}
 
 	@Override

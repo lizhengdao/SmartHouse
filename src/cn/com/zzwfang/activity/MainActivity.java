@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
 		guiderConsultant.setOnClickListener(this);
 		guiderMine.setOnClickListener(this);
 		
-		RSAUtil.testRsa();
+//		RSAUtil.testRsa();
 	}
 	
 	

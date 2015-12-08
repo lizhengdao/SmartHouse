@@ -3,7 +3,9 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,6 +75,27 @@ public class SearchHouseActivity extends BaseActivity implements
 		tvCancel.setOnClickListener(this);
 		tvHouseType.setOnClickListener(this);
 		imgClearKeyWords.setOnClickListener(this);
+		
+		edtKeyWords.addTextChangedListener(new TextWatcher() {
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                    int after) {
+            }
+            
+            @Override
+            public void afterTextChanged(Editable s) {
+                String keyWords = edtKeyWords.getText().toString();
+                // 接口定的  0是新房，1是二手房
+                if (!TextUtils.isEmpty(keyWords)) {
+                    getEstate(keyWords, houseType);
+                }
+            }
+        });
 
 		edtKeyWords
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -125,7 +148,7 @@ public class SearchHouseActivity extends BaseActivity implements
             .setBackInAnimation(R.anim.activity_alpha_in)
             .setBackOutAnimation(R.anim.activity_push_out_right)
             .putString(RentHouseActivity.INTENT_KEY_WORDS, idNameBean.getName())
-            .jump(SearchHouseActivity.this, RentHouseDetailActivity.class);
+            .jump(SearchHouseActivity.this, RentHouseActivity.class);
 		}
 	}
 
@@ -148,6 +171,10 @@ public class SearchHouseActivity extends BaseActivity implements
 	public void onHouseTypeSelect(int houseType, String houseTypeTxt) {
 		tvHouseType.setText(houseTypeTxt);
 		this.houseType = houseType;
+		String keyWords = edtKeyWords.getText().toString();
+		if (!TextUtils.isEmpty(keyWords)) {
+		    getEstate(keyWords, houseType);
+		}
 	}
 	
 	private void getEstate(String keyWords, int type) {
@@ -155,6 +182,10 @@ public class SearchHouseActivity extends BaseActivity implements
 			ToastUtils.SHORT.toast(this, "输入小区名称或楼盘名称");
 			return;
 		}
+		if (type == 2) { // 租房为2，但也传1
+		    type = 1;
+		}
+		
 		CityBean cityBean = ContentUtils.getCityBean(this);
 		if (cityBean != null) {
 		    ActionImpl actionImpl = ActionImpl.newInstance(this);

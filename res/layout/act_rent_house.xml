@@ -24,6 +24,7 @@
             android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/act_rent_house_search_edt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
@@ -33,7 +34,11 @@
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="4dp"
             android:hint="@string/act_second_hand_house_hint"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:inputType="text"
+            android:layout_marginRight="10dp" />
 
     </LinearLayout>
 

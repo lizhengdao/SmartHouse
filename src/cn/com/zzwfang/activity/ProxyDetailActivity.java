@@ -7,6 +7,11 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 
+/**
+ * 跟  BrokerInfoActivity 重了
+ * @author doer06
+ *
+ */
 public class ProxyDetailActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack;

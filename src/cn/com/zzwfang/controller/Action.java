@@ -746,4 +746,11 @@ public interface Action {
 	 * @param callback
 	 */
 	void getBindBankInfo(String userId, ResultHandlerCallback callback);
+	
+	/**
+	 * 获取小区详情
+	 * @param courtId
+	 * @param callback
+	 */
+	void getCourtDetail(String courtId, ResultHandlerCallback callback);
 }

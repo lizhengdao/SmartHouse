@@ -109,6 +109,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private int mode = MODE_LIST;
 	public static final String INTENT_KEYWORDS = "second_hand_house_key_words";
 	
+	public static final String INTENT_PRO_NUM = "intent_pro_num";
+	
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType;
 	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
@@ -198,6 +200,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		setContentView(R.layout.act_second_hand_house);
 		cityId = getIntent().getStringExtra(HomeRecommendHouseAdapter.INTENT_CITY_ID);
 		key = getIntent().getStringExtra(INTENT_KEYWORDS);
+		proNum = getIntent().getStringExtra(INTENT_PRO_NUM);
 		if (TextUtils.isEmpty(cityId)) {
 			CityBean cityBean = ContentUtils.getCityBean(this);
 			cityId = cityBean.getSiteId();
@@ -283,9 +286,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
-					String keyWords = edtKeyWords.getText().toString();
+				    key = edtKeyWords.getText().toString();
 					getSecondHandHouseList(cityId, areaCondition, direction, squareCondition,
-							labelCondition, totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+							labelCondition, totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, key, 10, true);
 					return true;
 				}
 				return false;
@@ -298,9 +301,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				totalPriceCondition = txtValueBean;
 				tvTotalPrice.setText(txtValueBean.getText());
-				String keyWords = edtKeyWords.getText().toString();
+				key = edtKeyWords.getText().toString();
 				getSecondHandHouseList(cityId, areaCondition, direction, squareCondition,
-						labelCondition, totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+						labelCondition, totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, key, 10, true);
 			}
 		};
 		
@@ -310,9 +313,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			public void onConditionSelect(TextValueBean txtValueBean) {
 				houseTypeCondition = txtValueBean;
 				tvHouseType.setText(txtValueBean.getText());
-				String keyWords = edtKeyWords.getText().toString();
+				key = edtKeyWords.getText().toString();
 				getSecondHandHouseList(cityId, areaCondition, direction, squareCondition, labelCondition,
-						totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+						totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, key, 10, true);
 			}
 		};
 		
@@ -325,9 +328,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 					areaCondition = txtValueBean;
 					tvArea.setText(txtValueBean.getText());
 					
-					String keyWords = edtKeyWords.getText().toString();
+					key = edtKeyWords.getText().toString();
 					getSecondHandHouseList(cityId, areaCondition, direction, squareCondition,
-							labelCondition, totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+							labelCondition, totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, key, 10, true);
 					
 					getMapFindHouseDataArea();
 				}
@@ -358,9 +361,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 					floor = floorRangeConditionData.getValue();
 				}
 				
-				String keyWords = edtKeyWords.getText().toString();
+				key = edtKeyWords.getText().toString();
 				getSecondHandHouseList(cityId, areaCondition, direction, squareCondition, labelCondition,
-						totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, keyWords, 10, true);
+						totalPriceCondition, houseTypeCondition, buildYear, floor, proNum, sort, key, 10, true);
 			}
 		};
 		
@@ -514,7 +517,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		String keyWords = edtKeyWords.getText().toString();
 		getSecondHandHouseList(cityId, areaCondition, direction, squareCondition,
 				labelCondition, totalPriceCondition, houseTypeCondition,
-				buildYear, floor, proNum, sort,keyWords, 10, true);
+				buildYear, floor, proNum, sort, keyWords, 10, true);
 	}
 
 	@Override
@@ -524,10 +527,10 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			pullView.onFooterLoadFinish();
 			return;
 		}
-		String keyWords = edtKeyWords.getText().toString();
+		key = edtKeyWords.getText().toString();
 		getSecondHandHouseList(cityId, areaCondition, direction, squareCondition,
 				labelCondition, totalPriceCondition, houseTypeCondition,
-				buildYear, floor, proNum, sort, keyWords, 10, false);
+				buildYear, floor, proNum, sort, key, 10, false);
 		
 	}
 	

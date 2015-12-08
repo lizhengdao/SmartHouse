@@ -11,7 +11,7 @@
         android:background="@color/color_app_theme" >
 
         <TextView
-            android:id="@+id/act_my_house_list_back"
+            android:id="@+id/act_house_source_info_changes_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/ic_back"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/act_my_house_list"
+            android:text="信息变动"
             android:textColor="@color/white"
             android:textSize="18sp" />
 

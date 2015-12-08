@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.activity.BaseActivity;
+import cn.com.zzwfang.activity.HouseSourceInfoChangesActivity;
 import cn.com.zzwfang.bean.MyHouseBean;
+import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import android.content.Context;
 import android.text.TextUtils;
@@ -87,19 +90,34 @@ public class MyHouseAdapter extends BaseAdapter {
 		}
 		
 		tvDesc.setText(desc);
-		tvDate.setText("接盘时间：" + myHouseBean.getPublishDate());
-		tvPrice.setText(myHouseBean.getPrice() + "万");
+		
+		if (!TextUtils.isEmpty(myHouseBean.getPublishDate())) {
+		    tvDate.setText("接盘时间：" + myHouseBean.getPublishDate());
+		} else {
+		    tvDate.setText("接盘时间：");
+		}
+		
+		if (!TextUtils.isEmpty(myHouseBean.getPrice())) {
+		    tvPrice.setText(myHouseBean.getPrice() + "万");
+		}
 		
 		String url = myHouseBean.getImagePath();
 	    if (!TextUtils.isEmpty(url)) {
 	        ImageAction.displayImage(url, img);
 	    }
+	    
+	    // 跳转 房源信息变动
 	    infoChanges.setOnClickListener(new OnClickListener() {
             
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                
+                Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .jump((BaseActivity)context, HouseSourceInfoChangesActivity.class);
             }
         });
 		return convertView;

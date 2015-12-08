@@ -61,7 +61,7 @@
                 android:id="@+id/adapter_my_house_source_info_change"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_round_corner_color_app_theme"
+                android:background="@drawable/shape_round_corner_color_f7860c"
                 android:drawableLeft="@drawable/ic_hourglass_white"
                 android:gravity="center_vertical"
                 android:drawablePadding="2dp"

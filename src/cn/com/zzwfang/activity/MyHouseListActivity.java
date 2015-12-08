@@ -106,10 +106,20 @@ public class MyHouseListActivity extends BaseActivity implements
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
+			    if (isRefresh) {
+                    pullView.onHeaderRefreshFinish();
+                } else {
+                    pullView.onFooterLoadFinish();
+                }
 			}
 			
 			@Override
 			public void rc3001(RequestEntity entity, Result result) {
+			    if (isRefresh) {
+                    pullView.onHeaderRefreshFinish();
+                } else {
+                    pullView.onFooterLoadFinish();
+                }
 			}
 			
 			@Override
@@ -120,6 +130,9 @@ public class MyHouseListActivity extends BaseActivity implements
 				if (isRefresh) {
 					myHouses.clear();
 				}
+				
+				MyHouseBean test = new MyHouseBean();
+				temp.add(test);
 				myHouses.addAll(temp);
 				adapter.notifyDataSetChanged();
 				if (isRefresh) {

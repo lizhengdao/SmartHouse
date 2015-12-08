@@ -14,12 +14,15 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.Jumper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,7 +33,7 @@ import android.widget.TextView;
  * @author lzd
  *
  */
-public class BrokerInfoActivity extends BaseActivity implements OnClickListener {
+public class BrokerInfoActivity extends BaseActivity implements OnClickListener, OnItemClickListener {
 
 	public static final String INTENT_AGENT_DATA = "intent_agent_date";
 	
@@ -76,10 +79,12 @@ public class BrokerInfoActivity extends BaseActivity implements OnClickListener 
 		adapter = new AgentInfoAdapter(this, listProperty);
 		lstAgentInfo.setAdapter(adapter);
 		
+		lstAgentInfo.setOnItemClickListener(this);
+		
 		if (agentBean != null) {
 			tvTitle.setText(agentBean.getName());
 			tvName.setText(agentBean.getName());
-			ImageAction.displayImage(agentBean.getPhoto(), imgAvatar);
+//			ImageAction.displayImage(agentBean.getPhoto(), imgAvatar);
 		}
 		
 		
@@ -105,12 +110,23 @@ public class BrokerInfoActivity extends BaseActivity implements OnClickListener 
 			}
 			break;
 		case R.id.act_broker_info_phone_agent_msg: // 发消息
+		    if (agentBean != null) {
+		        Jumper.newJumper()
+	            .setAheadInAnimation(R.anim.activity_push_in_right)
+	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+	            .setBackInAnimation(R.anim.activity_alpha_in)
+	            .setBackOutAnimation(R.anim.activity_push_out_right)
+	            .putString(ChatActivity.INTENT_MESSAGE_TO_ID, agentBean.getAgentId())
+	            .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agentBean.getName())
+	            .jump(this, ChatActivity.class);
+		    }
 			break;
 		}
 	}
 	
 	private void rendUI() {
 		if (agentInfoDetailBean != null) {
+		    ImageAction.displayImage(agentInfoDetailBean.getPhoto(), imgAvatar);
 			tvSecondHandHouses.setText(agentInfoDetailBean.getSaleCount());
 			tvRentHouses.setText(agentInfoDetailBean.getRentCount());
 			tvAccessAmount.setText(agentInfoDetailBean.getClickCount());
@@ -144,4 +160,18 @@ public class BrokerInfoActivity extends BaseActivity implements OnClickListener 
 			}
 		});
 	}
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+        // TODO Auto-generated method stub
+        AgentInfoItemBean agentInfoItemBean = agentInfoDetailBean.getListProperty().get(position);
+        Jumper.newJumper()
+        .setAheadInAnimation(R.anim.activity_push_in_right)
+        .setAheadOutAnimation(R.anim.activity_alpha_out)
+        .setBackInAnimation(R.anim.activity_alpha_in)
+        .setBackOutAnimation(R.anim.activity_push_out_right)
+        .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, agentInfoItemBean.getPropertyId())
+        .jump(this, SecondHandHouseDetailActivity.class);
+    }
 }

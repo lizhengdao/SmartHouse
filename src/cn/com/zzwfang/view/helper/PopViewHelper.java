@@ -36,7 +36,7 @@ public class PopViewHelper {
 	public interface OnHouseTypeSelectListener {
 		public static int HOUSE_TYPE_NEW_HOUSE = 0;
 		public static int HOUSE_TYPE_SECOND_HAND_HOUSE = 1;
-		public static int HOUSE_TYPE_RENT_HOUSE = 2;
+		public static int HOUSE_TYPE_RENT_HOUSE = 2;  // 租房和二手房都是1，为了区分3种，为2，上传还是传1
 		void onHouseTypeSelect(int houseType, String houseTypeTxt);
 	}
 	/**

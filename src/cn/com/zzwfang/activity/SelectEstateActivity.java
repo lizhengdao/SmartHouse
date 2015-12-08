@@ -6,7 +6,9 @@ import com.alibaba.fastjson.JSON;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,6 +62,27 @@ public class SelectEstateActivity extends BaseActivity implements OnClickListene
 		lstEstate.setAdapter(adapter);
 		
 		lstEstate.setOnItemClickListener(this);
+		
+		edtKeyWords.addTextChangedListener(new TextWatcher() {
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                    int after) {
+            }
+            
+            @Override
+            public void afterTextChanged(Editable s) {
+                String keywords = edtKeyWords.getText().toString();
+                if (TextUtils.isEmpty(keywords)) {
+                    return;
+                }
+                getEstate();
+            }
+        });
 		
 		edtKeyWords.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override

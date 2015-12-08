@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.SearchHouseArtifactResultAdapter;
+import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SearchHouseArtifactResultBean;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -102,13 +103,20 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		SearchHouseArtifactResultBean temp = artifactResult.get(position);
+		
+		// 跳经纪人详情页
+		AgentBean agentBean = new AgentBean();
+		agentBean.setAgentId(temp.getId());
+		agentBean.setName(temp.getName());
+		agentBean.setPhoto(temp.getPhoto());
+		agentBean.setTel(temp.getPhone());
 		Jumper.newJumper()
         .setAheadInAnimation(R.anim.activity_push_in_right)
         .setAheadOutAnimation(R.anim.activity_alpha_out)
         .setBackInAnimation(R.anim.activity_alpha_in)
         .setBackOutAnimation(R.anim.activity_push_out_right)
-        .putSerializable(INTENT_SEARCH_HOUSE_ARTIFACT_PROXY, temp)
-        .jump(this, ProxyDetailActivity.class);
+        .putSerializable(BrokerInfoActivity.INTENT_AGENT_DATA, agentBean)
+        .jump(this, BrokerInfoActivity.class);
 	}
 
 	

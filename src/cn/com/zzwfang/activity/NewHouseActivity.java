@@ -194,6 +194,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		setContentView(R.layout.act_new_house);
 		cityId = getIntent().getStringExtra(
 				HomeRecommendHouseAdapter.INTENT_CITY_ID);
+		keyWords = getIntent().getStringExtra(INTENT_KEY_WORDS);
 		initView();
 		setListener();
 		initData();
@@ -221,6 +222,10 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		autoTvLocate = (AutoDrawableTextView) findViewById(R.id.act_new_house_locate);
 		autoTvSubway = (AutoDrawableTextView) findViewById(R.id.act_new_house_subway);
 		autoTvNearby = (AutoDrawableTextView) findViewById(R.id.act_new_house_nearby);
+		
+		if (!TextUtils.isEmpty(keyWords)) {
+            edtKeyWords.setText(keyWords);
+        }
 		
 		baiduMap = mapView.getMap();
 		adapter = new NewHouseAdapter(this, newHouses);
@@ -275,7 +280,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
-					String keyWords = edtKeyWords.getText().toString();
+					keyWords = edtKeyWords.getText().toString();
 					getNewHouseList(cityId, areaCondition,
 							totalPriceCondition, roomTypeCondition,
 							usageCondition, labelCondition,

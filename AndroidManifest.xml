@@ -216,6 +216,10 @@
             android:name="cn.com.zzwfang.activity.NickNameUpdateActivity"
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="cn.com.zzwfang.activity.HouseSourceInfoChangesActivity"
+            android:screenOrientation="portrait" />
+        
         <!--  
         <activity
             android:name=".wxapi.WXEntryActivity"
