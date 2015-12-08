@@ -37,6 +37,7 @@ import cn.com.zzwfang.view.ptz.PullToZoomListViewEx;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
@@ -84,6 +85,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	        onCitySelectedListener = (cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener) activity;
 	    }
 	    super.onAttach(activity);
+	    mSearch = GeoCoder.newInstance();
+	    mSearch.setOnGetGeoCodeResultListener(MainHomeFragment.this);
 	}
 
 	
@@ -206,8 +209,14 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				}
 				getRecommendHouseSourceList(cityBean.getSiteId());
 			    // 初始化搜索模块，注册事件监听
-				mSearch = GeoCoder.newInstance();
-				mSearch.setOnGetGeoCodeResultListener(MainHomeFragment.this);
+				if (cityBean != null) {
+				    String cityName = cityBean.getName();
+				    if (!TextUtils.isEmpty(cityName)) {
+				        
+		                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
+				    }
+				}
+				
 				break;
 			}
 		}

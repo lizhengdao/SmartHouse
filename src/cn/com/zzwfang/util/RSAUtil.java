@@ -5,14 +5,18 @@ import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 
 import javax.crypto.Cipher;
 
+import android.util.Base64;
 import android.util.Log;
 //  http://blog.csdn.net/zeng622peng/article/details/5957012
 //  http://blog.csdn.net/yanzi1225627/article/details/26508035
@@ -20,6 +24,91 @@ import android.util.Log;
 //  http://bbs.csdn.net/topics/390923441
 //  http://blog.csdn.net/centralperk/article/details/8558678
 public class RSAUtil {
+    
+    private static final String ALGORITHM = "RSA";
+    
+    public static final String RSA_PUBLIC = "xLqsSIDFkdZy0vNeP+qCK8cq"
+            + "7SIU3QhgmYTrM0dtRuMk8FjAY59l2NPM"
+            + "GdDI3BuIc/ViPDS+e3n5oHQXT+F2XTDM"
+            + "weg4tUDPx306VALcmsvlF9SHlLbAXbjs"
+            + "KkM9mTYMV1AndreWjVKUoTWrERCVfo0M"
+            + "RzUp8nnMh94T60lyD4s=";
+    
+    private static final String RSA_PRIVATE = "xLqsSIDFkdZy0vNeP+qCK8cq7SIU3Qhg"
+            + "mYTrM0dtRuMk8FjAY59l2NPMGdDI3BuIc/ViP"
+            + "DS+e3n5oHQXT+F2XTDMweg4tUDPx306VALcms"
+            + "vlF9SHlLbAXbjsKkM9mTYMV1AndreWjVKUoTW"
+            + "rERCVfo0MRzUp8nnMh94T60lyD4s=AQABye7s"
+            + "9ZOE1YmCnAsipYBlb/uPTzuD7D/nYFcwSTVzf"
+            + "SxrucxQV8emxInCbJySk7Ko7UFl+9zLICmonH"
+            + "BzImZfSw==+WcK/sc+3NrVFABr9pHMvEosO4t"
+            + "QIhI8UNr8CqXe7t+rtZEdbPdC3UnCShWKN7ew"
+            + "1/kj9ucp612z8a2Q71GowQ==ifhvexNCDUyZK"
+            + "tkI4R+rLyooLrCxYHgBNPgdi8ezkvEI4bfRpU"
+            + "hKj7q4VtFb7QKDHSgz8DRZrS4JgGnsoLJlpQ="
+            + "=RfXxz6Z0q993BjVYE8Kye98SqWFbCTO0V7oW"
+            + "GaaN8tQrhrM+XeK+jvSx27ZPH3IX2X256PjPe"
+            + "Ya/g3v8vCVcAQ==Lvo30GDopR6LOqUI/tzpKh"
+            + "PjmkrANMjEADfP4Tsk3GTvqDrFVjxUt2KXu+J"
+            + "nFx8sCKxKSAwYgC2b3RMSUNqpew==B7WDrla+"
+            + "j/V+wE27kUJxUvM2AuqVe1mBvEmbzmpLn6DpT"
+            + "myG0jTvbbnfV3yLIbYHxFYMnknPX8tn4O6ek8"
+            + "mKl78LJU1vb6U2qzRmR6lfd2t1JrZYQIjQZa7"
+            + "uSDfSRktpUS7EQ0bfC+wD1IIr+qVlPNJT52nA"
+            + "Fx4588E6zR4iJcE=";
+    
+    
+    
+    private static PublicKey getPublicKeyFromX509(String algorithm,
+            String bysKey) throws NoSuchAlgorithmException, Exception
+    {
+        byte[] decodeKey = Base64.decode(bysKey, Base64.DEFAULT);
+        X509EncodedKeySpec x509 = new X509EncodedKeySpec(decodeKey);
+        KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
+        return keyFactory.generatePublic(x509);
+    }
+    
+    private static PrivateKey getPrivateKeyFrom509(String algorithm, String bysKey) throws NoSuchAlgorithmException, Exception {
+        byte[] decodeKey = Base64.decode(bysKey, Base64.DEFAULT);
+        X509EncodedKeySpec x509 = new X509EncodedKeySpec(decodeKey);
+        KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
+        return keyFactory.generatePrivate(x509);
+    }
+    
+    public static void test() {
+        
+    }
+    
+    
+    
+    /**
+     * 使用公钥加密
+     * 
+     * @param content
+     * @return
+     */
+    public static String encryptByPublic(String content)
+    {
+        try
+        {
+            PublicKey publicKey = getPublicKeyFromX509(ALGORITHM, RSA_PUBLIC);
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            byte[] plaintext = content.getBytes();
+            byte[] output = cipher.doFinal(plaintext);
+
+            String str = Base64.encodeToString(output, Base64.DEFAULT);
+            return str;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    
+    
+    
 
 	/**
 	 * 生成公钥和私钥
@@ -226,8 +315,11 @@ public class RSAUtil {
 		try {
 			map = getKeys();
 			//生成公钥和私钥
-			RSAPublicKey publicKey = (RSAPublicKey) map.get("public");
-			RSAPrivateKey privateKey = (RSAPrivateKey) map.get("private");
+//			RSAPublicKey publicKey = (RSAPublicKey) map.get("public");
+//			RSAPrivateKey privateKey = (RSAPrivateKey) map.get("private");
+			
+			RSAPublicKey publicKey = (RSAPublicKey) getPublicKeyFromX509(ALGORITHM, RSA_PUBLIC);
+			RSAPrivateKey privateKey = (RSAPrivateKey) getPrivateKeyFrom509(ALGORITHM, RSA_PRIVATE);
 			
 			//模
 			String modulus = publicKey.getModulus().toString();

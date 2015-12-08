@@ -122,10 +122,26 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 		mapView = (MapView) view.findViewById(R.id.bmapView);
 		mapView.showZoomControls(false);
 		baiduMap = mapView.getMap();
+		
+		
+		
 		MapStatus status = new MapStatus.Builder().zoom(14).build();
 		MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory
 				.newMapStatus(status);
 		baiduMap.setMapStatus(mapStatusUpdate);
+		
+		curLatLng = ContentUtils.getSelectedCityLatLng(getActivity());
+		if (curLatLng != null) {
+		    // 构建Marker图标
+	        BitmapDescriptor bitmap = BitmapDescriptorFactory
+	                .fromResource(R.drawable.ic_cur_location);
+	        // 构建MarkerOption，用于在地图上添加Marker
+	        OverlayOptions option = new MarkerOptions().position(curLatLng)
+	                .icon(bitmap);
+	        // 在地图上添加Marker，并显示
+	        baiduMap.addOverlay(option);
+		}
+		
 	}
 
 	private void setListener() {
@@ -260,6 +276,18 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				.putDouble(NearbyDetailActivity.INTENT_LAT, curLatLng.latitude)
 				.putDouble(NearbyDetailActivity.INTENT_LNG, curLatLng.longitude)
 				.jump(this, NearbyDetailActivity.class);
+			} else {
+			    curLatLng = ContentUtils.getSelectedCityLatLng(getActivity());
+			    if (curLatLng != null) {
+			        Jumper.newJumper()
+	                .setAheadInAnimation(R.anim.activity_push_in_right)
+	                .setAheadOutAnimation(R.anim.activity_alpha_out)
+	                .setBackInAnimation(R.anim.activity_alpha_in)
+	                .setBackOutAnimation(R.anim.activity_push_out_right)
+	                .putDouble(NearbyDetailActivity.INTENT_LAT, curLatLng.latitude)
+	                .putDouble(NearbyDetailActivity.INTENT_LNG, curLatLng.longitude)
+	                .jump(this, NearbyDetailActivity.class);
+			    }
 			}
 			break;
 		}

@@ -68,6 +68,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.act_login_login_tv:   //  登录
+		    tvLogin.setClickable(false);
 			login();
 			break;
 			
@@ -127,12 +128,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
-						
+					    tvLogin.setClickable(true);
 					}
 					
 					@Override
 					public void rc3001(RequestEntity entity, Result result) {
-						
+					    tvLogin.setClickable(true);
 					}
 					
 					@Override
@@ -167,6 +168,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			            .setAheadInAnimation(R.anim.zoom_in_style1)
 			            .setAheadOutAnimation(R.anim.zoom_out_style1)
 			            .jump(LoginActivity.this, MainActivity.class);
+						tvLogin.setClickable(true);
 					}
 				});
 			}
@@ -178,7 +180,15 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void onError(int arg0, String arg1) {
-				
+                    runOnUiThread(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        ContentUtils.setUserLoginStatus(LoginActivity.this, false);
+                        ToastUtils.SHORT.toast(LoginActivity.this, "登录失败");
+                        tvLogin.setClickable(true);
+                    }
+                });
 			}
 		});
 	}

@@ -53,6 +53,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -230,6 +231,23 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		// 初始化搜索模块，注册搜索事件监听
 	    mPoiSearch = PoiSearch.newInstance();
 	    mPoiSearch.setOnGetPoiSearchResultListener(this);
+	    
+	    MapStatus status = new MapStatus.Builder().zoom(14).build();
+        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory
+                .newMapStatus(status);
+        baiduMap.setMapStatus(mapStatusUpdate);
+        
+        curLatLng = ContentUtils.getSelectedCityLatLng(this);
+        if (curLatLng != null) {
+            // 构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.ic_cur_location);
+            // 构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions().position(curLatLng)
+                    .icon(bitmap);
+            // 在地图上添加Marker，并显示
+            baiduMap.addOverlay(option);
+        }
 
 		tvBack.setOnClickListener(this);
 		cbxListAndMap.setOnCheckedChangeListener(this);

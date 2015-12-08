@@ -53,6 +53,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMarkerClickListener;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
@@ -130,7 +131,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	public static final String SalePriceRange = "SalePriceRange";
 	public static final String HouseType = "HouseType";
 	public static final String PrpUsage = "PrpUsage";
-	public static final String EstateLabel = "EstateLabel";
+	public static final String EstateLabel = "SecondLabel";  // SecondLabel   EstateLabel
 	public static final String EstateStatus = "EstateStatus";
 	public static final String FloorRange = "FloorRange";
 	public static final String RentPriceRange = "RentPriceRange";
@@ -190,7 +191,6 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private int pageTotal = 0;
 	private String key;
 	
-	
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -238,6 +238,23 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		// 初始化搜索模块，注册搜索事件监听
 	    mPoiSearch = PoiSearch.newInstance();
 	    mPoiSearch.setOnGetPoiSearchResultListener(this);
+	    
+	    MapStatus status = new MapStatus.Builder().zoom(14).build();
+        MapStatusUpdate mapStatusUpdate = MapStatusUpdateFactory
+                .newMapStatus(status);
+        baiduMap.setMapStatus(mapStatusUpdate);
+	    
+	    curLatLng = ContentUtils.getSelectedCityLatLng(this);
+	    if (curLatLng != null) {
+	        // 构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.ic_cur_location);
+            // 构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions().position(curLatLng)
+                    .icon(bitmap);
+            // 在地图上添加Marker，并显示
+            baiduMap.addOverlay(option);
+	    }
 	}
 	
 	private void setListener() {

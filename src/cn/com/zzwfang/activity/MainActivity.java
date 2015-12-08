@@ -11,6 +11,7 @@ import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.util.AppUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.RSAUtil;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.GuiderView;
 import android.os.Bundle;
@@ -60,7 +61,9 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
 		guiderHome.setOnClickListener(this);
 		guiderMapFindHouse.setOnClickListener(this);
 		guiderConsultant.setOnClickListener(this);
-		guiderMine.setOnClickListener(this);;
+		guiderMine.setOnClickListener(this);
+		
+		RSAUtil.testRsa();
 	}
 	
 	

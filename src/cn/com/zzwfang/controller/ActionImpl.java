@@ -1402,7 +1402,7 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void getAutoCompleteEstate(String keywords, int top, int type,
+	public void getAutoCompleteEstate(String ciytId, String keywords, int top, int type,
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
@@ -1410,6 +1410,7 @@ public class ActionImpl implements Action {
         requestParams.put("sign", "1111");
         requestParams.put("timestamp", "2222");
         
+        requestParams.put("siteId", ciytId);
         requestParams.put("value", keywords);
         if (top > 0) {
         	requestParams.put("top", top + "");

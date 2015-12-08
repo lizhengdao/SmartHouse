@@ -18,11 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.EstateSelectAdapter;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.IdNameBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 
 /**
@@ -79,25 +81,29 @@ public class SelectEstateActivity extends BaseActivity implements OnClickListene
 			ToastUtils.SHORT.toast(this, "输入小区名称或楼盘名称");
 			return;
 		}
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getAutoCompleteEstate(keywords, 20, -1, new ResultHandlerCallback() {
-			
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-			}
-			
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-			}
-			
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				estates.clear();
-				ArrayList<IdNameBean> temp = (ArrayList<IdNameBean>) JSON.parseArray(result.getData(), IdNameBean.class);
-				estates.addAll(temp);
-				adapter.notifyDataSetChanged();
-			}
-		});
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		if (cityBean != null) {
+		    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	        actionImpl.getAutoCompleteEstate(cityBean.getSiteId(), keywords, 20, -1, new ResultHandlerCallback() {
+	            
+	            @Override
+	            public void rc999(RequestEntity entity, Result result) {
+	            }
+	            
+	            @Override
+	            public void rc3001(RequestEntity entity, Result result) {
+	            }
+	            
+	            @Override
+	            public void rc0(RequestEntity entity, Result result) {
+	                estates.clear();
+	                ArrayList<IdNameBean> temp = (ArrayList<IdNameBean>) JSON.parseArray(result.getData(), IdNameBean.class);
+	                estates.addAll(temp);
+	                adapter.notifyDataSetChanged();
+	            }
+	        });
+		}
+		
 	}
 
 	@Override

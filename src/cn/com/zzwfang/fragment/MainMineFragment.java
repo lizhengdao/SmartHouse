@@ -2,6 +2,8 @@ package cn.com.zzwfang.fragment;
 
 import java.io.File;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,6 +49,7 @@ import com.alibaba.fastjson.JSON;
  */
 public class MainMineFragment extends BasePickPhotoFragment implements OnClickListener, OnAvatarOptionsClickListener {
 
+    public static final int CODE_SETTING = 100;
 	
 	private TextView tvBack, tvUserName, tvPhone;
 
@@ -213,9 +216,21 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(this, SettingsActivity.class);
+	        .jumpForResult(this, SettingsActivity.class, CODE_SETTING);
 			break;
 		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    super.onActivityResult(requestCode, resultCode, data);
+	    if (resultCode == Activity.RESULT_OK) {
+	        switch (requestCode) {
+	        case CODE_SETTING:
+	            ((MainActivity)getActivity()).backToHomeFragment();
+	            break;
+	        }
+	    }
 	}
 
 	@Override

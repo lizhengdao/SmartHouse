@@ -202,7 +202,8 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:top_height="20dp"
-                    app:top_width="20dp" />
+                    app:top_width="20dp"
+                    android:visibility="gone" />
 
                 <cn.com.zzwfang.view.AutoDrawableTextView
                     android:id="@+id/frag_map_find_house_nearby"

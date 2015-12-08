@@ -238,7 +238,8 @@
                     android:textSize="14sp"
                     android:background="@drawable/shape_round_corner_white"
                     app:top_width="20dp"
-                    app:top_height="20dp" />
+                    app:top_height="20dp"
+                    android:visibility="gone" />
 
                 <cn.com.zzwfang.view.AutoDrawableTextView
                     android:id="@+id/act_new_house_nearby"

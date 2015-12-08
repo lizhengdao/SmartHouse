@@ -7,6 +7,8 @@ import com.alibaba.fastjson.JSON;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
@@ -20,6 +22,7 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
 
 /**
  * 我关注的房源 我的关注
@@ -28,7 +31,7 @@ import cn.com.zzwfang.util.ContentUtils;
  * 
  */
 public class MyConcernHouseResourcesActivity extends BaseActivity implements
-		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener {
+		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
 
 	private TextView tvBack;
 
@@ -60,6 +63,8 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 		
 		adapter = new AttentionAdapter(this, attentions);
 		lstConcern.setAdapter(adapter);
+		
+		lstConcern.setOnItemClickListener(this);
 		
 		pullView.setPullRefreshEnable(true);
 		pullView.setLoadMoreEnable(true);
@@ -141,4 +146,18 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 			}
 		});
 	}
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+            long id) {
+        // TODO Auto-generated method stub
+        AttentionBean attentionBean = attentions.get(position);
+        Jumper.newJumper()
+        .setAheadInAnimation(R.anim.activity_push_in_right)
+        .setAheadOutAnimation(R.anim.activity_alpha_out)
+        .setBackInAnimation(R.anim.activity_alpha_in)
+        .setBackOutAnimation(R.anim.activity_push_out_right)
+        .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, attentionBean.getPropertyId())
+        .jump(this, SecondHandHouseDetailActivity.class);
+    }
 }

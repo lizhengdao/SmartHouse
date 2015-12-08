@@ -63,10 +63,11 @@ public class NickNameUpdateActivity extends BaseActivity implements OnClickListe
 		final String nickName = edtNickName.getText().toString();
 		if (TextUtils.isEmpty(nickName)) {
 			ToastUtils.SHORT.toast(this, "请输入昵称");
+			return;
 		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		String userId = ContentUtils.getUserId(this);
-		actionImpl.updateUserInfo(userId, null, null, new ResultHandlerCallback() {
+		actionImpl.updateUserInfo(userId, nickName, null, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {

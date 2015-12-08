@@ -196,7 +196,6 @@
                         android:inputType="number" />
 
                     <TextView
-                        android:id="@+id/act_fee_hunter_recommend_owner_which_building"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"
@@ -228,7 +227,6 @@
                         android:inputType="number" />
 
                     <TextView
-                        android:id="@+id/act_fee_hunter_recommend_owner_which_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:gravity="center_vertical"

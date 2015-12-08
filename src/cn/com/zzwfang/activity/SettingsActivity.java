@@ -11,6 +11,7 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.util.AsyncUtils;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.ToggleButton;
@@ -101,7 +102,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		case R.id.act_settings_check_updates:   //  检查更新
 			break;
 		case R.id.act_settings_logout:   //  退出账号
-		    logoutHX();
+		    logout();
 			break;
 		}
 	}
@@ -109,6 +110,14 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	@Override
 	public void onToggle(ToggleButton button, boolean on) {
 		
+	}
+	
+	private void logout() {
+	    ContentUtils.setUserLoginStatus(this, false);
+	    ContentUtils.clearUserInfo(this);
+	    logoutHX();
+	    setResult(RESULT_OK);
+	    finish();
 	}
 	
 	private void logoutHX() {

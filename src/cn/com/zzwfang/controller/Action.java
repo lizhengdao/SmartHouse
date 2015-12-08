@@ -445,7 +445,7 @@ public interface Action {
 	 *            来源类型
 	 * @param callback
 	 */
-	void getAutoCompleteEstate(String keywords, int top, int type,
+	void getAutoCompleteEstate(String ciytId, String keywords, int top, int type,
 			ResultHandlerCallback callback);
 
 	/**
