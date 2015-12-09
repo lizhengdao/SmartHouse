@@ -1,12 +1,15 @@
 package cn.com.zzwfang.adapter;
 
-import cn.com.zzwfang.R;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.util.DevUtils;
 
 public class FirstAdapter extends BaseAdapter {
 
@@ -37,32 +40,55 @@ public class FirstAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+	    
+	    ViewHoler viewHoler = null;
 		if (convertView == null) {
+		    viewHoler = new ViewHoler();
 			convertView = View.inflate(context, R.layout.adapter_first_lst, null);
-		}
-		ImageView img = (ImageView) convertView.findViewById(R.id.adapter_first_lst_img);
-		TextView tvDescOne = (TextView) convertView.findViewById(R.id.adapter_first_desc_one);
-		TextView tvDescTwo = (TextView) convertView.findViewById(R.id.adapter_first_desc_two);
-		TextView tvDescThree = (TextView) convertView.findViewById(R.id.adapter_first_desc_three);
-		TextView tvDescFour = (TextView) convertView.findViewById(R.id.adapter_first_desc_four);
-		if (position == 3) {
-			tvDescThree.setText(descOne[position]);
-			tvDescFour.setText(descTwo[position]);
 			
-			tvDescThree.setVisibility(View.VISIBLE);
-			tvDescFour.setVisibility(View.VISIBLE);
-			tvDescOne.setVisibility(View.GONE);
-			tvDescTwo.setVisibility(View.GONE);
+			viewHoler.lltContainer = (LinearLayout) convertView.findViewById(R.id.adapter_first_lst_container);
+			viewHoler.img = (ImageView) convertView.findViewById(R.id.adapter_first_lst_img);
+			viewHoler.tvDescOne = (TextView) convertView.findViewById(R.id.adapter_first_desc_one);
+			viewHoler.tvDescTwo = (TextView) convertView.findViewById(R.id.adapter_first_desc_two);
+			viewHoler.tvDescThree = (TextView) convertView.findViewById(R.id.adapter_first_desc_three);
+			viewHoler.tvDescFour = (TextView) convertView.findViewById(R.id.adapter_first_desc_four);
+			
+			convertView.setTag(viewHoler);
 		} else {
-			tvDescOne.setText(descOne[position]);
-			tvDescTwo.setText(descTwo[position]);
-			tvDescOne.setVisibility(View.VISIBLE);
-			tvDescTwo.setVisibility(View.VISIBLE);
-			tvDescThree.setVisibility(View.GONE);
-			tvDescFour.setVisibility(View.GONE);
+		    viewHoler = (ViewHoler) convertView.getTag();
 		}
-		img.setImageResource(pics[position]);
+		
+		LinearLayout.LayoutParams lp = (LayoutParams) viewHoler.lltContainer.getLayoutParams();
+		lp.width = LayoutParams.MATCH_PARENT;
+		lp.height = (int) (DevUtils.getScreenTools(context).getScreenHeight() * 1.2);
+		
+		if (position == 3) {
+		    viewHoler.tvDescThree.setText(descOne[position]);
+		    viewHoler.tvDescFour.setText(descTwo[position]);
+			
+		    viewHoler.tvDescThree.setVisibility(View.VISIBLE);
+		    viewHoler.tvDescFour.setVisibility(View.VISIBLE);
+		    viewHoler.tvDescOne.setVisibility(View.GONE);
+		    viewHoler.tvDescTwo.setVisibility(View.GONE);
+		} else {
+		    viewHoler.tvDescOne.setText(descOne[position]);
+		    viewHoler.tvDescTwo.setText(descTwo[position]);
+		    viewHoler.tvDescOne.setVisibility(View.VISIBLE);
+		    viewHoler.tvDescTwo.setVisibility(View.VISIBLE);
+		    viewHoler.tvDescThree.setVisibility(View.GONE);
+		    viewHoler.tvDescFour.setVisibility(View.GONE);
+		}
+		viewHoler.img.setImageResource(pics[position]);
 		return convertView;
+	}
+	
+	public static class ViewHoler {
+	    LinearLayout lltContainer;
+	    ImageView img;
+	    TextView tvDescOne;
+	    TextView tvDescTwo;
+	    TextView tvDescThree;
+	    TextView tvDescFour;
 	}
 
 }

@@ -8,6 +8,7 @@
         android:id="@+id/act_first_lst"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fastScrollEnabled="true"
         android:divider="@null"
         android:scrollbars="none" />
 

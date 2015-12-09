@@ -50,8 +50,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		lltBrokerLogin = (LinearLayout) findViewById(R.id.act_login_login_llt);
 		tvForgetPwd = (TextView) findViewById(R.id.act_login_forget_pwd_tv);
 		
-		edtPhoneNum.setText("18683525229");
-		edtPwd.setText("123456");
+		edtPhoneNum.setText("18700827866");  //  18700827866    18683525229
+		edtPwd.setText("111111");    //   111111  123456   
 		
 		actionImpl = ActionImpl.newInstance(this);
 		tvBack.setOnClickListener(this);
@@ -98,24 +98,26 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		final String phoneNum = edtPhoneNum.getText().toString();
 		String pwd = edtPwd.getText().toString();
 		if (TextUtils.isEmpty(phoneNum)) {
+		    tvLogin.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入手机号码");
 			return;
 		}
 		if (TextUtils.isEmpty(pwd)) {
+		    tvLogin.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入密码");
 			return;
 		}
-//		pwd = MD5Util.md5(pwd);
-//		pwd = "E10ADC3949BA59ABBE56E057F20F883E";
 		
 		actionImpl.login(phoneNum, pwd, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
+			    tvLogin.setClickable(true);
 			}
 			
 			@Override
 			public void rc3001(RequestEntity entity, Result result) {
+			    tvLogin.setClickable(true);
 			}
 			
 			@Override

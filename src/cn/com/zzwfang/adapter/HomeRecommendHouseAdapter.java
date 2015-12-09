@@ -92,36 +92,43 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
 			switch (type) {
 			case TPYE1:
 				convertView = View.inflate(context, R.layout.adapter_frag_home_position_one, null);
-				TextView tvSecondHandHouse = (TextView) convertView.findViewById(R.id.frag_home_second_hand_house);
-				TextView tvNewHouse = (TextView) convertView.findViewById(R.id.frag_home_new_house);
-				TextView tvRentHouse = (TextView) convertView.findViewById(R.id.frag_home_rent_house);
-				TextView tvSearchHouse = (TextView) convertView.findViewById(R.id.frag_home_search_house);
-				
-				tvSecondHandHouse.setOnClickListener(this);
-				tvNewHouse.setOnClickListener(this);
-				tvRentHouse.setOnClickListener(this);
-				tvSearchHouse.setOnClickListener(this);
 				break;
 			case TPYE2:
 				convertView = View.inflate(context, R.layout.adapter_home_recommend_house, null);
-				ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.adapter_home_recommend_photo);
-				TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_home_recommend_title);
-				TextView tvAddr = (TextView) convertView.findViewById(R.id.adapter_home_recommend_addr);
-				TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_home_recommend_desc);
-				TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_home_recommend_price);
-				
-				RecommendHouseSourceBean sourceBean = recommendSources.get(position - 1);
-				tvTitle.setText(sourceBean.getTitle());
-				tvAddr.setText(sourceBean.getAreaName() + " " + sourceBean.getEstateName());
-				String desc = sourceBean.getTypeF() + "房" + sourceBean.getTypeT() + "厅" + "  " + sourceBean.getSquare() + "平米";
-				tvDesc.setText(desc);
-				tvPrice.setText(sourceBean.getPrice() + "万");
-				String url = sourceBean.getPhoto();
-				if (!TextUtils.isEmpty(url)) {
-					ImageAction.displayImage(url, ivPhoto);
-				}
 				break;
 			}
+		}
+		
+		switch (type) {
+		case TPYE1:
+		    TextView tvSecondHandHouse = (TextView) convertView.findViewById(R.id.frag_home_second_hand_house);
+            TextView tvNewHouse = (TextView) convertView.findViewById(R.id.frag_home_new_house);
+            TextView tvRentHouse = (TextView) convertView.findViewById(R.id.frag_home_rent_house);
+            TextView tvSearchHouse = (TextView) convertView.findViewById(R.id.frag_home_search_house);
+            
+            tvSecondHandHouse.setOnClickListener(this);
+            tvNewHouse.setOnClickListener(this);
+            tvRentHouse.setOnClickListener(this);
+            tvSearchHouse.setOnClickListener(this);
+		    break;
+		case TPYE2:
+		    ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.adapter_home_recommend_photo);
+            TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_home_recommend_title);
+            TextView tvAddr = (TextView) convertView.findViewById(R.id.adapter_home_recommend_addr);
+            TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_home_recommend_desc);
+            TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_home_recommend_price);
+            
+            RecommendHouseSourceBean sourceBean = recommendSources.get(position - 1);
+            tvTitle.setText(sourceBean.getTitle());
+            tvAddr.setText(sourceBean.getAreaName() + " " + sourceBean.getEstateName());
+            String desc = sourceBean.getTypeF() + "房" + sourceBean.getTypeT() + "厅" + "  " + sourceBean.getSquare() + "平米";
+            tvDesc.setText(desc);
+            tvPrice.setText(sourceBean.getPrice() + "万");
+            String url = sourceBean.getPhoto();
+            if (!TextUtils.isEmpty(url)) {
+                ImageAction.displayImage(url, ivPhoto);
+            }
+		    break;
 		}
 		return convertView;
 	}

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.NewsDetailBean;
@@ -50,6 +51,10 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener 
 		WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(false);
+        webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setTextSize(WebSettings.TextSize.LARGEST);
 //		if (newsItemBean != null) {
 //			webView.loadDataWithBaseURL(null, newsItemBean.getContent(), "text/html", "utf-8", null);
 //		}

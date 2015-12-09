@@ -31,6 +31,7 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.share.WeiXinShareHelper;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.RSAUtil;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.PathImage;
@@ -423,9 +424,14 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			if (cityBean != null) {
 //				String urlPriceTrend = API.host + "TrendChart/GetCityChartDataJson?siteId="
 //			                   + cityBean.getSiteId() + "&sign=1111&timestamp=2222";
-				
+//				String timestamp = String.valueOf(System.currentTimeMillis());
+				long time = System.currentTimeMillis();
+//		        String sign = RSAUtil.encryptByPublic(String.valueOf(time));
+		        
+				String sign = RSAUtil.encryptByPublic(String.valueOf(time));
+//				String sign = RSAUtil.encryptByPublic(timestamp);
 				String urlPriceTrend = API.host + "Estate/Chart?id="
-		                   + secondHandHouseDetail.getEstateId() + "&sign=1111&timestamp=2222";
+		                   + secondHandHouseDetail.getEstateId() + "&sign=" + sign + "&timestamp=" + time;
 				
 				webViewPriceTrend.loadUrl(urlPriceTrend);
 			}

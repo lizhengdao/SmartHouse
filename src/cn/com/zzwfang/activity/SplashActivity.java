@@ -25,6 +25,13 @@ public class SplashActivity extends BaseActivity {
 			
 			@Override
 			public void run() {
+			    AppUtils.createShortcut(SplashActivity.this,
+                        ResLoader.loadString(SplashActivity.this, R.string.app_name));
+//                Jumper.newJumper()
+//                .setAheadInAnimation(R.anim.activity_alpha_appear_in)
+//                .setAheadOutAnimation(R.anim.activity_alpha_out)
+//                .jump(SplashActivity.this, FirstActivity.class);
+//                finish();
 				if (AppUtils.isFirstLuanch(SplashActivity.this)) {
 					AppUtils.createShortcut(SplashActivity.this,
 							ResLoader.loadString(SplashActivity.this, R.string.app_name));
@@ -34,10 +41,6 @@ public class SplashActivity extends BaseActivity {
 		            .jump(SplashActivity.this, FirstActivity.class);
 					finish();
 				} else {
-//					Jumper.newJumper()
-//		            .setAheadInAnimation(R.anim.activity_alpha_appear_in)
-//		            .setAheadOutAnimation(R.anim.activity_alpha_out)
-//		            .jump(SplashActivity.this, LoginActivity.class);
 					Jumper.newJumper()
 		            .setAheadInAnimation(R.anim.activity_alpha_appear_in)
 		            .setAheadOutAnimation(R.anim.activity_alpha_out)

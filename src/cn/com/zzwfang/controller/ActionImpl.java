@@ -11,6 +11,7 @@ import cn.com.zzwfang.controller.DataWorker.Options;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.http.RequestParams;
+import cn.com.zzwfang.util.RSAUtil;
 
 public class ActionImpl implements Action {
 
@@ -35,13 +36,21 @@ public class ActionImpl implements Action {
 			return relativeUrl;
 		return API.host + relativeUrl; // + "?platform=a";
 	}
+	
+	private void encryptTimeStamp(RequestParams requestParams) {
+	    long time = System.currentTimeMillis();
+	    String sign = RSAUtil.encryptByPublic(String.valueOf(time));
+	    requestParams.put("sign", sign);
+        requestParams.put("timestamp", String.valueOf(time));
+	}
 
 	@Override
 	public void fetchVerifyCode(String phoneNum, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("tel", phoneNum);
 
 		Options opt = new Options();
@@ -58,7 +67,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.POST);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -73,8 +82,9 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("tel", phoneNum);
 		requestParams.put("password", pwd);
 		requestParams.put("code", captcha);
@@ -93,7 +103,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -108,8 +118,9 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("param", phoneNum);
 
 		Options opt = new Options();
@@ -125,7 +136,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -141,8 +152,9 @@ public class ActionImpl implements Action {
 
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("tel", userName);
 		requestParams.put("password", pwd);
 
@@ -160,7 +172,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.POST);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -210,9 +222,9 @@ public class ActionImpl implements Action {
 	public void resetPwd(String tel, String password, String captcha, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 		
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("tel", tel);
 		requestParams.put("password", password);
 		requestParams.put("code", captcha);
@@ -234,7 +246,7 @@ public class ActionImpl implements Action {
 		opts.toMemCacheAble = false;
 		requestEntity.setOpts(opts);
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 		requestEntity.setProcessCallback(handler);
 
@@ -269,7 +281,7 @@ public class ActionImpl implements Action {
 		// requestEntity.setOpts(opts);
 		// ProgressDialogResultHandler handler = new
 		// ProgressDialogResultHandler(
-		// context, "请稍后...");
+		// context, "请稍候...");
 		// handler.setResultHandlerCallback(callback);
 		// requestEntity.setProcessCallback(handler);
 		//
@@ -296,7 +308,7 @@ public class ActionImpl implements Action {
 		opts.toMemCacheAble = false;
 		requestEntity.setOpts(opts);
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 		requestEntity.setProcessCallback(handler);
 
@@ -308,9 +320,9 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 		
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("tel", phoneNum);
 		requestParams.put("password", oldPwd);
 		requestParams.put("nPassword", newPwd);
@@ -322,7 +334,7 @@ public class ActionImpl implements Action {
 
 		Options opts = new Options();
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		opts.fromDiskCacheAble = false;
@@ -347,8 +359,9 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("id", cityId);
 
 		Options opt = new Options();
@@ -364,7 +377,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -380,8 +393,9 @@ public class ActionImpl implements Action {
 	public void getCityList(ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 
 		Options opt = new Options();
 		opt.fromDiskCacheAble = false;
@@ -396,7 +410,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -411,8 +425,9 @@ public class ActionImpl implements Action {
 			String area, String rooms, String monthlyPay, String label, int pageIndex, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		
 		if (type == 1) {  // 一次性付款
 			requestParams.put("allPrice", allPrice);
@@ -452,7 +467,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -470,8 +485,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		
 		requestParams.put("siteId", cityId);
 		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {
@@ -511,7 +527,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -527,8 +543,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		
 		requestParams.put("estateId", estateId);
 
@@ -545,7 +562,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -564,8 +581,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		
 		requestParams.put("siteId", cityId);
 		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {
@@ -618,7 +636,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -637,8 +655,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		
 		requestParams.put("name", name);
 
@@ -655,7 +674,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -670,8 +689,10 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		
+		encryptTimeStamp(requestParams);
 		
 		requestParams.put("siteId", cityId);
 
@@ -688,7 +709,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -704,9 +725,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("proId", proId);
 
 		Options opt = new Options();
@@ -722,7 +743,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -740,9 +761,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("siteId", cityId);
 		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {
 			requestParams.put("area", areaCondition.getValue());
@@ -776,7 +797,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -791,9 +812,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("proId", proId);
 
 		Options opt = new Options();
@@ -809,7 +830,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -824,9 +845,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		Options opt = new Options();
 		opt.fromDiskCacheAble = false;
 		opt.fromHttpCacheAble = true;
@@ -840,7 +861,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -855,8 +876,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		
 		requestParams.put("id", newsTypeId);
 		
@@ -873,7 +895,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -889,9 +911,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("userId", userId);
 		requestParams.put("content", content);
 		if (!TextUtils.isEmpty(phone)) {
@@ -911,7 +933,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -927,9 +949,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("userId", userId);
 //		requestParams.put("pageSize", pageSize + "");
 //		requestParams.put("pageIndex", pageIndex + "");
@@ -947,7 +969,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -963,9 +985,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("userId", userId);
 		requestParams.put("propertyId", propertyId);
 		
@@ -982,7 +1004,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -998,9 +1020,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-		requestParams.put("timestamp", "2222");
-		
+//		requestParams.put("sign", "1111");
+//		requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
 		requestParams.put("tel", userPhone);
 		requestParams.put("pageSize", pageSize + "");
 		requestParams.put("pageIndex", pageIndex + "");
@@ -1018,7 +1040,7 @@ public class ActionImpl implements Action {
 		requestEntity.setType(RequestEntity.GET);
 
 		ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-				context, "请稍后...");
+				context, "请稍候...");
 		handler.setResultHandlerCallback(callback);
 
 		requestEntity.setOpts(opt);
@@ -1033,9 +1055,9 @@ public class ActionImpl implements Action {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+        encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1049,7 +1071,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1064,8 +1086,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         
         Options opt = new Options();
@@ -1081,7 +1104,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1096,9 +1119,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1112,7 +1135,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1127,8 +1150,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("siteId", cityId);
         requestParams.put("status", status);
@@ -1148,7 +1172,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1169,8 +1193,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         if (area != null) {
         	requestParams.put("area", area.getValue());
         }
@@ -1206,7 +1231,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1225,8 +1250,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("type", newsId);
         requestParams.put("pageSize", pageSize + "");
         requestParams.put("pageIndex", pageIndex + "");
@@ -1244,7 +1270,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1260,8 +1286,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("uid", id);
         requestParams.put("pwd", pwd);
         
@@ -1278,7 +1305,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1294,8 +1321,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("estId", estId);
         requestParams.put("roomType", roomType);
         
@@ -1312,7 +1340,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1328,8 +1356,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("trade", tradeType + "");
         requestParams.put("siteId", cityId);
         
@@ -1346,7 +1375,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1364,9 +1393,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//		requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("estateId", estateId);
         requestParams.put("maxPrice", maxPrice);
         requestParams.put("minPrice", minPrice);
@@ -1407,9 +1436,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("siteId", ciytId);
         requestParams.put("value", keywords);
         if (top > 0) {
@@ -1432,7 +1461,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1450,9 +1479,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-		requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//		requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("estateId", estateId);
         requestParams.put("ridgepole", rigdepole);
         requestParams.put("unit", unit);
@@ -1496,8 +1525,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("employeeId", agentId);
         
         Options opt = new Options();
@@ -1513,7 +1543,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1528,9 +1558,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1544,7 +1574,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1560,8 +1590,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("pageIndex", pageIndex + "");
         requestParams.put("pageSize", pageSize + "");
@@ -1579,7 +1610,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1595,8 +1626,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("id", houseSourceId);
         
         Options opt = new Options();
@@ -1612,7 +1644,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1628,8 +1660,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("attId", sourceId);
         
@@ -1646,7 +1679,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1661,8 +1694,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         
         Options opt = new Options();
@@ -1678,7 +1712,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1694,8 +1728,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("from", from);
         requestParams.put("to", to);
         requestParams.put("message", message);
@@ -1713,7 +1748,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1728,9 +1763,9 @@ public class ActionImpl implements Action {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+        encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1744,7 +1779,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1761,9 +1796,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         if (!TextUtils.isEmpty(realName)) {
         	requestParams.put("realName", realName);
@@ -1802,7 +1837,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1818,9 +1853,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("pageIndex", pageIndex + "");
         requestParams.put("pageSize", pageSize + "");
@@ -1838,7 +1873,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1853,9 +1888,9 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         
         Options opt = new Options();
@@ -1871,7 +1906,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1886,9 +1921,9 @@ public class ActionImpl implements Action {
             ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+        encryptTimeStamp(requestParams);
         if (!TextUtils.isEmpty(cityCode)) {
             requestParams.put("cityCode", cityCode);
         }
@@ -1906,7 +1941,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1920,9 +1955,9 @@ public class ActionImpl implements Action {
     public void getBankNameList(ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
-        
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+        encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1936,7 +1971,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1953,8 +1988,9 @@ public class ActionImpl implements Action {
 	public void getContactsList(String visitorId, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		encryptTimeStamp(requestParams);
         requestParams.put("visitorId", visitorId);
         
         Options opt = new Options();
@@ -1970,7 +2006,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -1985,8 +2021,10 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		
+		encryptTimeStamp(requestParams);
         requestParams.put("key", contactId);
         
         Options opt = new Options();
@@ -2002,7 +2040,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2017,8 +2055,10 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		
+		encryptTimeStamp(requestParams);
         requestParams.put("ids", ids);
         
         Options opt = new Options();
@@ -2034,7 +2074,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2048,8 +2088,10 @@ public class ActionImpl implements Action {
 	public void readMessage(String ids, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		
+		encryptTimeStamp(requestParams);
         requestParams.put("ids", ids);
         
         Options opt = new Options();
@@ -2065,7 +2107,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2084,9 +2126,10 @@ public class ActionImpl implements Action {
 			String Name, boolean sex, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
         
+		encryptTimeStamp(requestParams);
         requestParams.put("estateId", estateId);
         requestParams.put("estateName", estateName);
         requestParams.put("ridgepole", ridgepole);
@@ -2139,7 +2182,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2156,9 +2199,10 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
         
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("estateId", estateId);
         if (budget >= 0) {
@@ -2190,7 +2234,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2204,9 +2248,10 @@ public class ActionImpl implements Action {
 	public void getAboutUsData(ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
         
+		encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2220,7 +2265,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2234,8 +2279,10 @@ public class ActionImpl implements Action {
 	public void otherFileUpload(File file, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		
+		encryptTimeStamp(requestParams);
         try {
 			requestParams.put("requestFile", file);
 		} catch (FileNotFoundException e) {
@@ -2255,7 +2302,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2269,9 +2316,10 @@ public class ActionImpl implements Action {
 	public void updateUserInfo(String userId, String nickName, String avatarUrl, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
         
+		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         
         if (!TextUtils.isEmpty(nickName)) {
@@ -2294,7 +2342,7 @@ public class ActionImpl implements Action {
         requestEntity.setType(RequestEntity.GET);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2308,9 +2356,10 @@ public class ActionImpl implements Action {
 	public void getGuiderPageData(ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
         
+		encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2326,7 +2375,7 @@ public class ActionImpl implements Action {
 
         ResultHandler handler = new ResultHandler();
 //        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-//                context, "请稍后...");
+//                context, "请稍候...");
 //        handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2340,8 +2389,10 @@ public class ActionImpl implements Action {
     public void getClientProgress(String id, ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+        
+        encryptTimeStamp(requestParams);
         requestParams.put("id", id);
         
         Options opt = new Options();
@@ -2358,7 +2409,7 @@ public class ActionImpl implements Action {
         
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2372,8 +2423,10 @@ public class ActionImpl implements Action {
 	public void getBindBankInfo(String userId, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+		
+		encryptTimeStamp(requestParams);
         requestParams.put("userid", userId);
         
         Options opt = new Options();
@@ -2390,7 +2443,7 @@ public class ActionImpl implements Action {
         
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);
@@ -2404,8 +2457,10 @@ public class ActionImpl implements Action {
     public void getCourtDetail(String courtId, ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
-        requestParams.put("sign", "1111");
-        requestParams.put("timestamp", "2222");
+//        requestParams.put("sign", "1111");
+//        requestParams.put("timestamp", "2222");
+        
+        encryptTimeStamp(requestParams);
         requestParams.put("estateId", courtId);
         
         Options opt = new Options();
@@ -2422,7 +2477,7 @@ public class ActionImpl implements Action {
         
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
-                context, "请稍后...");
+                context, "请稍候...");
         handler.setResultHandlerCallback(callback);
 
         requestEntity.setOpts(opt);

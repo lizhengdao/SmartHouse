@@ -390,13 +390,15 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	private void rendArea() {
 		if (mapAreas != null && mapAreas.size() > 0 && baiduMap != null) {
 			baiduMap.clear();
-			View viewAreaPoint = View.inflate(getActivity(),
-					R.layout.view_map_point_area, null);
-			TextView tvEstate = (TextView) viewAreaPoint
-					.findViewById(R.id.view_point_title);
-			TextView tvNum = (TextView) viewAreaPoint
-					.findViewById(R.id.view_point_num);
+			
 			for (MapFindHouseBean area : mapAreas) {
+			    
+			    View viewAreaPoint = View.inflate(getActivity(),
+	                    R.layout.view_map_point_area, null);
+	            TextView tvEstate = (TextView) viewAreaPoint
+	                    .findViewById(R.id.view_point_title);
+	            TextView tvNum = (TextView) viewAreaPoint
+	                    .findViewById(R.id.view_point_num);
 				LatLng latLng = new LatLng(area.getLat(), area.getLng());
 				tvEstate.setText(area.getName());
 				tvNum.setText(area.getPrpCount());
@@ -523,13 +525,14 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	private void rendEstate() {
 		if (estates != null && estates.size() > 0) {
 			 baiduMap.clear();
-			View viewAreaPoint = View.inflate(getActivity(),
-					R.layout.view_map_point_estate, null);
-			TextView tvArea = (TextView) viewAreaPoint
-					.findViewById(R.id.view_point_estate_title);
-			TextView tvPrice = (TextView) viewAreaPoint
-					.findViewById(R.id.view_point_estate_price);
+			
 			for (SearchHouseItemBean estate : estates) {
+			    View viewAreaPoint = View.inflate(getActivity(),
+	                    R.layout.view_map_point_estate, null);
+	            TextView tvArea = (TextView) viewAreaPoint
+	                    .findViewById(R.id.view_point_estate_title);
+	            TextView tvPrice = (TextView) viewAreaPoint
+	                    .findViewById(R.id.view_point_estate_price);
 				LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
 				tvArea.setText(estate.getName());
 				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
@@ -548,7 +551,9 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			SearchHouseItemBean estate = estates.get(0);
 			LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
-			baiduMap.setMapStatus(u);
+//			baiduMap.setMapStatus(u);
+			
+            baiduMap.animateMapStatus(u);
 		}
 	}
 
@@ -630,7 +635,11 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 
 	@Override
 	public void onCitySelected(CityBean cityBean) {
-		getAreaList();
+	    baiduMap.clear();
+	    areaCondition = null;
+        tvArea.setText("不限");
+        getAreaList();
+        getMapFindHouseDataArea();
 	}
 	
 	

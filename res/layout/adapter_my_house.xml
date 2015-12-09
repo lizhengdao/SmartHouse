@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_round_corner_color_f7860c"
-                android:drawableLeft="@drawable/ic_hourglass_white"
+                android:drawableLeft="@drawable/ic_house_source_info_change"
                 android:gravity="center_vertical"
                 android:drawablePadding="2dp"
                 android:padding="4dp"

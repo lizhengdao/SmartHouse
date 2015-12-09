@@ -243,12 +243,11 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				ArrayList<RecommendHouseSourceBean> temp = (ArrayList<RecommendHouseSourceBean>) JSON.parseArray(result.getData(), RecommendHouseSourceBean.class);
+				recommendSources.clear();
 				if (temp != null) {
-					recommendSources.clear();
 					recommendSources.addAll(temp);
-					adapter.notifyDataSetChanged();
 				}
-				
+				adapter.notifyDataSetChanged();
 			}
 		});
 	}
@@ -263,8 +262,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
     public void onGetGeoCodeResult(GeoCodeResult result) {
         // TODO Auto-generated method stub
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-            Toast.makeText(getActivity(), "抱歉，未能找到结果", Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(getActivity(), "抱歉，未能找到结果", Toast.LENGTH_LONG)
+//                    .show();
             return;
         }
         ContentUtils.saveSelectedCityLatLng(getActivity(), result.getLocation().latitude, result.getLocation().longitude);
