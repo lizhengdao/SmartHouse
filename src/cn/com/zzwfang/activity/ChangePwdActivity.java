@@ -84,6 +84,10 @@ public class ChangePwdActivity extends BaseActivity implements OnClickListener {
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				ToastUtils.SHORT.toast(ChangePwdActivity.this, "修改密码成功");
+				ContentUtils.setUserLoginStatus(ChangePwdActivity.this, false);
+			    ContentUtils.clearUserInfo(ChangePwdActivity.this);
+			    setResult(RESULT_OK);
+			    finish();
 			}
 		});
 	}

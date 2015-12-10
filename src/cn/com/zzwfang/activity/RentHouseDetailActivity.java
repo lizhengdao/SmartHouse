@@ -290,7 +290,7 @@ OnPageChangeListener {
 			tvRentPrice.setText(rentHouseDetailBean.getRentPrice() + "元/月");
 			tvHouseType.setText(rentHouseDetailBean.getFloor() + "室" + rentHouseDetailBean.getTypeT() + "厅");
 			tvSquare.setText(rentHouseDetailBean.getSquare() + "㎡");
-			tvFloor.setText(rentHouseDetailBean.getFloor() + "层/" + rentHouseDetailBean.getTotalFloor() + "层");
+			tvFloor.setText(rentHouseDetailBean.getFloor() + "/" + rentHouseDetailBean.getTotalFloor() + "层");
 			tvDirection.setText(rentHouseDetailBean.getDirection());
 			tvDecoration.setText(rentHouseDetailBean.getDecoration());
 			tvYear.setText(rentHouseDetailBean.getBuildYear());
@@ -378,6 +378,11 @@ OnPageChangeListener {
 	}
 	
 	private void attentionToHouse() {
+		boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+		if (!loginStatus) {
+			ToastUtils.SHORT.toast(this, "您还未登录");
+			return;
+		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		String userId = ContentUtils.getUserId(this);
 		actionImpl.attentionToHouse(userId, houseSourceId,

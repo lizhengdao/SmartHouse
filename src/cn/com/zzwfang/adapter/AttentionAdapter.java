@@ -98,7 +98,7 @@ public class AttentionAdapter extends BaseAdapter {
                 .setBackInAnimation(R.anim.activity_alpha_in)
                 .setBackOutAnimation(R.anim.activity_push_out_right)
                 .putString(ChatActivity.INTENT_MESSAGE_TO_ID, attentionBean.getAgentId())
-                .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, "经纪人")
+//                .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, "经纪人")
                 .jump((BaseActivity)context, ChatActivity.class);
             }
         });

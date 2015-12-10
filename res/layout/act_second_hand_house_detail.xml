@@ -436,14 +436,13 @@
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:visibility="gone" >
+                        android:orientation="horizontal" >
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="楼型："
+                            android:text="年代："
                             android:textColor="@color/color_aaaaaa"
                             android:textSize="16sp" />
 
@@ -451,38 +450,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="塔楼"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </LinearLayout>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/color_e0e0e0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="年代："
-                        android:textColor="@color/color_aaaaaa"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="2009年"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <View

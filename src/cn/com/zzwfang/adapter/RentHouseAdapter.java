@@ -85,8 +85,8 @@ public class RentHouseAdapter extends BaseAdapter {
 
 		TextView tvPublishTime = (TextView) convertView
 				.findViewById(R.id.adapter_rent_house_publish_time);
-		String time = DateUtils.formatDate(rentHouseBean.getAddTime());
-		tvPublishTime.setText(time);
+//		String time = DateUtils.formatDate(rentHouseBean.getAddTime());
+		tvPublishTime.setText(rentHouseBean.getAddTime());
 
 		return convertView;
 	}

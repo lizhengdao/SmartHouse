@@ -728,11 +728,11 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			TextView tvNum = (TextView) viewAreaPoint
 					.findViewById(R.id.view_point_num);
 			for (MapFindHouseBean area : mapAreas) {
+				
 				LatLng latLng = new LatLng(area.getLat(), area.getLng());
 				tvEstate.setText(area.getName());
 				tvNum.setText(area.getPrpCount());
 				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
-
 				BitmapDescriptor bdA = BitmapDescriptorFactory
 						.fromBitmap(bmpAreaPoint);
 				Bundle bundle = new Bundle();
@@ -784,7 +784,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	
 	private void rendEstate() {
 		if (estates != null && estates.size() > 0) {
-			 baiduMap.clear();
+			baiduMap.clear();
 			View viewAreaPoint = View.inflate(this,
 					R.layout.view_map_point_estate, null);
 			TextView tvArea = (TextView) viewAreaPoint
@@ -792,6 +792,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			TextView tvPrice = (TextView) viewAreaPoint
 					.findViewById(R.id.view_point_estate_price);
 			for (SearchHouseItemBean estate : estates) {
+				
 				LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
 				tvArea.setText(estate.getName());
 				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
@@ -828,7 +829,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		addViewContent.buildDrawingCache();
 		Bitmap cacheBitmap = addViewContent.getDrawingCache();
 		Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
-
+		addViewContent.setDrawingCacheEnabled(false);
 		return bitmap;
 	}
 	

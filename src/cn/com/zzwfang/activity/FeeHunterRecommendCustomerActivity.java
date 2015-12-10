@@ -221,6 +221,14 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 				}
 				edtContactName.setText(username);
+				if (!TextUtils.isEmpty(userPhone)) {
+					userPhone = userPhone.replace(" ", "");
+					int len = userPhone.length();
+					if (len > 11) {
+						userPhone = userPhone.substring(len - 11, len);
+					}
+				}
+				
 				edtContactPhone.setText(userPhone);
 				break;
 

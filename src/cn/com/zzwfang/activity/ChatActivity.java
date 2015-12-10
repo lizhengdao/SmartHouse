@@ -85,7 +85,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 		tvSendMessage = (TextView) findViewById(R.id.act_chat_send_tv);
 		listView = (ListView) findViewById(R.id.lst_chat);
 		
-		tvTitle.setText(messageName);
+		if (!TextUtils.isEmpty(messageName)) {
+			tvTitle.setText(messageName);
+		}
 		
 		adapter = new ChatAdapter(this, messages);
 		listView.setAdapter(adapter);
@@ -205,6 +207,10 @@ public class ChatActivity extends BaseActivity implements OnClickListener{  // ,
 			public void rc0(RequestEntity entity, Result result) {
 				imMessages = JSON.parseObject(result.getData(), IMMessageBean.class);
 				if (imMessages != null) {
+					if (TextUtils.isEmpty(messageName)) {
+						messageName = imMessages.getUserName();
+						tvTitle.setText(messageName);
+					}
 					ArrayList<MessageBean> messages = imMessages.getMessages();
 					if (messages != null) {
 						adapter.addMessages(messages);

@@ -3,6 +3,8 @@ package cn.com.zzwfang.activity;
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +21,8 @@ import cn.com.zzwfang.view.ToggleButton.OnToggleChanged;
 
 public class SettingsActivity extends BaseActivity implements OnClickListener, OnToggleChanged {
 
+	private static final int CODE_CHANGE_PWD = 100;
+	
 	private TextView tvBack, tvLogout;
 	
 	private FrameLayout changeNickNameFlt, changePwdFlt, clearCacheFlt, aboutUsFlt, commonQuestionFlt, checkUpdatesFlt;
@@ -77,7 +81,8 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(this, ChangePwdActivity.class);
+	        .jumpForResult(this, ChangePwdActivity.class, CODE_CHANGE_PWD);
+//	        .jump(this, ChangePwdActivity.class);
 			break;
 		case R.id.act_settings_clear_cache:  //  清除缓存
 		    ImageAction.clearCache();
@@ -152,7 +157,20 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
                 });
             }
         });
-	    
-	    
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == Activity.RESULT_OK) {
+			switch (requestCode) {
+			case CODE_CHANGE_PWD:
+				// 修改密码后退出登录，需要重新登录
+				logoutHX();
+				setResult(RESULT_OK);
+			    finish();
+				break;
+			}
+		}
 	}
 }

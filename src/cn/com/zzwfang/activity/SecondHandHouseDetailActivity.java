@@ -480,6 +480,11 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	}
 
 	private void attentionToHouse() {
+		boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+		if (!loginStatus) {
+			ToastUtils.SHORT.toast(this, "您还未登录");
+			return;
+		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		String userId = ContentUtils.getUserId(this);
 		actionImpl.attentionToHouse(userId, houseSourceId,

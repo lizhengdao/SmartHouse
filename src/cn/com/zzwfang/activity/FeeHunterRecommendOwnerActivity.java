@@ -262,6 +262,14 @@ public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnC
 									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 				}
 				edtOwnerName.setText(username);
+				
+				if (!TextUtils.isEmpty(userPhone)) {
+					userPhone = userPhone.replace(" ", "");
+					int len = userPhone.length();
+					if (len > 11) {
+						userPhone = userPhone.substring(len - 11, len);
+					}
+				}
 				edtOwnerPhone.setText(userPhone);
 				break;
 

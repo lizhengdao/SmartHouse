@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -316,6 +317,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			public void onLocationCompletion(BDLocation location) {
 				curLatLng = new LatLng(location.getLatitude(), location
 						.getLongitude());
+				Log.i("--->", "定位    lat == " + location.getLatitude() + "   lng == " + location.getLongitude());
 				MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
 				baiduMap.animateMapStatus(u);
 				locationService.stopLocationService();
@@ -391,14 +393,14 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 		if (mapAreas != null && mapAreas.size() > 0 && baiduMap != null) {
 			baiduMap.clear();
 			
+			View viewAreaPoint = View.inflate(getActivity(),
+                    R.layout.view_map_point_area, null);
+            TextView tvEstate = (TextView) viewAreaPoint
+                    .findViewById(R.id.view_point_title);
+            TextView tvNum = (TextView) viewAreaPoint
+                    .findViewById(R.id.view_point_num);
 			for (MapFindHouseBean area : mapAreas) {
 			    
-			    View viewAreaPoint = View.inflate(getActivity(),
-	                    R.layout.view_map_point_area, null);
-	            TextView tvEstate = (TextView) viewAreaPoint
-	                    .findViewById(R.id.view_point_title);
-	            TextView tvNum = (TextView) viewAreaPoint
-	                    .findViewById(R.id.view_point_num);
 				LatLng latLng = new LatLng(area.getLat(), area.getLng());
 				tvEstate.setText(area.getName());
 				tvNum.setText(area.getPrpCount());
@@ -525,15 +527,16 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	private void rendEstate() {
 		if (estates != null && estates.size() > 0) {
 			 baiduMap.clear();
-			
-			for (SearchHouseItemBean estate : estates) {
-			    View viewAreaPoint = View.inflate(getActivity(),
+			 View viewAreaPoint = View.inflate(getActivity(),
 	                    R.layout.view_map_point_estate, null);
 	            TextView tvArea = (TextView) viewAreaPoint
 	                    .findViewById(R.id.view_point_estate_title);
 	            TextView tvPrice = (TextView) viewAreaPoint
 	                    .findViewById(R.id.view_point_estate_price);
+			for (SearchHouseItemBean estate : estates) {
+			    
 				LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
+				Log.i("--->", "lat == " + estate.getLat() + "   Lng == " + estate.getLng());
 				tvArea.setText(estate.getName());
 				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
 				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
@@ -550,6 +553,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			}
 			SearchHouseItemBean estate = estates.get(0);
 			LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
+			Log.i("--->", "estate.getLat() == " + estate.getLat() + "   estate.getLng() == " + estate.getLng());
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
 //			baiduMap.setMapStatus(u);
 			
@@ -594,7 +598,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 		addViewContent.buildDrawingCache();
 		Bitmap cacheBitmap = addViewContent.getDrawingCache();
 		Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
-
+		addViewContent.setDrawingCacheEnabled(false);
 		return bitmap;
 	}
 
