@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -116,6 +117,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
+	private ImageView imgClearKeyWords;
 
 	private AbPullToRefreshView pullView;
 	private ListView lstNewHouseView;
@@ -208,6 +210,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		lstNewHouseView = (ListView) findViewById(R.id.lst_new_house);
 		mapView = (MapView) findViewById(R.id.act_new_house_map);
 		mapViewFlt = (FrameLayout) findViewById(R.id.act_new_house_map_flt);
+		imgClearKeyWords = (ImageView) findViewById(R.id.act_new_house_clear_key_wrods);
 
 		lltArea = (LinearLayout) findViewById(R.id.act_new_house_area_llt);
 		lltTotalPrice = (LinearLayout) findViewById(R.id.act_new_house_total_price_llt);
@@ -267,6 +270,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		autoTvLocate.setOnClickListener(this);
 		autoTvSubway.setOnClickListener(this);
 		autoTvNearby.setOnClickListener(this);
+		imgClearKeyWords.setOnClickListener(this);
 		
 		getNewHouseList(cityId, areaCondition, totalPriceCondition,
 				roomTypeCondition, usageCondition, labelCondition,
@@ -562,6 +566,10 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 				.putDouble(NearbyDetailActivity.INTENT_LNG, curLatLng.longitude)
 				.jump(this, NearbyDetailActivity.class);
 			}
+			break;
+		case R.id.act_new_house_clear_key_wrods:
+			keyWords = "";
+			edtKeyWords.setText("");
 			break;
 		}
 	}

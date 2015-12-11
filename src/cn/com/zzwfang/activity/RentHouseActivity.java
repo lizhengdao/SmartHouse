@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +65,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
     private EditText edtKeyWords;
     private LinearLayout lltArea, lltRentPrice, lltHouseType, lltMore;
     private TextView tvArea, tvRentPrice, tvHouseType;
+    private ImageView imgClearKeyWords;
 
     private AbPullToRefreshView pullView;
     private ListView lstRentHouseView;
@@ -146,6 +148,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         edtKeyWords = (EditText) findViewById(R.id.act_rent_house_search_edt);
         pullView = (AbPullToRefreshView) findViewById(R.id.pull_rent_house);
         lstRentHouseView = (ListView) findViewById(R.id.lst_rent_house);
+        imgClearKeyWords = (ImageView) findViewById(R.id.act_rent_house_clear_key_wrods);
 
         lltArea = (LinearLayout) findViewById(R.id.act_rent_house_area_llt);
         lltRentPrice = (LinearLayout) findViewById(R.id.act_rent_house_rent_price_llt);
@@ -170,6 +173,7 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         lltRentPrice.setOnClickListener(this);
         lltHouseType.setOnClickListener(this);
         lltMore.setOnClickListener(this);
+        imgClearKeyWords.setOnClickListener(this);
 
         adapter = new RentHouseAdapter(this, rentHouses);
         lstRentHouseView.setAdapter(adapter);
@@ -306,6 +310,10 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         	PopViewHelper.showRentHouseMorePopWindow(this, moreType, sorts,
         			squareRanges, directions, lltMore, onRentHouseMoreConditionListener);
             break;
+        case R.id.act_rent_house_clear_key_wrods:
+        	keyWords = "";
+        	edtKeyWords.setText("");
+        	break;
         }
     }
 

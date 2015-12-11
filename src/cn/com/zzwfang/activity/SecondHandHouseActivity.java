@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -107,6 +108,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
 	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
+	private ImageView imgClearKeyWords;
 
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
 	private AbPullToRefreshView pullView;
@@ -212,6 +214,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		tvArea = (TextView) findViewById(R.id.act_second_hand_house_area_tv);
 		tvTotalPrice = (TextView) findViewById(R.id.act_second_hand_house_total_price_tv);
 		tvHouseType = (TextView) findViewById(R.id.act_second_hand_house_type_tv);
+		imgClearKeyWords = (ImageView) findViewById(R.id.act_second_hand_house_clear_key_wrods);
 
 		lltArea = (LinearLayout) findViewById(R.id.act_second_hand_house_area_llt);
 		lltTotalPrice = (LinearLayout) findViewById(R.id.act_second_hand_house_total_price_llt);
@@ -266,6 +269,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		autoTvLocate.setOnClickListener(this);
 		autoTvSubway.setOnClickListener(this);
 		autoTvNearby.setOnClickListener(this);
+		
+		imgClearKeyWords.setOnClickListener(this);
 
 		adapter = new SecondHandHouseAdapter(this, secondHandHouses);
 		lstSecondHandHouseView.setAdapter(adapter);
@@ -508,6 +513,10 @@ public class SecondHandHouseActivity extends BaseActivity implements
 								curLatLng.longitude)
 						.jump(this, NearbyDetailActivity.class);
 			}
+			break;
+		case R.id.act_second_hand_house_clear_key_wrods:
+			key = "";
+			edtKeyWords.setText("");
 			break;
 		}
 	}

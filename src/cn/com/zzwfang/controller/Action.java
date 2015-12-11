@@ -431,7 +431,7 @@ public interface Action {
 	 *            站点ID
 	 * @param callback
 	 */
-	void recommendFeeHunterCustomer(String estateId, String minPrice,
+	void recommendFeeHunterCustomer(int trade, String estateId, String minPrice,
 			String maxPrice, String monthlPay, String contactName,
 			String phone, String remark, String userId, String citeId,
 			ResultHandlerCallback callback);
@@ -475,7 +475,7 @@ public interface Action {
 	 *            情况介绍
 	 * @param callback
 	 */
-	void recommendFeeHunterHouseSource(String estateId, String rigdepole,
+	void recommendFeeHunterHouseSource(String userId, String estateId, String rigdepole,
 			String unit, String roomNo, String estateName, String cityId,
 			String floor, int trade, String contactName, String telNum,
 			String remark, ResultHandlerCallback callback);
@@ -701,8 +701,8 @@ public interface Action {
 	 * @param sex   性别
 	 * @param callback
 	 */
-	void entrustBuyHouse(String userId, String estateId, double budget,
-			int minSquare, int maxSquare, String monthlyPay,
+	void entrustBuyHouse(String cityId, String userId, String estateId, double budget,
+			int minSquare, int maxSquare, double minTotalPrice, double maxTotalPrice, String monthlyPay,
 			int countFang, int hall, String require,
 			String name, boolean sex, ResultHandlerCallback callback);
 	

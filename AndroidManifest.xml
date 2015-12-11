@@ -179,7 +179,7 @@
             android:name="cn.com.zzwfang.activity.FeeHunterWalletActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="cn.com.zzwfang.activity.FeeHunterRecommendOwnerActivity"
+            android:name="cn.com.zzwfang.activity.FeeHunterRecommendHouseSourceActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity

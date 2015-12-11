@@ -281,6 +281,11 @@ public class API {
     public static final String ENTRUST_SELL_HOUSE = "User/EntrustSell";
     
     /**
+     * 委托 我要买房
+     */
+    public static final String ENTRUST_BUY_HOUSE = "User/EntrustBuy";
+    
+    /**
      * 关于我们
      */
     public static final String GET_ABOUT_US = "Other/About";

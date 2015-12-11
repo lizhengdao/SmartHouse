@@ -30,7 +30,7 @@ import cn.com.zzwfang.util.ToastUtils;
  * @author lzd
  *
  */
-public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener {
+public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener {
 
 	private static final int REQUEST_CONTACT = 1;
 	
@@ -50,7 +50,7 @@ public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnC
 	
 	private IdNameBean idNameBean;
 	
-	private int trade = 1;
+	private int trade = 0;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -122,16 +122,17 @@ public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnC
 
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		// （0：出售、1：出租、2：租售）
 		if (isChecked) {
 			switch (buttonView.getId()) {
-			case R.id.act_fee_hunter_recommend_owner_rb_rent:
+			case R.id.act_fee_hunter_recommend_owner_rb_rent:  // 租房
+				trade = 0;
+				break;
+			case R.id.act_fee_hunter_recommend_owner_rb_sell:  // 售房
 				trade = 1;
 				break;
-			case R.id.act_fee_hunter_recommend_owner_rb_sell:
+			case R.id.act_fee_hunter_recommend_owner_rb_rent_sell:  // 租售
 				trade = 2;
-				break;
-			case R.id.act_fee_hunter_recommend_owner_rb_rent_sell:
-				trade = 3;
 				break;
 			}
 		}
@@ -194,7 +195,7 @@ public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnC
 		}
 		
 		String remark = edtMark.getText().toString();
-		
+		String userId = ContentUtils.getUserId(this);
 		/**
 		 * 赏金猎人  推荐房源
 		 * @param estateId   楼盘ID
@@ -210,7 +211,7 @@ public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnC
 		 * @param remark   情况介绍
 		 * @param callback
 		 */
-		actionImpl.recommendFeeHunterHouseSource(idNameBean.getId(),
+		actionImpl.recommendFeeHunterHouseSource(userId, idNameBean.getId(),
 				rigdepole, unit, roomNo,
 				idNameBean.getName(), cityBean.getSiteId(), floor,
 				trade, contactName, contactPhone,
@@ -226,7 +227,7 @@ public class FeeHunterRecommendOwnerActivity extends BaseActivity implements OnC
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
-						ToastUtils.SHORT.toast(FeeHunterRecommendOwnerActivity.this, "推荐房源成功");
+						ToastUtils.SHORT.toast(FeeHunterRecommendHouseSourceActivity.this, "推荐房源成功");
 					}
 				});
 	}

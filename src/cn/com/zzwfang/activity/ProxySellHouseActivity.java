@@ -184,6 +184,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 			PopViewHelper.showSelectHouseTypePopWindow(this, lltDecoration, decorations, onDecorationSelectListener);
 			break;
 		case R.id.act_proxy_sell_house_commit:
+			tvCommit.setClickable(false);
 			entrustSell();
 			break;
 		}
@@ -207,12 +208,14 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 	
 	private void entrustSell() {
 		if (idNameBean == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择小区名称");
 			return;
 		}
 		
 		// 房屋类型  其实是物业类型
 		if (houseTypeCondition == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择房屋类型");
 			return;
 		}
@@ -220,78 +223,92 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 		//  户型
 		String countFang = edtHouseRooms.getText().toString();
 		if (TextUtils.isEmpty(countFang)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入室信息");
 			return;
 		}
 		
 		String halls = edtHouseHalls.getText().toString();
 		if (TextUtils.isEmpty(halls)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入厅信息");
 			return;
 		}
 		String wc = edtWcs.getText().toString();
 		if (TextUtils.isEmpty(wc)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入厅卫信息");
 			return;
 		}
 		String floor = edtWhichFloor.getText().toString();
 		if (TextUtils.isEmpty(floor)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入楼层");
 			return;
 		}
 		String totalFloor = edtTotalFloor.getText().toString();
 		if (TextUtils.isEmpty(totalFloor)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入总楼层");
 			return;
 		}
 		int floorInt = Integer.valueOf(floor);
 		int totalFloorInt = Integer.valueOf(totalFloor);
 		if (floorInt > totalFloorInt) {
+			tvCommit.setClickable(true);
 		    ToastUtils.SHORT.toast(this, "楼层应小于等于总楼层"); 
             return;
 		}
 		
 		String square = edtSquare.getText().toString();
 		if (TextUtils.isEmpty(square)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入房屋面积");
 			return;
 		}
 		
-		if (directionCondition != null) {
+		if (directionCondition == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择朝向");
 			return;
 		}
 		
-		if (decoratonCondition != null) {
+		if (decoratonCondition == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择装修程度");
 			return;
 		}
 		
 		String ridgepole = edtWhichBuilding.getText().toString();
 		if (TextUtils.isEmpty(ridgepole)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入楼栋号");
 			return;
 		}
 		
 		String unit = edtWhichUnit.getText().toString();
 		if (TextUtils.isEmpty(unit)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入单元号");
 			return;
 		}
 		String roomNo = edtWhichNo.getText().toString();
 		if (TextUtils.isEmpty(roomNo)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入房间号");
 			return;
 		}
 		
 		String title = edtSourceName.getText().toString();
 		if (TextUtils.isEmpty(title)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入房源标题");
 			return;
 		}
 		
 		String name = edtOwnerName.getText().toString();
 		if (TextUtils.isEmpty(name)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入姓名");
 			return;
 		}
@@ -300,6 +317,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 		
 		CityBean cityBean = ContentUtils.getCityBean(this);
 		if (cityBean == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "您还未选定城市");
 			return;
 		}
@@ -319,16 +337,17 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
-						
+						tvCommit.setClickable(true);
 					}
 					
 					@Override
 					public void rc3001(RequestEntity entity, Result result) {
-						
+						tvCommit.setClickable(true);
 					}
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+						finish();
 						ToastUtils.SHORT.toast(ProxySellHouseActivity.this, "提交成功");
 					}
 				});

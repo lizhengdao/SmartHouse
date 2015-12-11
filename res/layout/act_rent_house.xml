@@ -23,23 +23,37 @@
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/act_rent_house_search_edt"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="4dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_search_round_white"
-            android:drawableLeft="@drawable/ic_search"
-            android:drawablePadding="4dp"
-            android:hint="@string/act_second_hand_house_hint"
-            android:textSize="14sp"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"
-            android:inputType="text"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_search_round_white" >
 
+            <EditText
+                android:id="@+id/act_rent_house_search_edt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="4dp"
+                android:hint="@string/act_second_hand_house_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/act_rent_house_clear_key_wrods"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_cross" />
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout

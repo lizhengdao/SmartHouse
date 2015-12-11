@@ -80,10 +80,10 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.act_fee_hunter_info_back:
+		case R.id.act_fee_hunter_info_back:  // 返回
 			finish();
 			break;
-		case R.id.act_fee_hunter_info_recommend_customer:   //  推荐买房  改成 推荐客户  跳推荐二手房页
+		case R.id.act_fee_hunter_info_recommend_customer:   //  推荐客户
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -91,13 +91,13 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendCustomerActivity.class);
 			break;
-		case R.id.act_fee_hunter_info_recommend_sell:  //  推荐卖房 改成推荐房源  跳推荐业主表单页
+		case R.id.act_fee_hunter_info_recommend_sell:  // 推荐房源  跳推荐业主表单页
 			Jumper.newJumper()
 	        .setAheadInAnimation(R.anim.activity_push_in_right)
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendOwnerActivity.class);
+	        .jump(FeeHunterInfoActivity.this, FeeHunterRecommendHouseSourceActivity.class);
 			break;
 		case R.id.act_fee_hunter_info_my_customer:   //  我的客户
 			Jumper.newJumper()

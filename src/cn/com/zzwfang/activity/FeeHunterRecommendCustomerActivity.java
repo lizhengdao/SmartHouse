@@ -46,6 +46,11 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 	private RadioButton rbBuy, rbRent;
 
 	private IdNameBean idNameBean;
+	
+	/**
+	 * 0(求购)  1（租求购）
+	 */
+	private int trade = 0;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -104,6 +109,7 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 			break;
 
 		case R.id.act_fee_hunter_recommend_customer_commit:
+			tvCommit.setClickable(false);
 			recommendCustomer();
 			break;
 		}
@@ -114,9 +120,11 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		if (isChecked) {
 			switch (buttonView.getId()) {
 			case R.id.act_fee_hunter_recommend_second_hand_house_rb_buy: // 求购
+				trade = 0;
 				break;
 
 			case R.id.act_fee_hunter_recommend_second_hand_house_rb_rent: // 租求购
+				trade = 1;
 				break;
 			}
 		}
@@ -126,21 +134,25 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 
 		String contactName = edtContactName.getText().toString();
 		if (TextUtils.isEmpty(contactName)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入被推荐人姓名");
 			return;
 		}
 		String contactPhone = edtContactPhone.getText().toString();
 		if (TextUtils.isEmpty(contactPhone)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入被推荐人手机号码");
 			return;
 		}
 		String minPrice = edtMinPrice.getText().toString();
 		if (TextUtils.isEmpty(minPrice)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入最低总价");
 			return;
 		}
 		String maxPrice = edtMaxPrice.getText().toString();
 		if (TextUtils.isEmpty(maxPrice)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入最高总价");
 			return;
 		}
@@ -148,12 +160,14 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		float minPriceFloat = Integer.valueOf(minPrice);
 		float maxPriceFloat = Integer.valueOf(maxPrice);
 		if (minPriceFloat >= maxPriceFloat) {
+			tvCommit.setClickable(true);
 		    ToastUtils.SHORT.toast(this, "最低总价应小于最高总价");
 		    return;
 		}
 
 		String monthlyPay = edtMonthlyPay.getText().toString();
 		if (TextUtils.isEmpty(monthlyPay)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入月供");
 			return;
 		}
@@ -161,30 +175,35 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		String remark = edtRemark.getText().toString();
 
 		if (idNameBean == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择楼盘名称");
 			return;
 		}
 		CityBean cityBean = ContentUtils.getCityBean(this);
 		if (cityBean == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择城市");
 			return;
 		}
 		String userId = ContentUtils.getUserId(this);
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.recommendFeeHunterCustomer(idNameBean.getId(), minPrice,
+		actionImpl.recommendFeeHunterCustomer(trade, idNameBean.getId(), minPrice,
 				maxPrice, monthlyPay, contactName, contactPhone, remark,
 				userId, cityBean.getSiteId(), new ResultHandlerCallback() {
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
+						tvCommit.setClickable(true);
 					}
 					
 					@Override
 					public void rc3001(RequestEntity entity, Result result) {
+						tvCommit.setClickable(true);
 					}
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+						finish();
 						ToastUtils.SHORT.toast(FeeHunterRecommendCustomerActivity.this, "推荐成功");
 					}
 				});

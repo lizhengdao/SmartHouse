@@ -1386,7 +1386,7 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void recommendFeeHunterCustomer(String estateId, String minPrice,
+	public void recommendFeeHunterCustomer(int trade, String estateId, String minPrice,
 			String maxPrice, String monthlPay, String contactName,
 			String phone, String remark, String userId, String citeId,
 			ResultHandlerCallback callback) {
@@ -1396,6 +1396,7 @@ public class ActionImpl implements Action {
 //		requestParams.put("sign", "1111");
 //        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
+		requestParams.put("trade", trade + "");
         requestParams.put("estateId", estateId);
         requestParams.put("maxPrice", maxPrice);
         requestParams.put("minPrice", minPrice);
@@ -1406,7 +1407,7 @@ public class ActionImpl implements Action {
         	requestParams.put("reMark", remark);
         }
         requestParams.put("userId", userId);
-        requestParams.put("citeId", citeId);
+        requestParams.put("siteId", citeId);
         
 		Options opt = new Options();
 		opt.fromDiskCacheAble = false;
@@ -1472,18 +1473,18 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void recommendFeeHunterHouseSource(String estateId,
+	public void recommendFeeHunterHouseSource(String userId, String estateId,
 			String rigdepole, String unit, String roomNo, String estateName,
 			String cityId, String floor, int trade, String contactName,
 			String telNum, String remark, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//		requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
+		
+		requestParams.put("userId", userId);
         requestParams.put("estateId", estateId);
-        requestParams.put("ridgepole", rigdepole);
+        requestParams.put("rigdepole", rigdepole);
         requestParams.put("unit", unit);
         requestParams.put("roomNo", roomNo);
         requestParams.put("estateName", estateName);
@@ -1870,7 +1871,7 @@ public class ActionImpl implements Action {
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSES_RECOMMENDED_TO_ME));
         requestEntity.setRequestParams(requestParams);
-        requestEntity.setType(RequestEntity.GET);
+        requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
                 context, "请稍候...");
@@ -2193,16 +2194,15 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void entrustBuyHouse(String userId, String estateId, double budget,
-			int minSquare, int maxSquare, String monthlyPay, int countFang,
+	public void entrustBuyHouse(String cityId, String userId, String estateId, double budget,
+			int minSquare, int maxSquare, double minTotalPrice, double maxTotalPrice,  String monthlyPay, int countFang,
 			int hall, String require, String name, boolean sex,
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
         
 		encryptTimeStamp(requestParams);
+		requestParams.put("siteId", cityId);
         requestParams.put("userId", userId);
         requestParams.put("estateId", estateId);
         if (budget >= 0) {
@@ -2210,6 +2210,8 @@ public class ActionImpl implements Action {
         }
         requestParams.put("minSquare", minSquare + "");
         requestParams.put("maxSquare", maxSquare + "");
+        requestParams.put("minPrice", String.valueOf(minTotalPrice));
+        requestParams.put("maxPrice", String.valueOf(maxTotalPrice));
         requestParams.put("monthlyPay", monthlyPay);
         requestParams.put("countFang", countFang + "");
         requestParams.put("hall", hall + "");
@@ -2229,7 +2231,7 @@ public class ActionImpl implements Action {
         opt.toMemCacheAble = false;
 
         RequestEntity requestEntity = new RequestEntity();
-        requestEntity.setUrl(getAbsoluteUrl(API.READ_MESSAGES));
+        requestEntity.setUrl(getAbsoluteUrl(API.ENTRUST_BUY_HOUSE));
         requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 

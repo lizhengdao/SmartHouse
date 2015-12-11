@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.IdNameBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.TextValueBean;
@@ -27,7 +28,7 @@ import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 
 /**
- * 我要买房
+ * 我要买房(委托买房)
  * @author lzd
  *
  */
@@ -39,6 +40,7 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 	private LinearLayout lltMonthlyPay;
 	
 	private EditText edtMinSquare, edtMaxSquare;
+	private EditText edtMinTotalPrice, edtMaxTotalPrice;
 	private EditText edtRooms, edtHalls;
 	private EditText edtOtherDesc;
 	private EditText edtYourName;
@@ -72,6 +74,9 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 		
 		edtMinSquare = (EditText) findViewById(R.id.act_i_want_buy_house_min_square);
 	    edtMaxSquare = (EditText) findViewById(R.id.act_i_want_buy_house_max_square);
+	    
+	    edtMinTotalPrice = (EditText) findViewById(R.id.act_i_want_buy_house_min_total_price);
+	    edtMaxTotalPrice = (EditText) findViewById(R.id.act_i_want_buy_house_max_total_price);
 	    
 	    edtRooms = (EditText) findViewById(R.id.act_i_want_buy_house_rooms);
 	    edtHalls = (EditText) findViewById(R.id.act_i_want_buy_house_halls);
@@ -123,6 +128,7 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 					REQUEST_ESTATE);
 			break;
 		case R.id.act_i_want_buy_house_commit:
+			tvCommit.setClickable(false);
 			entrustBuyHouse();
 			break;
 		}
@@ -145,10 +151,12 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 	
 	private void entrustBuyHouse() {
 		if (idNameBean == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择小区名称");
 			return;
 		}
 		if (monthlyPayCondition == null) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请选择月供范围");
 			return;
 		}
@@ -156,27 +164,53 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 		String minSquare = edtMinSquare.getText().toString();
 		String maxSquare = edtMaxSquare.getText().toString();
 		if (TextUtils.isEmpty(minSquare)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入最小面积");
 			return;
 		}
 		if (TextUtils.isEmpty(maxSquare)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入最大面积");
 			return;
 		}
 		int minSquareInt = Integer.valueOf(minSquare);
 		int maxSquareInt = Integer.valueOf(maxSquare);
 		if (minSquareInt >= maxSquareInt) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "最小面积应小于最大面积");
+			return;
+		}
+		
+		String minTotalPriceStr = edtMinTotalPrice.getText().toString();
+		String maxTotalPriceStr = edtMaxTotalPrice.getText().toString();
+		if (TextUtils.isEmpty(minTotalPriceStr)) {
+			tvCommit.setClickable(true);
+			ToastUtils.SHORT.toast(this, "请输入最小总价");
+			return;
+		}
+		if (TextUtils.isEmpty(maxTotalPriceStr)) {
+			tvCommit.setClickable(true);
+			ToastUtils.SHORT.toast(this, "请输入最大总价");
+			return;
+		}
+		
+		double minTotalPrice = Double.valueOf(minTotalPriceStr);
+		double maxTotalPrice = Double.valueOf(maxTotalPriceStr);
+		if (minTotalPrice >= maxTotalPrice) {
+			tvCommit.setClickable(true);
+			ToastUtils.SHORT.toast(this, "最小总价应小于最大总价");
 			return;
 		}
 		
 		String rooms = edtRooms.getText().toString();
 		String halls = edtHalls.getText().toString();
 		if (TextUtils.isEmpty(rooms)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入您想买几室的房");
 			return;
 		}
 		if (TextUtils.isEmpty(halls)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入您想买几厅的房");
 			return;
 		}
@@ -185,33 +219,42 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 		
 		String otherDesc = edtOtherDesc.getText().toString();
 		if (TextUtils.isEmpty(otherDesc)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入您的其他要求或描述");
 			return;
 		}
 		
 		String name = edtYourName.getText().toString();
 		if (TextUtils.isEmpty(name)) {
+			tvCommit.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入您的姓名");
 			return;
 		}
 		boolean sex = cbxSex.isChecked();
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		String cityId = cityBean.getSiteId();
 		String userId = ContentUtils.getUserId(this);
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.entrustBuyHouse(userId, idNameBean.getId(), -1,
-				minSquareInt, maxSquareInt, monthlyPayCondition.getValue(),
+		actionImpl.entrustBuyHouse(cityId, userId, idNameBean.getId(), -1,
+				minSquareInt, maxSquareInt, minTotalPrice, maxTotalPrice,
+				monthlyPayCondition.getValue(),
 				countFang, hall, otherDesc,
 				name, sex, new ResultHandlerCallback() {
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
+						tvCommit.setClickable(true);
 					}
 					
 					@Override
 					public void rc3001(RequestEntity entity, Result result) {
+						tvCommit.setClickable(true);
 					}
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+						tvCommit.setClickable(true);
+						finish();
 						ToastUtils.SHORT.toast(IWantBuyHouseActivity.this, "提交成功");
 					}
 				});
