@@ -220,6 +220,10 @@
             android:name="cn.com.zzwfang.activity.HouseSourceInfoChangesActivity"
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="cn.com.zzwfang.activity.IncomeStatementActivity"
+            android:screenOrientation="portrait" />
+        
         <!--  
         <activity
             android:name=".wxapi.WXEntryActivity"

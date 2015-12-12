@@ -320,5 +320,10 @@ public class API {
      */
     public static final String GET_COURT_DETAIL = "Estate/GetEstateDes";
     
+    /**
+     * 我的购屋的收支明细
+     */
+    public static final String GET_INCOME_STATEMENT = "User/Income";
+    
 
 }

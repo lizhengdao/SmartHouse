@@ -753,4 +753,11 @@ public interface Action {
 	 * @param callback
 	 */
 	void getCourtDetail(String courtId, ResultHandlerCallback callback);
+	
+	/**
+	 * 我的购屋的收支明细
+	 * @param prpId   房源ID
+	 * @param callback
+	 */
+	void getIncomeStatement(String prpId, ResultHandlerCallback callback);
 }
