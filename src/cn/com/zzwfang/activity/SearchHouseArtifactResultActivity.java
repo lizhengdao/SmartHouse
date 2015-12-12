@@ -65,7 +65,7 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 		budget = intent.getStringExtra(INTENT_BUDGET);
 		where = intent.getStringExtra(INTENT_WHERE);
 		monthlyPayRange = intent.getStringExtra(INTENT_MONTHLY_PAY);
-		rooms = intent.getIntExtra(INTENT_ROOMS, 1) + "";
+		rooms = intent.getStringExtra(INTENT_ROOMS);
 		label = intent.getStringExtra(INTENT_REMARKS);
 		initView();
 	}
@@ -136,7 +136,7 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 		 */
 		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getSearchHouseArtifactResut(budget, partPrice, type, where, rooms + "", monthlyPayRange, label, pageIndex, new ResultHandlerCallback() {
+		actionImpl.getSearchHouseArtifactResut(budget, partPrice, type, where, rooms, monthlyPayRange, label, pageIndex, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {

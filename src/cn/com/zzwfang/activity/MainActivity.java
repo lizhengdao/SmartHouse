@@ -112,18 +112,18 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
 		for (GuiderView guider : guidIndicators) {
 			guider.setIconAlpha(0.0f);
 		}
-		if (position == 3) {
-			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
-			if (!loginStatus) {
-				Jumper.newJumper()
-	            .setAheadInAnimation(R.anim.slide_in_style1)
-                .setAheadOutAnimation(R.anim.alpha_out_style1)
-                .setBackInAnimation(R.anim.alpha_in_style1)
-                .setBackOutAnimation(R.anim.slide_out_style1)
-                .jumpForResult(this, LoginActivity.class, CODE_LOGIN_MINE);
-				return;
-			}
-		}
+//		if (position == 3) {
+//			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+//			if (!loginStatus) {
+//				Jumper.newJumper()
+//	            .setAheadInAnimation(R.anim.slide_in_style1)
+//                .setAheadOutAnimation(R.anim.alpha_out_style1)
+//                .setBackInAnimation(R.anim.alpha_in_style1)
+//                .setBackOutAnimation(R.anim.slide_out_style1)
+//                .jumpForResult(this, LoginActivity.class, CODE_LOGIN_MINE);
+//				return;
+//			}
+//		}
 		guidIndicators.get(position).setIconAlpha(1.0f);
 		contentPager.setCurrentItem(position, false);
 	}

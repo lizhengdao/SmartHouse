@@ -143,6 +143,8 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
+            <!-- 几居 -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -164,71 +166,23 @@
                     android:textColor="@color/color_504f4f"
                     android:textSize="15sp" />
 
-                <RadioGroup
+                <LinearLayout
+                    android:id="@+id/act_search_house_additional_info_grid_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:layout_marginTop="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="4" >
+                    android:listSelector="#ffffff"
+                    android:orientation="vertical" >
 
-                    <RadioButton
-                        android:id="@+id/rb_one_room"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
-                        android:button="@null"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:text="@string/act_search_house_artifact_one_room"
-                        android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
+                    <GridView
+                        android:id="@+id/act_search_house_rooms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:numColumns="4"
+                        android:verticalSpacing="10dp" />
+                </LinearLayout>
 
-                    <RadioButton
-                        android:id="@+id/rb_two_rooms"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/act_search_house_artifact_two_rooms"
-                        android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
-
-                    <RadioButton
-                        android:id="@+id/rb_three_rooms"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/act_search_house_artifact_three_rooms"
-                        android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
-
-                    <RadioButton
-                        android:id="@+id/rb_four_rooms"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/selector_rect_color_app_theme_and_gray"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:text="@string/act_search_house_artifact_four_rooms"
-                        android:textColor="@color/color_504f4f"
-                        android:textSize="15sp" />
-                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -265,7 +219,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:numColumns="4"
-                        android:verticalSpacing="10dp" />
+                        android:verticalSpacing="10dp"
+                        android:listSelector="#ffffff" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -273,10 +228,10 @@
                 android:id="@+id/act_search_house_artifact_requirement_commit_tv"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
                 android:background="@drawable/bg_login_btn"
                 android:gravity="center"
                 android:text="提交"

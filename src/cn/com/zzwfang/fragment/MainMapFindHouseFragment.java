@@ -199,7 +199,6 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				totalPriceCondition = txtValueBean;
 				tvTotalPrice.setText(txtValueBean.getText());
 				getMapFindHouseDataArea();
-				// getMapFindHouseEstate();
 			}
 		};
 
@@ -210,7 +209,6 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				roomTypeCondition = txtValueBean;
 				tvHouseType.setText(txtValueBean.getText());
 				getMapFindHouseDataArea();
-				// getMapFindHouseEstate();
 			}
 		};
 

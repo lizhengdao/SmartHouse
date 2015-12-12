@@ -425,8 +425,6 @@ public class ActionImpl implements Action {
 			String area, String rooms, String monthlyPay, String label, int pageIndex, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
-//		requestParams.put("sign", "1111");
-//		requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
 		
 		if (type == 1) {  // 一次性付款

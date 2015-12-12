@@ -106,7 +106,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		}
 		
 //		pwd = MD5Util.md5(pwd);
-		action.register(phoneNum, pwd, authCode, 1, new ResultHandlerCallback() {
+		action.register(phoneNum, pwd, authCode, registerType, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
@@ -120,7 +120,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
+				setResult(RESULT_OK);
 				ToastUtils.SHORT.toast(RegisterActivity.this, "注册成功");
+				finish();
 			}
 		});
 	}

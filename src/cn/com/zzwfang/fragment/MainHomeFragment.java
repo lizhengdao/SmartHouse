@@ -151,16 +151,16 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			 * 用户类型    0经济人，1普通会员，2赏金猎人
 			 */
 			boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
-			if (loginStatus) {
+			if (loginStatus) {  // 已登录
 				int userType = ContentUtils.getUserType(getActivity());
-				if (userType == 2) {
+				if (userType == 2) {  // 赏金猎人
 					Jumper.newJumper()
 		            .setAheadInAnimation(R.anim.activity_push_in_right)
 		            .setAheadOutAnimation(R.anim.activity_alpha_out)
 		            .setBackInAnimation(R.anim.activity_alpha_in)
 		            .setBackOutAnimation(R.anim.activity_push_out_right)
 		            .jump(this, FeeHunterInfoActivity.class);
-				} else {
+				} else {  // 非赏金猎人
 					Jumper.newJumper()
 		            .setAheadInAnimation(R.anim.activity_push_in_right)
 		            .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -168,13 +168,21 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		            .setBackOutAnimation(R.anim.activity_push_out_right)
 		            .jump(this, ShangJinLieRenActivity.class);
 				}
-			} else {
+			} else {  // 未登录
+//				Jumper.newJumper()
+//	            .setAheadInAnimation(R.anim.slide_in_style1)
+//                .setAheadOutAnimation(R.anim.alpha_out_style1)
+//                .setBackInAnimation(R.anim.alpha_in_style1)
+//                .setBackOutAnimation(R.anim.slide_out_style1)
+//                .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
+				
 				Jumper.newJumper()
 	            .setAheadInAnimation(R.anim.slide_in_style1)
                 .setAheadOutAnimation(R.anim.alpha_out_style1)
                 .setBackInAnimation(R.anim.alpha_in_style1)
                 .setBackOutAnimation(R.anim.slide_out_style1)
-                .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
+                .jump(this, ShangJinLieRenActivity.class);
+//                .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
 			}
 			break;
 		}

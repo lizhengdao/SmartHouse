@@ -48,14 +48,14 @@ public class SearchHouseArtifactRequirementAdapter extends BaseAdapter {
         final TextValueBean textValueBean = additionalInfo.get(position);
         cbx.setChecked(textValueBean.isSelected());
         cbx.setText(textValueBean.getText());
-        cbx.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				textValueBean.setSelected(isChecked);
-				notifyDataSetChanged();
-			}
-		});
+//        cbx.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				textValueBean.setSelected(isChecked);
+//				notifyDataSetChanged();
+//			}
+//		});
         return convertView;
     }
 

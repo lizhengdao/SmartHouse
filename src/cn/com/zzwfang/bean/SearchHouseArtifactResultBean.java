@@ -10,6 +10,11 @@ public class SearchHouseArtifactResultBean extends BaseBean {
 	 * 代理人Id
 	 */
 	private String Id;
+	
+	/**
+	 * 等级
+	 */
+	private String Level;
 	/**
 	 * 头像
 	 */
@@ -26,6 +31,37 @@ public class SearchHouseArtifactResultBean extends BaseBean {
 	 * 浏览量
 	 */
 	private int PairCount;
+	
+	/**
+	 * 租房成交量
+	 */
+	private String RentNum;
+	
+	/**
+	 * 二手房成交量
+	 */
+	private String SecondNum;
+	
+	
+	
+	public String getLevel() {
+		return Level;
+	}
+	public void setLevel(String level) {
+		Level = level;
+	}
+	public String getRentNum() {
+		return RentNum;
+	}
+	public void setRentNum(String rentNum) {
+		RentNum = rentNum;
+	}
+	public String getSecondNum() {
+		return SecondNum;
+	}
+	public void setSecondNum(String secondNum) {
+		SecondNum = secondNum;
+	}
 	public String getId() {
 		return Id;
 	}

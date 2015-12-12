@@ -57,6 +57,10 @@ public class SearchHouseArtifactResultAdapter extends BaseAdapter{
 		ImageView imgAvatar = (ImageView) convertView.findViewById(R.id.adapter_search_house_artifact_avatar);
 		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_name);
 		TextView tvPhone = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_phone);
+		TextView tvSecondHandHouse = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_second_hand_houses);
+		TextView tvRentHouse = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_rent_houses);
+		
+		// 浏览量
 		TextView tvAccessQuantity = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_access_quantity);
 		AutoDrawableTextView tvConsult = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_search_house_artifact_consult);
 		AutoDrawableTextView tvDial = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_search_house_artifact_dial);
@@ -68,7 +72,11 @@ public class SearchHouseArtifactResultAdapter extends BaseAdapter{
 		}
 		tvName.setText(artifactResult.getName());
 		tvPhone.setText(artifactResult.getPhone());
+		tvSecondHandHouse.setText(artifactResult.getSecondNum());
+		tvRentHouse.setText(artifactResult.getRentNum());
 		tvAccessQuantity.setText(artifactResult.getPairCount() + "");
+		
+		
 		tvDial.setOnClickListener(new OnClickListener() {
 			
 			@Override

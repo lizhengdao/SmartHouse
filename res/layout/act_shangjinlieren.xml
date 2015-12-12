@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    android:background="@color/color_eeeeee" >
-    
+    android:orientation="vertical" >
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -31,52 +31,76 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
-    
-    <ImageView 
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_shangjinlieren_act"/>
-    
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:text="赏金猎人规则："/>
-    
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:text="为了能使用本服务，您同意一下事项："/>
-    
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:text="（1）依本服务注册表的提示提供您本人真实、正确、最新及完整的资料；"/>
-    
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:text="（2）维持更新您个人用户信息，确保其真实正确"/>
-    
-    <TextView 
-        android:id="@+id/act_shangjinlieren_register_tv"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:background="@drawable/bg_login_btn"
-        android:text="注册赏金猎人"/>
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_shangjinlieren_act" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="20dp"
+                android:text="赏金猎人规则：" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="20dp"
+                android:text="为了能使用本服务，您同意一下事项：" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="20dp"
+                android:text="（1）依本服务注册表的提示提供您本人真实、正确、最新及完整的资料；" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="20dp"
+                android:text="（2）维持更新您个人用户信息，确保其真实正确" />
+
+            <TextView
+                android:id="@+id/act_shangjinlieren_register_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/bg_login_btn"
+                android:gravity="center"
+                android:text="注册赏金猎人"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/act_shangjinlieren_login_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_login_yellow"
+                android:gravity="center"
+                android:text="登录"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -76,10 +76,10 @@
     <string name="frag_mine_be_fee_hunter">成为赏金猎人</string>
     <string name="frag_mine_msg">消息</string>
     <string name="frag_mine_house_source_i_attention">我关注的房源</string>
-    <string name="frag_mine_my_proxy">我的委托</string>
+    <string name="frag_mine_my_proxy">帮你买房</string>
     <string name="frag_mine_browse_record">浏览记录</string>
-    <string name="frag_mine_my_demand">我的需求</string>
-    <string name="frag_mine_my_house_resources">我的房源</string>
+    <string name="frag_mine_my_demand">帮你找房</string>
+    <string name="frag_mine_my_house_resources">我的房子</string>
     <string name="frag_mine_mortgage_calculator">房贷计算器</string>
     <string name="frag_mine_feedback">意见反馈</string>
     <string name="frag_mine_settings">设置</string>

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants" >
 
     <CheckBox
         android:id="@+id/adapter_search_house_artifact_requirement_cbx"
@@ -10,7 +11,9 @@
         android:layout_height="50dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:background="@drawable/selector_rect_color_app_theme_and_gray"
+        android:focusable="false"
+        android:clickable="false"
+        android:background="@drawable/selector_search_house_artifact_cbx"
         android:button="@null"
         android:gravity="center"
         android:textColor="@color/color_504f4f"

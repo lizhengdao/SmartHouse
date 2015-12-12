@@ -2,17 +2,13 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
-import android.app.Notification.Action;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.SearchHouseArtifactRequirementAdapter;
@@ -29,12 +25,14 @@ import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 找房神器具体筛选条件
  * @author lzd
  *
  */
-public class SearchHouseArtifactRequirementActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener {
+public class SearchHouseArtifactRequirementActivity extends BaseActivity implements OnClickListener {
 	
 	/**
 	 * 付款方式一次性或者按揭（Type,值为1或者0）
@@ -47,24 +45,26 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	
 	private TextView tvBack, tvCommit, tvBudget, tvWhere, tvMonthlyPay;
 	
-	private LinearLayout lltBudget, lltWhere, lltMonthlyPay, lltGridContainer;
+	private LinearLayout lltBudget, lltWhere, lltMonthlyPay;
 	private GridView  gridViewHouseRooms;
 	private GridView gridViewAdditionalInfo;
 	private SearchHouseArtifactRequirementAdapter adapter;
-	
-	private RadioButton rbOneRoom, rbTwoRooms, rbThreeRooms, rbFourRooms;
 	
 	private int payType = -1;
 	
 	/**
 	 * 几居    属于几房House(值为1，2，3，4，四房以上)
 	 */
-	private int rooms = 1;
+//	private int rooms = 1;
+	/**
+	 * 几居 
+	 */
+	private TextValueBean tvHouseRooms;
 	
 	/**
 	 * 补充信息   多个用逗号隔开（，）
 	 */
-	private String label;
+//	private String label;
 	
 	/**
      * 总价
@@ -107,6 +107,8 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
     
     private TextValueBean monthlyPayCondition;
     
+    private ArrayList<TextValueBean> houseRooms = new ArrayList<TextValueBean>();
+    private SearchHouseArtifactRequirementAdapter houseRoomAdapter;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -117,6 +119,7 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		getConditionList(EstateLabel);
 		getAreaList();
 		getMonthlyPayData();
+		getHouseRoomsData();
 	}
 	
 	private void initView() {
@@ -126,20 +129,19 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		lltBudget = (LinearLayout) findViewById(R.id.act_search_house_artifact_budget_llt);
 		lltWhere = (LinearLayout) findViewById(R.id.act_search_house_artifact_where_llt);
 		lltMonthlyPay = (LinearLayout) findViewById(R.id.act_search_house_month_pay_llt);
-		lltGridContainer = (LinearLayout) findViewById(R.id.act_search_house_additional_info_grid_container);
 		
 		tvBudget = (TextView) findViewById(R.id.act_search_house_artifact_budget_tv);
 		tvWhere = (TextView) findViewById(R.id.act_search_house_artifact_wheree_tv);
 		tvMonthlyPay = (TextView) findViewById(R.id.act_search_house_month_pay_tv);
 		
+		gridViewHouseRooms = (GridView) findViewById(R.id.act_search_house_rooms);
+		houseRoomAdapter = new SearchHouseArtifactRequirementAdapter(this, houseRooms);
+		gridViewHouseRooms.setAdapter(houseRoomAdapter);
+		
 		gridViewAdditionalInfo = (GridView) findViewById(R.id.act_search_house_additional_info);
 		adapter = new SearchHouseArtifactRequirementAdapter(this, estateLabels);
 		gridViewAdditionalInfo.setAdapter(adapter);
 		
-		rbOneRoom = (RadioButton) findViewById(R.id.rb_one_room);
-		rbTwoRooms = (RadioButton) findViewById(R.id.rb_two_rooms);
-		rbThreeRooms = (RadioButton) findViewById(R.id.rb_three_rooms);
-		rbFourRooms = (RadioButton) findViewById(R.id.rb_four_rooms);
 		
 		
 		tvCommit = (TextView) findViewById(R.id.act_search_house_artifact_requirement_commit_tv);
@@ -150,10 +152,6 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		lltWhere.setOnClickListener(this);
 		lltMonthlyPay.setOnClickListener(this);
 		
-		rbOneRoom.setOnCheckedChangeListener(this);
-		rbTwoRooms.setOnCheckedChangeListener(this);
-		rbThreeRooms.setOnCheckedChangeListener(this);
-		rbFourRooms.setOnCheckedChangeListener(this);
 		
 		
 		tvCommit.setOnClickListener(this);
@@ -191,6 +189,36 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
                 }
             }
         };
+        
+        gridViewHouseRooms.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				int size = houseRooms.size();
+				for (int i = 0; i < size; i++) {
+					TextValueBean temp = houseRooms.get(i);
+					if (position == i) {
+						temp.setSelected(!temp.isSelected());
+					} else {
+						temp.setSelected(false);
+					}
+				}
+				
+				houseRoomAdapter.notifyDataSetChanged();
+			}
+		});
+        
+        gridViewAdditionalInfo.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				TextValueBean temp = estateLabels.get(position);
+				temp.setSelected(!temp.isSelected());
+				adapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	@Override
@@ -229,8 +257,18 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	        	jumper = jumper.putString(SearchHouseArtifactResultActivity.INTENT_MONTHLY_PAY, monthlyPayCondition.getValue());
 	        }
 	        
-	        jumper.putInt(SearchHouseArtifactResultActivity.INTENT_ROOMS, rooms)
-			.putString(SearchHouseArtifactResultActivity.INTENT_REMARKS, additionalInfo);
+	        for (TextValueBean temp : houseRooms) {
+	        	if (temp.isSelected()) {
+	        		tvHouseRooms = temp;
+	        		break;
+	        	}
+	        }
+	        
+	        if (tvHouseRooms != null) {
+	        	jumper = jumper.putString(SearchHouseArtifactResultActivity.INTENT_ROOMS, tvHouseRooms.getValue());
+	        }
+	         
+	        jumper.putString(SearchHouseArtifactResultActivity.INTENT_REMARKS, additionalInfo);
 		    jumper.jump(this, SearchHouseArtifactResultActivity.class);
 			break;
 		case R.id.act_search_house_artifact_budget_llt:   //  预算
@@ -245,25 +283,6 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		}
 	}
 
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		if (isChecked) {
-			switch (buttonView.getId()) {
-			case R.id.rb_one_room:  // 一房
-				rooms = 1;
-				break;
-			case R.id.rb_two_rooms:  // 二房
-				rooms = 2;
-				break;
-			case R.id.rb_three_rooms:  // 三房
-				rooms = 3;
-				break;
-			case R.id.rb_four_rooms:  // 四房
-				rooms = 4;
-				break;
-			}
-		}
-	}
 	
 	public void getConditionList(final String conditionName) {
         ActionImpl actionImpl = ActionImpl.newInstance(this);
@@ -344,12 +363,31 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	
 	private void getHouseRoomsData() {
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		
+		actionImpl.getSearchHouseArtifactHouseType(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON.parseArray(result.getData(), TextValueBean.class);
+				houseRooms.addAll(temp);
+				houseRoomAdapter.notifyDataSetChanged();
+				setGridHeight(gridViewHouseRooms);
+			}
+		});
 	}
 	
 	private void setGridHeight(GridView gridView) {
 		
-		int count = adapter.getCount();
+		int count = gridView.getAdapter().getCount();
 		int column = 4;
         int displayRowNum = 0;
         int tmp = count % column;
