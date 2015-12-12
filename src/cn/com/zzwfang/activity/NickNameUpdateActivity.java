@@ -1,7 +1,5 @@
 package cn.com.zzwfang.activity;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -167,7 +165,7 @@ public class NickNameUpdateActivity extends BaseActivity implements
 			ToastUtils.SHORT.toast(this, "请输入昵称");
 			return;
 		}
-		if (nickName.getBytes().length > 20) {
+		if (nickName.getBytes().length > 14) {
 			ToastUtils.SHORT.toast(this, "您输入的昵称过长");
 			return;
 		}

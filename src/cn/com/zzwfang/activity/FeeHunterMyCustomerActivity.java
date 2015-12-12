@@ -112,6 +112,11 @@ OnFooterLoadListener {
 		}
 	    CityBean cityBean = ContentUtils.getCityBean(this);
 	    if (cityBean == null) {
+	    	if (isRefresh) {
+				pullView.onHeaderRefreshFinish();
+			} else {
+				pullView.onFooterLoadFinish();
+			}
 	        return;
 	    }
 		if (currentConditon != null) {
@@ -148,6 +153,7 @@ OnFooterLoadListener {
 					}
 					ArrayList<FeeHunterRecommendClientBean> temp = (ArrayList<FeeHunterRecommendClientBean>) JSON.parseArray(result.getData(), FeeHunterRecommendClientBean.class);
 					myCustomers.addAll(temp);
+					pageIndex++;
 					adapter.notifyDataSetChanged();
 					if (isRefresh) {
 						pullView.onHeaderRefreshFinish();
@@ -184,6 +190,8 @@ OnFooterLoadListener {
 			public void rc0(RequestEntity entity, Result result) {
 				ArrayList<FeeHunterMyCustomerConditionBean> temp = (ArrayList<FeeHunterMyCustomerConditionBean>) JSON.parseArray(result.getData(), FeeHunterMyCustomerConditionBean.class);
 				conditions.addAll(temp);
+				currentConditon = conditions.get(0);
+				getMyCustomer(true);
 			}
 		});
 				

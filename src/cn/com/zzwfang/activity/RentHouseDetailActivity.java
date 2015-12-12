@@ -191,7 +191,7 @@ OnPageChangeListener {
 			finish();
 			break;
 		case R.id.act_rent_house_detail_more:  // // 更多 （收藏  分享）
-			PopViewHelper.showMoreShareAndAttention(this, tvMore, onMoreShareAndAttentionListener);
+			PopViewHelper.showMoreShareAndAttention(this, tvMore, false, onMoreShareAndAttentionListener);
 			break;
 		case R.id.act_rent_house_detail_agent_dial:   // 拨打经纪人电话
 			if (rentHouseDetailBean != null) {

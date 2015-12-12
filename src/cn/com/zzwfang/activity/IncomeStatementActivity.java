@@ -1,13 +1,16 @@
 package cn.com.zzwfang.activity;
 
-import com.easemob.chat.core.ac;
+import java.util.ArrayList;
+
+import com.alibaba.fastjson.JSON;
 
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.IncomeStatementAdapter;
+import cn.com.zzwfang.bean.IncomeStatementBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,6 +31,9 @@ public class IncomeStatementActivity extends BaseActivity implements OnClickList
 	private TextView tvBack;
 	private ListView lstIncomeStatement;
 	
+	private ArrayList<IncomeStatementBean> incomeStatements = new ArrayList<IncomeStatementBean>();
+	private IncomeStatementAdapter adapter;
+	
 	private String houseSourceId;
 	
 	@Override
@@ -43,6 +49,9 @@ public class IncomeStatementActivity extends BaseActivity implements OnClickList
 		setContentView(R.layout.act_income_statement);
 		tvBack = (TextView) findViewById(R.id.act_income_statement_back);
 		lstIncomeStatement = (ListView) findViewById(R.id.act_income_statement_lst);
+		
+		adapter = new IncomeStatementAdapter(this, incomeStatements);
+		lstIncomeStatement.setAdapter(adapter);
 		
 		tvBack.setOnClickListener(this);
 	}
@@ -75,6 +84,11 @@ public class IncomeStatementActivity extends BaseActivity implements OnClickList
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				// TODO Auto-generated method stub
+				ArrayList<IncomeStatementBean> temp = (ArrayList<IncomeStatementBean>) JSON.parseArray(result.getData(), IncomeStatementBean.class);
+				if (temp != null) {
+					incomeStatements.addAll(temp);
+					adapter.notifyDataSetChanged();
+				}
 				
 			}
 		});

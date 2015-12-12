@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
@@ -54,6 +53,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	 * 跳转选择城市
 	 */
 	public static final int CODE_SELECT_CITY = 1000;
+	
+	public static final int CODE_LOGIN = 1001;
 	
 	private TextView tvLocation, edtSearchProperties;
 	
@@ -122,7 +123,6 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		edtSearchProperties.setOnClickListener(this);
 		imgShangjin.setOnClickListener(this);
 		
-//		RSAUtil.testRsa();
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
                 .setAheadOutAnimation(R.anim.alpha_out_style1)
                 .setBackInAnimation(R.anim.alpha_in_style1)
                 .setBackOutAnimation(R.anim.slide_out_style1)
-	            .jump(this, LoginActivity.class);
+                .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
 			}
 			break;
 		}
@@ -216,7 +216,24 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
 				    }
 				}
-				
+				break;
+			case CODE_LOGIN:  // 登录成功
+				int userType = ContentUtils.getUserType(getActivity());
+				if (userType == 2) {
+					Jumper.newJumper()
+		            .setAheadInAnimation(R.anim.activity_push_in_right)
+		            .setAheadOutAnimation(R.anim.activity_alpha_out)
+		            .setBackInAnimation(R.anim.activity_alpha_in)
+		            .setBackOutAnimation(R.anim.activity_push_out_right)
+		            .jump(this, FeeHunterInfoActivity.class);
+				} else {
+					Jumper.newJumper()
+		            .setAheadInAnimation(R.anim.activity_push_in_right)
+		            .setAheadOutAnimation(R.anim.activity_alpha_out)
+		            .setBackInAnimation(R.anim.activity_alpha_in)
+		            .setBackOutAnimation(R.anim.activity_push_out_right)
+		            .jump(this, ShangJinLieRenActivity.class);
+				}
 				break;
 			}
 		}

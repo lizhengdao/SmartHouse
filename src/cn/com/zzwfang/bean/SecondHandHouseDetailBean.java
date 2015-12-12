@@ -114,8 +114,16 @@ public class SecondHandHouseDetailBean extends BaseBean {
 	
 	private String Share;
 	
+	private String No;
 	
-	
+
+	public String getNo() {
+		return No;
+	}
+
+	public void setNo(String no) {
+		No = no;
+	}
 
 	public String getShare() {
         return Share;

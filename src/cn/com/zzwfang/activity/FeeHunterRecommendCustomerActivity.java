@@ -1,15 +1,21 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
+import com.alibaba.fastjson.JSON;
+
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.IdNameBean;
 import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
-import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,6 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -36,16 +43,21 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 
 	private static final int REQUEST_CONTACT = 1;
 
-	private static final int REQUEST_ESTATE = 2;
-
-	private TextView tvBack, tvSysContacts, tvSelectEstateName, tvCommit;
+	private TextView tvBack, tvSysContacts, tvArea, tvCommit;
 
 	private EditText edtContactName, edtContactPhone, edtMinPrice, edtMaxPrice,
-			edtMonthlyPay, edtRemark;
+			edtRemark;
+	
+	private LinearLayout lltArea;
 
 	private RadioButton rbBuy, rbRent;
 
-	private IdNameBean idNameBean;
+	// 区域
+    private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
+    // 区域选择监听
+ 	private OnConditionSelectListener onAreaSelectListener;
+ 	private TextValueBean areaCondition; // 区域
+    
 	
 	/**
 	 * 0(求购)  1（租求购）
@@ -57,6 +69,7 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		super.onCreate(arg0);
 
 		initView();
+		getAreaList();
 	}
 
 	private void initView() {
@@ -68,20 +81,32 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 
 		tvSysContacts = (TextView) findViewById(R.id.act_fee_hunter_recommend_customer_sys_contacts);
 		edtContactName = (EditText) findViewById(R.id.act_fee_hunter_recommend_second_hand_house_name);
+		tvArea = (TextView) findViewById(R.id.act_fee_hunter_recommend_customer_area);
 		edtContactPhone = (EditText) findViewById(R.id.act_fee_hunter_recommend_second_hand_house_phone1);
 		edtMinPrice = (EditText) findViewById(R.id.act_fee_hunter_recommend_customer_min_price);
 		edtMaxPrice = (EditText) findViewById(R.id.act_fee_hunter_recommend_customer_max_price);
-		edtMonthlyPay = (EditText) findViewById(R.id.act_fee_hunter_recommend_customer_monthly_pay);
-		tvSelectEstateName = (TextView) findViewById(R.id.act_fee_hunter_recommend_customer_estate_name);
 		tvCommit = (TextView) findViewById(R.id.act_fee_hunter_recommend_customer_commit);
 		edtRemark = (EditText) findViewById(R.id.act_fee_hunter_recommend_customer_mark);
+		lltArea = (LinearLayout) findViewById(R.id.act_fee_hunter_recommend_customer_area_llt);
 
 		tvBack.setOnClickListener(this);
 		rbBuy.setOnCheckedChangeListener(this);
 		rbRent.setOnCheckedChangeListener(this);
 		tvSysContacts.setOnClickListener(this);
-		tvSelectEstateName.setOnClickListener(this);
 		tvCommit.setOnClickListener(this);
+		lltArea.setOnClickListener(this);
+		
+		onAreaSelectListener = new OnConditionSelectListener() {
+			
+			@Override
+			public void onConditionSelect(TextValueBean txtValueBean) {
+				// TODO Auto-generated method stub
+				areaCondition = txtValueBean;
+				if (areaCondition != null) {
+					tvArea.setText(areaCondition.getText());
+				}
+			}
+		};
 
 	}
 
@@ -97,15 +122,11 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 			intent.setData(ContactsContract.Contacts.CONTENT_URI);
 			startActivityForResult(intent, REQUEST_CONTACT);
 			break;
-		case R.id.act_fee_hunter_recommend_customer_estate_name:
-			Jumper.newJumper()
-					.setAheadInAnimation(R.anim.activity_push_in_right)
-					.setAheadOutAnimation(R.anim.activity_alpha_out)
-					.setBackInAnimation(R.anim.activity_alpha_in)
-					.setBackOutAnimation(R.anim.activity_push_out_right)
-					.jumpForResult(this, SelectEstateActivity.class,
-							REQUEST_ESTATE);
-
+			
+		case R.id.act_fee_hunter_recommend_customer_area_llt:
+			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
+					onAreaSelectListener);
+			
 			break;
 
 		case R.id.act_fee_hunter_recommend_customer_commit:
@@ -165,20 +186,14 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		    return;
 		}
 
-		String monthlyPay = edtMonthlyPay.getText().toString();
-		if (TextUtils.isEmpty(monthlyPay)) {
+		if (areaCondition == null) {
 			tvCommit.setClickable(true);
-			ToastUtils.SHORT.toast(this, "请输入月供");
-			return;
+		    ToastUtils.SHORT.toast(this, "请选择意向区域");
+		    return;
 		}
 
 		String remark = edtRemark.getText().toString();
 
-		if (idNameBean == null) {
-			tvCommit.setClickable(true);
-			ToastUtils.SHORT.toast(this, "请选择楼盘名称");
-			return;
-		}
 		CityBean cityBean = ContentUtils.getCityBean(this);
 		if (cityBean == null) {
 			tvCommit.setClickable(true);
@@ -187,9 +202,9 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 		}
 		String userId = ContentUtils.getUserId(this);
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.recommendFeeHunterCustomer(trade, idNameBean.getId(), minPrice,
-				maxPrice, monthlyPay, contactName, contactPhone, remark,
-				userId, cityBean.getSiteId(), new ResultHandlerCallback() {
+		actionImpl.recommendFeeHunterCustomer(trade, minPrice,
+				maxPrice, contactName, contactPhone, remark,
+				userId, cityBean.getSiteId(), areaCondition.getValue(), new ResultHandlerCallback() {
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
@@ -250,13 +265,40 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 				
 				edtContactPhone.setText(userPhone);
 				break;
-
-			case REQUEST_ESTATE:
-				idNameBean = (IdNameBean) data
-						.getSerializableExtra(SelectEstateActivity.INTENT_ESTATE);
-				tvSelectEstateName.setText(idNameBean.getName());
-				break;
 			}
 		}
+	}
+	
+	private void getAreaList() {
+		
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		if (cityBean == null) {
+			ToastUtils.SHORT.toast(this, "请选择当前所在城市");
+			return;
+		}
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getAreaList(cityBean.getSiteId(), new ResultHandlerCallback() {
+
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+
+			}
+
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+
+			}
+
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
+						.parseArray(result.getData(), TextValueBean.class);
+				areas.addAll(temp);
+				if (areas != null && areas.size() > 0) {
+					areas.remove(0);
+				}
+			}
+		});
 	}
 }

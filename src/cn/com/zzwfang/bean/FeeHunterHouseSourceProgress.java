@@ -29,7 +29,7 @@ public class FeeHunterHouseSourceProgress extends BaseBean {
 	private String EstName;
 	
 	/**
-	 * 时间
+	 * 房源进度时间
 	 */
 	private String Date;
 	

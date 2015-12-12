@@ -73,6 +73,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			tvDecoration, tvEstateName, tvAgentName, tvAgentPhone,
 			tvPhotoIndex, tvSeeHouseRecord, tvNearbyDetail,
 			tvSandTableDisplay, tvTransactionHistory, tvInnerThreeDimensionDisplay;
+	private TextView tvHouseSourceId;
 	
 	private TextView tvApartmentLayout, tvBidPrice, tvBidDate, tvFollowPersons;
 	
@@ -147,6 +148,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvApartmentLayout = (TextView) findViewById(R.id.act_second_hand_house_detail_apartment_layout);
 		tvBidDate = (TextView) findViewById(R.id.act_second_hand_house_detail_bid_date);
 		tvFollowPersons = (TextView) findViewById(R.id.act_second_hand_house_detail_follow_persons);
+		tvHouseSourceId = (TextView) findViewById(R.id.act_second_hand_house_detail_num_tv);
 		
 		lineSandTableDisplay = findViewById(R.id.act_second_hand_house_detail_sand_table_display_line);
 		lineInnerThreeDimensionDisplay = findViewById(R.id.act_second_hand_house_detail_inner_three_dimession_display_line);
@@ -224,7 +226,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		case R.id.act_second_hand_house_detail_title: // 详情title
 			break;
 		case R.id.act_second_hand_house_detail_more: // 更多 （收藏  分享）
-			PopViewHelper.showMoreShareAndAttention(this, tvMore, onMoreShareAndAttentionListener);
+			PopViewHelper.showMoreShareAndAttention(this, tvMore, true, onMoreShareAndAttentionListener);
 			break;
 		case R.id.act_second_handhouse_see_house_record_tv: // 看房记录
 			if (secondHandHouseDetail != null) {
@@ -390,6 +392,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 					+ secondHandHouseDetail.getTotalFloor() + "层");
 			tvDirection.setText(secondHandHouseDetail.getDirection());
 			tvDecoration.setText(secondHandHouseDetail.getDecoration());
+			tvHouseSourceId.setText(secondHandHouseDetail.getNo());
 			tvEstateName.setText(secondHandHouseDetail.getEstateName());
 			
 			tvBidPrice.setText(secondHandHouseDetail.getPrice() + "万");

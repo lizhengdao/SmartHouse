@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -47,7 +49,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 	private EditText edtSquare;
 	
 	private EditText edtWhichBuilding, edtWhichUnit, edtWhichNo;
-	private EditText edtSourceName; 
+	private EditText edtSourceName, edtSourceDesc; 
 	
 	private EditText edtOwnerName;
 	private TextView tvPhone;
@@ -113,6 +115,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 		edtWhichNo = (EditText) findViewById(R.id.act_proxy_sell_house_which_num);
 		
 		edtSourceName = (EditText) findViewById(R.id.act_proxy_sell_house_source_title);
+		edtSourceDesc = (EditText) findViewById(R.id.act_proxy_sell_house_source_desc);
 		edtOwnerName = (EditText) findViewById(R.id.act_proxy_sell_house_name);
 		
 		cbxSex = (CheckBox) findViewById(R.id.act_proxy_sell_house_sex_cbx);
@@ -161,6 +164,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 
 	@Override
 	public void onClick(View v) {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		switch (v.getId()) {
 		case R.id.act_proxy_sell_house_back:
 			finish();
@@ -175,12 +179,15 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 					REQUEST_ESTATE);
 			break;
 		case R.id.act_proxy_sell_house_select_house_type:
+			imm.hideSoftInputFromWindow(lltHouseType.getWindowToken(), 0);
 			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType, houseTypes, onHouseTypeSelectListener);
 			break;
 		case R.id.act_proxy_sell_house_direction_llt:
+			imm.hideSoftInputFromWindow(lltHouseType.getWindowToken(), 0);
 			PopViewHelper.showSelectHouseTypePopWindow(this, lltDirection, directions, onDirectionSelectListener);
 			break;
 		case R.id.act_proxy_sell_house_decoration_llt:
+			imm.hideSoftInputFromWindow(lltHouseType.getWindowToken(), 0);
 			PopViewHelper.showSelectHouseTypePopWindow(this, lltDecoration, decorations, onDecorationSelectListener);
 			break;
 		case R.id.act_proxy_sell_house_commit:
@@ -306,6 +313,13 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 			return;
 		}
 		
+		String desc = edtSourceDesc.getText().toString();
+		if (TextUtils.isEmpty(desc)) {
+			tvCommit.setClickable(true);
+			ToastUtils.SHORT.toast(this, "请输入房源描述");
+			return;
+		}
+		
 		String name = edtOwnerName.getText().toString();
 		if (TextUtils.isEmpty(name)) {
 			tvCommit.setClickable(true);
@@ -323,17 +337,16 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 		}
 		String userId = ContentUtils.getUserId(this);
 		
-		String price = null;
-		
+		String phone = ContentUtils.getLoginPhone(this);
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		actionImpl.entrustSellHouse(idNameBean.getId(),
 				idNameBean.getName(), ridgepole, unit,
-				roomNo, houseTypeCondition.getValue(), price,
+				roomNo, houseTypeCondition.getValue(),
 				countFang, halls, wc,
 				square, directionCondition.getValue(), totalFloor,
-				floor, decoratonCondition.getValue(), title,
+				floor, decoratonCondition.getValue(), title, desc,
 				cityBean.getSiteId(), userId, name,
-				sex, new ResultHandlerCallback() {
+				sex, phone, new ResultHandlerCallback() {
 					
 					@Override
 					public void rc999(RequestEntity entity, Result result) {

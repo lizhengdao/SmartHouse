@@ -54,7 +54,7 @@ public class MessageAdapter extends BaseAdapter {
 		tvName.setText(msgBean.getUserName());
 		ArrayList<MessageBean> msgs = msgBean.getMessages();
 		if (msgs != null && msgs.size() > 0) {
-			MessageBean msg = msgs.get(0);
+			MessageBean msg = msgs.get(msgs.size() - 1);
 			if (msg != null) {
 				tvMsg.setText(msg.getMessage());
 			}

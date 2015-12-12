@@ -40,7 +40,6 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 		super.onCreate(arg0);
 		setContentView(R.layout.act_message);
 		initView();
-		getContacts();
 	}
 	
 	private void initView() {
@@ -52,6 +51,12 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 		
 		tvBack.setOnClickListener(this);
 		lstMessage.setOnItemClickListener(this);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		getContacts();
 	}
 
 	@Override
@@ -83,6 +88,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 				Log.i("--->", "msg activity data -- " + result.getData());
 				
 				ArrayList<IMMessageBean> temp = (ArrayList<IMMessageBean>) JSON.parseArray(result.getData(), IMMessageBean.class);
+				imMessageBeans.clear();
 				imMessageBeans.addAll(temp);
 				adapter.notifyDataSetChanged();
 			}

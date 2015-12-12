@@ -949,12 +949,8 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//		requestParams.put("sign", "1111");
-//		requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
 		requestParams.put("userId", userId);
-//		requestParams.put("pageSize", pageSize + "");
-//		requestParams.put("pageIndex", pageIndex + "");
 		
 		Options opt = new Options();
 		opt.fromDiskCacheAble = false;
@@ -1119,8 +1115,6 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1150,8 +1144,6 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("siteId", cityId);
@@ -1386,21 +1378,18 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void recommendFeeHunterCustomer(int trade, String estateId, String minPrice,
-			String maxPrice, String monthlPay, String contactName,
-			String phone, String remark, String userId, String citeId,
+	public void recommendFeeHunterCustomer(int trade, String minPrice,
+			String maxPrice, String contactName,
+			String phone, String remark, String userId, String citeId, String area,
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//		requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
-		requestParams.put("trade", trade + "");
-        requestParams.put("estateId", estateId);
+		
+		requestParams.put("Area", area);
         requestParams.put("maxPrice", maxPrice);
         requestParams.put("minPrice", minPrice);
-        requestParams.put("monthlyPay", monthlPay);
         requestParams.put("name", contactName);
         requestParams.put("telNum", phone);
         if (!TextUtils.isEmpty(remark)) {
@@ -1408,6 +1397,8 @@ public class ActionImpl implements Action {
         }
         requestParams.put("userId", userId);
         requestParams.put("siteId", citeId);
+        requestParams.put("trade", trade + "");
+        
         
 		Options opt = new Options();
 		opt.fromDiskCacheAble = false;
@@ -1586,15 +1577,14 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void getFeeHunterRecommendHouseSourceList(String userId,
+	public void getFeeHunterRecommendHouseSourceList(String userId, String cityId,
 			int pageSize, int pageIndex, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        requestParams.put("siteId", cityId);
         requestParams.put("pageIndex", pageIndex + "");
         requestParams.put("pageSize", pageSize + "");
         
@@ -2022,8 +2012,6 @@ public class ActionImpl implements Action {
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		
 		encryptTimeStamp(requestParams);
         requestParams.put("key", contactId);
@@ -2121,53 +2109,40 @@ public class ActionImpl implements Action {
 	@Override
 	public void entrustSellHouse(String estateId, String estateName,
 			String ridgepole, String unit, String roomNo, String type,
-			String price, String countFang, String halls, String wc,
+			String countFang, String halls, String wc,
 			String square, String direction, String totalFloor, String floor,
-			String decoration, String title, String cityId, String userId,
-			String Name, boolean sex, ResultHandlerCallback callback) {
+			String decoration, String title, String desc, String cityId, String userId,
+			String Name, boolean sex, String phone, ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
         
 		encryptTimeStamp(requestParams);
-        requestParams.put("estateId", estateId);
-        requestParams.put("estateName", estateName);
-        requestParams.put("ridgepole", ridgepole);
-        requestParams.put("unit", unit);
-        requestParams.put("roomNo", roomNo);
-        if (!TextUtils.isEmpty(type)) {
-        	requestParams.put("type", type);
-        }
-        if (!TextUtils.isEmpty(price)) {
-        	
-        }
+        requestParams.put("EstateId", estateId);
+        requestParams.put("EstateName", estateName);
+        requestParams.put("Ridgepole", ridgepole);
+        requestParams.put("Unit", unit);
+        requestParams.put("RoomNo", roomNo);
+        requestParams.put("Type", type);
 //        requestParams.put("price", "50");
-        requestParams.put("countFang", countFang);
-        requestParams.put("hall", halls);
-        requestParams.put("wc", wc);
-        requestParams.put("acreage", square);
-        if (!TextUtils.isEmpty(direction)) {
-        	requestParams.put("propertyDirection", direction);
-        }
-        
-        requestParams.put("floorAll", totalFloor);
-        requestParams.put("floor", floor);
-        if (!TextUtils.isEmpty(decoration)) {
-        	requestParams.put("renovated", decoration);
-        }
-        
-        requestParams.put("title", title);
-        
-        requestParams.put("siteId", cityId);
-        requestParams.put("userId", userId);
-        requestParams.put("name", Name);
+        requestParams.put("CountFang", countFang);
+        requestParams.put("Hall", halls);
+        requestParams.put("Wc", wc);
+        requestParams.put("Acreage", square);
+        requestParams.put("PropertyDirection", direction);
+        requestParams.put("FloorAll", totalFloor);
+        requestParams.put("Floor", floor);
+        requestParams.put("Renovated", decoration);
+        requestParams.put("Title", title);
+        requestParams.put("Description", desc);
+        requestParams.put("SiteId", cityId);
+        requestParams.put("UserId", userId);
+        requestParams.put("Name", Name);
         if (sex) {
-        	requestParams.put("sex", "true");
+        	requestParams.put("Sex", "true");
         } else {
-        	requestParams.put("sex", "false");
+        	requestParams.put("Sex", "false");
         }
-        
+        requestParams.put("TelNum", phone);
         
         
         Options opt = new Options();
@@ -2391,8 +2366,6 @@ public class ActionImpl implements Action {
     public void getClientProgress(String id, ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
         
         encryptTimeStamp(requestParams);
         requestParams.put("id", id);
@@ -2504,6 +2477,103 @@ public class ActionImpl implements Action {
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_INCOME_STATEMENT));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getSearchHouseArtifactHouseType(ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+        
+        encryptTimeStamp(requestParams);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_SEARCH_HOUSE_ARTIFACT_HOUSE_TYPE));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getClientInfoChange(String clientId,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+        
+        encryptTimeStamp(requestParams);
+        requestParams.put("Id", clientId);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_CLIENT_INFO_CHANGE));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getHouseSourceInfoChange(String houseSourceId,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+        
+        encryptTimeStamp(requestParams);
+        requestParams.put("Id", houseSourceId);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSE_SOURCE_INFO_CHANGE));
         requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
         

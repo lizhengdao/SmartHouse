@@ -177,5 +177,11 @@
         android:text="信息变动"
         android:textColor="@color/color_575757"
         android:textSize="15sp" />
+    
+    <ListView
+        android:id="@+id/act_fee_hunter_progress_info_change"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"/>
 
 </LinearLayout>

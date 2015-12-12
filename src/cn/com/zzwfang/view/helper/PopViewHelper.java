@@ -1122,9 +1122,18 @@ public class PopViewHelper {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				rightListData.clear();
-				rightListData.addAll(conditions.get(position).getChildren());
-				rightAdapter.notifyDataSetChanged();
+                if (position == 0) {
+                	popupWindow.dismiss();
+                	FeeHunterMyCustomerConditionBean allClient = conditions.get(0);
+    				if (onMyCustomerConditionSelectListener != null) {
+    					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(allClient);
+    				}
+				} else {
+					rightListData.clear();
+					rightListData.addAll(conditions.get(position).getChildren());
+					rightAdapter.notifyDataSetChanged();
+				}
+				
 //				if (onMyCustomerConditionSelectListener != null) {
 //					onMyCustomerConditionSelectListener.onMyCustomerConditonSelect(conditions.get(position));
 //				}
@@ -1354,7 +1363,7 @@ public class PopViewHelper {
 	 * @param context
 	 * @param anchorView
 	 */
-	public static void showMoreShareAndAttention(Context context, View anchorView,
+	public static void showMoreShareAndAttention(Context context, View anchorView, boolean isShowAttention,
 			final OnMoreShareAndAttentionListener listener) {
 		View view = View.inflate(context, R.layout.popup_more_share_attention, null);
 		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), LayoutParams.WRAP_CONTENT);
@@ -1367,6 +1376,12 @@ public class PopViewHelper {
 	    
 	    TextView tvShare = (TextView) view.findViewById(R.id.popwindow_more_share);
 	    TextView tvAttention = (TextView) view.findViewById(R.id.popwindow_more_attention);
+	    
+	    if (isShowAttention) {
+	    	tvAttention.setVisibility(View.VISIBLE);
+	    } else {
+	    	tvAttention.setVisibility(View.GONE);
+	    }
 	    
 	    OnClickListener clickListener = new OnClickListener() {
 			

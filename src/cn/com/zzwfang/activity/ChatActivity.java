@@ -30,7 +30,7 @@ import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chat.TextMessageBody;
 
-public class ChatActivity extends BaseActivity implements OnClickListener{  // , EMEventListener, OnMessageSendListener 
+public class ChatActivity extends BaseActivity implements OnClickListener {
 
 	public static final String INTENT_MESSAGE_TO_ID = "intent_message_to_user_id";
 	public static final String INTENT_MESSAGE_TO_NAME = "intent_message_to_user_name";

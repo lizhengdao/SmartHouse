@@ -147,7 +147,7 @@ public class API {
      * 赏金猎人  我的客户
      * 我推荐的客户列表
      */
-    public static final String GET_FEE_HUNTER_MY_CUSTOMER = "BountyHunter/RecommendClient";
+    public static final String GET_FEE_HUNTER_MY_CUSTOMER = "BountyHunter/RecommendClientList";
     
     /**
      * 返回搜索楼盘搜索列表
@@ -306,7 +306,7 @@ public class API {
     public static final String GET_GUIDER_PAGE_DATA = "Other/Guide";
     
     /**
-     * 引导页数据
+     * 客户进度
      */
     public static final String GET_CLIENT_PROGRESS = "BountyHunter/ClientProgress";
     
@@ -324,6 +324,21 @@ public class API {
      * 我的购屋的收支明细
      */
     public static final String GET_INCOME_STATEMENT = "User/Income";
+    
+    /**
+     * 找房神器，几居数据
+     */
+    public static final String GET_SEARCH_HOUSE_ARTIFACT_HOUSE_TYPE = "Other/HouseType";
+    
+    /**
+     * 客户信息变动
+     */
+    public static final String GET_CLIENT_INFO_CHANGE = "BountyHunter/ClientChange";
+    
+    /**
+     * 房源信息变动
+     */
+    public static final String GET_HOUSE_SOURCE_INFO_CHANGE = "BountyHunter/PrpChange";
     
 
 }

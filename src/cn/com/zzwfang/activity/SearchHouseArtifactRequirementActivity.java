@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
 
+import android.app.Notification.Action;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,7 +48,8 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	private TextView tvBack, tvCommit, tvBudget, tvWhere, tvMonthlyPay;
 	
 	private LinearLayout lltBudget, lltWhere, lltMonthlyPay, lltGridContainer;
-	private GridView gridView;
+	private GridView  gridViewHouseRooms;
+	private GridView gridViewAdditionalInfo;
 	private SearchHouseArtifactRequirementAdapter adapter;
 	
 	private RadioButton rbOneRoom, rbTwoRooms, rbThreeRooms, rbFourRooms;
@@ -80,7 +82,7 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
     private ArrayList<TextValueBean> monthlyPay = new ArrayList<TextValueBean>();
     
     /**
-     * 特色标签
+     * 特色标签(补充信息)
      */
     private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
     
@@ -130,9 +132,9 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		tvWhere = (TextView) findViewById(R.id.act_search_house_artifact_wheree_tv);
 		tvMonthlyPay = (TextView) findViewById(R.id.act_search_house_month_pay_tv);
 		
-		gridView = (GridView) findViewById(R.id.act_search_house_additional_info);
+		gridViewAdditionalInfo = (GridView) findViewById(R.id.act_search_house_additional_info);
 		adapter = new SearchHouseArtifactRequirementAdapter(this, estateLabels);
-		gridView.setAdapter(adapter);
+		gridViewAdditionalInfo.setAdapter(adapter);
 		
 		rbOneRoom = (RadioButton) findViewById(R.id.rb_one_room);
 		rbTwoRooms = (RadioButton) findViewById(R.id.rb_two_rooms);
@@ -285,7 +287,7 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
                 } else if (EstateLabel.equals(conditionName)) {
                     estateLabels.addAll(temp);
                     adapter.notifyDataSetChanged();
-                    setGridHeight(gridView);
+                    setGridHeight(gridViewAdditionalInfo);
                 }
             }
         });
@@ -338,6 +340,11 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
                 monthlyPay.addAll(temp);
             }
         });
+	}
+	
+	private void getHouseRoomsData() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		
 	}
 	
 	private void setGridHeight(GridView gridView) {

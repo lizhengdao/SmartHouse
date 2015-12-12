@@ -107,7 +107,7 @@
                     android:layout_gravity="right"
                     android:background="@color/color_app_theme"
                     android:drawablePadding="10dp"
-                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:drawableRight="@drawable/ic_right_arrow_white"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
@@ -123,10 +123,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="1dp"
-                android:inputType="phone"
-                android:maxLength="11"
                 android:background="@color/white"
                 android:hint="输入电话号码"
+                android:inputType="phone"
+                android:maxLength="11"
                 android:paddingLeft="10dp"
                 android:textColor="@color/color_b9b9b9"
                 android:textSize="15sp" />
@@ -135,10 +135,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
                 android:background="@color/white"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -151,119 +151,95 @@
                     android:text="意向总价"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
-                
-                <LinearLayout 
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:weightSum="2">
-                    
-                    <EditText 
+                    android:weightSum="2" >
+
+                    <EditText
                         android:id="@+id/act_fee_hunter_recommend_customer_min_price"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
                         android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
                         android:background="@color/white"
-                        android:hint="意向总价最低范围"
                         android:gravity="center"
-                        android:singleLine="true"
+                        android:hint="意向总价最低范围"
                         android:inputType="numberDecimal"
+                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="12sp"/>
-                    
-                    <TextView 
+                        android:textSize="12sp" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="万  至"
                         android:textColor="@color/black"
-                        android:textSize="14sp"/>
-                    
-                    <EditText 
+                        android:textSize="14sp" />
+
+                    <EditText
                         android:id="@+id/act_fee_hunter_recommend_customer_max_price"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:hint="意向总价最高范围"
                         android:gravity="center"
-                        android:singleLine="true"
+                        android:hint="意向总价最高范围"
                         android:inputType="numberDecimal"
+                        android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textSize="12sp"/>
-                    
-                    <TextView 
+                        android:textSize="12sp" />
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
                         android:layout_marginRight="4dp"
+                        android:gravity="center_vertical"
                         android:text="万 "
                         android:textColor="@color/black"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
-            
+
+            <!-- 意向区域 -->
+
             <LinearLayout
+                android:id="@+id/act_fee_hunter_recommend_customer_area_llt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:gravity="center_vertical"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" >
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="match_parent"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="月供"
+                    android:text="意向区域"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
-                
-                <EditText 
-                        android:id="@+id/act_fee_hunter_recommend_customer_monthly_pay"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/white"
-                        android:hint="月供"
-                        android:inputType="numberDecimal"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"/>
-                
-                <TextView 
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginRight="10dp"
-                        android:text="元"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"/>
-                
-            </LinearLayout>
 
-            <TextView
-                android:id="@+id/act_fee_hunter_recommend_customer_estate_name"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableRight="@drawable/ic_right_arrow"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="请选择楼盘名称"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/act_fee_hunter_recommend_customer_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:gravity="center_vertical"
+                    android:hint="请选择意向区域"
+                    android:textColor="@color/color_b9b9b9"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/act_fee_hunter_recommend_customer_mark"

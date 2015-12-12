@@ -50,7 +50,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	
 	private IdNameBean idNameBean;
 	
-	private int trade = 0;
+	private int trade = 1;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -126,10 +126,10 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 		if (isChecked) {
 			switch (buttonView.getId()) {
 			case R.id.act_fee_hunter_recommend_owner_rb_rent:  // 租房
-				trade = 0;
+				trade = 1;
 				break;
 			case R.id.act_fee_hunter_recommend_owner_rb_sell:  // 售房
-				trade = 1;
+				trade = 0;
 				break;
 			case R.id.act_fee_hunter_recommend_owner_rb_rent_sell:  // 租售
 				trade = 2;
@@ -228,6 +228,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
 						ToastUtils.SHORT.toast(FeeHunterRecommendHouseSourceActivity.this, "推荐房源成功");
+						finish();
 					}
 				});
 	}

@@ -87,9 +87,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			
 		case R.id.act_login_forget_pwd_tv:   //  忘记密码
 			Jumper.newJumper()
-            .setAheadInAnimation(R.anim.alpha_out_style1)
-            .setAheadOutAnimation(R.anim.alpha_in_style1)
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
             .jump(this, ForgetPwdActivity.class);
+			
 			break;
 		}
 	}
@@ -164,13 +167,15 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
+						setResult(RESULT_OK);
 						ContentUtils.setUserLoginStatus(LoginActivity.this, true);
 						ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
-						Jumper.newJumper()
-			            .setAheadInAnimation(R.anim.zoom_in_style1)
-			            .setAheadOutAnimation(R.anim.zoom_out_style1)
-			            .jump(LoginActivity.this, MainActivity.class);
-						tvLogin.setClickable(true);
+//						Jumper.newJumper()
+//			            .setAheadInAnimation(R.anim.zoom_in_style1)
+//			            .setAheadOutAnimation(R.anim.zoom_out_style1)
+//			            .jump(LoginActivity.this, MainActivity.class);
+//						tvLogin.setClickable(true);
+						finish();
 					}
 				});
 			}

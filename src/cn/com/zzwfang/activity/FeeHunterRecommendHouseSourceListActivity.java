@@ -3,6 +3,7 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.FeeHunterRecommendHouseSourceListAdapter;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.FeeHunterRecommendHouseSourceListItem;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -91,7 +93,14 @@ public class FeeHunterRecommendHouseSourceListActivity extends BaseActivity
 			pageIndex = 1;
 		}
 		String userId = ContentUtils.getUserId(this);
-		actionImpl.getFeeHunterRecommendHouseSourceList(userId, 10, pageIndex,
+		if (TextUtils.isEmpty(userId)) {
+			return;
+		}
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		if (cityBean == null) {
+			return;
+		}
+		actionImpl.getFeeHunterRecommendHouseSourceList(userId, cityBean.getSiteId(), 10, pageIndex,
 				new ResultHandlerCallback() {
 
 					@Override
@@ -125,6 +134,7 @@ public class FeeHunterRecommendHouseSourceListActivity extends BaseActivity
 								FeeHunterRecommendHouseSourceListItem.class);
 						houseSources.addAll(temp);
 						adapter.notifyDataSetChanged();
+						pageIndex++;
 						if (isRefresh) {
 							pullView.onHeaderRefreshFinish();
 						} else {

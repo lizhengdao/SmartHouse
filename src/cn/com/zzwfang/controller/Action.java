@@ -431,9 +431,9 @@ public interface Action {
 	 *            站点ID
 	 * @param callback
 	 */
-	void recommendFeeHunterCustomer(int trade, String estateId, String minPrice,
-			String maxPrice, String monthlPay, String contactName,
-			String phone, String remark, String userId, String citeId,
+	void recommendFeeHunterCustomer(int trade, String minPrice,
+			String maxPrice, String contactName,
+			String phone, String remark, String userId, String citeId, String area,
 			ResultHandlerCallback callback);
 
 	/**
@@ -507,7 +507,7 @@ public interface Action {
 	 *            当前页码
 	 * @param callback
 	 */
-	void getFeeHunterRecommendHouseSourceList(String userId, int pageSize,
+	void getFeeHunterRecommendHouseSourceList(String userId, String cityId, int pageSize,
 			int pageIndex, ResultHandlerCallback callback);
 
 	/**
@@ -680,11 +680,11 @@ public interface Action {
 	 * @param callback
 	 */
 	void entrustSellHouse(String estateId, String estateName, String ridgepole,
-			String unit, String roomNo, String type, String price,
+			String unit, String roomNo, String type,
 			String countFang, String halls, String wc, String square,
 			String direction, String totalFloor, String floor,
-			String decoration, String title, String cityId,
-			String userId, String Name, boolean sex, ResultHandlerCallback callback);
+			String decoration, String title, String desc, String cityId,
+			String userId, String Name, boolean sex, String phone, ResultHandlerCallback callback);
 	
 	/**
 	 * 委托买房
@@ -760,4 +760,24 @@ public interface Action {
 	 * @param callback
 	 */
 	void getIncomeStatement(String prpId, ResultHandlerCallback callback);
+	
+	/**
+	 * 找房神器 几居数据
+	 * @param callback
+	 */
+	void getSearchHouseArtifactHouseType(ResultHandlerCallback callback);
+	
+	/**
+	 * 客户信息变动
+	 * @param clientId
+	 * @param callback
+	 */
+	void getClientInfoChange(String clientId, ResultHandlerCallback callback);
+	
+	/**
+	 * 房源信息变动
+	 * @param houseSourceId
+	 * @param callback
+	 */
+	void getHouseSourceInfoChange(String houseSourceId, ResultHandlerCallback callback);
 }

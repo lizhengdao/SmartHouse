@@ -11,9 +11,9 @@ import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.util.AppUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.util.RSAUtil;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.GuiderView;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -22,6 +22,7 @@ import android.view.View.OnClickListener;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener, OnClickListener, OnCitySelectedListener {
     
+	public static final int CODE_LOGIN_MINE = 800;
 
 	private ViewPager contentPager;
 	
@@ -119,7 +120,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
                 .setAheadOutAnimation(R.anim.alpha_out_style1)
                 .setBackInAnimation(R.anim.alpha_in_style1)
                 .setBackOutAnimation(R.anim.slide_out_style1)
-	            .jump(this, LoginActivity.class);
+                .jumpForResult(this, LoginActivity.class, CODE_LOGIN_MINE);
 				return;
 			}
 		}
@@ -148,5 +149,17 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener, 
     @Override
     public void onCitySelected(CityBean cityBean) {
         contentAdapter.onCitySelected(cityBean);
+    }
+    
+    @Override
+    protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+    	super.onActivityResult(arg0, arg1, arg2);
+    	if (arg1 == RESULT_OK) {
+    		switch (arg0) {
+    		case CODE_LOGIN_MINE:
+    			clickTab(3);
+    			break;
+    		}
+    	}
     }
 }
