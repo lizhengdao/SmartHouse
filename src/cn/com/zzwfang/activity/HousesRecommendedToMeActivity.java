@@ -130,6 +130,7 @@ public class HousesRecommendedToMeActivity extends BaseActivity implements
 				if (isRefresh) {
 					recommendedHouses.clear();
 				}
+				pageIndex++;
 				recommendedHouses.addAll(temp);
 				adapter.notifyDataSetChanged();
 				if (isRefresh) {

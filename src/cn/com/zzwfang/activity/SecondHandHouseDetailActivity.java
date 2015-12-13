@@ -237,6 +237,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				.setBackOutAnimation(R.anim.activity_push_out_right)
 				.putSerializable(SeeHouseRecordActivity.INTENT_RECORD,
 						secondHandHouseDetail.getInqFollowList())
+//						.putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, secondHandHouseDetail.getEstateId())
 				.jump(this, SeeHouseRecordActivity.class);
 			}
 			

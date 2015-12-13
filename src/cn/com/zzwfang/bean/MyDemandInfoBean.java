@@ -1,7 +1,18 @@
 package cn.com.zzwfang.bean;
 
+/**
+ * 委托买房  自己填的  委托买房需求信息
+ * @author lzd
+ *
+ */
 public class MyDemandInfoBean extends BaseBean {
 
+	private String EstateName;
+	
+	private String MaxPrice;
+	
+	private String MinPrice;
+	
 	/**
 	 * 类型
 	 */
@@ -92,6 +103,25 @@ public class MyDemandInfoBean extends BaseBean {
 	public void setMonthlyPay(String monthlyPay) {
 		MonthlyPay = monthlyPay;
 	}
+	public String getEstateName() {
+		return EstateName;
+	}
+	public void setEstateName(String estateName) {
+		EstateName = estateName;
+	}
+	public String getMaxPrice() {
+		return MaxPrice;
+	}
+	public void setMaxPrice(String maxPrice) {
+		MaxPrice = maxPrice;
+	}
+	public String getMinPrice() {
+		return MinPrice;
+	}
+	public void setMinPrice(String minPrice) {
+		MinPrice = minPrice;
+	}
+	
 	
 	
 }

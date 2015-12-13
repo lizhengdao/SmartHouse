@@ -124,7 +124,7 @@ public class API {
     public static final String GET_ATTENTION_TO_PROPERTY = "User/CollectionAction";
     
     /**
-     * 获取我的房屋列表
+     * 我委托出售的房源列表
      */
     public static final String GET_MY_HOUSE_LIST = "User/MySellPrp";
     
@@ -340,5 +340,6 @@ public class API {
      */
     public static final String GET_HOUSE_SOURCE_INFO_CHANGE = "BountyHunter/PrpChange";
     
+    public static final String GET_HOUSE_SOURCE_FOLLOW_LIST = "User/FollowList";
 
 }

@@ -160,11 +160,26 @@
 
         <TextView
             android:id="@+id/act_fee_hunter_progress_recommend_operator"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:textColor="@color/color_575757"
             android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/act_fee_hunter_progress_complain"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_round_corner_color_f7860c"
+            android:gravity="center"
+            android:text="投诉"
+            android:textColor="@color/white"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <TextView

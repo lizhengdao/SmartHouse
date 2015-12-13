@@ -360,6 +360,7 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 					
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+						setResult(RESULT_OK);
 						finish();
 						ToastUtils.SHORT.toast(ProxySellHouseActivity.this, "提交成功");
 					}

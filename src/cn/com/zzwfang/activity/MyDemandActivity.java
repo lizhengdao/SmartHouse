@@ -9,7 +9,7 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.util.Jumper;
 
 /**
- * 我的需求
+ * 我的需求  (这个页面现在没用了)
  * @author lzd
  *
  */

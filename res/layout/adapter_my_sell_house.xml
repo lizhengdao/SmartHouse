@@ -57,20 +57,44 @@
                 android:textSize="14sp" />
         </FrameLayout>
         
-        <cn.com.zzwfang.view.AutoDrawableTextView
-                android:id="@+id/adapter_my_house_source_info_change"
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <cn.com.zzwfang.view.AutoDrawableTextView
+                android:id="@+id/adapter_my_house_source_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_corner_color_f7860c"
+                android:drawableLeft="@drawable/ic_hourglass_white"
+                android:gravity="center_vertical"
+                android:drawablePadding="2dp"
+                android:padding="4dp"
+                android:text="进度查询"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:left_width="20dp"
+                app:left_height="20dp" />
+            
+            <cn.com.zzwfang.view.AutoDrawableTextView
+                android:id="@+id/adapter_my_house_source_see_house_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:background="@drawable/shape_round_corner_color_f7860c"
                 android:drawableLeft="@drawable/ic_house_source_info_change"
                 android:gravity="center_vertical"
                 android:drawablePadding="2dp"
                 android:padding="4dp"
-                android:text="房源信息变动"
+                android:text="带看记录"
                 android:textColor="@color/white"
                 android:textSize="13sp"
                 app:left_width="20dp"
                 app:left_height="20dp" />
+        </LinearLayout>
+        
+        
 
     </LinearLayout>
 

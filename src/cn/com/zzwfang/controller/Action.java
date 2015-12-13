@@ -295,7 +295,7 @@ public interface Action {
 			ResultHandlerCallback callback);
 
 	/**
-	 * 获取我的房屋列表
+	 * 获取我委托卖的房子列表
 	 * 
 	 * @param userPhone
 	 *            用户的UserID(手机号)
@@ -305,7 +305,7 @@ public interface Action {
 	 *            当前页
 	 * @param callback
 	 */
-	void getMyHouseList(String userPhone, int pageSize, int pageIndex,
+	void getMySellHouseList(String userPhone, String cityId, int pageSize, int pageIndex,
 			ResultHandlerCallback callback);
 
 	/**
@@ -780,4 +780,13 @@ public interface Action {
 	 * @param callback
 	 */
 	void getHouseSourceInfoChange(String houseSourceId, ResultHandlerCallback callback);
+	
+	/**
+	 * 房源公用的带看记录
+	 * @param houseSourceId
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param callback
+	 */
+	void getHouseSourceFollowList(String houseSourceId, int pageIndex, int pageSize, ResultHandlerCallback callback);
 }

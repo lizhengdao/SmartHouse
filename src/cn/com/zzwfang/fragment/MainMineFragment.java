@@ -24,7 +24,7 @@ import cn.com.zzwfang.activity.MainActivity;
 import cn.com.zzwfang.activity.MessageActivity;
 import cn.com.zzwfang.activity.MortgageCalculatorActivity;
 import cn.com.zzwfang.activity.MyConcernHouseResourcesActivity;
-import cn.com.zzwfang.activity.MyDemandActivity;
+import cn.com.zzwfang.activity.MyDemandInfoActivity;
 import cn.com.zzwfang.activity.MyHouseListActivity;
 import cn.com.zzwfang.activity.MyProxyActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
@@ -193,7 +193,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		        .jump(this, MyConcernHouseResourcesActivity.class);
 			}
 			break;
-		case R.id.frag_mine_my_proxy_llt:  //  我的委托
+		case R.id.frag_mine_my_proxy_llt:  //  我的委托  （帮你卖房（我是业主））
 			if (checkLoginStatus()) {
 				Jumper.newJumper()
 		        .setAheadInAnimation(R.anim.activity_push_in_right)
@@ -203,22 +203,21 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 		        .jump(this, MyProxyActivity.class);
 			}
 			break;
-//		case R.id.frag_mine_browse_record_flt:  //  浏览记录
-//			Jumper.newJumper()
-//	        .setAheadInAnimation(R.anim.activity_push_in_right)
-//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
-//	        .setBackInAnimation(R.anim.activity_alpha_in)
-//	        .setBackOutAnimation(R.anim.activity_push_out_right)
-//	        .jump(this, BrowseRecordActivity.class);
-//			break;
-		case R.id.frag_mine_my_demand_llt:  // 我的需求
+		case R.id.frag_mine_my_demand_llt:  // 我的需求  (帮你找房  我是客户)
 			if (checkLoginStatus()) {
+//				Jumper.newJumper()
+//		        .setAheadInAnimation(R.anim.activity_push_in_right)
+//		        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//		        .setBackInAnimation(R.anim.activity_alpha_in)
+//		        .setBackOutAnimation(R.anim.activity_push_out_right)
+//		        .jump(this, MyDemandActivity.class);
+				
 				Jumper.newJumper()
 		        .setAheadInAnimation(R.anim.activity_push_in_right)
 		        .setAheadOutAnimation(R.anim.activity_alpha_out)
 		        .setBackInAnimation(R.anim.activity_alpha_in)
 		        .setBackOutAnimation(R.anim.activity_push_out_right)
-		        .jump(this, MyDemandActivity.class);
+		        .jump(this, MyDemandInfoActivity.class);
 			}
 			break;
 		case R.id.frag_mine_my_house_resources_flt:  // 我的房源
@@ -291,7 +290,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements OnClickLi
 	    if (resultCode == Activity.RESULT_OK) {
 	        switch (requestCode) {
 	        case CODE_SETTING:
-	            ((MainActivity)getActivity()).backToHomeFragment();
+//	            ((MainActivity)getActivity()).backToHomeFragment();
 	            break;
 	        }
 	    }

@@ -1009,15 +1009,14 @@ public class ActionImpl implements Action {
 	}
 
 	@Override
-	public void getMyHouseList(String userPhone, int pageSize, int pageIndex,
+	public void getMySellHouseList(String userPhone, String cityId, int pageSize, int pageIndex,
 			ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//		requestParams.put("sign", "1111");
-//		requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
 		requestParams.put("tel", userPhone);
+		requestParams.put("siteId", cityId);
 		requestParams.put("pageSize", pageSize + "");
 		requestParams.put("pageIndex", pageIndex + "");
 		
@@ -1877,8 +1876,6 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         
@@ -2572,6 +2569,40 @@ public class ActionImpl implements Action {
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSE_SOURCE_INFO_CHANGE));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getHouseSourceFollowList(String houseSourceId, int pageIndex,
+			int pageSize, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+        
+        encryptTimeStamp(requestParams);
+        requestParams.put("Id", houseSourceId);
+        requestParams.put("PageIndex", pageIndex + "");
+        requestParams.put("PageSize", pageSize + "");
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSE_SOURCE_FOLLOW_LIST));
         requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
         

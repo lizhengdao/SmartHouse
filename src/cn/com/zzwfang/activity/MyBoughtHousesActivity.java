@@ -22,7 +22,7 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 
 /**
- * 我的需求 -> 我的购房
+ * 我的需求 -> 我的购房  (这个页面现在没用了)
  * 
  * @author lzd
  * 

@@ -2,14 +2,13 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.bean.MyBoughtHouseBean;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.MyProxySellHouseBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -19,13 +18,17 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnProxyDialogListener;
 
+import com.alibaba.fastjson.JSON;
+
 public class MyProxyActivity extends BaseActivity implements OnClickListener {
 
-	private TextView tvBack, tvSellHouse, tvIBuyHouse, tvSeeMyBoughtHouses;
+	private TextView tvBack, tvSellHouse, tvSeeMyBoughtHouses;
 	
-	private ArrayList<MyBoughtHouseBean> houses = new ArrayList<MyBoughtHouseBean>();
+//	private ArrayList<MyBoughtHouseBean> houses = new ArrayList<MyBoughtHouseBean>();
 	
 	private OnProxyDialogListener onProxyDialogListener;
+	
+	private ArrayList<MyProxySellHouseBean> myProxySellHouses = new ArrayList<MyProxySellHouseBean>();
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -37,12 +40,10 @@ public class MyProxyActivity extends BaseActivity implements OnClickListener {
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_my_proxy_back);
 		tvSellHouse = (TextView) findViewById(R.id.act_my_proxy_sell_house);
-		tvIBuyHouse = (TextView) findViewById(R.id.act_my_proxy_i_buy_house);
 		tvSeeMyBoughtHouses = (TextView) findViewById(R.id.act_my_proxy_see_my_houses); // 我的购房
 		
 		tvBack.setOnClickListener(this);
 		tvSellHouse.setOnClickListener(this);
-		tvIBuyHouse.setOnClickListener(this);
 		tvSeeMyBoughtHouses.setOnClickListener(this);
 		
 		onProxyDialogListener = new OnProxyDialogListener() {
@@ -67,7 +68,8 @@ public class MyProxyActivity extends BaseActivity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getMyBoughtHouses();
+		getMyProxySellHouse();
+//		getMyBoughtHouses();
 	}
 
 	@Override
@@ -84,16 +86,8 @@ public class MyProxyActivity extends BaseActivity implements OnClickListener {
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .jump(this, ProxySellHouseActivity.class);
 			break;
-		case R.id.act_my_proxy_i_buy_house:  // 我要买房
-			Jumper.newJumper()
-	        .setAheadInAnimation(R.anim.activity_push_in_right)
-	        .setAheadOutAnimation(R.anim.activity_alpha_out)
-	        .setBackInAnimation(R.anim.activity_alpha_in)
-	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .jump(this, IWantBuyHouseActivity.class);
-			break;
-		case R.id.act_my_proxy_see_my_houses:
-			if (houses == null || houses.size() == 0) {
+		case R.id.act_my_proxy_see_my_houses:  // 跳我的卖房列表页
+			if (myProxySellHouses == null || myProxySellHouses.size() == 0) {
 				PopViewHelper.showProxyDialog(this, onProxyDialogListener);
 			} else {
 				Jumper.newJumper()
@@ -101,17 +95,21 @@ public class MyProxyActivity extends BaseActivity implements OnClickListener {
 		        .setAheadOutAnimation(R.anim.activity_alpha_out)
 		        .setBackInAnimation(R.anim.activity_alpha_in)
 		        .setBackOutAnimation(R.anim.activity_push_out_right)
-		        .jump(this, MyBoughtHousesActivity.class);  // 跳我的购房列表
+		        .jump(this, MySellHouseListActivity.class);  
 			}
 			break;
 		}
 	}
 	
 	
-	private void getMyBoughtHouses() {
-		String userId = ContentUtils.getUserId(this);
+	private void getMyProxySellHouse() {
+		String userPhone = ContentUtils.getLoginPhone(this);
+		CityBean cityBean = ContentUtils.getCityBean(this);
+		if (cityBean == null) {
+			return;
+		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getMyBoughtHouses(userId, new ResultHandlerCallback() {
+		actionImpl.getMySellHouseList(userPhone, cityBean.getSiteId(), 10, 1, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
@@ -123,14 +121,35 @@ public class MyProxyActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				ArrayList<MyBoughtHouseBean> temp = (ArrayList<MyBoughtHouseBean>) JSON.parseArray(result.getData(), MyBoughtHouseBean.class);
-				if (temp != null) {
-					houses.addAll(temp);
-				}
-				
+				ArrayList<MyProxySellHouseBean> temp = (ArrayList<MyProxySellHouseBean>) JSON.parseArray(result.getData(), MyProxySellHouseBean.class);
+				myProxySellHouses.addAll(temp);
 			}
 		});
 	}
+	
+//	private void getMyBoughtHouses() {
+//		String userId = ContentUtils.getUserId(this);
+//		ActionImpl actionImpl = ActionImpl.newInstance(this);
+//		actionImpl.getMyBoughtHouses(userId, new ResultHandlerCallback() {
+//			
+//			@Override
+//			public void rc999(RequestEntity entity, Result result) {
+//			}
+//			
+//			@Override
+//			public void rc3001(RequestEntity entity, Result result) {
+//			}
+//			
+//			@Override
+//			public void rc0(RequestEntity entity, Result result) {
+//				// TODO Auto-generated method stub
+//				ArrayList<MyBoughtHouseBean> temp = (ArrayList<MyBoughtHouseBean>) JSON.parseArray(result.getData(), MyBoughtHouseBean.class);
+//				if (temp != null) {
+//					houses.addAll(temp);
+//				}
+//				
+//			}
+//		});
+//	}
 	
 }

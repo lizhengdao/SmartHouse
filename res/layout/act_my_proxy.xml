@@ -67,19 +67,6 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/act_my_proxy_i_buy_house"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/bg_login_yellow"
-            android:gravity="center"
-            android:text="@string/act_my_proxy_i_buy_house"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
     </LinearLayout>
 
 </FrameLayout>

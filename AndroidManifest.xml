@@ -224,6 +224,10 @@
             android:name="cn.com.zzwfang.activity.IncomeStatementActivity"
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="cn.com.zzwfang.activity.MySellHouseListActivity"
+            android:screenOrientation="portrait" />
+        
         <!--  
         <activity
             android:name=".wxapi.WXEntryActivity"

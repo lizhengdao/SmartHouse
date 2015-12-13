@@ -144,8 +144,8 @@
     <string name="act_my_house_resources_see_house_detail">看房明细</string>
     <string name="act_my_house_resources_msg_changes">信息变动</string>
     
-    <!-- 我的房屋  列表  -->
-    <string name="act_my_house_list">我的房屋</string>
+    <!-- 我的房子  通过erp买的房 和 委托住房网卖的房  -->
+    <string name="act_my_house_list">我的房子</string>
     
     <!-- 房源信息变动  -->
     <string name="act_house_source_info_changes">信息变动</string>

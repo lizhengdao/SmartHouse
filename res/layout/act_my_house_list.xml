@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     android:orientation="vertical" >
     
     <FrameLayout
@@ -32,11 +33,90 @@
 
     </FrameLayout>
     
-    <cn.com.zzwfang.pullview.AbPullToRefreshView
+    <RadioGroup 
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        
+        <RadioButton 
+            android:id="@+id/act_my_house_list_my_bought"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@color/transparent"
+            android:background="@drawable/selector_my_bought_house"
+            android:gravity="center"
+            android:checked="true"
+            android:text="我的购房"
+            android:textSize="16sp"
+            android:textColor="@drawable/selector_text_color_my_house_list"/>
+        <RadioButton 
+            android:id="@+id/act_my_house_list_my_sold"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@color/transparent"
+            android:background="@drawable/selector_my_sold_house"
+            android:gravity="center"
+            android:text="我的售房"
+            android:textSize="16sp"
+            android:textColor="@drawable/selector_text_color_my_house_list"/>
+    </RadioGroup>
+    
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <LinearLayout 
+            android:id="@+id/act_my_house_list_no_house_prompt_llt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/white">
+            
+            <ImageView 
+                android:id="@+id/act_my_house_list_no_house_prompt_img"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_no_house_prompt"
+                android:scaleType="centerInside"/>
+            
+            <TextView 
+                android:id="@+id/act_my_house_list_no_house_prompt_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:textColor="@color/color_app_theme"
+                android:textSize="16sp"/>
+            
+            <TextView 
+                android:id="@+id/act_my_house_list_go_to_see"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="去看看"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@drawable/bg_login_btn"/>
+        </LinearLayout>
+        
+        <cn.com.zzwfang.pullview.AbPullToRefreshView
             android:id="@+id/pull_my_house_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="@color/white" >
 
             <ListView
                 android:id="@+id/lst_my_house"
@@ -45,5 +125,9 @@
                 android:divider="@color/color_cecece"
                 android:dividerHeight="1dp" />
         </cn.com.zzwfang.pullview.AbPullToRefreshView>
+        
+    </FrameLayout>
+    
+    
 
 </LinearLayout>

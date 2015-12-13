@@ -1,6 +1,6 @@
 package cn.com.zzwfang.bean;
 
-public class MyHouseBean extends BaseBean {
+public class MyProxySellHouseBean extends BaseBean {
 
 	/**
 	 * 朝向
@@ -16,6 +16,8 @@ public class MyHouseBean extends BaseBean {
 	 * 图片地址
 	 */
 	private String ImagePath;
+	
+	private boolean Lock;
 	
 	/**
 	 * 价格
@@ -61,6 +63,16 @@ public class MyHouseBean extends BaseBean {
 	 * 房源id
 	 */
 	private String id;
+	
+	
+
+	public boolean isLock() {
+		return Lock;
+	}
+
+	public void setLock(boolean lock) {
+		Lock = lock;
+	}
 
 	public String getDirection() {
 		return Direction;

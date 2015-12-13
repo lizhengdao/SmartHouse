@@ -11,7 +11,7 @@
         android:background="@color/color_app_theme" >
 
         <TextView
-            android:id="@+id/act_houses_recommended_to_me_back"
+            android:id="@+id/act_my_sell_house_list_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/ic_back"
@@ -26,19 +26,19 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/act_houses_recommended_to_me"
+            android:text="我的房屋"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </FrameLayout>
 
     <cn.com.zzwfang.pullview.AbPullToRefreshView
-        android:id="@+id/pull_act_houses_recommended_to_me"
+        android:id="@+id/pull_my_sell_house_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
         <ListView
-            android:id="@+id/lst_act_houses_recommended_to_me"
+            android:id="@+id/lst_my_sell_house"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/color_cecece"

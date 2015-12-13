@@ -9,9 +9,11 @@
     <ImageView 
         android:id="@+id/adapter_see_house_record_avtar"
         android:layout_width="80dp"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:scaleType="centerCrop"/>
     
     <TextView 
         android:id="@+id/adapter_see_house_record_name"

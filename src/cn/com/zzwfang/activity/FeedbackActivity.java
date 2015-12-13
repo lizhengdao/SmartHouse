@@ -1,6 +1,5 @@
 package cn.com.zzwfang.activity;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.os.Bundle;
@@ -20,18 +19,26 @@ import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 
 public class FeedbackActivity extends BaseActivity implements OnClickListener {
+	
+	/**
+	 * 投诉
+	 */
+	public static final String INTENT_COMPLAIN = "intent_complain";
 
     /**手机号码输入匹配正则*/
     public static final String REGX_MOBILE = "^1$|^1[34578]$|^1[3-8]\\d{0,9}$" ;
     /**手机号码提交验证正则*/
     public static final String REGX_MOBILE_FINAL = "^1[34578]\\d{9}$";
     
-	private TextView tvBack, tvCommt;
+	private TextView tvBack, tvTitle, tvCommt;
 	private EditText edtContent, edtPhone;
+	private boolean isComplain = false;
+	
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		isComplain = getIntent().getBooleanExtra(INTENT_COMPLAIN, false);
 		setContentView(R.layout.act_feedback);
 		
 		initView();
@@ -41,9 +48,14 @@ public class FeedbackActivity extends BaseActivity implements OnClickListener {
 		
 		tvBack = (TextView) findViewById(R.id.act_feedback_back);
 		
+		tvTitle = (TextView) findViewById(R.id.act_feedback_title);
 		edtContent = (EditText) findViewById(R.id.act_feedback_content_edt);
 		edtPhone = (EditText) findViewById(R.id.act_feedback_phone_edt);
 		tvCommt = (TextView) findViewById(R.id.act_feedback_commit);
+		
+		if (isComplain) {
+			tvTitle.setText("投诉");
+		}
 		
 		edtPhone.setFilters(new InputFilter [] { new InputFilter(){
 

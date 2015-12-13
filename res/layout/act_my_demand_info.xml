@@ -29,30 +29,45 @@
             android:text="@string/act_my_demand_info"
             android:textColor="@color/white"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/act_my_demand_info_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:text="编辑"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </FrameLayout>
 
+    <!-- 小区名称 -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:orientation="horizontal"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
+        android:paddingRight="16dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:text="小区名称："
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="类型：" />
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/act_my_demand_info_type"
+            android:id="@+id/act_my_demand_info_court_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <View
@@ -61,184 +76,243 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@color/color_e2e2e2" />
-    
+
+    <!-- 总价 -->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
+        android:paddingRight="16dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:text="总价："
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="意向：" />
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/act_my_demand_info_interest"
+            android:id="@+id/act_my_demand_info_total_price"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
+            android:textSize="16sp" />
     </LinearLayout>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@color/color_e2e2e2" />
-    
+    <!-- 面积 -->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
+        android:paddingRight="16dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:text="面积："
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="月收入：" />
-
-        <TextView
-            android:id="@+id/act_my_demand_info_monthly_income"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
-    </LinearLayout>
-    
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/color_e2e2e2" />
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="装修：" />
-
-        <TextView
-            android:id="@+id/act_my_demand_info_decoration"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
-    </LinearLayout>
-    
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/color_e2e2e2" />
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="朝向：" />
-
-        <TextView
-            android:id="@+id/act_my_demand_info_direction"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
-    </LinearLayout>
-    
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/color_e2e2e2" />
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="面积：" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/act_my_demand_info_square"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
+            android:textSize="16sp" />
     </LinearLayout>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@color/color_e2e2e2" />
-    
+    <!-- 户型 -->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="horizontal" >
+        android:paddingRight="16dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:text="户型："
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:text="户型：" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/act_my_demand_info_house_type"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:textColor="@color/color_626262"
-            android:textSize="16sp"
-            android:gravity="center_vertical" />
+            android:textSize="16sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="类型："
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/act_my_demand_info_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/color_e2e2e2"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="意向："
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/act_my_demand_info_interest"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/color_e2e2e2"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="装修："
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/act_my_demand_info_decoration"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/color_e2e2e2"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="朝向："
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/act_my_demand_info_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_626262"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="推荐房源"
+        android:background="@color/color_eeeeee"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <cn.com.zzwfang.pullview.AbPullToRefreshView
+        android:id="@+id/pull_act_my_demand_info_recommended_to_me"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/lst_act_my_demand_info_recommended_to_me"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/color_cecece"
+            android:dividerHeight="1dp" />
+    </cn.com.zzwfang.pullview.AbPullToRefreshView>
 
 </LinearLayout>

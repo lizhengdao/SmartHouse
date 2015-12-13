@@ -18,6 +18,8 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
 
 import com.alibaba.fastjson.JSON;
 
@@ -42,11 +44,13 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 	private TextView tvBack, tvProgressStateOne, tvProgressStateTwo, tvProgressStateThree, tvProgressStateFour;
 	private ImageView imgProgress;
 	
-	private TextView tvRecommendClientName, tvEstateName, tvTime, tvOperator;
+	private TextView tvRecommendClientName, tvEstateName, tvTime, tvOperator, tvComplain;
 	
 	private ListView lstInfoChange;
 	
 	private ClientInfoChangeAdapter clientInfoChangeAdapter;
+	
+	private ClientInfoChangeAdapter houseInfoChangeAdapter;
 	
 	private String houseSourceId;
 	
@@ -76,10 +80,12 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 		tvEstateName = (TextView) findViewById(R.id.act_fee_hunter_progress_estate_name);
 		tvTime = (TextView) findViewById(R.id.act_fee_hunter_progress_time);
 		tvOperator = (TextView) findViewById(R.id.act_fee_hunter_progress_recommend_operator);
+		tvComplain = (TextView) findViewById(R.id.act_fee_hunter_progress_complain);
 		
 		lstInfoChange = (ListView) findViewById(R.id.act_fee_hunter_progress_info_change);
 		
 		tvBack.setOnClickListener(this);
+		tvComplain.setOnClickListener(this);
 	}
 	
 	private void initData() {
@@ -97,6 +103,26 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 		switch (v.getId()) {
 		case R.id.act_fee_hunter_progress_detail_back:
 			finish();
+			break;
+		case R.id.act_fee_hunter_progress_complain: // 投诉
+			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+        	if (loginStatus) {
+        		Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putBoolean(FeedbackActivity.INTENT_COMPLAIN, true)
+                .jump(this, FeedbackActivity.class);
+        	} else {
+        		Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putBoolean(FeedbackActivity.INTENT_COMPLAIN, true)
+                .jump(this, LoginActivity.class);
+        	}
 			break;
 		}
 	}
@@ -222,7 +248,7 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 	}
 	
 	/**
-	 * 房源信息变动
+	 * 房源信息变动   跟客户信息变动返回的数据结构一样
 	 */
 	private void getHouseSourceInfoChange() {
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
@@ -240,8 +266,10 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				
+				// TODO 房源信息变动
+				ArrayList<ClientInfoChangeBean> houseInfoChanges = (ArrayList<ClientInfoChangeBean>) JSON.parseArray(result.getData(), ClientInfoChangeBean.class);
+				houseInfoChangeAdapter = new ClientInfoChangeAdapter(FeeHunterProgressDetailActivity.this, houseInfoChanges);
+				lstInfoChange.setAdapter(houseInfoChangeAdapter);
 			}
 		});
 	}
@@ -255,19 +283,14 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
             
             @Override
             public void rc999(RequestEntity entity, Result result) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public void rc3001(RequestEntity entity, Result result) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public void rc0(RequestEntity entity, Result result) {
-                // TODO Auto-generated method stub
             	ClientProgressBean progressData = JSON.parseObject(result.getData(), ClientProgressBean.class);
                 rendClientProgressUI(progressData);
             }

@@ -254,6 +254,7 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
 						tvCommit.setClickable(true);
+						setResult(RESULT_OK);
 						finish();
 						ToastUtils.SHORT.toast(IWantBuyHouseActivity.this, "提交成功");
 					}

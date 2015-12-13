@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.BaseActivity;
+import cn.com.zzwfang.activity.FeeHunterProgressDetailActivity;
 import cn.com.zzwfang.activity.HouseSourceInfoChangesActivity;
-import cn.com.zzwfang.bean.MyHouseBean;
+import cn.com.zzwfang.activity.SeeHouseRecordActivity;
+import cn.com.zzwfang.bean.MyProxySellHouseBean;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import android.content.Context;
@@ -23,14 +25,14 @@ import android.widget.TextView;
  * @author doer06
  *
  */
-public class MyHouseAdapter extends BaseAdapter {
+public class MySoldHouseAdapter extends BaseAdapter {
 
 	
 	private Context context;
 	
-	private ArrayList<MyHouseBean> myHouses;
+	private ArrayList<MyProxySellHouseBean> myHouses;
 	
-	public MyHouseAdapter(Context context, ArrayList<MyHouseBean> myHouses) {
+	public MySoldHouseAdapter(Context context, ArrayList<MyProxySellHouseBean> myHouses) {
 		this.context = context;
 		this.myHouses = myHouses;
 	}
@@ -57,16 +59,17 @@ public class MyHouseAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			
-			convertView = View.inflate(context, R.layout.adapter_my_house, null);
+			convertView = View.inflate(context, R.layout.adapter_my_sell_house, null);
 		}
-		MyHouseBean myHouseBean = myHouses.get(position);
+		final MyProxySellHouseBean myHouseBean = myHouses.get(position);
 		
 		ImageView img = (ImageView) convertView.findViewById(R.id.adapter_my_house_img);
 		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_my_house_title);
 		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_my_house_desc);
-		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_my_house_date);
+//		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_my_house_date);
 		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_house_price);
-		AutoDrawableTextView infoChanges = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_my_house_source_info_change);
+		AutoDrawableTextView houseProgress = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_my_house_source_progress);
+		AutoDrawableTextView seeHouseRecord = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_my_house_source_see_house_record);
 		
 		tvTitle.setText(myHouseBean.getTitle());
 		String desc = "";
@@ -91,35 +94,51 @@ public class MyHouseAdapter extends BaseAdapter {
 		
 		tvDesc.setText(desc);
 		
-		if (!TextUtils.isEmpty(myHouseBean.getPublishDate())) {
-		    tvDate.setText("接盘时间：" + myHouseBean.getPublishDate());
-		} else {
-		    tvDate.setText("接盘时间：");
-		}
+//		if (!TextUtils.isEmpty(myHouseBean.getPublishDate())) {
+//		    tvDate.setText("接盘时间：" + myHouseBean.getPublishDate());
+//		} else {
+//		    tvDate.setText("接盘时间：");
+//		}
 		
 		if (!TextUtils.isEmpty(myHouseBean.getPrice())) {
 		    tvPrice.setText(myHouseBean.getPrice() + "万");
 		}
 		
 		String url = myHouseBean.getImagePath();
-	    if (!TextUtils.isEmpty(url)) {
-	        ImageAction.displayImage(url, img);
-	    }
+		ImageAction.displayImage(url, img);
 	    
-	    // 跳转 房源信息变动
-	    infoChanges.setOnClickListener(new OnClickListener() {
+	    // 跳转 房源进度
+	    houseProgress.setOnClickListener(new OnClickListener() {
             
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+                // TODO 房源进度
                 Jumper.newJumper()
                 .setAheadInAnimation(R.anim.activity_push_in_right)
                 .setAheadOutAnimation(R.anim.activity_alpha_out)
                 .setBackInAnimation(R.anim.activity_alpha_in)
                 .setBackOutAnimation(R.anim.activity_push_out_right)
-                .jump((BaseActivity)context, HouseSourceInfoChangesActivity.class);
+                .putString(FeeHunterProgressDetailActivity.INTENT_HOUSE_SOURCE_ID, myHouseBean.getId())
+                .jump((BaseActivity)context, FeeHunterProgressDetailActivity.class);
             }
         });
+	    
+	    // 带看记录
+	    seeHouseRecord.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO 带看记录
+				Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, myHouseBean.getId())
+                .jump((BaseActivity)context, SeeHouseRecordActivity.class);
+				
+			}
+		});
 		return convertView;
 	}
 
