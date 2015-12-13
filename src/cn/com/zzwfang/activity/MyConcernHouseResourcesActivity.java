@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.AttentionAdapter;
+import cn.com.zzwfang.adapter.AttentionAdapter.OnConcernAllDeletedListener;
 import cn.com.zzwfang.bean.AttentionBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
@@ -31,9 +33,11 @@ import cn.com.zzwfang.util.Jumper;
  * 
  */
 public class MyConcernHouseResourcesActivity extends BaseActivity implements
-		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
+		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener,
+		OnItemClickListener, OnConcernAllDeletedListener {
 
-	private TextView tvBack;
+	private TextView tvBack, tvGoToSee;
+	private LinearLayout lltNoConcern;
 
 	private AbPullToRefreshView pullView;
 
@@ -53,15 +57,22 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 		setContentView(R.layout.act_my_concern_house_resources);
 
 		initView();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		getMyAttentionList(true);
 	}
 
 	private void initView() {
 		tvBack = (TextView) findViewById(R.id.act_concern_house_back);
+		tvGoToSee = (TextView) findViewById(R.id.act_concern_house_go_to_see);
+		lltNoConcern = (LinearLayout) findViewById(R.id.act_concern_house_no_concern_llt);
 		pullView = (AbPullToRefreshView) findViewById(R.id.pull_my_concern);
 		lstConcern = (ListView) findViewById(R.id.lst_my_concern);
 		
-		adapter = new AttentionAdapter(this, attentions);
+		adapter = new AttentionAdapter(this, attentions, this);
 		lstConcern.setAdapter(adapter);
 		
 		lstConcern.setOnItemClickListener(this);
@@ -72,6 +83,7 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 		pullView.setOnFooterLoadListener(this);
 
 		tvBack.setOnClickListener(this);
+		tvGoToSee.setOnClickListener(this);
 	}
 
 	@Override
@@ -79,6 +91,14 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 		switch (v.getId()) {
 		case R.id.act_concern_house_back: // 返回
 			finish();
+			break;
+		case R.id.act_concern_house_go_to_see: // 跳二手房列表
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .jump(this, SecondHandHouseActivity.class);
 			break;
 		}
 	}
@@ -117,6 +137,13 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 				} else {
 					pullView.onFooterLoadFinish();
 				}
+				if (attentions.size() == 0) {
+					pullView.setVisibility(View.GONE);
+					lltNoConcern.setVisibility(View.VISIBLE);
+				} else {
+					pullView.setVisibility(View.VISIBLE);
+					lltNoConcern.setVisibility(View.GONE);
+				}
 			}
 			
 			@Override
@@ -125,6 +152,13 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 					pullView.onHeaderRefreshFinish();
 				} else {
 					pullView.onFooterLoadFinish();
+				}
+				if (attentions.size() == 0) {
+					pullView.setVisibility(View.GONE);
+					lltNoConcern.setVisibility(View.VISIBLE);
+				} else {
+					pullView.setVisibility(View.VISIBLE);
+					lltNoConcern.setVisibility(View.GONE);
 				}
 			}
 			
@@ -143,6 +177,14 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 				} else {
 					pullView.onFooterLoadFinish();
 				}
+				
+				if (attentions.size() == 0) {
+					pullView.setVisibility(View.GONE);
+					lltNoConcern.setVisibility(View.VISIBLE);
+				} else {
+					pullView.setVisibility(View.VISIBLE);
+					lltNoConcern.setVisibility(View.GONE);
+				}
 			}
 		});
 	}
@@ -160,4 +202,16 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
         .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, attentionBean.getPropertyId())
         .jump(this, SecondHandHouseDetailActivity.class);
     }
+
+	@Override
+	public void onConcernAllDeleted() {
+		// TODO Auto-generated method stub
+		if (attentions.size() == 0) {
+			pullView.setVisibility(View.GONE);
+			lltNoConcern.setVisibility(View.VISIBLE);
+		} else {
+			pullView.setVisibility(View.VISIBLE);
+			lltNoConcern.setVisibility(View.GONE);
+		}
+	}
 }

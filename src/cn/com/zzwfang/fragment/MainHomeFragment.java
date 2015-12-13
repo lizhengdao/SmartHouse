@@ -19,7 +19,6 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
-import cn.com.zzwfang.activity.LoginActivity;
 import cn.com.zzwfang.activity.SearchHouseActivity;
 import cn.com.zzwfang.activity.SecondHandHouseDetailActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;

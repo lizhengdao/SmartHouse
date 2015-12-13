@@ -52,6 +52,20 @@
             android:text="@string/act_my_proxy_sell_house"
             android:textColor="@color/white"
             android:textSize="18sp" />
+        
+        <TextView
+            android:id="@+id/act_my_proxy_see_my_houses"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_login_yellow"
+            android:gravity="center"
+            android:text="@string/act_my_proxy_see_my_house"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/act_my_proxy_i_buy_house"

@@ -76,7 +76,7 @@
     <string name="frag_mine_be_fee_hunter">成为赏金猎人</string>
     <string name="frag_mine_msg">消息</string>
     <string name="frag_mine_house_source_i_attention">我关注的房源</string>
-    <string name="frag_mine_my_proxy">帮你买房</string>
+    <string name="frag_mine_my_proxy">帮你卖房</string>
     <string name="frag_mine_browse_record">浏览记录</string>
     <string name="frag_mine_my_demand">帮你找房</string>
     <string name="frag_mine_my_house_resources">我的房子</string>
@@ -168,8 +168,9 @@
     <!-- 我的委托 -->
     <string name="act_my_proxy_back">返回</string>
     <string name="act_my_proxy">我的委托</string>
-    <string name="act_my_proxy_sell_house">委托售房</string>
+    <string name="act_my_proxy_sell_house">帮我售房</string>
     <string name="act_my_proxy_i_buy_house">我要买房</string>
+    <string name="act_my_proxy_see_my_house">查看我的房子 (已录信息)</string>
     <!-- 二手房 -->
     <string name="act_second_hand_house_back">返回</string>
     <string name="act_second_hand_house_hint">试试输入楼盘名称</string>

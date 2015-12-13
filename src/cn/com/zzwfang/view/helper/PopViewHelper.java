@@ -4,11 +4,14 @@ package cn.com.zzwfang.view.helper;
 import java.util.ArrayList;
 
 import android.R.color;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -1491,6 +1494,51 @@ public class PopViewHelper {
         } else {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
+    }
+    
+  //==========================赞对话框【start】===========================================
+    public interface OnProxyDialogListener {
+        void onCancel();
+        void onGoToSee();
+    }
+    
+    /**弹出赞对话框
+     * @param context
+     */
+    public static void showProxyDialog(final Context context, final OnProxyDialogListener onProxyDialogListener) {
+        final Dialog dialog = new Dialog(context, R.style.DefaultDialogTheme);
+        dialog.setContentView(R.layout.dialog_proxy);
+        Window win = dialog.getWindow();
+        WindowManager.LayoutParams params = win.getAttributes();
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        win.setAttributes(params);
+        win.setGravity(Gravity.CENTER);
+        
+        TextView tvCancel = (TextView) dialog.findViewById(R.id.dialog_proxy_cancel);
+        TextView tvGo = (TextView) dialog.findViewById(R.id.dialog_proxy_go);
+        
+        OnClickListener listener = new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                
+                switch (v.getId()) {
+                case R.id.dialog_proxy_cancel:
+                	dialog.dismiss();
+                    break;
+                case R.id.dialog_proxy_go:
+                	if (onProxyDialogListener != null) {
+                		onProxyDialogListener.onGoToSee();
+                	}
+                    break;
+                }
+            }
+        };
+        tvCancel.setOnClickListener(listener);
+        tvGo.setOnClickListener(listener);
+        
+        dialog.show();
     }
     
     

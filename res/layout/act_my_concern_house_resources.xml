@@ -32,7 +32,39 @@
 
     </FrameLayout>
     
-    <cn.com.zzwfang.pullview.AbPullToRefreshView
+    <FrameLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <LinearLayout 
+            android:id="@+id/act_concern_house_no_concern_llt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@color/white">
+            
+            <ImageView 
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_no_attention"
+                android:scaleType="centerInside"/>
+            
+            <TextView 
+                android:id="@+id/act_concern_house_go_to_see"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:text="赶紧去看看"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:background="@drawable/bg_login_btn"/>
+        </LinearLayout>
+        
+        <cn.com.zzwfang.pullview.AbPullToRefreshView
             android:id="@+id/pull_my_concern"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,6 +77,9 @@
                 android:divider="@color/color_cecece"
                 android:dividerHeight="1dp" />
         </cn.com.zzwfang.pullview.AbPullToRefreshView>
+    </FrameLayout>
+    
+    
     
 
 </LinearLayout>

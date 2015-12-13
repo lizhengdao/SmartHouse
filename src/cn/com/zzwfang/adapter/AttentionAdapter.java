@@ -32,9 +32,13 @@ public class AttentionAdapter extends BaseAdapter {
 	
 	private ArrayList<AttentionBean> attentions;
 	
-	public AttentionAdapter(Context context, ArrayList<AttentionBean> attentions) {
+	private OnConcernAllDeletedListener onConcernAllDeletedListener;
+	
+	public AttentionAdapter(Context context, ArrayList<AttentionBean> attentions,
+			OnConcernAllDeletedListener onConcernAllDeletedListener) {
 		this.context = context;
 		this.attentions = attentions;
+		this.onConcernAllDeletedListener = onConcernAllDeletedListener;
 	}
 	
 	@Override
@@ -126,8 +130,17 @@ public class AttentionAdapter extends BaseAdapter {
 			public void rc0(RequestEntity entity, Result result) {
 				attentions.remove(position);
 				notifyDataSetChanged();
+				if (attentions == null || attentions.size() == 0) {
+					if (onConcernAllDeletedListener != null) {
+						onConcernAllDeletedListener.onConcernAllDeleted();
+					}
+				}
 			}
 		});
+	}
+	
+	public interface OnConcernAllDeletedListener {
+		void onConcernAllDeleted();
 	}
 
 }
