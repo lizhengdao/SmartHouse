@@ -283,4 +283,5 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 			}
 		}
 	}
+
 }

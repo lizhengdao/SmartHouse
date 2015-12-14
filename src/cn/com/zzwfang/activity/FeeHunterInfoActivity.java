@@ -142,6 +142,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 			break;
 		}
 	}
+
 	
 	
 }

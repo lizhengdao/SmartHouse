@@ -2,14 +2,14 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.adapter.PictureBrowseAdapter;
-import cn.com.zzwfang.bean.PhotoBean;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.adapter.PictureBrowseAdapter;
+import cn.com.zzwfang.bean.PhotoBean;
 
 public class PictureBrowseActivity extends BaseActivity implements OnPageChangeListener {
 	
@@ -60,4 +60,5 @@ public class PictureBrowseActivity extends BaseActivity implements OnPageChangeL
 		String indicatorStr = (++arg0) + "/" + adapter.getCount();
         indicatorTxt.setText(indicatorStr);
 	}
+
 }

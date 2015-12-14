@@ -37,5 +37,7 @@ public class BrowseRecordActivity extends BaseActivity implements OnClickListene
 			break;
 		}
 	}
+
+
 	
 }

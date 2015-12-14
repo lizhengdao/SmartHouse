@@ -72,4 +72,5 @@ public class MyDemandActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
+
 }

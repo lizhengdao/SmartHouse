@@ -59,4 +59,5 @@ public class MyHouseResourcesActivity extends BaseActivity implements OnClickLis
 			break;
 		}
 	}
+
 }

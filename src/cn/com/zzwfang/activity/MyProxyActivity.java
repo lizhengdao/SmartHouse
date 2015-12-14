@@ -126,6 +126,7 @@ public class MyProxyActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
+
 	
 //	private void getMyBoughtHouses() {
 //		String userId = ContentUtils.getUserId(this);

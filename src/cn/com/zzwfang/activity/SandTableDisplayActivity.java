@@ -58,4 +58,5 @@ public class SandTableDisplayActivity extends BaseActivity implements OnClickLis
 			break;
 		}
 	}
+
 }

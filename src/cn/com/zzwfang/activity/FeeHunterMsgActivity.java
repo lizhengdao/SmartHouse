@@ -37,4 +37,5 @@ public class FeeHunterMsgActivity extends BaseActivity implements OnClickListene
 			break;
 		}
 	}
+
 }

@@ -1,18 +1,23 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.UserInfoBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
@@ -167,15 +172,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 					
 					@Override
 					public void run() {
-						setResult(RESULT_OK);
-						ContentUtils.setUserLoginStatus(LoginActivity.this, true);
-						ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
-//						Jumper.newJumper()
-//			            .setAheadInAnimation(R.anim.zoom_in_style1)
-//			            .setAheadOutAnimation(R.anim.zoom_out_style1)
-//			            .jump(LoginActivity.this, MainActivity.class);
-//						tvLogin.setClickable(true);
-						finish();
+						getContacts();
 					}
 				});
 			}
@@ -199,5 +196,41 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
+	
+	private void getContacts() {
+		String userId = ContentUtils.getUserId(this);
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getContactsList(userId, new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				ArrayList<IMMessageBean> temp = (ArrayList<IMMessageBean>) JSON.parseArray(result.getData(), IMMessageBean.class);
+				if (temp != null) {
+					MessagePool.addAllContactsMessages(temp);
+				}
+				
+				setResult(RESULT_OK);
+				ContentUtils.setUserLoginStatus(LoginActivity.this, true);
+				ToastUtils.SHORT.toast(LoginActivity.this, "登录成功");
+//				Jumper.newJumper()
+//	            .setAheadInAnimation(R.anim.zoom_in_style1)
+//	            .setAheadOutAnimation(R.anim.zoom_out_style1)
+//	            .jump(LoginActivity.this, MainActivity.class);
+//				tvLogin.setClickable(true);
+				finish();
+			}
+		});
+	}
+
 	
 }

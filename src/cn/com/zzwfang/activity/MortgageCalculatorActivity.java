@@ -433,5 +433,6 @@ public class MortgageCalculatorActivity extends BaseActivity implements OnClickL
         return (double) (loanTotal * rate * StrictMath.pow(1.0 + rate, months) / (StrictMath.pow(
                 1.0 + rate, months) - 1));
     }
+
 	
 }

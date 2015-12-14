@@ -71,4 +71,5 @@ public class FeeHunterRuleActivity extends BaseActivity implements OnClickListen
 			}
 		});
 	}
+
 }

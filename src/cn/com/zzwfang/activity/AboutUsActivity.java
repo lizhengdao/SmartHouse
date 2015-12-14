@@ -7,6 +7,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -68,4 +69,5 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
+
 }

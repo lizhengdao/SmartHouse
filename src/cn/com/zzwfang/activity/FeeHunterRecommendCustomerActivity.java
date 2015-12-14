@@ -2,20 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.bean.CityBean;
-import cn.com.zzwfang.bean.IdNameBean;
-import cn.com.zzwfang.bean.Result;
-import cn.com.zzwfang.bean.TextValueBean;
-import cn.com.zzwfang.controller.ActionImpl;
-import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
-import cn.com.zzwfang.http.RequestEntity;
-import cn.com.zzwfang.util.ContentUtils;
-import cn.com.zzwfang.util.ToastUtils;
-import cn.com.zzwfang.view.helper.PopViewHelper;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -31,6 +17,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.TextValueBean;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.ToastUtils;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 赏金猎人 推荐客户
@@ -301,4 +300,5 @@ public class FeeHunterRecommendCustomerActivity extends BaseActivity
 			}
 		});
 	}
+
 }

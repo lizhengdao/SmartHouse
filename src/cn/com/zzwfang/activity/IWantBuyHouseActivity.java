@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,6 +24,8 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 我要买房(委托买房)
@@ -281,4 +281,5 @@ public class IWantBuyHouseActivity extends BaseActivity implements OnClickListen
             }
         });
 	}
+
 }

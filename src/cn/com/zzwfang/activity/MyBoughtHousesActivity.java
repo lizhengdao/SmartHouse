@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +18,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 我的需求 -> 我的购房  (这个页面现在没用了)
@@ -132,6 +132,6 @@ public class MyBoughtHousesActivity extends BaseActivity implements
 	public void onHeaderRefresh(AbPullToRefreshView view) {
 		getMyBoughtHouses(true);
 	}
-	
+
 	
 }

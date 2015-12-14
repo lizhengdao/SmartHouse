@@ -14,7 +14,6 @@ import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.util.MD5Util;
 import cn.com.zzwfang.util.ToastUtils;
 
 public class RegisterActivity extends BaseActivity implements OnClickListener {
@@ -208,5 +207,6 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			tvFetchAuthCode.setClickable(true);
 		}
 	}
+
 	
 }

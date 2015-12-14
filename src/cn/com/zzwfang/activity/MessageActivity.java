@@ -16,6 +16,7 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 
@@ -56,7 +57,14 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getContacts();
+//		getContacts();
+		
+		ArrayList<IMMessageBean> temp = MessagePool.getAllContactsMessages();
+		imMessageBeans.clear();
+		if (temp != null) {
+			imMessageBeans.addAll(temp);
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	@Override
@@ -68,32 +76,32 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 		}
 	}
 	
-	private void getContacts() {
-		String userId = ContentUtils.getUserId(this);
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getContactsList(userId, new ResultHandlerCallback() {
-			
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				Log.i("--->", "msg activity data -- " + result.getData());
-				
-				ArrayList<IMMessageBean> temp = (ArrayList<IMMessageBean>) JSON.parseArray(result.getData(), IMMessageBean.class);
-				imMessageBeans.clear();
-				imMessageBeans.addAll(temp);
-				adapter.notifyDataSetChanged();
-			}
-		});
-	}
+//	private void getContacts() {
+//		String userId = ContentUtils.getUserId(this);
+//		ActionImpl actionImpl = ActionImpl.newInstance(this);
+//		actionImpl.getContactsList(userId, new ResultHandlerCallback() {
+//			
+//			@Override
+//			public void rc999(RequestEntity entity, Result result) {
+//				
+//			}
+//			
+//			@Override
+//			public void rc3001(RequestEntity entity, Result result) {
+//				
+//			}
+//			
+//			@Override
+//			public void rc0(RequestEntity entity, Result result) {
+//				Log.i("--->", "msg activity data -- " + result.getData());
+//				
+//				ArrayList<IMMessageBean> temp = (ArrayList<IMMessageBean>) JSON.parseArray(result.getData(), IMMessageBean.class);
+//				imMessageBeans.clear();
+//				imMessageBeans.addAll(temp);
+//				adapter.notifyDataSetChanged();
+//			}
+//		});
+//	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -109,4 +117,5 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 		.putSerializable(ChatActivity.INTENT_HISTORY_MSG, imMessageBean.getMessages())
 		.jump(this, ChatActivity.class);
 	}
+
 }

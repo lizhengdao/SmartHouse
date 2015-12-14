@@ -50,5 +50,6 @@ public class FeeHunterRecommendNewHouseActivity extends BaseActivity implements 
 			break;
 		}
 	}
+
 	
 }

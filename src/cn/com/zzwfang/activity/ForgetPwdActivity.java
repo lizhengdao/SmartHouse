@@ -151,5 +151,6 @@ public class ForgetPwdActivity extends BaseActivity implements OnClickListener {
 			tvResendCode.setClickable(true);
 		}
 	}
+
 	
 }

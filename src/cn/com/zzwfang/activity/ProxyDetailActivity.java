@@ -45,4 +45,5 @@ public class ProxyDetailActivity extends BaseActivity implements OnClickListener
 			break;
 		}
 	}
+
 }

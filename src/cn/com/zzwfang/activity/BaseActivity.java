@@ -9,6 +9,7 @@ import com.easemob.chat.TextMessageBody;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.MessageBean;
+import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.SystemBarTintManager;
@@ -27,11 +28,11 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
 	
 	private int backInAnimationId;
     private int backOutAnimationId;
-
+    
 	public static ArrayList<Activity> activities = new ArrayList<Activity>();
 	private NewMessageBroadcastReceiver msgReceiver;
 	@Override
@@ -113,9 +114,6 @@ public class BaseActivity extends FragmentActivity {
         public void onReceive(Context context, Intent intent) {
             // 注销广播
             abortBroadcast();
-            
-            ToastUtils.SHORT.toast(context, "有新消息了");
-     
             // 消息id（每条消息都会生成唯一的一个id，目前是SDK生成）
             String msgId = intent.getStringExtra("msgid");
             //发送方
@@ -134,20 +132,34 @@ public class BaseActivity extends FragmentActivity {
 //          }
             if (message.getType() == Type.TXT) {
                 TextMessageBody txtBody = (TextMessageBody) message.getBody();
+                
                 MessageBean msg = new MessageBean();
+                
+                msg.setId(message.getMsgId());
                 msg.setFromUser(message.getFrom());
+                msg.setToUser(message.getTo());
                 msg.setMessage(txtBody.getMessage());
                 msg.setCreateDateLong(message.getMsgTime());
+                msg.setRead(!message.isUnread());
+                msg.setUserId(message.getFrom());
+                msg.setUserName(message.getUserName());
+                MessagePool.addMessage(msg);
+                
                 boolean isReceiveMsg = ContentUtils.getMessageReceiveSetting(context);
                 if (isReceiveMsg) {
-                    onNewMessage(msg);
+                	for (Activity act : activities) {
+                		if (act instanceof OnNewMessageListener) {
+                			((OnNewMessageListener) act).onNewMessage(msg);
+                		}
+                	}
                 }
             }
         }
     }
 	
-	protected void onNewMessage(MessageBean msg) {
-	    
+	public interface OnNewMessageListener {
+	
+		void onNewMessage(MessageBean msg);
 	}
 
 }

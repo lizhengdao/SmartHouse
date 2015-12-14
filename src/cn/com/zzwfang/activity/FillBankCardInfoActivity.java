@@ -3,8 +3,6 @@ package cn.com.zzwfang.activity;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -32,6 +30,8 @@ import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnAvatarOptionsClickListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnBankNameSelectedListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnBankProvinceOrCitySelectedListener;
+
+import com.alibaba.fastjson.JSON;
 
 public class FillBankCardInfoActivity extends BasePickPhotoActivity implements
         OnClickListener, OnAvatarOptionsClickListener {
@@ -443,5 +443,6 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements
             });
         }
     }
+
 
 }

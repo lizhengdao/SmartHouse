@@ -1,7 +1,5 @@
 package cn.com.zzwfang.activity;
 
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.util.Jumper;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +7,8 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.util.Jumper;
 
 /**
  * 找房神器
@@ -81,5 +81,5 @@ public class SearchHouseArtifactActivity extends BaseActivity implements OnClick
 			}
 		}
 	}
-	
+
 }

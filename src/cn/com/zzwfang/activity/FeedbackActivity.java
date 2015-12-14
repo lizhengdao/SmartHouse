@@ -136,5 +136,6 @@ public class FeedbackActivity extends BaseActivity implements OnClickListener {
 	    String regex="1([\\d]{10})|((\\+[0-9]{2,4})?\\(?[0-9]+\\)?-?)?[0-9]{7,8}";  
 	    Pattern p = Pattern.compile(regex);
 	    return p.matches(regex, input);
-	}  
+	}
+
 }

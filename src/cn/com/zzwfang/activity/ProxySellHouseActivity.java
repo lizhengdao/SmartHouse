@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +26,8 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 委托售房
@@ -397,4 +397,5 @@ public class ProxySellHouseActivity extends BaseActivity implements OnClickListe
 			}
 		});
 	}
+
 }

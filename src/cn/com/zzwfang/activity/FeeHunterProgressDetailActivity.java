@@ -322,5 +322,5 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 			}
 		});
 	}
-	
+
 }

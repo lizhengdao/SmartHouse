@@ -35,4 +35,5 @@ public class DealHistoryActivity extends BaseActivity implements OnClickListener
 			break;
 		}
 	}
+
 }

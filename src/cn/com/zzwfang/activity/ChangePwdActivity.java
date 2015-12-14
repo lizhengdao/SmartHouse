@@ -91,4 +91,5 @@ public class ChangePwdActivity extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
+
 }

@@ -33,4 +33,5 @@ public class SmartHouseProtocolActivity extends BaseActivity implements OnClickL
 			break;
 		}
 	}
+
 }

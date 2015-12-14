@@ -91,4 +91,5 @@ public class FeeHunterWalletActivity extends BaseActivity implements OnClickList
 			}
 		});
 	}
+
 }

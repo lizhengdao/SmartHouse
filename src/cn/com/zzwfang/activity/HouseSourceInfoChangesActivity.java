@@ -1,10 +1,10 @@
 package cn.com.zzwfang.activity;
 
-import cn.com.zzwfang.R;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
 
 public class HouseSourceInfoChangesActivity extends BaseActivity implements OnClickListener {
 
@@ -32,4 +32,5 @@ public class HouseSourceInfoChangesActivity extends BaseActivity implements OnCl
             break;
         }
     }
+
 }

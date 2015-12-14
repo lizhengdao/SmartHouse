@@ -1066,4 +1066,5 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			return true;
 		}
 	}
+
 }

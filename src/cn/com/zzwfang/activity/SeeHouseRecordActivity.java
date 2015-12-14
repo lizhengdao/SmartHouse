@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +25,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 看房记录页  （从二手房详情跳来）
@@ -212,4 +212,5 @@ public class SeeHouseRecordActivity extends BaseActivity implements
 		}
 		
 	}
+
 }
