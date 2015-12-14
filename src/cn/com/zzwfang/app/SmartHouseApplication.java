@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.easemob.chat.EMChat;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMChatOptions;
 
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.config.AppConfiger;
@@ -33,6 +35,10 @@ public class SmartHouseApplication extends Application {
 		}
 		
 		EMChat.getInstance().init(getApplicationContext());
+		EMChatOptions options = EMChatManager.getInstance().getChatOptions();
+		options.setAcceptInvitationAlways(true);
+		options.setNoticeBySound(true);
+		options.setNoticedByVibrate(true);
 	}
 	
 	private String getAppName(int pID) {
