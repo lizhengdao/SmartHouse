@@ -6,11 +6,15 @@ import java.util.List;
 import com.easemob.chat.EMChat;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
+import com.easemob.chat.EMMessage;
+import com.easemob.chat.OnNotificationClickListener;
 
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.activity.MessageActivity;
 import cn.com.zzwfang.config.AppConfiger;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 
 public class SmartHouseApplication extends Application {
@@ -39,6 +43,15 @@ public class SmartHouseApplication extends Application {
 		options.setAcceptInvitationAlways(true);
 		options.setNoticeBySound(true);
 		options.setNoticedByVibrate(true);
+		
+		options.setOnNotificationClickListener(new OnNotificationClickListener() {
+            
+            @Override
+            public Intent onNotificationClick(EMMessage arg0) {
+                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+                return intent;
+            }
+        });
 	}
 	
 	private String getAppName(int pID) {

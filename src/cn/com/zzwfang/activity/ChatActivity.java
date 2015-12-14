@@ -55,17 +55,17 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
     
     private String messageTo;
     private String messageName;
-    private NewMessageBroadcastReceiver msgReceiver;
+//    private NewMessageBroadcastReceiver msgReceiver;
     
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		
-	    msgReceiver = new NewMessageBroadcastReceiver();
-		IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
-		intentFilter.setPriority(3);
-		registerReceiver(msgReceiver, intentFilter);
+//	    msgReceiver = new NewMessageBroadcastReceiver();
+//		IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
+//		intentFilter.setPriority(3);
+//		registerReceiver(msgReceiver, intentFilter);
 		
 		messageTo = getIntent().getStringExtra(INTENT_MESSAGE_TO_ID);
 		messageName = getIntent().getStringExtra(INTENT_MESSAGE_TO_NAME);
@@ -155,40 +155,47 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 		});
 	}
 	
-	private class NewMessageBroadcastReceiver extends BroadcastReceiver {
-		@Override
-		public void onReceive(Context context, Intent intent) {
-		    // 注销广播
-			abortBroadcast();
-	 
-			// 消息id（每条消息都会生成唯一的一个id，目前是SDK生成）
-			String msgId = intent.getStringExtra("msgid");
-			//发送方
-			String username = intent.getStringExtra("from");
-			// 收到这个广播的时候，message已经在db和内存里了，可以通过id获取mesage对象
-			EMMessage message = EMChatManager.getInstance().getMessage(msgId);
-//			EMConversation	conversation = EMChatManager.getInstance().getConversation(username);
-			
-			// 如果是群聊消息，获取到group id
-//			if (message.getChatType() == ChatType.GroupChat) {
-//				username = message.getTo();
-//			}
-//			if (!username.equals(username)) {
-//				// 消息不是发给当前会话，return
-//				return;
-//			}
-			if (message.getType() == Type.TXT) {
-				TextMessageBody txtBody = (TextMessageBody) message.getBody();
-				MessageBean msg = new MessageBean();
-				msg.setFromUser(message.getFrom());
-				msg.setMessage(txtBody.getMessage());
-				msg.setCreateDateLong(message.getMsgTime());
-				adapter.addMessage(msg);
-			}
-			
-			
-		}
+	
+	@Override
+	protected void onNewMessage(MessageBean msg) {
+	    super.onNewMessage(msg);
+	    adapter.addMessage(msg);
 	}
+	
+//	private class NewMessageBroadcastReceiver extends BroadcastReceiver {
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//		    // 注销广播
+//			abortBroadcast();
+//	 
+//			// 消息id（每条消息都会生成唯一的一个id，目前是SDK生成）
+//			String msgId = intent.getStringExtra("msgid");
+//			//发送方
+//			String username = intent.getStringExtra("from");
+//			// 收到这个广播的时候，message已经在db和内存里了，可以通过id获取mesage对象
+//			EMMessage message = EMChatManager.getInstance().getMessage(msgId);
+////			EMConversation	conversation = EMChatManager.getInstance().getConversation(username);
+//			
+//			// 如果是群聊消息，获取到group id
+////			if (message.getChatType() == ChatType.GroupChat) {
+////				username = message.getTo();
+////			}
+////			if (!username.equals(username)) {
+////				// 消息不是发给当前会话，return
+////				return;
+////			}
+//			if (message.getType() == Type.TXT) {
+//				TextMessageBody txtBody = (TextMessageBody) message.getBody();
+//				MessageBean msg = new MessageBean();
+//				msg.setFromUser(message.getFrom());
+//				msg.setMessage(txtBody.getMessage());
+//				msg.setCreateDateLong(message.getMsgTime());
+//				adapter.addMessage(msg);
+//			}
+//			
+//			
+//		}
+//	}
 	
 	private void getHistoryMsg(String contactId) {
 		actionImpl.getMessageRecordsWithSomeBody(contactId, new ResultHandlerCallback() {
@@ -277,7 +284,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener {
 	
 	@Override
 		protected void onDestroy() {
-		unregisterReceiver(msgReceiver);
+//		unregisterReceiver(msgReceiver);
 			super.onDestroy();
 		}
 }

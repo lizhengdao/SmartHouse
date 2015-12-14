@@ -1,7 +1,5 @@
 package cn.com.zzwfang.adapter;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;

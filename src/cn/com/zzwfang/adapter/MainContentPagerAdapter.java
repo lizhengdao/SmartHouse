@@ -1,15 +1,16 @@
 package cn.com.zzwfang.adapter;
 
-import cn.com.zzwfang.bean.CityBean;
-import cn.com.zzwfang.fragment.MainHomeFragment;
-import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
-import cn.com.zzwfang.fragment.MainNewsFragment;
-import cn.com.zzwfang.fragment.MainMineFragment;
-import cn.com.zzwfang.fragment.MainMapFindHouseFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.MessageBean;
+import cn.com.zzwfang.fragment.MainHomeFragment;
+import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
+import cn.com.zzwfang.fragment.MainMapFindHouseFragment;
+import cn.com.zzwfang.fragment.MainMineFragment;
+import cn.com.zzwfang.fragment.MainNewsFragment;
 
 public class MainContentPagerAdapter extends FragmentPagerAdapter implements OnCitySelectedListener {
 	
@@ -26,6 +27,12 @@ public class MainContentPagerAdapter extends FragmentPagerAdapter implements OnC
 //		title.add("咨询");
 //		title.add("我的");
 	}
+	
+	public void updateMessageCount(MessageBean msg) {
+	    if (mineFragment != null) {
+	        mineFragment.updateMessageCount(msg);
+	    }
+    }
 
 	@Override
 	public Fragment getItem(int position) {

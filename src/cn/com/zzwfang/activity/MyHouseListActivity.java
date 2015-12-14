@@ -79,6 +79,7 @@ public class MyHouseListActivity extends BaseActivity implements
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		initView();
+		getMyBoughtHouses(true);
 		getMySoldHouseList(true);
 	}
 

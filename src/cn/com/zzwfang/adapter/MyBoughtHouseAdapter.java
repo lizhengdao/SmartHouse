@@ -12,6 +12,7 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.BaseActivity;
+import cn.com.zzwfang.activity.FeeHunterProgressDetailActivity;
 import cn.com.zzwfang.activity.IncomeStatementActivity;
 import cn.com.zzwfang.bean.MyBoughtHouseBean;
 import cn.com.zzwfang.util.Jumper;
@@ -56,6 +57,7 @@ public class MyBoughtHouseAdapter extends BaseAdapter {
 		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_desc);
 		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_date);
 		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_price);
+		TextView tvProgress = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_progress_check);
 		
 		tvTitle.setText(myBoughtHouseBean.getTitle());
 		
@@ -84,6 +86,23 @@ public class MyBoughtHouseAdapter extends BaseAdapter {
 		        .jump((BaseActivity)context, IncomeStatementActivity.class);
 			}
 		});
+		
+		// 进度查询
+		tvProgress.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putString(FeeHunterProgressDetailActivity.INTENT_HOUSE_SOURCE_ID, myBoughtHouseBean.getId())
+                .jump((BaseActivity)context, FeeHunterProgressDetailActivity.class);
+            }
+        });
+		
+		
 		return convertView;
 	}
 

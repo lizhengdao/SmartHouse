@@ -59,6 +59,8 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		commonQuestionFlt.setOnClickListener(this);
 		checkUpdatesFlt.setOnClickListener(this);
 		tvLogout.setOnClickListener(this);
+		
+		msgPushToggleBtn.setSelected(ContentUtils.getMessageReceiveSetting(this));
 	}
 
 	@Override
@@ -114,7 +116,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 
 	@Override
 	public void onToggle(ToggleButton button, boolean on) {
-		
+		ContentUtils.setMessageReceiveSetting(this, on);
 	}
 	
 	private void logout() {

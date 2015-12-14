@@ -36,6 +36,8 @@ public class Constants {
     
     public static final String CITY_ID = "city_id";
     
+    public static final String USER_IM_MSG_RECEIVE_SETTING = "user_im_msg_receive";
+    
     /**
      * 是否绑定银行卡
      */

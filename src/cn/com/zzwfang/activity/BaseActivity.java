@@ -2,12 +2,23 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMMessage;
+import com.easemob.chat.EMMessage.Type;
+import com.easemob.chat.TextMessageBody;
+
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.MessageBean;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.SystemBarTintManager;
+import cn.com.zzwfang.util.ToastUtils;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
@@ -22,11 +33,15 @@ public class BaseActivity extends FragmentActivity {
     private int backOutAnimationId;
 
 	public static ArrayList<Activity> activities = new ArrayList<Activity>();
-	
+	private NewMessageBroadcastReceiver msgReceiver;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		msgReceiver = new NewMessageBroadcastReceiver();
+        IntentFilter intentFilter = new IntentFilter(EMChatManager.getInstance().getNewMessageBroadcastAction());
+        intentFilter.setPriority(3);
+        registerReceiver(msgReceiver, intentFilter);
 		activities.add(this);
 		
 		Intent intent = getIntent();
@@ -50,6 +65,7 @@ public class BaseActivity extends FragmentActivity {
 	
 	@Override
 	protected void onDestroy() {
+	    unregisterReceiver(msgReceiver);
 		super.onDestroy();
 		activities.remove(this);
 	}
@@ -89,6 +105,49 @@ public class BaseActivity extends FragmentActivity {
 		        System.exit(1);
 			}
 		}
+	}
+	
+	
+	private class NewMessageBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // 注销广播
+            abortBroadcast();
+            
+            ToastUtils.SHORT.toast(context, "有新消息了");
+     
+            // 消息id（每条消息都会生成唯一的一个id，目前是SDK生成）
+            String msgId = intent.getStringExtra("msgid");
+            //发送方
+            String username = intent.getStringExtra("from");
+            // 收到这个广播的时候，message已经在db和内存里了，可以通过id获取mesage对象
+            EMMessage message = EMChatManager.getInstance().getMessage(msgId);
+//          EMConversation  conversation = EMChatManager.getInstance().getConversation(username);
+            
+            // 如果是群聊消息，获取到group id
+//          if (message.getChatType() == ChatType.GroupChat) {
+//              username = message.getTo();
+//          }
+//          if (!username.equals(username)) {
+//              // 消息不是发给当前会话，return
+//              return;
+//          }
+            if (message.getType() == Type.TXT) {
+                TextMessageBody txtBody = (TextMessageBody) message.getBody();
+                MessageBean msg = new MessageBean();
+                msg.setFromUser(message.getFrom());
+                msg.setMessage(txtBody.getMessage());
+                msg.setCreateDateLong(message.getMsgTime());
+                boolean isReceiveMsg = ContentUtils.getMessageReceiveSetting(context);
+                if (isReceiveMsg) {
+                    onNewMessage(msg);
+                }
+            }
+        }
+    }
+	
+	protected void onNewMessage(MessageBean msg) {
+	    
 	}
 
 }

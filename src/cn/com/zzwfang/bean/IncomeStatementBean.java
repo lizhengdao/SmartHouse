@@ -15,6 +15,8 @@ public class IncomeStatementBean extends BaseBean {
 	private boolean Invoice;
 	
 	private String Date;
+	
+	private String Brokerage;
 
 	public String getPrice() {
 		return Price;
@@ -47,6 +49,16 @@ public class IncomeStatementBean extends BaseBean {
 	public void setDate(String date) {
 		Date = date;
 	}
+
+    public String getBrokerage() {
+        return Brokerage;
+    }
+
+    public void setBrokerage(String brokerage) {
+        Brokerage = brokerage;
+    }
+	
+	
 	
 	
 }

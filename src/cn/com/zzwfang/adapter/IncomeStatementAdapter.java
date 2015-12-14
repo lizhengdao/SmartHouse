@@ -48,6 +48,7 @@ public class IncomeStatementAdapter extends BaseAdapter {
 		TextView tvType = (TextView) convertView.findViewById(R.id.adapter_income_statement_type);
 		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_income_statement_price);
 		TextView tvInvoiceState = (TextView) convertView.findViewById(R.id.adapter_income_statement_invoice_state);
+		TextView tvBrokerName = (TextView) convertView.findViewById(R.id.adapter_income_statement_broker_name);
 		tvDate.setText(temp.getDate());
 		tvType.setText(temp.getType() + ":");
 		if (temp.isInvoice()) {
@@ -56,7 +57,7 @@ public class IncomeStatementAdapter extends BaseAdapter {
 			tvInvoiceState.setText("未开");
 		}
 		tvPrice.setText(temp.getPrice());
-		
+		tvBrokerName.setText(temp.getBrokerage());
 		return convertView;
 	}
 

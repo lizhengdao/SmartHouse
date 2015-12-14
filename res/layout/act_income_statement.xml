@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical" >
     
     <FrameLayout
@@ -60,6 +61,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="票据状态"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+        
+        <TextView 
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="经手人"
             android:textColor="@color/white"
             android:textSize="16sp"/>
     </LinearLayout>

@@ -340,6 +340,9 @@ public class API {
      */
     public static final String GET_HOUSE_SOURCE_INFO_CHANGE = "BountyHunter/PrpChange";
     
+    /**
+     * 获取带看记录
+     */
     public static final String GET_HOUSE_SOURCE_FOLLOW_LIST = "User/FollowList";
 
 }

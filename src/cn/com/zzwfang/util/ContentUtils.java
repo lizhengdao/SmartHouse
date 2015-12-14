@@ -334,6 +334,19 @@ public final class ContentUtils {
 		return userInfoBean;
 	}
 	
+	public static void setMessageReceiveSetting(Context context, boolean isReceiveMsg) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putBoolean(Constants.USER_IM_MSG_RECEIVE_SETTING, isReceiveMsg).commit();
+	}
+	
+	public static boolean getMessageReceiveSetting(Context context) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+	    return sp.getBoolean(Constants.USER_IM_MSG_RECEIVE_SETTING, false);
+	}
+	
 	/**
 	 * 获取登录用户的用户类型    0经济人，1普通会员，2赏金猎人
 	 * 
