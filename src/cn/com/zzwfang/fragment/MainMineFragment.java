@@ -185,6 +185,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
         case R.id.frag_mine_msg_flt: // 消息
             if (checkLoginStatus()) {
             	newMsgCount = 0;
+            	tvMsgCount.setVisibility(View.GONE);
                 Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
                         .setAheadOutAnimation(R.anim.activity_alpha_out)

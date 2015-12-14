@@ -94,7 +94,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 		if (historyMsgs != null && historyMsgs.size() > 0) {
 			messages.addAll(historyMsgs);
 			adapter.notifyDataSetChanged();
-			readMessage(historyMsgs);
+//			readMessage(historyMsgs);
 			listView.setSelection(ListView.FOCUS_DOWN);
 		} else {  //  从其他聊天页来
 			if (!TextUtils.isEmpty(messageTo)) {
