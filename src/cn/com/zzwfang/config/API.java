@@ -344,5 +344,10 @@ public class API {
      * 获取带看记录
      */
     public static final String GET_HOUSE_SOURCE_FOLLOW_LIST = "User/FollowList";
+    
+    /**
+     * 投诉
+     */
+    public static final String COMPLAIN = "Other/Complaint";
 
 }

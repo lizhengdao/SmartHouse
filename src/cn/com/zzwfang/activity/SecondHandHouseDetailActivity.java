@@ -2,7 +2,10 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -50,7 +53,10 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.sdk.openapi.WXMediaMessage;
+import com.tencent.mm.sdk.openapi.WXWebpageObject;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -202,9 +208,12 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			        switch (shareType) {
 	                case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
 	                    // TODO
-	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
-	                    weixinShareHelper.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
+//	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
+//	                    weixinShareHelper.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
+//	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
+	                    shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
 	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
+//	                    weixinShareHelper.shareText(apiWeixin, "分享测试");
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:
 	                    break;
@@ -216,7 +225,27 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			}
 		};
 	}
-
+	
+	public void shareWebpage(Context context, IWXAPI api, String webpageTitle, String webpageDesc, String webpageUrl) {
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = webpageUrl;
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = webpageTitle;
+        msg.description = webpageDesc;
+        
+        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);  
+        msg.setThumbImage(thumb);  
+        
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = buildTransaction("webpage");
+        req.message = msg;
+//        req.scene = isTimelineCb.isChecked() ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+        req.scene = SendMessageToWX.Req.WXSceneTimeline;
+        api.sendReq(req);
+    }
+	private String buildTransaction(final String type) {
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -237,6 +266,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				.setBackOutAnimation(R.anim.activity_push_out_right)
 				.putSerializable(SeeHouseRecordActivity.INTENT_RECORD,
 						secondHandHouseDetail.getInqFollowList())
+			    .putString(SeeHouseRecordActivity.INTENT_SECOND_HAND_HOUSE_ID, secondHandHouseDetail.getEstateId())
 //						.putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, secondHandHouseDetail.getEstateId())
 				.jump(this, SeeHouseRecordActivity.class);
 			}

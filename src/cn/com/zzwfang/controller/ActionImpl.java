@@ -2618,6 +2618,41 @@ public class ActionImpl implements Action {
         worker.load(requestEntity);
 	}
 
+	@Override
+	public void complain(String id, String type, String userId, String content,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+        
+        encryptTimeStamp(requestParams);
+        requestParams.put("id", id);
+        requestParams.put("type", type);
+        requestParams.put("userid", userId);
+        requestParams.put("content", content);
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.COMPLAIN));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
 
 	
 }

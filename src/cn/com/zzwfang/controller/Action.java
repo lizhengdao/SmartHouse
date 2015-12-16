@@ -789,4 +789,13 @@ public interface Action {
 	 * @param callback
 	 */
 	void getHouseSourceFollowList(String houseSourceId, int pageIndex, int pageSize, ResultHandlerCallback callback);
+	
+	/**
+	 * 投诉接口
+	 * @param id  代表哪一项的投诉，就传哪一项的ID，比如房源进度投诉 就传这个房源进度的ID
+	 * @param type   1(财务)，2（带看），3（进度）
+	 * @param userId
+	 * @param content
+	 */
+	void complain(String id, String type, String userId, String content, ResultHandlerCallback callback);
 }

@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
@@ -38,6 +39,7 @@ public class SelectEstateActivity extends BaseActivity implements OnClickListene
 
 	public static final String INTENT_ESTATE = "estate_selected";
 	private TextView tvBack;
+	private ImageView imgClearKeyWords;
 	private EditText edtKeyWords;
 	private ListView lstEstate;
 	
@@ -55,8 +57,9 @@ public class SelectEstateActivity extends BaseActivity implements OnClickListene
 		tvBack = (TextView) findViewById(R.id.act_select_estate_back);
 		edtKeyWords = (EditText) findViewById(R.id.act_select_estate_keywords_edt);
 		lstEstate = (ListView) findViewById(R.id.fact_select_estate_list);
-		
+		imgClearKeyWords = (ImageView) findViewById(R.id.act_select_estate_clear_key_wrods);
 		tvBack.setOnClickListener(this);
+		imgClearKeyWords.setOnClickListener(this);
 		
 		adapter = new EstateSelectAdapter(this, estates);
 		lstEstate.setAdapter(adapter);
@@ -134,6 +137,9 @@ public class SelectEstateActivity extends BaseActivity implements OnClickListene
 		switch (v.getId()) {
 		case R.id.act_select_estate_back:
 			finish();
+			break;
+		case R.id.act_select_estate_clear_key_wrods:
+			edtKeyWords.setText("");
 			break;
 		}
 	}

@@ -107,20 +107,32 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 		case R.id.act_fee_hunter_progress_complain: // 投诉
 			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
         	if (loginStatus) {
+        		// 1(财务)，2（带看），3（进度）
+        		String complainType = "3";
+        		String complianId = null;
+        		if (!TextUtils.isEmpty(houseSourceId)) {
+        			complianId = houseSourceId;
+        		} else if (!TextUtils.isEmpty(clientId)) {
+        			complianId = clientId;
+        		}
+        		
+        		if (TextUtils.isEmpty(complianId)) {
+        			return;
+        		}
         		Jumper.newJumper()
                 .setAheadInAnimation(R.anim.activity_push_in_right)
                 .setAheadOutAnimation(R.anim.activity_alpha_out)
                 .setBackInAnimation(R.anim.activity_alpha_in)
                 .setBackOutAnimation(R.anim.activity_push_out_right)
-                .putBoolean(FeedbackActivity.INTENT_COMPLAIN, true)
-                .jump(this, FeedbackActivity.class);
+                .putString(ComplainActivity.INTENT_COMPLAIN_ID, complianId)
+                .putString(ComplainActivity.INTENT_COMPLAIN_TYPE, complainType)
+                .jump(this, ComplainActivity.class);
         	} else {
         		Jumper.newJumper()
                 .setAheadInAnimation(R.anim.activity_push_in_right)
                 .setAheadOutAnimation(R.anim.activity_alpha_out)
                 .setBackInAnimation(R.anim.activity_alpha_in)
                 .setBackOutAnimation(R.anim.activity_push_out_right)
-                .putBoolean(FeedbackActivity.INTENT_COMPLAIN, true)
                 .jump(this, LoginActivity.class);
         	}
 			break;
