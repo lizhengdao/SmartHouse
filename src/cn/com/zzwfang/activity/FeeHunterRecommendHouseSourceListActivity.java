@@ -170,4 +170,5 @@ public class FeeHunterRecommendHouseSourceListActivity extends BaseActivity
         .putString(FeeHunterProgressDetailActivity.INTENT_HOUSE_SOURCE_ID, date.getId())
         .jump(this, FeeHunterProgressDetailActivity.class);
 	}
+
 }

@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +21,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 推荐给我的房源
@@ -156,4 +156,5 @@ public class HousesRecommendedToMeActivity extends BaseActivity implements
         .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, recommendedHouseBean.getId())
         .jump(this, SecondHandHouseDetailActivity.class);
 	}
+
 }

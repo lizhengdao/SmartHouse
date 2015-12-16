@@ -1,12 +1,12 @@
 package cn.com.zzwfang.activity;
 
+import android.os.Bundle;
+import android.os.Handler;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.util.AppUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ResLoader;
-import android.os.Bundle;
-import android.os.Handler;
 
 public class SplashActivity extends BaseActivity {
 
@@ -45,8 +45,10 @@ public class SplashActivity extends BaseActivity {
 		            .setAheadInAnimation(R.anim.activity_alpha_appear_in)
 		            .setAheadOutAnimation(R.anim.activity_alpha_out)
 		            .jump(SplashActivity.this, MainActivity.class);
+					finish();
 				}
 			}
 		}, 800);
 	}
+
 }

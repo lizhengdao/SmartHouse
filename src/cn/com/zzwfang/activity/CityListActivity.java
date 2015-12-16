@@ -108,5 +108,6 @@ public class CityListActivity extends BaseActivity implements OnClickListener, O
 	}
 
 
+
 	
 }

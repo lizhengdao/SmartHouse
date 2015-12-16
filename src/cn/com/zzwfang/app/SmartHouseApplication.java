@@ -8,10 +8,18 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMChatOptions;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.OnNotificationClickListener;
+import com.easemob.chat.TextMessageBody;
+import com.easemob.chat.EMMessage.Type;
 
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.activity.ChatActivity;
 import cn.com.zzwfang.activity.MessageActivity;
+import cn.com.zzwfang.activity.BaseActivity.OnNewMessageListener;
+import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.config.AppConfiger;
+import cn.com.zzwfang.im.MessagePool;
+import cn.com.zzwfang.util.ContentUtils;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Intent;
@@ -47,8 +55,27 @@ public class SmartHouseApplication extends Application {
 		options.setOnNotificationClickListener(new OnNotificationClickListener() {
             
             @Override
-            public Intent onNotificationClick(EMMessage arg0) {
-                Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+            public Intent onNotificationClick(EMMessage message) {
+            	
+            	Intent intent = null;
+            	
+            	if (message.getType() == Type.TXT) {
+                    TextMessageBody txtBody = (TextMessageBody) message.getBody();
+                    MessageBean msg = new MessageBean();
+                    msg.setId(message.getMsgId());
+                    msg.setFromUser(message.getFrom());
+                    msg.setToUser(message.getTo());
+                    msg.setMessage(txtBody.getMessage());
+                    msg.setCreateDateLong(message.getMsgTime());
+                    msg.setRead(!message.isUnread());
+                    msg.setUserId(message.getFrom());
+                    msg.setUserName(message.getUserName());
+                    
+                    MessagePool.addMessage(msg);
+                    intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    intent.putExtra(ChatActivity.INTENT_IM_MESSAGE, msg);
+                }
+            	
                 return intent;
             }
         });

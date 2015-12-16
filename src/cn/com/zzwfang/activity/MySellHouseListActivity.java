@@ -1,8 +1,6 @@
 package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +18,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
+
+import com.alibaba.fastjson.JSON;
 
 
 
@@ -144,5 +144,6 @@ OnHeaderRefreshListener, OnFooterLoadListener {
 			}
 		});
 	}
+
 	
 }

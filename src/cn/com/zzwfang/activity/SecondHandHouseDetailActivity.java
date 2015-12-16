@@ -263,18 +263,27 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			}
 			break;
 		case R.id.act_second_hand_house_detail_agent_msg: // 给经纪人发消息
-			if (secondHandHouseDetail != null) {
-				AgentBean agent = secondHandHouseDetail.getAgent();
-				if (agent != null) {
-					Jumper.newJumper()
-					.setAheadInAnimation(R.anim.activity_push_in_right)
-					.setAheadOutAnimation(R.anim.activity_alpha_out)
-					.setBackInAnimation(R.anim.activity_alpha_in)
-					.setBackOutAnimation(R.anim.activity_push_out_right)
-					.putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
-					.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
-					.jump(this, ChatActivity.class);
+			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+			if (loginStatus) {
+				if (secondHandHouseDetail != null) {
+					AgentBean agent = secondHandHouseDetail.getAgent();
+					if (agent != null) {
+						Jumper.newJumper()
+						.setAheadInAnimation(R.anim.activity_push_in_right)
+						.setAheadOutAnimation(R.anim.activity_alpha_out)
+						.setBackInAnimation(R.anim.activity_alpha_in)
+						.setBackOutAnimation(R.anim.activity_push_out_right)
+						.putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
+						.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
+						.jump(this, ChatActivity.class);
+					}
 				}
+			} else {
+				Jumper.newJumper().setAheadInAnimation(R.anim.slide_in_style1)
+                .setAheadOutAnimation(R.anim.alpha_out_style1)
+                .setBackInAnimation(R.anim.alpha_in_style1)
+                .setBackOutAnimation(R.anim.slide_out_style1)
+                .jump(this, LoginActivity.class);
 			}
 			
 			break;
@@ -552,4 +561,5 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         tencent.onActivityResult(requestCode, resultCode, data);
     }
+
 }

@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +14,8 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+
+import com.alibaba.fastjson.JSON;
 
 public class CommonProblemsActivity extends BaseActivity implements
 		OnClickListener {
@@ -80,4 +80,5 @@ public class CommonProblemsActivity extends BaseActivity implements
         });
 	    
 	}
+
 }

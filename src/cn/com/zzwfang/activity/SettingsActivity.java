@@ -1,8 +1,5 @@
 package cn.com.zzwfang.activity;
 
-import com.easemob.EMCallBack;
-import com.easemob.chat.EMChatManager;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,12 +9,16 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.AsyncUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.ToggleButton;
 import cn.com.zzwfang.view.ToggleButton.OnToggleChanged;
+
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
 
 public class SettingsActivity extends BaseActivity implements OnClickListener, OnToggleChanged {
 
@@ -60,7 +61,13 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		checkUpdatesFlt.setOnClickListener(this);
 		tvLogout.setOnClickListener(this);
 		
-		msgPushToggleBtn.setSelected(ContentUtils.getMessageReceiveSetting(this));
+		boolean isReceiveMsg = ContentUtils.getMessageReceiveSetting(this);
+		if (isReceiveMsg) {
+			msgPushToggleBtn.setToggleOn();
+		} else {
+			msgPushToggleBtn.setToggleOff();
+		}
+		
 	}
 
 	@Override
@@ -124,6 +131,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	    ContentUtils.clearUserInfo(this);
 	    logoutHX();
 	    setResult(RESULT_OK);
+	    MessagePool.clearAllMessages();
 	    finish();
 	}
 	
@@ -175,4 +183,5 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 			}
 		}
 	}
+
 }

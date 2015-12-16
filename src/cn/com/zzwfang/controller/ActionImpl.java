@@ -2088,7 +2088,7 @@ public class ActionImpl implements Action {
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.READ_MESSAGES));
         requestEntity.setRequestParams(requestParams);
-        requestEntity.setType(RequestEntity.GET);
+        requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
                 context, "请稍候...");

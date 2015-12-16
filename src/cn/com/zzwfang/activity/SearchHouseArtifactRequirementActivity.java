@@ -406,4 +406,5 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
        lpGrid.height = gridHeight;
 
   }
+
 }

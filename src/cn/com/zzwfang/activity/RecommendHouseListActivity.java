@@ -64,4 +64,5 @@ public class RecommendHouseListActivity extends BaseActivity implements
 		// TODO Auto-generated method stub
 
 	}
+
 }

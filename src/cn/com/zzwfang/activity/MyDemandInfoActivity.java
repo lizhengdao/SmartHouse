@@ -2,16 +2,14 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HousesRecommendedToMeAdapter;
 import cn.com.zzwfang.bean.HouseRecommendedToMeBean;
@@ -25,6 +23,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 我的需求 ->  我的需求页
@@ -244,6 +244,6 @@ public class MyDemandInfoActivity extends BaseActivity implements OnClickListene
 			}
 		});
 	}
-	
+
 	
 }

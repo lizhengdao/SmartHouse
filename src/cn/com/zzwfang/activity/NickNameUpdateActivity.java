@@ -192,4 +192,5 @@ public class NickNameUpdateActivity extends BaseActivity implements
 					}
 				});
 	}
+
 }

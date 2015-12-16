@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +17,8 @@ import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 小区成交历史
@@ -135,4 +135,5 @@ public class ResidentialTransactionHistoryActivity extends BaseActivity implemen
 			}
 		});
 	}
+
 }

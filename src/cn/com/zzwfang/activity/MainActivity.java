@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.activity.BaseActivity.OnNewMessageListener;
 import cn.com.zzwfang.adapter.MainContentPagerAdapter;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.MessageBean;
@@ -21,7 +22,7 @@ import cn.com.zzwfang.view.GuiderView;
 import com.baidu.mapapi.SDKInitializer;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
-        OnClickListener, OnCitySelectedListener {
+        OnClickListener, OnCitySelectedListener, OnNewMessageListener {
 
     public static final int CODE_LOGIN_MINE = 800;
 
@@ -165,8 +166,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
     }
 
     @Override
-    protected void onNewMessage(MessageBean msg) {
-        super.onNewMessage(msg);
+	public void onNewMessage(MessageBean msg) {
         if (contentAdapter != null) {
             contentAdapter.updateMessageCount(msg);
         }

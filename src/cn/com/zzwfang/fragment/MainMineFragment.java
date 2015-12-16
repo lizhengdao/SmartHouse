@@ -55,6 +55,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
         OnClickListener, OnAvatarOptionsClickListener {
 
     public static final int CODE_SETTING = 100;
+    public static final int CODE_LOGIN = 101;
 
     private TextView tvBack, tvUserName, tvPhone, tvLoginRegister, tvMsgCount;
 
@@ -66,7 +67,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
 
     private ImageView imgFeeHunter;
 
-    private int newMsgCount = 0;
+    private static int newMsgCount = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,41 +116,13 @@ public class MainMineFragment extends BasePickPhotoFragment implements
         settingsFlt.setOnClickListener(this);
         imgFeeHunter.setOnClickListener(this);
         tvLoginRegister.setOnClickListener(this);
+        
+        rendUserInfo();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
-        if (loginStatus) { // 已登录
-            tvLoginRegister.setVisibility(View.GONE);
-            lltUserInfo.setVisibility(View.VISIBLE);
-            UserInfoBean userInfoBean = ContentUtils.getUserInfo(getActivity());
-            tvUserName.setText(userInfoBean.getUserName());
-            tvPhone.setText(userInfoBean.getPhone());
-            String avatarUrl = userInfoBean.getPhoto();
-            if (!TextUtils.isEmpty(avatarUrl)) {
-                ImageAction.displayAvatar(avatarUrl, avatar);
-            }
-            if (newMsgCount > 0) {
-                tvMsgCount.setVisibility(View.VISIBLE);
-                tvMsgCount.setText(newMsgCount + "");
-            } else {
-                tvMsgCount.setVisibility(View.GONE);
-            }
-        } else { // 未登录
-            tvMsgCount.setVisibility(View.GONE);
-            tvLoginRegister.setVisibility(View.VISIBLE);
-            lltUserInfo.setVisibility(View.GONE);
-            // Jumper.newJumper()
-            // .setAheadInAnimation(R.anim.slide_in_style1)
-            // .setAheadOutAnimation(R.anim.alpha_out_style1)
-            // .setBackInAnimation(R.anim.alpha_in_style1)
-            // .setBackOutAnimation(R.anim.slide_out_style1)
-            // .jumpForResult(this, LoginActivity.class, CODE_LOGIN_MINE);
-        }
-
     }
 
     public void updateMessageCount(MessageBean msg) {
@@ -205,11 +178,14 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                     .setAheadOutAnimation(R.anim.alpha_out_style1)
                     .setBackInAnimation(R.anim.alpha_in_style1)
                     .setBackOutAnimation(R.anim.slide_out_style1)
-                    .jump(this, LoginActivity.class);
+                    .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
+//                    .jump(this, LoginActivity.class);
             // .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
             break;
         case R.id.frag_mine_msg_flt: // 消息
             if (checkLoginStatus()) {
+            	newMsgCount = 0;
+            	tvMsgCount.setVisibility(View.GONE);
                 Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -240,13 +216,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             break;
         case R.id.frag_mine_my_demand_llt: // 我的需求 (帮你找房 我是客户)
             if (checkLoginStatus()) {
-                // Jumper.newJumper()
-                // .setAheadInAnimation(R.anim.activity_push_in_right)
-                // .setAheadOutAnimation(R.anim.activity_alpha_out)
-                // .setBackInAnimation(R.anim.activity_alpha_in)
-                // .setBackOutAnimation(R.anim.activity_push_out_right)
-                // .jump(this, MyDemandActivity.class);
-
                 Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -256,13 +225,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             }
             break;
         case R.id.frag_mine_my_house_resources_flt: // 我的房源
-            // Jumper.newJumper()
-            // .setAheadInAnimation(R.anim.activity_push_in_right)
-            // .setAheadOutAnimation(R.anim.activity_alpha_out)
-            // .setBackInAnimation(R.anim.activity_alpha_in)
-            // .setBackOutAnimation(R.anim.activity_push_out_right)
-            // .jump(this, MyHouseResourcesActivity.class);
-
             if (checkLoginStatus()) {
                 Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
@@ -313,7 +275,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                     .setAheadOutAnimation(R.anim.alpha_out_style1)
                     .setBackInAnimation(R.anim.alpha_in_style1)
                     .setBackOutAnimation(R.anim.slide_out_style1)
-                    .jump(this, LoginActivity.class);
+                    .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
             return false;
         }
         return true;
@@ -326,14 +288,44 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             switch (requestCode) {
             case CODE_SETTING:
                 // ((MainActivity)getActivity()).backToHomeFragment();
+            	rendUserInfo();
                 break;
+            case CODE_LOGIN:
+            	
+            	rendUserInfo();
+            	break;
             }
+        }
+    }
+    
+    private void rendUserInfo() {
+    	boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
+        if (loginStatus) { // 已登录
+            tvLoginRegister.setVisibility(View.GONE);
+            lltUserInfo.setVisibility(View.VISIBLE);
+            UserInfoBean userInfoBean = ContentUtils.getUserInfo(getActivity());
+            tvUserName.setText(userInfoBean.getUserName());
+            tvPhone.setText(userInfoBean.getPhone());
+            String avatarUrl = userInfoBean.getPhoto();
+            if (!TextUtils.isEmpty(avatarUrl)) {
+            	ImageAction.displayAvatar(avatarUrl, avatar);
+            }
+            if (newMsgCount > 0) {
+                tvMsgCount.setVisibility(View.VISIBLE);
+                tvMsgCount.setText(newMsgCount + "");
+            } else {
+                tvMsgCount.setVisibility(View.GONE);
+            }
+        } else { // 未登录
+        	avatar.setImageResource(R.drawable.ic_mine_unlogin_avatar);
+            tvMsgCount.setVisibility(View.GONE);
+            tvLoginRegister.setVisibility(View.VISIBLE);
+            lltUserInfo.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onPickedPhoto(File file, Bitmap bm) {
-        // TODO Auto-generated method stub
         avatar.setImageBitmap(bm);
         upLoadAvatar(file);
     }
@@ -377,12 +369,10 @@ public class MainMineFragment extends BasePickPhotoFragment implements
 
             @Override
             public void rc999(RequestEntity entity, Result result) {
-
             }
 
             @Override
             public void rc3001(RequestEntity entity, Result result) {
-
             }
 
             @Override

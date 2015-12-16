@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -24,6 +22,8 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnShareTypeSelectListener;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 小区详情
@@ -249,4 +249,5 @@ public class CourtDetailActivity extends BaseActivity implements OnClickListener
 		String txt = photoTotalNum + "/" + (arg0 + 1);
 		tvPhotoIndex.setText(txt);
 	}
+
 }

@@ -1,13 +1,11 @@
 package cn.com.zzwfang.activity;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebSettings.LayoutAlgorithm;
+import android.webkit.WebView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.NewsDetailBean;
@@ -16,6 +14,8 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+
+import com.alibaba.fastjson.JSON;
 
 public class NewsDetailActivity extends BaseActivity implements OnClickListener {
 	
@@ -96,4 +96,5 @@ public class NewsDetailActivity extends BaseActivity implements OnClickListener 
 
 		});
 	}
+
 }

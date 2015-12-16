@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +23,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 我关注的房源 我的关注
@@ -214,4 +214,5 @@ public class MyConcernHouseResourcesActivity extends BaseActivity implements
 			lltNoConcern.setVisibility(View.GONE);
 		}
 	}
+
 }

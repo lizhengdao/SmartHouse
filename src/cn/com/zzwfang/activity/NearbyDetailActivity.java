@@ -283,4 +283,5 @@ public class NearbyDetailActivity extends BaseActivity implements
 		mSuggestionSearch.destroy();
 		super.onDestroy();
 	}
+
 }

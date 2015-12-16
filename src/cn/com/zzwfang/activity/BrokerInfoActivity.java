@@ -2,19 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.action.ImageAction;
-import cn.com.zzwfang.adapter.AgentInfoAdapter;
-import cn.com.zzwfang.bean.AgentBean;
-import cn.com.zzwfang.bean.AgentInfoDetailBean;
-import cn.com.zzwfang.bean.AgentInfoItemBean;
-import cn.com.zzwfang.bean.Result;
-import cn.com.zzwfang.controller.ActionImpl;
-import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
-import cn.com.zzwfang.http.RequestEntity;
-import cn.com.zzwfang.util.Jumper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +14,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.adapter.AgentInfoAdapter;
+import cn.com.zzwfang.bean.AgentBean;
+import cn.com.zzwfang.bean.AgentInfoDetailBean;
+import cn.com.zzwfang.bean.AgentInfoItemBean;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.util.Jumper;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 中介信息
@@ -174,4 +174,5 @@ public class BrokerInfoActivity extends BaseActivity implements OnClickListener,
         .putString(SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID, agentInfoItemBean.getPropertyId())
         .jump(this, SecondHandHouseDetailActivity.class);
     }
+
 }

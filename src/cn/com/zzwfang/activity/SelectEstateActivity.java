@@ -2,8 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.alibaba.fastjson.JSON;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,6 +26,8 @@ import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * 赏金猎人  推荐客户  选择楼盘列表
@@ -147,5 +147,6 @@ public class SelectEstateActivity extends BaseActivity implements OnClickListene
 		setResult(RESULT_OK, intent);
 		finish();
 	}
+
 	
 }

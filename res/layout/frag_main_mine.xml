@@ -156,8 +156,10 @@
                         android:id="@+id/frag_mine_msg_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
                         android:background="@drawable/ic_msg_count"
                         android:textSize="14sp"
+                        android:gravity="center"
                         android:textColor="@color/white"/>
 
                     <ImageView
