@@ -50,6 +50,9 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	
 	private IdNameBean idNameBean;
 	
+	/**
+	 *  出售 是0  出租是1 租售是2
+	 */
 	private int trade = 1;
 	
 	@Override
