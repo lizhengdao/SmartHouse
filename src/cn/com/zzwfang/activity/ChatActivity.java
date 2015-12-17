@@ -123,7 +123,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 			getHistoryMsg(msg.getUserId());
 		}
 		
-		readMessage(messages);
+//		readMessage(messages);
 	}
 	
 	@Override
@@ -177,6 +177,9 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 	@Override
 	public void onNewMessage(MessageBean msg) {
 	    adapter.addMessage(msg);
+	    ArrayList<MessageBean> temp = new ArrayList<MessageBean>();
+	    temp.add(msg);
+	    readMessage(temp);
 	}
 	
 	private void getHistoryMsg(String contactId) {

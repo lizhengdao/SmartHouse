@@ -694,6 +694,24 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	 * 获取某大区域的子区域列表， 获取后在地图上以圆形图标显示  已检查
 	 */
 	private void getMapFindHouseDataArea() {
+		
+//		String id = null;
+//		if (areaCondition != null) {
+//			id = areaCondition.getValue();
+//		}
+//		if (TextUtils.isEmpty(id)) {
+//			CityBean cityBean = ContentUtils.getCityBean(this);
+//			if (cityBean == null) {
+//				return;
+//			} else {
+//				id = cityBean.getSiteId();
+//			}
+//		}
+//		
+//		if (TextUtils.isEmpty(id)) {
+//			return;
+//		}
+		
 		CityBean cityBean = ContentUtils.getCityBean(this);
 		if (cityBean == null) {
 			return;

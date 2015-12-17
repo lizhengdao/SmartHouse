@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -355,10 +356,29 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	 * 获取某大区域的子区域列表， 获取后在地图上以圆形图标显示  已检查
 	 */
 	private void getMapFindHouseDataArea() {
+		
+//		String id = null;
+//		if (areaCondition != null) {
+//			id = areaCondition.getValue();
+//		}
+//		if (TextUtils.isEmpty(id)) {
+//			CityBean cityBean = ContentUtils.getCityBean(getActivity());
+//			if (cityBean == null) {
+//				return;
+//			} else {
+//				id = cityBean.getSiteId();
+//			}
+//		}
+//		
+//		if (TextUtils.isEmpty(id)) {
+//			return;
+//		}
+		
 		CityBean cityBean = ContentUtils.getCityBean(getActivity());
 		if (cityBean == null) {
 			return;
 		}
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
 		//  默认传0，0代表出售，1代表出租
 		actionImpl.getMapFindHouseData(0, cityBean.getSiteId(),
