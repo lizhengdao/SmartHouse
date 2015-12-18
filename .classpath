@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="libs/baidumapapi_util_v3_6_0.jar"/>
 	<classpathentry kind="lib" path="libs/baidumapapi_radar_v3_6_0.jar"/>
 	<classpathentry kind="lib" path="libs/baidumapapi_cloud_v3_6_0.jar"/>
+	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
