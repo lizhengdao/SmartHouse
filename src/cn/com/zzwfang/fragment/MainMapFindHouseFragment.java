@@ -357,31 +357,34 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 	 */
 	private void getMapFindHouseDataArea() {
 		
-//		String id = null;
-//		if (areaCondition != null) {
-//			id = areaCondition.getValue();
-//		}
-//		if (TextUtils.isEmpty(id)) {
-//			CityBean cityBean = ContentUtils.getCityBean(getActivity());
-//			if (cityBean == null) {
-//				return;
-//			} else {
-//				id = cityBean.getSiteId();
-//			}
-//		}
-//		
-//		if (TextUtils.isEmpty(id)) {
-//			return;
-//		}
+		String id = null;
+		if (areaCondition != null) {
+			id = areaCondition.getValue();
+		}
+		if (TextUtils.isEmpty(id)) {
+			CityBean cityBean = ContentUtils.getCityBean(getActivity());
+			if (cityBean == null) {
+				return;
+			} else {
+				id = cityBean.getSiteId();
+			}
+		} else {
+		    getMapFindHouseEstate();
+		    return;
+		}
 		
-		CityBean cityBean = ContentUtils.getCityBean(getActivity());
-		if (cityBean == null) {
+		if (TextUtils.isEmpty(id)) {
 			return;
 		}
 		
+//		CityBean cityBean = ContentUtils.getCityBean(getActivity());
+//		if (cityBean == null) {
+//			return;
+//		}
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
 		//  默认传0，0代表出售，1代表出租
-		actionImpl.getMapFindHouseData(0, cityBean.getSiteId(),
+		actionImpl.getMapFindHouseData(0, id,
 				new ResultHandlerCallback() {
 
 					@Override

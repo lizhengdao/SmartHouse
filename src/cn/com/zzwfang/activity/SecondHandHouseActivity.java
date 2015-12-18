@@ -733,29 +733,33 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	 */
 	private void getMapFindHouseDataArea() {
 		
-//		String id = null;
-//		if (areaCondition != null) {
-//			id = areaCondition.getValue();
-//		}
-//		if (TextUtils.isEmpty(id)) {
-//			CityBean cityBean = ContentUtils.getCityBean(this);
-//			if (cityBean == null) {
-//				return;
-//			} else {
-//				id = cityBean.getSiteId();
-//			}
-//		}
-//		
-//		if (TextUtils.isEmpty(id)) {
-//			return;
-//		}
-		CityBean cityBean = ContentUtils.getCityBean(this);
-		if (cityBean == null) {
+		String id = null;
+		if (areaCondition != null) {
+			id = areaCondition.getValue();
+		}
+		if (TextUtils.isEmpty(id)) {
+			CityBean cityBean = ContentUtils.getCityBean(this);
+			if (cityBean == null) {
+				return;
+			} else {
+				id = cityBean.getSiteId();
+			}
+		}  else {
+            getMapFindHouseEstate();
+            return;
+        }
+		
+		if (TextUtils.isEmpty(id)) {
 			return;
 		}
+		
+//		CityBean cityBean = ContentUtils.getCityBean(this);
+//		if (cityBean == null) {
+//			return;
+//		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		// 默认传0，0代表出售，1代表出租
-		actionImpl.getMapFindHouseData(0, cityBean.getSiteId(),
+		actionImpl.getMapFindHouseData(0, id,
 				new ResultHandlerCallback() {
 
 					@Override
