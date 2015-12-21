@@ -33,6 +33,7 @@ import cn.com.zzwfang.bean.IdTitleBean;
 import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 
 public class PopViewHelper {
 
@@ -1246,6 +1247,8 @@ public class PopViewHelper {
 		
 		public static final int Share_Type_Sina_Weibo = 3;
 		
+		public static final int Share_Type_WeiXin_Friend = 4;
+		
 		void onShareTypeSelected(int shareType);
 	}
 	/**
@@ -1264,6 +1267,7 @@ public class PopViewHelper {
 	    popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
 	    
 	    TextView tvShareByWeixin = (TextView) view.findViewById(R.id.popwindow_share_weixin);
+	    AutoDrawableTextView tvShareByWeixinFriend = (AutoDrawableTextView) view.findViewById(R.id.popwindow_share_weixin_friend);
 	    TextView tvShareByQQ = (TextView) view.findViewById(R.id.popwindow_share_qq);
 	    TextView tvShareBySinaWeibo = (TextView) view.findViewById(R.id.popwindow_share_sina_weibo);
 	    
@@ -1288,6 +1292,11 @@ public class PopViewHelper {
 						onShareTypeSelectListener.onShareTypeSelected(OnShareTypeSelectListener.Share_Type_Sina_Weibo);
 					}
 					break;
+				case R.id.popwindow_share_weixin_friend:
+				    if (onShareTypeSelectListener != null) {
+                        onShareTypeSelectListener.onShareTypeSelected(OnShareTypeSelectListener.Share_Type_WeiXin_Friend);
+                    }
+				    break;
 				}
 			}
 		};
@@ -1295,6 +1304,7 @@ public class PopViewHelper {
 		tvShareByWeixin.setOnClickListener(clickListener);
 		tvShareByQQ.setOnClickListener(clickListener);
 		tvShareBySinaWeibo.setOnClickListener(clickListener);
+		tvShareByWeixinFriend.setOnClickListener(clickListener);
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {

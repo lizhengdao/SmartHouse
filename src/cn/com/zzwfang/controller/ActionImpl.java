@@ -759,8 +759,6 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//		requestParams.put("sign", "1111");
-//		requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
 		requestParams.put("siteId", cityId);
 		if (areaCondition != null && !TextUtils.isEmpty(areaCondition.getValue())) {

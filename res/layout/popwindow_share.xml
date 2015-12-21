@@ -14,7 +14,21 @@
         android:layout_gravity="center_vertical"
         android:drawableTop="@drawable/ic_share_weixin"
         android:gravity="center"
-        android:text="微信"
+        android:text="微信朋友圈"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:top_height="50dp"
+        app:top_width="50dp" />
+    
+    <cn.com.zzwfang.view.AutoDrawableTextView
+        android:id="@+id/popwindow_share_weixin_friend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:drawableTop="@drawable/ic_share_weixin"
+        android:gravity="center"
+        android:text="微信好友"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:top_height="50dp"
@@ -32,7 +46,8 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:top_height="50dp"
-        app:top_width="50dp" />
+        app:top_width="50dp"
+        android:visibility="gone" />
     
     <cn.com.zzwfang.view.AutoDrawableTextView
         android:id="@+id/popwindow_share_sina_weibo"
@@ -46,6 +61,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:top_height="50dp"
-        app:top_width="50dp" />
+        app:top_width="50dp"
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -171,12 +171,17 @@ OnPageChangeListener {
 	                    // TODO
 	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
 	                    weixinShareHelper.shareWebpage(RentHouseDetailActivity.this, apiWeixin,
-	                            "智住网", rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare());
+	                            "智住网", rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare(), true);
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_Sina_Weibo:
 	                    break;
+	                case OnShareTypeSelectListener.Share_Type_WeiXin_Friend:
+                        WeiXinShareHelper weixinShareHelper2 = new WeiXinShareHelper();
+                        weixinShareHelper2.shareWebpage(RentHouseDetailActivity.this, apiWeixin,
+                                "智住网", rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare(), false);
+                        break;
 	                }
 			    }
 				

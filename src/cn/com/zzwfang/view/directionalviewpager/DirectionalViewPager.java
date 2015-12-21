@@ -20,7 +20,6 @@ package cn.com.zzwfang.view.directionalviewpager;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -74,7 +73,7 @@ public class DirectionalViewPager extends ViewPager {
     private Parcelable mRestoredAdapterState = null;
     private ClassLoader mRestoredClassLoader = null;
     private Scroller mScroller;
-    private DataSetObserver mObserver;
+//    private DataSetObserver mObserver;
 
     private int mChildWidthMeasureSpec;
     private int mChildHeightMeasureSpec;
@@ -162,12 +161,12 @@ public class DirectionalViewPager extends ViewPager {
         mAdapter = adapter;
 
         if (mAdapter != null) {
-            if (mObserver == null) {
-//                mObserver = new DataSetObserver();
-                mObserver = new MyDataSetObserver();
-            }
+//            if (mObserver == null) {
+////                mObserver = new DataSetObserver();
+//                mObserver = new MyDataSetObserver();
+//            }
 //            VerticalViewPagerCompat.setDataSetObserver(mAdapter, mObserver);
-            mAdapter.registerDataSetObserver(mObserver);
+//            mAdapter.registerDataSetObserver(mObserver);
             mPopulatePending = false;
             if (mRestoredCurItem >= 0) {
                 mAdapter.restoreState(mRestoredAdapterState, mRestoredClassLoader);
@@ -1073,13 +1072,13 @@ public class DirectionalViewPager extends ViewPager {
         }
     }
     
-    private class MyDataSetObserver extends DataSetObserver {
-        @Override
-        public void onChanged() {
-            super.onChanged();
-            dataSetChanged();
-        }
-    }
+//    private class MyDataSetObserver extends DataSetObserver {
+//        @Override
+//        public void onChanged() {
+//            super.onChanged();
+//            dataSetChanged();
+//        }
+//    }
 
 //    private class DataSetObserver implements DataSetObserver {
 //        @Override

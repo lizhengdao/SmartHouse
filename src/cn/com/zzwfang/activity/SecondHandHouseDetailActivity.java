@@ -208,16 +208,21 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			        switch (shareType) {
 	                case OnShareTypeSelectListener.Share_Type_WeiXin:  // 微信分享
 	                    // TODO
-//	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
-//	                    weixinShareHelper.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
+	                    WeiXinShareHelper weixinShareHelper1 = new WeiXinShareHelper();
+	                    weixinShareHelper1.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
+	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), true);
+//	                    shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
 //	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
-	                    shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
-	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
 //	                    weixinShareHelper.shareText(apiWeixin, "分享测试");
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_Sina_Weibo:
+	                    break;
+	                case OnShareTypeSelectListener.Share_Type_WeiXin_Friend:
+	                    WeiXinShareHelper weixinShareHelper2 = new WeiXinShareHelper();
+	                    weixinShareHelper2.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
+                                "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), false);
 	                    break;
 	                }
 			    }
