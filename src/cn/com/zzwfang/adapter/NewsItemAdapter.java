@@ -12,7 +12,6 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.NewsItemBean;
-import cn.com.zzwfang.util.DateUtils;
 
 public class NewsItemAdapter extends BaseAdapter {
 
@@ -50,12 +49,14 @@ public class NewsItemAdapter extends BaseAdapter {
 		}
 		
 		NewsItemBean newsItemBean = news.get(position);
-		ImageView imgNewsPhoto = (ImageView) convertView.findViewById(R.id.adapter_news_item_photo);
-		TextView tvNewsName = (TextView) convertView.findViewById(R.id.adapter_news_item_name);
-		TextView tvContent = (TextView) convertView.findViewById(R.id.adapter_news_item_content);
+		
+		ImageView imgNewsPhoto = ViewHolder.get(convertView, R.id.adapter_news_item_photo);
+		TextView tvNewsName = ViewHolder.get(convertView, R.id.adapter_news_item_name);
+		TextView tvContent = ViewHolder.get(convertView, R.id.adapter_news_item_content);
+		TextView tvTime = ViewHolder.get(convertView, R.id.adapter_news_item_time);
+		
 		tvNewsName.setText(newsItemBean.getTitle());
 		tvContent.setText(newsItemBean.getContent());
-		TextView tvTime = (TextView) convertView.findViewById(R.id.adapter_news_item_time);
 //		String time = DateUtils.formatDate(newsItemBean.getAddTime());
 		tvTime.setText(newsItemBean.getAddTime());
 //		ArrayList<String> photos = newsItemBean.getImages();

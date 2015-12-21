@@ -53,9 +53,9 @@ public class SeeHouseRecordAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_see_house_record, null);
 		}
 		
-		ImageView imgAvatar = (ImageView) convertView.findViewById(R.id.adapter_see_house_record_avtar);
-		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_see_house_record_name);
-		AutoDrawableTextView tvPhone = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_see_house_record_phone);
+		ImageView imgAvatar = ViewHolder.get(convertView, R.id.adapter_see_house_record_avtar);
+		TextView tvName = ViewHolder.get(convertView, R.id.adapter_see_house_record_name);
+		AutoDrawableTextView tvPhone = ViewHolder.get(convertView, R.id.adapter_see_house_record_phone);
 		
 		InqFollowListBean inqFollowListBean = inqFollowList.get(position);
 		tvName.setText(inqFollowListBean.getName());

@@ -45,8 +45,9 @@ public class WalletAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_wallet, null);
 		}
 		
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_wallet_desc);
-		TextView tvMoney = (TextView) convertView.findViewById(R.id.adapter_wallet_money);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_wallet_desc);
+		TextView tvMoney = ViewHolder.get(convertView, R.id.adapter_wallet_money);
+		
 		WalletDetailItemBean walletDetailItemBean = walletInfos.get(position);
 		String desc = walletDetailItemBean.getEstateName() + walletDetailItemBean.getBuildName() + "栋" +
 				walletDetailItemBean.getUnit() + "单元";

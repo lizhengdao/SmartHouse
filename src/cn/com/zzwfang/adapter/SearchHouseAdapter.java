@@ -52,18 +52,20 @@ public class SearchHouseAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_search_house, null);
 		}
-		SearchHouseItemBean searchHouseItemBean = searchHouses.get(position);
-		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_search_house_photo);
-		ImageAction.displayImage(searchHouseItemBean.getPhoto(), imgPhoto);
 		
-		TextView tvTitle  = (TextView) convertView.findViewById(R.id.adapter_search_house_title);
+		SearchHouseItemBean searchHouseItemBean = searchHouses.get(position);
+		
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_search_house_photo);
+		TextView tvTitle  = ViewHolder.get(convertView, R.id.adapter_search_house_title);
+		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_search_house_rent_price);
+		
+		ImageAction.displayImage(searchHouseItemBean.getPhoto(), imgPhoto);
 		tvTitle.setText(searchHouseItemBean.getName());
 //		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_search_house_desc);
 //		String desc = rentHouseBean.getTypeF() + "室" + 
 //				rentHouseBean.getTypeT() + "厅    " + rentHouseBean.getSquare() + "㎡  " + rentHouseBean.getDirection();
 //		tvDesc.setText(desc);
 		
-		TextView tvTotalPrice = (TextView) convertView.findViewById(R.id.adapter_search_house_rent_price);
 		tvTotalPrice.setText(searchHouseItemBean.getPrpAvg() + "万");
 		
 //		TextView tvPublishTime = (TextView) convertView.findViewById(R.id.adapter_search_house_publish_time);

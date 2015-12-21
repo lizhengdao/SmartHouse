@@ -101,10 +101,15 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
 		
 		switch (type) {
 		case TPYE1:
-		    TextView tvSecondHandHouse = (TextView) convertView.findViewById(R.id.frag_home_second_hand_house);
-            TextView tvNewHouse = (TextView) convertView.findViewById(R.id.frag_home_new_house);
-            TextView tvRentHouse = (TextView) convertView.findViewById(R.id.frag_home_rent_house);
-            TextView tvSearchHouse = (TextView) convertView.findViewById(R.id.frag_home_search_house);
+//		    TextView tvSecondHandHouse = (TextView) convertView.findViewById(R.id.frag_home_second_hand_house);
+//            TextView tvNewHouse = (TextView) convertView.findViewById(R.id.frag_home_new_house);
+//            TextView tvRentHouse = (TextView) convertView.findViewById(R.id.frag_home_rent_house);
+//            TextView tvSearchHouse = (TextView) convertView.findViewById(R.id.frag_home_search_house);
+            
+            TextView tvSecondHandHouse = ViewHolder.get(convertView, R.id.frag_home_second_hand_house);
+            TextView tvNewHouse = ViewHolder.get(convertView, R.id.frag_home_new_house);
+            TextView tvRentHouse = ViewHolder.get(convertView, R.id.frag_home_rent_house);
+            TextView tvSearchHouse = ViewHolder.get(convertView, R.id.frag_home_search_house);
             
             tvSecondHandHouse.setOnClickListener(this);
             tvNewHouse.setOnClickListener(this);
@@ -112,11 +117,17 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
             tvSearchHouse.setOnClickListener(this);
 		    break;
 		case TPYE2:
-		    ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.adapter_home_recommend_photo);
-            TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_home_recommend_title);
-            TextView tvAddr = (TextView) convertView.findViewById(R.id.adapter_home_recommend_addr);
-            TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_home_recommend_desc);
-            TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_home_recommend_price);
+//		    ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.adapter_home_recommend_photo);
+//            TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_home_recommend_title);
+//            TextView tvAddr = (TextView) convertView.findViewById(R.id.adapter_home_recommend_addr);
+//            TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_home_recommend_desc);
+//            TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_home_recommend_price);
+            
+            ImageView ivPhoto = ViewHolder.get(convertView, R.id.adapter_home_recommend_photo);
+            TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_home_recommend_title);
+            TextView tvAddr = ViewHolder.get(convertView, R.id.adapter_home_recommend_addr);
+            TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_home_recommend_desc);
+            TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_home_recommend_price);
             
             RecommendHouseSourceBean sourceBean = recommendSources.get(position - 1);
             tvTitle.setText(sourceBean.getTitle());

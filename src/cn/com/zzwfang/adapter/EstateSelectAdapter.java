@@ -46,7 +46,8 @@ public class EstateSelectAdapter extends BaseAdapter {
 		}
 		
 		IdNameBean idNameBean = estates.get(position);
-		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_estate_select_name);
+		
+		TextView tvName = ViewHolder.get(convertView, R.id.adapter_estate_select_name);
 		tvName.setText(idNameBean.getName());
 		return convertView;
 	}

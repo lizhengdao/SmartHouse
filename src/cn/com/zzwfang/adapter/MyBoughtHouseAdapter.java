@@ -3,6 +3,7 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -52,20 +53,36 @@ public class MyBoughtHouseAdapter extends BaseAdapter {
 		
 		final MyBoughtHouseBean myBoughtHouseBean = houses.get(position);
 		
-		ImageView img = (ImageView) convertView.findViewById(R.id.adapter_my_bought_house_img);
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_title);
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_desc);
-		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_date);
-		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_price);
-		TextView tvProgress = (TextView) convertView.findViewById(R.id.adapter_my_bought_house_progress_check);
+		ImageView img = ViewHolder.get(convertView, R.id.adapter_my_bought_house_img);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_my_bought_house_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_my_bought_house_desc);
+		TextView tvDate = ViewHolder.get(convertView, R.id.adapter_my_bought_house_date);
+		TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_my_bought_house_price);
+		TextView tvProgress = ViewHolder.get(convertView, R.id.adapter_my_bought_house_progress_check);
 		
 		tvTitle.setText(myBoughtHouseBean.getTitle());
 		
-		String desc = myBoughtHouseBean.getTypeF() + "室" + myBoughtHouseBean.getTypeT()
-				+ "厅    " + myBoughtHouseBean.getSquare() + "㎡   " +myBoughtHouseBean.getDirection();
+		String desc = "";
+		if (!TextUtils.isEmpty(myBoughtHouseBean.getTypeF())) {
+			desc += myBoughtHouseBean.getTypeF() + "室";
+		}
+		if (!TextUtils.isEmpty(myBoughtHouseBean.getTypeT())) {
+			desc += myBoughtHouseBean.getTypeT() + "厅    ";
+		}
+		if (!TextUtils.isEmpty(myBoughtHouseBean.getSquare())) {
+			desc += myBoughtHouseBean.getSquare() + "㎡   ";
+		}
+		if (!TextUtils.isEmpty(myBoughtHouseBean.getDirection())) {
+			desc += myBoughtHouseBean.getDirection();
+		}
+		
 		tvDesc.setText(desc);
-		tvDate.setText(myBoughtHouseBean.getPublishDate());
-		tvPrice.setText(myBoughtHouseBean.getPrice() + "万");
+		if (!TextUtils.isEmpty(myBoughtHouseBean.getPublishDate())) {
+			tvDate.setText(myBoughtHouseBean.getPublishDate());
+		}
+		if (!TextUtils.isEmpty(myBoughtHouseBean.getPrice())) {
+			tvPrice.setText(myBoughtHouseBean.getPrice() + "万");
+		}
 		
 		String url = myBoughtHouseBean.getPhoto();
 		ImageAction.displayImage(url, img);

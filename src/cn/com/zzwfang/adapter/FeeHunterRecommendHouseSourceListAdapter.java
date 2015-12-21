@@ -3,6 +3,7 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -48,24 +49,41 @@ public class FeeHunterRecommendHouseSourceListAdapter extends BaseAdapter {
 		
 		FeeHunterRecommendHouseSourceListItem data = houseSources.get(position);
 		
-		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_fee_hunter_recommend_house_source_list_photo);
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_photo);
+		TextView tvTitle  = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_desc);
+		TextView tvEstName = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_est_name);
+		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_price);
+		TextView tvPublishTime = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_publish_time);
+		
 		ImageAction.displayImage(data.getImagePath(), imgPhoto);
-		TextView tvTitle  = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_recommend_house_source_list_title);
-		tvTitle.setText(data.getEstName());
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_recommend_house_source_list_desc);
-		String desc = data.getTypeF() + "室" + 
-				data.getTypeT() + "厅    " + data.getTypeW() + "卫   "  +
-				data.getTypeY() + "阳台    ";
+		if (!TextUtils.isEmpty(data.getEstName())) {
+			tvTitle.setText(data.getEstName());
+		}
+		
+		String desc = "";
+		if (!TextUtils.isEmpty(data.getTypeF())) {
+			desc += data.getTypeF() + "室";
+		}
+		if (!TextUtils.isEmpty(data.getTypeT())) {
+			desc += data.getTypeT() + "厅    ";
+		}
+		if (!TextUtils.isEmpty(data.getTypeW())) {
+			desc += data.getTypeW() + "卫   ";
+		}
+		if (!TextUtils.isEmpty(data.getTypeY())) {
+			desc += data.getTypeY() + "阳台    ";
+		}
 		tvDesc.setText(desc);
-		
-		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_recommend_house_source_list_est_name);
-		tvEstName.setText(data.getEstName());
-		
-		TextView tvTotalPrice = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_recommend_house_source_list_price);
-		tvTotalPrice.setText(data.getPrice() + "万");
-		
-		TextView tvPublishTime = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_recommend_house_source_list_publish_time);
-		tvPublishTime.setText(data.getTrustDate());
+		if (!TextUtils.isEmpty(data.getEstName())) {
+			tvEstName.setText(data.getEstName());
+		}
+		if (!TextUtils.isEmpty(data.getPrice())) {
+			tvTotalPrice.setText(data.getPrice() + "万");
+		}
+		if (!TextUtils.isEmpty(data.getTrustDate())) {
+			tvPublishTime.setText(data.getTrustDate());
+		}
 		
 		return convertView;
 	}

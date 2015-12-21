@@ -14,6 +14,8 @@ public class AgentInfoItemBean extends BaseBean {
 	
 	private double Lng;
 	
+	private String Photo;
+	
 	private String Price;
 	
 	private String PropertyId;
@@ -27,6 +29,16 @@ public class AgentInfoItemBean extends BaseBean {
 	private String TypeF;
 	
 	private String TypeT;
+	
+	
+
+	public String getPhoto() {
+		return Photo;
+	}
+
+	public void setPhoto(String photo) {
+		Photo = photo;
+	}
 
 	public String getAddDate() {
 		return AddDate;

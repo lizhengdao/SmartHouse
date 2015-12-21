@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class SearchHouseArtifactRequirementAdapter extends BaseAdapter {
 
@@ -44,7 +42,9 @@ public class SearchHouseArtifactRequirementAdapter extends BaseAdapter {
         if (convertView == null) {
         	convertView = View.inflate(context, R.layout.adapter_search_house_artifact_requirement, null);
         }
-        CheckBox cbx = (CheckBox) convertView.findViewById(R.id.adapter_search_house_artifact_requirement_cbx);
+        
+        CheckBox cbx = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_requirement_cbx);
+        
         final TextValueBean textValueBean = additionalInfo.get(position);
         cbx.setChecked(textValueBean.isSelected());
         cbx.setText(textValueBean.getText());

@@ -44,7 +44,9 @@ public class MoreTypeAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_more_type, null);
 		}
-		TextView tvTypeName = (TextView) convertView.findViewById(R.id.adapter_more_type_txt);
+		
+		TextView tvTypeName = ViewHolder.get(convertView, R.id.adapter_more_type_txt);
+		
 		tvTypeName.setText(types.get(position));
 		return convertView;
 	}

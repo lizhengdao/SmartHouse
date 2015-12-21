@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.AgentInfoItemBean;
-import cn.com.zzwfang.util.DateUtils;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -49,14 +48,20 @@ public class AgentInfoAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_agent_info, null);
 		}
 		
-		
 		AgentInfoItemBean agentInfoItemBean = listProperty.get(position);
 		
-		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_agent_info_photo);
-//		ImageAction.displayImage(agentInfoItemBean.getPhoto(), imgPhoto);
-		TextView tvTitle  = (TextView) convertView.findViewById(R.id.adapter_agent_info_title);
-		tvTitle.setText(agentInfoItemBean.getTitle());
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_agent_info_desc);
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_agent_info_photo);
+		TextView tvTitle  = ViewHolder.get(convertView, R.id.adapter_agent_info_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_agent_info_desc);
+		TextView tvEstName = ViewHolder.get(convertView, R.id.adapter_agent_info_est_name);
+		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_agent_info_total_price);
+		TextView tvPublishTime = ViewHolder.get(convertView, R.id.adapter_agent_info_publish_time);
+		
+		ImageAction.displayImage(agentInfoItemBean.getPhoto(), imgPhoto);
+		if (!TextUtils.isEmpty(agentInfoItemBean.getTitle())) {
+			tvTitle.setText(agentInfoItemBean.getTitle());
+		}
+		
 		String desc = "";
 		if (!TextUtils.isEmpty(agentInfoItemBean.getTypeF())) {
 		    desc += agentInfoItemBean.getTypeF() + "室";
@@ -75,15 +80,17 @@ public class AgentInfoAdapter extends BaseAdapter {
 		}
 		tvDesc.setText(desc);
 		
-		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_agent_info_est_name);
-		tvEstName.setText(agentInfoItemBean.getEstName());
+		if (!TextUtils.isEmpty(agentInfoItemBean.getEstName())) {
+			tvEstName.setText(agentInfoItemBean.getEstName());
+		}
+		if (!TextUtils.isEmpty(agentInfoItemBean.getPrice())) {
+			tvTotalPrice.setText(agentInfoItemBean.getPrice() + "万");
+		}
 		
-		TextView tvTotalPrice = (TextView) convertView.findViewById(R.id.adapter_agent_info_total_price);
-		tvTotalPrice.setText(agentInfoItemBean.getPrice() + "万");
-		
-		TextView tvPublishTime = (TextView) convertView.findViewById(R.id.adapter_agent_info_publish_time);
 //		String time = DateUtils.formatDate(agentInfoItemBean.getAddDate());
-		tvPublishTime.setText(agentInfoItemBean.getAddDate());
+		if (!TextUtils.isEmpty(agentInfoItemBean.getAddDate())) {
+			tvPublishTime.setText(agentInfoItemBean.getAddDate());
+		}
 		
 		return convertView;
 	}

@@ -44,7 +44,8 @@ public class BankNameAdapter extends BaseAdapter {
 		}
 		
 		String temp = bankNames.get(position);
-    	TextView tvBankProvinceOrCity = (TextView) convertView.findViewById(R.id.adapter_bank_province_or_city);
+		
+		TextView tvBankProvinceOrCity = ViewHolder.get(convertView, R.id.adapter_bank_province_or_city);
     	tvBankProvinceOrCity.setText(temp);
 		return convertView;
 	}

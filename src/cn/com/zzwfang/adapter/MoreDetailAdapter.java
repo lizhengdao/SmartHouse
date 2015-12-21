@@ -46,8 +46,8 @@ public class MoreDetailAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_more_detail, null);
 		}
 		
-		TextView tvMoreDetail = (TextView) convertView.findViewById(R.id.adapter_more_detail_txt);
-		CheckBox cbx = (CheckBox) convertView.findViewById(R.id.adapter_more_detail_cbx);
+		TextView tvMoreDetail = ViewHolder.get(convertView, R.id.adapter_more_detail_txt);
+		CheckBox cbx = ViewHolder.get(convertView, R.id.adapter_more_detail_cbx);
 		
 		TextValueBean tvb = moreDetails.get(position);
 		tvMoreDetail.setText(tvb.getText());

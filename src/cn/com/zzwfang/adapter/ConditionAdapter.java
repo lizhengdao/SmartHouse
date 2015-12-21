@@ -44,7 +44,7 @@ public class ConditionAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_condition_item, null);
 		}
 		
-		TextView tvConditionName = (TextView) convertView.findViewById(R.id.adapter_conditon_name_tv);
+		TextView tvConditionName = ViewHolder.get(convertView, R.id.adapter_conditon_name_tv);
 		tvConditionName.setText(conditions.get(position).getText());
 		return convertView;
 	}

@@ -54,31 +54,33 @@ public class ResidentialTransactionHistoryAdapter extends BaseAdapter {
 		}
 		
 		final ResidentialTransactionHistoryBean temp = historys.get(position);
-		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_residential_transaction_history_photo);
+		
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_photo);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_desc);
+		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_total_price);
+		TextView tvTime = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_publish_time);
+		TextView tvBrokerName = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_broker_name);
+		TextView tvConsult = ViewHolder.get(convertView, R.id.adapter_residential_transaction_history_consult);
+		
 		ArrayList<PhotoBean> photos = temp.getPhoto();
 		if (photos != null && photos.size() > 0) {
 			PhotoBean photo = photos.get(0);
 			ImageAction.displayImage(photo.getPath(), imgPhoto);
 		}
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_title);
 		String title = temp.getTypeF() + "室" + temp.getTypeT() + "厅   " + temp.getSquare() + "平";
 		tvTitle.setText(title);
 		
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_desc);
 		String desc = temp.getDirection() + "  " + temp.getFloor() + "层/" + temp.getTotalFloor() + "层";
 		tvDesc.setText(desc);
 		
-		TextView tvTotalPrice = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_total_price);
 		tvTotalPrice.setText(temp.getPrice() + "万");
 		
-		TextView tvTime = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_publish_time);
 		String time = DateUtils.formatDate(temp.getSaleDate());
 		tvTime.setText(time);
 		
-		TextView tvBrokerName = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_broker_name);
 		tvBrokerName.setText(temp.getAgentName());
 		
-		TextView tvConsult = (TextView) convertView.findViewById(R.id.adapter_residential_transaction_history_consult);
 		tvConsult.setOnClickListener(new OnClickListener() {
             
             @Override

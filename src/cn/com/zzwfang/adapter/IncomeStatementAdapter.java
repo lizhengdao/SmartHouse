@@ -44,11 +44,13 @@ public class IncomeStatementAdapter extends BaseAdapter {
 		}
 		
 		IncomeStatementBean temp = incomeStatements.get(position);
-		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_income_statement_date);
-		TextView tvType = (TextView) convertView.findViewById(R.id.adapter_income_statement_type);
-		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_income_statement_price);
-		TextView tvInvoiceState = (TextView) convertView.findViewById(R.id.adapter_income_statement_invoice_state);
-		TextView tvBrokerName = (TextView) convertView.findViewById(R.id.adapter_income_statement_broker_name);
+		
+		TextView tvDate = ViewHolder.get(convertView, R.id.adapter_income_statement_date);
+		TextView tvType = ViewHolder.get(convertView, R.id.adapter_income_statement_type);
+		TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_income_statement_price);
+		TextView tvInvoiceState = ViewHolder.get(convertView, R.id.adapter_income_statement_invoice_state);
+		TextView tvBrokerName = ViewHolder.get(convertView, R.id.adapter_income_statement_broker_name);
+		
 		tvDate.setText(temp.getDate());
 		tvType.setText(temp.getType() + ":");
 		if (temp.isInvoice()) {

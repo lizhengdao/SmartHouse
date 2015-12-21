@@ -45,8 +45,10 @@ public class MyCustomerConditionAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_my_customer_condition, null);
 		}
 		
-		TextView tvCustomerConditon = (TextView) convertView.findViewById(R.id.adapter_my_customer_condition);
 		FeeHunterMyCustomerConditionBean condition = conditions.get(position);
+		
+		TextView tvCustomerConditon = ViewHolder.get(convertView, R.id.adapter_my_customer_condition);
+		
 		tvCustomerConditon.setText(condition.getName());
 		
 		return convertView;
