@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.bean.RentHouseBean;
-import cn.com.zzwfang.util.DateUtils;
+//import cn.com.zzwfang.util.DateUtils;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,14 +51,19 @@ public class RentHouseAdapter extends BaseAdapter {
 		}
 
 		RentHouseBean rentHouseBean = rentHouses.get(position);
-		ImageView imgPhoto = (ImageView) convertView
-				.findViewById(R.id.adapter_rent_house_photo);
+		
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_rent_house_photo);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_rent_house_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_rent_house_desc);
+		TextView tvEstName = ViewHolder.get(convertView, R.id.adapter_rent_house_est_name);
+		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_rent_house_rent_price);
+		TextView tvPublishTime = ViewHolder.get(convertView, R.id.adapter_rent_house_publish_time);
+		
 		ImageAction.displayImage(rentHouseBean.getPhoto(), imgPhoto);
-		TextView tvTitle = (TextView) convertView
-				.findViewById(R.id.adapter_rent_house_title);
-		tvTitle.setText(rentHouseBean.getTitle());
-		TextView tvDesc = (TextView) convertView
-				.findViewById(R.id.adapter_rent_house_desc);
+		if (!TextUtils.isEmpty(rentHouseBean.getTitle())) {
+			tvTitle.setText(rentHouseBean.getTitle());
+		}
+		
 		String desc = "";
 		if (!TextUtils.isEmpty(rentHouseBean.getTypeF())) {
 			desc += rentHouseBean.getTypeF() + "室";
@@ -75,18 +80,18 @@ public class RentHouseAdapter extends BaseAdapter {
 
 		tvDesc.setText(desc);
 
-		TextView tvEstName = (TextView) convertView
-				.findViewById(R.id.adapter_rent_house_est_name);
-		tvEstName.setText(rentHouseBean.getEsateName());
+		if (!TextUtils.isEmpty(rentHouseBean.getEsateName())) {
+			tvEstName.setText(rentHouseBean.getEsateName());
+		}
+		
+		if (!TextUtils.isEmpty(rentHouseBean.getRentPrice())) {
+			tvTotalPrice.setText(rentHouseBean.getRentPrice() + "元/月");
+		}
 
-		TextView tvTotalPrice = (TextView) convertView
-				.findViewById(R.id.adapter_rent_house_rent_price);
-		tvTotalPrice.setText(rentHouseBean.getRentPrice() + "元/月");
-
-		TextView tvPublishTime = (TextView) convertView
-				.findViewById(R.id.adapter_rent_house_publish_time);
 //		String time = DateUtils.formatDate(rentHouseBean.getAddTime());
-		tvPublishTime.setText(rentHouseBean.getAddTime());
+		if (!TextUtils.isEmpty(rentHouseBean.getAddTime())) {
+			tvPublishTime.setText(rentHouseBean.getAddTime());
+		}
 
 		return convertView;
 	}

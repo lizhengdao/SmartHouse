@@ -43,7 +43,8 @@ public class MortgageYearsAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_mortgage_years_item, null);
 		}
 		
-		TextView tvYear = (TextView) convertView.findViewById(R.id.adapter_mortgage_year_tv);
+		TextView tvYear = ViewHolder.get(convertView, R.id.adapter_mortgage_year_tv);
+		
 		tvYear.setText(years[position]);
 		return convertView;
 	}

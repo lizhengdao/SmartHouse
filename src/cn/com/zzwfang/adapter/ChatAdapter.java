@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;

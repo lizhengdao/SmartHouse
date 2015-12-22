@@ -45,7 +45,9 @@ public class NewsMoreAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_news_more, null);
 		}
 		IdTitleBean newsBean = news.get(position);
-		TextView tvMoreTitle = (TextView) convertView.findViewById(R.id.adapter_new_more_tv);
+		
+		TextView tvMoreTitle = ViewHolder.get(convertView, R.id.adapter_new_more_tv);
+		
 		tvMoreTitle.setText(newsBean.getTitle());
 		return convertView;
 	}

@@ -50,19 +50,26 @@ public class NewHouseAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_new_house, null);
 		}
 		NewHouseBean temp = newHouses.get(position);
-		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_new_house_photo);
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_new_house_title);
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_new_house_desc);
-		TextView tvSquare = (TextView) convertView.findViewById(R.id.adapter_new_house_square);
 		
-		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_new_house_price);
-		TextView tvLabelOne = (TextView) convertView.findViewById(R.id.adapter_new_house_label_one);
-		TextView tvLabelTwo = (TextView) convertView.findViewById(R.id.adapter_new_house_label_two);
-		TextView tvLabelThree = (TextView) convertView.findViewById(R.id.adapter_new_house_label_three);
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_new_house_photo);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_new_house_title);
+//		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_new_house_desc);
+		TextView tvSquare = ViewHolder.get(convertView, R.id.adapter_new_house_square);
 		
-		tvTitle.setText(temp.getName());
-		tvSquare.setText(temp.getSquare() + "㎡");
-		tvPrice.setText(temp.getPrice() + "元/㎡");
+		TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_new_house_price);
+		TextView tvLabelOne = ViewHolder.get(convertView, R.id.adapter_new_house_label_one);
+		TextView tvLabelTwo = ViewHolder.get(convertView, R.id.adapter_new_house_label_two);
+		TextView tvLabelThree = ViewHolder.get(convertView, R.id.adapter_new_house_label_three);
+		
+		if (!TextUtils.isEmpty(temp.getName())) {
+			tvTitle.setText(temp.getName());
+		}
+		if (!TextUtils.isEmpty(temp.getSquare())) {
+			tvSquare.setText(temp.getSquare() + "㎡");
+		}
+		if (!TextUtils.isEmpty(temp.getPrice())) {
+			tvPrice.setText(temp.getPrice() + "元/㎡");
+		}
 		
 		ArrayList<NewHouseLabelBean> labels = temp.getLabel();
 		int size = labels.size();

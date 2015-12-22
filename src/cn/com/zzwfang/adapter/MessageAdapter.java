@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.MessageBean;
-import cn.com.zzwfang.view.PathImage;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +45,10 @@ public class MessageAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_message, null);
 		}
-		PathImage avatar = (PathImage) convertView.findViewById(R.id.adapter_message_avatar);
-		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_message_name);
-		TextView tvMsg = (TextView) convertView.findViewById(R.id.adapter_message_content);
+		
+//		PathImage avatar = ViewHolder.get(convertView, R.id.adapter_message_avatar);
+		TextView tvName = ViewHolder.get(convertView, R.id.adapter_message_name);
+		TextView tvMsg = ViewHolder.get(convertView, R.id.adapter_message_content);
 		
 		IMMessageBean msgBean = imMessageBeans.get(position);
 		tvName.setText(msgBean.getUserName());

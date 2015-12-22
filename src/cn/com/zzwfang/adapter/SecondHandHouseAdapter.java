@@ -48,11 +48,16 @@ public class SecondHandHouseAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_second_hand_house, null);
 		}
 		SecondHandHouseBean secondHandHouseBean = secondHandHouses.get(position);
-		ImageView imgPhoto = (ImageView) convertView.findViewById(R.id.adapter_second_hand_house_photo);
+		
+		ImageView imgPhoto = ViewHolder.get(convertView, R.id.adapter_second_hand_house_photo);
+		TextView tvTitle  = ViewHolder.get(convertView, R.id.adapter_second_hand_house_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_second_hand_house_desc);
+		TextView tvEstName = ViewHolder.get(convertView, R.id.adapter_second_hand_house_est_name);
+		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_second_hand_house_total_price);
+		TextView tvPublishTime = ViewHolder.get(convertView, R.id.adapter_second_hand_house_publish_time);
+		
 		ImageAction.displayImage(secondHandHouseBean.getPhoto(), imgPhoto);
-		TextView tvTitle  = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_title);
 		tvTitle.setText(secondHandHouseBean.getTitle());
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_desc);
 		String desc =  "";
 		if  (!TextUtils.isEmpty(secondHandHouseBean.getTypeF() + "")) {
 			desc += (secondHandHouseBean.getTypeF() + "室"); 
@@ -70,18 +75,12 @@ public class SecondHandHouseAdapter extends BaseAdapter {
 //        if  (!TextUtils.isEmpty(secondHandHouseBean.getTotalFloor())) {
 //            
 //        }
+        
 		tvDesc.setText(desc);
-		
-		TextView tvEstName = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_est_name);
 		tvEstName.setText(secondHandHouseBean.getEstName());
-		
-		TextView tvTotalPrice = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_total_price);
 		tvTotalPrice.setText(secondHandHouseBean.getPrice() + "万");
-		
-		TextView tvPublishTime = (TextView) convertView.findViewById(R.id.adapter_second_hand_house_publish_time);
 //		String time = DateUtils.formatDate(secondHandHouseBean.getAddTime());
 		tvPublishTime.setText(secondHandHouseBean.getAddTime());
-		
 		 
 		return convertView;
 	}

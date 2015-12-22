@@ -3,6 +3,7 @@ package cn.com.zzwfang.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -65,18 +66,24 @@ public class AttentionAdapter extends BaseAdapter {
 			convertView = View.inflate(context, R.layout.adapter_my_attention, null);
 		}
 		
-		ImageView img = (ImageView) convertView.findViewById(R.id.adapter_my_attention_img);
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_my_attention_title);
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_my_attention_desc);
-		TextView tvEstateName = (TextView) convertView.findViewById(R.id.adapter_my_attention_estate_name);
-		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_attention_price);
-		TextView tvOnLineConsult = (TextView) convertView.findViewById(R.id.adapter_my_attention_online_consult);
-		TextView tvCancelCollection = (TextView) convertView.findViewById(R.id.adapter_my_attention_cancel_collection);
+		ImageView img = ViewHolder.get(convertView, R.id.adapter_my_attention_img);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_my_attention_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_my_attention_desc);
+		TextView tvEstateName = ViewHolder.get(convertView, R.id.adapter_my_attention_estate_name);
+		TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_my_attention_price);
+		TextView tvOnLineConsult = ViewHolder.get(convertView, R.id.adapter_my_attention_online_consult);
+		TextView tvCancelCollection = ViewHolder.get(convertView, R.id.adapter_my_attention_cancel_collection);
 		
 		final AttentionBean attentionBean = attentions.get(position);
-		tvTitle.setText(attentionBean.getTitel());
-		tvEstateName.setText(attentionBean.getEstName());
-		tvPrice.setText(attentionBean.getPrice() + "万");
+		if (!TextUtils.isEmpty(attentionBean.getTitel())) {
+			tvTitle.setText(attentionBean.getTitel());
+		}
+		if (!TextUtils.isEmpty(attentionBean.getEstName())) {
+			tvEstateName.setText(attentionBean.getEstName());
+		}
+		if (!TextUtils.isEmpty(attentionBean.getPrice())) {
+			tvPrice.setText(attentionBean.getPrice() + "万");
+		}
 		
 		String desc = attentionBean.getTypeF() + "室" + attentionBean.getTypeT() + "厅    "
 		+ attentionBean.getSquare() + "㎡   " + attentionBean.getDiretion();

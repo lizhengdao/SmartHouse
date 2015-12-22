@@ -54,16 +54,16 @@ public class SearchHouseArtifactResultAdapter extends BaseAdapter{
 			convertView = View.inflate(context, R.layout.adapter_search_house_artifact_result, null);
 		}
 		
-		ImageView imgAvatar = (ImageView) convertView.findViewById(R.id.adapter_search_house_artifact_avatar);
-		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_name);
-		TextView tvPhone = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_phone);
-		TextView tvSecondHandHouse = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_second_hand_houses);
-		TextView tvRentHouse = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_rent_houses);
+		ImageView imgAvatar = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_avatar);
+		TextView tvName = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_name);
+		TextView tvPhone = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_phone);
+		TextView tvSecondHandHouse = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_second_hand_houses);
+		TextView tvRentHouse = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_rent_houses);
 		
 		// 浏览量
-		TextView tvAccessQuantity = (TextView) convertView.findViewById(R.id.adapter_search_house_artifact_access_quantity);
-		AutoDrawableTextView tvConsult = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_search_house_artifact_consult);
-		AutoDrawableTextView tvDial = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_search_house_artifact_dial);
+		TextView tvAccessQuantity = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_access_quantity);
+		AutoDrawableTextView tvConsult = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_consult);
+		AutoDrawableTextView tvDial = ViewHolder.get(convertView, R.id.adapter_search_house_artifact_dial);
 		
 		final SearchHouseArtifactResultBean artifactResult = artifactResults.get(position);
 		String url = artifactResult.getPhoto();

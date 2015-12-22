@@ -55,39 +55,35 @@ public class FeeHunterRecommendHouseSourceListAdapter extends BaseAdapter {
 		TextView tvEstName = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_est_name);
 		TextView tvTotalPrice = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_price);
 		TextView tvPublishTime = ViewHolder.get(convertView, R.id.adapter_fee_hunter_recommend_house_source_list_publish_time);
+
 		
 		ImageAction.displayImage(data.getImagePath(), imgPhoto);
 		if (!TextUtils.isEmpty(data.getEstName())) {
-		    tvTitle.setText(data.getEstName());
+			tvTitle.setText(data.getEstName());
 		}
 		
 		String desc = "";
 		if (!TextUtils.isEmpty(data.getTypeF())) {
-		    desc += data.getTypeF() + "室";
+			desc += data.getTypeF() + "室";
 		}
 		if (!TextUtils.isEmpty(data.getTypeT())) {
-		    desc += data.getTypeT() + "厅    ";
+			desc += data.getTypeT() + "厅    ";
 		}
 		if (!TextUtils.isEmpty(data.getTypeW())) {
-		    desc += data.getTypeW() + "卫   ";
+			desc += data.getTypeW() + "卫   ";
 		}
 		if (!TextUtils.isEmpty(data.getTypeY())) {
-		    desc += data.getTypeY() + "阳台    ";
+			desc += data.getTypeY() + "阳台    ";
 		}
-				
 		tvDesc.setText(desc);
-		
-		
 		if (!TextUtils.isEmpty(data.getEstName())) {
-		    tvEstName.setText(data.getEstName());
+			tvEstName.setText(data.getEstName());
 		}
-		
 		if (!TextUtils.isEmpty(data.getPrice())) {
-		    tvTotalPrice.setText(data.getPrice() + "万");
+			tvTotalPrice.setText(data.getPrice() + "万");
 		}
-		
 		if (!TextUtils.isEmpty(data.getTrustDate())) {
-		    tvPublishTime.setText(data.getTrustDate());
+			tvPublishTime.setText(data.getTrustDate());
 		}
 		
 		return convertView;

@@ -49,11 +49,11 @@ public class HousesRecommendedToMeAdapter extends BaseAdapter {
 		
 		HouseRecommendedToMeBean recommendedHouseBean = recommendedHouses.get(position);
 		
-		ImageView img = (ImageView) convertView.findViewById(R.id.adapter_my_house_img);
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_house_recommended_to_me_title);
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_house_recommended_to_me_desc);
-		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_house_recommended_to_me_date);
-		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_house_recommended_to_me_price);
+		ImageView img = ViewHolder.get(convertView, R.id.adapter_my_house_img);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_house_recommended_to_me_title);
+		TextView tvDesc =  ViewHolder.get(convertView, R.id.adapter_house_recommended_to_me_desc);
+		TextView tvDate = ViewHolder.get(convertView, R.id.adapter_house_recommended_to_me_date);
+		TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_house_recommended_to_me_price);
 		
 		tvTitle.setText(recommendedHouseBean.getEstateName());
 		

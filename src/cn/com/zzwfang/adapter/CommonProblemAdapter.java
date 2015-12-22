@@ -46,8 +46,8 @@ public class CommonProblemAdapter extends BaseAdapter {
             convertView = View.inflate(context, R.layout.adapter_common_problem, null);
         }
         
-        TextView tvQuestion = (TextView) convertView.findViewById(R.id.adapter_common_problem_question);
-        TextView tvAnswer = (TextView) convertView.findViewById(R.id.adapter_common_problem_answer);
+        TextView tvQuestion = ViewHolder.get(convertView, R.id.adapter_common_problem_question);
+        TextView tvAnswer = ViewHolder.get(convertView, R.id.adapter_common_problem_answer);
         
         CommonProblemBean commonProblemBean = commonProblems.get(position);
         tvQuestion.setText(commonProblemBean.getQuestion());

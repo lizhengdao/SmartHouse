@@ -6,7 +6,6 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.FeeHunterProgressDetailActivity;
-import cn.com.zzwfang.activity.HouseSourceInfoChangesActivity;
 import cn.com.zzwfang.activity.SeeHouseRecordActivity;
 import cn.com.zzwfang.bean.MyProxySellHouseBean;
 import cn.com.zzwfang.util.Jumper;
@@ -63,13 +62,14 @@ public class MySoldHouseAdapter extends BaseAdapter {
 		}
 		final MyProxySellHouseBean myHouseBean = myHouses.get(position);
 		
-		ImageView img = (ImageView) convertView.findViewById(R.id.adapter_my_house_img);
-		TextView tvTitle = (TextView) convertView.findViewById(R.id.adapter_my_house_title);
-		TextView tvDesc = (TextView) convertView.findViewById(R.id.adapter_my_house_desc);
 //		TextView tvDate = (TextView) convertView.findViewById(R.id.adapter_my_house_date);
-		TextView tvPrice = (TextView) convertView.findViewById(R.id.adapter_my_house_price);
-		AutoDrawableTextView houseProgress = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_my_house_source_progress);
-		AutoDrawableTextView seeHouseRecord = (AutoDrawableTextView) convertView.findViewById(R.id.adapter_my_house_source_see_house_record);
+		
+		ImageView img = ViewHolder.get(convertView, R.id.adapter_my_house_img);
+		TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_my_house_title);
+		TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_my_house_desc);
+		TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_my_house_price);
+		AutoDrawableTextView houseProgress = ViewHolder.get(convertView, R.id.adapter_my_house_source_progress);
+		AutoDrawableTextView seeHouseRecord = ViewHolder.get(convertView, R.id.adapter_my_house_source_see_house_record);
 		
 		tvTitle.setText(myHouseBean.getTitle());
 		String desc = "";

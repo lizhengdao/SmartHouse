@@ -6,7 +6,6 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.FeeHunterProgressDetailActivity;
 import cn.com.zzwfang.bean.FeeHunterRecommendClientBean;
-import cn.com.zzwfang.bean.FeeHunterRecommendHouseSourceListItem;
 import cn.com.zzwfang.util.Jumper;
 import android.content.Context;
 import android.view.View;
@@ -51,10 +50,11 @@ public class FeeHunterMyCustomerAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_fee_hunter_my_customer, null);
 		}
-		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_my_customer_name);
-		TextView tvPhone = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_my_customer_phone);
-		TextView tvEstate = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_my_customer_estate);
-		TextView tvCheck = (TextView) convertView.findViewById(R.id.adapter_fee_hunter_my_customer_check);
+		
+		TextView tvName = ViewHolder.get(convertView, R.id.adapter_fee_hunter_my_customer_name);
+		TextView tvPhone = ViewHolder.get(convertView, R.id.adapter_fee_hunter_my_customer_phone);
+		TextView tvEstate = ViewHolder.get(convertView, R.id.adapter_fee_hunter_my_customer_estate);
+		TextView tvCheck = ViewHolder.get(convertView, R.id.adapter_fee_hunter_my_customer_check);
 		
 		final FeeHunterRecommendClientBean temp = myCustomers.get(position);
 		tvName.setText(temp.getName());

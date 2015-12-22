@@ -40,14 +40,13 @@ public class ClientInfoChangeAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_client_info_change, null);
 		}
 		
-		TextView tvDateAndType = (TextView) convertView.findViewById(R.id.adapter_client_info_change_date_type);
-		TextView tvName = (TextView) convertView.findViewById(R.id.adapter_client_info_change_name);
-		TextView tvContent = (TextView) convertView.findViewById(R.id.adapter_client_info_change_content);
+		TextView tvDateAndType = ViewHolder.get(convertView, R.id.adapter_client_info_change_date_type);
+		TextView tvName = ViewHolder.get(convertView, R.id.adapter_client_info_change_name);
+		TextView tvContent = ViewHolder.get(convertView, R.id.adapter_client_info_change_content);
 		
 		ClientInfoChangeBean clientInfoChange = clientInfoChanges.get(position);
 		

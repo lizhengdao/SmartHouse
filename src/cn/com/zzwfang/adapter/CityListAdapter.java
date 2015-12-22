@@ -42,7 +42,8 @@ public class CityListAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = View.inflate(context, R.layout.adapter_city_list, null);
 		}
-		TextView tvCityName = (TextView) convertView.findViewById(R.id.adapter_city_name_tv);
+		
+		TextView tvCityName = ViewHolder.get(convertView, R.id.adapter_city_name_tv);
 		tvCityName.setText(cities.get(position).getName());
 		return convertView;
 	}
