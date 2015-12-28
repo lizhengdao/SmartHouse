@@ -34,6 +34,8 @@ public class MyProxySellHouseBean extends BaseBean {
 	 */
 	private String Square;
 	
+    private int Status;
+	
 	/**
 	 * 房源标题
 	 */
@@ -64,9 +66,16 @@ public class MyProxySellHouseBean extends BaseBean {
 	 */
 	private String id;
 	
-	
 
-	public boolean isLock() {
+	public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        this.Status = status;
+    }
+
+    public boolean isLock() {
 		return Lock;
 	}
 

@@ -220,7 +220,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="8dp"
-                    android:text="@string/frag_mine_my_proxy"
+                    android:text="@string/frag_mine_i_am_owner"
                     android:textColor="@color/color_8d8d8d"
                     android:textSize="16sp" />
 
@@ -234,7 +234,8 @@
                     android:paddingLeft="8dp"
                     android:text="(我是业主)"
                     android:textColor="@color/color_8d8d8d"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:layout_width="wrap_content"

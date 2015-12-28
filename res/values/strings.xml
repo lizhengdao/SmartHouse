@@ -41,9 +41,9 @@
     <string name="act_main_me">我</string>
     
     <!-- 首页 -->
-    <string name="frag_home_second_hand_house">二手房</string>
+    <string name="frag_home_second_hand_house">买卖二手房</string>
     <string name="frag_home_new_house">新房</string>
-    <string name="frag_home_rent_house">租房</string>
+    <string name="frag_home_rent_house">找租房</string>
     <string name="frag_home_find_house_artifact">找房神器</string>
     <string name="frag_home_recommend_house_source">推荐房源</string>
     <string name="frag_home_more">更多</string>
@@ -77,6 +77,7 @@
     <string name="frag_mine_msg">消息</string>
     <string name="frag_mine_house_source_i_attention">我关注的房源</string>
     <string name="frag_mine_my_proxy">帮你卖房</string>
+    <string name="frag_mine_i_am_owner">我是业主</string>
     <string name="frag_mine_browse_record">浏览记录</string>
     <string name="frag_mine_my_demand">帮你找房</string>
     <string name="frag_mine_my_house_resources">我的房子</string>
@@ -259,6 +260,9 @@
     <!-- 周边详情  -->
     <string name="act_nearby_detail">周边详情</string>
     
+    <!-- 我是业主  -->
+    <string name="act_i_am_owner">我是业主</string>
+    
     <string-array name="loan_years_array">
         <item>1年  (12期)</item>
         <item>2年  (24期)</item>
@@ -296,11 +300,11 @@
     <string name="act_court_detail">小区详情</string>
     
     <string name="errcode_success">发送成功</string>
-	<string name="errcode_cancel">发送取消</string>
-	<string name="errcode_deny">发送被拒绝</string>
-	<string name="errcode_unknown">发送返回</string>
-	
-	<!-- 日期时间 -->
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unknown">发送返回</string>
+
+    <!-- 日期时间 -->
     <string name="year">年</string>
     <string name="month">月</string>
     <string name="day">日</string>
@@ -313,7 +317,7 @@
     <string name="unknow">未知</string>
     <string name="unstart">未开始</string>
     <string name="ended">已结束</string>
-	<string-array name="label_fields">
+    <string-array name="label_fields">
         <item>@string/year</item>
         <item>@string/month</item>
         <item>@string/day_t</item>

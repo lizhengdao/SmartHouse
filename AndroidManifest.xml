@@ -232,6 +232,10 @@
             android:name="cn.com.zzwfang.activity.ComplainActivity"
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="cn.com.zzwfang.activity.IAmOwnerActicity"
+            android:screenOrientation="portrait" />
+        
         <!--  
         <activity
             android:name="cn.com.zzwfang.wxapi.WXEntryActivity"

@@ -30,6 +30,20 @@
             android:text="@string/frag_home_second_hand_house"
             android:textColor="@color/color_747474"
             android:textSize="16sp" />
+        
+        <cn.com.zzwfang.view.AutoDrawableTextView
+            android:id="@+id/frag_home_rent_house"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/ic_rent_house"
+            android:gravity="center"
+            app:top_height="50dp"
+            app:top_width="50dp"
+            android:text="@string/frag_home_rent_house"
+            android:textColor="@color/color_747474"
+            android:textSize="16sp" />
 
         <cn.com.zzwfang.view.AutoDrawableTextView
             android:id="@+id/frag_home_new_house"
@@ -45,19 +59,7 @@
             android:textColor="@color/color_747474"
             android:textSize="16sp" />
 
-        <cn.com.zzwfang.view.AutoDrawableTextView
-            android:id="@+id/frag_home_rent_house"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_rent_house"
-            android:gravity="center"
-            app:top_height="50dp"
-            app:top_width="50dp"
-            android:text="@string/frag_home_rent_house"
-            android:textColor="@color/color_747474"
-            android:textSize="16sp" />
+        
 
         <cn.com.zzwfang.view.AutoDrawableTextView
             android:id="@+id/frag_home_search_house"

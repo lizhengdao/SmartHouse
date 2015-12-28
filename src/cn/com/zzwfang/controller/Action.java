@@ -798,4 +798,11 @@ public interface Action {
 	 * @param content
 	 */
 	void complain(String id, String type, String userId, String content, ResultHandlerCallback callback);
+	
+	/**
+	 * 看房经历
+	 * @param userId
+	 * @param callback
+	 */
+	void seeHouseExperience(String userId, ResultHandlerCallback callback);
 }

@@ -1512,8 +1512,6 @@ public class ActionImpl implements Action {
 		// TODO Auto-generated method stub
 		RequestParams requestParams = new RequestParams();
 
-//        requestParams.put("sign", "1111");
-//        requestParams.put("timestamp", "2222");
 		encryptTimeStamp(requestParams);
         requestParams.put("employeeId", agentId);
         
@@ -2650,6 +2648,37 @@ public class ActionImpl implements Action {
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
 	}
+
+    @Override
+    public void seeHouseExperience(String userId, ResultHandlerCallback callback) {
+        // TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+        
+        encryptTimeStamp(requestParams);
+        requestParams.put("userId", userId);
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.SEE_HOUSE));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+        
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
 
 
 	

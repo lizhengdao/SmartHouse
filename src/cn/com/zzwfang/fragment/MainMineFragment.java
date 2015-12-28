@@ -19,6 +19,7 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
 import cn.com.zzwfang.activity.FeedbackActivity;
+import cn.com.zzwfang.activity.IAmOwnerActicity;
 import cn.com.zzwfang.activity.LoginActivity;
 import cn.com.zzwfang.activity.MainActivity;
 import cn.com.zzwfang.activity.MessageActivity;
@@ -204,14 +205,23 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                         .jump(this, MyConcernHouseResourcesActivity.class);
             }
             break;
-        case R.id.frag_mine_my_proxy_llt: // 我的委托 （帮你卖房（我是业主））
+        case R.id.frag_mine_my_proxy_llt: // 我的委托 （帮你卖房（我是业主）） //  现在改成我是业主
             if (checkLoginStatus()) {
+//                Jumper.newJumper()
+//                        .setAheadInAnimation(R.anim.activity_push_in_right)
+//                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//                        .setBackInAnimation(R.anim.activity_alpha_in)
+//                        .setBackOutAnimation(R.anim.activity_push_out_right)
+//                        .jump(this, MyProxyActivity.class);
+                
                 Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, MyProxyActivity.class);
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .jump(this, IAmOwnerActicity.class);
+                
+                
             }
             break;
         case R.id.frag_mine_my_demand_llt: // 我的需求 (帮你找房 我是客户)

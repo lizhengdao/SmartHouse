@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <FrameLayout
+        android:layout_width="120dp"
+        android:layout_height="90dp" >
+
+        <ImageView
+            android:id="@+id/adapter_i_am_owner_photo"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:scaleType="centerCrop" />
+        
+        <TextView 
+            android:id="@+id/adapter_i_am_owner_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <TextView 
+            android:id="@+id/adapter_i_am_owner_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+        
+        <TextView 
+            android:id="@+id/adapter_i_am_owner_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/black"/>
+        
+        <TextView 
+            android:id="@+id/adapter_i_am_owner_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:singleLine="true"
+            android:textColor="@color/color_d86048"
+            android:textSize="14sp"/>
+        
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <cn.com.zzwfang.view.AutoDrawableTextView
+                android:id="@+id/adapter_i_am_owner_action1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_corner_color_f7860c"
+                android:drawableLeft="@drawable/ic_see_record"
+                android:gravity="center_vertical"
+                android:drawablePadding="2dp"
+                android:padding="4dp"
+                android:text="售后查询"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:left_width="20dp"
+                app:left_height="20dp" />
+            
+            <cn.com.zzwfang.view.AutoDrawableTextView
+                android:id="@+id/adapter_i_am_owner_action2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/shape_round_corner_color_f7860c"
+                android:drawableLeft="@drawable/ic_house_source_info_change"
+                android:gravity="center_vertical"
+                android:drawablePadding="2dp"
+                android:padding="4dp"
+                android:text="财务明细"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:left_width="20dp"
+                app:left_height="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
