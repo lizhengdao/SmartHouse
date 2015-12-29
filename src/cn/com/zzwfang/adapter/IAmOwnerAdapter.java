@@ -52,14 +52,29 @@ public class IAmOwnerAdapter extends BaseAdapter {
         MyProxySellHouseBean temp = mySoldHouses.get(position);
         
         ImageView photo = ViewHolder.get(convertView, R.id.adapter_i_am_owner_photo);
+        ImageView statusImg = ViewHolder.get(convertView, R.id.adapter_i_am_owner_status);
         TextView tvTitle = ViewHolder.get(convertView, R.id.adapter_i_am_owner_title);
         TextView tvDesc = ViewHolder.get(convertView, R.id.adapter_i_am_owner_desc);
         TextView tvPrice = ViewHolder.get(convertView, R.id.adapter_i_am_owner_money);
         
-//        AutoDrawableTextView houseProgress = ViewHolder.get(convertView, R.id.adapter_my_house_source_progress);
-//        AutoDrawableTextView seeHouseRecord = ViewHolder.get(convertView, R.id.adapter_my_house_source_see_house_record);
+        AutoDrawableTextView action1 = ViewHolder.get(convertView, R.id.adapter_i_am_owner_action1);
+        AutoDrawableTextView action2 = ViewHolder.get(convertView, R.id.adapter_i_am_owner_action2);
         
+        int status = temp.getStatus();
+        if (status == 0) { // 已售
+            statusImg.setBackgroundResource(R.drawable.ic_saled);
+            action1.setVisibility(View.VISIBLE);
+            action2.setVisibility(View.VISIBLE);
+            action1.setText("售后查询");
+            action2.setText("财务明细");
+        } else if (status == 1) { // 未售
+            action1.setVisibility(View.GONE);
+            action2.setVisibility(View.VISIBLE);
+            action2.setText("带看记录");
+            statusImg.setBackgroundResource(R.drawable.ic_unsaled);
+        }
         tvTitle.setText(temp.getTitle());
+        
         String desc = "";
         if (!TextUtils.isEmpty(temp.getTypeF())) {
             desc += temp.getTypeF() + "室";
