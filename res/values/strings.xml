@@ -80,6 +80,7 @@
     <string name="frag_mine_i_am_owner">我是业主</string>
     <string name="frag_mine_browse_record">浏览记录</string>
     <string name="frag_mine_my_demand">帮你找房</string>
+    <string name="frag_mine_i_am_customer">我是客户</string>
     <string name="frag_mine_my_house_resources">我的房子</string>
     <string name="frag_mine_mortgage_calculator">房贷计算器</string>
     <string name="frag_mine_feedback">意见反馈</string>

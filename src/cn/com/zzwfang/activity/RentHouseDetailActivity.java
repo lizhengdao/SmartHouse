@@ -70,7 +70,7 @@ OnPageChangeListener {
 	private TextView inner3D, court3D;
 	private View lineInner3D, lineCourt3D;
 	
-	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
+	private AutoDrawableTextView tvAgentDial, tvAgentMsg, tvShare;
 	
 	private PathImage agentAvatar;
 	
@@ -117,6 +117,7 @@ OnPageChangeListener {
 		tvPhotoIndex = (TextView) findViewById(R.id.act_rent_house_detail_photo_index_tv);
 		tvAgentDial = (AutoDrawableTextView) findViewById(R.id.act_rent_house_detail_agent_dial);
 		tvAgentMsg = (AutoDrawableTextView) findViewById(R.id.act_rent_house_detail_agent_msg);
+		tvShare = (AutoDrawableTextView) findViewById(R.id.act_rent_house_detail_share);
 		agentAvatar = (PathImage) findViewById(R.id.act_rent_house_detail_agent_avatar);
 		
 		inner3D = (TextView) findViewById(R.id.act_rent_house_detail_inner_three_dimession_display);
@@ -143,6 +144,7 @@ OnPageChangeListener {
 		photoPager.setOnPageChangeListener(this);
 		tvAgentDial.setOnClickListener(this);
 		tvAgentMsg.setOnClickListener(this);
+		tvShare.setOnClickListener(this);
 		tvEstateName.setOnClickListener(this);
 		inner3D.setOnClickListener(this);
 		court3D.setOnClickListener(this);
@@ -232,6 +234,11 @@ OnPageChangeListener {
                 .setBackOutAnimation(R.anim.slide_out_style1)
                 .jump(this, LoginActivity.class);
 			}
+			break;
+			
+		case R.id.act_rent_house_detail_share:
+			PopViewHelper.showSharePopupWindow(RentHouseDetailActivity.this,
+					getWindow().getDecorView(), onShareTypeSelectListener);
 			break;
 			
 		case R.id.act_rent_house_detail_estatename_tv:  //  小区详情

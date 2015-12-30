@@ -805,4 +805,13 @@ public interface Action {
 	 * @param callback
 	 */
 	void seeHouseExperience(String userId, ResultHandlerCallback callback);
+	
+	/**
+	 * @param id  宿主ID（房源、客源） 代表哪一项的点赞，就传哪一项的ID，比如房源进度点赞 就传这个房源进度的ID 
+	 * @param supportType  点赞类型    1(财务)，2（带看），3（进度）
+	 * @param userId  
+	 * @param content  
+	 * @param callback
+	 */
+	void support(String id, int supportType, String userId, String content, ResultHandlerCallback callback);
 }

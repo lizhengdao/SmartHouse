@@ -16,6 +16,7 @@ import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.NewHouseActivity;
 import cn.com.zzwfang.activity.RentHouseActivity;
 import cn.com.zzwfang.activity.SearchHouseArtifactActivity;
+import cn.com.zzwfang.activity.SearchHouseArtifactActivity1;
 import cn.com.zzwfang.activity.SecondHandHouseActivity;
 import cn.com.zzwfang.bean.RecommendHouseSourceBean;
 import cn.com.zzwfang.util.Jumper;
@@ -179,7 +180,7 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
         .setAheadOutAnimation(R.anim.activity_alpha_out)
         .setBackInAnimation(R.anim.activity_alpha_in)
         .setBackOutAnimation(R.anim.activity_push_out_right)
-        .jump((BaseActivity)context, SearchHouseArtifactActivity.class);
+        .jump((BaseActivity)context, SearchHouseArtifactActivity1.class);
 		break;
 		}
 		

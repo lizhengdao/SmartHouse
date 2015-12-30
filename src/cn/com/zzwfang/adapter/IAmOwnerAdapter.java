@@ -4,11 +4,18 @@ import java.util.ArrayList;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.activity.BaseActivity;
+import cn.com.zzwfang.activity.IncomeStatementActivity;
+import cn.com.zzwfang.activity.QueryAfterSaleActivity;
+import cn.com.zzwfang.activity.SelectEstateActivity;
 import cn.com.zzwfang.bean.MyProxySellHouseBean;
+import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -49,7 +56,7 @@ public class IAmOwnerAdapter extends BaseAdapter {
             convertView = View.inflate(context, R.layout.adapter_i_am_owner, null);
         }
         
-        MyProxySellHouseBean temp = mySoldHouses.get(position);
+        final MyProxySellHouseBean temp = mySoldHouses.get(position);
         
         ImageView photo = ViewHolder.get(convertView, R.id.adapter_i_am_owner_photo);
         ImageView statusImg = ViewHolder.get(convertView, R.id.adapter_i_am_owner_status);
@@ -60,18 +67,28 @@ public class IAmOwnerAdapter extends BaseAdapter {
         AutoDrawableTextView action1 = ViewHolder.get(convertView, R.id.adapter_i_am_owner_action1);
         AutoDrawableTextView action2 = ViewHolder.get(convertView, R.id.adapter_i_am_owner_action2);
         
-        int status = temp.getStatus();
+        final int status = temp.getStatus();
         if (status == 0) { // 已售
             statusImg.setBackgroundResource(R.drawable.ic_saled);
             action1.setVisibility(View.VISIBLE);
             action2.setVisibility(View.VISIBLE);
             action1.setText("售后查询");
             action2.setText("财务明细");
+            Drawable aDrawableAction1 = context.getResources().getDrawable(R.drawable.ic_see_record);
+            action1.setCompoundDrawables(aDrawableAction1, null, null, null);
+            action1.setBackgroundResource(R.drawable.shape_round_corner_bg_color_app_theme);
+            
+            Drawable aDrawableAction2 = context.getResources().getDrawable(R.drawable.ic_financial_detial_white);
+            action2.setCompoundDrawables(aDrawableAction2, null, null, null);
         } else if (status == 1) { // 未售
-            action1.setVisibility(View.GONE);
-            action2.setVisibility(View.VISIBLE);
-            action2.setText("带看记录");
+            action1.setVisibility(View.VISIBLE);
+            action2.setVisibility(View.GONE);
+            action1.setText("带看记录");
             statusImg.setBackgroundResource(R.drawable.ic_unsaled);
+            
+            Drawable aDrawableAction1 = context.getResources().getDrawable(R.drawable.ic_see_record);
+            action1.setCompoundDrawables(aDrawableAction1, null, null, null);
+            action1.setBackgroundResource(R.drawable.shape_round_corner_color_f7860c);
         }
         tvTitle.setText(temp.getTitle());
         
@@ -101,6 +118,48 @@ public class IAmOwnerAdapter extends BaseAdapter {
         }
         
         ImageAction.displayImage(temp.getImagePath(), photo);
+        
+        action1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (status == 0) { // 已售
+					// 跳售后查询
+					Jumper.newJumper()
+					.setAheadInAnimation(R.anim.activity_push_in_right)
+					.setAheadOutAnimation(R.anim.activity_alpha_out)
+					.setBackInAnimation(R.anim.activity_alpha_in)
+					.setBackOutAnimation(R.anim.activity_push_out_right)
+					.putString(QueryAfterSaleActivity.INTENT_ESTATE_NAME, temp.getTitle())
+					.putString(QueryAfterSaleActivity.INTENT_HOUSE_SOURCE_ID, temp.getId())
+					.jump((BaseActivity)context, QueryAfterSaleActivity.class);
+				} else if (status == 1) { // 未售
+					// 跳带看记录
+					Jumper.newJumper()
+					.setAheadInAnimation(R.anim.activity_push_in_right)
+					.setAheadOutAnimation(R.anim.activity_alpha_out)
+					.setBackInAnimation(R.anim.activity_alpha_in)
+					.setBackOutAnimation(R.anim.activity_push_out_right)
+					.jump((BaseActivity)context, QueryAfterSaleActivity.class);
+				}
+			}
+		});
+        
+        action2.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// 跳财务明细
+				Jumper.newJumper()
+		        .setAheadInAnimation(R.anim.activity_push_in_right)
+		        .setAheadOutAnimation(R.anim.activity_alpha_out)
+		        .setBackInAnimation(R.anim.activity_alpha_in)
+		        .setBackOutAnimation(R.anim.activity_push_out_right)
+		        .putString(IncomeStatementActivity.INTENT_HOUSE_SOURCE_ID, temp.getId())
+		        .jump((BaseActivity)context, IncomeStatementActivity.class);
+			}
+		});
+        
         return convertView;
     }
 

@@ -354,5 +354,10 @@ public class API {
      * 看房经历
      */
     public static final String SEE_HOUSE = "User/SeeHouse";
+    
+    /**
+     * 赞
+     */
+    public static final String SUPPORT = "Other/Zan";
 
 }

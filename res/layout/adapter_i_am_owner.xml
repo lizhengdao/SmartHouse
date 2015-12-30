@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="16sp"/>
         
         <TextView 
             android:id="@+id/adapter_i_am_owner_desc"
@@ -45,16 +45,18 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_marginTop="2dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
         
         <TextView 
             android:id="@+id/adapter_i_am_owner_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginRight="8dp"
             android:singleLine="true"
             android:textColor="@color/color_d86048"
-            android:textSize="14sp"/>
+            android:textSize="16sp"/>
         
         <LinearLayout 
             android:layout_width="wrap_content"

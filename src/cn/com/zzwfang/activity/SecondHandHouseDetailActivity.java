@@ -2,10 +2,7 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -53,10 +50,7 @@ import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.mm.sdk.openapi.WXMediaMessage;
-import com.tencent.mm.sdk.openapi.WXWebpageObject;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -86,7 +80,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private View lineSandTableDisplay, lineInnerThreeDimensionDisplay;
 	
 	private LinearLayout lltBrokerInfo, lltCourt;
-	private AutoDrawableTextView tvAgentDial, tvAgentMsg;
+	private AutoDrawableTextView tvAgentDial, tvAgentMsg, tvShare;
 	private TextView tvMortgageCalculate;
 	private MapView mapView;
 	private WebView webViewPriceTrend;
@@ -141,6 +135,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvAgentPhone = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_phone);
 		tvAgentDial = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
 		tvAgentMsg = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
+		tvShare = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_share);
 		tvPhotoIndex = (TextView) findViewById(R.id.act_second_house_detail_photo_index_tv);
 		tvSeeHouseRecord = (TextView) findViewById(R.id.act_second_handhouse_see_house_record_tv);
 		tvMortgageCalculate = (TextView) findViewById(R.id.act_second_hand_house_detail_calculator_tv);
@@ -182,6 +177,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvTransactionHistory.setOnClickListener(this);
 		tvAgentDial.setOnClickListener(this);
 		tvAgentMsg.setOnClickListener(this);
+		tvShare.setOnClickListener(this);
 		lltBrokerInfo.setOnClickListener(this);
 		tvInnerThreeDimensionDisplay.setOnClickListener(this);
 		lltCourt.setOnClickListener(this);
@@ -211,9 +207,6 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	                    WeiXinShareHelper weixinShareHelper1 = new WeiXinShareHelper();
 	                    weixinShareHelper1.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
 	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), true);
-//	                    shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
-//	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare());
-//	                    weixinShareHelper.shareText(apiWeixin, "分享测试");
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:
 	                    break;
@@ -231,26 +224,6 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		};
 	}
 	
-	public void shareWebpage(Context context, IWXAPI api, String webpageTitle, String webpageDesc, String webpageUrl) {
-        WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = webpageUrl;
-        WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title = webpageTitle;
-        msg.description = webpageDesc;
-        
-        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);  
-        msg.setThumbImage(thumb);  
-        
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = buildTransaction("webpage");
-        req.message = msg;
-//        req.scene = isTimelineCb.isChecked() ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
-        req.scene = SendMessageToWX.Req.WXSceneTimeline;
-        api.sendReq(req);
-    }
-	private String buildTransaction(final String type) {
-        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
-    }
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -321,6 +294,10 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
                 .jump(this, LoginActivity.class);
 			}
 			
+			break;
+		case R.id.act_second_hand_house_detail_share:   // 分享
+			PopViewHelper.showSharePopupWindow(SecondHandHouseDetailActivity.this,
+					getWindow().getDecorView(), onShareTypeSelectListener);
 			break;
 		case R.id.act_second_hand_house_detail_court:   // 跳小区详情
 			if (secondHandHouseDetail != null) {

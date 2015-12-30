@@ -236,6 +236,22 @@
             android:name="cn.com.zzwfang.activity.IAmOwnerActicity"
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="cn.com.zzwfang.activity.QueryAfterSaleActivity"
+            android:screenOrientation="portrait" />
+        
+        <activity
+            android:name="cn.com.zzwfang.activity.SearchHouseArtifactActivity1"
+            android:screenOrientation="portrait" />
+        
+        <activity
+            android:name="cn.com.zzwfang.activity.IAmCustomerActivity"
+            android:screenOrientation="portrait" />
+        
+        <activity
+            android:name="cn.com.zzwfang.activity.SupportActivity"
+            android:screenOrientation="portrait" />
+        
         <!--  
         <activity
             android:name="cn.com.zzwfang.wxapi.WXEntryActivity"

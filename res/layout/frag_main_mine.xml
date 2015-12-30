@@ -260,7 +260,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="8dp"
-                    android:text="@string/frag_mine_my_demand"
+                    android:text="@string/frag_mine_i_am_customer"
                     android:textColor="@color/color_8d8d8d"
                     android:textSize="16sp" />
 
@@ -274,7 +274,8 @@
                     android:paddingLeft="8dp"
                     android:text="(我是客户)"
                     android:textColor="@color/color_8d8d8d"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="invisible" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -287,13 +288,15 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_e2e2e2" />
+                android:background="@color/color_e2e2e2"
+                android:visibility="gone" />
 
             <FrameLayout
                 android:id="@+id/frag_mine_my_house_resources_flt"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
-                android:background="@color/white" >
+                android:background="@color/white"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="wrap_content"
