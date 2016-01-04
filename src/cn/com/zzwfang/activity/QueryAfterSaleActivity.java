@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import com.alibaba.fastjson.JSON;
 
 import cn.com.zzwfang.R;
-import cn.com.zzwfang.adapter.ClientInfoChangeAdapter;
 import cn.com.zzwfang.adapter.QueryAfterSaleAdapter;
 import cn.com.zzwfang.bean.ClientInfoChangeBean;
 import cn.com.zzwfang.bean.Result;
@@ -23,6 +22,11 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * 售后查询
+ * @author lzd
+ *
+ */
 public class QueryAfterSaleActivity extends BaseActivity implements OnClickListener {
 
 	public static final String INTENT_ESTATE_NAME = "estate_name";

@@ -7,6 +7,7 @@ import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.IncomeStatementActivity;
 import cn.com.zzwfang.activity.QueryAfterSaleActivity;
+import cn.com.zzwfang.activity.SeeHouseRecordActivity;
 import cn.com.zzwfang.activity.SelectEstateActivity;
 import cn.com.zzwfang.bean.MyProxySellHouseBean;
 import cn.com.zzwfang.util.Jumper;
@@ -135,12 +136,13 @@ public class IAmOwnerAdapter extends BaseAdapter {
 					.jump((BaseActivity)context, QueryAfterSaleActivity.class);
 				} else if (status == 1) { // 未售
 					// 跳带看记录
-					Jumper.newJumper()
-					.setAheadInAnimation(R.anim.activity_push_in_right)
-					.setAheadOutAnimation(R.anim.activity_alpha_out)
-					.setBackInAnimation(R.anim.activity_alpha_in)
-					.setBackOutAnimation(R.anim.activity_push_out_right)
-					.jump((BaseActivity)context, QueryAfterSaleActivity.class);
+	                Jumper.newJumper()
+	                .setAheadInAnimation(R.anim.activity_push_in_right)
+	                .setAheadOutAnimation(R.anim.activity_alpha_out)
+	                .setBackInAnimation(R.anim.activity_alpha_in)
+	                .setBackOutAnimation(R.anim.activity_push_out_right)
+	                .putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, temp.getId())
+	                .jump((BaseActivity)context, SeeHouseRecordActivity.class);
 				}
 			}
 		});

@@ -62,7 +62,7 @@ public class SeeHouseRecordAdapter extends BaseAdapter {
 		tvPhone.setText(inqFollowListBean.getTel());
 		String url = inqFollowListBean.getHead();
 		if (!TextUtils.isEmpty(url)) {
-			ImageAction.displayImage(inqFollowListBean.getHead(), imgAvatar);
+			ImageAction.displayBrokerAvatar(inqFollowListBean.getHead(), imgAvatar);
 		}
 		
 		return convertView;

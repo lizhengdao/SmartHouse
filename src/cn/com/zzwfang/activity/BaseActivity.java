@@ -13,7 +13,6 @@ import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.SystemBarTintManager;
-import cn.com.zzwfang.util.ToastUtils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;

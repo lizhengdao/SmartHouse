@@ -154,15 +154,68 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/color_eeeeee"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp"
-        android:text="推荐房源"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:visibility="gone" />
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/color_eeeeee"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="已购房源"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            
+            <LinearLayout 
+                android:id="@+id/act_i_am_customer_already_buy_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/color_eeeeee"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="看房经历"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            
+            <LinearLayout 
+                android:id="@+id/act_i_am_customer_buy_house_experence_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/color_eeeeee"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="关注房源"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            
+            <LinearLayout 
+                android:id="@+id/act_i_am_customer_concern_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

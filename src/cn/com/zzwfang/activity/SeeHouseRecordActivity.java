@@ -198,6 +198,7 @@ public class SeeHouseRecordActivity extends BaseActivity implements
 				if (temp != null) {
 					inqFollowList.addAll(temp);
 				}
+				adapter.notifyDataSetChanged();
 				if (isRefresh) {
                     pullView.onHeaderRefreshFinish();
                 } else {

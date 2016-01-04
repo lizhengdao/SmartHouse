@@ -7,6 +7,10 @@ public class InqFollowListBean extends BaseBean {
 	private String Head;
 	
 	private String Name;
+	
+	private String AgentId;
+	
+	private String Photo;
 
 	public String getTel() {
 		return Tel;
@@ -31,6 +35,22 @@ public class InqFollowListBean extends BaseBean {
 	public void setName(String name) {
 		Name = name;
 	}
-	
+
+    public String getAgentId() {
+        return AgentId;
+    }
+
+    public void setAgentId(String agentId) {
+        AgentId = agentId;
+    }
+
+    public String getPhoto() {
+        return Photo;
+    }
+
+    public void setPhoto(String photo) {
+        Photo = photo;
+        this.Head = photo;
+    }
 	
 }

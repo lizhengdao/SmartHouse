@@ -9,15 +9,15 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="6dp">
         <View 
-            android:layout_width="3dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent"
-            android:background="#0000ff"
+            android:background="#d5d5d5"
             android:layout_gravity="center_horizontal"/>
         <ImageView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@drawable/ic_dot"
+            android:background="@drawable/ic_query_dot"
             android:layout_gravity="center_horizontal"/>
     </FrameLayout>
     
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:textColor="@color/color_app_theme"
+            android:textColor="#a5a5a5"
             android:textSize="16sp"/>
         
         <TextView 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textColor="@color/color_app_theme"
+            android:textColor="#787878"
             android:textSize="16sp"/>
     </LinearLayout>
 

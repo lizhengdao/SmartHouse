@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginTop="28dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="28dp"
         android:orientation="horizontal"
         android:weightSum="4" >
@@ -29,7 +29,7 @@
             app:top_width="50dp"
             android:text="@string/frag_home_second_hand_house"
             android:textColor="@color/color_747474"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
         
         <cn.com.zzwfang.view.AutoDrawableTextView
             android:id="@+id/frag_home_rent_house"
@@ -43,7 +43,7 @@
             app:top_width="50dp"
             android:text="@string/frag_home_rent_house"
             android:textColor="@color/color_747474"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <cn.com.zzwfang.view.AutoDrawableTextView
             android:id="@+id/frag_home_new_house"
@@ -57,7 +57,7 @@
             app:top_width="50dp"
             android:text="@string/frag_home_new_house"
             android:textColor="@color/color_747474"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         
 
@@ -73,7 +73,7 @@
             app:top_width="50dp"
             android:text="@string/frag_home_find_house_artifact"
             android:textColor="@color/color_747474"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <FrameLayout
