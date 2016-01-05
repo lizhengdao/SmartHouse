@@ -117,7 +117,7 @@ public interface Action {
 	 */
 	void getSearchHouseArtifactResut(String allPrice, String partPrice,
 			int type, String area, String rooms, String monthlyPay,
-			String label, int pageIndex, ResultHandlerCallback callback);
+			String label, int tradeType, int pageIndex, ResultHandlerCallback callback);
 
 	/**
 	 * 新房列表页

@@ -422,23 +422,40 @@ public class ActionImpl implements Action {
 
 	@Override
 	public void getSearchHouseArtifactResut(String allPrice, String partPrice, int type,
-			String area, String rooms, String monthlyPay, String label, int pageIndex, ResultHandlerCallback callback) {
+			String area, String rooms, String monthlyPay, String label, int tradeType, int pageIndex, ResultHandlerCallback callback) {
 		RequestParams requestParams = new RequestParams();
 
 		encryptTimeStamp(requestParams);
-		
-		if (type == 1) {  // 一次性付款
-			requestParams.put("allPrice", allPrice);
-//			requestParams.put("area", area);
-//			requestParams.put("house", rooms);
-//			requestParams.put("label", label);
-		} else if (type == 0) {
-			requestParams.put("partPrice", partPrice);
-			requestParams.put("priceRange", monthlyPay);
-//			requestParams.put("area", area);
-//			requestParams.put("house", rooms);
-			
+		// Trade 出售0      出租1
+		if (tradeType == 0) {  // 出售0
+			if (!TextUtils.isEmpty(label)) {
+				requestParams.put("label", label);
+			}
+			if (type == 1) {
+				requestParams.put("allPrice", allPrice);
+			} else {
+				requestParams.put("partPrice", partPrice);
+				requestParams.put("priceRange", monthlyPay);
+			}
+		} else if (tradeType == 1) {  // 出租 1
+			if (type == 1) {
+				requestParams.put("allPrice", allPrice);
+			}
 		}
+		
+		
+//		if (type == 1) {  // 一次性付款
+//			requestParams.put("allPrice", allPrice);
+////			requestParams.put("area", area);
+////			requestParams.put("house", rooms);
+////			requestParams.put("label", label);
+//		} else if (type == 0) { // 按揭
+//			requestParams.put("partPrice", partPrice);
+//			requestParams.put("priceRange", monthlyPay);
+////			requestParams.put("area", area);
+////			requestParams.put("house", rooms);
+//			
+//		}
 		if (!TextUtils.isEmpty(area)) {
 			requestParams.put("area", area);
 		}
@@ -446,10 +463,9 @@ public class ActionImpl implements Action {
 			requestParams.put("house", rooms);
 		}
 		
-		if (!TextUtils.isEmpty(label)) {
-			requestParams.put("label", label);
-		}
+		
 		requestParams.put("type", type + "");
+		requestParams.put("Trade", tradeType + "");
 		requestParams.put("pageIndex", pageIndex + "");
 
 		Options opt = new Options();

@@ -18,13 +18,20 @@ import cn.com.zzwfang.util.Jumper;
  */
 public class SearchHouseArtifactActivity extends BaseActivity implements OnClickListener, OnCheckedChangeListener {
 
+	/**
+	 * Excalibur/MatchingList 这个接口新增参数：Trade    0是买房那个  1是租房
+	 */
+	public static final String INTENT_SEARCH_HOUSE_TRADE_TYPE = "intent_search_house_trade_type";
 	private TextView tvBack, tvDisposable, tvMortgage;
 	
 	private RadioButton rbLiveHouse, rbCommercialHouse;
 	
+	private int tradeType = 0;
+	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		tradeType = getIntent().getIntExtra(INTENT_SEARCH_HOUSE_TRADE_TYPE, 0);
 		setContentView(R.layout.act_search_house_artifact);
 		initView();
 	}
@@ -56,6 +63,7 @@ public class SearchHouseArtifactActivity extends BaseActivity implements OnClick
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .putInt(SearchHouseArtifactRequirementActivity.INTENT_PAY_TYPE, 1)
+	        .putInt(SearchHouseArtifactRequirementActivity.INTENT_SEARCH_HOUSE_TRADE_TYPE, tradeType)
 	        .jump(this, SearchHouseArtifactRequirementActivity.class);
 			break;
 		case R.id.act_house_artifact_mortgage_tv:  //  按揭贷款  付款方式一次性或者按揭（Type,值为1或者0）
@@ -65,6 +73,7 @@ public class SearchHouseArtifactActivity extends BaseActivity implements OnClick
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
 	        .putInt(SearchHouseArtifactRequirementActivity.INTENT_PAY_TYPE, 0)
+	        .putInt(SearchHouseArtifactRequirementActivity.INTENT_SEARCH_HOUSE_TRADE_TYPE, tradeType)
 	        .jump(this, SearchHouseArtifactRequirementActivity.class);
 			break;
 		}

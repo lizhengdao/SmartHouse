@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <!-- 预算 -->
             <LinearLayout
                 android:id="@+id/act_search_house_artifact_budget_llt"
                 android:layout_width="match_parent"
@@ -75,6 +76,7 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
+            <!-- 地点 -->
             <LinearLayout
                 android:id="@+id/act_search_house_artifact_where_llt"
                 android:layout_width="match_parent"
@@ -86,6 +88,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/act_search_house_artifact_wheree_prompt_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/ic_location_to_buy"
@@ -109,6 +112,7 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
+            <!-- 月供 -->
             <LinearLayout
                 android:id="@+id/act_search_house_month_pay_llt"
                 android:layout_width="match_parent"
@@ -155,6 +159,7 @@
                 android:orientation="vertical" >
 
                 <TextView
+                    android:id="@+id/act_search_house_artifact_how_many_rooms_prompt_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
@@ -186,6 +191,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/act_search_house_additional_info_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"

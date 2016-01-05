@@ -2,6 +2,7 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,9 +42,23 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	
 	public static final String SalePriceRange = "SalePriceRange";
 	
+	/**
+	 * 补充信息
+	 */
 	public static final String EstateLabel = "EstateLabel";
+	/**
+	 * 租房价格区间
+	 */
+	public static final String RentPriceRange = "RentPriceRange"; // 租金区间
+	
+	/**
+	 * Excalibur/MatchingList 这个接口新增参数：Trade    0是买房那个  1是租房
+	 */
+	public static final String INTENT_SEARCH_HOUSE_TRADE_TYPE = "intent_search_house_trade_type";
 	
 	private TextView tvBack, tvCommit, tvBudget, tvWhere, tvMonthlyPay;
+	private TextView tvPromptWhere, tvPromptHowManyRooms;
+	private LinearLayout lltAdditionalInfoContainer;
 	
 	private LinearLayout lltBudget, lltWhere, lltMonthlyPay;
 	private GridView  gridViewHouseRooms;
@@ -53,18 +68,9 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	private int payType = -1;
 	
 	/**
-	 * 几居    属于几房House(值为1，2，3，4，四房以上)
-	 */
-//	private int rooms = 1;
-	/**
 	 * 几居 
 	 */
 	private TextValueBean tvHouseRooms;
-	
-	/**
-	 * 补充信息   多个用逗号隔开（，）
-	 */
-//	private String label;
 	
 	/**
      * 总价
@@ -109,17 +115,27 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
     
     private ArrayList<TextValueBean> houseRooms = new ArrayList<TextValueBean>();
     private SearchHouseArtifactRequirementAdapter houseRoomAdapter;
+    private int tradeType = 0;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		payType = getIntent().getIntExtra(INTENT_PAY_TYPE, -1);
+		Intent intent = getIntent();
+		payType = intent.getIntExtra(INTENT_PAY_TYPE, -1);
+		tradeType = intent.getIntExtra(INTENT_SEARCH_HOUSE_TRADE_TYPE, 0);
 		initView();
-		getConditionList(SalePriceRange);
-		getConditionList(EstateLabel);
+		
+		if (tradeType == 0) {  // 0是买房那个 
+			getConditionList(SalePriceRange);
+			getConditionList(EstateLabel);
+			getMonthlyPayData();
+		}
 		getAreaList();
-		getMonthlyPayData();
 		getHouseRoomsData();
+		
+		if (tradeType == 1) {  // 1是租房
+			getConditionList(RentPriceRange);
+		}
 	}
 	
 	private void initView() {
@@ -134,6 +150,10 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		tvWhere = (TextView) findViewById(R.id.act_search_house_artifact_wheree_tv);
 		tvMonthlyPay = (TextView) findViewById(R.id.act_search_house_month_pay_tv);
 		
+		tvPromptWhere = (TextView) findViewById(R.id.act_search_house_artifact_wheree_prompt_tv);
+		tvPromptHowManyRooms = (TextView) findViewById(R.id.act_search_house_artifact_how_many_rooms_prompt_tv);
+		lltAdditionalInfoContainer = (LinearLayout) findViewById(R.id.act_search_house_additional_info_container);
+		
 		gridViewHouseRooms = (GridView) findViewById(R.id.act_search_house_rooms);
 		houseRoomAdapter = new SearchHouseArtifactRequirementAdapter(this, houseRooms);
 		gridViewHouseRooms.setAdapter(houseRoomAdapter);
@@ -142,7 +162,12 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		adapter = new SearchHouseArtifactRequirementAdapter(this, estateLabels);
 		gridViewAdditionalInfo.setAdapter(adapter);
 		
-		
+		if (tradeType == 1) {
+			tvPromptWhere.setText("您想在哪里租");
+			tvPromptHowManyRooms.setText("您想租几居");
+			lltAdditionalInfoContainer.setVisibility(View.GONE);
+			lltMonthlyPay.setVisibility(View.GONE);
+		}
 		
 		tvCommit = (TextView) findViewById(R.id.act_search_house_artifact_requirement_commit_tv);
 		
@@ -245,6 +270,7 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 	        .setAheadOutAnimation(R.anim.activity_alpha_out)
 	        .setBackInAnimation(R.anim.activity_alpha_in)
 	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .putInt(SearchHouseArtifactResultActivity.INTENT_SEARCH_HOUSE_TRADE_TYPE, tradeType)
 	        .putInt(SearchHouseArtifactResultActivity.INTENT_PAY_TYPE, payType);
 		    
 		    if (totalPriceCondition != null) {
@@ -301,7 +327,7 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
             @Override
             public void rc0(RequestEntity entity, Result result) {
                 ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON.parseArray(result.getData(), TextValueBean.class);
-                if (SalePriceRange.equals(conditionName)) {
+                if (SalePriceRange.equals(conditionName) || RentPriceRange.equals(conditionName)) {
                     salePriceRanges.addAll(temp);
                 } else if (EstateLabel.equals(conditionName)) {
                     estateLabels.addAll(temp);

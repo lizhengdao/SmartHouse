@@ -39,6 +39,7 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 	public static final String INTENT_MONTHLY_PAY = "intent_monthly_pay";
 	public static final String INTENT_ROOMS = "intent_rooms";
 	public static final String INTENT_REMARKS = "intent_remarks";
+	public static final String INTENT_SEARCH_HOUSE_TRADE_TYPE = "intent_search_house_trade_type";
 	
 	private TextView tvBack, tvChangeAnother;
 	private ListView lstSearchHouseArtifactResult;
@@ -55,7 +56,7 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 	
 	private String partPrice;  //   首付范围
 	
-	
+	private int tradeType = 0;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -67,6 +68,7 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 		monthlyPayRange = intent.getStringExtra(INTENT_MONTHLY_PAY);
 		rooms = intent.getStringExtra(INTENT_ROOMS);
 		label = intent.getStringExtra(INTENT_REMARKS);
+		tradeType = intent.getIntExtra(INTENT_SEARCH_HOUSE_TRADE_TYPE, 0);
 		initView();
 	}
 	
@@ -136,7 +138,7 @@ public class SearchHouseArtifactResultActivity extends BaseActivity implements O
 		 */
 		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getSearchHouseArtifactResut(budget, partPrice, type, where, rooms, monthlyPayRange, label, pageIndex, new ResultHandlerCallback() {
+		actionImpl.getSearchHouseArtifactResut(budget, partPrice, type, where, rooms, monthlyPayRange, label, tradeType, pageIndex, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
