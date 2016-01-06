@@ -133,8 +133,6 @@ public class IAmOwnerActicity extends BaseActivity implements OnClickListener,
                     mySoldHouses.clear();
                 }
                 pageIndexSold++;
-                MyProxySellHouseBean test = new MyProxySellHouseBean();
-                temp.add(test);
                 mySoldHouses.addAll(temp);
                 adapter.notifyDataSetChanged();
                 if (isRefresh) {

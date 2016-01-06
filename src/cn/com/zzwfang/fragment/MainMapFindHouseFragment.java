@@ -557,9 +557,10 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			for (SearchHouseItemBean estate : estates) {
 			    
 				LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
-				Log.i("--->", "lat == " + estate.getLat() + "   Lng == " + estate.getLng());
 				tvArea.setText(estate.getName());
-				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
+//				tvPrice.setText(estate.getPrpAvg() + estate.getRentUnitName());
+				tvPrice.setText(estate.getPrpAvg() + "万元");
+				
 				Bitmap bmpAreaPoint = getViewBitmap(viewAreaPoint);
 
 				BitmapDescriptor bdA = BitmapDescriptorFactory
