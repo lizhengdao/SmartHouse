@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import com.alibaba.fastjson.JSON;
 
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.QueryAfterSaleAdapter;
 import cn.com.zzwfang.bean.ClientInfoChangeBean;
+import cn.com.zzwfang.bean.PrpChangeBean;
+import cn.com.zzwfang.bean.PrpChangeEmployeBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -19,6 +22,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -39,10 +43,15 @@ public class QueryAfterSaleActivity extends BaseActivity implements OnClickListe
     private TextView tvSupport1, tvSupport2, tvSupport3;
     private ListView listView;
     
+    private LinearLayout lltEmploye1, lltEmploye2, lltEmploye3;
+    private View line1, line2, line3;
+    
     private QueryAfterSaleAdapter houseInfoChangeAdapter;
     
     private String estateName;
     private String houseSourceId;
+    private PrpChangeBean prpChangeBean;
+    private ArrayList<PrpChangeEmployeBean> employes;
     
     @Override
     protected void onCreate(Bundle arg0) {
@@ -76,6 +85,14 @@ public class QueryAfterSaleActivity extends BaseActivity implements OnClickListe
         tvSupport2 = (TextView) findViewById(R.id.act_query_after_sale_support2);
         tvSupport3 = (TextView) findViewById(R.id.act_query_after_sale_support3);
         
+        lltEmploye1 = (LinearLayout) findViewById(R.id.act_query_after_sale_employe1);
+        lltEmploye2 = (LinearLayout) findViewById(R.id.act_query_after_sale_employe2);
+        lltEmploye3 = (LinearLayout) findViewById(R.id.act_query_after_sale_employe3);
+        
+        line1 = findViewById(R.id.act_query_after_sale_line1);
+        line2 = findViewById(R.id.act_query_after_sale_line2);
+        line3 = findViewById(R.id.act_query_after_sale_line3);
+        
         listView = (ListView)findViewById(R.id.act_query_after_sale_lst);
         
         if (TextUtils.isEmpty(estateName)) {
@@ -101,52 +118,95 @@ public class QueryAfterSaleActivity extends BaseActivity implements OnClickListe
             finish();
             break;
         case R.id.act_query_after_sale_complain1:
-        	Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, ComplainActivity.class);
+        	if (employes != null) {
+        		PrpChangeEmployeBean employ1 = employes.get(0);
+        		if (employ1 != null) {
+        			Jumper.newJumper()
+        			.setAheadInAnimation(R.anim.activity_push_in_right)
+        			.setAheadOutAnimation(R.anim.activity_alpha_out)
+        			.setBackInAnimation(R.anim.activity_alpha_in)
+        			.setBackOutAnimation(R.anim.activity_push_out_right)
+        			.putString(ComplainActivity.INTENT_COMPLAIN_ID, employ1.getId())
+                    .putString(ComplainActivity.INTENT_COMPLAIN_TYPE, "3")
+        			.jump(this, ComplainActivity.class);
+        		}
+        	}
+        	
         	break;
         case R.id.act_query_after_sale_complain2:
-        	Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, ComplainActivity.class);
+        	if (employes != null) {
+        		PrpChangeEmployeBean employ2 = employes.get(1);
+        		if (employ2 != null) {
+        			Jumper.newJumper()
+        			.setAheadInAnimation(R.anim.activity_push_in_right)
+        			.setAheadOutAnimation(R.anim.activity_alpha_out)
+        			.setBackInAnimation(R.anim.activity_alpha_in)
+        			.setBackOutAnimation(R.anim.activity_push_out_right)
+        			.putString(ComplainActivity.INTENT_COMPLAIN_ID, employ2.getId())
+                    .putString(ComplainActivity.INTENT_COMPLAIN_TYPE, "3")
+        			.jump(this, ComplainActivity.class);
+        		}
+        	}
         	break;
         case R.id.act_query_after_sale_complain3:
-        	Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, ComplainActivity.class);
+        	if (employes != null) {
+        		PrpChangeEmployeBean employ3 = employes.get(2);
+        		if (employ3 != null) {
+        			Jumper.newJumper()
+        			.setAheadInAnimation(R.anim.activity_push_in_right)
+        			.setAheadOutAnimation(R.anim.activity_alpha_out)
+        			.setBackInAnimation(R.anim.activity_alpha_in)
+        			.setBackOutAnimation(R.anim.activity_push_out_right)
+        			.putString(ComplainActivity.INTENT_COMPLAIN_ID, employ3.getId())
+                    .putString(ComplainActivity.INTENT_COMPLAIN_TYPE, "3")
+        			.jump(this, ComplainActivity.class);
+        		}
+        	}
         	break;
         case R.id.act_query_after_sale_support1:
-        	Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, SupportActivity.class);
+        	if (employes != null) {
+        		PrpChangeEmployeBean employ11 = employes.get(0);
+        		if (employ11 != null) {
+        			Jumper.newJumper()
+        			.setAheadInAnimation(R.anim.activity_push_in_right)
+        			.setAheadOutAnimation(R.anim.activity_alpha_out)
+        			.setBackInAnimation(R.anim.activity_alpha_in)
+        			.setBackOutAnimation(R.anim.activity_push_out_right)
+        			.putString(SupportActivity.INTENT_SUPPORT_ID, employ11.getId())
+                    .putInt(SupportActivity.INTENT_SUPPORT_TYPE, 3)
+        			.jump(this, SupportActivity.class);
+        		}
+        	}
         	break;
         case R.id.act_query_after_sale_support2:
-        	Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, SupportActivity.class);
+        	if (employes != null) {
+        		PrpChangeEmployeBean employ21 = employes.get(1);
+        		if (employ21 != null) {
+        			Jumper.newJumper()
+        			.setAheadInAnimation(R.anim.activity_push_in_right)
+        			.setAheadOutAnimation(R.anim.activity_alpha_out)
+        			.setBackInAnimation(R.anim.activity_alpha_in)
+        			.setBackOutAnimation(R.anim.activity_push_out_right)
+        			.putString(SupportActivity.INTENT_SUPPORT_ID, employ21.getId())
+                    .putInt(SupportActivity.INTENT_SUPPORT_TYPE, 3)
+        			.jump(this, SupportActivity.class);
+        		}
+        	}
         	break;
         case R.id.act_query_after_sale_support3:
-        	Jumper.newJumper()
-			.setAheadInAnimation(R.anim.activity_push_in_right)
-			.setAheadOutAnimation(R.anim.activity_alpha_out)
-			.setBackInAnimation(R.anim.activity_alpha_in)
-			.setBackOutAnimation(R.anim.activity_push_out_right)
-			.jump(this, SupportActivity.class);
+        	if (employes != null) {
+        		PrpChangeEmployeBean employ31 = employes.get(2);
+        		if (employ31 != null) {
+        			Jumper.newJumper()
+        			.setAheadInAnimation(R.anim.activity_push_in_right)
+        			.setAheadOutAnimation(R.anim.activity_alpha_out)
+        			.setBackInAnimation(R.anim.activity_alpha_in)
+        			.setBackOutAnimation(R.anim.activity_push_out_right)
+        			.putString(SupportActivity.INTENT_SUPPORT_ID, employ31.getId())
+                    .putInt(SupportActivity.INTENT_SUPPORT_TYPE, 3)
+        			.jump(this, SupportActivity.class);
+        		}
+        	}
         	break;
         }
     }
@@ -171,32 +231,99 @@ public class QueryAfterSaleActivity extends BaseActivity implements OnClickListe
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				// TODO 房源信息变动
-				ArrayList<ClientInfoChangeBean> houseInfoChanges = (ArrayList<ClientInfoChangeBean>) JSON.parseArray(result.getData(), ClientInfoChangeBean.class);
-				houseInfoChangeAdapter = new QueryAfterSaleAdapter(QueryAfterSaleActivity.this, houseInfoChanges);
-				listView.setAdapter(houseInfoChangeAdapter);
+				prpChangeBean = JSON.parseObject(result.getData(), PrpChangeBean.class);
+				if (prpChangeBean != null) {
+					houseInfoChangeAdapter = new QueryAfterSaleAdapter(QueryAfterSaleActivity.this, prpChangeBean.getFollow());
+					listView.setAdapter(houseInfoChangeAdapter);
+					employes = prpChangeBean.getEmployes();
+				}
+				
+				refreshEmployeUI();
 			}
 		});
 	}
+	
+	private void refreshEmployeUI() {
+		if (prpChangeBean != null) {
+			ArrayList<PrpChangeEmployeBean> employes = prpChangeBean.getEmployes();
+			if (employes != null && employes.size() > 0) {
+				int size = employes.size();
+				switch (size) {
+				case 1:
+					lltEmploye1.setVisibility(View.VISIBLE);
+					lltEmploye2.setVisibility(View.GONE);
+					lltEmploye3.setVisibility(View.GONE);
+					line1.setVisibility(View.VISIBLE);
+					line2.setVisibility(View.GONE);
+					line3.setVisibility(View.GONE);
+					PrpChangeEmployeBean prpChangeEmployeBean11 = employes.get(0);
+					ImageAction.displayAvatar(prpChangeEmployeBean11.getPic(), avatar1);
+					tvName1.setText("员工:" + prpChangeEmployeBean11.getName());
+					break;
+				case 2:
+					lltEmploye1.setVisibility(View.VISIBLE);
+					lltEmploye2.setVisibility(View.VISIBLE);
+					lltEmploye3.setVisibility(View.GONE);
+					line1.setVisibility(View.VISIBLE);
+					line2.setVisibility(View.VISIBLE);
+					line3.setVisibility(View.GONE);
+					
+					PrpChangeEmployeBean prpChangeEmployeBean21 = employes.get(0);
+					ImageAction.displayAvatar(prpChangeEmployeBean21.getPic(), avatar1);
+					tvName1.setText("员工:" + prpChangeEmployeBean21.getName());
+					
+					PrpChangeEmployeBean prpChangeEmployeBean22 = employes.get(1);
+					ImageAction.displayAvatar(prpChangeEmployeBean22.getPic(), avatar2);
+					tvName2.setText("员工:" + prpChangeEmployeBean22.getName());
+					
+					break;
+				case 3:
+					lltEmploye1.setVisibility(View.VISIBLE);
+					lltEmploye2.setVisibility(View.VISIBLE);
+					lltEmploye3.setVisibility(View.VISIBLE);
+					line1.setVisibility(View.VISIBLE);
+					line2.setVisibility(View.VISIBLE);
+					line3.setVisibility(View.VISIBLE);
+					
+					PrpChangeEmployeBean prpChangeEmployeBean31 = employes.get(0);
+					ImageAction.displayAvatar(prpChangeEmployeBean31.getPic(), avatar1);
+					tvName1.setText("员工:" + prpChangeEmployeBean31.getName());
+					
+					PrpChangeEmployeBean prpChangeEmployeBean32 = employes.get(1);
+					ImageAction.displayAvatar(prpChangeEmployeBean32.getPic(), avatar2);
+					tvName2.setText("员工:" + prpChangeEmployeBean32.getName());
+					
+					PrpChangeEmployeBean prpChangeEmployeBean33 = employes.get(2);
+					ImageAction.displayAvatar(prpChangeEmployeBean33.getPic(), avatar3);
+					tvName3.setText("员工:" + prpChangeEmployeBean33.getName());
+					break;
+					default:
+						lltEmploye1.setVisibility(View.VISIBLE);
+						lltEmploye2.setVisibility(View.VISIBLE);
+						lltEmploye3.setVisibility(View.VISIBLE);
+						line1.setVisibility(View.VISIBLE);
+						line2.setVisibility(View.VISIBLE);
+						line3.setVisibility(View.VISIBLE);
+						
+						PrpChangeEmployeBean prpChangeEmployeBean41 = employes.get(0);
+						ImageAction.displayAvatar(prpChangeEmployeBean41.getPic(), avatar1);
+						tvName1.setText("员工:" + prpChangeEmployeBean41.getName());
+						
+						PrpChangeEmployeBean prpChangeEmployeBean42 = employes.get(1);
+						ImageAction.displayAvatar(prpChangeEmployeBean42.getPic(), avatar2);
+						tvName2.setText("员工:" + prpChangeEmployeBean42.getName());
+						
+						PrpChangeEmployeBean prpChangeEmployeBean43 = employes.get(2);
+						ImageAction.displayAvatar(prpChangeEmployeBean43.getPic(), avatar3);
+						tvName3.setText("员工:" + prpChangeEmployeBean43.getName());
+						break;
+				}
+			} else {
+				lltEmploye1.setVisibility(View.GONE);
+				lltEmploye2.setVisibility(View.GONE);
+				lltEmploye3.setVisibility(View.GONE);
+			}
+		}
+	}
     
-    private void seeHouseExperience() {
-        ActionImpl actionImpl = ActionImpl.newInstance(this);
-        String userId = ContentUtils.getUserId(this);
-        actionImpl.seeHouseExperience(userId, new ResultHandlerCallback() {
-            
-            @Override
-            public void rc999(RequestEntity entity, Result result) {
-                
-            }
-            
-            @Override
-            public void rc3001(RequestEntity entity, Result result) {
-                
-            }
-            
-            @Override
-            public void rc0(RequestEntity entity, Result result) {
-                
-            }
-        });
-    }
 }

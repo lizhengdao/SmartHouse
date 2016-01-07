@@ -1,5 +1,6 @@
 package cn.com.zzwfang.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,13 +17,24 @@ import cn.com.zzwfang.util.ToastUtils;
 
 public class SupportActivity extends BaseActivity implements OnClickListener {
 
+	public static final String INTENT_SUPPORT_ID = "intent_support_id";
+	/**
+	 * supportType  1(财务)，2（带看），3（进度）
+	 */
+	public static final String INTENT_SUPPORT_TYPE = "intent_support_type";
+	
     private TextView tvBack;
     private EditText edtSupportContent;
     private TextView tvCommit;
+    
+    private String id;
+    private int supportType;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        
+        Intent intent = getIntent();
+        id = intent.getStringExtra(INTENT_SUPPORT_ID);
+        supportType = intent.getIntExtra(INTENT_SUPPORT_TYPE, 3);
         initView();
     }
     
@@ -58,8 +70,6 @@ public class SupportActivity extends BaseActivity implements OnClickListener {
 		}
 		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		String id = null;
-		int supportType = 1;
 		String userId = ContentUtils.getUserId(this);
 		// supportType  1(财务)，2（带看），3（进度）
 		actionImpl.support(id, supportType, userId, content, new ResultHandlerCallback() {
