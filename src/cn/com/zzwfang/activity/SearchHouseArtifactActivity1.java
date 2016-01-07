@@ -48,13 +48,22 @@ public class SearchHouseArtifactActivity1 extends BaseActivity implements OnClic
 	        .jump(this, SearchHouseArtifactActivity.class);
 			break;
 		case R.id.act_house_artifact1_find_rent_house_tv:  // 租房
-			Jumper.newJumper()
-	        .setAheadInAnimation(R.anim.activity_push_in_right)
-	        .setAheadOutAnimation(R.anim.activity_alpha_out)
-	        .setBackInAnimation(R.anim.activity_alpha_in)
-	        .setBackOutAnimation(R.anim.activity_push_out_right)
-	        .putInt(SearchHouseArtifactActivity.INTENT_SEARCH_HOUSE_TRADE_TYPE, 1)
-	        .jump(this, SearchHouseArtifactActivity.class);
+		    
+		    Jumper.newJumper()
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
+            .putInt(SearchHouseArtifactRequirementActivity.INTENT_PAY_TYPE, 1)
+            .putInt(SearchHouseArtifactRequirementActivity.INTENT_SEARCH_HOUSE_TRADE_TYPE, 1)
+            .jump(this, SearchHouseArtifactRequirementActivity.class);
+//			Jumper.newJumper()
+//	        .setAheadInAnimation(R.anim.activity_push_in_right)
+//	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+//	        .setBackInAnimation(R.anim.activity_alpha_in)
+//	        .setBackOutAnimation(R.anim.activity_push_out_right)
+//	        .putInt(SearchHouseArtifactActivity.INTENT_SEARCH_HOUSE_TRADE_TYPE, 1)
+//	        .jump(this, SearchHouseArtifactActivity.class);
 			break;
 		}
 	}
