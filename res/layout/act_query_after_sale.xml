@@ -36,15 +36,19 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/act_query_after_sale_employe1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:layout_marginLeft="10dp"
             android:orientation="vertical" >
 
@@ -104,20 +108,26 @@
     </LinearLayout>
     
     <View 
+        android:id="@+id/act_query_after_sale_line1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/dotted_line"/>
+        android:background="@drawable/dotted_line"
+        android:visibility="gone"/>
 
     <LinearLayout
+        android:id="@+id/act_query_after_sale_employe2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:orientation="vertical" >
 
             <cn.com.zzwfang.view.PathImage
@@ -175,20 +185,26 @@
     </LinearLayout>
 
     <View 
+        android:id="@+id/act_query_after_sale_line2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/dotted_line"/>
+        android:background="@drawable/dotted_line"
+        android:visibility="gone"/>
     
     <LinearLayout
+        android:id="@+id/act_query_after_sale_employe3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:orientation="vertical" >
 
             <cn.com.zzwfang.view.PathImage
@@ -246,9 +262,11 @@
     </LinearLayout>
     
     <View 
+        android:id="@+id/act_query_after_sale_line3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/dotted_line"/>
+        android:background="@drawable/dotted_line"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/act_query_after_sale_lst"

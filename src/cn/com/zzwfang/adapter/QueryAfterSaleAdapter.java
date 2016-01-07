@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.ClientInfoChangeBean;
+import cn.com.zzwfang.bean.PrpChangeFollowBean;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,9 @@ import android.widget.TextView;
 public class QueryAfterSaleAdapter extends BaseAdapter {
 
 	private Context context;
-	private ArrayList<ClientInfoChangeBean> houseSourceInfoChanges;
+	private ArrayList<PrpChangeFollowBean> houseSourceInfoChanges;
 	
-	public QueryAfterSaleAdapter(Context context, ArrayList<ClientInfoChangeBean> houseSourceInfoChanges) {
+	public QueryAfterSaleAdapter(Context context, ArrayList<PrpChangeFollowBean> houseSourceInfoChanges) {
 		this.context = context;
 		this.houseSourceInfoChanges = houseSourceInfoChanges;
 	}
@@ -50,7 +51,7 @@ public class QueryAfterSaleAdapter extends BaseAdapter {
 		TextView tvContent = ViewHolder.get(convertView, R.id.adapter_query_after_sale_content);
 		TextView tvDate = ViewHolder.get(convertView, R.id.adapter_query_after_sale_date);
 		
-		ClientInfoChangeBean temp = houseSourceInfoChanges.get(position);
+		PrpChangeFollowBean temp = houseSourceInfoChanges.get(position);
 		tvName.setText(temp.getType());
 		tvContent.setText(temp.getContent());
 		tvDate.setText(temp.getDate());
