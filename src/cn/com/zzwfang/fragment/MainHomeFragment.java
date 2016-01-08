@@ -68,6 +68,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	private GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
 	
 	private ArrayList<RecommendHouseSourceBean> recommendSources = new ArrayList<RecommendHouseSourceBean>();
+	private ArrayList<CityBean> cities = new ArrayList<CityBean>();
 	
 	private OnCitySelectedListener onCitySelectedListener;
 	
@@ -114,6 +115,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				adapter.setCityId(cityId);
 				getRecommendHouseSourceList(cityId);
 			}
+		} else {
+		    getAreaList();
 		}
 		
 		ptzListView.setOnItemClickListener(this);
@@ -297,6 +300,50 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
         // TODO Auto-generated method stub
         
+    }
+    
+    private void getAreaList() {
+        
+        ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
+        actionImpl.getCityList(new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                ArrayList<CityBean> temp = (ArrayList<CityBean>) JSON.parseArray(result.getData(), CityBean.class);
+                if (temp != null) {
+                    cities.clear();
+                    cities.addAll(temp);
+                    if (cities != null && cities.size() > 0) {
+                        CityBean cityBean = cities.get(0);
+                        cityId = cityBean.getSiteId();
+                        ContentUtils.saveCityBeanData(getActivity(), cityBean);
+                        tvLocation.setText(cityBean.getName());
+                        adapter.setCityId(cityBean.getSiteId());
+                        if (onCitySelectedListener != null) {
+                            onCitySelectedListener.onCitySelected(cityBean);
+                        }
+                        getRecommendHouseSourceList(cityBean.getSiteId());
+                        // 初始化搜索模块，注册事件监听
+                        if (cityBean != null) {
+                            String cityName = cityBean.getName();
+                            if (!TextUtils.isEmpty(cityName)) {
+                                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
 
 	
