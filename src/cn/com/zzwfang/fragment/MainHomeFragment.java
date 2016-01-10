@@ -110,10 +110,13 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		if (cityBean != null) {
 			String cityName = cityBean.getName();
 			String cityId = cityBean.getSiteId();
+			
 			if (!TextUtils.isEmpty(cityName) && !TextUtils.isEmpty(cityId)) {
 				tvLocation.setText(cityBean.getName());
 				adapter.setCityId(cityId);
 				getRecommendHouseSourceList(cityId);
+			} else {
+			    getAreaList();
 			}
 		} else {
 		    getAreaList();
