@@ -150,10 +150,10 @@
                 android:drawablePadding="4dp"
                 android:background="@drawable/shape_round_corner_color_app_theme"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:text="我要咨询"
-                app:left_width="20dp"
-                app:left_height="20dp" />
+                app:left_width="18dp"
+                app:left_height="18dp" />
             
             <cn.com.zzwfang.view.AutoDrawableTextView
                 android:id="@+id/adapter_search_house_artifact_dial"
@@ -170,10 +170,10 @@
                 android:drawablePadding="4dp"
                 android:background="@drawable/shape_round_corner_color_app_theme"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="11sp"
                 android:text="一键呼叫"
-                app:left_width="20dp"
-                app:left_height="20dp" />
+                app:left_width="18dp"
+                app:left_height="18dp" />
         </LinearLayout>
     </LinearLayout>
 
