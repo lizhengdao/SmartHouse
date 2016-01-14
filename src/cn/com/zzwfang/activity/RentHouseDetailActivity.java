@@ -3,6 +3,7 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -85,6 +86,9 @@ OnPageChangeListener {
 	private OnShareTypeSelectListener onShareTypeSelectListener;
 	
 	private IWXAPI apiWeixin;
+	private String sharedPictureUrl;
+    private Bitmap sharedBitmap;
+    
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -173,7 +177,7 @@ OnPageChangeListener {
 	                    // TODO
 	                    WeiXinShareHelper weixinShareHelper = new WeiXinShareHelper();
 	                    weixinShareHelper.shareWebpage(RentHouseDetailActivity.this, apiWeixin,
-	                            "智住网", rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare(), true);
+	                            "智住网", sharedBitmap, rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare(), true);
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:
 	                    break;
@@ -182,7 +186,7 @@ OnPageChangeListener {
 	                case OnShareTypeSelectListener.Share_Type_WeiXin_Friend:
                         WeiXinShareHelper weixinShareHelper2 = new WeiXinShareHelper();
                         weixinShareHelper2.shareWebpage(RentHouseDetailActivity.this, apiWeixin,
-                                "智住网", rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare(), false);
+                                "智住网", sharedBitmap, rentHouseDetailBean.getTitle(), rentHouseDetailBean.getShare(), false);
                         break;
 	                }
 			    }
@@ -295,6 +299,11 @@ OnPageChangeListener {
 	
 	private void rendUI() {
 		if (rentHouseDetailBean != null) {
+		    
+		    if (rentHouseDetailBean.getPhoto() != null && rentHouseDetailBean.getPhoto().size() > 0) {
+                sharedPictureUrl = rentHouseDetailBean.getPhoto().get(0).getPath();
+                sharedBitmap = ImageAction.loadBitmap(sharedPictureUrl);
+            }
 		    
 		    if (TextUtils.isEmpty(rentHouseDetailBean.getEstate360())) {
 		        court3D.setVisibility(View.GONE);

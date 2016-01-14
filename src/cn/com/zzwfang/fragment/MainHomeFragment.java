@@ -19,6 +19,7 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.CityListActivity;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
+import cn.com.zzwfang.activity.FillBankCardInfoActivity;
 import cn.com.zzwfang.activity.SearchHouseActivity;
 import cn.com.zzwfang.activity.SecondHandHouseDetailActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
@@ -158,21 +159,72 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
 			if (loginStatus) {  // 已登录
 				int userType = ContentUtils.getUserType(getActivity());
+				boolean isBindBankCard = ContentUtils.isUserBindBankCard(getActivity());
 				if (userType == 2) {  // 赏金猎人
-					Jumper.newJumper()
-		            .setAheadInAnimation(R.anim.activity_push_in_right)
-		            .setAheadOutAnimation(R.anim.activity_alpha_out)
-		            .setBackInAnimation(R.anim.activity_alpha_in)
-		            .setBackOutAnimation(R.anim.activity_push_out_right)
-		            .jump(this, FeeHunterInfoActivity.class);
-				} else {  // 非赏金猎人
-					Jumper.newJumper()
-		            .setAheadInAnimation(R.anim.activity_push_in_right)
-		            .setAheadOutAnimation(R.anim.activity_alpha_out)
-		            .setBackInAnimation(R.anim.activity_alpha_in)
-		            .setBackOutAnimation(R.anim.activity_push_out_right)
-		            .jump(this, ShangJinLieRenActivity.class);
-				}
+				    if (isBindBankCard) {
+				        Jumper.newJumper()
+	                    .setAheadInAnimation(R.anim.activity_push_in_right)
+	                    .setAheadOutAnimation(R.anim.activity_alpha_out)
+	                    .setBackInAnimation(R.anim.activity_alpha_in)
+	                    .setBackOutAnimation(R.anim.activity_push_out_right)
+	                    .jump(this, FeeHunterInfoActivity.class);
+				    } else {
+				        Jumper.newJumper()
+	                    .setAheadInAnimation(R.anim.activity_push_in_right)
+	                    .setAheadOutAnimation(R.anim.activity_alpha_out)
+	                    .setBackInAnimation(R.anim.activity_alpha_in)
+	                    .setBackOutAnimation(R.anim.activity_push_out_right)
+	                    .jump(this, FillBankCardInfoActivity.class);
+				    }
+					
+				} else if (userType == 0) {  // 0经济人
+//					Jumper.newJumper()
+//		            .setAheadInAnimation(R.anim.activity_push_in_right)
+//		            .setAheadOutAnimation(R.anim.activity_alpha_out)
+//		            .setBackInAnimation(R.anim.activity_alpha_in)
+//		            .setBackOutAnimation(R.anim.activity_push_out_right)
+//		            .jump(this, ShangJinLieRenActivity.class);
+				    
+				    if (isBindBankCard) {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FeeHunterInfoActivity.class);
+                    } else {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
+				    
+				} else if (userType == 1) {
+				    if (isBindBankCard) {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FeeHunterInfoActivity.class);
+                    } else {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
+				} else {  //  非赏金猎人  1普通会员
+                    Jumper.newJumper()
+                    .setAheadInAnimation(R.anim.activity_push_in_right)
+                    .setAheadOutAnimation(R.anim.activity_alpha_out)
+                    .setBackInAnimation(R.anim.activity_alpha_in)
+                    .setBackOutAnimation(R.anim.activity_push_out_right)
+                    .jump(this, ShangJinLieRenActivity.class);
+                }
 			} else {  // 未登录
 //				Jumper.newJumper()
 //	            .setAheadInAnimation(R.anim.slide_in_style1)
@@ -232,20 +284,54 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				break;
 			case CODE_LOGIN:  // 登录成功
 				int userType = ContentUtils.getUserType(getActivity());
-				if (userType == 2) {
-					Jumper.newJumper()
-		            .setAheadInAnimation(R.anim.activity_push_in_right)
-		            .setAheadOutAnimation(R.anim.activity_alpha_out)
-		            .setBackInAnimation(R.anim.activity_alpha_in)
-		            .setBackOutAnimation(R.anim.activity_push_out_right)
-		            .jump(this, FeeHunterInfoActivity.class);
+				boolean isBindBankCard = ContentUtils.isUserBindBankCard(getActivity());
+				if (userType == 2) {  // 赏金猎人
+				    
+				    if (isBindBankCard) {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FeeHunterInfoActivity.class);
+                    } else {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
+				} else if (userType == 0) {  // 0经济人
+				    if (isBindBankCard) {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FeeHunterInfoActivity.class);
+                    } else {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
 				} else {
+//					Jumper.newJumper()
+//		            .setAheadInAnimation(R.anim.activity_push_in_right)
+//		            .setAheadOutAnimation(R.anim.activity_alpha_out)
+//		            .setBackInAnimation(R.anim.activity_alpha_in)
+//		            .setBackOutAnimation(R.anim.activity_push_out_right)
+//		            .jump(this, ShangJinLieRenActivity.class);
+					
 					Jumper.newJumper()
-		            .setAheadInAnimation(R.anim.activity_push_in_right)
-		            .setAheadOutAnimation(R.anim.activity_alpha_out)
-		            .setBackInAnimation(R.anim.activity_alpha_in)
-		            .setBackOutAnimation(R.anim.activity_push_out_right)
-		            .jump(this, ShangJinLieRenActivity.class);
+                    .setAheadInAnimation(R.anim.activity_push_in_right)
+                    .setAheadOutAnimation(R.anim.activity_alpha_out)
+                    .setBackInAnimation(R.anim.activity_alpha_in)
+                    .setBackOutAnimation(R.anim.activity_push_out_right)
+                    .jump(this, FillBankCardInfoActivity.class);
 				}
 				break;
 			}

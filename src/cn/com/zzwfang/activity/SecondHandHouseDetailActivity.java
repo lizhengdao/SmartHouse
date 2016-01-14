@@ -3,6 +3,7 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -100,6 +101,9 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private Tencent tencent;
 	
 	private IWXAPI apiWeixin;
+	
+	private String sharedPictureUrl;
+	private Bitmap sharedBitmap;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -206,7 +210,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	                    // TODO
 	                    WeiXinShareHelper weixinShareHelper1 = new WeiXinShareHelper();
 	                    weixinShareHelper1.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
-	                            "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), true);
+	                            "智住网", sharedBitmap, secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), true);
 	                    break;
 	                case OnShareTypeSelectListener.Share_Type_QQ:
 	                    break;
@@ -215,7 +219,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	                case OnShareTypeSelectListener.Share_Type_WeiXin_Friend:
 	                    WeiXinShareHelper weixinShareHelper2 = new WeiXinShareHelper();
 	                    weixinShareHelper2.shareWebpage(SecondHandHouseDetailActivity.this, apiWeixin,
-                                "智住网", secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), false);
+                                "智住网", sharedBitmap, secondHandHouseDetail.getTitle(), secondHandHouseDetail.getShare(), false);
 	                    break;
 	                }
 			    }
@@ -376,6 +380,11 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private void rendUI() {
 		if (secondHandHouseDetail != null) {
 			
+		    if (secondHandHouseDetail.getPhoto() != null && secondHandHouseDetail.getPhoto().size() > 0) {
+		        sharedPictureUrl = secondHandHouseDetail.getPhoto().get(0).getPath();
+		        sharedBitmap = ImageAction.loadBitmap(sharedPictureUrl);
+		    }
+		    
 			if (TextUtils.isEmpty(secondHandHouseDetail.getEstate360())) {
 				tvSandTableDisplay.setVisibility(View.GONE);
 				lineSandTableDisplay.setVisibility(View.GONE);

@@ -18,6 +18,7 @@ import cn.com.zzwfang.util.AppUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.GuiderView;
+import cn.com.zzwfang.view.UnScrollableViewPager;
 
 import com.baidu.mapapi.SDKInitializer;
 
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
     public static final int CODE_LOGIN_MINE = 800;
 
-    private ViewPager contentPager;
+    private UnScrollableViewPager contentPager;
 
     private MainContentPagerAdapter contentAdapter;
 
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
     }
 
     private void initView() {
-        contentPager = (ViewPager) findViewById(R.id.act_main_content_pager);
+        contentPager = (UnScrollableViewPager) findViewById(R.id.act_main_content_pager);
         guiderHome = (GuiderView) findViewById(R.id.act_main_guider_home);
         guiderMapFindHouse = (GuiderView) findViewById(R.id.act_main_guider_map);
         guiderConsultant = (GuiderView) findViewById(R.id.act_main_guider_consultant);

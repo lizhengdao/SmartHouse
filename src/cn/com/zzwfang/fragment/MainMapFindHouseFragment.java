@@ -71,7 +71,7 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 public class MainMapFindHouseFragment extends BaseFragment implements
 		OnClickListener, OnCitySelectedListener, OnGetPoiSearchResultListener {
 	
-	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType;
+	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvReset;
 	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
 	private MapView mapView;
 	private BaiduMap baiduMap;
@@ -116,6 +116,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				.findViewById(R.id.frag_map_find_house_type_llt); 
 		lltMore = (LinearLayout) view
 				.findViewById(R.id.frag_map_find_house_more_llt);
+		tvReset = (TextView) view.findViewById(R.id.frag_map_reset);
 		
 		autoTvLocate = (AutoDrawableTextView) view.findViewById(R.id.frag_map_find_house_locate);
 		autoTvSubway = (AutoDrawableTextView) view.findViewById(R.id.frag_map_find_house_subway);
@@ -156,7 +157,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 		autoTvLocate.setOnClickListener(this);
 		autoTvSubway.setOnClickListener(this);
 		autoTvNearby.setOnClickListener(this);
-		
+		tvReset.setOnClickListener(this);
 
 		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
@@ -232,6 +233,7 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 				usageTypeCondition = typeConditionData;
 				labelCondition = labelConditionData;
 				statusCondition = saleStatusConditonData;
+				getMapFindHouseDataArea();
 			}
 		};
 	}
@@ -290,6 +292,11 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			    }
 			}
 			break;
+		case R.id.frag_map_reset:
+		    areaCondition = null;
+		    tvArea.setText("不限");
+		    getMapFindHouseDataArea();
+		    break;
 		}
 	}
 	

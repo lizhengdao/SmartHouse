@@ -131,6 +131,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	public static final String RentPriceRange = "RentPriceRange";
 	public static final String Direction = "Direction";
 	public static final String Sort = "Sort";
+	public static final String SquareRange = "SquareRange";
 
 	// 区域
 	private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
@@ -452,6 +453,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		// getConditionList(FloorRange); // 楼层范围 现在写死了的，妈的，到底哪个对
 		getConditionList(RentPriceRange); // 租价范围
 		getConditionList(Direction); // 朝向
+		getConditionList(SquareRange);
 		getAreaList();
 		getSecondHandHouseList(cityId, areaCondition, direction,
 				squareCondition, labelCondition, totalPriceCondition,
@@ -674,6 +676,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 							rentPriceRanges.addAll(temp);
 						} else if (Direction.equals(conditionName)) {
 							directions.addAll(temp);
+						} else if (SquareRange.equals(conditionName)) {
+						    squares.addAll(temp);
 						}
 					}
 				});

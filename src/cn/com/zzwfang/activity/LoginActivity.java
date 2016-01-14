@@ -55,8 +55,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 		lltBrokerLogin = (LinearLayout) findViewById(R.id.act_login_login_llt);
 		tvForgetPwd = (TextView) findViewById(R.id.act_login_forget_pwd_tv);
 		
-		edtPhoneNum.setText("18700827866");  //  18700827866    18683525229
-		edtPwd.setText("111111");    //   111111  123456   
+//		edtPhoneNum.setText("18081329650");  //  18700827866    18683525229
+//		edtPwd.setText("111111");    //   111111  123456   
 		
 		actionImpl = ActionImpl.newInstance(this);
 		tvBack.setOnClickListener(this);

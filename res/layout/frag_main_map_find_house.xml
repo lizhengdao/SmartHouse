@@ -30,6 +30,18 @@
             android:text="地图找房"
             android:textColor="@color/white"
             android:textSize="18sp" />
+        
+        <TextView 
+            android:id="@+id/frag_map_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_gravity="right"
+            android:text="重置"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
 
     </FrameLayout>
 
@@ -203,7 +215,7 @@
                     android:textSize="14sp"
                     app:top_height="20dp"
                     app:top_width="20dp"
-                    android:visibility="gone" />
+                    android:visibility="gone" />`
 
                 <cn.com.zzwfang.view.AutoDrawableTextView
                     android:id="@+id/frag_map_find_house_nearby"

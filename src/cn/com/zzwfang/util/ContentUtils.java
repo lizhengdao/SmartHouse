@@ -334,6 +334,12 @@ public final class ContentUtils {
 		return userInfoBean;
 	}
 	
+	public static boolean isUserBindBankCard(Context context) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        return sp.getBoolean(Constants.IS_BIND_BANK_CARD, false);
+	}
+	
 	public static void setMessageReceiveSetting(Context context, boolean isReceiveMsg) {
 	    SharedPreferences sp = (SharedPreferences) context
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
@@ -357,7 +363,7 @@ public final class ContentUtils {
 	public static int getUserType(Context context) {
 		SharedPreferences sp = (SharedPreferences) context
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
-		return sp.getInt(Constants.USER_TYPE, 1);  //  用户类型    0经济人，1普通会员，2赏金猎人
+		return sp.getInt(Constants.USER_TYPE, -1);  //  用户类型    0经济人，1普通会员，2赏金猎人
 	}
 	
 	public static void updateUserAvatar(Context context, String avatarUrl) {

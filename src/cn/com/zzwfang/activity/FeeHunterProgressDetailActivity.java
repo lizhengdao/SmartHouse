@@ -11,9 +11,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.ClientInfoChangeAdapter;
+import cn.com.zzwfang.adapter.HouseSourceInfoChangeAdapter;
+import cn.com.zzwfang.adapter.QueryAfterSaleAdapter;
 import cn.com.zzwfang.bean.ClientInfoChangeBean;
 import cn.com.zzwfang.bean.ClientProgressBean;
 import cn.com.zzwfang.bean.FeeHunterHouseSourceProgress;
+import cn.com.zzwfang.bean.PrpChangeBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -50,7 +53,7 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 	
 	private ClientInfoChangeAdapter clientInfoChangeAdapter;
 	
-	private ClientInfoChangeAdapter houseInfoChangeAdapter;
+	private HouseSourceInfoChangeAdapter houseInfoChangeAdapter;
 	
 	private String houseSourceId;
 	
@@ -279,9 +282,12 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				// TODO 房源信息变动
-				ArrayList<ClientInfoChangeBean> houseInfoChanges = (ArrayList<ClientInfoChangeBean>) JSON.parseArray(result.getData(), ClientInfoChangeBean.class);
-				houseInfoChangeAdapter = new ClientInfoChangeAdapter(FeeHunterProgressDetailActivity.this, houseInfoChanges);
-				lstInfoChange.setAdapter(houseInfoChangeAdapter);
+			    
+			    PrpChangeBean prpChangeBean = JSON.parseObject(result.getData(), PrpChangeBean.class);
+                if (prpChangeBean != null) {
+                    houseInfoChangeAdapter = new HouseSourceInfoChangeAdapter(FeeHunterProgressDetailActivity.this, prpChangeBean.getFollow());
+                    lstInfoChange.setAdapter(houseInfoChangeAdapter);
+                }
 			}
 		});
 	}

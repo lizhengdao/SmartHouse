@@ -19,6 +19,7 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.FeeHunterInfoActivity;
 import cn.com.zzwfang.activity.FeedbackActivity;
+import cn.com.zzwfang.activity.FillBankCardInfoActivity;
 import cn.com.zzwfang.activity.IAmCustomerActivity;
 import cn.com.zzwfang.activity.IAmOwnerActicity;
 import cn.com.zzwfang.activity.LoginActivity;
@@ -26,9 +27,7 @@ import cn.com.zzwfang.activity.MainActivity;
 import cn.com.zzwfang.activity.MessageActivity;
 import cn.com.zzwfang.activity.MortgageCalculatorActivity;
 import cn.com.zzwfang.activity.MyConcernHouseResourcesActivity;
-import cn.com.zzwfang.activity.MyDemandInfoActivity;
 import cn.com.zzwfang.activity.MyHouseListActivity;
-import cn.com.zzwfang.activity.MyProxyActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
 import cn.com.zzwfang.bean.FileUploadResultBean;
@@ -149,25 +148,74 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             ((MainActivity) getActivity()).backToHomeFragment();
             break;
         case R.id.frag_mine_fee_hunter: // 赏金猎人个人中心
-            /**
-             * 用户类型 0经济人，1普通会员，2赏金猎人
-             */
-            int userType = ContentUtils.getUserType(getActivity());
-            if (userType == 2) {
+            boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
+            if (!loginStatus) {
                 Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .jump(this, ShangJinLieRenActivity.class);
+            } else {
+                /**
+                 * 用户类型 0经济人，1普通会员，2赏金猎人
+                 */
+                int userType = ContentUtils.getUserType(getActivity());
+                boolean isBindBankCard = ContentUtils.isUserBindBankCard(getActivity());
+                
+                if (userType == 2) {
+                    if (isBindBankCard) {
+                        Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
                         .setBackInAnimation(R.anim.activity_alpha_in)
                         .setBackOutAnimation(R.anim.activity_push_out_right)
                         .jump(this, FeeHunterInfoActivity.class);
-            } else {
-                Jumper.newJumper()
+                    } else {
+                        Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
                         .setBackInAnimation(R.anim.activity_alpha_in)
                         .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, ShangJinLieRenActivity.class);
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
+                    
+                } else if (userType == 0) {  // 0经济人
+                    if (isBindBankCard) {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FeeHunterInfoActivity.class);
+                    } else {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
+                } else if (userType == 1) {  //  非赏金猎人  1普通会员
+                    
+                    if (isBindBankCard) {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FeeHunterInfoActivity.class);
+                    } else {
+                        Jumper.newJumper()
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, FillBankCardInfoActivity.class);
+                    }
+                }
             }
+            
             break;
         case R.id.frag_mine_avatar: // 修改头像
             if (checkLoginStatus()) {

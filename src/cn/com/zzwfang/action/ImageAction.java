@@ -5,6 +5,7 @@
 package cn.com.zzwfang.action;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -20,6 +21,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -141,6 +143,11 @@ public final class ImageAction {
 			ImageLoadingProgressListener progressListener) {
 		loader.displayImage(uri, imageView, DIP_IMAGE_PRO, listener,
 				progressListener);
+	}
+	
+	public static Bitmap loadBitmap(String url) {
+	    ImageSize imageSize = new ImageSize(80, 80);
+	    return loader.loadImageSync(url, imageSize);
 	}
 
 	public static void displayImage(String uri, ImageAware imageAware,

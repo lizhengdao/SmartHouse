@@ -73,15 +73,19 @@ public class WeiXinShareHelper {
         api.sendReq(req);
     }
     
-    public void shareWebpage(Context context, IWXAPI api, String webpageTitle, String webpageDesc, String webpageUrl, boolean allFriends) {
+    public void shareWebpage(Context context, IWXAPI api, String webpageTitle, Bitmap bitmap, String webpageDesc, String webpageUrl, boolean allFriends) {
         WXWebpageObject webpage = new WXWebpageObject();
         webpage.webpageUrl = webpageUrl;
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = webpageTitle;
         msg.description = webpageDesc;
         
-        Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);  
-        msg.setThumbImage(thumb);  
+        if (bitmap != null) {
+            msg.setThumbImage(bitmap);
+        } else {
+            Bitmap thumb = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+            msg.setThumbImage(thumb);
+        }
         
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("webpage");
