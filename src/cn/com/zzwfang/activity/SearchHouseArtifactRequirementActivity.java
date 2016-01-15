@@ -36,7 +36,7 @@ import com.alibaba.fastjson.JSON;
 public class SearchHouseArtifactRequirementActivity extends BaseActivity implements OnClickListener {
 	
 	/**
-	 * 付款方式一次性或者按揭（Type,值为1或者0）
+	 * 付款方式一次性1或者按揭0（Type,值为1或者0）
 	 */
 	public static final String INTENT_PAY_TYPE = "intent_pay_type";
 	
@@ -124,6 +124,10 @@ public class SearchHouseArtifactRequirementActivity extends BaseActivity impleme
 		payType = intent.getIntExtra(INTENT_PAY_TYPE, -1);
 		tradeType = intent.getIntExtra(INTENT_SEARCH_HOUSE_TRADE_TYPE, 0);
 		initView();
+		
+		if (payType == 1) {
+		    lltMonthlyPay.setVisibility(View.GONE);
+		}
 		
 		if (tradeType == 0) {  // 0是买房那个 
 			getConditionList(SalePriceRange);

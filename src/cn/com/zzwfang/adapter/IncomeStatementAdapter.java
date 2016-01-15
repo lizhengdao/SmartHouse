@@ -21,7 +21,7 @@ public class IncomeStatementAdapter extends BaseAdapter {
 	}
 	@Override
 	public int getCount() {
-		if (incomeStatements != null) {
+		if (incomeStatements == null) {
 			return 0;
 		}
 		return incomeStatements.size();

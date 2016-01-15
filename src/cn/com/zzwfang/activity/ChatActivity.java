@@ -95,7 +95,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 			messages.addAll(historyMsgs);
 			adapter.notifyDataSetChanged();
 //			readMessage(historyMsgs);
-			listView.setSelection(ListView.FOCUS_DOWN);
+//			listView.setSelection(ListView.FOCUS_DOWN);
+			listView.setSelection(adapter.getCount());
 		} else {  //  从其他聊天页来
 			if (!TextUtils.isEmpty(messageTo)) {
 				imMessages = MessagePool.getMessagesByContactId(messageTo);
@@ -103,7 +104,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 					ArrayList<MessageBean> messages = imMessages.getMessages();
 					if (messages != null) {
 						adapter.addMessages(messages);
-						listView.setSelection(ListView.FOCUS_DOWN);
+//						listView.setSelection(ListView.FOCUS_DOWN);
+						listView.setSelection(adapter.getCount());
 					}
 				}
 				getHistoryMsg(messageTo);
@@ -117,7 +119,8 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 				ArrayList<MessageBean> messages = imMessages.getMessages();
 				if (messages != null) {
 					adapter.addMessages(messages);
-					listView.setSelection(ListView.FOCUS_DOWN);
+//					listView.setSelection(ListView.FOCUS_DOWN);
+					listView.setSelection(adapter.getCount());
 				}
 			}
 			getHistoryMsg(msg.getUserId());

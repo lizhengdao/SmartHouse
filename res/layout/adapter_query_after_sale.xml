@@ -37,6 +37,14 @@
             android:textSize="16sp"/>
         
         <TextView 
+            android:id="@+id/adapter_query_after_sale_operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:textColor="#a5a5a5"
+            android:textSize="16sp"/>
+        
+        <TextView 
             android:id="@+id/adapter_query_after_sale_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

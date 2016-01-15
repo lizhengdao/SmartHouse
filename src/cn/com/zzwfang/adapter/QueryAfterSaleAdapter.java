@@ -48,11 +48,13 @@ public class QueryAfterSaleAdapter extends BaseAdapter {
 		}
 		
 		TextView tvName = ViewHolder.get(convertView, R.id.adapter_query_after_sale_name);
+		TextView tvOperatorName = ViewHolder.get(convertView, R.id.adapter_query_after_sale_operator);
 		TextView tvContent = ViewHolder.get(convertView, R.id.adapter_query_after_sale_content);
 		TextView tvDate = ViewHolder.get(convertView, R.id.adapter_query_after_sale_date);
 		
 		PrpChangeFollowBean temp = houseSourceInfoChanges.get(position);
 		tvName.setText(temp.getType());
+		tvOperatorName.setText("操作员:" + temp.getName());
 		tvContent.setText(temp.getContent());
 		tvDate.setText(temp.getDate());
 		return convertView;
