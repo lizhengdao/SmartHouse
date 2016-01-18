@@ -173,6 +173,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 				msg.setMessage(message);
 				msg.setCreateDateLong(System.currentTimeMillis());
 				adapter.addMessage(msg);
+				listView.setSelection(adapter.getCount());
 			}
 		});
 	}
@@ -180,6 +181,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 	@Override
 	public void onNewMessage(MessageBean msg) {
 	    adapter.addMessage(msg);
+	    listView.setSelection(adapter.getCount());
 	    ArrayList<MessageBean> temp = new ArrayList<MessageBean>();
 	    temp.add(msg);
 	    readMessage(temp);

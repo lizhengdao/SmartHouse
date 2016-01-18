@@ -6,6 +6,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMMessage;
 import com.easemob.chat.EMMessage.Type;
 import com.easemob.chat.TextMessageBody;
+import com.easemob.exceptions.EaseMobException;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.MessageBean;
@@ -13,6 +14,7 @@ import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.SystemBarTintManager;
+import cn.com.zzwfang.util.ToastUtils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -23,6 +25,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -129,12 +133,26 @@ public abstract class BaseActivity extends FragmentActivity {
 //              // 消息不是发给当前会话，return
 //              return;
 //          }
+            
+            String extMsgId = null;
+            try {
+                extMsgId = message.getStringAttribute("msgId");
+            } catch (EaseMobException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            
+//            ToastUtils.SHORT.toast(context, "消息来了");
+//            Log.i("--->", "消息来了");
             if (message.getType() == Type.TXT) {
                 TextMessageBody txtBody = (TextMessageBody) message.getBody();
                 
                 MessageBean msg = new MessageBean();
                 
-                msg.setId(message.getMsgId());
+//                msg.setId(message.getMsgId());
+                if (TextUtils.isEmpty(extMsgId)) {
+                    msg.setId(extMsgId);
+                }
                 msg.setFromUser(message.getFrom());
                 msg.setToUser(message.getTo());
                 msg.setMessage(txtBody.getMessage());

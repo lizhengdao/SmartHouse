@@ -22,15 +22,15 @@ public class API {
 	public static final int ERROR_TOKEN_INVALID = 9001;
 
 	/**
-	 * 目标主机地址  http://www.zzwfang.com:7894
+	 * 目标主机地址
 	 * http://118.119.254.72:7894/
 	 * 
-	 * http://www.zzwfang.com:7894/
+	 * 
 	 * http://yangmingbo.cn
 	 * 
 	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/
 	 */
-	public static final String host = "http://www.zzwfang.com:7894/";
+	public static final String host = "http://110.189.90.40:7892/";
 
 	/**
 	 * 认证授权接口

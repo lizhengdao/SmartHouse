@@ -350,7 +350,7 @@ public final class ContentUtils {
 	public static boolean getMessageReceiveSetting(Context context) {
 	    SharedPreferences sp = (SharedPreferences) context
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
-	    return sp.getBoolean(Constants.USER_IM_MSG_RECEIVE_SETTING, false);
+	    return sp.getBoolean(Constants.USER_IM_MSG_RECEIVE_SETTING, true);
 	}
 	
 	/**
