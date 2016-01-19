@@ -138,7 +138,6 @@ public abstract class BaseActivity extends FragmentActivity {
             try {
                 extMsgId = message.getStringAttribute("msgId");
             } catch (EaseMobException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             
@@ -150,7 +149,7 @@ public abstract class BaseActivity extends FragmentActivity {
                 MessageBean msg = new MessageBean();
                 
 //                msg.setId(message.getMsgId());
-                if (TextUtils.isEmpty(extMsgId)) {
+                if (!TextUtils.isEmpty(extMsgId)) {
                     msg.setId(extMsgId);
                 }
                 msg.setFromUser(message.getFrom());

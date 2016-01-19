@@ -222,7 +222,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener, OnNew
 		}
 		String ids = "";
 		for (MessageBean msg : contactMessages) {
-			if (!msg.isRead()) {
+			if (!msg.isRead() && !TextUtils.isEmpty(msg.getId())) {
 				ids += msg.getId()+ ",";
 			}
 		}
