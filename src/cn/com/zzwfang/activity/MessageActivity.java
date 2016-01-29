@@ -2,7 +2,6 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -12,15 +11,8 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.MessageAdapter;
 import cn.com.zzwfang.bean.IMMessageBean;
-import cn.com.zzwfang.bean.Result;
-import cn.com.zzwfang.controller.ActionImpl;
-import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
-import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.im.MessagePool;
-import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
-
-import com.alibaba.fastjson.JSON;
 
 
 /**
@@ -115,6 +107,7 @@ public class MessageActivity extends BaseActivity implements OnClickListener, On
 		.putString(ChatActivity.INTENT_MESSAGE_TO_ID, imMessageBean.getUserId())
 		.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, imMessageBean.getUserName())
 		.putSerializable(ChatActivity.INTENT_HISTORY_MSG, imMessageBean.getMessages())
+		.putInt(ChatActivity.INTENT_MSG_POSITION, position)
 		.jump(this, ChatActivity.class);
 	}
 

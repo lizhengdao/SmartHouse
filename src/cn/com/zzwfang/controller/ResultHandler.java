@@ -58,10 +58,10 @@ public class ResultHandler implements ProcessCallback {
 					switch (statusCode) {
 
 					case API.SUCCESS_EXIST:
-						Log.i("--->", "statusCode == " + statusCode);
+//						Log.i("--->", "statusCode == " + statusCode);
 						if (callback != null) {
 							// 成功返回数据
-							Log.i("--->", entity.getUrl() + "   rc0 -- result ==  " + r.getData());
+//							Log.i("--->", entity.getUrl() + "   rc0 -- result ==  " + r.getData());
 							callback.rc0(entity, r);
 						}
 						break;
@@ -82,11 +82,7 @@ public class ResultHandler implements ProcessCallback {
 						
 						break;
 					case API.ERROR_NEED_LOGIN:
-						Log.i("--->", "3001   错误");
 						callback.rc3001(entity, r);
-//						Intent intent = new Intent(context, LoginActivity.class);
-//						intent.putExtra(Constants.NEED_LOGIN, true);
-//						context.startActivity(intent);
 						break;
 						default:
 						    callback.rc999(entity, r);
@@ -161,10 +157,8 @@ public class ResultHandler implements ProcessCallback {
 
 		@Override
 		public void rc0(RequestEntity entity, Result result) {
-//			Log.d(this.getClass().getName() + "->rc0[entity="
-//					+ entity.toString() + "]");
 			
-			Log.i("--->", entity.getUrl() + "   rc0 -- result ==  " + result.getData());
+//			Log.i("--->", entity.getUrl() + "   rc0 -- result ==  " + result.getData());
 
 		}
 

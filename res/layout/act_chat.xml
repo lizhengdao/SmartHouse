@@ -41,6 +41,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:cacheColorHint="#00ffffff"
+        android:listSelector="#fffff3"
         android:divider="@null" />
 
     <View

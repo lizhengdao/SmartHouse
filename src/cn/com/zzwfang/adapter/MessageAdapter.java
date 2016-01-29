@@ -49,6 +49,7 @@ public class MessageAdapter extends BaseAdapter {
 //		PathImage avatar = ViewHolder.get(convertView, R.id.adapter_message_avatar);
 		TextView tvName = ViewHolder.get(convertView, R.id.adapter_message_name);
 		TextView tvMsg = ViewHolder.get(convertView, R.id.adapter_message_content);
+		TextView tvMsgCount = ViewHolder.get(convertView, R.id.adapter_message_msg_count);
 		
 		IMMessageBean msgBean = imMessageBeans.get(position);
 		tvName.setText(msgBean.getUserName());
@@ -58,6 +59,19 @@ public class MessageAdapter extends BaseAdapter {
 			if (msg != null) {
 				tvMsg.setText(msg.getMessage());
 			}
+		}
+		
+		int count = 0;
+		for (MessageBean msg : msgs) {
+		    if (!msg.isRead()) {
+		        count ++;
+		    }
+		}
+		if (count > 0) {
+		    tvMsgCount.setText(count + "");
+		    tvMsgCount.setVisibility(View.VISIBLE);
+		} else {
+		    tvMsgCount.setVisibility(View.GONE);
 		}
 		
 		return convertView;

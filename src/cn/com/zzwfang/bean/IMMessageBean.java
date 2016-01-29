@@ -4,35 +4,36 @@ import java.util.ArrayList;
 
 public class IMMessageBean extends BaseBean {
 
-	private String userId;
-	
-	private String userName;
-	
-	private ArrayList<MessageBean> messages;
+    private static final long serialVersionUID = 8835206542398594506L;
 
-	public String getUserId() {
-		return userId;
-	}
+    private String userId;
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    private String userName;
 
-	public String getUserName() {
-		return userName;
-	}
+    private ArrayList<MessageBean> messages;
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public ArrayList<MessageBean> getMessages() {
-		return messages;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public void setMessages(ArrayList<MessageBean> messages) {
-		this.messages = messages;
-	}
-	
-	
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public ArrayList<MessageBean> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(ArrayList<MessageBean> messages) {
+        this.messages = messages;
+    }
+
 }
