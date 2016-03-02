@@ -32,7 +32,6 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 
 import android.content.Context;
-import android.util.Log;
 
 
 /**
@@ -111,11 +110,7 @@ public class HttpExecuter implements HttpExecuterInterface{
         }
         HttpPost httpPost = new HttpPost(url);
         
-//        String token = ContentUtils.getToken(context);
-//        httpPost.addHeader("csrfmiddlewaretoken", token);
-        
         if(params != null){
-        	Log.i("--->", "HttpExecuter post requestParams.hashcode == " + params.hashCode());
             HttpEntity entity = params.getEntity();
             httpPost.setEntity(entity);
         }

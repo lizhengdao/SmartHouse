@@ -98,7 +98,7 @@ public class HttpClient implements HttpClientInterface {
 		if (httpClient != null) {
 			return;
 		}
-		Log.i("--->", "HttpClient 初始化httpClient-------------");
+//		Log.i("--->", "HttpClient 初始化httpClient-------------");
 		BasicHttpParams httpParams = new BasicHttpParams();
 		ConnManagerParams.setTimeout(httpParams, socketTimeout);
 		ConnManagerParams.setMaxConnectionsPerRoute(httpParams,

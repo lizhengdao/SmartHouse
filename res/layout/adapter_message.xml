@@ -9,10 +9,10 @@
         android:id="@+id/adapter_message_avatar"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_avatar"
         app:shape="circle" />
 
@@ -40,5 +40,22 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>
+    
+    <Space 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/adapter_message_msg_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_msg_count"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 
 </LinearLayout>

@@ -1,12 +1,16 @@
 package cn.com.zzwfang.fragment;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,12 +35,14 @@ import cn.com.zzwfang.activity.MyHouseListActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
 import cn.com.zzwfang.bean.FileUploadResultBean;
+import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.UserInfoBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
@@ -68,7 +74,10 @@ public class MainMineFragment extends BasePickPhotoFragment implements
 
     private ImageView imgFeeHunter;
 
-    private static int newMsgCount = 0;
+//    private static int newMsgCount = 0;
+//    private static int oldMsgCount = 0;
+    
+    private Handler handler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -117,28 +126,51 @@ public class MainMineFragment extends BasePickPhotoFragment implements
         settingsFlt.setOnClickListener(this);
         imgFeeHunter.setOnClickListener(this);
         tvLoginRegister.setOnClickListener(this);
-        
+
         rendUserInfo();
+        
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                
+                int oldMsgCountTemp = msg.arg1;
+                Log.i("--->", "oldMsgCount == " + oldMsgCountTemp);
+                if (oldMsgCountTemp > 0) {
+                    tvMsgCount.setVisibility(View.VISIBLE);
+                    tvMsgCount.setText(oldMsgCountTemp + "");
+                } else {
+                    tvMsgCount.setVisibility(View.GONE);
+                }
+            }
+        };
     }
+    
 
     @Override
     public void onResume() {
         super.onResume();
+//        refreshCount();
+
     }
 
     public void updateMessageCount(MessageBean msg) {
-        newMsgCount++;
-        boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
-        if (loginStatus) {
-            if (newMsgCount > 0) {
-                tvMsgCount.setVisibility(View.VISIBLE);
-                tvMsgCount.setText(newMsgCount + "");
-            } else {
-                tvMsgCount.setVisibility(View.GONE);
-            }
-        } else {
-            tvMsgCount.setVisibility(View.GONE);
-        }
+        // newMsgCount++;
+        // boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
+        // if (loginStatus) {
+        // if (newMsgCount > 0) {
+        // tvMsgCount.setVisibility(View.VISIBLE);
+        // tvMsgCount.setText(newMsgCount + "");
+        // } else {
+        // tvMsgCount.setVisibility(View.GONE);
+        // }
+        // } else {
+        // tvMsgCount.setVisibility(View.GONE);
+        // }
+
+        refreshCount();
+        
+
     }
 
     @Override
@@ -148,74 +180,88 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             ((MainActivity) getActivity()).backToHomeFragment();
             break;
         case R.id.frag_mine_fee_hunter: // 赏金猎人个人中心
-            boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
+            boolean loginStatus = ContentUtils
+                    .getUserLoginStatus(getActivity());
             if (!loginStatus) {
                 Jumper.newJumper()
-                .setAheadInAnimation(R.anim.activity_push_in_right)
-                .setAheadOutAnimation(R.anim.activity_alpha_out)
-                .setBackInAnimation(R.anim.activity_alpha_in)
-                .setBackOutAnimation(R.anim.activity_push_out_right)
-                .jump(this, ShangJinLieRenActivity.class);
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, ShangJinLieRenActivity.class);
             } else {
                 /**
                  * 用户类型 0经济人，1普通会员，2赏金猎人
                  */
                 int userType = ContentUtils.getUserType(getActivity());
-                boolean isBindBankCard = ContentUtils.isUserBindBankCard(getActivity());
-                
+                boolean isBindBankCard = ContentUtils
+                        .isUserBindBankCard(getActivity());
+
                 if (userType == 2) {
                     if (isBindBankCard) {
                         Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, FeeHunterInfoActivity.class);
+                                .setAheadInAnimation(
+                                        R.anim.activity_push_in_right)
+                                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                                .setBackInAnimation(R.anim.activity_alpha_in)
+                                .setBackOutAnimation(
+                                        R.anim.activity_push_out_right)
+                                .jump(this, FeeHunterInfoActivity.class);
                     } else {
                         Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, FillBankCardInfoActivity.class);
+                                .setAheadInAnimation(
+                                        R.anim.activity_push_in_right)
+                                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                                .setBackInAnimation(R.anim.activity_alpha_in)
+                                .setBackOutAnimation(
+                                        R.anim.activity_push_out_right)
+                                .jump(this, FillBankCardInfoActivity.class);
                     }
-                    
-                } else if (userType == 0) {  // 0经济人
+
+                } else if (userType == 0) { // 0经济人
                     if (isBindBankCard) {
                         Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, FeeHunterInfoActivity.class);
+                                .setAheadInAnimation(
+                                        R.anim.activity_push_in_right)
+                                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                                .setBackInAnimation(R.anim.activity_alpha_in)
+                                .setBackOutAnimation(
+                                        R.anim.activity_push_out_right)
+                                .jump(this, FeeHunterInfoActivity.class);
                     } else {
                         Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, FillBankCardInfoActivity.class);
+                                .setAheadInAnimation(
+                                        R.anim.activity_push_in_right)
+                                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                                .setBackInAnimation(R.anim.activity_alpha_in)
+                                .setBackOutAnimation(
+                                        R.anim.activity_push_out_right)
+                                .jump(this, FillBankCardInfoActivity.class);
                     }
-                } else if (userType == 1) {  //  非赏金猎人  1普通会员
-                    
+                } else if (userType == 1) { // 非赏金猎人 1普通会员
+
                     if (isBindBankCard) {
                         Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, FeeHunterInfoActivity.class);
+                                .setAheadInAnimation(
+                                        R.anim.activity_push_in_right)
+                                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                                .setBackInAnimation(R.anim.activity_alpha_in)
+                                .setBackOutAnimation(
+                                        R.anim.activity_push_out_right)
+                                .jump(this, FeeHunterInfoActivity.class);
                     } else {
                         Jumper.newJumper()
-                        .setAheadInAnimation(R.anim.activity_push_in_right)
-                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-                        .setBackInAnimation(R.anim.activity_alpha_in)
-                        .setBackOutAnimation(R.anim.activity_push_out_right)
-                        .jump(this, FillBankCardInfoActivity.class);
+                                .setAheadInAnimation(
+                                        R.anim.activity_push_in_right)
+                                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                                .setBackInAnimation(R.anim.activity_alpha_in)
+                                .setBackOutAnimation(
+                                        R.anim.activity_push_out_right)
+                                .jump(this, FillBankCardInfoActivity.class);
                     }
                 }
             }
-            
+
             break;
         case R.id.frag_mine_avatar: // 修改头像
             if (checkLoginStatus()) {
@@ -229,13 +275,13 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                     .setBackInAnimation(R.anim.alpha_in_style1)
                     .setBackOutAnimation(R.anim.slide_out_style1)
                     .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
-//                    .jump(this, LoginActivity.class);
+            // .jump(this, LoginActivity.class);
             // .jumpForResult(this, LoginActivity.class, CODE_LOGIN);
             break;
         case R.id.frag_mine_msg_flt: // 消息
             if (checkLoginStatus()) {
-            	newMsgCount = 0;
-            	tvMsgCount.setVisibility(View.GONE);
+                // newMsgCount = 0;
+                // tvMsgCount.setVisibility(View.GONE);
                 Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
@@ -254,40 +300,39 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                         .jump(this, MyConcernHouseResourcesActivity.class);
             }
             break;
-        case R.id.frag_mine_my_proxy_llt: // 我的委托 （帮你卖房（我是业主）） //  现在改成我是业主
+        case R.id.frag_mine_my_proxy_llt: // 我的委托 （帮你卖房（我是业主）） // 现在改成我是业主
             if (checkLoginStatus()) {
-//                Jumper.newJumper()
-//                        .setAheadInAnimation(R.anim.activity_push_in_right)
-//                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-//                        .setBackInAnimation(R.anim.activity_alpha_in)
-//                        .setBackOutAnimation(R.anim.activity_push_out_right)
-//                        .jump(this, MyProxyActivity.class);
-                
+                // Jumper.newJumper()
+                // .setAheadInAnimation(R.anim.activity_push_in_right)
+                // .setAheadOutAnimation(R.anim.activity_alpha_out)
+                // .setBackInAnimation(R.anim.activity_alpha_in)
+                // .setBackOutAnimation(R.anim.activity_push_out_right)
+                // .jump(this, MyProxyActivity.class);
+
                 Jumper.newJumper()
-                .setAheadInAnimation(R.anim.activity_push_in_right)
-                .setAheadOutAnimation(R.anim.activity_alpha_out)
-                .setBackInAnimation(R.anim.activity_alpha_in)
-                .setBackOutAnimation(R.anim.activity_push_out_right)
-                .jump(this, IAmOwnerActicity.class);
-                
-                
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, IAmOwnerActicity.class);
+
             }
             break;
         case R.id.frag_mine_my_demand_llt: // 我的需求 (帮你找房 我是客户) // 现在改成我是客户
             if (checkLoginStatus()) {
-//                Jumper.newJumper()
-//                        .setAheadInAnimation(R.anim.activity_push_in_right)
-//                        .setAheadOutAnimation(R.anim.activity_alpha_out)
-//                        .setBackInAnimation(R.anim.activity_alpha_in)
-//                        .setBackOutAnimation(R.anim.activity_push_out_right)
-//                        .jump(this, MyDemandInfoActivity.class);
-                
+                // Jumper.newJumper()
+                // .setAheadInAnimation(R.anim.activity_push_in_right)
+                // .setAheadOutAnimation(R.anim.activity_alpha_out)
+                // .setBackInAnimation(R.anim.activity_alpha_in)
+                // .setBackOutAnimation(R.anim.activity_push_out_right)
+                // .jump(this, MyDemandInfoActivity.class);
+
                 Jumper.newJumper()
-                .setAheadInAnimation(R.anim.activity_push_in_right)
-                .setAheadOutAnimation(R.anim.activity_alpha_out)
-                .setBackInAnimation(R.anim.activity_alpha_in)
-                .setBackOutAnimation(R.anim.activity_push_out_right)
-                .jump(this, IAmCustomerActivity.class);
+                        .setAheadInAnimation(R.anim.activity_push_in_right)
+                        .setAheadOutAnimation(R.anim.activity_alpha_out)
+                        .setBackInAnimation(R.anim.activity_alpha_in)
+                        .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .jump(this, IAmCustomerActivity.class);
             }
             break;
         case R.id.frag_mine_my_house_resources_flt: // 我的房源
@@ -347,6 +392,43 @@ public class MainMineFragment extends BasePickPhotoFragment implements
         return true;
     }
 
+    private void refreshCount() {
+
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                
+                
+                int oldMsgCount = 0;
+                ArrayList<IMMessageBean> temp = MessagePool
+                        .getAllContactsMessages();
+                Log.i("--->", "线程 temp == " + temp);
+                
+                if (temp != null) {
+                    int size = temp.size();
+                    for (int i = 0; i < size; size++) {
+                        IMMessageBean imMessageBean = temp.get(i);
+
+                        ArrayList<MessageBean> messages = imMessageBean
+                                .getMessages();
+                        for (MessageBean tempMsg : messages) {
+                            if (!tempMsg.isRead()) {
+                                oldMsgCount++;
+                            }
+                        }
+                    }
+                }
+                
+                Log.i("--->", "oldMsgCount == " + oldMsgCount);
+                Message msg = handler.obtainMessage();
+                msg.arg1 = oldMsgCount;
+                handler.sendMessage(msg);
+
+            }
+        }).start();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -354,18 +436,20 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             switch (requestCode) {
             case CODE_SETTING:
                 // ((MainActivity)getActivity()).backToHomeFragment();
-            	rendUserInfo();
+                rendUserInfo();
                 break;
             case CODE_LOGIN:
-            	
-            	rendUserInfo();
-            	break;
+
+                rendUserInfo();
+                refreshCount();
+
+                break;
             }
         }
     }
-    
+
     private void rendUserInfo() {
-    	boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
+        boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
         if (loginStatus) { // 已登录
             tvLoginRegister.setVisibility(View.GONE);
             lltUserInfo.setVisibility(View.VISIBLE);
@@ -374,16 +458,17 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             tvPhone.setText(userInfoBean.getPhone());
             String avatarUrl = userInfoBean.getPhoto();
             if (!TextUtils.isEmpty(avatarUrl)) {
-            	ImageAction.displayAvatar(avatarUrl, avatar);
+                ImageAction.displayAvatar(avatarUrl, avatar);
             }
-            if (newMsgCount > 0) {
-                tvMsgCount.setVisibility(View.VISIBLE);
-                tvMsgCount.setText(newMsgCount + "");
-            } else {
-                tvMsgCount.setVisibility(View.GONE);
-            }
+            // if (newMsgCount > 0) {
+            // tvMsgCount.setVisibility(View.VISIBLE);
+            // tvMsgCount.setText(newMsgCount + "");
+            // } else {
+            // tvMsgCount.setVisibility(View.GONE);
+            // }
+
         } else { // 未登录
-        	avatar.setImageResource(R.drawable.ic_mine_unlogin_avatar);
+            avatar.setImageResource(R.drawable.ic_mine_unlogin_avatar);
             tvMsgCount.setVisibility(View.GONE);
             tvLoginRegister.setVisibility(View.VISIBLE);
             lltUserInfo.setVisibility(View.GONE);
