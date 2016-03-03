@@ -814,4 +814,25 @@ public interface Action {
 	 * @param callback
 	 */
 	void support(String id, int supportType, String userId, String content, ResultHandlerCallback callback);
+	
+	/**
+	 * 推荐房源获取楼栋  获取楼栋信息
+	 * @param estateId  小区id
+	 * @param callback
+	 */
+	void getEstateBuilding(String estateId, ResultHandlerCallback callback);
+	
+	/**
+	 * 推荐房源  获取楼栋单元信息
+	 * @param buildingId 楼栋id
+	 * @param callback
+	 */
+	void getEstateCell(String buildingId, ResultHandlerCallback callback);
+	
+	/**
+	 * 推荐房源  获取房间号信息
+	 * @param cellId
+	 * @param callback
+	 */
+	void getEstateRoom(String cellId, ResultHandlerCallback callback);
 }

@@ -358,5 +358,20 @@ public class API {
      * 赞
      */
     public static final String SUPPORT = "Other/Zan";
+    
+    /**
+     * 推荐房源 获取楼栋单元信息
+     */
+    public static final String GET_ESTATE_BUILDING = "Estate/GetBuilding";
+    
+    /**
+     * 推荐房源 获取楼栋单元信息
+     */
+    public static final String GET_ESTATE_CELL = "Estate/GetCell";
+    
+    /**
+     * 推荐房源 获取房间号信息
+     */
+    public static final String GET_ESTATE_ROOM = "Estate/GetRoom";
 
 }

@@ -2659,4 +2659,95 @@ public class ActionImpl implements Action {
         worker.load(requestEntity);
     }
 
+	@Override
+	public void getEstateBuilding(String estateId,
+			ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        requestParams.put("estateId", estateId);
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_ESTATE_BUILDING));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getEstateCell(String buildingId, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        requestParams.put("buildingId", buildingId);
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_ESTATE_CELL));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getEstateRoom(String cellId, ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        requestParams.put("cellId", cellId);
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_ESTATE_ROOM));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
 }
