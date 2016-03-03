@@ -30,7 +30,7 @@ public class API {
 	 * 
 	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/
 	 */
-	public static final String host = "http://110.189.90.40:7892/";
+	public static final String host = "http://www.zzwfang.com:7894/";
 
 	/**
 	 * 认证授权接口

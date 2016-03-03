@@ -10,7 +10,7 @@ public class MessagePool {
 
     private static ArrayList<IMMessageBean> imMessageBeans = new ArrayList<IMMessageBean>();
 
-    public static void addAllContactsMessages(
+    public synchronized static void addAllContactsMessages(
             ArrayList<IMMessageBean> allContactsMessages) {
         if (imMessageBeans == null) {
             imMessageBeans = new ArrayList<IMMessageBean>();

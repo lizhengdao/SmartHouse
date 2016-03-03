@@ -135,7 +135,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                 super.handleMessage(msg);
                 
                 int oldMsgCountTemp = msg.arg1;
-                Log.i("--->", "oldMsgCount == " + oldMsgCountTemp);
                 if (oldMsgCountTemp > 0) {
                     tvMsgCount.setVisibility(View.VISIBLE);
                     tvMsgCount.setText(oldMsgCountTemp + "");
@@ -150,7 +149,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
     @Override
     public void onResume() {
         super.onResume();
-//        refreshCount();
+        refreshCount();
 
     }
 
@@ -403,15 +402,15 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                 int oldMsgCount = 0;
                 ArrayList<IMMessageBean> temp = MessagePool
                         .getAllContactsMessages();
-                Log.i("--->", "线程 temp == " + temp);
                 
                 if (temp != null) {
                     int size = temp.size();
-                    for (int i = 0; i < size; size++) {
+                    for (int i = 0; i < size; i++) {
                         IMMessageBean imMessageBean = temp.get(i);
 
                         ArrayList<MessageBean> messages = imMessageBean
                                 .getMessages();
+                        
                         for (MessageBean tempMsg : messages) {
                             if (!tempMsg.isRead()) {
                                 oldMsgCount++;
@@ -420,7 +419,6 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                     }
                 }
                 
-                Log.i("--->", "oldMsgCount == " + oldMsgCount);
                 Message msg = handler.obtainMessage();
                 msg.arg1 = oldMsgCount;
                 handler.sendMessage(msg);
