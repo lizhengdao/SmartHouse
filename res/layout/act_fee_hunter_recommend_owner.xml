@@ -185,7 +185,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/act_fee_hunter_recommend_owner_which_building"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -216,7 +216,7 @@
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
-                    <EditText
+                    <TextView
                         android:id="@+id/act_fee_hunter_recommend_owner_which_unit"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -268,7 +268,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/act_fee_hunter_recommend_owner_which_floor"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -299,7 +299,7 @@
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
-                    <EditText
+                    <TextView
                         android:id="@+id/act_fee_hunter_recommend_owner_which_house"
                         android:layout_width="0dp"
                         android:layout_height="50dp"

@@ -1,5 +1,9 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
+import com.alibaba.fastjson.JSON;
+
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.IdNameBean;
+import cn.com.zzwfang.bean.IdNameFloorBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -42,7 +47,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	
 	private EditText edtOwnerName, edtOwnerPhone;
 	
-	private EditText edtWhichBuilding, edtWhichUnit,  edtWhichFloor, edtWhichHouse;
+	private TextView edtWhichBuilding, edtWhichUnit,  edtWhichFloor, edtWhichHouse;
 	
 	private EditText edtMark;
 	
@@ -54,6 +59,23 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	 *  出售 是0  出租是1 租售是2
 	 */
 	private int trade = 1;
+	
+	private String estateId = null;
+	
+	/**
+	 * 楼栋
+	 */
+	private ArrayList<IdNameBean> buildings = null;
+	
+	/**
+	 * 单元
+	 */
+	private ArrayList<IdNameBean> cells = null;
+	
+	/**
+	 * 房间号
+	 */
+	private ArrayList<IdNameFloorBean> rooms = null;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -74,10 +96,10 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 		edtOwnerPhone = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_phone);
 		tvSelectEstate = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_select_estate);
 		
-		edtWhichBuilding = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_which_building);
-		edtWhichUnit = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_which_unit);
-		edtWhichFloor = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_which_floor);
-		edtWhichHouse = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_which_house);
+		edtWhichBuilding = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_which_building);
+		edtWhichUnit = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_which_unit);
+		edtWhichFloor = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_which_floor);
+		edtWhichHouse = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_which_house);
 		
 		edtMark = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_mark);
 		
@@ -282,9 +304,34 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 				idNameBean = (IdNameBean) data
 						.getSerializableExtra(SelectEstateActivity.INTENT_ESTATE);
 				tvSelectEstate.setText(idNameBean.getName());
+				estateId = idNameBean.getId();
+				getEstateBuilding();
 				break;
 			}
 		}
+	}
+	
+	private void getEstateBuilding() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		if (TextUtils.isEmpty(estateId)) {
+			return;
+		}
+		actionImpl.getEstateBuilding(estateId, new ResultHandlerCallback() {
+					
+					@Override
+					public void rc999(RequestEntity entity, Result result) {
+					}
+					
+					@Override
+					public void rc3001(RequestEntity entity, Result result) {
+					}
+					
+					@Override
+					public void rc0(RequestEntity entity, Result result) {
+						
+						buildings = (ArrayList<IdNameBean>) JSON.parseArray(result.getData(), IdNameBean.class);
+					}
+				});
 	}
 
 }
