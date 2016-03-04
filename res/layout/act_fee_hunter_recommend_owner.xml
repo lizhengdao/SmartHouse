@@ -170,6 +170,7 @@
                 android:weightSum="2" >
 
                 <LinearLayout
+                    android:id="@+id/act_fee_hunter_recommend_owner_which_building_llt"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -211,6 +212,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/act_fee_hunter_recommend_owner_which_unit_llt"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -243,6 +245,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/act_fee_hunter_recommend_owner_which_floor_and_room_llt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"

@@ -24,6 +24,7 @@ import cn.com.zzwfang.adapter.BankNameAdapter;
 import cn.com.zzwfang.adapter.BankProvinceOrCityAdapter;
 import cn.com.zzwfang.adapter.BuildingsAdapter;
 import cn.com.zzwfang.adapter.ConditionAdapter;
+import cn.com.zzwfang.adapter.EstateRoomAdapter;
 import cn.com.zzwfang.adapter.MoreDetailAdapter;
 import cn.com.zzwfang.adapter.MoreTypeAdapter;
 import cn.com.zzwfang.adapter.MortgageYearsAdapter;
@@ -31,6 +32,7 @@ import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
 import cn.com.zzwfang.adapter.NewsMoreAdapter;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
 import cn.com.zzwfang.bean.IdNameBean;
+import cn.com.zzwfang.bean.IdNameFloorBean;
 import cn.com.zzwfang.bean.IdTitleBean;
 import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.TextValueBean;
@@ -1558,7 +1560,7 @@ public class PopViewHelper {
 	}
 	
 	/**
-	 * 总价选择
+	 * 推荐房源选择几栋
 	 */
 	public static void showSelectBuildingPopWindow(Context context, View anchorView,
 			final ArrayList<IdNameBean> buildings, final OnBuildingSelectListener onBuildingSelectListener) {
@@ -1590,4 +1592,80 @@ public class PopViewHelper {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
 	}
+	
+	public interface OnEstateCellSelectListener {
+        void onEstateCellSelect(IdNameBean idNameBean);
+    }
+    
+    /**
+     * 推荐房源选择几单元
+     */
+    public static void showSelectEstateCellPopWindow(Context context, View anchorView,
+            final ArrayList<IdNameBean> cells, final OnEstateCellSelectListener onEstateCellSelectListener) {
+        View view = View.inflate(context, R.layout.popup_condition, null);
+        final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
+        ColorDrawable dw = new ColorDrawable(0000000000);
+        popupWindow.setBackgroundDrawable(dw);
+        
+        ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+        BuildingsAdapter adapter = new BuildingsAdapter(context, cells);
+        lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                popupWindow.dismiss();
+                if (onEstateCellSelectListener != null) {
+                    onEstateCellSelectListener.onEstateCellSelect(cells.get(position));
+                }
+            }
+        });
+        lstCondition.setAdapter(adapter);
+        if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+    }
+    
+    public interface OnEstateRoomSelectListener {
+        void onEstateRoomSelect(IdNameFloorBean idNameBean);
+    }
+    
+    /**
+     * 推荐房源选择几号房间
+     */
+    public static void showSelectEstateRoomPopWindow(Context context, View anchorView,
+            final ArrayList<IdNameFloorBean> rooms, final OnEstateRoomSelectListener onEstateRoomSelectListener) {
+        View view = View.inflate(context, R.layout.popup_condition, null);
+        final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
+        ColorDrawable dw = new ColorDrawable(0000000000);
+        popupWindow.setBackgroundDrawable(dw);
+        
+        ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+        EstateRoomAdapter adapter = new EstateRoomAdapter(context, rooms);
+        lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                    int position, long id) {
+                popupWindow.dismiss();
+                if (onEstateRoomSelectListener != null) {
+                    onEstateRoomSelectListener.onEstateRoomSelect(rooms.get(position));
+                }
+            }
+        });
+        lstCondition.setAdapter(adapter);
+        if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+    }
 }

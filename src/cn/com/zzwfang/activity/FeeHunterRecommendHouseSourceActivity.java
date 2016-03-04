@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
@@ -29,6 +30,10 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
+import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnBuildingSelectListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnEstateCellSelectListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnEstateRoomSelectListener;
 
 /**
  * 赏金猎人    推荐房源   页
@@ -49,6 +54,8 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	
 	private TextView edtWhichBuilding, edtWhichUnit,  edtWhichFloor, edtWhichHouse;
 	
+	private LinearLayout lltWhichBuilding, lltWhichUnit, lltWhichFloorAndHouse;
+	
 	private EditText edtMark;
 	
 	private TextView tvCommit;
@@ -67,15 +74,25 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	 */
 	private ArrayList<IdNameBean> buildings = null;
 	
+	private OnBuildingSelectListener onBuildingSelectListener;
+	
+	private String buildingId = null;
 	/**
 	 * 单元
 	 */
 	private ArrayList<IdNameBean> cells = null;
 	
+	private OnEstateCellSelectListener onEstateCellSelectListener;
+	
+	private String cellId = null;
 	/**
 	 * 房间号
 	 */
 	private ArrayList<IdNameFloorBean> rooms = null;
+	
+	private String roomId = null;
+	
+	private OnEstateRoomSelectListener onEstateRoomSelectListener;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -101,6 +118,10 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 		edtWhichFloor = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_which_floor);
 		edtWhichHouse = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_which_house);
 		
+		lltWhichBuilding = (LinearLayout) findViewById(R.id.act_fee_hunter_recommend_owner_which_building_llt);
+		lltWhichUnit = (LinearLayout) findViewById(R.id.act_fee_hunter_recommend_owner_which_unit_llt);
+		lltWhichFloorAndHouse = (LinearLayout) findViewById(R.id.act_fee_hunter_recommend_owner_which_floor_and_room_llt);
+		
 		edtMark = (EditText) findViewById(R.id.act_fee_hunter_recommend_owner_mark);
 		
 		tvCommit = (TextView) findViewById(R.id.act_fee_hunter_recommend_owner_commit);
@@ -113,6 +134,51 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 		rbRent.setOnCheckedChangeListener(this);
 		rbSell.setOnCheckedChangeListener(this);
 		rbRentSell.setOnCheckedChangeListener(this);
+		
+		lltWhichBuilding.setOnClickListener(this);
+//		edtWhichBuilding.setOnClickListener(this);
+		lltWhichUnit.setOnClickListener(this);
+//		edtWhichUnit.setOnClickListener(this);
+		lltWhichFloorAndHouse.setOnClickListener(this);
+		edtWhichFloor.setOnClickListener(this);
+		edtWhichHouse.setOnClickListener(this);
+		
+		onBuildingSelectListener = new OnBuildingSelectListener() {
+            
+            @Override
+            public void onBuildingSelect(IdNameBean idNameBean) {
+                if (idNameBean != null) {
+                    buildingId = idNameBean.getId();
+                    edtWhichBuilding.setText(idNameBean.getName());
+                    getEstateCell();
+                }
+            }
+        };
+        
+        onEstateCellSelectListener = new OnEstateCellSelectListener() {
+            
+            @Override
+            public void onEstateCellSelect(IdNameBean idNameBean) {
+                if (idNameBean != null) {
+                    cellId = idNameBean.getId();
+                    edtWhichUnit.setText(idNameBean.getName());
+                    getEstateRoom();
+                }
+            }
+        };
+        
+        onEstateRoomSelectListener = new OnEstateRoomSelectListener() {
+            
+            @Override
+            public void onEstateRoomSelect(IdNameFloorBean idNameBean) {
+                if (idNameBean != null) {
+                    roomId = idNameBean.getId();
+                    edtWhichFloor.setText(idNameBean.getFloor());
+                    edtWhichHouse.setText(idNameBean.getName());
+                }
+            }
+        };
+		
 	}
 
 	@Override
@@ -142,6 +208,27 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 		case R.id.act_fee_hunter_recommend_owner_commit:   //  提交
 			recommendHouseSource();
 			break;
+		case R.id.act_fee_hunter_recommend_owner_which_building_llt: // 栋
+		    if (buildings != null) {
+		        PopViewHelper.showSelectBuildingPopWindow(this, getWindow().getDecorView().getRootView(), buildings, onBuildingSelectListener);
+		    }
+		    break;
+		case R.id.act_fee_hunter_recommend_owner_which_unit_llt: // 单元
+		    if (cells != null) {
+		        PopViewHelper.showSelectEstateCellPopWindow(this, getWindow().getDecorView().getRootView(), cells, onEstateCellSelectListener);
+		    }
+		    break;
+		case R.id.act_fee_hunter_recommend_owner_which_floor: // 层
+		    
+		    break;
+		case R.id.act_fee_hunter_recommend_owner_which_house: // 房间号
+		    
+		    break;
+		case R.id.act_fee_hunter_recommend_owner_which_floor_and_room_llt: // 层和房间号
+		    if (rooms != null) {
+		        PopViewHelper.showSelectEstateRoomPopWindow(this, getWindow().getDecorView().getRootView(), rooms, onEstateRoomSelectListener);
+		    }
+		    break;
 		}
 	}
 
@@ -332,6 +419,54 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 						buildings = (ArrayList<IdNameBean>) JSON.parseArray(result.getData(), IdNameBean.class);
 					}
 				});
+	}
+	
+	private void getEstateCell() {
+	    if (TextUtils.isEmpty(buildingId)) {
+	        return;
+	    }
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    actionImpl.getEstateCell(buildingId, new ResultHandlerCallback() {
+
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                cells = (ArrayList<IdNameBean>) JSON.parseArray(result.getData(), IdNameBean.class);
+            }
+
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+            }
+
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+            }
+	        
+	    });
+	}
+	
+	private void getEstateRoom() {
+	    if (TextUtils.isEmpty(cellId)) {
+	        return;
+	    }
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    actionImpl.getEstateRoom(cellId, new ResultHandlerCallback() {
+
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                // TODO Auto-generated method stub
+                rooms = (ArrayList<IdNameFloorBean>) JSON.parseArray(result.getData(), IdNameFloorBean.class);
+            }
+
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+            }
+
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+            }
+	        
+	    });
 	}
 
 }
