@@ -140,8 +140,8 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 		lltWhichUnit.setOnClickListener(this);
 //		edtWhichUnit.setOnClickListener(this);
 		lltWhichFloorAndHouse.setOnClickListener(this);
-		edtWhichFloor.setOnClickListener(this);
-		edtWhichHouse.setOnClickListener(this);
+//		edtWhichFloor.setOnClickListener(this);
+//		edtWhichHouse.setOnClickListener(this);
 		
 		onBuildingSelectListener = new OnBuildingSelectListener() {
             
@@ -210,7 +210,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 			break;
 		case R.id.act_fee_hunter_recommend_owner_which_building_llt: // 栋
 		    if (buildings != null) {
-		        PopViewHelper.showSelectBuildingPopWindow(this, getWindow().getDecorView().getRootView(), buildings, onBuildingSelectListener);
+		        PopViewHelper.showSelectBuildingPopWindow(this, lltWhichBuilding, buildings, onBuildingSelectListener);
 		    }
 		    break;
 		case R.id.act_fee_hunter_recommend_owner_which_unit_llt: // 单元
@@ -399,6 +399,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	}
 	
 	private void getEstateBuilding() {
+		estateId = "56cbbf47e00fea2eccdb61de";
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		if (TextUtils.isEmpty(estateId)) {
 			return;

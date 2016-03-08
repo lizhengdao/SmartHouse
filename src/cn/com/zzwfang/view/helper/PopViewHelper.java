@@ -1589,7 +1589,9 @@ public class PopViewHelper {
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
-            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+//            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+            
+            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
         }
 	}
 	
