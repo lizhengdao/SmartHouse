@@ -1574,6 +1574,7 @@ public class PopViewHelper {
 	    
 	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
 	    BuildingsAdapter adapter = new BuildingsAdapter(context, buildings);
+	    lstCondition.setAdapter(adapter);
 	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -1585,13 +1586,15 @@ public class PopViewHelper {
 				}
 			}
 		});
-	    lstCondition.setAdapter(adapter);
+	    
 	    if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
+            popupWindow.showAsDropDown(anchorView, 0, 0);
+            
 //            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
             
-            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
+//            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, 0);
         }
 	}
 	
@@ -1629,7 +1632,8 @@ public class PopViewHelper {
         if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
-            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+            popupWindow.showAsDropDown(anchorView, 0, 0);
+//            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
     }
     
@@ -1667,7 +1671,8 @@ public class PopViewHelper {
         if (popupWindow.isShowing()) {
             popupWindow.dismiss();
         } else {
-            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+            popupWindow.showAsDropDown(anchorView, 0, 0);
+//            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
     }
 }

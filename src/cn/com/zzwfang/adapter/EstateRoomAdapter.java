@@ -46,7 +46,7 @@ public class EstateRoomAdapter extends BaseAdapter {
         
         TextView tvConditionName = ViewHolder.get(convertView, R.id.adapter_conditon_name_tv);
         IdNameFloorBean temp = cells.get(position);
-        String tempStr = temp.getFloor() + "  " + temp.getName();
+        String tempStr = temp.getFloor() + "层  " + temp.getName() + "室";
         tvConditionName.setText(tempStr);
         return convertView;
     }
