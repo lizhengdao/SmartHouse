@@ -28,7 +28,7 @@ public class API {
 	 * 
 	 * http://yangmingbo.cn
 	 * 
-	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/
+	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/  http://zzwfang.com:9001/
 	 */
 	public static final String host = "http://www.zzwfang.com:7894/";
 

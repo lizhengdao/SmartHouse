@@ -67,6 +67,9 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	 */
 	private int trade = 1;
 	
+	/**
+	 * 楼盘Id
+	 */
 	private String estateId = null;
 	
 	/**
@@ -76,6 +79,9 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	
 	private OnBuildingSelectListener onBuildingSelectListener;
 	
+	/**
+	 * 楼栋号
+	 */
 	private String buildingId = null;
 	/**
 	 * 几栋
@@ -89,6 +95,9 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	
 	private OnEstateCellSelectListener onEstateCellSelectListener;
 	
+	/**
+	 * 单元号
+	 */
 	private String cellId = null;
 	/**
 	 * 几单元
@@ -240,18 +249,36 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 			recommendHouseSource();
 			break;
 		case R.id.act_fee_hunter_recommend_owner_which_building_llt: // 栋
-		    if (buildings != null) {
+		    if (buildings != null && buildings.size() > 0) {
 		        PopViewHelper.showSelectBuildingPopWindow(this, lltWhichBuilding, buildings, onBuildingSelectListener);
+		    } else {
+		        if (TextUtils.isEmpty(estateId)) {
+		            ToastUtils.SHORT.toast(this, "请选择楼盘");
+		        } else {
+		            ToastUtils.SHORT.toast(this, "该楼盘没有楼栋信息");
+		        }
 		    }
 		    break;
 		case R.id.act_fee_hunter_recommend_owner_which_unit_llt: // 单元
-		    if (cells != null) {
+		    if (cells != null && cells.size() > 0) {
 		        PopViewHelper.showSelectEstateCellPopWindow(this, lltWhichUnit, cells, onEstateCellSelectListener);
+		    } else {
+		        if (TextUtils.isEmpty(buildingId)) {
+		            ToastUtils.SHORT.toast(this, "请选择楼栋信息");
+		        } else {
+		            ToastUtils.SHORT.toast(this, "该楼栋没有单元信息");
+		        }
 		    }
 		    break;
 		case R.id.act_fee_hunter_recommend_owner_which_floor_and_room_llt: // 层和房间号
-		    if (rooms != null) {
+		    if (rooms != null && rooms.size() > 0) {
 		        PopViewHelper.showSelectEstateRoomPopWindow(this, lltWhichFloorAndHouse, rooms, onEstateRoomSelectListener);
+		    } else {
+		        if (TextUtils.isEmpty(cellId)) {
+                    ToastUtils.SHORT.toast(this, "请选择单元信息");
+                } else {
+                    ToastUtils.SHORT.toast(this, "该单元没有房号信息");
+                }
 		    }
 		    break;
 		}
@@ -329,10 +356,10 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 //			return;
 //		}
 		
-		if (TextUtils.isEmpty(floorName)) {
-            ToastUtils.SHORT.toast(this, "请选择楼层");
-            return;
-        }
+//		if (TextUtils.isEmpty(floorName)) {
+//            ToastUtils.SHORT.toast(this, "请选择楼层");
+//            return;
+//        }
 		
 //		if (TextUtils.isEmpty(roomNo)) {
 //			ToastUtils.SHORT.toast(this, "请输入房号");
@@ -477,7 +504,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 	}
 	
 	private void getEstateBuilding() {
-		estateId = "56cbbf47e00fea2eccdb61de";
+//		estateId = "56cbbf47e00fea2eccdb61de";
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
 		if (TextUtils.isEmpty(estateId)) {
 			return;
