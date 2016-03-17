@@ -156,12 +156,12 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:weightSum="2" >
+                android:weightSum="5" >
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -185,7 +185,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -211,12 +211,12 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:weightSum="2" >
+                android:weightSum="5" >
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -240,7 +240,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -266,12 +266,12 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:weightSum="2" >
+                android:weightSum="5" >
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -295,7 +295,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -392,7 +392,8 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:textColor="@color/color_2a2a2a"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:text="暂无信息" />
                 </LinearLayout>
 
                 <TextView
@@ -418,14 +419,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/color_e2e2e2" />
-
+            
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/color_e2e2e2" />
-
+            
             <TextView
+                android:id="@+id/act_new_house_detail_3d"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="小区3D"
+                android:textColor="@color/color_898989"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_e2e2e2" />
+            
+            <TextView
+                android:id="@+id/act_new_house_detail_house_photo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
@@ -437,11 +463,26 @@
                 android:textColor="@color/color_898989"
                 android:textSize="16sp" />
 
-            <View
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_e2e2e2" />
+                android:layout_height="wrap_content" >
 
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/act_new_house_detail_house_photo_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+                <TextView
+                    android:id="@+id/act_new_house_detail_house_photo_index_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </FrameLayout>
+            
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -451,7 +492,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="房屋介绍"
+                android:text="小区配套"
                 android:textColor="@color/color_898989"
                 android:textSize="16sp" />
 
@@ -463,10 +504,39 @@
             <TextView
                 android:id="@+id/act_new_house_detail_house_introduction_tv"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp" />
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/color_e2e2e2" />
+            
+            <TextView
+                android:id="@+id/act_new_house_detail_location"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
-                android:padding="10dp"
-                android:text="好房子，好地段" />
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="位置及周边"
+                android:textColor="@color/color_898989"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+            
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/act_new_house_detail_map_view"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:clickable="true" />
         </LinearLayout>
     </ScrollView>
 

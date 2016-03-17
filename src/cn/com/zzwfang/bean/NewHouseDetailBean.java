@@ -36,8 +36,28 @@ public class NewHouseDetailBean extends BaseBean {
 	
 	private String V360;
 	
+	private ArrayList<PhotoBean> HousePhoto;
+	
+	private String Share;
+	
 
-	public String getAeraName() {
+	public String getShare() {
+        return Share;
+    }
+
+    public void setShare(String share) {
+        Share = share;
+    }
+
+    public ArrayList<PhotoBean> getHousePhoto() {
+        return HousePhoto;
+    }
+
+    public void setHousePhoto(ArrayList<PhotoBean> housePhoto) {
+        HousePhoto = housePhoto;
+    }
+
+    public String getAeraName() {
 		return AeraName;
 	}
 

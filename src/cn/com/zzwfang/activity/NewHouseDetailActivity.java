@@ -20,6 +20,15 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.Jumper;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 
 public class NewHouseDetailActivity extends BaseActivity implements
 		OnClickListener, OnPageChangeListener {
@@ -29,7 +38,10 @@ public class NewHouseDetailActivity extends BaseActivity implements
 	private TextView tvBack, tvPageTitle, tvTitle, tvPhotoIndex,
 			tvAveragePrice, tvConsultant, tvArea, tvSquare, tvPropertyType,
 			tvPlotRatio, tvDecoration, tvGreenRatio, tvMgtCompany,
-			tvBuilderCompany, tvMortgageCalculate;
+			tvBuilderCompany, tvMortgageCalculate, tv3d, tvIntroduction,
+			tvLocation;
+	
+	private MapView mapView;
 
 	private String estateId;
 
@@ -38,6 +50,10 @@ public class NewHouseDetailActivity extends BaseActivity implements
 	private ViewPager photoPager;
 	private PhotoPagerAdapter photoAdapter;
 	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
+	
+	private ViewPager housePhotoPager;
+	private PhotoPagerAdapter housePhotoAdapter;
+	private ArrayList<PhotoBean> housePhotos = new ArrayList<PhotoBean>();
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -65,6 +81,15 @@ public class NewHouseDetailActivity extends BaseActivity implements
 		tvBuilderCompany = (TextView) findViewById(R.id.act_new_house_detail_builder_company_tv);
 		tvMortgageCalculate = (TextView) findViewById(R.id.act_new_house_detail_calculator_tv);
 		tvConsultant = (TextView) findViewById(R.id.act_new_house_detail_consult_tv);
+		tv3d = (TextView) findViewById(R.id.act_new_house_detail_3d);
+		tvIntroduction = (TextView) findViewById(R.id.act_new_house_detail_house_introduction_tv);
+		tvLocation = (TextView) findViewById(R.id.act_new_house_detail_location);
+		
+		mapView = (MapView) findViewById(R.id.act_new_house_detail_map_view);
+		
+		housePhotoPager = (ViewPager) findViewById(R.id.act_new_house_detail_house_photo_pager);
+		housePhotoAdapter = new PhotoPagerAdapter(this, housePhotos);
+		housePhotoPager.setAdapter(housePhotoAdapter);
 
 		photoPager = (ViewPager) findViewById(R.id.act_new_house_detail_pager);
 		photoAdapter = new PhotoPagerAdapter(this, photos);
@@ -73,6 +98,8 @@ public class NewHouseDetailActivity extends BaseActivity implements
 		tvBack.setOnClickListener(this);
 		tvMortgageCalculate.setOnClickListener(this);
 		tvConsultant.setOnClickListener(this);
+		tv3d.setOnClickListener(this);
+		tvLocation.setOnClickListener(this);
 	}
 
 	@Override
@@ -105,6 +132,30 @@ public class NewHouseDetailActivity extends BaseActivity implements
                 }
             }
 		    break;
+		case R.id.act_new_house_detail_3d:
+		    if (newHouseDetailBean != null) {
+		        Jumper.newJumper()
+	            .setAheadInAnimation(R.anim.activity_push_in_right)
+	            .setAheadOutAnimation(R.anim.activity_alpha_out)
+	            .setBackInAnimation(R.anim.activity_alpha_in)
+	            .setBackOutAnimation(R.anim.activity_push_out_right)
+	            .putString(SandTableDisplayActivity.INTENT_SAND_TABLE_DISPLAY_URL, newHouseDetailBean.getV360())
+	            .putString(SandTableDisplayActivity.INTENT_ESTATE_NAME, newHouseDetailBean.getName())
+	            .jump(this, SandTableDisplayActivity.class);
+		    }
+		    break;
+		case R.id.act_new_house_detail_location:
+		    if (newHouseDetailBean != null) {
+		        Jumper.newJumper()
+                .setAheadInAnimation(R.anim.activity_push_in_right)
+                .setAheadOutAnimation(R.anim.activity_alpha_out)
+                .setBackInAnimation(R.anim.activity_alpha_in)
+                .setBackOutAnimation(R.anim.activity_push_out_right)
+                .putDouble(NearbyDetailActivity.INTENT_LAT, newHouseDetailBean.getLat())
+                .putDouble(NearbyDetailActivity.INTENT_LNG, newHouseDetailBean.getLng())
+                .jump(this, NearbyDetailActivity.class);
+		    }
+		    break;
 		}
 	}
 
@@ -113,7 +164,7 @@ public class NewHouseDetailActivity extends BaseActivity implements
 			tvPageTitle.setText(newHouseDetailBean.getName());
 			tvTitle.setText(newHouseDetailBean.getName());
 			tvAveragePrice.setText(newHouseDetailBean.getUnitPrice());
-			tvArea.setText(newHouseDetailBean.getFloorArea());
+			tvArea.setText(newHouseDetailBean.getAeraName());
 			tvSquare.setText(newHouseDetailBean.getFloorArea());
 			tvPropertyType.setText(newHouseDetailBean.getMgtCompany());
 			tvPlotRatio.setText(newHouseDetailBean.getPlotRatio());
@@ -121,9 +172,26 @@ public class NewHouseDetailActivity extends BaseActivity implements
 			tvGreenRatio.setText(newHouseDetailBean.getGreeningRate());
 			tvMgtCompany.setText(newHouseDetailBean.getMgtCompany());
 			tvBuilderCompany.setText(newHouseDetailBean.getBuilder());
+			tvIntroduction.setText(newHouseDetailBean.getRemark());
 
 			photos.addAll(newHouseDetailBean.getPhoto());
+			housePhotos.addAll(newHouseDetailBean.getHousePhoto());
 			photoAdapter.notifyDataSetChanged();
+			housePhotoAdapter.notifyDataSetChanged();
+			
+			LatLng latLng = new LatLng(newHouseDetailBean.getLat(), newHouseDetailBean.getLng());
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+            BaiduMap baiduMap = mapView.getMap();
+            baiduMap.animateMapStatus(u);
+
+            // 构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.ic_cur_location);
+            // 构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions option = new MarkerOptions().position(latLng)
+                    .icon(bitmap);
+            // 在地图上添加Marker，并显示
+            baiduMap.addOverlay(option);
 		}
 
 	}
@@ -170,5 +238,23 @@ public class NewHouseDetailActivity extends BaseActivity implements
 		String txt = (arg0 + 1) + "/" + photoTotalNum;
 		tvPhotoIndex.setText(txt);
 	}
+	
+	@Override
+    protected void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+    
+    @Override
+    protected void onPause() {
+        mapView.onPause();
+        super.onPause();
+    }
+    
+    @Override
+    protected void onDestroy() {
+        mapView.onDestroy();
+        super.onDestroy();
+    }
 
 }
