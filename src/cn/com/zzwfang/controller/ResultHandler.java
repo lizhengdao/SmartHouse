@@ -58,7 +58,8 @@ public class ResultHandler implements ProcessCallback {
 					switch (statusCode) {
 
 					case API.SUCCESS_EXIST:
-//						Log.i("--->", "statusCode == " + statusCode);
+						Log.i("--->", "statusCode == " + statusCode);
+                      
 						if (callback != null) {
 							// 成功返回数据
 //							Log.i("--->", entity.getUrl() + "   rc0 -- result ==  " + r.getData());
@@ -66,6 +67,7 @@ public class ResultHandler implements ProcessCallback {
 						}
 						break;
 					case API.ERROR_FAILURE:
+					    Log.i("--->", entity.getUrl() + "   rc0 -- result ==  " + r.getData());
 						ToastUtils.SHORT.toast(context, r.getMessage());
 						if (callback != null) {
 							callback.rc999(entity, r);

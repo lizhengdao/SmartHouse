@@ -496,6 +496,10 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
                 roomName = null;
                 tvWhichFloor.setText("");
                 tvWhichHouse.setText("");
+                
+                buildings = null;
+                cells = null;
+                rooms = null;
 				
 				getEstateBuilding();
 				break;
