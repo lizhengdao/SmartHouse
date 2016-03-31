@@ -28,9 +28,9 @@ public class API {
 	 * 
 	 * http://yangmingbo.cn
 	 * 
-	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/  http://zzwfang.com:9001/
+	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/  http://zzwfang.com:9001/  funapi.zzwfang.com:7894
 	 */
-	public static final String host = "http://www.zzwfang.com:7894/";
+	public static final String host = "http://funapi.zzwfang.com:7894/";
 
 	/**
 	 * 认证授权接口
