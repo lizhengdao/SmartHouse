@@ -267,7 +267,16 @@ public class FeeHunterProgressDetailActivity extends BaseActivity implements OnC
 	 */
 	private void getHouseSourceInfoChange() {
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getHouseSourceInfoChange(houseSourceId, new ResultHandlerCallback() {
+		
+		/**
+         * 用户类型 0经济人，1普通会员，2赏金猎人
+         */
+        int userType = ContentUtils.getUserType(this);
+        boolean isSale = false;
+        if (userType == 1) {
+            isSale = true;
+        }
+		actionImpl.getHouseSourceInfoChange(houseSourceId, isSale, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {

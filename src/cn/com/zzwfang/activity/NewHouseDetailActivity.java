@@ -2,9 +2,12 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -119,16 +122,24 @@ public class NewHouseDetailActivity extends BaseActivity implements
 			break;
 		case R.id.act_new_house_detail_consult_tv:
 		    if (newHouseDetailBean != null) {
-                AgentBean agent = newHouseDetailBean.getAgent();
-                if (agent != null) {
-                    Jumper.newJumper()
-                    .setAheadInAnimation(R.anim.activity_push_in_right)
-                    .setAheadOutAnimation(R.anim.activity_alpha_out)
-                    .setBackInAnimation(R.anim.activity_alpha_in)
-                    .setBackOutAnimation(R.anim.activity_push_out_right)
-                    .putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
-                    .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
-                    .jump(this, ChatActivity.class);
+//                AgentBean agent = newHouseDetailBean.getAgent();
+//                if (agent != null) {
+//                    Jumper.newJumper()
+//                    .setAheadInAnimation(R.anim.activity_push_in_right)
+//                    .setAheadOutAnimation(R.anim.activity_alpha_out)
+//                    .setBackInAnimation(R.anim.activity_alpha_in)
+//                    .setBackOutAnimation(R.anim.activity_push_out_right)
+//                    .putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
+//                    .putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
+//                    .jump(this, ChatActivity.class);
+//                }
+		        
+		        AgentBean agent = newHouseDetailBean.getAgent();
+                String phone = agent.getTel();
+                if (!TextUtils.isEmpty(phone)) {
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + phone));
+                    startActivity(intent);
                 }
             }
 		    break;

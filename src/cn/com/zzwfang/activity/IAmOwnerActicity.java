@@ -30,9 +30,16 @@ import android.widget.TextView;
 public class IAmOwnerActicity extends BaseActivity implements OnClickListener,
     OnHeaderRefreshListener, OnFooterLoadListener{
 
+    public static final String INTENT_TYPE = "IAmOwnerActicity.type";
     private TextView tvBack;
     private AbPullToRefreshView pullView;
     private ListView listView;
+    /**
+     * User/Income 新增参数 type 字符串
+       在我是客户、我是业主 房源收支明细传递
+       我是客户 传递“客户”字符串  我是业主 传递“业主” 字符串
+     */
+    private String type;
     
     /**
      * 我的售房
@@ -45,7 +52,7 @@ public class IAmOwnerActicity extends BaseActivity implements OnClickListener,
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        
+        type = getIntent().getStringExtra(INTENT_TYPE);
         initView();
     }
     

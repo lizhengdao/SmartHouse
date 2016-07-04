@@ -215,8 +215,18 @@ public class QueryAfterSaleActivity extends BaseActivity implements OnClickListe
 	 * 房源信息变动   跟客户信息变动返回的数据结构一样
 	 */
 	private void getHouseSourceInfoChange() {
+	    
+	    /**
+         * 用户类型 0经济人，1普通会员，2赏金猎人
+         */
+        int userType = ContentUtils.getUserType(this);
+        boolean isSale = false;
+        if (userType == 1) {
+            isSale = true;
+        }
+        
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getHouseSourceInfoChange(houseSourceId, new ResultHandlerCallback() {
+		actionImpl.getHouseSourceInfoChange(houseSourceId, isSale, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {

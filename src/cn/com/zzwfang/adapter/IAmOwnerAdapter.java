@@ -158,6 +158,7 @@ public class IAmOwnerAdapter extends BaseAdapter {
 		        .setBackInAnimation(R.anim.activity_alpha_in)
 		        .setBackOutAnimation(R.anim.activity_push_out_right)
 		        .putString(IncomeStatementActivity.INTENT_HOUSE_SOURCE_ID, temp.getId())
+		        .putString(IncomeStatementActivity.INTENT_TYPE, "业主")
 		        .jump((BaseActivity)context, IncomeStatementActivity.class);
 			}
 		});

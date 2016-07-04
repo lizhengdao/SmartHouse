@@ -33,6 +33,7 @@ import cn.com.zzwfang.view.AutoDrawableTextView;
  */
 public class IAmCustomerActivity extends BaseActivity implements OnClickListener {
 
+    public static final String INTENT_TYPE = "IAmCustomerActivity.type";
 	public static final int CODE_EDIT_PROXY_BUY_HOUSE_INFO = 100;
 	
 	private TextView tvBack;
@@ -48,11 +49,17 @@ public class IAmCustomerActivity extends BaseActivity implements OnClickListener
     private ArrayList<SeeHouseBean> seeHouseExperiences = new ArrayList<SeeHouseBean>();
     private ArrayList<AttentionBean> attentions = new ArrayList<AttentionBean>();
     
+    /**
+     * User/Income 新增参数 type 字符串
+       在我是客户、我是业主 房源收支明细传递
+       我是客户 传递“客户”字符串  我是业主 传递“业主” 字符串
+     */
+    private String type;
     
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		
+		type = getIntent().getStringExtra(INTENT_TYPE);
 		initView();
 		getMyDemandInfo();
 		getMyBoughtHouses();
@@ -191,6 +198,7 @@ public class IAmCustomerActivity extends BaseActivity implements OnClickListener
                         .setBackInAnimation(R.anim.activity_alpha_in)
                         .setBackOutAnimation(R.anim.activity_push_out_right)
                         .putString(IncomeStatementActivity.INTENT_HOUSE_SOURCE_ID, myBoughtHouseBean.getId())
+                        .putString(IncomeStatementActivity.INTENT_TYPE, "客户")
                         .jump(IAmCustomerActivity.this, IncomeStatementActivity.class);
                     }
                 });

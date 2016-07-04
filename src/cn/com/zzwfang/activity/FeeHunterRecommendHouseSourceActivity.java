@@ -415,7 +415,7 @@ public class FeeHunterRecommendHouseSourceActivity extends BaseActivity implemen
 //				});
 		
 		actionImpl.recommendFeeHunterHouseSource(userId, idNameBean.getId(),
-		        buildingId, cellName, roomName,
+		        buildingName, cellName, roomName,
                 idNameBean.getName(), cityBean.getSiteId(), floorName,
                 trade, contactName, contactPhone,
                 remark, new ResultHandlerCallback() {

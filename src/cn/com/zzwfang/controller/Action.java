@@ -759,7 +759,7 @@ public interface Action {
 	 * @param prpId   房源ID
 	 * @param callback
 	 */
-	void getIncomeStatement(String prpId, ResultHandlerCallback callback);
+	void getIncomeStatement(String prpId, String type, ResultHandlerCallback callback);
 	
 	/**
 	 * 找房神器 几居数据
@@ -776,10 +776,11 @@ public interface Action {
 	
 	/**
 	 * 房源信息变动
+	 * 新增参数 isSale  布尔类型  在我是客户 和我是业主那里点击房源 售后服务 调用的接口传递这个参数，其他调用的可以不用管（赏金猎人 不改）
 	 * @param houseSourceId
 	 * @param callback
 	 */
-	void getHouseSourceInfoChange(String houseSourceId, ResultHandlerCallback callback);
+	void getHouseSourceInfoChange(String houseSourceId, boolean isSale, ResultHandlerCallback callback);
 	
 	/**
 	 * 房源公用的带看记录

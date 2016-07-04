@@ -313,6 +313,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
                         .setBackInAnimation(R.anim.activity_alpha_in)
                         .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .putString(IAmOwnerActicity.INTENT_TYPE, "业主")
                         .jump(this, IAmOwnerActicity.class);
 
             }
@@ -331,6 +332,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
                         .setAheadOutAnimation(R.anim.activity_alpha_out)
                         .setBackInAnimation(R.anim.activity_alpha_in)
                         .setBackOutAnimation(R.anim.activity_push_out_right)
+                        .putString(IAmCustomerActivity.INTENT_TYPE, "业主")
                         .jump(this, IAmCustomerActivity.class);
             }
             break;

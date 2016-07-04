@@ -1447,7 +1447,7 @@ public class ActionImpl implements Action {
 
         requestParams.put("userId", userId);
         requestParams.put("estateId", estateId);
-        requestParams.put("rigdepole", rigdepole);
+        requestParams.put("Ridgepole", rigdepole);
         requestParams.put("unit", unit);
         requestParams.put("roomNo", roomNo);
         requestParams.put("estateName", estateName);
@@ -2403,12 +2403,15 @@ public class ActionImpl implements Action {
     }
 
     @Override
-    public void getIncomeStatement(String prpId, ResultHandlerCallback callback) {
+    public void getIncomeStatement(String prpId, String type, ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
         requestParams.put("PrpId", prpId);
+        if (!TextUtils.isEmpty(type)) {
+            requestParams.put("type", type);
+        }
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2497,13 +2500,16 @@ public class ActionImpl implements Action {
     }
 
     @Override
-    public void getHouseSourceInfoChange(String houseSourceId,
+    public void getHouseSourceInfoChange(String houseSourceId, boolean isSale,
             ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
         requestParams.put("Id", houseSourceId);
+        if (isSale) {
+            requestParams.put("isSale", "1");
+        }
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
