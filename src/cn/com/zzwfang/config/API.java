@@ -29,8 +29,9 @@ public class API {
 	 * http://yangmingbo.cn
 	 * 
 	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/  http://zzwfang.com:9001/  funapi.zzwfang.com:7894
+	 * http://funapi.zzwfang.com:7894/
 	 */
-	public static final String host = "http://funapi.zzwfang.com:7894/";
+	public static final String host = "http://110.189.90.40:7894/";  //  http://110.189.90.40:7894/
 
 	/**
 	 * 认证授权接口
@@ -373,5 +374,12 @@ public class API {
      * 推荐房源 获取房间号信息
      */
     public static final String GET_ESTATE_ROOM = "Estate/GetRoom";
+    
+    /**
+     * 每次访问或返回至赏金猎人中心的首页则请求这个接口
+     * BountyHunter/GetBountyHunterInfo?userId=当前用户ID
+       返回结果 {PrpCount=推荐房源数量,InqCount=推荐客户数量,Money=赏金金额}
+     */
+    public static final String GET_Bounty_Hunter_Info = "BountyHunter/GetBountyHunterInfo";
 
 }

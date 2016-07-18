@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -451,6 +452,9 @@ public final class ContentUtils {
 		Editor editor = sp.edit();
 		editor.putString(Constants.CITY_NAME, cityBean.getName());
 		editor.putString(Constants.CITY_ID, cityBean.getSiteId());
+		editor.putString(Constants.CITY_LAT, String.valueOf(cityBean.getLat()));
+		editor.putString(Constants.CITY_LNG, String.valueOf(cityBean.getLng()));
+		editor.putBoolean(Constants.CITY_OPEN_MONEY, cityBean.isOpenMoney());
 		editor.commit();
 	}
 	
@@ -460,10 +464,21 @@ public final class ContentUtils {
 		
 		String cityName = sp.getString(Constants.CITY_NAME, null);
 		String cityId = sp.getString(Constants.CITY_ID, null);
+		String latStr = sp.getString(Constants.CITY_LAT, null);
+		String lngStr = sp.getString(Constants.CITY_LNG, null);
+		Boolean isOpenMoney = sp.getBoolean(Constants.CITY_OPEN_MONEY, false);
 		
 		CityBean cityBean = new CityBean();
 		cityBean.setName(cityName);
 		cityBean.setSiteId(cityId);
+		if (!TextUtils.isEmpty(latStr)) {
+		    cityBean.setLat(Double.valueOf(latStr));
+		}
+		if (!TextUtils.isEmpty(lngStr)) {
+		    cityBean.setLng(Double.valueOf(lngStr));
+		}
+		cityBean.setOpenMoney(isOpenMoney);
+		
 		return cityBean;
 	}
 

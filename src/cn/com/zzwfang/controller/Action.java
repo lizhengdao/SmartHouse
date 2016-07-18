@@ -836,4 +836,12 @@ public interface Action {
 	 * @param callback
 	 */
 	void getEstateRoom(String cellId, ResultHandlerCallback callback);
+	
+	/**
+	 * 每次访问或返回至赏金猎人中心的首页则请求这个接口
+	 * 返回结果 {PrpCount=推荐房源数量,InqCount=推荐客户数量,Money=赏金金额}
+	 * @param userId
+	 * @param callback
+	 */
+	void getBountyHunterInfo(String userId, ResultHandlerCallback callback);
 }

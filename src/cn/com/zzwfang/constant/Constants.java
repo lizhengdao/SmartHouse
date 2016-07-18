@@ -36,6 +36,12 @@ public class Constants {
     
     public static final String CITY_ID = "city_id";
     
+    public static final String CITY_LNG = "city_lng";
+    
+    public static final String CITY_LAT = "city_lat";
+    
+    public static final String CITY_OPEN_MONEY = "city_open_money";
+    
     public static final String USER_IM_MSG_RECEIVE_SETTING = "user_im_msg_receive";
     
     /**

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +33,7 @@ import cn.com.zzwfang.activity.MyConcernHouseResourcesActivity;
 import cn.com.zzwfang.activity.MyHouseListActivity;
 import cn.com.zzwfang.activity.SettingsActivity;
 import cn.com.zzwfang.activity.ShangJinLieRenActivity;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.FileUploadResultBean;
 import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.MessageBean;
@@ -150,6 +150,17 @@ public class MainMineFragment extends BasePickPhotoFragment implements
     public void onResume() {
         super.onResume();
         refreshCount();
+        CityBean cityBean = ContentUtils.getCityBean(getActivity());
+        if (cityBean != null) {
+            if (cityBean.isOpenMoney()) {
+                imgFeeHunter.setVisibility(View.VISIBLE);
+            } else {
+                imgFeeHunter.setVisibility(View.INVISIBLE);
+            }
+        } else {
+            imgFeeHunter.setVisibility(View.INVISIBLE);
+        }
+        rendUserInfo();
 
     }
 

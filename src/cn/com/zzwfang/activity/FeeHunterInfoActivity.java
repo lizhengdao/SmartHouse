@@ -1,5 +1,8 @@
 package cn.com.zzwfang.activity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,7 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.action.ImageAction;
+import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.PathImage;
@@ -32,6 +39,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		super.onCreate(arg0);
 		setResult(RESULT_OK);
 		initView();
+		getBountyHunterInfo();
 	}
 	
 	private void initView() {
@@ -143,6 +151,40 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		}
 	}
 
-	
+	private void getBountyHunterInfo() {
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+	    String userId = ContentUtils.getUserId(this);
+	    actionImpl.getBountyHunterInfo(userId, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                String data = result.getData();
+                try {
+                    JSONObject jObj = new JSONObject(data);
+                    // 推荐房源数量
+                    String PrpCount = jObj.optString("PrpCount");
+                    // 推荐客户数量
+                    String InqCount = jObj.optString("InqCount");
+                    // 赏金金额
+                    String Money = jObj.optString("Money");
+                    tvRecommendedCustomers.setText(InqCount + "个");
+                    tvRecommendedOwners.setText(PrpCount + "套");
+                    tvFeeHunterMoney.setText("￥" + Money);
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                
+            }
+        });
+	}
 	
 }

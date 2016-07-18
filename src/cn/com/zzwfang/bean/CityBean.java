@@ -11,8 +11,40 @@ public class CityBean extends BaseBean {
 	 * 城市编号
 	 */
 	private String SiteId;
+	
+	private double Lng;
+	
+	private double Lat;
+	
+	private boolean OpenMoney;
+	
+	
 
-	public String getName() {
+	public double getLng() {
+        return Lng;
+    }
+
+    public void setLng(double lng) {
+        Lng = lng;
+    }
+
+    public double getLat() {
+        return Lat;
+    }
+
+    public void setLat(double lat) {
+        Lat = lat;
+    }
+
+    public boolean isOpenMoney() {
+        return OpenMoney;
+    }
+
+    public void setOpenMoney(boolean openMoney) {
+        OpenMoney = openMoney;
+    }
+
+    public String getName() {
 		return Name;
 	}
 
