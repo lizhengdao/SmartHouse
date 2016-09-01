@@ -130,6 +130,23 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		imgShangjin.setOnClickListener(this);
 		
 	}
+	
+	@Override
+	public void onResume() {
+	    // TODO Auto-generated method stub
+	    super.onResume();
+	    CityBean cityBean = ContentUtils.getCityBean(getActivity());
+	    if (cityBean != null) {
+	        if (cityBean.isOpenMoney()) {
+	            imgShangjin.setVisibility(View.VISIBLE);
+	        } else {
+	            imgShangjin.setVisibility(View.INVISIBLE);
+	        }
+	    } else {
+	        imgShangjin.setVisibility(View.INVISIBLE);
+	    }
+	}
+	
 
 	@Override
 	public void onClick(View v) {

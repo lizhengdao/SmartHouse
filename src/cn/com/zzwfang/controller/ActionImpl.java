@@ -1745,7 +1745,7 @@ public class ActionImpl implements Action {
     @Override
     public void commitFeeHunterBankInfo(String userId, String realName,
             String bankCode, String bankName, String bankCity,
-            String bankImage, String openAccountBankName,
+            String bankImage, String openAccountBankName, String cityId,
             ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
@@ -1775,6 +1775,8 @@ public class ActionImpl implements Action {
         if (!TextUtils.isEmpty(openAccountBankName)) {
             requestParams.put("openAccountName", openAccountBankName);
         }
+        
+        requestParams.put("SiteId", cityId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;

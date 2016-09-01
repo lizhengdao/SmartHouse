@@ -39,7 +39,12 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		super.onCreate(arg0);
 		setResult(RESULT_OK);
 		initView();
-		getBountyHunterInfo();
+	}
+	
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    getBountyHunterInfo();
 	}
 	
 	private void initView() {

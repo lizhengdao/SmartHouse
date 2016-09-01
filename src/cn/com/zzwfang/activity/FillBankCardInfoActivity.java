@@ -30,6 +30,7 @@ import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnAvatarOptionsClickListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnBankNameSelectedListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnBankProvinceOrCitySelectedListener;
+import cn.com.zzwfang.bean.CityBean;
 
 import com.alibaba.fastjson.JSON;
 
@@ -218,9 +219,17 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements
             return;
         }
 
+        CityBean cityBean = ContentUtils.getCityBean(this);
+        String cityId = null;
+        if (cityBean != null) {
+            cityId = cityBean.getSiteId();
+        } else {
+        	ToastUtils.SHORT.toast(this, "请选择您所在的城市");
+        	return;
+        }
         ActionImpl actionImpl = ActionImpl.newInstance(this);
         actionImpl.commitFeeHunterBankInfo(userId, realName, bankCode,
-                bankName, cityName, bankImageUrl, openAccountBankName,
+                bankName, cityName, bankImageUrl, openAccountBankName, cityId,
                 new ResultHandlerCallback() {
 
                     @Override

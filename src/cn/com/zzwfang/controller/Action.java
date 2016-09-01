@@ -577,7 +577,7 @@ public interface Action {
 	 */
 	void commitFeeHunterBankInfo(String userId, String realName,
 			String bankCode, String bankName, String bankCity, String bankImage,
-			String openAccountBankName, ResultHandlerCallback callback);
+			String openAccountBankName, String cityId, ResultHandlerCallback callback);
 
 	/**
 	 * 根据我的需求条件推荐给我的房源列表
