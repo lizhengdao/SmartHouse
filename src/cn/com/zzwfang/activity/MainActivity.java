@@ -4,23 +4,33 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.BaseActivity.OnNewMessageListener;
 import cn.com.zzwfang.adapter.MainContentPagerAdapter;
 import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.MessageBean;
+import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.UserInfoBean;
+import cn.com.zzwfang.controller.ActionImpl;
+import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
+import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.im.MessagePool;
 import cn.com.zzwfang.util.AppUtils;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.GuiderView;
 import cn.com.zzwfang.view.UnScrollableViewPager;
 
+import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.SDKInitializer;
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
         OnClickListener, OnCitySelectedListener, OnNewMessageListener {
@@ -43,6 +53,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
         setContentView(R.layout.act_main);
 
         initView();
+        login();
     }
 
     private void initView() {
@@ -135,7 +146,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
     public void onBackPressed() {
         // super.onBackPressed();
         if (AppUtils.isDoubleClick(this)) {
-            ContentUtils.clearUserInfo(this);
+//            ContentUtils.clearUserInfo(this);
             ContentUtils.setUserLoginStatus(this, false);
             exitApplication(true);
             // moveTaskToBack(true);
@@ -172,5 +183,115 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
             contentAdapter.updateMessageCount(msg);
         }
 
+    }
+    
+    private void login() {
+        boolean hasLogin = ContentUtils.getUserHasLogin(this);
+        final String phoneNum = ContentUtils.getLoginPhone(this);
+        final String pwd = ContentUtils.getLoginPwd(this);
+        if (hasLogin && !TextUtils.isEmpty(phoneNum) && !TextUtils.isEmpty(pwd)) {
+            ActionImpl actionImpl = ActionImpl.newInstance(this);
+            actionImpl.login(phoneNum, pwd, new ResultHandlerCallback() {
+                
+                @Override
+                public void rc999(RequestEntity entity, Result result) {
+                }
+                
+                @Override
+                public void rc3001(RequestEntity entity, Result result) {
+                }
+                
+                @Override
+                public void rc0(RequestEntity entity, Result result) {
+                    final UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
+                    ContentUtils.saveUserInfo(MainActivity.this, userInfo);
+                    ContentUtils.saveLoginPhone(MainActivity.this, phoneNum);
+                    ContentUtils.saveLoginPwd(MainActivity.this, pwd);
+                    ContentUtils.setUserHasLogin(MainActivity.this, true);
+                    ActionImpl actionImpl = ActionImpl.newInstance(MainActivity.this);
+                    actionImpl.createIMAccount(userInfo.getId(), userInfo.getId(), new ResultHandlerCallback() {
+                        
+                        @Override
+                        public void rc999(RequestEntity entity, Result result) {
+                        }
+                        
+                        @Override
+                        public void rc3001(RequestEntity entity, Result result) {
+                        }
+                        
+                        @Override
+                        public void rc0(RequestEntity entity, Result result) {
+                            loginOnHx(userInfo.getId(), userInfo.getId());
+                        }
+                    });
+                }
+            });
+        }
+    }
+    
+    private void loginOnHx(String easeId, String easePwd) {
+        EMChatManager.getInstance().login(easeId, easePwd, new EMCallBack() {
+            
+            @Override
+            public void onSuccess() {
+                try {
+//                  EMGroupManager.getInstance().loadAllGroups();
+//                  EMChatManager.getInstance().loadAllConversations();
+//                  EMChatManager.getInstance().
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+                runOnUiThread(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        getContacts();
+                    }
+                });
+            }
+            
+            @Override
+            public void onProgress(int arg0, String arg1) {
+                
+            }
+            
+            @Override
+            public void onError(int arg0, String arg1) {
+                    runOnUiThread(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        ContentUtils.setUserLoginStatus(MainActivity.this, false);
+                    }
+                });
+            }
+        });
+    }
+    
+    private void getContacts() {
+        String userId = ContentUtils.getUserId(this);
+        ActionImpl actionImpl = ActionImpl.newInstance(this);
+        actionImpl.getContactsList(userId, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                ArrayList<IMMessageBean> temp = (ArrayList<IMMessageBean>) JSON.parseArray(result.getData(), IMMessageBean.class);
+                if (temp != null) {
+                    MessagePool.addAllContactsMessages(temp);
+                }
+                ContentUtils.setUserLoginStatus(MainActivity.this, true);
+            }
+        });
     }
 }

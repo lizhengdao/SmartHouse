@@ -300,6 +300,19 @@ public final class ContentUtils {
 		return sp.getBoolean(Constants.LOGINED_IN, false);
 	}
 	
+	public static void setUserHasLogin(Context context, boolean loginStatus) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putBoolean(Constants.HAS_LOGIN, loginStatus).commit();
+	}
+	
+	public static boolean getUserHasLogin(Context context) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        return sp.getBoolean(Constants.HAS_LOGIN, false);
+	}
+	
 	public static void updateUserType(Context context, int userType) {
 	    SharedPreferences sp = (SharedPreferences) context
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
@@ -437,6 +450,20 @@ public final class ContentUtils {
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		String userLoginPhone = sp.getString(Constants.USER_LOGIN_PHONE, "");
 		return userLoginPhone;
+	}
+	
+	public static void saveLoginPwd(Context context, String pwd) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putString(Constants.USER_LOGIN_PWD, pwd).commit();
+	}
+	
+	public static String getLoginPwd(Context context) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        String userLoginPwd = sp.getString(Constants.USER_LOGIN_PWD, "");
+        return userLoginPwd;
 	}
 	
 	public static String getUserId(Context context) {

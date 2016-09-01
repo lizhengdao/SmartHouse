@@ -9,6 +9,11 @@ public class Constants {
      *   SharedPreference 中的字段  保存是否已经登录
      */
     public static final String LOGINED_IN = "logined_in";
+    
+    /**
+     * 是否登录过
+     */
+    public static final String HAS_LOGIN = "has_longin";
 
     /**
      *   SharedPreference 中的字段  保存登录的用户名
@@ -31,6 +36,8 @@ public class Constants {
     public static final String USER_PHONE = "user_phone";
     
     public static final String USER_LOGIN_PHONE = "user_login_phone";
+    
+    public static final String USER_LOGIN_PWD = "user_login_pwd";
     
     public static final String CITY_NAME = "city_name";
     

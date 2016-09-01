@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 	
 	private void login() {
 		final String phoneNum = edtPhoneNum.getText().toString();
-		String pwd = edtPwd.getText().toString();
+		final String pwd = edtPwd.getText().toString();
 		if (TextUtils.isEmpty(phoneNum)) {
 		    tvLogin.setClickable(true);
 			ToastUtils.SHORT.toast(this, "请输入手机号码");
@@ -133,6 +133,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener {
 				final UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
 				ContentUtils.saveUserInfo(LoginActivity.this, userInfo);
 				ContentUtils.saveLoginPhone(LoginActivity.this, phoneNum);
+				ContentUtils.saveLoginPwd(LoginActivity.this, pwd);
+				ContentUtils.setUserHasLogin(LoginActivity.this, true);
 				
 				actionImpl.createIMAccount(userInfo.getId(), userInfo.getId(), new ResultHandlerCallback() {
 					

@@ -128,7 +128,8 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 	
 	private void logout() {
 	    ContentUtils.setUserLoginStatus(this, false);
-	    ContentUtils.clearUserInfo(this);
+	    ContentUtils.setUserHasLogin(this, false);
+//	    ContentUtils.clearUserInfo(this);
 	    logoutHX();
 	    setResult(RESULT_OK);
 	    MessagePool.clearAllMessages();

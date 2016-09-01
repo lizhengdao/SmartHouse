@@ -17,7 +17,7 @@ public class SplashActivity extends BaseActivity {
 		super.onCreate(arg0);
 		
 		setContentView(R.layout.act_splash);
-		ContentUtils.clearUserInfo(this);
+//		ContentUtils.clearUserInfo(this);
 		ContentUtils.setUserLoginStatus(this, false);
 		
 		handler = new Handler();

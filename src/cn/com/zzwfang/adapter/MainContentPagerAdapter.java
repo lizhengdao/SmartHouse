@@ -3,6 +3,7 @@ package cn.com.zzwfang.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.MessageBean;
@@ -12,7 +13,7 @@ import cn.com.zzwfang.fragment.MainMapFindHouseFragment;
 import cn.com.zzwfang.fragment.MainMineFragment;
 import cn.com.zzwfang.fragment.MainNewsFragment;
 
-public class MainContentPagerAdapter extends FragmentPagerAdapter implements OnCitySelectedListener {
+public class MainContentPagerAdapter extends FragmentStatePagerAdapter implements OnCitySelectedListener {
 	
 	private MainHomeFragment homeFragment = null;
 	private MainMapFindHouseFragment mapFragment = null;
