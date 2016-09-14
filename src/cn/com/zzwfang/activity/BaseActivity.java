@@ -2,19 +2,6 @@ package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
 
-import com.easemob.chat.EMChatManager;
-import com.easemob.chat.EMMessage;
-import com.easemob.chat.EMMessage.Type;
-import com.easemob.chat.TextMessageBody;
-import com.easemob.exceptions.EaseMobException;
-
-import cn.com.zzwfang.R;
-import cn.com.zzwfang.bean.MessageBean;
-import cn.com.zzwfang.im.MessagePool;
-import cn.com.zzwfang.util.ContentUtils;
-import cn.com.zzwfang.util.Jumper;
-import cn.com.zzwfang.util.SystemBarTintManager;
-import cn.com.zzwfang.util.ToastUtils;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -26,9 +13,20 @@ import android.os.Bundle;
 import android.os.Process;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.MessageBean;
+import cn.com.zzwfang.im.MessagePool;
+import cn.com.zzwfang.util.ContentUtils;
+import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.util.SystemBarTintManager;
+
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMMessage;
+import com.easemob.chat.EMMessage.Type;
+import com.easemob.chat.TextMessageBody;
+import com.easemob.exceptions.EaseMobException;
 
 
 public abstract class BaseActivity extends FragmentActivity {

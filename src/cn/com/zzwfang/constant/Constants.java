@@ -92,6 +92,8 @@ public class Constants {
      */
     public static final String LAT_CURRENT_LOCATION = "lat_current_location";
     
+    public static final String CITY_LOCATED = "city_located";
+    
     /**
      *   是否需要登录
      */

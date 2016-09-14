@@ -2,13 +2,13 @@ package cn.com.zzwfang.adapter;
 
 import java.util.ArrayList;
 
-import cn.com.zzwfang.bean.IdTitleBean;
-import cn.com.zzwfang.fragment.NewsListFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import cn.com.zzwfang.bean.IdTitleBean;
+import cn.com.zzwfang.fragment.NewsListFragment;
 
 public class NewsTypeListPagerAdapter extends FragmentPagerAdapter {
 

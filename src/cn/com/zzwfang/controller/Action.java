@@ -83,6 +83,8 @@ public interface Action {
 	// ----首页相关接口------完---------------------------------------
 
 	// ----地理位置相关接口---------------------------------------------
+	
+	void getCityByGps(double lat, double lng, ResultHandlerCallback callback);
 
 	/**
 	 * 获取指定城市id的区域列表

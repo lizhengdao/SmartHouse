@@ -82,6 +82,8 @@ public class API {
 	 * 返回城市区域列表
 	 */
 	public static final String GET_CITY_LIST = "Map/getCityList";
+	
+	public static final String GET_CITY_BY_GPS = "Other/GetCityByGPS";
     
     public static final String GET_SEARCH_HOUSE_ARTIFACT = "Excalibur/MatchingList";
     

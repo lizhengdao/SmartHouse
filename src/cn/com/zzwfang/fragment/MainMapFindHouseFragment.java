@@ -49,8 +49,8 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.MarkerOptions.MarkerAnimateType;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.overlayutil.PoiOverlay;
 import com.baidu.mapapi.search.core.CityInfo;
@@ -448,6 +448,15 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			LatLng latLng = new LatLng(area.getLat(), area.getLng());
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
 			baiduMap.setMapStatus(u);
+		} else {
+		    baiduMap.clear();
+            CityBean cityBean = ContentUtils.getCityBean(getActivity());
+            if (cityBean != null) {
+                LatLng latLng = new LatLng(cityBean.getLat(), cityBean.getLng());
+//              Log.i("--->", "estate.getLat() == " + estate.getLat() + "   estate.getLng() == " + estate.getLng());
+                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+                baiduMap.animateMapStatus(u);
+            }
 		}
 	}
 
@@ -582,12 +591,22 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 			}
 			SearchHouseItemBean estate = estates.get(0);
 			LatLng latLng = new LatLng(estate.getLat(), estate.getLng());
-			Log.i("--->", "estate.getLat() == " + estate.getLat() + "   estate.getLng() == " + estate.getLng());
+//			Log.i("--->", "estate.getLat() == " + estate.getLat() + "   estate.getLng() == " + estate.getLng());
 			MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
 //			baiduMap.setMapStatus(u);
 			
             baiduMap.animateMapStatus(u);
 		}
+//		else {
+//		    baiduMap.clear();
+//		    CityBean cityBean = ContentUtils.getCityBean(getActivity());
+//		    if (cityBean != null) {
+//		        LatLng latLng = new LatLng(cityBean.getLat(), cityBean.getLng());
+////	            Log.i("--->", "estate.getLat() == " + estate.getLat() + "   estate.getLng() == " + estate.getLng());
+//	            MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(latLng);
+//	            baiduMap.animateMapStatus(u);
+//		    }
+//		}
 	}
 
 	@Override

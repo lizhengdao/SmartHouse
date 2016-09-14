@@ -2,7 +2,6 @@ package cn.com.zzwfang.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 import cn.com.zzwfang.bean.CityBean;
@@ -23,6 +22,10 @@ public class MainContentPagerAdapter extends FragmentStatePagerAdapter implement
 //	ArrayList<String> title = new ArrayList<String>();
 	public MainContentPagerAdapter(FragmentManager fm) {
 		super(fm);
+		homeFragment = new MainHomeFragment();
+		mapFragment = new MainMapFindHouseFragment();
+		consultationFragment = new MainNewsFragment();
+		mineFragment = new MainMineFragment();
 //		title.add("首页");
 //		title.add("地图找房");
 //		title.add("咨询");

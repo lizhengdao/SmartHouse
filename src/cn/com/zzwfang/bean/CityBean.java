@@ -60,5 +60,15 @@ public class CityBean extends BaseBean {
 		SiteId = siteId;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+	    if (o != null && o instanceof CityBean) {
+	        String cityId = ((CityBean) o).getSiteId();
+	        if (cityId != null && cityId.equals(this.SiteId)) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 	
 }

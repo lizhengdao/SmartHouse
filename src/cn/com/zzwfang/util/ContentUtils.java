@@ -418,6 +418,14 @@ public final class ContentUtils {
 	    return latLng;
 	}
 	
+	public static void saveLocatedCity(Context context, String city) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putString(Constants.CITY_LOCATED, city);
+        editor.commit();
+	}
+	
 	
 	/**
 	 * 用户退出登录，清除登录信息

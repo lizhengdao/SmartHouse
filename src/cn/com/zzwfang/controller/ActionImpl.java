@@ -404,6 +404,37 @@ public class ActionImpl implements Action {
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
     }
+    
+    public void getCityByGps(double lat, double lng, ResultHandlerCallback callback) {
+        
+        RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        requestParams.put("lat", String.valueOf(lat));
+        requestParams.put("lng", String.valueOf(lng));
+
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_CITY_BY_GPS));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
 
     @Override
     public void getSearchHouseArtifactResut(String allPrice, String partPrice,

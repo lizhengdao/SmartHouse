@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
         contentAdapter = new MainContentPagerAdapter(
                 getSupportFragmentManager());
+        contentPager.setOffscreenPageLimit(4);
         contentPager.setAdapter(contentAdapter);
 
         contentPager.setOnPageChangeListener(this);

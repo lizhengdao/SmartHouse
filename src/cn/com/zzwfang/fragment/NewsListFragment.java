@@ -2,12 +2,13 @@ package cn.com.zzwfang.fragment;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.alibaba.fastjson.JSON;
-
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.NewsDetailActivity;
@@ -22,13 +23,8 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.Jumper;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
+
+import com.alibaba.fastjson.JSON;
 
 public class NewsListFragment extends BaseFragment implements
 		OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {

@@ -30,15 +30,16 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.location.LocationService;
+import cn.com.zzwfang.location.LocationService.OnLocationListener;
 import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.ptz.PullToZoomListViewEx;
 
 import com.alibaba.fastjson.JSON;
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.geocode.GeoCodeOption;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
-import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 
@@ -66,7 +67,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	private ImageView imgShangjin;
 	
 	private String cityId;
-	private GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
+//	private GeoCoder mSearch = null; // 搜索模块，也可去掉地图模块独立使用
 	
 	private ArrayList<RecommendHouseSourceBean> recommendSources = new ArrayList<RecommendHouseSourceBean>();
 	private ArrayList<CityBean> cities = new ArrayList<CityBean>();
@@ -87,8 +88,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	        onCitySelectedListener = (cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener) activity;
 	    }
 	    super.onAttach(activity);
-	    mSearch = GeoCoder.newInstance();
-	    mSearch.setOnGetGeoCodeResultListener(MainHomeFragment.this);
+//	    mSearch = GeoCoder.newInstance();
+//	    mSearch.setOnGetGeoCodeResultListener(MainHomeFragment.this);
 	}
 
 	
@@ -107,27 +108,32 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 		ptzListView.setAdapter(adapter);
 		ptzListView.setHideHeader(false);
 		
-		CityBean cityBean = ContentUtils.getCityBean(getActivity());
-		if (cityBean != null) {
-			String cityName = cityBean.getName();
-			String cityId = cityBean.getSiteId();
-			
-			if (!TextUtils.isEmpty(cityName) && !TextUtils.isEmpty(cityId)) {
-				tvLocation.setText(cityBean.getName());
-				adapter.setCityId(cityId);
-				getRecommendHouseSourceList(cityId);
-			} else {
-			    getAreaList();
-			}
-		} else {
-		    getAreaList();
-		}
+//		CityBean cityBean = ContentUtils.getCityBean(getActivity());
+//		if (cityBean != null) {
+//			String cityName = cityBean.getName();
+//			String cityId = cityBean.getSiteId();
+//			
+//			if (!TextUtils.isEmpty(cityName) && !TextUtils.isEmpty(cityId)) {
+//				tvLocation.setText(cityBean.getName());
+//				adapter.setCityId(cityId);
+//				getRecommendHouseSourceList(cityId);
+//			} else {
+////			    getAreaList();
+//			    locate();
+//			}
+//		} else {
+////		    getAreaList();
+//		    locate();
+//		}
+		
 		
 		ptzListView.setOnItemClickListener(this);
 		
 		tvLocation.setOnClickListener(this);
 		edtSearchProperties.setOnClickListener(this);
 		imgShangjin.setOnClickListener(this);
+		
+		locate();
 		
 	}
 	
@@ -282,6 +288,12 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 			switch (requestCode) {
 			case CODE_SELECT_CITY:
 				CityBean cityBean = (CityBean) data.getSerializableExtra(CityListActivity.INTENT_CITY);
+				
+				CityBean cityBeanSaved = ContentUtils.getCityBean(getActivity());
+				if (cityBean != null && cityBean.equals(cityBeanSaved)) {
+				    return;
+				}
+				
 				cityId = cityBean.getSiteId();
 				ContentUtils.saveCityBeanData(getActivity(), cityBean);
 				tvLocation.setText(cityBean.getName());
@@ -291,13 +303,13 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				}
 				getRecommendHouseSourceList(cityBean.getSiteId());
 			    // 初始化搜索模块，注册事件监听
-				if (cityBean != null) {
-				    String cityName = cityBean.getName();
-				    if (!TextUtils.isEmpty(cityName)) {
-				        
-		                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
-				    }
-				}
+//				if (cityBean != null) {
+//				    String cityName = cityBean.getName();
+//				    if (!TextUtils.isEmpty(cityName)) {
+//				        
+//		                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
+//				    }
+//				}
 				break;
 			case CODE_LOGIN:  // 登录成功
 				int userType = ContentUtils.getUserType(getActivity());
@@ -399,16 +411,21 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 //                    .show();
             return;
         }
-        ContentUtils.saveSelectedCityLatLng(getActivity(), result.getLocation().latitude, result.getLocation().longitude);
+//        double lat = result.getLocation().latitude;
+//        double lng = result.getLocation().longitude;
+//        ContentUtils.saveSelectedCityLatLng(getActivity(), lat, lng);
+//        getCurrentCityByGps(lat, lng);
     }
 
     @Override
     public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
         // TODO Auto-generated method stub
-        
+//        AddressComponent componet = arg0.getAddressDetail();
+//        String city = componet.city;
+//        ContentUtils.saveLocatedCity(getActivity(), city);
     }
     
-    private void getAreaList() {
+    private void getAreaList(final String city) {
         
         ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
         actionImpl.getCityList(new ResultHandlerCallback() {
@@ -430,24 +447,86 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
                     cities.clear();
                     cities.addAll(temp);
                     if (cities != null && cities.size() > 0) {
-                        CityBean cityBean = cities.get(0);
+                        CityBean cityBean = null;
+                        if (!TextUtils.isEmpty(city)) {
+                            for (CityBean cityBeanTemp : cities) {
+                                if (cityBeanTemp.getName().contains(city) || city.contains(cityBeanTemp.getName())) {
+                                    cityBean = cityBeanTemp;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (cityBean == null) {
+                            cityBean = cities.get(0);
+                        }
+                        
                         cityId = cityBean.getSiteId();
                         ContentUtils.saveCityBeanData(getActivity(), cityBean);
                         tvLocation.setText(cityBean.getName());
                         adapter.setCityId(cityBean.getSiteId());
+                        
+                        
                         if (onCitySelectedListener != null) {
                             onCitySelectedListener.onCitySelected(cityBean);
                         }
                         getRecommendHouseSourceList(cityBean.getSiteId());
                         // 初始化搜索模块，注册事件监听
-                        if (cityBean != null) {
-                            String cityName = cityBean.getName();
-                            if (!TextUtils.isEmpty(cityName)) {
-                                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
-                            }
-                        }
+//                        if (cityBean != null) {
+//                            String cityName = cityBean.getName();
+//                            if (!TextUtils.isEmpty(cityName)) {
+//                                mSearch.geocode(new GeoCodeOption().city(cityName).address(cityName));
+//                            }
+//                        }
                     }
                 }
+            }
+        });
+    }
+    
+    private void getCurrentCityByGps(double lat, double lng) {
+        ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
+        if (lat > 0 || lng > 0) {
+            actionImpl.getCityByGps(lat, lng, new ResultHandlerCallback() {
+                
+                @Override
+                public void rc999(RequestEntity entity, Result result) {
+                    // TODO Auto-generated method stub
+                    
+                }
+                
+                @Override
+                public void rc3001(RequestEntity entity, Result result) {
+                    // TODO Auto-generated method stub
+                    
+                }
+                
+                @Override
+                public void rc0(RequestEntity entity, Result result) {
+                    // TODO Auto-generated method stub
+                    String city = result.getData();
+                    getAreaList(city);
+                }
+            });
+        }
+        
+    }
+    
+    private void locate() {
+        final LocationService locationService = LocationService
+                .getInstance(getActivity());
+        locationService.startLocationService(new OnLocationListener() {
+
+            @Override
+            public void onLocationCompletion(BDLocation location) {
+//                LatLng curLatLng = new LatLng(location.getLatitude(), location
+//                        .getLongitude());
+//                Log.i("--->", "定位    lat == " + location.getLatitude() + "   lng == " + location.getLongitude());
+//                MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
+                locationService.stopLocationService();
+                
+                getCurrentCityByGps(location.getLatitude(), location.getLongitude());
+
             }
         });
     }
