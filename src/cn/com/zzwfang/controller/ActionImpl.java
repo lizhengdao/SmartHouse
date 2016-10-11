@@ -5,12 +5,14 @@ import java.io.FileNotFoundException;
 
 import android.content.Context;
 import android.text.TextUtils;
+import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.config.API;
 import cn.com.zzwfang.controller.DataWorker.Options;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.http.RequestParams;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.RSAUtil;
 
 public class ActionImpl implements Action {
@@ -50,6 +52,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("tel", phoneNum);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -85,6 +94,13 @@ public class ActionImpl implements Action {
         requestParams.put("password", pwd);
         requestParams.put("code", captcha);
         requestParams.put("type", type + "");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -116,6 +132,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("Tel", phoneNum);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -149,6 +172,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("tel", userName);
         requestParams.put("password", pwd);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -180,6 +210,13 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         requestParams.put("platform", "a");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
         // Log.i("--->", "ActionImpl getToken requestParams.hashcode == "
         // + requestParams.hashCode());
         Options opt = new Options();
@@ -219,6 +256,13 @@ public class ActionImpl implements Action {
         requestParams.put("tel", tel);
         requestParams.put("password", password);
         requestParams.put("code", captcha);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.POST_RESET_PWD));
@@ -282,6 +326,15 @@ public class ActionImpl implements Action {
         requestParams.put("version", version);
         requestParams.put("client", client);
         requestParams.put("platform", "a");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
+        
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_APP_VERSIONCHECK));
         requestEntity.setRequestParams(requestParams);
@@ -315,6 +368,13 @@ public class ActionImpl implements Action {
         requestParams.put("tel", phoneNum);
         requestParams.put("password", oldPwd);
         requestParams.put("nPassword", newPwd);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.POST_CHANGE_PWD));
@@ -350,6 +410,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("id", cityId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -381,6 +448,13 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -412,6 +486,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("lat", String.valueOf(lat));
         requestParams.put("lng", String.valueOf(lng));
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -483,6 +564,13 @@ public class ActionImpl implements Action {
         requestParams.put("type", type + "");
         requestParams.put("Trade", tradeType + "");
         requestParams.put("pageIndex", pageIndex + "");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -580,6 +668,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
 
         requestParams.put("estateId", estateId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -697,6 +792,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
 
         requestParams.put("name", name);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -759,6 +861,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("proId", proId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -845,6 +954,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("proId", proId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -904,6 +1020,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
 
         requestParams.put("id", newsTypeId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -939,6 +1062,13 @@ public class ActionImpl implements Action {
         if (!TextUtils.isEmpty(phone)) {
             requestParams.put("tel", phone);
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -970,6 +1100,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1002,6 +1139,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("propertyId", propertyId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1065,6 +1209,13 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1094,6 +1245,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1124,6 +1282,14 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1224,6 +1390,13 @@ public class ActionImpl implements Action {
         if (!TextUtils.isEmpty(key)) {
             requestParams.put("key", key);
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1263,6 +1436,13 @@ public class ActionImpl implements Action {
         requestParams.put("type", newsId);
         requestParams.put("pageSize", pageSize + "");
         requestParams.put("pageIndex", pageIndex + "");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1295,6 +1475,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("uid", id);
         requestParams.put("pwd", pwd);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1327,6 +1514,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("estId", estId);
         requestParams.put("roomType", roomType);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1360,6 +1554,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("trade", tradeType + "");
         requestParams.put("siteId", cityId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1523,6 +1724,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("employeeId", agentId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1553,6 +1761,14 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1621,6 +1837,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("id", houseSourceId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1655,6 +1878,13 @@ public class ActionImpl implements Action {
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
         requestParams.put("attId", sourceId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1686,6 +1916,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1720,6 +1957,13 @@ public class ActionImpl implements Action {
         requestParams.put("from", from);
         requestParams.put("to", to);
         requestParams.put("message", message);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1750,6 +1994,14 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1783,6 +2035,7 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
         if (!TextUtils.isEmpty(realName)) {
             requestParams.put("realName", realName);
         }
@@ -1843,6 +2096,13 @@ public class ActionImpl implements Action {
         requestParams.put("userId", userId);
         requestParams.put("pageIndex", pageIndex + "");
         requestParams.put("pageSize", pageSize + "");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1874,6 +2134,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1907,6 +2174,13 @@ public class ActionImpl implements Action {
         if (!TextUtils.isEmpty(cityCode)) {
             requestParams.put("cityCode", cityCode);
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -1936,6 +2210,14 @@ public class ActionImpl implements Action {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -1971,6 +2253,13 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
         encryptTimeStamp(requestParams);
         requestParams.put("visitorId", visitorId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2003,6 +2292,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("key", contactId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2036,6 +2332,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("ids", ids);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2068,6 +2371,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("ids", ids);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2214,6 +2524,14 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2248,6 +2566,13 @@ public class ActionImpl implements Action {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2287,6 +2612,13 @@ public class ActionImpl implements Action {
         if (!TextUtils.isEmpty(avatarUrl)) {
             requestParams.put("photo", avatarUrl);
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2317,6 +2649,14 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2349,6 +2689,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("id", id);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2380,6 +2727,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userid", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2411,6 +2765,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("estateId", courtId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2445,6 +2806,13 @@ public class ActionImpl implements Action {
         if (!TextUtils.isEmpty(type)) {
             requestParams.put("type", type);
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2475,6 +2843,13 @@ public class ActionImpl implements Action {
         RequestParams requestParams = new RequestParams();
 
         encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2508,6 +2883,13 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("Id", clientId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2543,6 +2925,13 @@ public class ActionImpl implements Action {
         if (isSale) {
             requestParams.put("isSale", "1");
         }
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -2577,6 +2966,14 @@ public class ActionImpl implements Action {
         requestParams.put("Id", houseSourceId);
         requestParams.put("PageIndex", pageIndex + "");
         requestParams.put("PageSize", pageSize + "");
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2611,6 +3008,14 @@ public class ActionImpl implements Action {
         requestParams.put("type", type);
         requestParams.put("userid", userId);
         requestParams.put("content", content);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2641,6 +3046,14 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2675,6 +3088,14 @@ public class ActionImpl implements Action {
         requestParams.put("type", supportType + "");
         requestParams.put("userid", userId);
         requestParams.put("content", content);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2706,6 +3127,15 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("estateId", estateId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2736,6 +3166,14 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("buildingId", buildingId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2766,6 +3204,14 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("cellId", cellId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
@@ -2797,6 +3243,14 @@ public class ActionImpl implements Action {
 
         encryptTimeStamp(requestParams);
         requestParams.put("userId", userId);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
