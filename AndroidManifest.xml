@@ -252,6 +252,14 @@
             android:name="cn.com.zzwfang.activity.SupportActivity"
             android:screenOrientation="portrait" />
         
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterCompanyAnnouncementActivity"
+            android:screenOrientation="portrait" />
+        
+        <activity
+            android:name="cn.com.zzwfang.activity.FeeHunterCompanyAnnouncementDetailActivity"
+            android:screenOrientation="portrait" />
+        
         <!--  
         <activity
             android:name="cn.com.zzwfang.wxapi.WXEntryActivity"

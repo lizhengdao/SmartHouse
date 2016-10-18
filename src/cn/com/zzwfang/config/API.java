@@ -31,8 +31,9 @@ public class API {
 	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/  http://zzwfang.com:9001/  funapi.zzwfang.com:7894
 	 * http://funapi.zzwfang.com:7894/
 	 */
-	public static final String host = "http://zzwfang.com:7894/";  //  http://110.189.90.40:7894/   http://192.168.1.115:8000/
+	public static final String host = "http://47.90.54.170:7003/";  //  http://110.189.90.40:7894/   http://192.168.1.115:8000/
 
+	//   http://zzwfang.com:7894/    http://47.90.54.170:7003/
 	/**
 	 * 认证授权接口
 	 */
@@ -383,5 +384,10 @@ public class API {
        返回结果 {PrpCount=推荐房源数量,InqCount=推荐客户数量,Money=赏金金额}
      */
     public static final String GET_Bounty_Hunter_Info = "BountyHunter/GetBountyHunterInfo";
+    
+    /**
+     * 公司公告列表
+     */
+    public static final String GET_COMPANY_ANNOCEMENT_LIST = "Notices/Index";
 
 }

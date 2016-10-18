@@ -85,7 +85,7 @@ public class ActionImpl implements Action {
     }
 
     @Override
-    public void register(String phoneNum, String pwd, String captcha, int type,
+    public void register(String phoneNum, String pwd, String captcha, int type, String reference,
             ResultHandlerCallback callback) {
         RequestParams requestParams = new RequestParams();
 
@@ -94,6 +94,10 @@ public class ActionImpl implements Action {
         requestParams.put("password", pwd);
         requestParams.put("code", captcha);
         requestParams.put("type", type + "");
+        
+        if (!TextUtils.isEmpty(reference)) {
+            requestParams.put("Reference", reference);
+        }
         
         CityBean cityBean = ContentUtils.getCityBean(context);
         String SiteId = "";
@@ -3260,6 +3264,47 @@ public class ActionImpl implements Action {
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_Bounty_Hunter_Info));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
+
+    @Override
+    public void getCompanyAnnocementList(int pageIndex, int pageSize,
+            ResultHandlerCallback callback) {
+        // TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+//        requestParams.put("type", "");
+        requestParams.put("pageindex", String.valueOf(pageIndex));
+        requestParams.put("pagesize", String.valueOf(pageSize));
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_COMPANY_ANNOCEMENT_LIST));
         requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 

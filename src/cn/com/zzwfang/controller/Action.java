@@ -27,7 +27,7 @@ public interface Action {
 	 *            类型 （1：普通用户、2：赏金猎人）
 	 * @param callback
 	 */
-	void register(String phoneNum, String pwd, String captcha, int type,
+	void register(String phoneNum, String pwd, String captcha, int type, String reference,
 			ResultHandlerCallback callback);
 
 	/**
@@ -846,4 +846,6 @@ public interface Action {
 	 * @param callback
 	 */
 	void getBountyHunterInfo(String userId, ResultHandlerCallback callback);
+	
+	void getCompanyAnnocementList(int pageIndex, int pageSize, ResultHandlerCallback callback);
 }

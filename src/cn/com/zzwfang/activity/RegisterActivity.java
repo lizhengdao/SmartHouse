@@ -22,7 +22,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 
 	private TextView tvBack, tvFeeHunter, tvFetchAuthCode, tvRegister, tvProtocol;
 	
-	private EditText edtPhone, edtAuthCode, edtPwd;
+	private EditText edtPhone, edtAuthCode, edtPwd, edtRecommendPhone;
 	
 	private CheckBox cbxProtocol;
 	
@@ -50,6 +50,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		edtPhone = (EditText) findViewById(R.id.act_register_phone_num_edt);
 		edtAuthCode = (EditText) findViewById(R.id.act_register_input_auth_code_edt);
 		edtPwd = (EditText) findViewById(R.id.act_register_input_pwd_edt);
+		edtRecommendPhone = (EditText) findViewById(R.id.act_register_phone_recommend_num_edt);
 		tvFetchAuthCode = (TextView) findViewById(R.id.act_register_auth_code_tv);
 		tvProtocol = (TextView) findViewById(R.id.act_register_protocol_tv);
 		tvRegister = (TextView) findViewById(R.id.act_register_tv);
@@ -57,6 +58,7 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 		
 		if (registerType == 2) {
 			tvFeeHunter.setVisibility(View.VISIBLE);
+			edtRecommendPhone.setVisibility(View.VISIBLE);
 		}
 		
 		tvBack.setOnClickListener(this);
@@ -104,8 +106,10 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			return;
 		}
 		
+		String recommendPhone = edtRecommendPhone.getText().toString().trim();
+		
 //		pwd = MD5Util.md5(pwd);
-		action.register(phoneNum, pwd, authCode, registerType, new ResultHandlerCallback() {
+		action.register(phoneNum, pwd, authCode, registerType, recommendPhone, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {

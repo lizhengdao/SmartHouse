@@ -32,19 +32,19 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	private LinearLayout lltRecommendCustomer, lltRecommendSell;
 	private PathImage avatarImageView;
 	
-	private TextView tvRecommendedCustomers, tvRecommendedOwners, tvFeeHunterMoney;
+	private TextView tvRecommendedCustomers, tvRecommendedOwners, tvFeeHunterMoney, tvFeeHunterCompanyAnnouncement;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setResult(RESULT_OK);
 		initView();
+		getBountyHunterInfo();
 	}
 	
 	@Override
 	protected void onResume() {
 	    super.onResume();
-	    getBountyHunterInfo();
 	}
 	
 	private void initView() {
@@ -59,6 +59,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		tvRecommendHouseSourceList = (TextView) findViewById(R.id.act_fee_hunter_info_recommend_house_source_list);
 		tvFeeHunterMsg = (TextView) findViewById(R.id.act_fee_hunter_info_fee_hunter_msg);
 		tvFeeHunterRule = (TextView) findViewById(R.id.act_fee_hunter_info_hunter_rule);
+		tvFeeHunterCompanyAnnouncement = (TextView) findViewById(R.id.act_fee_hunter_info_company_announcement);
 		
 		tvBindedCards = (TextView) findViewById(R.id.act_fee_hunter_info_binded_card);
 		
@@ -86,6 +87,7 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 		tvRecommendHouseSourceList.setOnClickListener(this);
 		tvFeeHunterMsg.setOnClickListener(this);
 		tvFeeHunterRule.setOnClickListener(this);
+		tvFeeHunterCompanyAnnouncement.setOnClickListener(this);
 		tvBindedCards.setOnClickListener(this);
 	}
 	
@@ -153,6 +155,15 @@ public class FeeHunterInfoActivity extends BaseActivity implements OnClickListen
 	        .putBoolean(FillBankCardInfoActivity.INTENT_UPDATE_BANK_INFO, true)
 	        .jump(FeeHunterInfoActivity.this, FillBankCardInfoActivity.class);
 			break;
+		case R.id.act_fee_hunter_info_company_announcement: // 公司公告
+		    Jumper.newJumper()
+            .setAheadInAnimation(R.anim.activity_push_in_right)
+            .setAheadOutAnimation(R.anim.activity_alpha_out)
+            .setBackInAnimation(R.anim.activity_alpha_in)
+            .setBackOutAnimation(R.anim.activity_push_out_right)
+            .putBoolean(FillBankCardInfoActivity.INTENT_UPDATE_BANK_INFO, true)
+            .jump(FeeHunterInfoActivity.this, FeeHunterCompanyAnnouncementActivity.class);
+		    break;
 		}
 	}
 

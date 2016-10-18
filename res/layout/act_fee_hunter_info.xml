@@ -351,6 +351,24 @@
                 android:text="活动规则"
                 android:textColor="@color/color_4e4e4e"
                 android:textSize="15sp" />
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_e2e2e2" />
+
+            <TextView
+                android:id="@+id/act_fee_hunter_info_company_announcement"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                android:drawableRight="@drawable/ic_right_arrow"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="公司公告"
+                android:textColor="@color/color_4e4e4e"
+                android:textSize="15sp" />
         </LinearLayout>
     </ScrollView>
 
