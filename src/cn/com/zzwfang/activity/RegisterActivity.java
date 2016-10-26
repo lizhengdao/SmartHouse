@@ -1,5 +1,11 @@
 package cn.com.zzwfang.activity;
 
+import java.util.ArrayList;
+
+import com.alibaba.fastjson.JSON;
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
+
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
@@ -9,10 +15,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.IMMessageBean;
 import cn.com.zzwfang.bean.Result;
+import cn.com.zzwfang.bean.UserInfoBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
+import cn.com.zzwfang.im.MessagePool;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.ToastUtils;
 
@@ -94,8 +104,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 	
 	private void register() {
 		ActionImpl action = ActionImpl.newInstance(this);
-		String phoneNum = edtPhone.getText().toString();
-		String pwd = edtPwd.getText().toString();
+		final String phoneNum = edtPhone.getText().toString();
+		final String pwd = edtPwd.getText().toString();
 		authCode = edtAuthCode.getText().toString().trim();
 		if (TextUtils.isEmpty(phoneNum)) {
 			ToastUtils.SHORT.toast(this, "请输入手机号码");
@@ -125,7 +135,8 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			public void rc0(RequestEntity entity, Result result) {
 				setResult(RESULT_OK);
 				ToastUtils.SHORT.toast(RegisterActivity.this, "注册成功");
-				finish();
+				login(phoneNum, pwd);
+//				finish();
 			}
 		});
 	}
@@ -211,6 +222,112 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
 			tvFetchAuthCode.setClickable(true);
 		}
 	}
-
 	
+	
+	private void login(final String phoneNum, final String pwd) {
+	    ActionImpl actionImpl = ActionImpl.newInstance(this);
+        actionImpl.login(phoneNum, pwd, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                final UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
+                ContentUtils.saveUserInfo(RegisterActivity.this, userInfo);
+                ContentUtils.saveLoginPhone(RegisterActivity.this, phoneNum);
+                ContentUtils.saveLoginPwd(RegisterActivity.this, pwd);
+                ContentUtils.setUserHasLogin(RegisterActivity.this, true);
+                ActionImpl actionImpl = ActionImpl.newInstance(RegisterActivity.this);
+                actionImpl.createIMAccount(userInfo.getId(), userInfo.getId(), new ResultHandlerCallback() {
+                    
+                    @Override
+                    public void rc999(RequestEntity entity, Result result) {
+                    }
+                    
+                    @Override
+                    public void rc3001(RequestEntity entity, Result result) {
+                    }
+                    
+                    @Override
+                    public void rc0(RequestEntity entity, Result result) {
+                        loginOnHx(userInfo.getId(), userInfo.getId());
+                        finish();
+                    }
+                });
+            }
+        });
+	}
+	
+	private void loginOnHx(String easeId, String easePwd) {
+        EMChatManager.getInstance().login(easeId, easePwd, new EMCallBack() {
+            
+            @Override
+            public void onSuccess() {
+                try {
+//                  EMGroupManager.getInstance().loadAllGroups();
+//                  EMChatManager.getInstance().loadAllConversations();
+//                  EMChatManager.getInstance().
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                ContentUtils.setUserLoginStatus(RegisterActivity.this, true);
+                runOnUiThread(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+//                        contentAdapter.onLongin();
+                        getContacts();
+                    }
+                });
+            }
+            
+            @Override
+            public void onProgress(int arg0, String arg1) {
+                
+            }
+            
+            @Override
+            public void onError(int arg0, String arg1) {
+                    runOnUiThread(new Runnable() {
+                    
+                    @Override
+                    public void run() {
+                        ContentUtils.setUserLoginStatus(RegisterActivity.this, false);
+                    }
+                });
+            }
+        });
+    }
+
+	private void getContacts() {
+        String userId = ContentUtils.getUserId(this);
+        ActionImpl actionImpl = ActionImpl.newInstance(this);
+        actionImpl.getContactsList(userId, new ResultHandlerCallback() {
+            
+            @Override
+            public void rc999(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc3001(RequestEntity entity, Result result) {
+                
+            }
+            
+            @Override
+            public void rc0(RequestEntity entity, Result result) {
+                ArrayList<IMMessageBean> temp = (ArrayList<IMMessageBean>) JSON.parseArray(result.getData(), IMMessageBean.class);
+                if (temp != null) {
+                    MessagePool.addAllContactsMessages(temp);
+                }
+                ContentUtils.setUserLoginStatus(RegisterActivity.this, true);
+            }
+        });
+    }
 }

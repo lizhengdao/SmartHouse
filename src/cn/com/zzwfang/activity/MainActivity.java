@@ -34,6 +34,10 @@ import com.easemob.chat.EMChatManager;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
         OnClickListener, OnCitySelectedListener, OnNewMessageListener {
+    
+    public interface OnLoginListener {
+        void onLongin();
+    }
 
     public static final int CODE_LOGIN_MINE = 800;
 
@@ -242,11 +246,12 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+                ContentUtils.setUserLoginStatus(MainActivity.this, true);
                 runOnUiThread(new Runnable() {
                     
                     @Override
                     public void run() {
+                        contentAdapter.onLongin();
                         getContacts();
                     }
                 });

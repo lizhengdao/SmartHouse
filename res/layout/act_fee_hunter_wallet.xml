@@ -46,15 +46,8 @@
             android:id="@+id/act_fee_hunter_wallet_last_month_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="上月收益（元）"
-            android:textColor="@color/color_2a2a2a"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
-            android:text="暂无收益"
+            android:layout_marginTop="45dp"
+            android:text="本月收益（元）"
             android:textColor="@color/color_949494"
             android:textSize="20sp"
             android:textStyle="bold" />

@@ -847,5 +847,30 @@ public interface Action {
 	 */
 	void getBountyHunterInfo(String userId, ResultHandlerCallback callback);
 	
+	/**
+	 * 公司公告列表
+	 * @param pageIndex
+	 * @param pageSize
+	 * @param callback
+	 */
 	void getCompanyAnnocementList(int pageIndex, int pageSize, ResultHandlerCallback callback);
+	
+	/**
+	 * 公司公告详情
+	 * @param id
+	 * @param callback
+	 */
+	void getCompanyAnnocementDetail(String id, ResultHandlerCallback callback);
+	
+	/**
+	 * 评论公司公告详情
+	 * @param id   公告Id
+	 * @param content   评论内容
+	 * @param ip   客户端ip
+	 * @param address  客户端地址  
+	 * @param commentId   评论人id
+	 * @param commentName  评论人姓名
+	 * @param callback
+	 */
+	void commentCompanyAnnocementDetail(String id, String content, String commentId, String commentName, ResultHandlerCallback callback);
 }

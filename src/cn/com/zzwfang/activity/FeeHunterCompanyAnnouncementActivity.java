@@ -15,6 +15,7 @@ import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
+import cn.com.zzwfang.util.Jumper;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -109,8 +110,7 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
             @Override
             public void rc0(RequestEntity entity, Result result) {
                 // TODO Auto-generated method stub
-                String resultStr = result.getData();
-                Log.i("--->", resultStr);
+                
                 int total = result.getTotal();
                 pageTotal = (int) Math
                         .ceil(((double) total / (double) 10));
@@ -155,7 +155,14 @@ OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         // TODO Auto-generated method stub
-        
+        CompanyAnnouncementBean temp = companyAnnouncements.get(arg2);
+        Jumper.newJumper()
+        .setAheadInAnimation(R.anim.activity_push_in_right)
+        .setAheadOutAnimation(R.anim.activity_alpha_out)
+        .setBackInAnimation(R.anim.activity_alpha_in)
+        .setBackOutAnimation(R.anim.activity_push_out_right)
+        .putSerializable(FeeHunterCompanyAnnouncementDetailActivity.INTENT_Company_Announcement, temp)
+        .jump(FeeHunterCompanyAnnouncementActivity.this, FeeHunterCompanyAnnouncementDetailActivity.class);
     }
 
 

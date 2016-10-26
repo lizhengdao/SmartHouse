@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
+import cn.com.zzwfang.activity.MainActivity.OnLoginListener;
 import cn.com.zzwfang.bean.CityBean;
 import cn.com.zzwfang.bean.MessageBean;
 import cn.com.zzwfang.fragment.MainHomeFragment;
@@ -12,7 +13,7 @@ import cn.com.zzwfang.fragment.MainMapFindHouseFragment;
 import cn.com.zzwfang.fragment.MainMineFragment;
 import cn.com.zzwfang.fragment.MainNewsFragment;
 
-public class MainContentPagerAdapter extends FragmentStatePagerAdapter implements OnCitySelectedListener {
+public class MainContentPagerAdapter extends FragmentStatePagerAdapter implements OnCitySelectedListener, OnLoginListener {
 	
 	private MainHomeFragment homeFragment = null;
 	private MainMapFindHouseFragment mapFragment = null;
@@ -95,6 +96,14 @@ public class MainContentPagerAdapter extends FragmentStatePagerAdapter implement
     public void onCitySelected(CityBean cityBean) {
         if (mapFragment != null) {
             mapFragment.onCitySelected(cityBean);
+        }
+    }
+
+    @Override
+    public void onLongin() {
+        // TODO Auto-generated method stub
+        if (mineFragment != null) {
+            mineFragment.rendUserInfo();
         }
     }
 

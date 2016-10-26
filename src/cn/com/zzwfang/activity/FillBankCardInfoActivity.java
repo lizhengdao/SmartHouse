@@ -260,6 +260,7 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements
                                 .jumpForResult(FillBankCardInfoActivity.this,
                                         FeeHunterInfoActivity.class,
                                         CODE_BIND_CARD_INFO);
+                        ContentUtils.setUserBindBankCard(FillBankCardInfoActivity.this, true);
                         finish();
                     }
                 });

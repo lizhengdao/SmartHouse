@@ -459,7 +459,7 @@ public class MainMineFragment extends BasePickPhotoFragment implements
         }
     }
 
-    private void rendUserInfo() {
+    public void rendUserInfo() {
         boolean loginStatus = ContentUtils.getUserLoginStatus(getActivity());
         if (loginStatus) { // 已登录
             tvLoginRegister.setVisibility(View.GONE);
@@ -479,10 +479,19 @@ public class MainMineFragment extends BasePickPhotoFragment implements
             // }
 
         } else { // 未登录
-            avatar.setImageResource(R.drawable.ic_mine_unlogin_avatar);
-            tvMsgCount.setVisibility(View.GONE);
-            tvLoginRegister.setVisibility(View.VISIBLE);
-            lltUserInfo.setVisibility(View.GONE);
+            if (avatar != null) {
+                avatar.setImageResource(R.drawable.ic_mine_unlogin_avatar);
+            }
+            if (tvMsgCount != null) {
+                tvMsgCount.setVisibility(View.GONE);
+            }
+            if (tvLoginRegister != null) {
+                tvLoginRegister.setVisibility(View.VISIBLE);
+            }
+            if (lltUserInfo != null) {
+                lltUserInfo.setVisibility(View.GONE);
+            }
+            
         }
     }
 

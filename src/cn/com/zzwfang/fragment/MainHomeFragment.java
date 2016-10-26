@@ -513,6 +513,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
     }
     
     private void locate() {
+        
         final LocationService locationService = LocationService
                 .getInstance(getActivity());
         locationService.startLocationService(new OnLocationListener() {

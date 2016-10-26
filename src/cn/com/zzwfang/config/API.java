@@ -31,7 +31,7 @@ public class API {
 	 * http://110.189.90.40:7892/     http://www.zzwfang.com:7894/  http://zzwfang.com:9001/  funapi.zzwfang.com:7894
 	 * http://funapi.zzwfang.com:7894/
 	 */
-	public static final String host = "http://47.90.54.170:7003/";  //  http://110.189.90.40:7894/   http://192.168.1.115:8000/
+	public static final String host = "http://192.168.1.115:8000/";  //  http://110.189.90.40:7894/   http://192.168.1.115:8000/
 
 	//   http://zzwfang.com:7894/    http://47.90.54.170:7003/
 	/**
@@ -389,5 +389,16 @@ public class API {
      * 公司公告列表
      */
     public static final String GET_COMPANY_ANNOCEMENT_LIST = "Notices/Index";
+    
+    /**
+     * 公司公告详情
+     */
+    public static final String GET_COMPANY_ANNOCEMENT_DETAIL = "Notices/Detail";
+    
+    /**
+     * 评论公司公告详情
+     */
+    public static final String POST_COMMENT_COMPANY_ANNOCEMENT_DETAIL = "Notices/Common";
+
 
 }
