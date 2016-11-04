@@ -136,6 +136,15 @@ public class UserInfoBean extends BaseBean {
 		Bounty = bounty;
 	}
 
+    @Override
+    public String toString() {
+        return "UserInfoBean [Id=" + Id + ", UserName=" + UserName + ", Phone="
+                + Phone + ", Photo=" + Photo + ", IsBindBank=" + IsBindBank
+                + ", RecommendClientsNum=" + RecommendClientsNum
+                + ", RecommendOwners=" + RecommendOwners + ", Bounty=" + Bounty
+                + ", UserType=" + UserType + ", Sex=" + Sex + "]";
+    }
+
 //	public int getSerType() {
 //		return serType;
 //	}

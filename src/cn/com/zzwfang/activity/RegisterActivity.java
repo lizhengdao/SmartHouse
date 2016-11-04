@@ -238,7 +238,9 @@ public class RegisterActivity extends BaseActivity implements OnClickListener {
             
             @Override
             public void rc0(RequestEntity entity, Result result) {
+//                Log.i("--->", "Register Login  --- " + result.getData());
                 final UserInfoBean userInfo = JSON.parseObject(result.getData(), UserInfoBean.class);
+//                Log.i("--->", "Register Login  UserInfoBean --- " + userInfo.toString());
                 ContentUtils.saveUserInfo(RegisterActivity.this, userInfo);
                 ContentUtils.saveLoginPhone(RegisterActivity.this, phoneNum);
                 ContentUtils.saveLoginPwd(RegisterActivity.this, pwd);
