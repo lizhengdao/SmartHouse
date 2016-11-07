@@ -687,9 +687,15 @@ public class MainMapFindHouseFragment extends BaseFragment implements
 
 	@Override
 	public void onCitySelected(CityBean cityBean) {
-	    baiduMap.clear();
+	    if (baiduMap != null) {
+	        baiduMap.clear();
+	    }
+	    
 	    areaCondition = null;
-        tvArea.setText("不限");
+	    if (tvArea != null) {
+	        tvArea.setText("不限");
+	    }
+        
         getAreaList();
         getMapFindHouseDataArea();
 	}

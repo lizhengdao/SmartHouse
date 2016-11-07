@@ -3319,4 +3319,92 @@ public class ActionImpl implements Action {
         worker.load(requestEntity);
     }
 
+    @Override
+    public void getCompanyAnnocementDetail(String id,
+            ResultHandlerCallback callback) {
+        // TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+//        requestParams.put("type", "");
+        requestParams.put("id", id);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_COMPANY_ANNOCEMENT_DETAIL));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
+
+    @Override
+    public void commentCompanyAnnocementDetail(String id, String content,
+            String commentId, String commentName,
+            ResultHandlerCallback callback) {
+        // TODO Auto-generated method stub
+        RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        requestParams.put("id", id);
+        
+        requestParams.put("content", content);
+//        requestParams.put("ip", ip);
+//        requestParams.put("Address", address);
+        requestParams.put("CommonerId", commentId);
+        requestParams.put("CommonerName", commentName);
+        
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        // opt.toHttpCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.POST_COMMENT_COMPANY_ANNOCEMENT_DETAIL));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.POST);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
+
 }

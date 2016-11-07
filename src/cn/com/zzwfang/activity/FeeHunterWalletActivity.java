@@ -62,7 +62,7 @@ public class FeeHunterWalletActivity extends BaseActivity implements OnClickList
 	
 	private void rendUI() {
 		if (walletInfoBean != null) {
-			tvLastMonthIncome.setText("上月收益(" + walletInfoBean.getMonthly() + "元)");
+			tvLastMonthIncome.setText("本月收益(" + walletInfoBean.getMonthly() + "元)");
 			tvTotalIncome.setText(walletInfoBean.getCumulative() + "元");
 			walletInfos.addAll(walletInfoBean.getDetailed());
 			adapter.notifyDataSetChanged();

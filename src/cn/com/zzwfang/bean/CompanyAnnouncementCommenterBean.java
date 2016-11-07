@@ -7,7 +7,7 @@ public class CompanyAnnouncementCommenterBean extends BaseBean {
     
     private String Name;
     
-    private String Head;
+//    private String Head;
 
     public String getObjectId() {
         return ObjectId;
@@ -25,13 +25,13 @@ public class CompanyAnnouncementCommenterBean extends BaseBean {
         Name = name;
     }
 
-    public String getHead() {
-        return Head;
-    }
-
-    public void setHead(String head) {
-        Head = head;
-    }
+//    public String getHead() {
+//        return Head;
+//    }
+//
+//    public void setHead(String head) {
+//        Head = head;
+//    }
     
     
 }

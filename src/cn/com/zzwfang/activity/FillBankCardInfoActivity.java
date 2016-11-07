@@ -225,7 +225,7 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements
             cityId = cityBean.getSiteId();
         } else {
         	ToastUtils.SHORT.toast(this, "请选择您所在的城市");
-        	return;
+            return;
         }
         ActionImpl actionImpl = ActionImpl.newInstance(this);
         actionImpl.commitFeeHunterBankInfo(userId, realName, bankCode,
@@ -260,6 +260,7 @@ public class FillBankCardInfoActivity extends BasePickPhotoActivity implements
                                 .jumpForResult(FillBankCardInfoActivity.this,
                                         FeeHunterInfoActivity.class,
                                         CODE_BIND_CARD_INFO);
+                        ContentUtils.setUserBindBankCard(FillBankCardInfoActivity.this, true);
                         finish();
                     }
                 });

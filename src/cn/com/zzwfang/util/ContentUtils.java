@@ -295,6 +295,9 @@ public final class ContentUtils {
 	}
 	
 	public static boolean getUserLoginStatus(Context context) {
+	    if (context == null) {
+	        return false;
+	    }
 		SharedPreferences sp = (SharedPreferences) context
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		return sp.getBoolean(Constants.LOGINED_IN, false);
@@ -352,6 +355,13 @@ public final class ContentUtils {
 	    SharedPreferences sp = (SharedPreferences) context
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         return sp.getBoolean(Constants.IS_BIND_BANK_CARD, false);
+	}
+	
+	public static void setUserBindBankCard(Context context, boolean isBindBankCard) {
+	    SharedPreferences sp = (SharedPreferences) context
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        Editor editor = sp.edit();
+        editor.putBoolean(Constants.IS_BIND_BANK_CARD, isBindBankCard).commit();
 	}
 	
 	public static void setMessageReceiveSetting(Context context, boolean isReceiveMsg) {
@@ -494,6 +504,9 @@ public final class ContentUtils {
 	}
 	
 	public static CityBean getCityBean(Context context) {
+	    if (context == null) {
+	        return null;
+	    }
 		SharedPreferences sp = (SharedPreferences) context
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		

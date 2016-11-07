@@ -3,9 +3,7 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,26 +74,42 @@ public class SearchHouseActivity extends BaseActivity implements
 		tvHouseType.setOnClickListener(this);
 		imgClearKeyWords.setOnClickListener(this);
 		
-		edtKeyWords.addTextChangedListener(new TextWatcher() {
-            
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                    int after) {
-            }
-            
-            @Override
-            public void afterTextChanged(Editable s) {
-                String keyWords = edtKeyWords.getText().toString();
-                // 接口定的  0是新房，1是二手房
-                if (!TextUtils.isEmpty(keyWords)) {
-                    getEstate(keyWords, houseType);
-                }
-            }
-        });
+//		edtKeyWords.setOnKeyListener(new OnKeyListener() {
+//            
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+//                    String keyWords = edtKeyWords.getText().toString();
+//                    // 接口定的  0是新房，1是二手房
+//                    if (!TextUtils.isEmpty(keyWords)) {
+//                        getEstate(keyWords, houseType);
+//                    }
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+		
+//		edtKeyWords.addTextChangedListener(new TextWatcher() {
+//            
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//            
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                    int after) {
+//            }
+//            
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                String keyWords = edtKeyWords.getText().toString();
+//                // 接口定的  0是新房，1是二手房
+//                if (!TextUtils.isEmpty(keyWords)) {
+//                    getEstate(keyWords, houseType);
+//                }
+//            }
+//        });
 
 		edtKeyWords
 				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
