@@ -15,6 +15,7 @@ bin/*
 
 #files for vm
 *.dex
+gen/
 R.java
 #java .class files
 *.class
