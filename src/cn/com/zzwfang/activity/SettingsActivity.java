@@ -1,5 +1,7 @@
 package cn.com.zzwfang.activity;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +21,15 @@ import cn.com.zzwfang.view.ToggleButton.OnToggleChanged;
 
 import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class SettingsActivity extends BaseActivity implements OnClickListener, OnToggleChanged {
 
 	private static final int CODE_CHANGE_PWD = 100;
 	
 	private TextView tvBack, tvLogout;
+	
+	private TextView tvCacheSize;
 	
 	private FrameLayout changeNickNameFlt, changePwdFlt, clearCacheFlt, aboutUsFlt, commonQuestionFlt, checkUpdatesFlt;
 	
@@ -37,6 +42,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		setContentView(R.layout.act_settings);
 		
 		initView();
+		computeDiskCacheSize();
 	}
 	
 	private void initView() {
@@ -50,6 +56,7 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 		commonQuestionFlt = (FrameLayout) findViewById(R.id.act_settings_common_questions);
 		checkUpdatesFlt = (FrameLayout) findViewById(R.id.act_settings_check_updates);
 		tvLogout = (TextView) findViewById(R.id.act_settings_logout);
+		tvCacheSize = (TextView) findViewById(R.id.act_settings_cache_size);
 		
 		msgPushToggleBtn.setOnToggleChanged(this);
 		tvBack.setOnClickListener(this);
@@ -94,8 +101,9 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 //	        .jump(this, ChangePwdActivity.class);
 			break;
 		case R.id.act_settings_clear_cache:  //  清除缓存
-		    ImageAction.clearCache();
-		    ToastUtils.SHORT.toast(this, "缓存已清除");
+//		    ImageAction.clearCache();
+//		    ToastUtils.SHORT.toast(this, "缓存已清除");
+			clearCache();
 			break;
 		case R.id.act_settings_about_us:  //  关于我们
 			Jumper.newJumper()
@@ -184,5 +192,82 @@ public class SettingsActivity extends BaseActivity implements OnClickListener, O
 			}
 		}
 	}
+	
+	private void computeDiskCacheSize() {
+		
+        final File imageDiskCacheFile = ImageLoader.getInstance().getDiskCache().getDirectory();
+        if (imageDiskCacheFile != null && imageDiskCacheFile.exists()) {
+            AsyncUtils.executeRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    long imageSize = getFileSize(imageDiskCacheFile);
+                    double result = imageSize / (1024 * 1024);
+                    final int value = Double.valueOf(result).intValue();
+                    AsyncUtils.postRunnable(new Runnable() {
+                        @Override
+                        public void run() {
+                        	tvCacheSize.setText(value + "M");
+                        }
+                    });
+                }
+            });
+        }
+    }
+	
+	private void clearCache() {
+		final File imageDiskCacheFile = ImageLoader.getInstance().getDiskCache().getDirectory();
+        AsyncUtils.executeRunnable(new Runnable() {
+            @Override
+            public void run() {
+                AsyncUtils.postRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                    	tvCacheSize.setText("清理中...");
+                    }
+                });
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                clearFile(imageDiskCacheFile);
+                computeDiskCacheSize();
+            }
+        });
+	}
+	
+	public boolean clearFile(File file) {
+        if (!file.exists()) {
+            return false;
+        }
+        if (!file.isDirectory()) {
+            return file.delete();
+        }
+        File[] files = file.listFiles();
+        for (File child : files) {
+            clearFile(child);
+        }
+        return true;
+    }
+	
+	/**获取文件的大小
+     * @param file
+     * @return
+     */
+    public long getFileSize(File file) {
+        long size = 0;
+        if (file == null || !file.exists()) {
+            return 0;
+        }
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                size += getFileSize(f);
+            }
+        } else {
+            size = file.length();
+        }
+        return size;
+    }
 
 }
