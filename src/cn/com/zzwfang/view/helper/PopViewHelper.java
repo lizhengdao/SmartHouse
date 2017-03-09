@@ -15,11 +15,14 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.adapter.BankNameAdapter;
 import cn.com.zzwfang.adapter.BankProvinceOrCityAdapter;
 import cn.com.zzwfang.adapter.BuildingsAdapter;
@@ -30,6 +33,7 @@ import cn.com.zzwfang.adapter.MoreTypeAdapter;
 import cn.com.zzwfang.adapter.MortgageYearsAdapter;
 import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
 import cn.com.zzwfang.adapter.NewsMoreAdapter;
+import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
 import cn.com.zzwfang.bean.IdNameBean;
 import cn.com.zzwfang.bean.IdNameFloorBean;
@@ -38,6 +42,7 @@ import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
+import cn.com.zzwfang.view.PathImage;
 
 public class PopViewHelper {
 
@@ -1674,5 +1679,75 @@ public class PopViewHelper {
             popupWindow.showAsDropDown(anchorView, 0, 0);
 //            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
+    }
+    
+    public interface OnHouseDetailAgentActionListener {
+        void onHouseDetailAgentAction(int actionId);
+    }
+    
+    public static void showHouseDetailAgentWindow(Context context, View anchorView, AgentBean agentBean, 
+    		final OnHouseDetailAgentActionListener onHouseDetailAgentActionListener) {
+    	View view = View.inflate(context, R.layout.popup_house_detail_agent, null);
+        final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.update();
+        ColorDrawable dw = new ColorDrawable(66000000);
+        popupWindow.setBackgroundDrawable(dw);
+        
+        FrameLayout fltWindow = (FrameLayout) view.findViewById(R.id.flt_pop_house_detail_agent);
+        LinearLayout lltAgent = (LinearLayout) view.findViewById(R.id.llt_pop_house_detail_agent);
+        PathImage agentAvatar = (PathImage) view.findViewById(R.id.iv_pop_house_detail_agent_avatar);
+        TextView tvName = (TextView) view.findViewById(R.id.tv_pop_house_detail_agent_name);
+        TextView tvPhoneNum = (TextView) view.findViewById(R.id.tv_pop_house_detail_agent_phone);
+        ImageView ivCall = (ImageView) view.findViewById(R.id.iv_pop_house_detail_agent_call);
+        ImageView ivMsg = (ImageView) view.findViewById(R.id.iv_pop_house_detail_agent_msg);
+        if (agentBean != null) {
+        	ImageAction.displayBrokerAvatar(agentBean.getPhoto(),
+    				agentAvatar);
+        	tvName.setText(agentBean.getName());
+        	tvPhoneNum.setText(agentBean.getTel());
+        }
+        
+        
+        OnClickListener listener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				switch (v.getId()) {
+				case R.id.iv_pop_house_detail_agent_call:
+					if (onHouseDetailAgentActionListener != null) {
+						onHouseDetailAgentActionListener.onHouseDetailAgentAction(1);
+					}
+					break;
+				case R.id.iv_pop_house_detail_agent_msg:
+					if (onHouseDetailAgentActionListener != null) {
+						onHouseDetailAgentActionListener.onHouseDetailAgentAction(2);
+					}
+					break;
+				case R.id.llt_pop_house_detail_agent:
+					if (onHouseDetailAgentActionListener != null) {
+						onHouseDetailAgentActionListener.onHouseDetailAgentAction(3);
+					}
+					break;
+				}
+				popupWindow.dismiss();
+			}
+		};
+		
+		ivCall.setOnClickListener(listener);
+		ivMsg.setOnClickListener(listener);
+		fltWindow.setOnClickListener(listener);
+		lltAgent.setOnClickListener(listener);
+		
+		if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+//            popupWindow.showAsDropDown(anchorView, 0, 0);
+//            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+            popupWindow.showAtLocation(anchorView, Gravity.BOTTOM, 0, DevUtils.getScreenTools(context).dip2px(140));
+        }
+		
     }
 }

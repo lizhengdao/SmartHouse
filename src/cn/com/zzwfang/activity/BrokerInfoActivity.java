@@ -29,7 +29,7 @@ import cn.com.zzwfang.util.Jumper;
 import com.alibaba.fastjson.JSON;
 
 /**
- * 中介信息
+ * 中介信息  (改为经纪人店铺)
  * @author lzd
  *
  */

@@ -271,7 +271,11 @@ public final class ContentUtils {
 	 * @param userInfo
 	 */
 	public static void saveUserInfo(Context context, UserInfoBean userInfo) {
-		SharedPreferences sp = (SharedPreferences) context
+		
+		if (context == null) {
+			return;
+		}
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putString(Constants.ZZWFANG_USER_NAME, userInfo.getUserName());
@@ -288,7 +292,10 @@ public final class ContentUtils {
 	}
 	
 	public static void setUserLoginStatus(Context context, boolean loginStatus) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+			return;
+		}
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putBoolean(Constants.LOGINED_IN, loginStatus).commit();
@@ -298,26 +305,35 @@ public final class ContentUtils {
 	    if (context == null) {
 	        return false;
 	    }
-		SharedPreferences sp = (SharedPreferences) context
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		return sp.getBoolean(Constants.LOGINED_IN, false);
 	}
 	
 	public static void setUserHasLogin(Context context, boolean loginStatus) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putBoolean(Constants.HAS_LOGIN, loginStatus).commit();
 	}
 	
 	public static boolean getUserHasLogin(Context context) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return false;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         return sp.getBoolean(Constants.HAS_LOGIN, false);
 	}
 	
 	public static void updateUserType(Context context, int userType) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putInt(Constants.USER_TYPE, userType);
@@ -325,8 +341,11 @@ public final class ContentUtils {
 	}
 	
 	public static UserInfoBean getUserInfo(Context context) {
+		if (context == null) {
+	        return null;
+	    }
 		UserInfoBean userInfoBean = new UserInfoBean();
-		SharedPreferences sp = (SharedPreferences) context
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		String userName = sp.getString(Constants.ZZWFANG_USER_NAME, "");
 		userInfoBean.setUserName(userName);
@@ -352,27 +371,39 @@ public final class ContentUtils {
 	}
 	
 	public static boolean isUserBindBankCard(Context context) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return false;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         return sp.getBoolean(Constants.IS_BIND_BANK_CARD, false);
 	}
 	
 	public static void setUserBindBankCard(Context context, boolean isBindBankCard) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putBoolean(Constants.IS_BIND_BANK_CARD, isBindBankCard).commit();
 	}
 	
 	public static void setMessageReceiveSetting(Context context, boolean isReceiveMsg) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putBoolean(Constants.USER_IM_MSG_RECEIVE_SETTING, isReceiveMsg).commit();
 	}
 	
 	public static boolean getMessageReceiveSetting(Context context) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return false;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 	    return sp.getBoolean(Constants.USER_IM_MSG_RECEIVE_SETTING, true);
 	}
@@ -385,33 +416,48 @@ public final class ContentUtils {
 	 * @return
 	 */
 	public static int getUserType(Context context) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return -1;
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		return sp.getInt(Constants.USER_TYPE, -1);  //  用户类型    0经济人，1普通会员，2赏金猎人
 	}
 	
 	public static void updateUserAvatar(Context context, String avatarUrl) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putString(Constants.USER_PHOTO, avatarUrl).commit();
 	}
 	
 	public static String getUserAvatar(Context context) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return "";
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		return sp.getString(Constants.USER_PHOTO, "");
 	}
 	
 	public static void updateUserNickName(Context context, String nickName) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putString(Constants.ZZWFANG_USER_NAME, nickName).commit();
 	}
 	
 	public static void saveSelectedCityLatLng(Context context, double lat, double lng) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putString(Constants.LAT_SELECTED_CITY, String.valueOf(lat));
@@ -420,7 +466,10 @@ public final class ContentUtils {
 	}
 	
 	public static LatLng getSelectedCityLatLng(Context context) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return null;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 	    double lat = Double.valueOf(sp.getString(Constants.LAT_SELECTED_CITY, "0"));
 	    double lng = Double.valueOf(sp.getString(Constants.LNG_SELECTED_CITY, "0"));
@@ -429,7 +478,10 @@ public final class ContentUtils {
 	}
 	
 	public static void saveLocatedCity(Context context, String city) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putString(Constants.CITY_LOCATED, city);
@@ -442,7 +494,10 @@ public final class ContentUtils {
 	 * @param context
 	 */
 	public static void clearUserInfo(Context context) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		sp.edit()
 		.remove(Constants.ZZWFANG_USER_NAME)
@@ -457,42 +512,60 @@ public final class ContentUtils {
 	}
 	
 	public static void saveLoginPhone(Context context, String phone) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putString(Constants.USER_LOGIN_PHONE, phone).commit();
 	}
 	
 	public static String getLoginPhone(Context context) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return "";
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		String userLoginPhone = sp.getString(Constants.USER_LOGIN_PHONE, "");
 		return userLoginPhone;
 	}
 	
 	public static void saveLoginPwd(Context context, String pwd) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return;
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         Editor editor = sp.edit();
         editor.putString(Constants.USER_LOGIN_PWD, pwd).commit();
 	}
 	
 	public static String getLoginPwd(Context context) {
-	    SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return "";
+	    }
+	    SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
                 .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
         String userLoginPwd = sp.getString(Constants.USER_LOGIN_PWD, "");
         return userLoginPwd;
 	}
 	
 	public static String getUserId(Context context) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null) {
+	        return "";
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		String userId = sp.getString(Constants.USER_ID, "");
 		return userId;
 	}
 	
 	public static void saveCityBeanData(Context context, CityBean cityBean) {
-		SharedPreferences sp = (SharedPreferences) context
+		if (context == null || cityBean == null) {
+	        return;
+	    }
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		Editor editor = sp.edit();
 		editor.putString(Constants.CITY_NAME, cityBean.getName());
@@ -507,7 +580,7 @@ public final class ContentUtils {
 	    if (context == null) {
 	        return null;
 	    }
-		SharedPreferences sp = (SharedPreferences) context
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
 				.getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
 		
 		String cityName = sp.getString(Constants.CITY_NAME, null);

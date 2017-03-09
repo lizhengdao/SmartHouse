@@ -3,6 +3,7 @@ package cn.com.zzwfang.fragment;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,6 +40,7 @@ public class MainNewsFragment extends BaseFragment implements OnCheckedChangeLis
 OnClickListener, OnItemClickListener {
 
 	private TextView tvBack;
+//	private ViewPager pagerTop;
 	private RadioButton rbNewsTypeOne, rbNewsTypeTwo, rbNewsTypeThree, rbMore;
 	private View lineOne, lineTwo, lineThree;
 	private UnScrollableViewPager viewPager;
@@ -59,6 +61,7 @@ OnClickListener, OnItemClickListener {
 	
 	private void initView(View view) {
 		tvBack = (TextView) view.findViewById(R.id.frag_consultation_back);
+//		pagerTop = (ViewPager) view.findViewById(R.id.pager_consultation);
 		rbNewsTypeOne = (RadioButton) view.findViewById(R.id.frag_consultation_one_rb);
 		rbNewsTypeTwo = (RadioButton) view.findViewById(R.id.frag_consultation_two_rb);
 		rbNewsTypeThree = (RadioButton) view.findViewById(R.id.frag_consultation_three_rb);

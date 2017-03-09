@@ -35,8 +35,8 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.util.RSAUtil;
 import cn.com.zzwfang.util.ToastUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
-import cn.com.zzwfang.view.PathImage;
 import cn.com.zzwfang.view.helper.PopViewHelper;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseDetailAgentActionListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnMoreShareAndAttentionListener;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnShareTypeSelectListener;
 
@@ -71,17 +71,21 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private TextView tvBack, tvTitle, tvMore, tvDetailtitle;
 	private TextView tvTotalPrice, tvHouseType, tvSquare, tvLabel, tvUnitPrice;
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
-			tvDecoration, tvEstateName, tvAgentName, tvAgentPhone,
+			tvDecoration, tvEstateName,
 			tvPhotoIndex, tvSeeHouseRecord, tvNearbyDetail,
-			tvSandTableDisplay, tvTransactionHistory, tvInnerThreeDimensionDisplay;
+			tvSandTableDisplay, tvTransactionHistory, tvInnerThreeDimensionDisplay;  // tvAgentName  tvAgentPhone
 	private TextView tvHouseSourceId;
 	
 	private TextView tvApartmentLayout, tvBidPrice, tvBidDate, tvFollowPersons;
 	
+	private TextView tvConsultAgent;
+	private LinearLayout lltAgentAnchorView;
+	private TextView tvAttentionToHouse;
+	
 	private View lineSandTableDisplay, lineInnerThreeDimensionDisplay;
 	
-	private LinearLayout lltBrokerInfo, lltCourt;
-	private AutoDrawableTextView tvAgentDial, tvAgentMsg, tvShare;
+	private LinearLayout lltCourt;  // lltBrokerInfo
+	private AutoDrawableTextView tvShare;  // tvAgentDial  tvAgentMsg
 	private TextView tvMortgageCalculate;
 	private MapView mapView;
 	private WebView webViewPriceTrend;
@@ -89,7 +93,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private PhotoPagerAdapter photoAdapter;
 	private ArrayList<PhotoBean> photos = new ArrayList<PhotoBean>();
 
-	private PathImage agentAvatar;
+//	private PathImage agentAvatar;
 	private String houseSourceId = null;
 
 	private SecondHandHouseDetailBean secondHandHouseDetail;
@@ -97,6 +101,8 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 	private OnMoreShareAndAttentionListener onMoreShareAndAttentionListener;
 	
 	private OnShareTypeSelectListener onShareTypeSelectListener;
+	
+	private OnHouseDetailAgentActionListener onHouseDetailAgentActionListener;
 	
 	private Tencent tencent;
 	
@@ -134,11 +140,11 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvDirection = (TextView) findViewById(R.id.act_second_hand_house_detail_direction_tv);
 		tvDecoration = (TextView) findViewById(R.id.act_second_hand_house_detail_decoration_tv);
 		tvEstateName = (TextView) findViewById(R.id.act_second_hand_house_detail_estatename_tv);
-		agentAvatar = (PathImage) findViewById(R.id.act_second_hand_house_detail_agent_avatar);
-		tvAgentName = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_name);
-		tvAgentPhone = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_phone);
-		tvAgentDial = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
-		tvAgentMsg = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
+//		agentAvatar = (PathImage) findViewById(R.id.act_second_hand_house_detail_agent_avatar);
+//		tvAgentName = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_name);
+//		tvAgentPhone = (TextView) findViewById(R.id.act_second_hand_house_detail_agent_phone);
+//		tvAgentDial = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_dial);
+//		tvAgentMsg = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_agent_msg);
 		tvShare = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_detail_share);
 		tvPhotoIndex = (TextView) findViewById(R.id.act_second_house_detail_photo_index_tv);
 		tvSeeHouseRecord = (TextView) findViewById(R.id.act_second_handhouse_see_house_record_tv);
@@ -146,7 +152,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvNearbyDetail = (TextView) findViewById(R.id.act_second_handhouse_nearby_detail_tv);
 		tvSandTableDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_sand_table_display);
 		tvTransactionHistory = (TextView) findViewById(R.id.act_second_handhouse_transaction_history_tv);
-		lltBrokerInfo = (LinearLayout) findViewById(R.id.act_second_hand_house_detail_broker_info_llt);
+//		lltBrokerInfo = (LinearLayout) findViewById(R.id.act_second_hand_house_detail_broker_info_llt);
 		tvInnerThreeDimensionDisplay = (TextView) findViewById(R.id.act_second_hand_house_detail_inner_three_dimession_display);
 		lltCourt = (LinearLayout) findViewById(R.id.act_second_hand_house_detail_court);
 		tvBidPrice = (TextView) findViewById(R.id.act_second_hand_house_detail_bid_price);
@@ -154,6 +160,10 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvBidDate = (TextView) findViewById(R.id.act_second_hand_house_detail_bid_date);
 		tvFollowPersons = (TextView) findViewById(R.id.act_second_hand_house_detail_follow_persons);
 		tvHouseSourceId = (TextView) findViewById(R.id.act_second_hand_house_detail_num_tv);
+		
+		tvConsultAgent = (TextView) findViewById(R.id.act_second_hand_house_detail_consult_agent);
+		lltAgentAnchorView = (LinearLayout) findViewById(R.id.llt_second_hand_house_detail_agent_anchorview);
+		tvAttentionToHouse = (TextView) findViewById(R.id.act_second_hand_house_detail_attention);
 		
 		lineSandTableDisplay = findViewById(R.id.act_second_hand_house_detail_sand_table_display_line);
 		lineInnerThreeDimensionDisplay = findViewById(R.id.act_second_hand_house_detail_inner_three_dimession_display_line);
@@ -179,12 +189,15 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		tvNearbyDetail.setOnClickListener(this);
 		tvSandTableDisplay.setOnClickListener(this);
 		tvTransactionHistory.setOnClickListener(this);
-		tvAgentDial.setOnClickListener(this);
-		tvAgentMsg.setOnClickListener(this);
+//		tvAgentDial.setOnClickListener(this);
+//		tvAgentMsg.setOnClickListener(this);
 		tvShare.setOnClickListener(this);
-		lltBrokerInfo.setOnClickListener(this);
+//		lltBrokerInfo.setOnClickListener(this);
 		tvInnerThreeDimensionDisplay.setOnClickListener(this);
 		lltCourt.setOnClickListener(this);
+		
+		tvConsultAgent.setOnClickListener(this);
+		tvAttentionToHouse.setOnClickListener(this);
 		
 		onMoreShareAndAttentionListener = new OnMoreShareAndAttentionListener() {
 			
@@ -226,6 +239,63 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				
 			}
 		};
+		
+		onHouseDetailAgentActionListener = new OnHouseDetailAgentActionListener() {
+			
+			@Override
+			public void onHouseDetailAgentAction(int actionId) {
+				// TODO Auto-generated method stub
+				switch (actionId) {
+				case 1:    // 给经纪人打电话
+					if (secondHandHouseDetail != null) {
+					AgentBean agent = secondHandHouseDetail.getAgent();
+					String phone = agent.getTel();
+					if (!TextUtils.isEmpty(phone)) {
+						Intent intent = new Intent(Intent.ACTION_CALL);
+						intent.setData(Uri.parse("tel:" + phone));
+						startActivity(intent);
+					}
+				}
+					break;
+				case 2:    // 给经纪人发消息
+					boolean loginStatus = ContentUtils.getUserLoginStatus(SecondHandHouseDetailActivity.this);
+					if (loginStatus) {
+						if (secondHandHouseDetail != null) {
+							AgentBean agent = secondHandHouseDetail.getAgent();
+							if (agent != null) {
+								Jumper.newJumper()
+								.setAheadInAnimation(R.anim.activity_push_in_right)
+								.setAheadOutAnimation(R.anim.activity_alpha_out)
+								.setBackInAnimation(R.anim.activity_alpha_in)
+								.setBackOutAnimation(R.anim.activity_push_out_right)
+								.putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
+								.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
+								.jump(SecondHandHouseDetailActivity.this, ChatActivity.class);
+							}
+						}
+					} else {
+						Jumper.newJumper().setAheadInAnimation(R.anim.slide_in_style1)
+		                .setAheadOutAnimation(R.anim.alpha_out_style1)
+		                .setBackInAnimation(R.anim.alpha_in_style1)
+		                .setBackOutAnimation(R.anim.slide_out_style1)
+		                .jump(SecondHandHouseDetailActivity.this, LoginActivity.class);
+					}
+					break;
+				case 3:    //  跳转经纪人详情页面
+					if (secondHandHouseDetail != null) {
+						Jumper.newJumper()
+						.setAheadInAnimation(R.anim.activity_push_in_right)
+						.setAheadOutAnimation(R.anim.activity_alpha_out)
+						.setBackInAnimation(R.anim.activity_alpha_in)
+						.setBackOutAnimation(R.anim.activity_push_out_right)
+						.putSerializable(BrokerInfoActivity.INTENT_AGENT_DATA, secondHandHouseDetail.getAgent())
+						.jump(SecondHandHouseDetailActivity.this, BrokerInfoActivity.class);
+					}
+					break;
+				}
+				
+			}
+		};
 	}
 	
 	@Override
@@ -263,42 +333,42 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 					.setBackOutAnimation(R.anim.activity_push_out_right)
 					.jump(this, MortgageCalculatorActivity.class);
 			break;
-		case R.id.act_second_hand_house_detail_agent_dial: // 拨打经纪人电话
-			if (secondHandHouseDetail != null) {
-				AgentBean agent = secondHandHouseDetail.getAgent();
-				String phone = agent.getTel();
-				if (!TextUtils.isEmpty(phone)) {
-					Intent intent = new Intent(Intent.ACTION_CALL);
-					intent.setData(Uri.parse("tel:" + phone));
-					startActivity(intent);
-				}
-			}
-			break;
-		case R.id.act_second_hand_house_detail_agent_msg: // 给经纪人发消息
-			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
-			if (loginStatus) {
-				if (secondHandHouseDetail != null) {
-					AgentBean agent = secondHandHouseDetail.getAgent();
-					if (agent != null) {
-						Jumper.newJumper()
-						.setAheadInAnimation(R.anim.activity_push_in_right)
-						.setAheadOutAnimation(R.anim.activity_alpha_out)
-						.setBackInAnimation(R.anim.activity_alpha_in)
-						.setBackOutAnimation(R.anim.activity_push_out_right)
-						.putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
-						.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
-						.jump(this, ChatActivity.class);
-					}
-				}
-			} else {
-				Jumper.newJumper().setAheadInAnimation(R.anim.slide_in_style1)
-                .setAheadOutAnimation(R.anim.alpha_out_style1)
-                .setBackInAnimation(R.anim.alpha_in_style1)
-                .setBackOutAnimation(R.anim.slide_out_style1)
-                .jump(this, LoginActivity.class);
-			}
-			
-			break;
+//		case R.id.act_second_hand_house_detail_agent_dial: // 拨打经纪人电话
+//			if (secondHandHouseDetail != null) {
+//				AgentBean agent = secondHandHouseDetail.getAgent();
+//				String phone = agent.getTel();
+//				if (!TextUtils.isEmpty(phone)) {
+//					Intent intent = new Intent(Intent.ACTION_CALL);
+//					intent.setData(Uri.parse("tel:" + phone));
+//					startActivity(intent);
+//				}
+//			}
+//			break;
+//		case R.id.act_second_hand_house_detail_agent_msg: // 给经纪人发消息
+//			boolean loginStatus = ContentUtils.getUserLoginStatus(this);
+//			if (loginStatus) {
+//				if (secondHandHouseDetail != null) {
+//					AgentBean agent = secondHandHouseDetail.getAgent();
+//					if (agent != null) {
+//						Jumper.newJumper()
+//						.setAheadInAnimation(R.anim.activity_push_in_right)
+//						.setAheadOutAnimation(R.anim.activity_alpha_out)
+//						.setBackInAnimation(R.anim.activity_alpha_in)
+//						.setBackOutAnimation(R.anim.activity_push_out_right)
+//						.putString(ChatActivity.INTENT_MESSAGE_TO_ID, agent.getAgentId())
+//						.putString(ChatActivity.INTENT_MESSAGE_TO_NAME, agent.getName())
+//						.jump(this, ChatActivity.class);
+//					}
+//				}
+//			} else {
+//				Jumper.newJumper().setAheadInAnimation(R.anim.slide_in_style1)
+//                .setAheadOutAnimation(R.anim.alpha_out_style1)
+//                .setBackInAnimation(R.anim.alpha_in_style1)
+//                .setBackOutAnimation(R.anim.slide_out_style1)
+//                .jump(this, LoginActivity.class);
+//			}
+//			
+//			break;
 		case R.id.act_second_hand_house_detail_share:   // 分享
 			PopViewHelper.showSharePopupWindow(SecondHandHouseDetailActivity.this,
 					getWindow().getDecorView(), onShareTypeSelectListener);
@@ -363,17 +433,37 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 				.jump(this, ResidentialTransactionHistoryActivity.class);
 			}
 			break;
-		case R.id.act_second_hand_house_detail_broker_info_llt:  //  经纪人详情
+//		case R.id.act_second_hand_house_detail_broker_info_llt:  //  经纪人详情
+//			if (secondHandHouseDetail != null) {
+//				Jumper.newJumper()
+//				.setAheadInAnimation(R.anim.activity_push_in_right)
+//				.setAheadOutAnimation(R.anim.activity_alpha_out)
+//				.setBackInAnimation(R.anim.activity_alpha_in)
+//				.setBackOutAnimation(R.anim.activity_push_out_right)
+//				.putSerializable(BrokerInfoActivity.INTENT_AGENT_DATA, secondHandHouseDetail.getAgent())
+//				.jump(this, BrokerInfoActivity.class);
+//			}
+//			break;
+		case R.id.act_second_hand_house_detail_consult_agent:  // 咨询经纪人
 			if (secondHandHouseDetail != null) {
-				Jumper.newJumper()
-				.setAheadInAnimation(R.anim.activity_push_in_right)
-				.setAheadOutAnimation(R.anim.activity_alpha_out)
-				.setBackInAnimation(R.anim.activity_alpha_in)
-				.setBackOutAnimation(R.anim.activity_push_out_right)
-				.putSerializable(BrokerInfoActivity.INTENT_AGENT_DATA, secondHandHouseDetail.getAgent())
-				.jump(this, BrokerInfoActivity.class);
+				AgentBean agentBean = secondHandHouseDetail.getAgent();
+				PopViewHelper.showHouseDetailAgentWindow(this, lltAgentAnchorView, agentBean, onHouseDetailAgentActionListener);
+			}
+			
+			break;
+		case R.id.act_second_hand_house_detail_attention:  // 关注
+			boolean loginStatus = ContentUtils.getUserLoginStatus(SecondHandHouseDetailActivity.this);
+			if (loginStatus) {
+				attentionToHouse();
+			} else {
+				Jumper.newJumper().setAheadInAnimation(R.anim.slide_in_style1)
+                .setAheadOutAnimation(R.anim.alpha_out_style1)
+                .setBackInAnimation(R.anim.alpha_in_style1)
+                .setBackOutAnimation(R.anim.slide_out_style1)
+                .jump(SecondHandHouseDetailActivity.this, LoginActivity.class);
 			}
 			break;
+			
 		}
 	}
 
@@ -446,13 +536,13 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			// 在地图上添加Marker，并显示
 			baiduMap.addOverlay(option);
 
-			AgentBean agentBean = secondHandHouseDetail.getAgent();
-			if (agentBean != null) {
-				tvAgentName.setText(agentBean.getName());
-				tvAgentPhone.setText(agentBean.getTel());
-				ImageAction.displayBrokerAvatar(agentBean.getPhoto(),
-						agentAvatar);
-			}
+//			AgentBean agentBean = secondHandHouseDetail.getAgent();
+//			if (agentBean != null) {
+//				tvAgentName.setText(agentBean.getName());
+//				tvAgentPhone.setText(agentBean.getTel());
+//				ImageAction.displayBrokerAvatar(agentBean.getPhoto(),
+//						agentAvatar);
+//			}
 			
 			CityBean cityBean = ContentUtils.getCityBean(this);
 			if (cityBean != null) {

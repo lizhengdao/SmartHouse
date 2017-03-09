@@ -1,6 +1,7 @@
 package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -69,12 +70,12 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected void onDestroy() {
 	    unregisterReceiver(msgReceiver);
 		super.onDestroy();
-		activities.remove(this);
 	}
 	
 	@Override
     public void finish() {
         super.finish();
+        activities.remove(this);
         this.overridePendingTransition(backInAnimationId, backOutAnimationId);
     }
 	
@@ -98,9 +99,15 @@ public abstract class BaseActivity extends FragmentActivity {
 	public void exitApplication(boolean needKillProcess) {
 		
 		if (activities != null && activities.size() != 0) {
-			for (Activity activity : activities) {
+			Iterator<Activity> iterator = activities.iterator();
+			while (iterator.hasNext()) {
+				Activity activity = iterator.next();
+				iterator.remove();
 				activity.finish();
 			}
+//			for (Activity activity : activities) {
+//				activity.finish();
+//			}
 			
 			if (needKillProcess) {
 				Process.killProcess(Process.myPid());
