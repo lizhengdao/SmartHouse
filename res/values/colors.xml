@@ -4,6 +4,10 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color> <!-- 透明 -->
     
+    <color name="color_frag_main_mine_status_bar">#01c09f</color>
+    
+    <color name="color_f2f2f2">#f2f2f2</color>
+    <color name="color_0ed76d">#0ed76d</color>
     <color name="color_eeeeee">#eeeeee</color>
     <color name="color_a0a0a0">#a0a0a0</color>
     <color name="color_15901b">#15901b</color>

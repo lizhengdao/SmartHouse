@@ -3,6 +3,8 @@ package cn.com.zzwfang.view.helper;
 
 import java.util.ArrayList;
 
+import com.baidu.location.b.d;
+
 import android.R.color;
 import android.app.Dialog;
 import android.content.Context;
@@ -1333,19 +1335,29 @@ public class PopViewHelper {
         void onAvatarOptionClick(int action);
     }
     public static void showUpdateAvatarPopupWindow(Context context, View anchor, final OnAvatarOptionsClickListener listener) {
+    	
+    	final Dialog dialog = new Dialog(context, R.style.DefaultDialogTheme);
+        dialog.setContentView(R.layout.popup_updateavatar);
+        Window win = dialog.getWindow();
+        WindowManager.LayoutParams params = win.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        win.setAttributes(params);
+        win.setWindowAnimations(R.style.timepopwindow_anim_style);
+        win.setGravity(Gravity.BOTTOM);
         
-        final PopupWindow avatarPopupWindow = new PopupWindow(context);
-        LinearLayout contentView = (LinearLayout) View.inflate(context, R.layout.popup_updateavatar, null);
-        avatarPopupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
-        avatarPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-        
-        avatarPopupWindow.setContentView(contentView);
-        avatarPopupWindow.setFocusable(true);
-        avatarPopupWindow.setOutsideTouchable(true);
-        
-        ColorDrawable dw = new ColorDrawable(color.transparent);
-//        avatarPopupWindow.setBackgroundDrawable(dw);
-        avatarPopupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+//        final PopupWindow avatarPopupWindow = new PopupWindow(context);
+//        LinearLayout contentView = (LinearLayout) View.inflate(context, R.layout.popup_updateavatar, null);
+//        avatarPopupWindow.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+//        avatarPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+//        
+//        avatarPopupWindow.setContentView(contentView);
+//        avatarPopupWindow.setFocusable(true);
+//        avatarPopupWindow.setOutsideTouchable(true);
+//        
+//        ColorDrawable dw = new ColorDrawable(color.transparent);
+////        avatarPopupWindow.setBackgroundDrawable(dw);
+//        avatarPopupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
         
         OnClickListener clickListener = new OnClickListener() {
             
@@ -1361,17 +1373,18 @@ public class PopViewHelper {
                         break;
                     }
                 }
-                avatarPopupWindow.dismiss();
+                dialog.dismiss();
             }
         };
         
-        TextView tvCamera = (TextView) contentView.findViewById(R.id.popup_update_avatar_from_camera_tv);
-        TextView tvAlbum = (TextView) contentView.findViewById(R.id.popup_update_avatar_from_album_tv);
-        TextView tvCancel = (TextView) contentView.findViewById(R.id.popup_exit_account_cancel_tv);
+        TextView tvCamera = (TextView) dialog.findViewById(R.id.popup_update_avatar_from_camera_tv);
+        TextView tvAlbum = (TextView) dialog.findViewById(R.id.popup_update_avatar_from_album_tv);
+        TextView tvCancel = (TextView) dialog.findViewById(R.id.popup_exit_account_cancel_tv);
         tvCamera.setOnClickListener(clickListener);
         tvAlbum.setOnClickListener(clickListener);
         tvCancel.setOnClickListener(clickListener);
-        avatarPopupWindow.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
+        dialog.show();
+//        avatarPopupWindow.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
     }
 //==========================更换头像【end】===========================================
     
@@ -1692,7 +1705,7 @@ public class PopViewHelper {
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.update();
-        ColorDrawable dw = new ColorDrawable(66000000);
+        ColorDrawable dw = new ColorDrawable(00000000);
         popupWindow.setBackgroundDrawable(dw);
         
         FrameLayout fltWindow = (FrameLayout) view.findViewById(R.id.flt_pop_house_detail_agent);
@@ -1750,4 +1763,78 @@ public class PopViewHelper {
         }
 		
     }
+    
+    
+  //==========================经纪人店铺咨询【start】===========================================
+    public interface OnBrokerConsultClickListener {
+        public static final int ACTION_PHONE = 0;
+        public static final int ACTION_CHAT = 1;
+        public static final int ACTION_SMS = 2;
+        
+        /**
+         * 经纪人店铺咨询
+         * @param action
+         */
+        void onAvatarOptionClick(int action);
+    }
+    public static void showBrokerConsultPopupWindow(Context context, View anchor, final OnBrokerConsultClickListener listener) {
+        
+    	final Dialog dialog = new Dialog(context, R.style.DefaultDialogTheme);
+        dialog.setContentView(R.layout.popup_broker_info_consult);
+        Window win = dialog.getWindow();
+        WindowManager.LayoutParams params = win.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        win.setAttributes(params);
+        win.setGravity(Gravity.BOTTOM);
+    	
+    	
+//        final PopupWindow brokerInfoConsultPopupWindow = new PopupWindow(context);
+//        FrameLayout contentView = (FrameLayout) View.inflate(context, R.layout.popup_broker_info_consult, null);
+//        brokerInfoConsultPopupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+//        brokerInfoConsultPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+//        
+//        brokerInfoConsultPopupWindow.setContentView(contentView);
+//        brokerInfoConsultPopupWindow.setFocusable(true);
+//        brokerInfoConsultPopupWindow.setOutsideTouchable(true);
+//        
+//        ColorDrawable dw = new ColorDrawable(color.transparent);
+////        avatarPopupWindow.setBackgroundDrawable(dw);
+//        brokerInfoConsultPopupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
+        
+        OnClickListener clickListener = new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    switch (v.getId()) {
+                    case R.id.tv_popup_broker_consult_phone_call:
+                        listener.onAvatarOptionClick(OnBrokerConsultClickListener.ACTION_PHONE);
+                        break;
+                    case R.id.tv_popup_broker_consult_chat:
+                        listener.onAvatarOptionClick(OnBrokerConsultClickListener.ACTION_CHAT);
+                        break;
+                    case R.id.tv_popup_broker_consult_sms:
+                    	listener.onAvatarOptionClick(OnBrokerConsultClickListener.ACTION_SMS);
+                    	break;
+                    case R.id.llt_pop_broker_info_consult:
+                    	break;
+                    }
+                }
+                dialog.dismiss();
+            }
+        };
+        
+        AutoDrawableTextView tvPhoneCall = (AutoDrawableTextView) dialog.findViewById(R.id.tv_popup_broker_consult_phone_call);
+        AutoDrawableTextView tvChat = (AutoDrawableTextView) dialog.findViewById(R.id.tv_popup_broker_consult_chat);
+        AutoDrawableTextView tvSMS = (AutoDrawableTextView) dialog.findViewById(R.id.tv_popup_broker_consult_sms);
+        LinearLayout lltConsult = (LinearLayout) dialog.findViewById(R.id.llt_pop_broker_info_consult);
+        tvPhoneCall.setOnClickListener(clickListener);
+        tvChat.setOnClickListener(clickListener);
+        tvSMS.setOnClickListener(clickListener);
+        lltConsult.setOnClickListener(clickListener);
+        dialog.show();
+//        dialog.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
+    }
+//==========================经纪人店铺咨询【end】===========================================
 }

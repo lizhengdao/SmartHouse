@@ -114,15 +114,19 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
 
         case R.id.act_main_guider_home:
             clickTab(0);
+            refreshStatusBarColor(R.color.color_app_theme);
             break;
         case R.id.act_main_guider_map:
             clickTab(1);
+            refreshStatusBarColor(R.color.color_app_theme);
             break;
         case R.id.act_main_guider_consultant:
             clickTab(2);
+            refreshStatusBarColor(R.color.white);
             break;
         case R.id.act_main_guider_mine:
             clickTab(3);
+            refreshStatusBarColor(R.color.color_frag_main_mine_status_bar);
             break;
         }
     }

@@ -35,6 +35,21 @@ public class AttentionAdapter extends BaseAdapter {
 	
 	private OnConcernAllDeletedListener onConcernAllDeletedListener;
 	
+	public AttentionAdapter(Context context,
+			OnConcernAllDeletedListener onConcernAllDeletedListener) {
+		this.context = context;
+		this.attentions = new ArrayList<AttentionBean>();
+		this.onConcernAllDeletedListener = onConcernAllDeletedListener;
+	}
+	
+	public void refreshData(ArrayList<AttentionBean> data) {
+		if (attentions != null) {
+			attentions.clear();
+			attentions.addAll(data);
+			notifyDataSetChanged();
+		}
+	}
+	
 	public AttentionAdapter(Context context, ArrayList<AttentionBean> attentions,
 			OnConcernAllDeletedListener onConcernAllDeletedListener) {
 		this.context = context;

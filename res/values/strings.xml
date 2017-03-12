@@ -44,7 +44,7 @@
     <string name="frag_home_second_hand_house">买卖二手房</string>
     <string name="frag_home_new_house">新房</string>
     <string name="frag_home_rent_house">找租房</string>
-    <string name="frag_home_find_house_artifact">找房神器</string>
+    <string name="frag_home_find_house_artifact">找经纪人</string>
     <string name="frag_home_recommend_house_source">推荐房源</string>
     <string name="frag_home_more">更多</string>
     <string name="frag_home_search_hint">输入小区名或楼盘名称</string>

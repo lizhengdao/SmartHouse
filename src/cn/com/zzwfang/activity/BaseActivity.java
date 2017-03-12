@@ -66,6 +66,17 @@ public abstract class BaseActivity extends FragmentActivity {
         tintManager.setStatusBarTintResource(getStatusBarTintResource());
 	}
 	
+	public void refreshStatusBarColor(int resColor) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			setTranslucentStatus(true);
+		}
+		
+		SystemBarTintManager tintManager = new SystemBarTintManager(this);
+		tintManager.setStatusBarTintEnabled(true);
+        tintManager.setNavigationBarTintEnabled(true);
+        tintManager.setStatusBarTintResource(resColor);
+	}
+	
 	@Override
 	protected void onDestroy() {
 	    unregisterReceiver(msgReceiver);

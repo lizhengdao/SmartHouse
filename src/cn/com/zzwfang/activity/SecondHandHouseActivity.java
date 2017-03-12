@@ -1091,5 +1091,11 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			return true;
 		}
 	}
+	
+	@Override
+	protected int getStatusBarTintResource() {
+		// TODO Auto-generated method stub
+		return R.color.white;
+	}
 
 }

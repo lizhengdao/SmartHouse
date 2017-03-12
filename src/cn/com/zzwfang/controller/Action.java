@@ -873,4 +873,11 @@ public interface Action {
 	 * @param callback
 	 */
 	void commentCompanyAnnocementDetail(String id, String content, String commentId, String commentName, ResultHandlerCallback callback);
+	
+	
+	/**
+	 * 获取投诉
+	 * @param callback
+	 */
+	void getComplainLabels(ResultHandlerCallback callback); 
 }

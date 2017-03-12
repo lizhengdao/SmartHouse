@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
@@ -68,7 +69,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
     public static final String Tencent_app_id = "";
 
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
-	private TextView tvBack, tvTitle, tvMore, tvDetailtitle;
+	private TextView tvBack, tvTitle, tvDetailtitle;  // tvMore
 	private TextView tvTotalPrice, tvHouseType, tvSquare, tvLabel, tvUnitPrice;
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
 			tvDecoration, tvEstateName,
@@ -127,7 +128,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 
 		tvBack = (TextView) findViewById(R.id.act_second_hand_house_detail_back);
 		tvTitle = (TextView) findViewById(R.id.act_second_hand_house_detail_title);
-		tvMore = (TextView) findViewById(R.id.act_second_hand_house_detail_more);
+//		tvMore = (TextView) findViewById(R.id.act_second_hand_house_detail_more);
 		tvDetailtitle = (TextView) findViewById(R.id.act_second_house_detail_title);
 		tvTotalPrice = (TextView) findViewById(R.id.act_second_house_detail_total_price);
 		tvHouseType = (TextView) findViewById(R.id.act_second_house_detail_house_type);
@@ -182,7 +183,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		photoPager.setAdapter(photoAdapter);
 
 		tvBack.setOnClickListener(this);
-		tvMore.setOnClickListener(this);
+//		tvMore.setOnClickListener(this);
 		tvSeeHouseRecord.setOnClickListener(this);
 		photoPager.setOnPageChangeListener(this);
 		tvMortgageCalculate.setOnClickListener(this);
@@ -306,9 +307,9 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 			break;
 		case R.id.act_second_hand_house_detail_title: // 详情title
 			break;
-		case R.id.act_second_hand_house_detail_more: // 更多 （收藏  分享）
-			PopViewHelper.showMoreShareAndAttention(this, tvMore, true, onMoreShareAndAttentionListener);
-			break;
+//		case R.id.act_second_hand_house_detail_more: // 更多 （收藏  分享）
+//			PopViewHelper.showMoreShareAndAttention(this, tvMore, true, onMoreShareAndAttentionListener);
+//			break;
 		case R.id.act_second_handhouse_see_house_record_tv: // 看房记录
 			if (secondHandHouseDetail != null) {
 				Jumper.newJumper()
@@ -578,6 +579,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+//						Log.i("--->", "getSecondHandHouseDetail result: " + result.getData());
 						secondHandHouseDetail = JSON.parseObject(
 								result.getData(),
 								SecondHandHouseDetailBean.class);
@@ -671,6 +673,12 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         tencent.onActivityResult(requestCode, resultCode, data);
+    }
+    
+    @Override
+    protected int getStatusBarTintResource() {
+    	// TODO Auto-generated method stub
+    	return R.color.white;
     }
 
 }

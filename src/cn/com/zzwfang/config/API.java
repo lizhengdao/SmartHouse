@@ -399,6 +399,12 @@ public class API {
      * 评论公司公告详情
      */
     public static final String POST_COMMENT_COMPANY_ANNOCEMENT_DETAIL = "Notices/Common";
+    
+    
+    /**
+     * 获取投诉标签
+     */
+    public static final String GET_COMPLAIN_LABELS = "Other/Label";
 
 
 }

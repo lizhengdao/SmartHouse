@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res/cn.com.zzwfang"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    android:background="@color/color_eeeeee" >
-    
+    android:orientation="vertical" >
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/color_app_theme" >
+        android:background="@color/color_0ed76d" >
 
         <TextView
             android:id="@+id/act_settings_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:drawableLeft="@drawable/ic_back"
-            android:paddingLeft="8dp"
             android:gravity="center_vertical"
+            android:paddingLeft="8dp"
             android:text="@string/back"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -31,223 +31,259 @@
             android:text="@string/act_settings"
             android:textColor="@color/white"
             android:textSize="18sp" />
+    </FrameLayout>
 
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/act_settings_change_nickname"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="修改昵称"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_right_arrow"/>
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/act_settings_change_pwd"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_settings_change_pwd"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_right_arrow"/>
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="12dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_settings_msg_push"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <cn.com.zzwfang.view.ToggleButton
-            android:id="@+id/act_settings_msg_push_toggle"
-            android:layout_width="54dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="10dp"
-            app:borderWidth="0.5sp"
-            app:offBorderColor="#aaa"
-            app:offColor="#fff"
-            app:onColor="@color/color_app_theme"
-            app:spotColor="#fff"/>
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/act_settings_clear_cache"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="12dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_settings_clear_cache"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <TextView 
-            android:id="@+id/act_settings_cache_size"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:gravity="center_vertical"
-            android:drawableRight="@drawable/ic_right_arrow"
-            android:drawablePadding="40dp"
-            android:textColor="@color/color_fbd0ad"
-            android:textSize="16sp"
-            android:text=""/>
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/act_settings_about_us"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="12dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_settings_about_us"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_right_arrow"/>
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/act_settings_common_questions"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="12dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_settings_common_questions"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <ImageView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:src="@drawable/ic_right_arrow"/>
-    </FrameLayout>
-    
-    <FrameLayout 
-        android:id="@+id/act_settings_check_updates"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="12dp"
-        android:background="@color/white">
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="left"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="@string/act_settings_check_updates"
-            android:textColor="@color/color_626262"
-            android:textSize="15sp"/>
-        
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="right"
-            android:drawableRight="@drawable/ic_right_arrow"
-            android:gravity="center"
-            android:text="最新版本"
-            android:textColor="@color/color_dddddd"
-            android:textSize="16sp"/>
-    </FrameLayout>
-    
-    <TextView 
-        android:id="@+id/act_settings_logout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:text="@string/act_settings_logout"
-        android:textSize="16sp"
-        android:textColor="@color/color_da6846"
-        android:background="@drawable/shape_login_out"/>
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@+id/act_settings_change_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="头像"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <cn.com.zzwfang.view.PathImage
+                        android:id="@+id/iv_settings_avatar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_mine_unlogin_avatar"
+                        app:shape="circle" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_right_arrow" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/act_settings_change_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="昵称"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/act_settings_change_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/act_settings_change_pwd"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/act_settings_msg_push"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <cn.com.zzwfang.view.ToggleButton
+                    android:id="@+id/act_settings_msg_push_toggle"
+                    android:layout_width="54dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"
+                    app:borderWidth="0.5sp"
+                    app:offBorderColor="#aaa"
+                    app:offColor="#fff"
+                    app:onColor="@color/color_app_theme"
+                    app:spotColor="#fff" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/act_settings_clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/act_settings_clear_cache"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/act_settings_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:drawablePadding="40dp"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/color_fbd0ad"
+                    android:textSize="16sp" />
+            </FrameLayout>
+            
+            <FrameLayout
+                android:id="@+id/act_settings_check_updates"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/act_settings_check_updates"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:gravity="center"
+                    android:text="最新版本"
+                    android:textColor="@color/color_dddddd"
+                    android:textSize="16sp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/act_settings_about_us"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/act_settings_about_us"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/act_settings_common_questions"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/act_settings_common_questions"
+                    android:textColor="@color/color_626262"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_right_arrow" />
+            </FrameLayout>
+
+            
+
+            <TextView
+                android:id="@+id/act_settings_logout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="@string/act_settings_logout"
+                android:textColor="#fd5552"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

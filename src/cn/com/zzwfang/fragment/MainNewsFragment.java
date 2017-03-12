@@ -137,9 +137,15 @@ OnClickListener, OnItemClickListener {
 				ArrayList<IdTitleBean> moreNewsTypes = new ArrayList<IdTitleBean>();
 				moreNewsTypes.addAll(newsTypes);
 				// 移除前三个
-				moreNewsTypes.remove(0);
-				moreNewsTypes.remove(0);
-				moreNewsTypes.remove(0);
+				if (moreNewsTypes.size() > 0) {
+					moreNewsTypes.remove(0);
+				}
+				if (moreNewsTypes.size() > 0) {
+					moreNewsTypes.remove(0);
+				}
+				if (moreNewsTypes.size() > 0) {
+					moreNewsTypes.remove(0);
+				}
 				PopViewHelper.showNewsMorePopWindow(getActivity(), rbMore, moreNewsTypes, onNewsMoreSelectedListener);
 			}
 			break;

@@ -33,32 +33,45 @@
             android:textSize="18sp" />
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/act_complain_content_edt"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="10dp"
-        android:paddingTop="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="6dp"
-        android:gravity="top|left"
-        android:hint="@string/act_feedback_hint"
-        android:background="@color/white"
-        android:textSize="14sp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <GridView
+            android:id="@+id/grid_complain_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="20dp"
+            android:numColumns="2"
+            android:padding="20dp"
+            android:background="@color/white" />
+
+        <EditText
+            android:id="@+id/act_complain_content_edt"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:gravity="top|left"
+            android:hint="@string/act_feedback_hint"
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="6dp"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/act_complain_commit"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/bg_login_btn"
-            android:text="发送"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/color_app_theme"
+        android:gravity="center"
+        android:text="发送"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 </LinearLayout>

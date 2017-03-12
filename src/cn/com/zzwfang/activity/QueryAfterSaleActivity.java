@@ -128,6 +128,7 @@ public class QueryAfterSaleActivity extends BaseActivity implements OnClickListe
         			.setBackOutAnimation(R.anim.activity_push_out_right)
         			.putString(ComplainActivity.INTENT_COMPLAIN_ID, employ1.getId())
                     .putString(ComplainActivity.INTENT_COMPLAIN_TYPE, "3")
+                    .putString(ComplainActivity.INTENT_COMPLAIN_PERSON, employ1.getName())
         			.jump(this, ComplainActivity.class);
         		}
         	}

@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/color_app_theme" >
+        android:background="@color/color_frag_main_mine_status_bar" >
 
         <TextView
             android:id="@+id/frag_mine_back"
@@ -30,15 +30,6 @@
             android:text="@string/frag_mine"
             android:textColor="@color/white"
             android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/frag_mine_fee_hunter"
-            android:layout_width="80dp"
-            android:layout_height="23dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="8dp"
-            android:gravity="center_vertical"
-            android:src="@drawable/ic_fee_hunter" />
     </FrameLayout>
 
     <ScrollView
@@ -54,7 +45,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:background="@drawable/bg_mine_top"
+                android:background="@color/color_frag_main_mine_status_bar"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -76,9 +67,8 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="4dp"
                         android:layout_marginTop="8dp"
-                        android:background="@drawable/bg_frag_mine_login_register"
                         android:gravity="center"
-                        android:text="未登录/注册"
+                        android:text="登录/注册"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -99,7 +89,7 @@
                             android:layout_marginTop="4dp"
                             android:maxLength="20"
                             android:singleLine="true"
-                            android:textColor="@color/color_8d8d8d"
+                            android:textColor="@color/white"
                             android:textSize="16sp" />
 
                         <LinearLayout
@@ -115,11 +105,49 @@
                                 android:drawableLeft="@drawable/ic_mine_phone"
                                 android:drawablePadding="4dp"
                                 android:gravity="center"
-                                android:textColor="@color/color_8d8d8d"
+                                android:textColor="@color/white"
                                 android:textSize="15sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llt_frag_mine_fee_hunter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_fee_hunter_default" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textColor="#9c8261"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="赏金猎人"
+                        android:textColor="#9c8261"
+                        android:textSize="13sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <View
@@ -151,16 +179,16 @@
                     android:layout_gravity="right"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
-                    
-                    <TextView 
+
+                    <TextView
                         android:id="@+id/frag_mine_msg_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="8dp"
                         android:background="@drawable/ic_msg_count"
-                        android:textSize="14sp"
                         android:gravity="center"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
