@@ -3419,15 +3419,14 @@ public class ActionImpl implements Action {
             SiteId = cityBean.getSiteId();
         }
         requestParams.put("SiteId", SiteId);
-        
-		Options opt = new Options();
+        Options opt = new Options();
         opt.fromDiskCacheAble = false;
         opt.fromHttpCacheAble = true;
         opt.fromMemCacheAble = false;
         opt.toDiskCacheAble = false;
         // opt.toHttpCacheAble = false;
         opt.toMemCacheAble = false;
-
+        
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_COMPLAIN_LABELS));
 //        requestEntity.setRequestParams(requestParams);
@@ -3436,7 +3435,28 @@ public class ActionImpl implements Action {
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
                 context, "请稍候...");
         handler.setResultHandlerCallback(callback);
+        
+	}
+        
+	public void getRecommendNews(ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
 
+		RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_RECOMMEND_NEWS));
+//        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ResultHandler handler = new ResultHandler();
+        handler.setResultHandlerCallback(callback);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        // opt.toHttpCacheAble = false;
+        opt.toMemCacheAble = false;
+        
         requestEntity.setOpts(opt);
         requestEntity.setProcessCallback(handler);
 

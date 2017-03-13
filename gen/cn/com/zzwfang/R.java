@@ -26,8 +26,8 @@ public final class R {
         public static final int zoom_out_style1=0x7f04000e;
     }
     public static final class array {
-        public static final int label_fields=0x7f080001;
-        public static final int loan_years_array=0x7f080000;
+        public static final int label_fields=0x7f0b0001;
+        public static final int loan_years_array=0x7f0b0000;
     }
     public static final class attr {
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -35,6 +35,54 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
          */
         public static final int animate=0x7f010010;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ball_Color=0x7f010036;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ball_radius=0x7f010035;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ballarm_color=0x7f010039;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ballarm_height=0x7f010038;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int ballarm_width=0x7f010037;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -65,6 +113,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int bottom_width=0x7f01001c;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int centered=0x7f01001d;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -78,6 +134,53 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int contentView=0x7f010012;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int coodinate_Color=0x7f01003b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int coodinate_Size=0x7f01003a;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int dividerColor=0x7f010026;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int dividerPaddingPagerSlidingTabStrip=0x7f010029;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int fillColor=0x7f01001e;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -103,6 +206,54 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int icon=0x7f010000;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int indicatorColor=0x7f010024;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int indicatorHeight=0x7f010027;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int indicator_Color=0x7f010034;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int indicator_Height=0x7f010033;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int indicator_Width=0x7f010032;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -131,6 +282,17 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int left_width=0x7f010016;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>below</code></td><td>1</td><td></td></tr>
+<tr><td><code>above</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int mod=0x7f01003e;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -149,6 +311,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
         public static final int onColor=0x7f01000e;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pageColor=0x7f01001f;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -182,6 +353,16 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
+        public static final int radius=0x7f010020;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
         public static final int right_height=0x7f010017;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -193,6 +374,16 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int right_width=0x7f010018;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int scrollOffset=0x7f01002b;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -207,6 +398,30 @@ containing a value of this type.
 </table>
          */
         public static final int shape=0x7f010004;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int shouldExpand=0x7f01002d;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int smooth=0x7f01003f;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int snap=0x7f010021;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -224,6 +439,67 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 </table>
          */
         public static final int stretchMod=0x7f010005;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int strokeColor=0x7f010022;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int strokeWidth=0x7f010023;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int tabBackground=0x7f01002c;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int tabPaddingLeftRight=0x7f01002a;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int tabTextColor=0x7f010030;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int tabTextSize=0x7f01002f;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int tabUnselectedTextColor=0x7f010031;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -232,6 +508,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int text=0x7f010002;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textAllCapsPagerSlidingTabStrip=0x7f01002e;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -242,6 +526,25 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int textSize=0x7f010003;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int text_color=0x7f01003d;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int text_size=0x7f01003c;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -262,109 +565,149 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int top_width=0x7f01001a;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int underlineColor=0x7f010025;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int underlineHeight=0x7f010028;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int zoomView=0x7f010013;
     }
+    public static final class bool {
+        /**  CirclePageIndicator 
+         */
+        public static final int default_circle_indicator_centered=0x7f070000;
+        public static final int default_circle_indicator_snap=0x7f070001;
+    }
     public static final class color {
         public static final int black=0x7f060001;
         public static final int color_0ed76d=0x7f060005;
-        public static final int color_15901b=0x7f060008;
-        public static final int color_2a2a2a=0x7f060027;
-        public static final int color_31392e=0x7f060046;
-        public static final int color_333333=0x7f06000d;
-        public static final int color_383838=0x7f06000f;
-        public static final int color_3ba506=0x7f060052;
-        public static final int color_45ba0a=0x7f060012;
-        public static final int color_46b30e=0x7f06000b;
-        public static final int color_484c58=0x7f060028;
-        public static final int color_4ac20b=0x7f06001f;
-        public static final int color_4c4c4c=0x7f060017;
-        public static final int color_4e4e4e=0x7f060037;
-        public static final int color_504f4f=0x7f060015;
-        public static final int color_575757=0x7f060049;
-        public static final int color_593f32=0x7f060034;
-        public static final int color_5dca43=0x7f060041;
-        public static final int color_626262=0x7f06000c;
-        public static final int color_66b978=0x7f060018;
-        public static final int color_6d6d6d=0x7f06000a;
-        public static final int color_747474=0x7f060009;
-        public static final int color_777777=0x7f060011;
-        public static final int color_78c95c=0x7f060043;
-        public static final int color_7c7c7c=0x7f060044;
-        public static final int color_878787=0x7f06003a;
-        public static final int color_888888=0x7f06000e;
-        public static final int color_898989=0x7f060026;
-        public static final int color_8d8d8d=0x7f060020;
-        public static final int color_949494=0x7f060039;
-        public static final int color_97978f=0x7f06004c;
-        public static final int color_9c9c9c=0x7f060010;
-        public static final int color_9d9d9d=0x7f06004f;
-        public static final int color_9fc98a=0x7f060035;
-        public static final int color_a0a0a0=0x7f060007;
-        public static final int color_a2a2a2=0x7f060014;
-        public static final int color_a3a3a3=0x7f060029;
-        public static final int color_a3d095=0x7f060033;
-        public static final int color_a5a5a5=0x7f060019;
-        public static final int color_a7a7a7=0x7f06004a;
-        public static final int color_a9a9a9=0x7f060021;
-        public static final int color_aaaaaa=0x7f06001e;
-        public static final int color_afafaf=0x7f06003f;
-        public static final int color_app_theme=0x7f060053;
-        public static final int color_b3000000=0x7f06005d;
-        public static final int color_b3b3b3=0x7f06003b;
-        public static final int color_b5b4b4=0x7f060016;
-        public static final int color_b9b9b9=0x7f060022;
-        public static final int color_b9cdb1=0x7f060032;
-        public static final int color_c4c4c4=0x7f06003d;
-        public static final int color_c9c9c9=0x7f060013;
-        public static final int color_cecece=0x7f06005e;
-        public static final int color_d86048=0x7f06002b;
-        public static final int color_da6846=0x7f06002f;
-        public static final int color_dbdbdb=0x7f060045;
-        public static final int color_dddddd=0x7f060030;
-        public static final int color_de6843=0x7f060023;
-        public static final int color_e06440=0x7f060051;
-        public static final int color_e0e0e0=0x7f06001d;
-        public static final int color_e2e2e2=0x7f06001c;
-        public static final int color_e4eed3=0x7f060048;
-        public static final int color_e9663a=0x7f06001b;
-        public static final int color_eaeaea=0x7f06002c;
-        public static final int color_eecca9=0x7f060050;
-        public static final int color_eeeeee=0x7f060006;
-        public static final int color_ef8626=0x7f060042;
-        public static final int color_f0f1f5=0x7f06004b;
+        public static final int color_15901b=0x7f060009;
+        public static final int color_2a2a2a=0x7f060028;
+        public static final int color_31392e=0x7f060047;
+        public static final int color_333333=0x7f06000e;
+        public static final int color_383838=0x7f060010;
+        public static final int color_3ba506=0x7f060053;
+        public static final int color_45ba0a=0x7f060013;
+        public static final int color_46b30e=0x7f06000c;
+        public static final int color_484c58=0x7f060029;
+        public static final int color_4ac20b=0x7f060020;
+        public static final int color_4c4c4c=0x7f060018;
+        public static final int color_4e4e4e=0x7f060038;
+        public static final int color_504f4f=0x7f060016;
+        public static final int color_575757=0x7f06004a;
+        public static final int color_593f32=0x7f060035;
+        public static final int color_5dca43=0x7f060042;
+        public static final int color_626262=0x7f06000d;
+        public static final int color_66b978=0x7f060019;
+        public static final int color_6d6d6d=0x7f06000b;
+        public static final int color_747474=0x7f06000a;
+        public static final int color_777777=0x7f060012;
+        public static final int color_78c95c=0x7f060044;
+        public static final int color_7c7c7c=0x7f060045;
+        public static final int color_878787=0x7f06003b;
+        public static final int color_888888=0x7f06000f;
+        public static final int color_898989=0x7f060027;
+        public static final int color_8d8d8d=0x7f060021;
+        public static final int color_949494=0x7f06003a;
+        public static final int color_97978f=0x7f06004d;
+        public static final int color_9c9c9c=0x7f060011;
+        public static final int color_9d9d9d=0x7f060050;
+        public static final int color_9fc98a=0x7f060036;
+        public static final int color_a0a0a0=0x7f060008;
+        public static final int color_a2a2a2=0x7f060015;
+        public static final int color_a3a3a3=0x7f06002a;
+        public static final int color_a3d095=0x7f060034;
+        public static final int color_a5a5a5=0x7f06001a;
+        public static final int color_a7a7a7=0x7f06004b;
+        public static final int color_a9a9a9=0x7f060022;
+        public static final int color_aaaaaa=0x7f06001f;
+        public static final int color_afafaf=0x7f060040;
+        public static final int color_app_theme=0x7f060054;
+        public static final int color_b3000000=0x7f06005e;
+        public static final int color_b3b3b3=0x7f06003c;
+        public static final int color_b5b4b4=0x7f060017;
+        public static final int color_b9b9b9=0x7f060023;
+        public static final int color_b9cdb1=0x7f060033;
+        public static final int color_c4c4c4=0x7f06003e;
+        public static final int color_c9c9c9=0x7f060014;
+        public static final int color_cecece=0x7f06005f;
+        public static final int color_d86048=0x7f06002c;
+        public static final int color_da6846=0x7f060030;
+        public static final int color_dbdbdb=0x7f060046;
+        public static final int color_dddddd=0x7f060031;
+        public static final int color_de6843=0x7f060024;
+        public static final int color_e06440=0x7f060052;
+        public static final int color_e0e0e0=0x7f06001e;
+        public static final int color_e2e2e2=0x7f06001d;
+        public static final int color_e4eed3=0x7f060049;
+        public static final int color_e9663a=0x7f06001c;
+        public static final int color_eaeaea=0x7f06002d;
+        public static final int color_eecca9=0x7f060051;
+        public static final int color_eeeeee=0x7f060007;
+        public static final int color_ef8626=0x7f060043;
+        public static final int color_f0f1f5=0x7f06004c;
         public static final int color_f2f2f2=0x7f060004;
-        public static final int color_f4c960=0x7f060036;
-        public static final int color_f4f4f4=0x7f06002a;
-        public static final int color_f5dfb6=0x7f06003e;
-        public static final int color_f5f5f7=0x7f060025;
-        public static final int color_f7860c=0x7f06004d;
-        public static final int color_f8a20d=0x7f060047;
-        public static final int color_f8f8f8=0x7f06003c;
-        public static final int color_fbd0ad=0x7f060031;
-        public static final int color_fcd1ae=0x7f06002e;
-        public static final int color_fdb36a=0x7f060040;
-        public static final int color_ff4e00=0x7f060024;
-        public static final int color_ff6974=0x7f060038;
-        public static final int color_ff9000=0x7f06001a;
-        public static final int color_ff9c00=0x7f06002d;
-        public static final int color_ffb84c=0x7f06004e;
+        public static final int color_f4c960=0x7f060037;
+        public static final int color_f4f4f4=0x7f06002b;
+        public static final int color_f5dfb6=0x7f06003f;
+        public static final int color_f5f5f7=0x7f060026;
+        public static final int color_f7860c=0x7f06004e;
+        public static final int color_f8a20d=0x7f060048;
+        public static final int color_f8f8f8=0x7f06003d;
+        public static final int color_fbd0ad=0x7f060032;
+        public static final int color_fcd1ae=0x7f06002f;
+        public static final int color_fdb36a=0x7f060041;
+        public static final int color_ff4e00=0x7f060025;
+        public static final int color_ff6974=0x7f060039;
+        public static final int color_ff9000=0x7f06001b;
+        public static final int color_ff9c00=0x7f06002e;
+        public static final int color_ffb84c=0x7f06004f;
         /**  透明 
          */
         public static final int color_frag_main_mine_status_bar=0x7f060003;
-        public static final int theme_black=0x7f06005a;
-        public static final int theme_brown=0x7f06005b;
-        public static final int theme_gray=0x7f060057;
-        public static final int theme_gray_l1=0x7f060058;
-        public static final int theme_green=0x7f06005c;
-        public static final int theme_hint=0x7f060059;
-        public static final int theme_red=0x7f060055;
-        public static final int theme_red_alpha=0x7f060054;
-        public static final int theme_white=0x7f060056;
+        public static final int default_circle_indicator_fill_color=0x7f060060;
+        public static final int default_circle_indicator_page_color=0x7f060061;
+        public static final int default_circle_indicator_stroke_color=0x7f060062;
+        public static final int tab_pressed=0x7f060006;
+        public static final int theme_black=0x7f06005b;
+        public static final int theme_brown=0x7f06005c;
+        public static final int theme_gray=0x7f060058;
+        public static final int theme_gray_l1=0x7f060059;
+        public static final int theme_green=0x7f06005d;
+        public static final int theme_hint=0x7f06005a;
+        public static final int theme_red=0x7f060056;
+        public static final int theme_red_alpha=0x7f060055;
+        public static final int theme_white=0x7f060057;
         public static final int transparent=0x7f060002;
         public static final int white=0x7f060000;
+    }
+    public static final class dimen {
+        public static final int default_circle_indicator_radius=0x7f090000;
+        public static final int default_circle_indicator_stroke_width=0x7f090001;
+        public static final int header_footer_left_right_padding=0x7f090005;
+        public static final int header_footer_top_bottom_padding=0x7f090006;
+        public static final int indicator_corner_radius=0x7f090003;
+        public static final int indicator_internal_padding=0x7f090004;
+        /**  ptr 
+         */
+        public static final int indicator_right_padding=0x7f090002;
     }
     public static final class drawable {
         public static final int bg_bank_card=0x7f020000;
@@ -391,1049 +734,1060 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int color_complain_label=0x7f020015;
         public static final int color_image_bg=0x7f020016;
         public static final int dotted_line=0x7f020017;
-        public static final int ic_attention_house_detail=0x7f020018;
-        public static final int ic_attentioned_house_detail=0x7f020019;
-        public static final int ic_avatar=0x7f02001a;
-        public static final int ic_back=0x7f02001b;
-        public static final int ic_back_black=0x7f02001c;
-        public static final int ic_bank=0x7f02001d;
-        public static final int ic_body_building=0x7f02001e;
-        public static final int ic_broker_avatar_rect=0x7f02001f;
-        public static final int ic_broker_avatar_round=0x7f020020;
-        public static final int ic_broker_consult_chat=0x7f020021;
-        public static final int ic_broker_consult_phone=0x7f020022;
-        public static final int ic_broker_consult_sms=0x7f020023;
-        public static final int ic_budget=0x7f020024;
-        public static final int ic_bus=0x7f020025;
-        public static final int ic_change_another=0x7f020026;
-        public static final int ic_circle=0x7f020027;
-        public static final int ic_commercial_house_hl=0x7f020028;
-        public static final int ic_commercial_house_nor=0x7f020029;
-        public static final int ic_company_announcement_comment=0x7f02002a;
-        public static final int ic_company_announcement_time=0x7f02002b;
-        public static final int ic_consult=0x7f02002c;
-        public static final int ic_cross=0x7f02002d;
-        public static final int ic_cur_location=0x7f02002e;
-        public static final int ic_dot=0x7f02002f;
-        public static final int ic_down_arrow=0x7f020030;
-        public static final int ic_down_scroll=0x7f020031;
-        public static final int ic_duty_free=0x7f020032;
-        public static final int ic_fee_hunter=0x7f020033;
-        public static final int ic_fee_hunter_card=0x7f020034;
-        public static final int ic_fee_hunter_default=0x7f020035;
-        public static final int ic_fee_hunter_default_avatar=0x7f020036;
-        public static final int ic_fee_hunter_recommend_buy_house=0x7f020037;
-        public static final int ic_fee_hunter_recommend_customer=0x7f020038;
-        public static final int ic_fee_hunter_recommend_owner=0x7f020039;
-        public static final int ic_fee_hunter_recommend_sell_house=0x7f02003a;
-        public static final int ic_feedback=0x7f02003b;
-        public static final int ic_filter=0x7f02003c;
-        public static final int ic_financial_detial_white=0x7f02003d;
-        public static final int ic_find_house_artifact=0x7f02003e;
-        public static final int ic_foods=0x7f02003f;
-        public static final int ic_frag_home_header=0x7f020040;
-        public static final int ic_frag_home_recommend=0x7f020041;
-        public static final int ic_heart_white=0x7f020042;
-        public static final int ic_hostipal=0x7f020043;
-        public static final int ic_hourglass_white=0x7f020044;
-        public static final int ic_house_source_info_change=0x7f020045;
-        public static final int ic_hundrand_true=0x7f020046;
-        public static final int ic_i_concerned_source=0x7f020047;
-        public static final int ic_income_statement_prompt=0x7f020048;
-        public static final int ic_launcher=0x7f020049;
-        public static final int ic_leisure=0x7f02004a;
-        public static final int ic_list=0x7f02004b;
-        public static final int ic_live_house_hl=0x7f02004c;
-        public static final int ic_live_house_nor=0x7f02004d;
-        public static final int ic_location_to_buy=0x7f02004e;
-        public static final int ic_login_broker=0x7f02004f;
-        public static final int ic_login_logo=0x7f020050;
-        public static final int ic_login_phone=0x7f020051;
-        public static final int ic_login_pwd=0x7f020052;
-        public static final int ic_map=0x7f020053;
-        public static final int ic_map_estate=0x7f020054;
-        public static final int ic_map_locate=0x7f020055;
-        public static final int ic_map_nearby=0x7f020056;
-        public static final int ic_map_subway=0x7f020057;
-        public static final int ic_menu_consultant=0x7f020058;
-        public static final int ic_menu_home=0x7f020059;
-        public static final int ic_menu_map_house=0x7f02005a;
-        public static final int ic_menu_me=0x7f02005b;
-        public static final int ic_message_white=0x7f02005c;
-        public static final int ic_mine_phone=0x7f02005d;
-        public static final int ic_mine_unlogin_avatar=0x7f02005e;
-        public static final int ic_mortgage_bottom_line=0x7f02005f;
-        public static final int ic_mortgage_calculator=0x7f020060;
-        public static final int ic_msg=0x7f020061;
-        public static final int ic_msg_count=0x7f020062;
-        public static final int ic_msg_green=0x7f020063;
-        public static final int ic_my_demand=0x7f020064;
-        public static final int ic_my_house_sources=0x7f020065;
-        public static final int ic_my_mortgage_calculator=0x7f020066;
-        public static final int ic_my_proxy=0x7f020067;
-        public static final int ic_new_house=0x7f020068;
-        public static final int ic_no_attention=0x7f020069;
-        public static final int ic_no_house_prompt=0x7f02006a;
-        public static final int ic_ok=0x7f02006b;
-        public static final int ic_other_location=0x7f02006c;
-        public static final int ic_phone_green=0x7f02006d;
-        public static final int ic_phone_white=0x7f02006e;
-        public static final int ic_progress_four=0x7f02006f;
-        public static final int ic_progress_one=0x7f020070;
-        public static final int ic_progress_three=0x7f020071;
-        public static final int ic_progress_two=0x7f020072;
-        public static final int ic_query_dot=0x7f020073;
-        public static final int ic_rent_house=0x7f020074;
-        public static final int ic_resend_auth_code=0x7f020075;
-        public static final int ic_right_arrow=0x7f020076;
-        public static final int ic_right_arrow_white=0x7f020077;
-        public static final int ic_room=0x7f020078;
-        public static final int ic_saled=0x7f020079;
-        public static final int ic_school=0x7f02007a;
-        public static final int ic_search=0x7f02007b;
-        public static final int ic_second_hand_house=0x7f02007c;
-        public static final int ic_see_record=0x7f02007d;
-        public static final int ic_setting=0x7f02007e;
-        public static final int ic_sex_boy=0x7f02007f;
-        public static final int ic_sex_girl=0x7f020080;
-        public static final int ic_shangjinlieren=0x7f020081;
-        public static final int ic_share=0x7f020082;
-        public static final int ic_share_house_detail=0x7f020083;
-        public static final int ic_share_new=0x7f020084;
-        public static final int ic_share_qq=0x7f020085;
-        public static final int ic_share_sina_weibo=0x7f020086;
-        public static final int ic_share_weixin=0x7f020087;
-        public static final int ic_shopping=0x7f020088;
-        public static final int ic_splash=0x7f020089;
-        public static final int ic_splash_cover=0x7f02008a;
-        public static final int ic_subway=0x7f02008b;
-        public static final int ic_triangle=0x7f02008c;
-        public static final int ic_unsaled=0x7f02008d;
-        public static final int ic_up_scroll=0x7f02008e;
-        public static final int ic_urgent_sail=0x7f02008f;
-        public static final int icon_refresh_arrow=0x7f020090;
-        public static final int lineh_dash=0x7f020091;
-        public static final int message_backgroud_left=0x7f020092;
-        public static final int message_backgroud_right=0x7f020093;
-        public static final int pic_first_four=0x7f020094;
-        public static final int pic_first_one=0x7f020095;
-        public static final int pic_first_three=0x7f020096;
-        public static final int pic_first_two=0x7f020097;
-        public static final int select_h=0x7f020098;
-        public static final int select_n=0x7f020099;
-        public static final int selector_commercial_house=0x7f02009a;
-        public static final int selector_complain_label=0x7f02009b;
-        public static final int selector_condition_cbx=0x7f02009c;
-        public static final int selector_live_house=0x7f02009d;
-        public static final int selector_map_list=0x7f02009e;
-        public static final int selector_mortgage_text_color=0x7f02009f;
-        public static final int selector_my_bought_house=0x7f0200a0;
-        public static final int selector_my_sold_house=0x7f0200a1;
-        public static final int selector_rect_color_app_theme_and_gray=0x7f0200a2;
-        public static final int selector_search_house_artifact_cbx=0x7f0200a3;
-        public static final int selector_sex=0x7f0200a4;
-        public static final int selector_text_color_my_house_list=0x7f0200a5;
-        public static final int shape_act_settings_item=0x7f0200a6;
-        public static final int shape_complain_label_selected_bg=0x7f0200a7;
-        public static final int shape_complain_label_unselected_bg=0x7f0200a8;
-        public static final int shape_dialog_1=0x7f0200a9;
-        public static final int shape_dialog_support_bg=0x7f0200aa;
-        public static final int shape_left_corner_color_app_theme=0x7f0200ab;
-        public static final int shape_left_corner_color_white=0x7f0200ac;
-        public static final int shape_rect_color_app_theme=0x7f0200ad;
-        public static final int shape_rect_color_gray=0x7f0200ae;
-        public static final int shape_rect_solid_color_app_theme=0x7f0200af;
-        public static final int shape_right_corner_color_app_theme=0x7f0200b0;
-        public static final int shape_right_corner_color_white=0x7f0200b1;
-        public static final int shape_round_color_45ba0a=0x7f0200b2;
-        public static final int shape_round_color_c9c9c9=0x7f0200b3;
-        public static final int shape_round_corner_bg_color_app_theme=0x7f0200b4;
-        public static final int shape_round_corner_bg_white=0x7f0200b5;
-        public static final int shape_round_corner_color_4ac20b=0x7f0200b6;
-        public static final int shape_round_corner_color_5dca43=0x7f0200b7;
-        public static final int shape_round_corner_color_9fc98a=0x7f0200b8;
-        public static final int shape_round_corner_color_app_theme=0x7f0200b9;
-        public static final int shape_round_corner_color_eaeaea=0x7f0200ba;
-        public static final int shape_round_corner_color_f0f1f5=0x7f0200bb;
-        public static final int shape_round_corner_color_f4c960=0x7f0200bc;
-        public static final int shape_round_corner_color_f7860c=0x7f0200bd;
-        public static final int shape_round_corner_color_ff9c00=0x7f0200be;
-        public static final int shape_round_corner_white=0x7f0200bf;
-        public static final int shape_round_solid_white_stroke_color_aaaaaa=0x7f0200c0;
-        public static final int shape_round_stroke_color_app_theme=0x7f0200c1;
-        public static final int shape_search_round_white=0x7f0200c2;
-        public static final int shape_search_round_white_no_padding=0x7f0200c3;
-        public static final int shape_toast_success=0x7f0200c4;
+        public static final int gradient_mine_top=0x7f020018;
+        public static final int ic_attention_house_detail=0x7f020019;
+        public static final int ic_attentioned_house_detail=0x7f02001a;
+        public static final int ic_avatar=0x7f02001b;
+        public static final int ic_back=0x7f02001c;
+        public static final int ic_back_black=0x7f02001d;
+        public static final int ic_bank=0x7f02001e;
+        public static final int ic_body_building=0x7f02001f;
+        public static final int ic_broker_avatar_rect=0x7f020020;
+        public static final int ic_broker_avatar_round=0x7f020021;
+        public static final int ic_broker_consult_chat=0x7f020022;
+        public static final int ic_broker_consult_phone=0x7f020023;
+        public static final int ic_broker_consult_sms=0x7f020024;
+        public static final int ic_budget=0x7f020025;
+        public static final int ic_bus=0x7f020026;
+        public static final int ic_change_another=0x7f020027;
+        public static final int ic_circle=0x7f020028;
+        public static final int ic_commercial_house_hl=0x7f020029;
+        public static final int ic_commercial_house_nor=0x7f02002a;
+        public static final int ic_company_announcement_comment=0x7f02002b;
+        public static final int ic_company_announcement_time=0x7f02002c;
+        public static final int ic_consult=0x7f02002d;
+        public static final int ic_cross=0x7f02002e;
+        public static final int ic_cur_location=0x7f02002f;
+        public static final int ic_dot=0x7f020030;
+        public static final int ic_down_arrow=0x7f020031;
+        public static final int ic_down_scroll=0x7f020032;
+        public static final int ic_duty_free=0x7f020033;
+        public static final int ic_fee_hunter=0x7f020034;
+        public static final int ic_fee_hunter_card=0x7f020035;
+        public static final int ic_fee_hunter_default=0x7f020036;
+        public static final int ic_fee_hunter_default_avatar=0x7f020037;
+        public static final int ic_fee_hunter_recommend_buy_house=0x7f020038;
+        public static final int ic_fee_hunter_recommend_customer=0x7f020039;
+        public static final int ic_fee_hunter_recommend_owner=0x7f02003a;
+        public static final int ic_fee_hunter_recommend_sell_house=0x7f02003b;
+        public static final int ic_feedback=0x7f02003c;
+        public static final int ic_filter=0x7f02003d;
+        public static final int ic_financial_detial_white=0x7f02003e;
+        public static final int ic_find_house_artifact=0x7f02003f;
+        public static final int ic_foods=0x7f020040;
+        public static final int ic_frag_home_header=0x7f020041;
+        public static final int ic_frag_home_recommend=0x7f020042;
+        public static final int ic_heart_white=0x7f020043;
+        public static final int ic_hostipal=0x7f020044;
+        public static final int ic_hourglass_white=0x7f020045;
+        public static final int ic_house_source_info_change=0x7f020046;
+        public static final int ic_hundrand_true=0x7f020047;
+        public static final int ic_i_concerned_source=0x7f020048;
+        public static final int ic_income_statement_prompt=0x7f020049;
+        public static final int ic_launcher=0x7f02004a;
+        public static final int ic_leisure=0x7f02004b;
+        public static final int ic_list=0x7f02004c;
+        public static final int ic_live_house_hl=0x7f02004d;
+        public static final int ic_live_house_nor=0x7f02004e;
+        public static final int ic_location_to_buy=0x7f02004f;
+        public static final int ic_login_broker=0x7f020050;
+        public static final int ic_login_logo=0x7f020051;
+        public static final int ic_login_phone=0x7f020052;
+        public static final int ic_login_pwd=0x7f020053;
+        public static final int ic_map=0x7f020054;
+        public static final int ic_map_estate=0x7f020055;
+        public static final int ic_map_locate=0x7f020056;
+        public static final int ic_map_nearby=0x7f020057;
+        public static final int ic_map_subway=0x7f020058;
+        public static final int ic_menu_consultant=0x7f020059;
+        public static final int ic_menu_home=0x7f02005a;
+        public static final int ic_menu_map_house=0x7f02005b;
+        public static final int ic_menu_me=0x7f02005c;
+        public static final int ic_message_white=0x7f02005d;
+        public static final int ic_mine_phone=0x7f02005e;
+        public static final int ic_mine_unlogin_avatar=0x7f02005f;
+        public static final int ic_mortgage_bottom_line=0x7f020060;
+        public static final int ic_mortgage_calculator=0x7f020061;
+        public static final int ic_msg=0x7f020062;
+        public static final int ic_msg_count=0x7f020063;
+        public static final int ic_msg_green=0x7f020064;
+        public static final int ic_my_demand=0x7f020065;
+        public static final int ic_my_house_sources=0x7f020066;
+        public static final int ic_my_mortgage_calculator=0x7f020067;
+        public static final int ic_my_proxy=0x7f020068;
+        public static final int ic_new_house=0x7f020069;
+        public static final int ic_no_attention=0x7f02006a;
+        public static final int ic_no_house_prompt=0x7f02006b;
+        public static final int ic_ok=0x7f02006c;
+        public static final int ic_other_location=0x7f02006d;
+        public static final int ic_phone_green=0x7f02006e;
+        public static final int ic_phone_white=0x7f02006f;
+        public static final int ic_progress_four=0x7f020070;
+        public static final int ic_progress_one=0x7f020071;
+        public static final int ic_progress_three=0x7f020072;
+        public static final int ic_progress_two=0x7f020073;
+        public static final int ic_query_dot=0x7f020074;
+        public static final int ic_rent_house=0x7f020075;
+        public static final int ic_resend_auth_code=0x7f020076;
+        public static final int ic_right_arrow=0x7f020077;
+        public static final int ic_right_arrow_white=0x7f020078;
+        public static final int ic_room=0x7f020079;
+        public static final int ic_saled=0x7f02007a;
+        public static final int ic_school=0x7f02007b;
+        public static final int ic_search=0x7f02007c;
+        public static final int ic_second_hand_house=0x7f02007d;
+        public static final int ic_see_record=0x7f02007e;
+        public static final int ic_setting=0x7f02007f;
+        public static final int ic_sex_boy=0x7f020080;
+        public static final int ic_sex_girl=0x7f020081;
+        public static final int ic_shangjinlieren=0x7f020082;
+        public static final int ic_share=0x7f020083;
+        public static final int ic_share_house_detail=0x7f020084;
+        public static final int ic_share_new=0x7f020085;
+        public static final int ic_share_qq=0x7f020086;
+        public static final int ic_share_sina_weibo=0x7f020087;
+        public static final int ic_share_weixin=0x7f020088;
+        public static final int ic_shopping=0x7f020089;
+        public static final int ic_splash=0x7f02008a;
+        public static final int ic_splash_cover=0x7f02008b;
+        public static final int ic_subway=0x7f02008c;
+        public static final int ic_triangle=0x7f02008d;
+        public static final int ic_unsaled=0x7f02008e;
+        public static final int ic_up_scroll=0x7f02008f;
+        public static final int ic_urgent_sail=0x7f020090;
+        public static final int icon_refresh_arrow=0x7f020091;
+        public static final int lineh_dash=0x7f020092;
+        public static final int message_backgroud_left=0x7f020093;
+        public static final int message_backgroud_right=0x7f020094;
+        public static final int pic_first_four=0x7f020095;
+        public static final int pic_first_one=0x7f020096;
+        public static final int pic_first_three=0x7f020097;
+        public static final int pic_first_two=0x7f020098;
+        public static final int select_h=0x7f020099;
+        public static final int select_n=0x7f02009a;
+        public static final int selector_commercial_house=0x7f02009b;
+        public static final int selector_complain_label=0x7f02009c;
+        public static final int selector_condition_cbx=0x7f02009d;
+        public static final int selector_live_house=0x7f02009e;
+        public static final int selector_map_list=0x7f02009f;
+        public static final int selector_mortgage_text_color=0x7f0200a0;
+        public static final int selector_my_bought_house=0x7f0200a1;
+        public static final int selector_my_sold_house=0x7f0200a2;
+        public static final int selector_rect_color_app_theme_and_gray=0x7f0200a3;
+        public static final int selector_search_house_artifact_cbx=0x7f0200a4;
+        public static final int selector_sex=0x7f0200a5;
+        public static final int selector_tab=0x7f0200a6;
+        public static final int selector_text_color_my_house_list=0x7f0200a7;
+        public static final int shape_act_settings_item=0x7f0200a8;
+        public static final int shape_complain_label_selected_bg=0x7f0200a9;
+        public static final int shape_complain_label_unselected_bg=0x7f0200aa;
+        public static final int shape_dialog_1=0x7f0200ab;
+        public static final int shape_dialog_support_bg=0x7f0200ac;
+        public static final int shape_left_corner_color_app_theme=0x7f0200ad;
+        public static final int shape_left_corner_color_white=0x7f0200ae;
+        public static final int shape_rect_color_app_theme=0x7f0200af;
+        public static final int shape_rect_color_gray=0x7f0200b0;
+        public static final int shape_rect_solid_color_app_theme=0x7f0200b1;
+        public static final int shape_right_corner_color_app_theme=0x7f0200b2;
+        public static final int shape_right_corner_color_white=0x7f0200b3;
+        public static final int shape_round_color_45ba0a=0x7f0200b4;
+        public static final int shape_round_color_c9c9c9=0x7f0200b5;
+        public static final int shape_round_corner_bg_color_app_theme=0x7f0200b6;
+        public static final int shape_round_corner_bg_white=0x7f0200b7;
+        public static final int shape_round_corner_color_4ac20b=0x7f0200b8;
+        public static final int shape_round_corner_color_5dca43=0x7f0200b9;
+        public static final int shape_round_corner_color_9fc98a=0x7f0200ba;
+        public static final int shape_round_corner_color_app_theme=0x7f0200bb;
+        public static final int shape_round_corner_color_eaeaea=0x7f0200bc;
+        public static final int shape_round_corner_color_f0f1f5=0x7f0200bd;
+        public static final int shape_round_corner_color_f4c960=0x7f0200be;
+        public static final int shape_round_corner_color_f7860c=0x7f0200bf;
+        public static final int shape_round_corner_color_ff9c00=0x7f0200c0;
+        public static final int shape_round_corner_white=0x7f0200c1;
+        public static final int shape_round_solid_white_stroke_color_aaaaaa=0x7f0200c2;
+        public static final int shape_round_stroke_color_app_theme=0x7f0200c3;
+        public static final int shape_search_round_white=0x7f0200c4;
+        public static final int shape_search_round_white_no_padding=0x7f0200c5;
+        public static final int shape_toast_success=0x7f0200c6;
     }
     public static final class id {
-        public static final int act_about_us_back=0x7f05000a;
-        public static final int act_about_us_webview=0x7f05000b;
-        public static final int act_broker_info_avatar=0x7f05000e;
-        public static final int act_broker_info_back=0x7f05000c;
-        public static final int act_broker_info_lst=0x7f050016;
-        public static final int act_broker_info_motto=0x7f050012;
-        public static final int act_broker_info_name=0x7f05000f;
-        public static final int act_broker_info_phone=0x7f050010;
-        public static final int act_broker_info_rent_houses=0x7f050014;
-        public static final int act_broker_info_second_hand_houses=0x7f050013;
-        public static final int act_broker_info_shop=0x7f050011;
-        public static final int act_broker_info_shop_access_amount=0x7f050015;
-        public static final int act_broker_info_title=0x7f05000d;
-        public static final int act_browse_record_back=0x7f050018;
-        public static final int act_change_new_pwd_edt=0x7f05001b;
-        public static final int act_change_old_pwd_edt=0x7f05001a;
-        public static final int act_change_pwd_back=0x7f050019;
-        public static final int act_change_pwd_commit_tv=0x7f05001c;
-        public static final int act_chat_back=0x7f05001d;
-        public static final int act_chat_content_edt=0x7f050020;
-        public static final int act_chat_send_tv=0x7f050021;
-        public static final int act_chat_title=0x7f05001e;
-        public static final int act_city_list=0x7f050023;
-        public static final int act_city_list_back=0x7f050022;
-        public static final int act_common_problems_back=0x7f050024;
-        public static final int act_common_problems_list=0x7f050025;
-        public static final int act_complain_back=0x7f050026;
-        public static final int act_complain_commit=0x7f05002a;
-        public static final int act_complain_content_edt=0x7f050029;
-        public static final int act_complain_title=0x7f050027;
-        public static final int act_concern_house_back=0x7f0500ed;
-        public static final int act_concern_house_go_to_see=0x7f0500ef;
-        public static final int act_concern_house_no_concern_llt=0x7f0500ee;
-        public static final int act_court_detail_back=0x7f05002b;
-        public static final int act_court_detail_build_year_tv=0x7f050036;
-        public static final int act_court_detail_building_type=0x7f050039;
-        public static final int act_court_detail_buildings=0x7f050033;
-        public static final int act_court_detail_consult_tv=0x7f050031;
-        public static final int act_court_detail_detail_share=0x7f05002d;
-        public static final int act_court_detail_greening_rate_tv=0x7f050037;
-        public static final int act_court_detail_house_type_tv=0x7f050038;
-        public static final int act_court_detail_houses=0x7f050034;
-        public static final int act_court_detail_pager=0x7f05002e;
-        public static final int act_court_detail_photo_index_tv=0x7f050030;
-        public static final int act_court_detail_plot_ratio_tv=0x7f050035;
-        public static final int act_court_detail_property_management_fee=0x7f050032;
-        public static final int act_court_detail_title=0x7f05002c;
-        public static final int act_court_detail_title_tv=0x7f05002f;
-        public static final int act_deal_history_back=0x7f05003b;
-        public static final int act_deal_history_lst=0x7f05003d;
-        public static final int act_deal_history_title=0x7f05003c;
-        public static final int act_fee_hunter_company_announcement_back=0x7f05003e;
-        public static final int act_fee_hunter_company_announcement_detail_back=0x7f050041;
-        public static final int act_fee_hunter_company_announcement_detail_comment_edt=0x7f050044;
-        public static final int act_fee_hunter_company_announcement_detail_comment_num=0x7f050045;
-        public static final int act_fee_hunter_info_avater=0x7f050047;
-        public static final int act_fee_hunter_info_back=0x7f050046;
-        public static final int act_fee_hunter_info_binded_card=0x7f050049;
-        public static final int act_fee_hunter_info_company_announcement=0x7f050053;
-        public static final int act_fee_hunter_info_fee_hunter_msg=0x7f050051;
-        public static final int act_fee_hunter_info_hunter_rule=0x7f050052;
-        public static final int act_fee_hunter_info_money=0x7f05004b;
-        public static final int act_fee_hunter_info_my_customer=0x7f05004f;
-        public static final int act_fee_hunter_info_name=0x7f050048;
-        public static final int act_fee_hunter_info_recommend_customer=0x7f05004d;
-        public static final int act_fee_hunter_info_recommend_house_source_list=0x7f050050;
-        public static final int act_fee_hunter_info_recommend_sell=0x7f05004e;
-        public static final int act_fee_hunter_info_recommended_customers=0x7f05004a;
-        public static final int act_fee_hunter_info_recommended_owners=0x7f05004c;
-        public static final int act_fee_hunter_msg_back=0x7f050054;
-        public static final int act_fee_hunter_my_customer_back=0x7f050055;
-        public static final int act_fee_hunter_my_customer_condition=0x7f050056;
-        public static final int act_fee_hunter_my_customer_lst=0x7f050058;
-        public static final int act_fee_hunter_progress_complain=0x7f050063;
-        public static final int act_fee_hunter_progress_detail_back=0x7f050059;
-        public static final int act_fee_hunter_progress_estate_name=0x7f050060;
-        public static final int act_fee_hunter_progress_four=0x7f05005e;
-        public static final int act_fee_hunter_progress_img=0x7f05005a;
-        public static final int act_fee_hunter_progress_info_change=0x7f050065;
-        public static final int act_fee_hunter_progress_one=0x7f05005b;
-        public static final int act_fee_hunter_progress_recommend_msg_change=0x7f050064;
-        public static final int act_fee_hunter_progress_recommend_name=0x7f05005f;
-        public static final int act_fee_hunter_progress_recommend_operator=0x7f050062;
-        public static final int act_fee_hunter_progress_three=0x7f05005d;
-        public static final int act_fee_hunter_progress_time=0x7f050061;
-        public static final int act_fee_hunter_progress_two=0x7f05005c;
-        public static final int act_fee_hunter_recommend_customer_area=0x7f050089;
-        public static final int act_fee_hunter_recommend_customer_area_llt=0x7f050088;
-        public static final int act_fee_hunter_recommend_customer_commit=0x7f05008b;
-        public static final int act_fee_hunter_recommend_customer_mark=0x7f05008a;
-        public static final int act_fee_hunter_recommend_customer_max_price=0x7f050087;
-        public static final int act_fee_hunter_recommend_customer_min_price=0x7f050086;
-        public static final int act_fee_hunter_recommend_customer_sys_contacts=0x7f050084;
-        public static final int act_fee_hunter_recommend_house_source_list_back=0x7f050066;
-        public static final int act_fee_hunter_recommend_new_house_back=0x7f050069;
-        public static final int act_fee_hunter_recommend_new_house_commit=0x7f05006e;
-        public static final int act_fee_hunter_recommend_new_house_name=0x7f05006a;
-        public static final int act_fee_hunter_recommend_new_house_phone1=0x7f05006b;
-        public static final int act_fee_hunter_recommend_new_house_phone2=0x7f05006c;
-        public static final int act_fee_hunter_recommend_new_house_select=0x7f05006d;
-        public static final int act_fee_hunter_recommend_owner_back=0x7f05006f;
-        public static final int act_fee_hunter_recommend_owner_commit=0x7f05007f;
-        public static final int act_fee_hunter_recommend_owner_mark=0x7f05007e;
-        public static final int act_fee_hunter_recommend_owner_name=0x7f050073;
-        public static final int act_fee_hunter_recommend_owner_phone=0x7f050075;
-        public static final int act_fee_hunter_recommend_owner_rb_rent=0x7f050070;
-        public static final int act_fee_hunter_recommend_owner_rb_rent_sell=0x7f050072;
-        public static final int act_fee_hunter_recommend_owner_rb_sell=0x7f050071;
-        public static final int act_fee_hunter_recommend_owner_select_estate=0x7f050076;
-        public static final int act_fee_hunter_recommend_owner_sys_contacts=0x7f050074;
-        public static final int act_fee_hunter_recommend_owner_which_building_llt=0x7f050077;
-        public static final int act_fee_hunter_recommend_owner_which_building_tv=0x7f050078;
-        public static final int act_fee_hunter_recommend_owner_which_floor_and_room_llt=0x7f05007b;
-        public static final int act_fee_hunter_recommend_owner_which_floor_tv=0x7f05007c;
-        public static final int act_fee_hunter_recommend_owner_which_house_tv=0x7f05007d;
-        public static final int act_fee_hunter_recommend_owner_which_unit_llt=0x7f050079;
-        public static final int act_fee_hunter_recommend_owner_which_unit_tv=0x7f05007a;
-        public static final int act_fee_hunter_recommend_second_hand_house_back=0x7f050080;
-        public static final int act_fee_hunter_recommend_second_hand_house_name=0x7f050083;
-        public static final int act_fee_hunter_recommend_second_hand_house_phone1=0x7f050085;
-        public static final int act_fee_hunter_recommend_second_hand_house_rb_buy=0x7f050081;
-        public static final int act_fee_hunter_recommend_second_hand_house_rb_rent=0x7f050082;
-        public static final int act_fee_hunter_rule_back=0x7f05008c;
-        public static final int act_fee_hunter_rule_webview=0x7f05008d;
-        public static final int act_fee_hunter_wallet_back=0x7f05008e;
-        public static final int act_fee_hunter_wallet_last_month_income=0x7f05008f;
-        public static final int act_fee_hunter_wallet_lst=0x7f050091;
-        public static final int act_fee_hunter_wallet_total_income=0x7f050090;
-        public static final int act_feedback_back=0x7f050092;
-        public static final int act_feedback_commit=0x7f050096;
-        public static final int act_feedback_content_edt=0x7f050094;
-        public static final int act_feedback_phone_edt=0x7f050095;
-        public static final int act_feedback_title=0x7f050093;
-        public static final int act_fill_bank_card_info_back=0x7f050097;
-        public static final int act_fill_card_info_addr_tv=0x7f05009e;
-        public static final int act_fill_card_info_banK_img=0x7f05009f;
-        public static final int act_fill_card_info_bank_name_llt=0x7f05009a;
-        public static final int act_fill_card_info_bank_name_tv=0x7f05009b;
-        public static final int act_fill_card_info_card_num_edt=0x7f050099;
-        public static final int act_fill_card_info_commit_tv=0x7f0500a0;
-        public static final int act_fill_card_info_name_edt=0x7f050098;
-        public static final int act_fill_card_info_open_account_city_llt=0x7f05009d;
-        public static final int act_fill_card_info_open_bank_name_edt=0x7f05009c;
-        public static final int act_first_down_scroll_tv=0x7f0500a2;
-        public static final int act_first_lst=0x7f0500a1;
-        public static final int act_first_start_find_house_tv=0x7f0500a5;
-        public static final int act_first_up_scroll=0x7f0500a3;
-        public static final int act_first_up_scroll_tv=0x7f0500a4;
-        public static final int act_forget_pwd_back=0x7f0500a6;
-        public static final int act_forget_pwd_input_auth_code_edt=0x7f0500aa;
-        public static final int act_forget_pwd_input_pwd_edt=0x7f0500a9;
-        public static final int act_forget_pwd_next_step_tv=0x7f0500ab;
-        public static final int act_forget_pwd_phone_num_edt=0x7f0500a7;
-        public static final int act_forget_pwd_resend_code=0x7f0500a8;
-        public static final int act_house_artifact1_buy_second_hand_house_tv=0x7f0501ce;
-        public static final int act_house_artifact1_find_rent_house_tv=0x7f0501cf;
-        public static final int act_house_artifact_commercial_house_rb=0x7f0501ca;
-        public static final int act_house_artifact_disposable_tv=0x7f0501cb;
-        public static final int act_house_artifact_live_house_rb=0x7f0501c9;
-        public static final int act_house_artifact_mortgage_tv=0x7f0501cc;
-        public static final int act_house_source_info_changes_back=0x7f0500ac;
-        public static final int act_houses_recommended_to_me_back=0x7f0500ad;
-        public static final int act_i_am_customer_back=0x7f0500b0;
-        public static final int act_i_am_customer_court_name=0x7f0500b1;
-        public static final int act_i_am_customer_house_type=0x7f0500b4;
-        public static final int act_i_am_customer_square=0x7f0500b3;
-        public static final int act_i_am_customer_total_price=0x7f0500b2;
-        public static final int act_i_am_owner_back=0x7f0500bc;
-        public static final int act_i_am_owner_lst=0x7f0500be;
-        public static final int act_i_want_buy_house_back=0x7f0500bf;
-        public static final int act_i_want_buy_house_commit=0x7f0500cd;
-        public static final int act_i_want_buy_house_halls=0x7f0500c8;
-        public static final int act_i_want_buy_house_max_square=0x7f0500c4;
-        public static final int act_i_want_buy_house_max_total_price=0x7f0500c6;
-        public static final int act_i_want_buy_house_min_square=0x7f0500c3;
-        public static final int act_i_want_buy_house_min_total_price=0x7f0500c5;
-        public static final int act_i_want_buy_house_monthly_pay_llt=0x7f0500c1;
-        public static final int act_i_want_buy_house_monthly_pay_tv=0x7f0500c2;
-        public static final int act_i_want_buy_house_name=0x7f0500ca;
-        public static final int act_i_want_buy_house_other_desc=0x7f0500c9;
-        public static final int act_i_want_buy_house_phone=0x7f0500cc;
-        public static final int act_i_want_buy_house_rooms=0x7f0500c7;
-        public static final int act_i_want_buy_house_select_estate_name=0x7f0500c0;
-        public static final int act_i_want_buy_house_sex_cbx=0x7f0500cb;
-        public static final int act_income_statement_back=0x7f0500ce;
-        public static final int act_income_statement_lst=0x7f0500cf;
-        public static final int act_login_back=0x7f0500d1;
-        public static final int act_login_forget_pwd_tv=0x7f0500d5;
-        public static final int act_login_login_llt=0x7f0500d7;
-        public static final int act_login_login_tv=0x7f0500d6;
-        public static final int act_login_phone_num_edt=0x7f0500d3;
-        public static final int act_login_pwd_edt=0x7f0500d4;
-        public static final int act_login_register=0x7f0500d2;
-        public static final int act_main_content_pager=0x7f0500dd;
-        public static final int act_main_guider_consultant=0x7f0500db;
-        public static final int act_main_guider_home=0x7f0500d9;
-        public static final int act_main_guider_llt=0x7f0500d8;
-        public static final int act_main_guider_map=0x7f0500da;
-        public static final int act_main_guider_mine=0x7f0500dc;
-        public static final int act_message_back=0x7f0500de;
-        public static final int act_message_lst=0x7f0500df;
-        public static final int act_mortgage_cal_business_rb=0x7f0500e2;
-        public static final int act_mortgage_cal_funds_rb=0x7f0500e1;
-        public static final int act_mortgage_cal_mix_business_money=0x7f05034c;
-        public static final int act_mortgage_cal_mix_funds_money=0x7f05034b;
-        public static final int act_mortgage_cal_mix_rb=0x7f0500e3;
-        public static final int act_mortgage_cal_total_money=0x7f050346;
-        public static final int act_mortgage_calculate_business_result_llt=0x7f0500e8;
-        public static final int act_mortgage_calculate_funds_result_llt=0x7f0500e7;
-        public static final int act_mortgage_calculate_mix_result_llt=0x7f0500e9;
-        public static final int act_mortgage_calculate_tv=0x7f0500e6;
-        public static final int act_mortgage_calculator_back=0x7f0500e0;
-        public static final int act_mortgage_funds_business=0x7f0500e4;
-        public static final int act_mortgage_mix=0x7f0500e5;
-        public static final int act_mortgage_mix_type_llt=0x7f05034f;
-        public static final int act_mortgage_mix_type_tv=0x7f050350;
-        public static final int act_mortgage_mix_years_llt=0x7f05034d;
-        public static final int act_mortgage_mix_years_tv=0x7f05034e;
-        public static final int act_mortgage_type_llt=0x7f050349;
-        public static final int act_mortgage_type_tv=0x7f05034a;
-        public static final int act_mortgage_years_llt=0x7f050347;
-        public static final int act_mortgage_years_tv=0x7f050348;
-        public static final int act_my_bought_houses_back=0x7f0500ea;
-        public static final int act_my_demand_advised_house_resources_flt=0x7f0500f4;
-        public static final int act_my_demand_back=0x7f0500f2;
-        public static final int act_my_demand_flt=0x7f0500f3;
-        public static final int act_my_demand_info_back=0x7f0500f6;
-        public static final int act_my_demand_info_court_name=0x7f0500f8;
-        public static final int act_my_demand_info_decoration=0x7f0500fe;
-        public static final int act_my_demand_info_direction=0x7f0500ff;
-        public static final int act_my_demand_info_edit=0x7f0500f7;
-        public static final int act_my_demand_info_house_type=0x7f0500fb;
-        public static final int act_my_demand_info_interest=0x7f0500fd;
-        public static final int act_my_demand_info_square=0x7f0500fa;
-        public static final int act_my_demand_info_total_price=0x7f0500f9;
-        public static final int act_my_demand_info_type=0x7f0500fc;
-        public static final int act_my_demand_my_buy_house_flt=0x7f0500f5;
-        public static final int act_my_house_list_back=0x7f050102;
-        public static final int act_my_house_list_go_to_see=0x7f050108;
-        public static final int act_my_house_list_my_bought=0x7f050103;
-        public static final int act_my_house_list_my_sold=0x7f050104;
-        public static final int act_my_house_list_no_house_prompt_img=0x7f050106;
-        public static final int act_my_house_list_no_house_prompt_llt=0x7f050105;
-        public static final int act_my_house_list_no_house_prompt_tv=0x7f050107;
-        public static final int act_my_house_resources_back=0x7f05010b;
-        public static final int act_my_house_resources_msg_changes=0x7f05010e;
-        public static final int act_my_house_resources_my_house=0x7f05010c;
-        public static final int act_my_house_resources_see_house_detail=0x7f05010d;
-        public static final int act_my_proxy_back=0x7f05010f;
-        public static final int act_my_proxy_see_my_houses=0x7f050111;
-        public static final int act_my_proxy_sell_house=0x7f050110;
-        public static final int act_my_sell_house_list_back=0x7f050112;
-        public static final int act_nearby_detail_back=0x7f050115;
-        public static final int act_nearby_detail_bank=0x7f050118;
-        public static final int act_nearby_detail_body_building=0x7f05011f;
-        public static final int act_nearby_detail_bus=0x7f050119;
-        public static final int act_nearby_detail_foods=0x7f050120;
-        public static final int act_nearby_detail_hostipal=0x7f05011c;
-        public static final int act_nearby_detail_leisure=0x7f05011d;
-        public static final int act_nearby_detail_map_view=0x7f050117;
-        public static final int act_nearby_detail_school=0x7f05011b;
-        public static final int act_nearby_detail_shopping=0x7f05011e;
-        public static final int act_nearby_detail_subway=0x7f05011a;
-        public static final int act_nearby_detail_title=0x7f050116;
-        public static final int act_new_house_area_llt=0x7f050125;
-        public static final int act_new_house_area_tv=0x7f050126;
-        public static final int act_new_house_back=0x7f050121;
-        public static final int act_new_house_clear_key_wrods=0x7f050123;
-        public static final int act_new_house_detail_3d=0x7f050145;
-        public static final int act_new_house_detail_area_tv=0x7f05013c;
-        public static final int act_new_house_detail_average_price_tv=0x7f05013a;
-        public static final int act_new_house_detail_back=0x7f050134;
-        public static final int act_new_house_detail_builder_company_tv=0x7f050142;
-        public static final int act_new_house_detail_calculator_tv=0x7f050144;
-        public static final int act_new_house_detail_consult_tv=0x7f05013b;
-        public static final int act_new_house_detail_decoration_tv=0x7f05013f;
-        public static final int act_new_house_detail_greening_rate_tv=0x7f050140;
-        public static final int act_new_house_detail_house_introduction_tv=0x7f050149;
-        public static final int act_new_house_detail_house_photo=0x7f050146;
-        public static final int act_new_house_detail_house_photo_index_tv=0x7f050148;
-        public static final int act_new_house_detail_house_photo_pager=0x7f050147;
-        public static final int act_new_house_detail_location=0x7f05014a;
-        public static final int act_new_house_detail_main_house_type_tv=0x7f050143;
-        public static final int act_new_house_detail_map_view=0x7f05014b;
-        public static final int act_new_house_detail_mgt_company_tv=0x7f050141;
-        public static final int act_new_house_detail_pager=0x7f050137;
-        public static final int act_new_house_detail_photo_index_tv=0x7f050139;
-        public static final int act_new_house_detail_plot_ratio_tv=0x7f05003a;
-        public static final int act_new_house_detail_property_type_tv=0x7f05013e;
-        public static final int act_new_house_detail_share=0x7f050136;
-        public static final int act_new_house_detail_square_tv=0x7f05013d;
-        public static final int act_new_house_detail_title=0x7f050135;
-        public static final int act_new_house_detail_title_tv=0x7f050138;
-        public static final int act_new_house_key_word_edt=0x7f050122;
-        public static final int act_new_house_list_map=0x7f050124;
-        public static final int act_new_house_locate=0x7f05012f;
-        public static final int act_new_house_map=0x7f05012e;
-        public static final int act_new_house_map_flt=0x7f05012d;
-        public static final int act_new_house_more_llt=0x7f05012b;
-        public static final int act_new_house_more_tv=0x7f05012c;
-        public static final int act_new_house_nearby=0x7f050131;
-        public static final int act_new_house_subway=0x7f050130;
-        public static final int act_new_house_total_price_llt=0x7f050127;
-        public static final int act_new_house_total_price_tv=0x7f050128;
-        public static final int act_new_house_type_llt=0x7f050129;
-        public static final int act_new_house_type_tv=0x7f05012a;
-        public static final int act_news_detail_back=0x7f05014c;
-        public static final int act_news_detail_webview=0x7f05014d;
-        public static final int act_nick_name_commit=0x7f050150;
-        public static final int act_nick_name_edt=0x7f05014f;
-        public static final int act_nick_name_update_back=0x7f05014e;
-        public static final int act_picturebrowse_indicator=0x7f050152;
-        public static final int act_picturebrowse_viewpager=0x7f050151;
-        public static final int act_protocol_back=0x7f050233;
-        public static final int act_proxy_detail_back=0x7f050153;
-        public static final int act_proxy_detail_bottom_llt=0x7f050157;
-        public static final int act_proxy_detail_dial_top=0x7f050154;
-        public static final int act_proxy_detail_msg_llt=0x7f050158;
-        public static final int act_proxy_sell_house_back=0x7f050159;
-        public static final int act_proxy_sell_house_commit=0x7f05016f;
-        public static final int act_proxy_sell_house_decoration_llt=0x7f050165;
-        public static final int act_proxy_sell_house_decoration_tv=0x7f050166;
-        public static final int act_proxy_sell_house_direction_llt=0x7f050163;
-        public static final int act_proxy_sell_house_direction_tv=0x7f050164;
-        public static final int act_proxy_sell_house_halls=0x7f05015e;
-        public static final int act_proxy_sell_house_name=0x7f05016c;
-        public static final int act_proxy_sell_house_phone=0x7f05016e;
-        public static final int act_proxy_sell_house_rooms=0x7f05015d;
-        public static final int act_proxy_sell_house_select_estate_name=0x7f05015a;
-        public static final int act_proxy_sell_house_select_house_type=0x7f05015b;
-        public static final int act_proxy_sell_house_sex_cbx=0x7f05016d;
-        public static final int act_proxy_sell_house_source_desc=0x7f05016b;
-        public static final int act_proxy_sell_house_source_title=0x7f05016a;
-        public static final int act_proxy_sell_house_square=0x7f050162;
-        public static final int act_proxy_sell_house_toilets=0x7f05015f;
-        public static final int act_proxy_sell_house_total_floors=0x7f050161;
-        public static final int act_proxy_sell_house_type_tv=0x7f05015c;
-        public static final int act_proxy_sell_house_which_building=0x7f050167;
-        public static final int act_proxy_sell_house_which_floor=0x7f050160;
-        public static final int act_proxy_sell_house_which_num=0x7f050169;
-        public static final int act_proxy_sell_house_which_unit=0x7f050168;
-        public static final int act_query_after_sale_avatar1=0x7f050173;
-        public static final int act_query_after_sale_avatar2=0x7f050179;
-        public static final int act_query_after_sale_avatar3=0x7f05017f;
-        public static final int act_query_after_sale_back=0x7f050170;
-        public static final int act_query_after_sale_complain1=0x7f050175;
-        public static final int act_query_after_sale_complain2=0x7f05017b;
-        public static final int act_query_after_sale_complain3=0x7f050181;
-        public static final int act_query_after_sale_employe1=0x7f050172;
-        public static final int act_query_after_sale_employe2=0x7f050178;
-        public static final int act_query_after_sale_employe3=0x7f05017e;
-        public static final int act_query_after_sale_line1=0x7f050177;
-        public static final int act_query_after_sale_line2=0x7f05017d;
-        public static final int act_query_after_sale_line3=0x7f050183;
-        public static final int act_query_after_sale_lst=0x7f050184;
-        public static final int act_query_after_sale_name1=0x7f050174;
-        public static final int act_query_after_sale_name2=0x7f05017a;
-        public static final int act_query_after_sale_name3=0x7f050180;
-        public static final int act_query_after_sale_support1=0x7f050176;
-        public static final int act_query_after_sale_support2=0x7f05017c;
-        public static final int act_query_after_sale_support3=0x7f050182;
-        public static final int act_query_after_sale_title=0x7f050171;
-        public static final int act_recommend_house_detail_back=0x7f050185;
-        public static final int act_recommend_house_list_back=0x7f050186;
-        public static final int act_register_auth_code_tv=0x7f05018c;
-        public static final int act_register_back=0x7f050189;
-        public static final int act_register_fee_hunter_tv=0x7f05018a;
-        public static final int act_register_input_auth_code_edt=0x7f05018d;
-        public static final int act_register_input_pwd_edt=0x7f05018e;
-        public static final int act_register_phone_num_edt=0x7f05018b;
-        public static final int act_register_phone_recommend_num_edt=0x7f05018f;
-        public static final int act_register_protocol_cbx=0x7f050190;
-        public static final int act_register_protocol_tv=0x7f050191;
-        public static final int act_register_tv=0x7f050192;
-        public static final int act_rent_house_area_llt=0x7f050196;
-        public static final int act_rent_house_area_tv=0x7f050197;
-        public static final int act_rent_house_back=0x7f050193;
-        public static final int act_rent_house_clear_key_wrods=0x7f050195;
-        public static final int act_rent_house_detail_Heating_tv=0x7f0501ab;
-        public static final int act_rent_house_detail_agent_avatar=0x7f0501b6;
-        public static final int act_rent_house_detail_agent_dial=0x7f0501b9;
-        public static final int act_rent_house_detail_agent_msg=0x7f0501ba;
-        public static final int act_rent_house_detail_agent_name=0x7f0501b7;
-        public static final int act_rent_house_detail_agent_phone=0x7f0501b8;
-        public static final int act_rent_house_detail_back=0x7f05019f;
-        public static final int act_rent_house_detail_decoration_tv=0x7f0501aa;
-        public static final int act_rent_house_detail_direction_tv=0x7f0501a9;
-        public static final int act_rent_house_detail_estatename_tv=0x7f0501ad;
-        public static final int act_rent_house_detail_floor_tv=0x7f0501a8;
-        public static final int act_rent_house_detail_house_type=0x7f0501a6;
-        public static final int act_rent_house_detail_inner_three_dimession_display=0x7f0501af;
-        public static final int act_rent_house_detail_inner_three_dimession_display_line=0x7f0501ae;
-        public static final int act_rent_house_detail_map=0x7f0501b4;
-        public static final int act_rent_house_detail_more=0x7f0501a1;
-        public static final int act_rent_house_detail_num_tv=0x7f0501b2;
-        public static final int act_rent_house_detail_page_title=0x7f0501a0;
-        public static final int act_rent_house_detail_pager=0x7f0501a2;
-        public static final int act_rent_house_detail_photo_index_tv=0x7f0501a3;
-        public static final int act_rent_house_detail_price_trend=0x7f0501b5;
-        public static final int act_rent_house_detail_rent_price=0x7f0501a5;
-        public static final int act_rent_house_detail_sand_table_display=0x7f0501b1;
-        public static final int act_rent_house_detail_sand_table_display_line=0x7f0501b0;
-        public static final int act_rent_house_detail_share=0x7f0501bb;
-        public static final int act_rent_house_detail_square=0x7f0501a7;
-        public static final int act_rent_house_detail_title=0x7f0501a4;
-        public static final int act_rent_house_detail_year_tv=0x7f0501ac;
-        public static final int act_rent_house_more_llt=0x7f05019c;
-        public static final int act_rent_house_nearby_detail_tv=0x7f0501b3;
-        public static final int act_rent_house_rent_price_llt=0x7f050198;
-        public static final int act_rent_house_rent_price_tv=0x7f050199;
-        public static final int act_rent_house_search_edt=0x7f050194;
-        public static final int act_rent_house_type_llt=0x7f05019a;
-        public static final int act_rent_house_type_tv=0x7f05019b;
-        public static final int act_residential_transaction_history_back=0x7f0501bc;
-        public static final int act_residential_transaction_history_filter=0x7f0501be;
-        public static final int act_residential_transaction_history_lst=0x7f0501bf;
-        public static final int act_residential_transaction_history_title=0x7f0501bd;
-        public static final int act_sand_table_display_back=0x7f0501c0;
-        public static final int act_sand_table_display_title=0x7f0501c1;
-        public static final int act_sand_table_display_webview=0x7f0501c2;
-        public static final int act_search_house_additional_info=0x7f0501dd;
-        public static final int act_search_house_additional_info_container=0x7f0501db;
-        public static final int act_search_house_additional_info_grid_container=0x7f0501dc;
-        public static final int act_search_house_artifact1_back=0x7f0501cd;
-        public static final int act_search_house_artifact_back=0x7f0501c8;
-        public static final int act_search_house_artifact_budget_llt=0x7f0501d1;
-        public static final int act_search_house_artifact_budget_tv=0x7f0501d2;
-        public static final int act_search_house_artifact_how_many_rooms_prompt_tv=0x7f0501d8;
-        public static final int act_search_house_artifact_requirement_back=0x7f0501d0;
-        public static final int act_search_house_artifact_requirement_commit_tv=0x7f0501de;
-        public static final int act_search_house_artifact_result_back=0x7f0501df;
-        public static final int act_search_house_artifact_result_change_another=0x7f0501e0;
-        public static final int act_search_house_artifact_where_llt=0x7f0501d3;
-        public static final int act_search_house_artifact_wheree_prompt_tv=0x7f0501d4;
-        public static final int act_search_house_artifact_wheree_tv=0x7f0501d5;
-        public static final int act_search_house_auto_complete=0x7f0501c7;
-        public static final int act_search_house_cancel_tv=0x7f0501c6;
-        public static final int act_search_house_clear_key_wrods=0x7f0501c5;
-        public static final int act_search_house_house_type_tv=0x7f0501c3;
-        public static final int act_search_house_houses_grid_container=0x7f0501d9;
-        public static final int act_search_house_key_words=0x7f0501c4;
-        public static final int act_search_house_month_pay_llt=0x7f0501d6;
-        public static final int act_search_house_month_pay_tv=0x7f0501d7;
-        public static final int act_search_house_rooms=0x7f0501da;
-        public static final int act_second_hand_house_area_llt=0x7f0501e6;
-        public static final int act_second_hand_house_area_tv=0x7f0501e7;
-        public static final int act_second_hand_house_back=0x7f0501e2;
-        public static final int act_second_hand_house_clear_key_wrods=0x7f0501e4;
-        public static final int act_second_hand_house_detail_agent_msg=0x7f0500d0;
-        public static final int act_second_hand_house_detail_apartment_layout=0x7f050211;
-        public static final int act_second_hand_house_detail_attention=0x7f050217;
-        public static final int act_second_hand_house_detail_back=0x7f0501f5;
-        public static final int act_second_hand_house_detail_bid_date=0x7f050213;
-        public static final int act_second_hand_house_detail_bid_price=0x7f050212;
-        public static final int act_second_hand_house_detail_calculator_tv=0x7f0501ff;
-        public static final int act_second_hand_house_detail_consult_agent=0x7f050218;
-        public static final int act_second_hand_house_detail_court=0x7f050206;
-        public static final int act_second_hand_house_detail_decoration_tv=0x7f050204;
-        public static final int act_second_hand_house_detail_direction_tv=0x7f050203;
-        public static final int act_second_hand_house_detail_estatename_tv=0x7f050207;
-        public static final int act_second_hand_house_detail_floor_tv=0x7f050202;
-        public static final int act_second_hand_house_detail_follow_persons=0x7f05020d;
-        public static final int act_second_hand_house_detail_inner_three_dimession_display=0x7f050209;
-        public static final int act_second_hand_house_detail_inner_three_dimession_display_line=0x7f050208;
-        public static final int act_second_hand_house_detail_map_view=0x7f05020f;
-        public static final int act_second_hand_house_detail_monthly_pay_tv=0x7f050201;
-        public static final int act_second_hand_house_detail_num_tv=0x7f050205;
-        public static final int act_second_hand_house_detail_partialprice_tv=0x7f050200;
-        public static final int act_second_hand_house_detail_price_trend=0x7f050214;
-        public static final int act_second_hand_house_detail_sand_table_display=0x7f05020b;
-        public static final int act_second_hand_house_detail_sand_table_display_line=0x7f05020a;
-        public static final int act_second_hand_house_detail_share=0x7f050216;
-        public static final int act_second_hand_house_detail_title=0x7f0501f6;
-        public static final int act_second_hand_house_detail_unit_price_tv=0x7f0501fe;
-        public static final int act_second_hand_house_key_words=0x7f0501e3;
-        public static final int act_second_hand_house_list_map=0x7f0501e5;
-        public static final int act_second_hand_house_locate=0x7f0501f0;
-        public static final int act_second_hand_house_map=0x7f0501ef;
-        public static final int act_second_hand_house_map_flt=0x7f0501ee;
-        public static final int act_second_hand_house_more_llt=0x7f0501ec;
-        public static final int act_second_hand_house_more_tv=0x7f0501ed;
-        public static final int act_second_hand_house_nearby=0x7f0501f2;
-        public static final int act_second_hand_house_subway=0x7f0501f1;
-        public static final int act_second_hand_house_total_price_llt=0x7f0501e8;
-        public static final int act_second_hand_house_total_price_tv=0x7f0501e9;
-        public static final int act_second_hand_house_type_llt=0x7f0501ea;
-        public static final int act_second_hand_house_type_tv=0x7f0501eb;
-        public static final int act_second_handhouse_nearby_detail_tv=0x7f05020e;
-        public static final int act_second_handhouse_see_house_record_tv=0x7f05020c;
-        public static final int act_second_handhouse_transaction_history_tv=0x7f050210;
-        public static final int act_second_house_detail_house_type=0x7f0501fb;
-        public static final int act_second_house_detail_label=0x7f0501fd;
-        public static final int act_second_house_detail_pager=0x7f0501f7;
-        public static final int act_second_house_detail_photo_index_tv=0x7f0501f8;
-        public static final int act_second_house_detail_square=0x7f0501fc;
-        public static final int act_second_house_detail_title=0x7f0501f9;
-        public static final int act_second_house_detail_total_price=0x7f0501fa;
-        public static final int act_see_house_record_back=0x7f050219;
-        public static final int act_see_house_record_complain=0x7f05021c;
-        public static final int act_see_house_record_lst=0x7f05021e;
-        public static final int act_see_house_record_recent=0x7f05021b;
-        public static final int act_see_house_record_title=0x7f05021a;
-        public static final int act_select_estate_back=0x7f05021f;
-        public static final int act_select_estate_clear_key_wrods=0x7f050221;
-        public static final int act_select_estate_keywords_edt=0x7f050220;
-        public static final int act_settings_about_us=0x7f05022c;
-        public static final int act_settings_back=0x7f050223;
-        public static final int act_settings_cache_size=0x7f05022a;
-        public static final int act_settings_change_avatar=0x7f050224;
-        public static final int act_settings_change_nickname=0x7f050226;
-        public static final int act_settings_change_pwd=0x7f050227;
-        public static final int act_settings_check_updates=0x7f05022b;
-        public static final int act_settings_clear_cache=0x7f050229;
-        public static final int act_settings_common_questions=0x7f05022d;
-        public static final int act_settings_logout=0x7f05022e;
-        public static final int act_settings_msg_push_toggle=0x7f050228;
-        public static final int act_shangjinlieren_back=0x7f05022f;
-        public static final int act_shangjinlieren_info_back=0x7f050232;
-        public static final int act_shangjinlieren_login_tv=0x7f050231;
-        public static final int act_shangjinlieren_register_tv=0x7f050230;
-        public static final int act_support_back=0x7f050234;
-        public static final int act_support_commit=0x7f050237;
-        public static final int act_support_content_edt=0x7f050236;
-        public static final int act_support_title=0x7f050235;
-        public static final int adapter_agent_info_desc=0x7f05023a;
-        public static final int adapter_agent_info_distance=0x7f05023e;
-        public static final int adapter_agent_info_est_name=0x7f05023b;
-        public static final int adapter_agent_info_photo=0x7f050238;
-        public static final int adapter_agent_info_publish_time=0x7f05023d;
-        public static final int adapter_agent_info_title=0x7f050239;
-        public static final int adapter_agent_info_total_price=0x7f05023c;
-        public static final int adapter_bank_province_or_city=0x7f05023f;
-        public static final int adapter_chat_left_avatar=0x7f05030b;
-        public static final int adapter_chat_left_time=0x7f05030a;
-        public static final int adapter_chat_right_time=0x7f05030d;
-        public static final int adapter_city_name_tv=0x7f050240;
-        public static final int adapter_client_info_change_content=0x7f050243;
-        public static final int adapter_client_info_change_date_type=0x7f050241;
-        public static final int adapter_client_info_change_name=0x7f050242;
-        public static final int adapter_common_problem_answer=0x7f050245;
-        public static final int adapter_common_problem_question=0x7f050244;
-        public static final int adapter_company_announcement_detail_comment_content=0x7f050248;
-        public static final int adapter_company_announcement_detail_comment_name=0x7f050246;
-        public static final int adapter_company_announcement_detail_comment_time=0x7f050247;
-        public static final int adapter_conditon_name_tv=0x7f05024a;
-        public static final int adapter_estate_select_name=0x7f05024b;
-        public static final int adapter_fee_hunter_company_announcement_content=0x7f05024d;
-        public static final int adapter_fee_hunter_company_announcement_time=0x7f05024e;
-        public static final int adapter_fee_hunter_company_announcement_title=0x7f05024c;
-        public static final int adapter_fee_hunter_my_customer_check=0x7f050252;
-        public static final int adapter_fee_hunter_my_customer_estate=0x7f050251;
-        public static final int adapter_fee_hunter_my_customer_name=0x7f05024f;
-        public static final int adapter_fee_hunter_my_customer_phone=0x7f050250;
-        public static final int adapter_fee_hunter_recommend_house_source_list_desc=0x7f050255;
-        public static final int adapter_fee_hunter_recommend_house_source_list_est_name=0x7f050256;
-        public static final int adapter_fee_hunter_recommend_house_source_list_photo=0x7f050253;
-        public static final int adapter_fee_hunter_recommend_house_source_list_price=0x7f050257;
-        public static final int adapter_fee_hunter_recommend_house_source_list_publish_time=0x7f050258;
-        public static final int adapter_fee_hunter_recommend_house_source_list_title=0x7f050254;
-        public static final int adapter_first_desc_four=0x7f05025e;
-        public static final int adapter_first_desc_one=0x7f05025b;
-        public static final int adapter_first_desc_three=0x7f05025d;
-        public static final int adapter_first_desc_two=0x7f05025c;
-        public static final int adapter_first_lst_container=0x7f050259;
-        public static final int adapter_first_lst_img=0x7f05025a;
-        public static final int adapter_home_recommend_addr=0x7f050265;
-        public static final int adapter_home_recommend_desc=0x7f050266;
-        public static final int adapter_home_recommend_photo=0x7f050263;
-        public static final int adapter_home_recommend_price=0x7f050267;
-        public static final int adapter_home_recommend_title=0x7f050264;
-        public static final int adapter_house_recommended_to_me_check=0x7f05026d;
-        public static final int adapter_house_recommended_to_me_date=0x7f05026b;
-        public static final int adapter_house_recommended_to_me_desc=0x7f05026a;
-        public static final int adapter_house_recommended_to_me_finacial_detail=0x7f05026e;
-        public static final int adapter_house_recommended_to_me_img=0x7f050268;
-        public static final int adapter_house_recommended_to_me_price=0x7f05026c;
-        public static final int adapter_house_recommended_to_me_title=0x7f050269;
-        public static final int adapter_i_am_owner_action1=0x7f050274;
-        public static final int adapter_i_am_owner_action2=0x7f050275;
-        public static final int adapter_i_am_owner_desc=0x7f050272;
-        public static final int adapter_i_am_owner_money=0x7f050273;
-        public static final int adapter_i_am_owner_photo=0x7f05026f;
-        public static final int adapter_i_am_owner_status=0x7f050270;
-        public static final int adapter_i_am_owner_title=0x7f050271;
-        public static final int adapter_income_statement_broker_name=0x7f05027a;
-        public static final int adapter_income_statement_date=0x7f050276;
-        public static final int adapter_income_statement_invoice_state=0x7f050279;
-        public static final int adapter_income_statement_price=0x7f050278;
-        public static final int adapter_income_statement_type=0x7f050277;
-        public static final int adapter_message_avatar=0x7f05027b;
-        public static final int adapter_message_content=0x7f05027d;
-        public static final int adapter_message_msg_count=0x7f05027e;
-        public static final int adapter_message_name=0x7f05027c;
-        public static final int adapter_more_detail_cbx=0x7f050280;
-        public static final int adapter_more_detail_txt=0x7f05027f;
-        public static final int adapter_more_type_txt=0x7f050281;
-        public static final int adapter_mortgage_year_tv=0x7f050282;
-        public static final int adapter_my_attention_cancel_collection=0x7f050289;
-        public static final int adapter_my_attention_desc=0x7f050285;
-        public static final int adapter_my_attention_estate_name=0x7f050286;
-        public static final int adapter_my_attention_img=0x7f050283;
-        public static final int adapter_my_attention_online_consult=0x7f050288;
-        public static final int adapter_my_attention_price=0x7f050287;
-        public static final int adapter_my_attention_title=0x7f050284;
-        public static final int adapter_my_bought_house_date=0x7f05028d;
-        public static final int adapter_my_bought_house_desc=0x7f05028c;
-        public static final int adapter_my_bought_house_img=0x7f05028a;
-        public static final int adapter_my_bought_house_price=0x7f05028e;
-        public static final int adapter_my_bought_house_progress_check=0x7f05028f;
-        public static final int adapter_my_bought_house_progress_finacial_detail=0x7f050290;
-        public static final int adapter_my_bought_house_title=0x7f05028b;
-        public static final int adapter_my_customer_condition=0x7f050291;
-        public static final int adapter_my_house_date=0x7f050295;
-        public static final int adapter_my_house_desc=0x7f050294;
-        public static final int adapter_my_house_img=0x7f050292;
-        public static final int adapter_my_house_price=0x7f050296;
-        public static final int adapter_my_house_source_progress=0x7f050297;
-        public static final int adapter_my_house_source_see_house_record=0x7f050298;
-        public static final int adapter_my_house_title=0x7f050293;
-        public static final int adapter_new_house_desc=0x7f05029b;
-        public static final int adapter_new_house_distance=0x7f0502a1;
-        public static final int adapter_new_house_label_one=0x7f05029e;
-        public static final int adapter_new_house_label_three=0x7f0502a0;
-        public static final int adapter_new_house_label_two=0x7f05029f;
-        public static final int adapter_new_house_photo=0x7f050299;
-        public static final int adapter_new_house_price=0x7f05029d;
-        public static final int adapter_new_house_square=0x7f05029c;
-        public static final int adapter_new_house_title=0x7f05029a;
-        public static final int adapter_new_more_tv=0x7f0502a6;
-        public static final int adapter_news_item_content=0x7f0502a4;
-        public static final int adapter_news_item_name=0x7f0502a3;
-        public static final int adapter_news_item_photo=0x7f0502a2;
-        public static final int adapter_news_item_time=0x7f0502a5;
-        public static final int adapter_photo_img=0x7f0502a7;
-        public static final int adapter_picturebrowse_zmg=0x7f0502a8;
-        public static final int adapter_query_after_sale_content=0x7f0502ab;
-        public static final int adapter_query_after_sale_date=0x7f0502ac;
-        public static final int adapter_query_after_sale_name=0x7f0502a9;
-        public static final int adapter_query_after_sale_operator=0x7f0502aa;
-        public static final int adapter_rent_house_desc=0x7f0502af;
-        public static final int adapter_rent_house_distance=0x7f0502b3;
-        public static final int adapter_rent_house_est_name=0x7f0502b0;
-        public static final int adapter_rent_house_photo=0x7f0502ad;
-        public static final int adapter_rent_house_publish_time=0x7f0502b2;
-        public static final int adapter_rent_house_rent_price=0x7f0502b1;
-        public static final int adapter_rent_house_title=0x7f0502ae;
-        public static final int adapter_residential_transaction_history_broker_name=0x7f0502b9;
-        public static final int adapter_residential_transaction_history_consult=0x7f0502ba;
-        public static final int adapter_residential_transaction_history_desc=0x7f0502b6;
-        public static final int adapter_residential_transaction_history_photo=0x7f0502b4;
-        public static final int adapter_residential_transaction_history_publish_time=0x7f0502b8;
-        public static final int adapter_residential_transaction_history_title=0x7f0502b5;
-        public static final int adapter_residential_transaction_history_total_price=0x7f0502b7;
-        public static final int adapter_search_house_artifact_access_quantity=0x7f0502c8;
-        public static final int adapter_search_house_artifact_avatar=0x7f0502c3;
-        public static final int adapter_search_house_artifact_consult=0x7f0502c9;
-        public static final int adapter_search_house_artifact_dial=0x7f0502ca;
-        public static final int adapter_search_house_artifact_name=0x7f0502c4;
-        public static final int adapter_search_house_artifact_phone=0x7f0502c5;
-        public static final int adapter_search_house_artifact_rent_houses=0x7f0502c7;
-        public static final int adapter_search_house_artifact_requirement_cbx=0x7f0502c2;
-        public static final int adapter_search_house_artifact_second_hand_houses=0x7f0502c6;
-        public static final int adapter_search_house_desc=0x7f0502bd;
-        public static final int adapter_search_house_distance=0x7f0502c1;
-        public static final int adapter_search_house_est_name=0x7f0502be;
-        public static final int adapter_search_house_photo=0x7f0502bb;
-        public static final int adapter_search_house_publish_time=0x7f0502c0;
-        public static final int adapter_search_house_rent_price=0x7f0502bf;
-        public static final int adapter_search_house_title=0x7f0502bc;
-        public static final int adapter_second_hand_house_desc=0x7f0502cd;
-        public static final int adapter_second_hand_house_distance=0x7f0502d1;
-        public static final int adapter_second_hand_house_est_name=0x7f0502ce;
-        public static final int adapter_second_hand_house_photo=0x7f0502cb;
-        public static final int adapter_second_hand_house_publish_time=0x7f0502d0;
-        public static final int adapter_second_hand_house_title=0x7f0502cc;
-        public static final int adapter_second_hand_house_total_price=0x7f0502cf;
-        public static final int adapter_see_house_record_avtar=0x7f0502d2;
-        public static final int adapter_see_house_record_name=0x7f0502d3;
-        public static final int adapter_see_house_record_phone=0x7f0502d4;
-        public static final int adapter_wallet_desc=0x7f0502d5;
-        public static final int adapter_wallet_money=0x7f0502d6;
+        public static final int above=0x7f050008;
+        public static final int act_about_us_back=0x7f05000c;
+        public static final int act_about_us_webview=0x7f05000d;
+        public static final int act_broker_info_avatar=0x7f050010;
+        public static final int act_broker_info_back=0x7f05000e;
+        public static final int act_broker_info_lst=0x7f050018;
+        public static final int act_broker_info_motto=0x7f050014;
+        public static final int act_broker_info_name=0x7f050011;
+        public static final int act_broker_info_phone=0x7f050012;
+        public static final int act_broker_info_rent_houses=0x7f050016;
+        public static final int act_broker_info_second_hand_houses=0x7f050015;
+        public static final int act_broker_info_shop=0x7f050013;
+        public static final int act_broker_info_shop_access_amount=0x7f050017;
+        public static final int act_broker_info_title=0x7f05000f;
+        public static final int act_browse_record_back=0x7f05001a;
+        public static final int act_change_new_pwd_edt=0x7f05001d;
+        public static final int act_change_old_pwd_edt=0x7f05001c;
+        public static final int act_change_pwd_back=0x7f05001b;
+        public static final int act_change_pwd_commit_tv=0x7f05001e;
+        public static final int act_chat_back=0x7f05001f;
+        public static final int act_chat_content_edt=0x7f050022;
+        public static final int act_chat_send_tv=0x7f050023;
+        public static final int act_chat_title=0x7f050020;
+        public static final int act_city_list=0x7f050025;
+        public static final int act_city_list_back=0x7f050024;
+        public static final int act_common_problems_back=0x7f050026;
+        public static final int act_common_problems_list=0x7f050027;
+        public static final int act_complain_back=0x7f050028;
+        public static final int act_complain_commit=0x7f05002c;
+        public static final int act_complain_content_edt=0x7f05002b;
+        public static final int act_complain_title=0x7f050029;
+        public static final int act_concern_house_back=0x7f0500ef;
+        public static final int act_concern_house_go_to_see=0x7f0500f1;
+        public static final int act_concern_house_no_concern_llt=0x7f0500f0;
+        public static final int act_court_detail_back=0x7f05002d;
+        public static final int act_court_detail_build_year_tv=0x7f050038;
+        public static final int act_court_detail_building_type=0x7f05003b;
+        public static final int act_court_detail_buildings=0x7f050035;
+        public static final int act_court_detail_consult_tv=0x7f050033;
+        public static final int act_court_detail_detail_share=0x7f05002f;
+        public static final int act_court_detail_greening_rate_tv=0x7f050039;
+        public static final int act_court_detail_house_type_tv=0x7f05003a;
+        public static final int act_court_detail_houses=0x7f050036;
+        public static final int act_court_detail_pager=0x7f050030;
+        public static final int act_court_detail_photo_index_tv=0x7f050032;
+        public static final int act_court_detail_plot_ratio_tv=0x7f050037;
+        public static final int act_court_detail_property_management_fee=0x7f050034;
+        public static final int act_court_detail_title=0x7f05002e;
+        public static final int act_court_detail_title_tv=0x7f050031;
+        public static final int act_deal_history_back=0x7f05003d;
+        public static final int act_deal_history_lst=0x7f05003f;
+        public static final int act_deal_history_title=0x7f05003e;
+        public static final int act_fee_hunter_company_announcement_back=0x7f050040;
+        public static final int act_fee_hunter_company_announcement_detail_back=0x7f050043;
+        public static final int act_fee_hunter_company_announcement_detail_comment_edt=0x7f050046;
+        public static final int act_fee_hunter_company_announcement_detail_comment_num=0x7f050047;
+        public static final int act_fee_hunter_info_avater=0x7f050049;
+        public static final int act_fee_hunter_info_back=0x7f050048;
+        public static final int act_fee_hunter_info_binded_card=0x7f05004b;
+        public static final int act_fee_hunter_info_company_announcement=0x7f050055;
+        public static final int act_fee_hunter_info_fee_hunter_msg=0x7f050053;
+        public static final int act_fee_hunter_info_hunter_rule=0x7f050054;
+        public static final int act_fee_hunter_info_money=0x7f05004d;
+        public static final int act_fee_hunter_info_my_customer=0x7f050051;
+        public static final int act_fee_hunter_info_name=0x7f05004a;
+        public static final int act_fee_hunter_info_recommend_customer=0x7f05004f;
+        public static final int act_fee_hunter_info_recommend_house_source_list=0x7f050052;
+        public static final int act_fee_hunter_info_recommend_sell=0x7f050050;
+        public static final int act_fee_hunter_info_recommended_customers=0x7f05004c;
+        public static final int act_fee_hunter_info_recommended_owners=0x7f05004e;
+        public static final int act_fee_hunter_msg_back=0x7f050056;
+        public static final int act_fee_hunter_my_customer_back=0x7f050057;
+        public static final int act_fee_hunter_my_customer_condition=0x7f050058;
+        public static final int act_fee_hunter_my_customer_lst=0x7f05005a;
+        public static final int act_fee_hunter_progress_complain=0x7f050065;
+        public static final int act_fee_hunter_progress_detail_back=0x7f05005b;
+        public static final int act_fee_hunter_progress_estate_name=0x7f050062;
+        public static final int act_fee_hunter_progress_four=0x7f050060;
+        public static final int act_fee_hunter_progress_img=0x7f05005c;
+        public static final int act_fee_hunter_progress_info_change=0x7f050067;
+        public static final int act_fee_hunter_progress_one=0x7f05005d;
+        public static final int act_fee_hunter_progress_recommend_msg_change=0x7f050066;
+        public static final int act_fee_hunter_progress_recommend_name=0x7f050061;
+        public static final int act_fee_hunter_progress_recommend_operator=0x7f050064;
+        public static final int act_fee_hunter_progress_three=0x7f05005f;
+        public static final int act_fee_hunter_progress_time=0x7f050063;
+        public static final int act_fee_hunter_progress_two=0x7f05005e;
+        public static final int act_fee_hunter_recommend_customer_area=0x7f05008b;
+        public static final int act_fee_hunter_recommend_customer_area_llt=0x7f05008a;
+        public static final int act_fee_hunter_recommend_customer_commit=0x7f05008d;
+        public static final int act_fee_hunter_recommend_customer_mark=0x7f05008c;
+        public static final int act_fee_hunter_recommend_customer_max_price=0x7f050089;
+        public static final int act_fee_hunter_recommend_customer_min_price=0x7f050088;
+        public static final int act_fee_hunter_recommend_customer_sys_contacts=0x7f050086;
+        public static final int act_fee_hunter_recommend_house_source_list_back=0x7f050068;
+        public static final int act_fee_hunter_recommend_new_house_back=0x7f05006b;
+        public static final int act_fee_hunter_recommend_new_house_commit=0x7f050070;
+        public static final int act_fee_hunter_recommend_new_house_name=0x7f05006c;
+        public static final int act_fee_hunter_recommend_new_house_phone1=0x7f05006d;
+        public static final int act_fee_hunter_recommend_new_house_phone2=0x7f05006e;
+        public static final int act_fee_hunter_recommend_new_house_select=0x7f05006f;
+        public static final int act_fee_hunter_recommend_owner_back=0x7f050071;
+        public static final int act_fee_hunter_recommend_owner_commit=0x7f050081;
+        public static final int act_fee_hunter_recommend_owner_mark=0x7f050080;
+        public static final int act_fee_hunter_recommend_owner_name=0x7f050075;
+        public static final int act_fee_hunter_recommend_owner_phone=0x7f050077;
+        public static final int act_fee_hunter_recommend_owner_rb_rent=0x7f050072;
+        public static final int act_fee_hunter_recommend_owner_rb_rent_sell=0x7f050074;
+        public static final int act_fee_hunter_recommend_owner_rb_sell=0x7f050073;
+        public static final int act_fee_hunter_recommend_owner_select_estate=0x7f050078;
+        public static final int act_fee_hunter_recommend_owner_sys_contacts=0x7f050076;
+        public static final int act_fee_hunter_recommend_owner_which_building_llt=0x7f050079;
+        public static final int act_fee_hunter_recommend_owner_which_building_tv=0x7f05007a;
+        public static final int act_fee_hunter_recommend_owner_which_floor_and_room_llt=0x7f05007d;
+        public static final int act_fee_hunter_recommend_owner_which_floor_tv=0x7f05007e;
+        public static final int act_fee_hunter_recommend_owner_which_house_tv=0x7f05007f;
+        public static final int act_fee_hunter_recommend_owner_which_unit_llt=0x7f05007b;
+        public static final int act_fee_hunter_recommend_owner_which_unit_tv=0x7f05007c;
+        public static final int act_fee_hunter_recommend_second_hand_house_back=0x7f050082;
+        public static final int act_fee_hunter_recommend_second_hand_house_name=0x7f050085;
+        public static final int act_fee_hunter_recommend_second_hand_house_phone1=0x7f050087;
+        public static final int act_fee_hunter_recommend_second_hand_house_rb_buy=0x7f050083;
+        public static final int act_fee_hunter_recommend_second_hand_house_rb_rent=0x7f050084;
+        public static final int act_fee_hunter_rule_back=0x7f05008e;
+        public static final int act_fee_hunter_rule_webview=0x7f05008f;
+        public static final int act_fee_hunter_wallet_back=0x7f050090;
+        public static final int act_fee_hunter_wallet_last_month_income=0x7f050091;
+        public static final int act_fee_hunter_wallet_lst=0x7f050093;
+        public static final int act_fee_hunter_wallet_total_income=0x7f050092;
+        public static final int act_feedback_back=0x7f050094;
+        public static final int act_feedback_commit=0x7f050098;
+        public static final int act_feedback_content_edt=0x7f050096;
+        public static final int act_feedback_phone_edt=0x7f050097;
+        public static final int act_feedback_title=0x7f050095;
+        public static final int act_fill_bank_card_info_back=0x7f050099;
+        public static final int act_fill_card_info_addr_tv=0x7f0500a0;
+        public static final int act_fill_card_info_banK_img=0x7f0500a1;
+        public static final int act_fill_card_info_bank_name_llt=0x7f05009c;
+        public static final int act_fill_card_info_bank_name_tv=0x7f05009d;
+        public static final int act_fill_card_info_card_num_edt=0x7f05009b;
+        public static final int act_fill_card_info_commit_tv=0x7f0500a2;
+        public static final int act_fill_card_info_name_edt=0x7f05009a;
+        public static final int act_fill_card_info_open_account_city_llt=0x7f05009f;
+        public static final int act_fill_card_info_open_bank_name_edt=0x7f05009e;
+        public static final int act_first_down_scroll_tv=0x7f0500a4;
+        public static final int act_first_lst=0x7f0500a3;
+        public static final int act_first_start_find_house_tv=0x7f0500a7;
+        public static final int act_first_up_scroll=0x7f0500a5;
+        public static final int act_first_up_scroll_tv=0x7f0500a6;
+        public static final int act_forget_pwd_back=0x7f0500a8;
+        public static final int act_forget_pwd_input_auth_code_edt=0x7f0500ac;
+        public static final int act_forget_pwd_input_pwd_edt=0x7f0500ab;
+        public static final int act_forget_pwd_next_step_tv=0x7f0500ad;
+        public static final int act_forget_pwd_phone_num_edt=0x7f0500a9;
+        public static final int act_forget_pwd_resend_code=0x7f0500aa;
+        public static final int act_house_artifact1_buy_second_hand_house_tv=0x7f0501d0;
+        public static final int act_house_artifact1_find_rent_house_tv=0x7f0501d1;
+        public static final int act_house_artifact_commercial_house_rb=0x7f0501cc;
+        public static final int act_house_artifact_disposable_tv=0x7f0501cd;
+        public static final int act_house_artifact_live_house_rb=0x7f0501cb;
+        public static final int act_house_artifact_mortgage_tv=0x7f0501ce;
+        public static final int act_house_source_info_changes_back=0x7f0500ae;
+        public static final int act_houses_recommended_to_me_back=0x7f0500af;
+        public static final int act_i_am_customer_back=0x7f0500b2;
+        public static final int act_i_am_customer_court_name=0x7f0500b3;
+        public static final int act_i_am_customer_house_type=0x7f0500b6;
+        public static final int act_i_am_customer_square=0x7f0500b5;
+        public static final int act_i_am_customer_total_price=0x7f0500b4;
+        public static final int act_i_am_owner_back=0x7f0500be;
+        public static final int act_i_am_owner_lst=0x7f0500c0;
+        public static final int act_i_want_buy_house_back=0x7f0500c1;
+        public static final int act_i_want_buy_house_commit=0x7f0500cf;
+        public static final int act_i_want_buy_house_halls=0x7f0500ca;
+        public static final int act_i_want_buy_house_max_square=0x7f0500c6;
+        public static final int act_i_want_buy_house_max_total_price=0x7f0500c8;
+        public static final int act_i_want_buy_house_min_square=0x7f0500c5;
+        public static final int act_i_want_buy_house_min_total_price=0x7f0500c7;
+        public static final int act_i_want_buy_house_monthly_pay_llt=0x7f0500c3;
+        public static final int act_i_want_buy_house_monthly_pay_tv=0x7f0500c4;
+        public static final int act_i_want_buy_house_name=0x7f0500cc;
+        public static final int act_i_want_buy_house_other_desc=0x7f0500cb;
+        public static final int act_i_want_buy_house_phone=0x7f0500ce;
+        public static final int act_i_want_buy_house_rooms=0x7f0500c9;
+        public static final int act_i_want_buy_house_select_estate_name=0x7f0500c2;
+        public static final int act_i_want_buy_house_sex_cbx=0x7f0500cd;
+        public static final int act_income_statement_back=0x7f0500d0;
+        public static final int act_income_statement_lst=0x7f0500d1;
+        public static final int act_login_back=0x7f0500d3;
+        public static final int act_login_forget_pwd_tv=0x7f0500d7;
+        public static final int act_login_login_llt=0x7f0500d9;
+        public static final int act_login_login_tv=0x7f0500d8;
+        public static final int act_login_phone_num_edt=0x7f0500d5;
+        public static final int act_login_pwd_edt=0x7f0500d6;
+        public static final int act_login_register=0x7f0500d4;
+        public static final int act_main_content_pager=0x7f0500df;
+        public static final int act_main_guider_consultant=0x7f0500dd;
+        public static final int act_main_guider_home=0x7f0500db;
+        public static final int act_main_guider_llt=0x7f0500da;
+        public static final int act_main_guider_map=0x7f0500dc;
+        public static final int act_main_guider_mine=0x7f0500de;
+        public static final int act_message_back=0x7f0500e0;
+        public static final int act_message_lst=0x7f0500e1;
+        public static final int act_mortgage_cal_business_rb=0x7f0500e4;
+        public static final int act_mortgage_cal_funds_rb=0x7f0500e3;
+        public static final int act_mortgage_cal_mix_business_money=0x7f050352;
+        public static final int act_mortgage_cal_mix_funds_money=0x7f050351;
+        public static final int act_mortgage_cal_mix_rb=0x7f0500e5;
+        public static final int act_mortgage_cal_total_money=0x7f05034c;
+        public static final int act_mortgage_calculate_business_result_llt=0x7f0500ea;
+        public static final int act_mortgage_calculate_funds_result_llt=0x7f0500e9;
+        public static final int act_mortgage_calculate_mix_result_llt=0x7f0500eb;
+        public static final int act_mortgage_calculate_tv=0x7f0500e8;
+        public static final int act_mortgage_calculator_back=0x7f0500e2;
+        public static final int act_mortgage_funds_business=0x7f0500e6;
+        public static final int act_mortgage_mix=0x7f0500e7;
+        public static final int act_mortgage_mix_type_llt=0x7f050355;
+        public static final int act_mortgage_mix_type_tv=0x7f050356;
+        public static final int act_mortgage_mix_years_llt=0x7f050353;
+        public static final int act_mortgage_mix_years_tv=0x7f050354;
+        public static final int act_mortgage_type_llt=0x7f05034f;
+        public static final int act_mortgage_type_tv=0x7f050350;
+        public static final int act_mortgage_years_llt=0x7f05034d;
+        public static final int act_mortgage_years_tv=0x7f05034e;
+        public static final int act_my_bought_houses_back=0x7f0500ec;
+        public static final int act_my_demand_advised_house_resources_flt=0x7f0500f6;
+        public static final int act_my_demand_back=0x7f0500f4;
+        public static final int act_my_demand_flt=0x7f0500f5;
+        public static final int act_my_demand_info_back=0x7f0500f8;
+        public static final int act_my_demand_info_court_name=0x7f0500fa;
+        public static final int act_my_demand_info_decoration=0x7f050100;
+        public static final int act_my_demand_info_direction=0x7f050101;
+        public static final int act_my_demand_info_edit=0x7f0500f9;
+        public static final int act_my_demand_info_house_type=0x7f0500fd;
+        public static final int act_my_demand_info_interest=0x7f0500ff;
+        public static final int act_my_demand_info_square=0x7f0500fc;
+        public static final int act_my_demand_info_total_price=0x7f0500fb;
+        public static final int act_my_demand_info_type=0x7f0500fe;
+        public static final int act_my_demand_my_buy_house_flt=0x7f0500f7;
+        public static final int act_my_house_list_back=0x7f050104;
+        public static final int act_my_house_list_go_to_see=0x7f05010a;
+        public static final int act_my_house_list_my_bought=0x7f050105;
+        public static final int act_my_house_list_my_sold=0x7f050106;
+        public static final int act_my_house_list_no_house_prompt_img=0x7f050108;
+        public static final int act_my_house_list_no_house_prompt_llt=0x7f050107;
+        public static final int act_my_house_list_no_house_prompt_tv=0x7f050109;
+        public static final int act_my_house_resources_back=0x7f05010d;
+        public static final int act_my_house_resources_msg_changes=0x7f050110;
+        public static final int act_my_house_resources_my_house=0x7f05010e;
+        public static final int act_my_house_resources_see_house_detail=0x7f05010f;
+        public static final int act_my_proxy_back=0x7f050111;
+        public static final int act_my_proxy_see_my_houses=0x7f050113;
+        public static final int act_my_proxy_sell_house=0x7f050112;
+        public static final int act_my_sell_house_list_back=0x7f050114;
+        public static final int act_nearby_detail_back=0x7f050117;
+        public static final int act_nearby_detail_bank=0x7f05011a;
+        public static final int act_nearby_detail_body_building=0x7f050121;
+        public static final int act_nearby_detail_bus=0x7f05011b;
+        public static final int act_nearby_detail_foods=0x7f050122;
+        public static final int act_nearby_detail_hostipal=0x7f05011e;
+        public static final int act_nearby_detail_leisure=0x7f05011f;
+        public static final int act_nearby_detail_map_view=0x7f050119;
+        public static final int act_nearby_detail_school=0x7f05011d;
+        public static final int act_nearby_detail_shopping=0x7f050120;
+        public static final int act_nearby_detail_subway=0x7f05011c;
+        public static final int act_nearby_detail_title=0x7f050118;
+        public static final int act_new_house_area_llt=0x7f050127;
+        public static final int act_new_house_area_tv=0x7f050128;
+        public static final int act_new_house_back=0x7f050123;
+        public static final int act_new_house_clear_key_wrods=0x7f050125;
+        public static final int act_new_house_detail_3d=0x7f050147;
+        public static final int act_new_house_detail_area_tv=0x7f05013e;
+        public static final int act_new_house_detail_average_price_tv=0x7f05013c;
+        public static final int act_new_house_detail_back=0x7f050136;
+        public static final int act_new_house_detail_builder_company_tv=0x7f050144;
+        public static final int act_new_house_detail_calculator_tv=0x7f050146;
+        public static final int act_new_house_detail_consult_tv=0x7f05013d;
+        public static final int act_new_house_detail_decoration_tv=0x7f050141;
+        public static final int act_new_house_detail_greening_rate_tv=0x7f050142;
+        public static final int act_new_house_detail_house_introduction_tv=0x7f05014b;
+        public static final int act_new_house_detail_house_photo=0x7f050148;
+        public static final int act_new_house_detail_house_photo_index_tv=0x7f05014a;
+        public static final int act_new_house_detail_house_photo_pager=0x7f050149;
+        public static final int act_new_house_detail_location=0x7f05014c;
+        public static final int act_new_house_detail_main_house_type_tv=0x7f050145;
+        public static final int act_new_house_detail_map_view=0x7f05014d;
+        public static final int act_new_house_detail_mgt_company_tv=0x7f050143;
+        public static final int act_new_house_detail_pager=0x7f050139;
+        public static final int act_new_house_detail_photo_index_tv=0x7f05013b;
+        public static final int act_new_house_detail_plot_ratio_tv=0x7f05003c;
+        public static final int act_new_house_detail_property_type_tv=0x7f050140;
+        public static final int act_new_house_detail_share=0x7f050138;
+        public static final int act_new_house_detail_square_tv=0x7f05013f;
+        public static final int act_new_house_detail_title=0x7f050137;
+        public static final int act_new_house_detail_title_tv=0x7f05013a;
+        public static final int act_new_house_key_word_edt=0x7f050124;
+        public static final int act_new_house_list_map=0x7f050126;
+        public static final int act_new_house_locate=0x7f050131;
+        public static final int act_new_house_map=0x7f050130;
+        public static final int act_new_house_map_flt=0x7f05012f;
+        public static final int act_new_house_more_llt=0x7f05012d;
+        public static final int act_new_house_more_tv=0x7f05012e;
+        public static final int act_new_house_nearby=0x7f050133;
+        public static final int act_new_house_subway=0x7f050132;
+        public static final int act_new_house_total_price_llt=0x7f050129;
+        public static final int act_new_house_total_price_tv=0x7f05012a;
+        public static final int act_new_house_type_llt=0x7f05012b;
+        public static final int act_new_house_type_tv=0x7f05012c;
+        public static final int act_news_detail_back=0x7f05014e;
+        public static final int act_news_detail_webview=0x7f05014f;
+        public static final int act_nick_name_commit=0x7f050152;
+        public static final int act_nick_name_edt=0x7f050151;
+        public static final int act_nick_name_update_back=0x7f050150;
+        public static final int act_picturebrowse_indicator=0x7f050154;
+        public static final int act_picturebrowse_viewpager=0x7f050153;
+        public static final int act_protocol_back=0x7f050235;
+        public static final int act_proxy_detail_back=0x7f050155;
+        public static final int act_proxy_detail_bottom_llt=0x7f050159;
+        public static final int act_proxy_detail_dial_top=0x7f050156;
+        public static final int act_proxy_detail_msg_llt=0x7f05015a;
+        public static final int act_proxy_sell_house_back=0x7f05015b;
+        public static final int act_proxy_sell_house_commit=0x7f050171;
+        public static final int act_proxy_sell_house_decoration_llt=0x7f050167;
+        public static final int act_proxy_sell_house_decoration_tv=0x7f050168;
+        public static final int act_proxy_sell_house_direction_llt=0x7f050165;
+        public static final int act_proxy_sell_house_direction_tv=0x7f050166;
+        public static final int act_proxy_sell_house_halls=0x7f050160;
+        public static final int act_proxy_sell_house_name=0x7f05016e;
+        public static final int act_proxy_sell_house_phone=0x7f050170;
+        public static final int act_proxy_sell_house_rooms=0x7f05015f;
+        public static final int act_proxy_sell_house_select_estate_name=0x7f05015c;
+        public static final int act_proxy_sell_house_select_house_type=0x7f05015d;
+        public static final int act_proxy_sell_house_sex_cbx=0x7f05016f;
+        public static final int act_proxy_sell_house_source_desc=0x7f05016d;
+        public static final int act_proxy_sell_house_source_title=0x7f05016c;
+        public static final int act_proxy_sell_house_square=0x7f050164;
+        public static final int act_proxy_sell_house_toilets=0x7f050161;
+        public static final int act_proxy_sell_house_total_floors=0x7f050163;
+        public static final int act_proxy_sell_house_type_tv=0x7f05015e;
+        public static final int act_proxy_sell_house_which_building=0x7f050169;
+        public static final int act_proxy_sell_house_which_floor=0x7f050162;
+        public static final int act_proxy_sell_house_which_num=0x7f05016b;
+        public static final int act_proxy_sell_house_which_unit=0x7f05016a;
+        public static final int act_query_after_sale_avatar1=0x7f050175;
+        public static final int act_query_after_sale_avatar2=0x7f05017b;
+        public static final int act_query_after_sale_avatar3=0x7f050181;
+        public static final int act_query_after_sale_back=0x7f050172;
+        public static final int act_query_after_sale_complain1=0x7f050177;
+        public static final int act_query_after_sale_complain2=0x7f05017d;
+        public static final int act_query_after_sale_complain3=0x7f050183;
+        public static final int act_query_after_sale_employe1=0x7f050174;
+        public static final int act_query_after_sale_employe2=0x7f05017a;
+        public static final int act_query_after_sale_employe3=0x7f050180;
+        public static final int act_query_after_sale_line1=0x7f050179;
+        public static final int act_query_after_sale_line2=0x7f05017f;
+        public static final int act_query_after_sale_line3=0x7f050185;
+        public static final int act_query_after_sale_lst=0x7f050186;
+        public static final int act_query_after_sale_name1=0x7f050176;
+        public static final int act_query_after_sale_name2=0x7f05017c;
+        public static final int act_query_after_sale_name3=0x7f050182;
+        public static final int act_query_after_sale_support1=0x7f050178;
+        public static final int act_query_after_sale_support2=0x7f05017e;
+        public static final int act_query_after_sale_support3=0x7f050184;
+        public static final int act_query_after_sale_title=0x7f050173;
+        public static final int act_recommend_house_detail_back=0x7f050187;
+        public static final int act_recommend_house_list_back=0x7f050188;
+        public static final int act_register_auth_code_tv=0x7f05018e;
+        public static final int act_register_back=0x7f05018b;
+        public static final int act_register_fee_hunter_tv=0x7f05018c;
+        public static final int act_register_input_auth_code_edt=0x7f05018f;
+        public static final int act_register_input_pwd_edt=0x7f050190;
+        public static final int act_register_phone_num_edt=0x7f05018d;
+        public static final int act_register_phone_recommend_num_edt=0x7f050191;
+        public static final int act_register_protocol_cbx=0x7f050192;
+        public static final int act_register_protocol_tv=0x7f050193;
+        public static final int act_register_tv=0x7f050194;
+        public static final int act_rent_house_area_llt=0x7f050198;
+        public static final int act_rent_house_area_tv=0x7f050199;
+        public static final int act_rent_house_back=0x7f050195;
+        public static final int act_rent_house_clear_key_wrods=0x7f050197;
+        public static final int act_rent_house_detail_Heating_tv=0x7f0501ad;
+        public static final int act_rent_house_detail_agent_avatar=0x7f0501b8;
+        public static final int act_rent_house_detail_agent_dial=0x7f0501bb;
+        public static final int act_rent_house_detail_agent_msg=0x7f0501bc;
+        public static final int act_rent_house_detail_agent_name=0x7f0501b9;
+        public static final int act_rent_house_detail_agent_phone=0x7f0501ba;
+        public static final int act_rent_house_detail_back=0x7f0501a1;
+        public static final int act_rent_house_detail_decoration_tv=0x7f0501ac;
+        public static final int act_rent_house_detail_direction_tv=0x7f0501ab;
+        public static final int act_rent_house_detail_estatename_tv=0x7f0501af;
+        public static final int act_rent_house_detail_floor_tv=0x7f0501aa;
+        public static final int act_rent_house_detail_house_type=0x7f0501a8;
+        public static final int act_rent_house_detail_inner_three_dimession_display=0x7f0501b1;
+        public static final int act_rent_house_detail_inner_three_dimession_display_line=0x7f0501b0;
+        public static final int act_rent_house_detail_map=0x7f0501b6;
+        public static final int act_rent_house_detail_more=0x7f0501a3;
+        public static final int act_rent_house_detail_num_tv=0x7f0501b4;
+        public static final int act_rent_house_detail_page_title=0x7f0501a2;
+        public static final int act_rent_house_detail_pager=0x7f0501a4;
+        public static final int act_rent_house_detail_photo_index_tv=0x7f0501a5;
+        public static final int act_rent_house_detail_price_trend=0x7f0501b7;
+        public static final int act_rent_house_detail_rent_price=0x7f0501a7;
+        public static final int act_rent_house_detail_sand_table_display=0x7f0501b3;
+        public static final int act_rent_house_detail_sand_table_display_line=0x7f0501b2;
+        public static final int act_rent_house_detail_share=0x7f0501bd;
+        public static final int act_rent_house_detail_square=0x7f0501a9;
+        public static final int act_rent_house_detail_title=0x7f0501a6;
+        public static final int act_rent_house_detail_year_tv=0x7f0501ae;
+        public static final int act_rent_house_more_llt=0x7f05019e;
+        public static final int act_rent_house_nearby_detail_tv=0x7f0501b5;
+        public static final int act_rent_house_rent_price_llt=0x7f05019a;
+        public static final int act_rent_house_rent_price_tv=0x7f05019b;
+        public static final int act_rent_house_search_edt=0x7f050196;
+        public static final int act_rent_house_type_llt=0x7f05019c;
+        public static final int act_rent_house_type_tv=0x7f05019d;
+        public static final int act_residential_transaction_history_back=0x7f0501be;
+        public static final int act_residential_transaction_history_filter=0x7f0501c0;
+        public static final int act_residential_transaction_history_lst=0x7f0501c1;
+        public static final int act_residential_transaction_history_title=0x7f0501bf;
+        public static final int act_sand_table_display_back=0x7f0501c2;
+        public static final int act_sand_table_display_title=0x7f0501c3;
+        public static final int act_sand_table_display_webview=0x7f0501c4;
+        public static final int act_search_house_additional_info=0x7f0501df;
+        public static final int act_search_house_additional_info_container=0x7f0501dd;
+        public static final int act_search_house_additional_info_grid_container=0x7f0501de;
+        public static final int act_search_house_artifact1_back=0x7f0501cf;
+        public static final int act_search_house_artifact_back=0x7f0501ca;
+        public static final int act_search_house_artifact_budget_llt=0x7f0501d3;
+        public static final int act_search_house_artifact_budget_tv=0x7f0501d4;
+        public static final int act_search_house_artifact_how_many_rooms_prompt_tv=0x7f0501da;
+        public static final int act_search_house_artifact_requirement_back=0x7f0501d2;
+        public static final int act_search_house_artifact_requirement_commit_tv=0x7f0501e0;
+        public static final int act_search_house_artifact_result_back=0x7f0501e1;
+        public static final int act_search_house_artifact_result_change_another=0x7f0501e2;
+        public static final int act_search_house_artifact_where_llt=0x7f0501d5;
+        public static final int act_search_house_artifact_wheree_prompt_tv=0x7f0501d6;
+        public static final int act_search_house_artifact_wheree_tv=0x7f0501d7;
+        public static final int act_search_house_auto_complete=0x7f0501c9;
+        public static final int act_search_house_cancel_tv=0x7f0501c8;
+        public static final int act_search_house_clear_key_wrods=0x7f0501c7;
+        public static final int act_search_house_house_type_tv=0x7f0501c5;
+        public static final int act_search_house_houses_grid_container=0x7f0501db;
+        public static final int act_search_house_key_words=0x7f0501c6;
+        public static final int act_search_house_month_pay_llt=0x7f0501d8;
+        public static final int act_search_house_month_pay_tv=0x7f0501d9;
+        public static final int act_search_house_rooms=0x7f0501dc;
+        public static final int act_second_hand_house_area_llt=0x7f0501e8;
+        public static final int act_second_hand_house_area_tv=0x7f0501e9;
+        public static final int act_second_hand_house_back=0x7f0501e4;
+        public static final int act_second_hand_house_clear_key_wrods=0x7f0501e6;
+        public static final int act_second_hand_house_detail_agent_msg=0x7f0500d2;
+        public static final int act_second_hand_house_detail_apartment_layout=0x7f050213;
+        public static final int act_second_hand_house_detail_attention=0x7f050219;
+        public static final int act_second_hand_house_detail_back=0x7f0501f7;
+        public static final int act_second_hand_house_detail_bid_date=0x7f050215;
+        public static final int act_second_hand_house_detail_bid_price=0x7f050214;
+        public static final int act_second_hand_house_detail_calculator_tv=0x7f050201;
+        public static final int act_second_hand_house_detail_consult_agent=0x7f05021a;
+        public static final int act_second_hand_house_detail_court=0x7f050208;
+        public static final int act_second_hand_house_detail_decoration_tv=0x7f050206;
+        public static final int act_second_hand_house_detail_direction_tv=0x7f050205;
+        public static final int act_second_hand_house_detail_estatename_tv=0x7f050209;
+        public static final int act_second_hand_house_detail_floor_tv=0x7f050204;
+        public static final int act_second_hand_house_detail_follow_persons=0x7f05020f;
+        public static final int act_second_hand_house_detail_inner_three_dimession_display=0x7f05020b;
+        public static final int act_second_hand_house_detail_inner_three_dimession_display_line=0x7f05020a;
+        public static final int act_second_hand_house_detail_map_view=0x7f050211;
+        public static final int act_second_hand_house_detail_monthly_pay_tv=0x7f050203;
+        public static final int act_second_hand_house_detail_num_tv=0x7f050207;
+        public static final int act_second_hand_house_detail_partialprice_tv=0x7f050202;
+        public static final int act_second_hand_house_detail_price_trend=0x7f050216;
+        public static final int act_second_hand_house_detail_sand_table_display=0x7f05020d;
+        public static final int act_second_hand_house_detail_sand_table_display_line=0x7f05020c;
+        public static final int act_second_hand_house_detail_share=0x7f050218;
+        public static final int act_second_hand_house_detail_title=0x7f0501f8;
+        public static final int act_second_hand_house_detail_unit_price_tv=0x7f050200;
+        public static final int act_second_hand_house_key_words=0x7f0501e5;
+        public static final int act_second_hand_house_list_map=0x7f0501e7;
+        public static final int act_second_hand_house_locate=0x7f0501f2;
+        public static final int act_second_hand_house_map=0x7f0501f1;
+        public static final int act_second_hand_house_map_flt=0x7f0501f0;
+        public static final int act_second_hand_house_more_llt=0x7f0501ee;
+        public static final int act_second_hand_house_more_tv=0x7f0501ef;
+        public static final int act_second_hand_house_nearby=0x7f0501f4;
+        public static final int act_second_hand_house_subway=0x7f0501f3;
+        public static final int act_second_hand_house_total_price_llt=0x7f0501ea;
+        public static final int act_second_hand_house_total_price_tv=0x7f0501eb;
+        public static final int act_second_hand_house_type_llt=0x7f0501ec;
+        public static final int act_second_hand_house_type_tv=0x7f0501ed;
+        public static final int act_second_handhouse_nearby_detail_tv=0x7f050210;
+        public static final int act_second_handhouse_see_house_record_tv=0x7f05020e;
+        public static final int act_second_handhouse_transaction_history_tv=0x7f050212;
+        public static final int act_second_house_detail_house_type=0x7f0501fd;
+        public static final int act_second_house_detail_label=0x7f0501ff;
+        public static final int act_second_house_detail_pager=0x7f0501f9;
+        public static final int act_second_house_detail_photo_index_tv=0x7f0501fa;
+        public static final int act_second_house_detail_square=0x7f0501fe;
+        public static final int act_second_house_detail_title=0x7f0501fb;
+        public static final int act_second_house_detail_total_price=0x7f0501fc;
+        public static final int act_see_house_record_back=0x7f05021b;
+        public static final int act_see_house_record_complain=0x7f05021e;
+        public static final int act_see_house_record_lst=0x7f050220;
+        public static final int act_see_house_record_recent=0x7f05021d;
+        public static final int act_see_house_record_title=0x7f05021c;
+        public static final int act_select_estate_back=0x7f050221;
+        public static final int act_select_estate_clear_key_wrods=0x7f050223;
+        public static final int act_select_estate_keywords_edt=0x7f050222;
+        public static final int act_settings_about_us=0x7f05022e;
+        public static final int act_settings_back=0x7f050225;
+        public static final int act_settings_cache_size=0x7f05022c;
+        public static final int act_settings_change_avatar=0x7f050226;
+        public static final int act_settings_change_nickname=0x7f050228;
+        public static final int act_settings_change_pwd=0x7f050229;
+        public static final int act_settings_check_updates=0x7f05022d;
+        public static final int act_settings_clear_cache=0x7f05022b;
+        public static final int act_settings_common_questions=0x7f05022f;
+        public static final int act_settings_logout=0x7f050230;
+        public static final int act_settings_msg_push_toggle=0x7f05022a;
+        public static final int act_shangjinlieren_back=0x7f050231;
+        public static final int act_shangjinlieren_info_back=0x7f050234;
+        public static final int act_shangjinlieren_login_tv=0x7f050233;
+        public static final int act_shangjinlieren_register_tv=0x7f050232;
+        public static final int act_support_back=0x7f050236;
+        public static final int act_support_commit=0x7f050239;
+        public static final int act_support_content_edt=0x7f050238;
+        public static final int act_support_title=0x7f050237;
+        public static final int adapter_agent_info_desc=0x7f05023c;
+        public static final int adapter_agent_info_distance=0x7f050240;
+        public static final int adapter_agent_info_est_name=0x7f05023d;
+        public static final int adapter_agent_info_photo=0x7f05023a;
+        public static final int adapter_agent_info_publish_time=0x7f05023f;
+        public static final int adapter_agent_info_title=0x7f05023b;
+        public static final int adapter_agent_info_total_price=0x7f05023e;
+        public static final int adapter_bank_province_or_city=0x7f050241;
+        public static final int adapter_chat_left_avatar=0x7f050311;
+        public static final int adapter_chat_left_time=0x7f050310;
+        public static final int adapter_chat_right_time=0x7f050313;
+        public static final int adapter_city_name_tv=0x7f050242;
+        public static final int adapter_client_info_change_content=0x7f050245;
+        public static final int adapter_client_info_change_date_type=0x7f050243;
+        public static final int adapter_client_info_change_name=0x7f050244;
+        public static final int adapter_common_problem_answer=0x7f050247;
+        public static final int adapter_common_problem_question=0x7f050246;
+        public static final int adapter_company_announcement_detail_comment_content=0x7f05024a;
+        public static final int adapter_company_announcement_detail_comment_name=0x7f050248;
+        public static final int adapter_company_announcement_detail_comment_time=0x7f050249;
+        public static final int adapter_conditon_name_tv=0x7f05024c;
+        public static final int adapter_estate_select_name=0x7f05024d;
+        public static final int adapter_fee_hunter_company_announcement_content=0x7f05024f;
+        public static final int adapter_fee_hunter_company_announcement_time=0x7f050250;
+        public static final int adapter_fee_hunter_company_announcement_title=0x7f05024e;
+        public static final int adapter_fee_hunter_my_customer_check=0x7f050254;
+        public static final int adapter_fee_hunter_my_customer_estate=0x7f050253;
+        public static final int adapter_fee_hunter_my_customer_name=0x7f050251;
+        public static final int adapter_fee_hunter_my_customer_phone=0x7f050252;
+        public static final int adapter_fee_hunter_recommend_house_source_list_desc=0x7f050257;
+        public static final int adapter_fee_hunter_recommend_house_source_list_est_name=0x7f050258;
+        public static final int adapter_fee_hunter_recommend_house_source_list_photo=0x7f050255;
+        public static final int adapter_fee_hunter_recommend_house_source_list_price=0x7f050259;
+        public static final int adapter_fee_hunter_recommend_house_source_list_publish_time=0x7f05025a;
+        public static final int adapter_fee_hunter_recommend_house_source_list_title=0x7f050256;
+        public static final int adapter_first_desc_four=0x7f050260;
+        public static final int adapter_first_desc_one=0x7f05025d;
+        public static final int adapter_first_desc_three=0x7f05025f;
+        public static final int adapter_first_desc_two=0x7f05025e;
+        public static final int adapter_first_lst_container=0x7f05025b;
+        public static final int adapter_first_lst_img=0x7f05025c;
+        public static final int adapter_home_recommend_addr=0x7f050267;
+        public static final int adapter_home_recommend_desc=0x7f050268;
+        public static final int adapter_home_recommend_photo=0x7f050265;
+        public static final int adapter_home_recommend_price=0x7f050269;
+        public static final int adapter_home_recommend_title=0x7f050266;
+        public static final int adapter_house_recommended_to_me_check=0x7f05026f;
+        public static final int adapter_house_recommended_to_me_date=0x7f05026d;
+        public static final int adapter_house_recommended_to_me_desc=0x7f05026c;
+        public static final int adapter_house_recommended_to_me_finacial_detail=0x7f050270;
+        public static final int adapter_house_recommended_to_me_img=0x7f05026a;
+        public static final int adapter_house_recommended_to_me_price=0x7f05026e;
+        public static final int adapter_house_recommended_to_me_title=0x7f05026b;
+        public static final int adapter_i_am_owner_action1=0x7f050276;
+        public static final int adapter_i_am_owner_action2=0x7f050277;
+        public static final int adapter_i_am_owner_desc=0x7f050274;
+        public static final int adapter_i_am_owner_money=0x7f050275;
+        public static final int adapter_i_am_owner_photo=0x7f050271;
+        public static final int adapter_i_am_owner_status=0x7f050272;
+        public static final int adapter_i_am_owner_title=0x7f050273;
+        public static final int adapter_income_statement_broker_name=0x7f05027c;
+        public static final int adapter_income_statement_date=0x7f050278;
+        public static final int adapter_income_statement_invoice_state=0x7f05027b;
+        public static final int adapter_income_statement_price=0x7f05027a;
+        public static final int adapter_income_statement_type=0x7f050279;
+        public static final int adapter_message_avatar=0x7f05027d;
+        public static final int adapter_message_content=0x7f05027f;
+        public static final int adapter_message_msg_count=0x7f050280;
+        public static final int adapter_message_name=0x7f05027e;
+        public static final int adapter_more_detail_cbx=0x7f050282;
+        public static final int adapter_more_detail_txt=0x7f050281;
+        public static final int adapter_more_type_txt=0x7f050283;
+        public static final int adapter_mortgage_year_tv=0x7f050284;
+        public static final int adapter_my_attention_cancel_collection=0x7f05028b;
+        public static final int adapter_my_attention_desc=0x7f050287;
+        public static final int adapter_my_attention_estate_name=0x7f050288;
+        public static final int adapter_my_attention_img=0x7f050285;
+        public static final int adapter_my_attention_online_consult=0x7f05028a;
+        public static final int adapter_my_attention_price=0x7f050289;
+        public static final int adapter_my_attention_title=0x7f050286;
+        public static final int adapter_my_bought_house_date=0x7f05028f;
+        public static final int adapter_my_bought_house_desc=0x7f05028e;
+        public static final int adapter_my_bought_house_img=0x7f05028c;
+        public static final int adapter_my_bought_house_price=0x7f050290;
+        public static final int adapter_my_bought_house_progress_check=0x7f050291;
+        public static final int adapter_my_bought_house_progress_finacial_detail=0x7f050292;
+        public static final int adapter_my_bought_house_title=0x7f05028d;
+        public static final int adapter_my_customer_condition=0x7f050293;
+        public static final int adapter_my_house_date=0x7f050297;
+        public static final int adapter_my_house_desc=0x7f050296;
+        public static final int adapter_my_house_img=0x7f050294;
+        public static final int adapter_my_house_price=0x7f050298;
+        public static final int adapter_my_house_source_progress=0x7f050299;
+        public static final int adapter_my_house_source_see_house_record=0x7f05029a;
+        public static final int adapter_my_house_title=0x7f050295;
+        public static final int adapter_new_house_desc=0x7f05029d;
+        public static final int adapter_new_house_distance=0x7f0502a3;
+        public static final int adapter_new_house_label_one=0x7f0502a0;
+        public static final int adapter_new_house_label_three=0x7f0502a2;
+        public static final int adapter_new_house_label_two=0x7f0502a1;
+        public static final int adapter_new_house_photo=0x7f05029b;
+        public static final int adapter_new_house_price=0x7f05029f;
+        public static final int adapter_new_house_square=0x7f05029e;
+        public static final int adapter_new_house_title=0x7f05029c;
+        public static final int adapter_new_more_tv=0x7f0502a8;
+        public static final int adapter_news_item_content=0x7f0502a6;
+        public static final int adapter_news_item_name=0x7f0502a5;
+        public static final int adapter_news_item_photo=0x7f0502a4;
+        public static final int adapter_news_item_time=0x7f0502a7;
+        public static final int adapter_photo_img=0x7f0502a9;
+        public static final int adapter_picturebrowse_zmg=0x7f0502aa;
+        public static final int adapter_query_after_sale_content=0x7f0502ad;
+        public static final int adapter_query_after_sale_date=0x7f0502ae;
+        public static final int adapter_query_after_sale_name=0x7f0502ab;
+        public static final int adapter_query_after_sale_operator=0x7f0502ac;
+        public static final int adapter_rent_house_desc=0x7f0502b3;
+        public static final int adapter_rent_house_distance=0x7f0502b7;
+        public static final int adapter_rent_house_est_name=0x7f0502b4;
+        public static final int adapter_rent_house_photo=0x7f0502b1;
+        public static final int adapter_rent_house_publish_time=0x7f0502b6;
+        public static final int adapter_rent_house_rent_price=0x7f0502b5;
+        public static final int adapter_rent_house_title=0x7f0502b2;
+        public static final int adapter_residential_transaction_history_broker_name=0x7f0502bd;
+        public static final int adapter_residential_transaction_history_consult=0x7f0502be;
+        public static final int adapter_residential_transaction_history_desc=0x7f0502ba;
+        public static final int adapter_residential_transaction_history_photo=0x7f0502b8;
+        public static final int adapter_residential_transaction_history_publish_time=0x7f0502bc;
+        public static final int adapter_residential_transaction_history_title=0x7f0502b9;
+        public static final int adapter_residential_transaction_history_total_price=0x7f0502bb;
+        public static final int adapter_search_house_artifact_access_quantity=0x7f0502cc;
+        public static final int adapter_search_house_artifact_avatar=0x7f0502c7;
+        public static final int adapter_search_house_artifact_consult=0x7f0502cd;
+        public static final int adapter_search_house_artifact_dial=0x7f0502ce;
+        public static final int adapter_search_house_artifact_name=0x7f0502c8;
+        public static final int adapter_search_house_artifact_phone=0x7f0502c9;
+        public static final int adapter_search_house_artifact_rent_houses=0x7f0502cb;
+        public static final int adapter_search_house_artifact_requirement_cbx=0x7f0502c6;
+        public static final int adapter_search_house_artifact_second_hand_houses=0x7f0502ca;
+        public static final int adapter_search_house_desc=0x7f0502c1;
+        public static final int adapter_search_house_distance=0x7f0502c5;
+        public static final int adapter_search_house_est_name=0x7f0502c2;
+        public static final int adapter_search_house_photo=0x7f0502bf;
+        public static final int adapter_search_house_publish_time=0x7f0502c4;
+        public static final int adapter_search_house_rent_price=0x7f0502c3;
+        public static final int adapter_search_house_title=0x7f0502c0;
+        public static final int adapter_second_hand_house_desc=0x7f0502d1;
+        public static final int adapter_second_hand_house_distance=0x7f0502d5;
+        public static final int adapter_second_hand_house_est_name=0x7f0502d2;
+        public static final int adapter_second_hand_house_photo=0x7f0502cf;
+        public static final int adapter_second_hand_house_publish_time=0x7f0502d4;
+        public static final int adapter_second_hand_house_title=0x7f0502d0;
+        public static final int adapter_second_hand_house_total_price=0x7f0502d3;
+        public static final int adapter_see_house_record_avtar=0x7f0502d6;
+        public static final int adapter_see_house_record_name=0x7f0502d7;
+        public static final int adapter_see_house_record_phone=0x7f0502d8;
+        public static final int adapter_wallet_desc=0x7f0502d9;
+        public static final int adapter_wallet_money=0x7f0502da;
         public static final int applyHeight=0x7f050006;
         public static final int applyWidth=0x7f050005;
-        public static final int bmapView=0x7f0502f0;
-        public static final int cbx_adapter_complain_label=0x7f050249;
+        public static final int below=0x7f050007;
+        public static final int bmapView=0x7f0502f6;
+        public static final int cbx_adapter_complain_label=0x7f05024b;
         public static final int circle=0x7f050001;
-        public static final int dialog_1_text=0x7f0502d7;
-        public static final int dialog_proxy_cancel=0x7f0502d8;
-        public static final int dialog_proxy_go=0x7f0502d9;
-        public static final int edt_search_properties=0x7f050336;
-        public static final int fact_select_estate_list=0x7f050222;
-        public static final int flt_pop_house_detail_agent=0x7f05031a;
-        public static final int frag_consultation_back=0x7f0502da;
-        public static final int frag_consultation_more_rb=0x7f0502e1;
-        public static final int frag_consultation_one_rb=0x7f0502db;
-        public static final int frag_consultation_three_rb=0x7f0502df;
-        public static final int frag_consultation_two_rb=0x7f0502dd;
-        public static final int frag_home_new_house=0x7f050261;
-        public static final int frag_home_ptz=0x7f0502e3;
-        public static final int frag_home_rent_house=0x7f050260;
-        public static final int frag_home_search_house=0x7f050262;
-        public static final int frag_home_second_hand_house=0x7f05025f;
-        public static final int frag_main_news_line_one=0x7f0502dc;
-        public static final int frag_main_news_line_three=0x7f0502e0;
-        public static final int frag_main_news_line_two=0x7f0502de;
-        public static final int frag_map_back=0x7f0502e5;
-        public static final int frag_map_find_house_area_llt=0x7f0502e7;
-        public static final int frag_map_find_house_area_tv=0x7f0502e8;
-        public static final int frag_map_find_house_locate=0x7f0502f1;
-        public static final int frag_map_find_house_map_flt=0x7f0502ef;
-        public static final int frag_map_find_house_more_llt=0x7f0502ed;
-        public static final int frag_map_find_house_more_tv=0x7f0502ee;
-        public static final int frag_map_find_house_nearby=0x7f0502f3;
-        public static final int frag_map_find_house_subway=0x7f0502f2;
-        public static final int frag_map_find_house_total_price_llt=0x7f0502e9;
-        public static final int frag_map_find_house_total_price_tv=0x7f0502ea;
-        public static final int frag_map_find_house_type_llt=0x7f0502eb;
-        public static final int frag_map_find_house_type_tv=0x7f0502ec;
-        public static final int frag_map_reset=0x7f0502e6;
-        public static final int frag_mine_attention_house_source_flt=0x7f0502fd;
-        public static final int frag_mine_avatar=0x7f0502f5;
-        public static final int frag_mine_back=0x7f0502f4;
-        public static final int frag_mine_feedback_flt=0x7f050302;
-        public static final int frag_mine_login_register=0x7f0502f6;
-        public static final int frag_mine_mortgage_calculator_flt=0x7f050301;
-        public static final int frag_mine_msg_count=0x7f0502fc;
-        public static final int frag_mine_msg_flt=0x7f0502fb;
-        public static final int frag_mine_my_demand_llt=0x7f0502ff;
-        public static final int frag_mine_my_house_resources_flt=0x7f050300;
-        public static final int frag_mine_my_proxy_llt=0x7f0502fe;
-        public static final int frag_mine_phone=0x7f0502f9;
-        public static final int frag_mine_settings_flt=0x7f050303;
-        public static final int frag_mine_user_info_llt=0x7f0502f7;
-        public static final int frag_news_pager=0x7f0502e2;
-        public static final int grid_complain_label=0x7f050028;
+        public static final int dialog_1_text=0x7f0502db;
+        public static final int dialog_proxy_cancel=0x7f0502dc;
+        public static final int dialog_proxy_go=0x7f0502dd;
+        public static final int edt_search_properties=0x7f05033c;
+        public static final int fact_select_estate_list=0x7f050224;
+        public static final int flt_pop_house_detail_agent=0x7f050320;
+        public static final int frag_consultation_back=0x7f0502de;
+        public static final int frag_consultation_more_rb=0x7f0502e7;
+        public static final int frag_consultation_one_rb=0x7f0502e1;
+        public static final int frag_consultation_three_rb=0x7f0502e5;
+        public static final int frag_consultation_two_rb=0x7f0502e3;
+        public static final int frag_home_new_house=0x7f050263;
+        public static final int frag_home_ptz=0x7f0502e9;
+        public static final int frag_home_rent_house=0x7f050262;
+        public static final int frag_home_search_house=0x7f050264;
+        public static final int frag_home_second_hand_house=0x7f050261;
+        public static final int frag_main_news_line_one=0x7f0502e2;
+        public static final int frag_main_news_line_three=0x7f0502e6;
+        public static final int frag_main_news_line_two=0x7f0502e4;
+        public static final int frag_map_back=0x7f0502eb;
+        public static final int frag_map_find_house_area_llt=0x7f0502ed;
+        public static final int frag_map_find_house_area_tv=0x7f0502ee;
+        public static final int frag_map_find_house_locate=0x7f0502f7;
+        public static final int frag_map_find_house_map_flt=0x7f0502f5;
+        public static final int frag_map_find_house_more_llt=0x7f0502f3;
+        public static final int frag_map_find_house_more_tv=0x7f0502f4;
+        public static final int frag_map_find_house_nearby=0x7f0502f9;
+        public static final int frag_map_find_house_subway=0x7f0502f8;
+        public static final int frag_map_find_house_total_price_llt=0x7f0502ef;
+        public static final int frag_map_find_house_total_price_tv=0x7f0502f0;
+        public static final int frag_map_find_house_type_llt=0x7f0502f1;
+        public static final int frag_map_find_house_type_tv=0x7f0502f2;
+        public static final int frag_map_reset=0x7f0502ec;
+        public static final int frag_mine_attention_house_source_flt=0x7f050303;
+        public static final int frag_mine_avatar=0x7f0502fb;
+        public static final int frag_mine_back=0x7f0502fa;
+        public static final int frag_mine_feedback_flt=0x7f050308;
+        public static final int frag_mine_login_register=0x7f0502fc;
+        public static final int frag_mine_mortgage_calculator_flt=0x7f050307;
+        public static final int frag_mine_msg_count=0x7f050302;
+        public static final int frag_mine_msg_flt=0x7f050301;
+        public static final int frag_mine_my_demand_llt=0x7f050305;
+        public static final int frag_mine_my_house_resources_flt=0x7f050306;
+        public static final int frag_mine_my_proxy_llt=0x7f050304;
+        public static final int frag_mine_phone=0x7f0502ff;
+        public static final int frag_mine_settings_flt=0x7f050309;
+        public static final int frag_mine_user_info_llt=0x7f0502fd;
+        public static final int frag_news_pager=0x7f0502e8;
+        public static final int grid_complain_label=0x7f05002a;
         /**  ptr 
          */
-        public static final int gridview=0x7f050007;
-        public static final int header_company_announcement_detail_comments_num=0x7f050309;
-        public static final int header_company_announcement_detail_content=0x7f050308;
-        public static final int header_company_announcement_detail_time=0x7f050307;
-        public static final int header_company_announcement_detail_title=0x7f050306;
-        public static final int iv_avatar_right=0x7f05030e;
-        public static final int iv_frag_home_shangjinglieren=0x7f0502e4;
-        public static final int iv_pop_house_detail_agent_avatar=0x7f05031c;
-        public static final int iv_pop_house_detail_agent_call=0x7f05031f;
-        public static final int iv_pop_house_detail_agent_msg=0x7f050320;
-        public static final int iv_settings_avatar=0x7f050225;
-        public static final int line_already_bought_house=0x7f0500b6;
-        public static final int line_my_attention=0x7f0500ba;
-        public static final int line_see_house=0x7f0500b8;
-        public static final int llt_frag_mine_fee_hunter=0x7f0502fa;
-        public static final int llt_pop_broker_info_consult=0x7f050311;
-        public static final int llt_pop_house_detail_agent=0x7f05031b;
-        public static final int llt_second_hand_house_detail_agent_anchorview=0x7f050215;
-        public static final int lst_act_fee_hunter_company_announcement=0x7f050040;
-        public static final int lst_act_fee_hunter_company_announcement_detail_comments=0x7f050043;
-        public static final int lst_act_houses_recommended_to_me=0x7f0500af;
-        public static final int lst_act_my_bought_houses_list=0x7f0500ec;
-        public static final int lst_act_my_demand_info_recommended_to_me=0x7f050101;
-        public static final int lst_act_proxy_detail=0x7f050156;
-        public static final int lst_act_recommend_house_list=0x7f050188;
-        public static final int lst_chat=0x7f05001f;
-        public static final int lst_fee_hunter_recommend_house_source_list=0x7f050068;
-        public static final int lst_i_am_customer=0x7f0500bb;
-        public static final int lst_my_concern=0x7f0500f1;
-        public static final int lst_my_house=0x7f05010a;
-        public static final int lst_my_sell_house=0x7f050114;
-        public static final int lst_new_house=0x7f050133;
-        public static final int lst_news=0x7f050305;
-        public static final int lst_rent_house=0x7f05019e;
-        public static final int lst_search_house_artifact_result=0x7f0501e1;
-        public static final int lst_second_hand_house=0x7f0501f4;
+        public static final int gridview=0x7f050009;
+        public static final int header_company_announcement_detail_comments_num=0x7f05030f;
+        public static final int header_company_announcement_detail_content=0x7f05030e;
+        public static final int header_company_announcement_detail_time=0x7f05030d;
+        public static final int header_company_announcement_detail_title=0x7f05030c;
+        public static final int indicator_header_recommend_news=0x7f0502e0;
+        public static final int iv_avatar_right=0x7f050314;
+        public static final int iv_frag_home_shangjinglieren=0x7f0502ea;
+        public static final int iv_pop_house_detail_agent_avatar=0x7f050322;
+        public static final int iv_pop_house_detail_agent_call=0x7f050325;
+        public static final int iv_pop_house_detail_agent_msg=0x7f050326;
+        public static final int iv_recommend_news=0x7f0502af;
+        public static final int iv_settings_avatar=0x7f050227;
+        public static final int line_already_bought_house=0x7f0500b8;
+        public static final int line_my_attention=0x7f0500bc;
+        public static final int line_see_house=0x7f0500ba;
+        public static final int llt_frag_mine_fee_hunter=0x7f050300;
+        public static final int llt_pop_broker_info_consult=0x7f050317;
+        public static final int llt_pop_house_detail_agent=0x7f050321;
+        public static final int llt_second_hand_house_detail_agent_anchorview=0x7f050217;
+        public static final int lst_act_fee_hunter_company_announcement=0x7f050042;
+        public static final int lst_act_fee_hunter_company_announcement_detail_comments=0x7f050045;
+        public static final int lst_act_houses_recommended_to_me=0x7f0500b1;
+        public static final int lst_act_my_bought_houses_list=0x7f0500ee;
+        public static final int lst_act_my_demand_info_recommended_to_me=0x7f050103;
+        public static final int lst_act_proxy_detail=0x7f050158;
+        public static final int lst_act_recommend_house_list=0x7f05018a;
+        public static final int lst_chat=0x7f050021;
+        public static final int lst_fee_hunter_recommend_house_source_list=0x7f05006a;
+        public static final int lst_i_am_customer=0x7f0500bd;
+        public static final int lst_my_concern=0x7f0500f3;
+        public static final int lst_my_house=0x7f05010c;
+        public static final int lst_my_sell_house=0x7f050116;
+        public static final int lst_new_house=0x7f050135;
+        public static final int lst_news=0x7f05030b;
+        public static final int lst_rent_house=0x7f0501a0;
+        public static final int lst_search_house_artifact_result=0x7f0501e3;
+        public static final int lst_second_hand_house=0x7f0501f6;
         public static final int oval=0x7f050000;
-        public static final int pop_search_new_house=0x7f050326;
-        public static final int pop_search_rent_house=0x7f050328;
-        public static final int pop_search_second_hand_house=0x7f050327;
-        public static final int popup_condition_lst=0x7f050315;
-        public static final int popup_exit_account_cancel_tv=0x7f05032e;
-        public static final int popup_fee_hunter_my_customer_left_list=0x7f050316;
-        public static final int popup_fee_hunter_my_customer_right_list=0x7f050317;
-        public static final int popup_mortgage_years_lst=0x7f050325;
-        public static final int popup_second_hand_more_type_detail=0x7f05032a;
-        public static final int popup_second_hand_more_type_lst=0x7f050329;
-        public static final int popup_second_hand_more_type_ok=0x7f05032b;
-        public static final int popup_update_avatar_from_album_tv=0x7f05032d;
-        public static final int popup_update_avatar_from_camera_tv=0x7f05032c;
-        public static final int popwindow_fee_hunter_recommend_new_house=0x7f050318;
-        public static final int popwindow_fee_hunter_recommend_second_hand_house=0x7f050319;
-        public static final int popwindow_more_attention=0x7f050322;
-        public static final int popwindow_more_share=0x7f050321;
-        public static final int popwindow_mortgage_type_benjin=0x7f050323;
-        public static final int popwindow_mortgage_type_benxi=0x7f050324;
-        public static final int popwindow_share_qq=0x7f050331;
-        public static final int popwindow_share_sina_weibo=0x7f050332;
-        public static final int popwindow_share_weixin=0x7f05032f;
-        public static final int popwindow_share_weixin_friend=0x7f050330;
-        public static final int pull_act_fee_hunter_company_announcement=0x7f05003f;
-        public static final int pull_act_fee_hunter_company_announcement_detail=0x7f050042;
-        public static final int pull_act_fee_hunter_my_customer=0x7f050057;
-        public static final int pull_act_houses_recommended_to_me=0x7f0500ae;
-        public static final int pull_act_i_am_owner=0x7f0500bd;
-        public static final int pull_act_my_bought_houses=0x7f0500eb;
-        public static final int pull_act_my_demand_info_recommended_to_me=0x7f050100;
-        public static final int pull_act_proxy_detail=0x7f050155;
-        public static final int pull_act_see_house_record_list=0x7f05021d;
-        public static final int pull_fee_hunter_recommend_house_source_list=0x7f050067;
-        public static final int pull_headline=0x7f050304;
-        public static final int pull_my_concern=0x7f0500f0;
-        public static final int pull_my_house_list=0x7f050109;
-        public static final int pull_my_sell_house_list=0x7f050113;
-        public static final int pull_new_house=0x7f050132;
-        public static final int pull_recommend_house_list=0x7f050187;
-        public static final int pull_rent_house=0x7f05019d;
-        public static final int pull_second_hand_house=0x7f0501f3;
+        public static final int pager_recommend_news=0x7f0502df;
+        public static final int pop_search_new_house=0x7f05032c;
+        public static final int pop_search_rent_house=0x7f05032e;
+        public static final int pop_search_second_hand_house=0x7f05032d;
+        public static final int popup_condition_lst=0x7f05031b;
+        public static final int popup_exit_account_cancel_tv=0x7f050334;
+        public static final int popup_fee_hunter_my_customer_left_list=0x7f05031c;
+        public static final int popup_fee_hunter_my_customer_right_list=0x7f05031d;
+        public static final int popup_mortgage_years_lst=0x7f05032b;
+        public static final int popup_second_hand_more_type_detail=0x7f050330;
+        public static final int popup_second_hand_more_type_lst=0x7f05032f;
+        public static final int popup_second_hand_more_type_ok=0x7f050331;
+        public static final int popup_update_avatar_from_album_tv=0x7f050333;
+        public static final int popup_update_avatar_from_camera_tv=0x7f050332;
+        public static final int popwindow_fee_hunter_recommend_new_house=0x7f05031e;
+        public static final int popwindow_fee_hunter_recommend_second_hand_house=0x7f05031f;
+        public static final int popwindow_more_attention=0x7f050328;
+        public static final int popwindow_more_share=0x7f050327;
+        public static final int popwindow_mortgage_type_benjin=0x7f050329;
+        public static final int popwindow_mortgage_type_benxi=0x7f05032a;
+        public static final int popwindow_share_qq=0x7f050337;
+        public static final int popwindow_share_sina_weibo=0x7f050338;
+        public static final int popwindow_share_weixin=0x7f050335;
+        public static final int popwindow_share_weixin_friend=0x7f050336;
+        public static final int pull_act_fee_hunter_company_announcement=0x7f050041;
+        public static final int pull_act_fee_hunter_company_announcement_detail=0x7f050044;
+        public static final int pull_act_fee_hunter_my_customer=0x7f050059;
+        public static final int pull_act_houses_recommended_to_me=0x7f0500b0;
+        public static final int pull_act_i_am_owner=0x7f0500bf;
+        public static final int pull_act_my_bought_houses=0x7f0500ed;
+        public static final int pull_act_my_demand_info_recommended_to_me=0x7f050102;
+        public static final int pull_act_proxy_detail=0x7f050157;
+        public static final int pull_act_see_house_record_list=0x7f05021f;
+        public static final int pull_fee_hunter_recommend_house_source_list=0x7f050069;
+        public static final int pull_headline=0x7f05030a;
+        public static final int pull_my_concern=0x7f0500f2;
+        public static final int pull_my_house_list=0x7f05010b;
+        public static final int pull_my_sell_house_list=0x7f050115;
+        public static final int pull_new_house=0x7f050134;
+        public static final int pull_recommend_house_list=0x7f050189;
+        public static final int pull_rent_house=0x7f05019f;
+        public static final int pull_second_hand_house=0x7f0501f5;
         public static final int rect=0x7f050003;
         public static final int roundRect=0x7f050004;
-        public static final int scrollview=0x7f050009;
+        public static final int scrollview=0x7f05000b;
         public static final int triangle=0x7f050002;
-        public static final int tv_already_bought_house=0x7f0500b5;
-        public static final int tv_broker_info_consult=0x7f050017;
-        public static final int tv_frag_home_location=0x7f050335;
-        public static final int tv_msg_content=0x7f05030c;
-        public static final int tv_msg_content_right=0x7f05030f;
-        public static final int tv_my_attention=0x7f0500b9;
-        public static final int tv_pop_house_detail_agent_name=0x7f05031d;
-        public static final int tv_pop_house_detail_agent_phone=0x7f05031e;
-        public static final int tv_popup_broker_consult_chat=0x7f050313;
-        public static final int tv_popup_broker_consult_phone_call=0x7f050312;
-        public static final int tv_popup_broker_consult_sms=0x7f050314;
-        public static final int tv_see_house=0x7f0500b7;
-        public static final int tv_toast_content=0x7f050310;
-        public static final int view_city_list_header_locate_city_tv=0x7f050334;
-        public static final int view_city_list_header_locate_tv=0x7f050333;
-        public static final int view_frag_home_zoom_img=0x7f050337;
-        public static final int view_mortgage_business_loan_interests=0x7f05033f;
-        public static final int view_mortgage_business_loan_month_pay=0x7f050340;
-        public static final int view_mortgage_business_loan_months=0x7f05033e;
-        public static final int view_mortgage_business_loan_total=0x7f05033c;
-        public static final int view_mortgage_business_loan_total_pay=0x7f05033d;
-        public static final int view_mortgage_funds_loan_interests=0x7f050344;
-        public static final int view_mortgage_funds_loan_month_pay=0x7f050345;
-        public static final int view_mortgage_funds_loan_months=0x7f050343;
-        public static final int view_mortgage_funds_loan_total=0x7f050341;
-        public static final int view_mortgage_funds_loan_total_pay=0x7f050342;
-        public static final int view_mortgage_mix_loan_interests=0x7f050354;
-        public static final int view_mortgage_mix_loan_month_pay=0x7f050355;
-        public static final int view_mortgage_mix_loan_months=0x7f050353;
-        public static final int view_mortgage_mix_loan_total=0x7f050351;
-        public static final int view_mortgage_mix_loan_total_pay=0x7f050352;
-        public static final int view_my_buy_house_action1=0x7f05035a;
-        public static final int view_my_buy_house_action2=0x7f05035b;
-        public static final int view_my_buy_house_desc=0x7f050358;
-        public static final int view_my_buy_house_money=0x7f050359;
-        public static final int view_my_buy_house_photo=0x7f050356;
-        public static final int view_my_buy_house_title=0x7f050357;
-        public static final int view_point_estate_price=0x7f05033b;
-        public static final int view_point_estate_title=0x7f05033a;
-        public static final int view_point_num=0x7f050339;
-        public static final int view_point_title=0x7f050338;
-        public static final int view_see_house_experience_action1=0x7f050361;
-        public static final int view_see_house_experience_date=0x7f05035f;
-        public static final int view_see_house_experience_desc=0x7f05035e;
-        public static final int view_see_house_experience_money=0x7f050360;
-        public static final int view_see_house_experience_photo=0x7f05035c;
-        public static final int view_see_house_experience_title=0x7f05035d;
-        public static final int view_userinfo_username=0x7f0502f8;
-        public static final int webview=0x7f050008;
+        public static final int tv_already_bought_house=0x7f0500b7;
+        public static final int tv_broker_info_consult=0x7f050019;
+        public static final int tv_frag_home_location=0x7f05033b;
+        public static final int tv_msg_content=0x7f050312;
+        public static final int tv_msg_content_right=0x7f050315;
+        public static final int tv_my_attention=0x7f0500bb;
+        public static final int tv_pop_house_detail_agent_name=0x7f050323;
+        public static final int tv_pop_house_detail_agent_phone=0x7f050324;
+        public static final int tv_popup_broker_consult_chat=0x7f050319;
+        public static final int tv_popup_broker_consult_phone_call=0x7f050318;
+        public static final int tv_popup_broker_consult_sms=0x7f05031a;
+        public static final int tv_recommend_news_content=0x7f0502b0;
+        public static final int tv_see_house=0x7f0500b9;
+        public static final int tv_toast_content=0x7f050316;
+        public static final int view_city_list_header_locate_city_tv=0x7f05033a;
+        public static final int view_city_list_header_locate_tv=0x7f050339;
+        public static final int view_frag_home_zoom_img=0x7f05033d;
+        public static final int view_mortgage_business_loan_interests=0x7f050345;
+        public static final int view_mortgage_business_loan_month_pay=0x7f050346;
+        public static final int view_mortgage_business_loan_months=0x7f050344;
+        public static final int view_mortgage_business_loan_total=0x7f050342;
+        public static final int view_mortgage_business_loan_total_pay=0x7f050343;
+        public static final int view_mortgage_funds_loan_interests=0x7f05034a;
+        public static final int view_mortgage_funds_loan_month_pay=0x7f05034b;
+        public static final int view_mortgage_funds_loan_months=0x7f050349;
+        public static final int view_mortgage_funds_loan_total=0x7f050347;
+        public static final int view_mortgage_funds_loan_total_pay=0x7f050348;
+        public static final int view_mortgage_mix_loan_interests=0x7f05035a;
+        public static final int view_mortgage_mix_loan_month_pay=0x7f05035b;
+        public static final int view_mortgage_mix_loan_months=0x7f050359;
+        public static final int view_mortgage_mix_loan_total=0x7f050357;
+        public static final int view_mortgage_mix_loan_total_pay=0x7f050358;
+        public static final int view_my_buy_house_action1=0x7f050360;
+        public static final int view_my_buy_house_action2=0x7f050361;
+        public static final int view_my_buy_house_desc=0x7f05035e;
+        public static final int view_my_buy_house_money=0x7f05035f;
+        public static final int view_my_buy_house_photo=0x7f05035c;
+        public static final int view_my_buy_house_title=0x7f05035d;
+        public static final int view_point_estate_price=0x7f050341;
+        public static final int view_point_estate_title=0x7f050340;
+        public static final int view_point_num=0x7f05033f;
+        public static final int view_point_title=0x7f05033e;
+        public static final int view_see_house_experience_action1=0x7f050367;
+        public static final int view_see_house_experience_date=0x7f050365;
+        public static final int view_see_house_experience_desc=0x7f050364;
+        public static final int view_see_house_experience_money=0x7f050366;
+        public static final int view_see_house_experience_photo=0x7f050362;
+        public static final int view_see_house_experience_title=0x7f050363;
+        public static final int view_userinfo_username=0x7f0502fe;
+        public static final int webview=0x7f05000a;
+    }
+    public static final class integer {
+        public static final int default_circle_indicator_orientation=0x7f080000;
     }
     public static final class layout {
         public static final int act_about_us=0x7f030000;
@@ -1544,335 +1898,336 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int adapter_photo=0x7f030069;
         public static final int adapter_picture_browse=0x7f03006a;
         public static final int adapter_query_after_sale=0x7f03006b;
-        public static final int adapter_rent_house=0x7f03006c;
-        public static final int adapter_residential_transaction_history=0x7f03006d;
-        public static final int adapter_search_house=0x7f03006e;
-        public static final int adapter_search_house_artifact_requirement=0x7f03006f;
-        public static final int adapter_search_house_artifact_result=0x7f030070;
-        public static final int adapter_second_hand_house=0x7f030071;
-        public static final int adapter_see_house_record=0x7f030072;
-        public static final int adapter_wallet=0x7f030073;
-        public static final int dialog_1=0x7f030074;
-        public static final int dialog_proxy=0x7f030075;
-        public static final int frag_main_consultation=0x7f030076;
-        public static final int frag_main_home=0x7f030077;
-        public static final int frag_main_map_find_house=0x7f030078;
-        public static final int frag_main_mine=0x7f030079;
-        public static final int frag_news_list=0x7f03007a;
-        public static final int header_company_announcement_detail=0x7f03007b;
-        public static final int item_appointment_msg_left=0x7f03007c;
-        public static final int item_appointment_msg_right=0x7f03007d;
-        public static final int layout_toast=0x7f03007e;
-        public static final int popup_broker_info_consult=0x7f03007f;
-        public static final int popup_condition=0x7f030080;
-        public static final int popup_fee_hunter_my_customer=0x7f030081;
-        public static final int popup_fee_hunter_recommend_buy_sell=0x7f030082;
-        public static final int popup_house_detail_agent=0x7f030083;
-        public static final int popup_more_share_attention=0x7f030084;
-        public static final int popup_mortgage_type=0x7f030085;
-        public static final int popup_mortgage_years=0x7f030086;
-        public static final int popup_search_house_type=0x7f030087;
-        public static final int popup_second_hand_house_more=0x7f030088;
-        public static final int popup_updateavatar=0x7f030089;
-        public static final int popwindow_share=0x7f03008a;
-        public static final int view_city_list_header=0x7f03008b;
-        public static final int view_frag_home_header=0x7f03008c;
-        public static final int view_frag_home_zoom=0x7f03008d;
-        public static final int view_map_point_area=0x7f03008e;
-        public static final int view_map_point_estate=0x7f03008f;
-        public static final int view_mortgage_business=0x7f030090;
-        public static final int view_mortgage_funds=0x7f030091;
-        public static final int view_mortgage_funds_business=0x7f030092;
-        public static final int view_mortgage_mix=0x7f030093;
-        public static final int view_mortgage_mix_result=0x7f030094;
-        public static final int view_my_buy_houses_item=0x7f030095;
-        public static final int view_see_house_experience_item=0x7f030096;
+        public static final int adapter_recommend_news=0x7f03006c;
+        public static final int adapter_rent_house=0x7f03006d;
+        public static final int adapter_residential_transaction_history=0x7f03006e;
+        public static final int adapter_search_house=0x7f03006f;
+        public static final int adapter_search_house_artifact_requirement=0x7f030070;
+        public static final int adapter_search_house_artifact_result=0x7f030071;
+        public static final int adapter_second_hand_house=0x7f030072;
+        public static final int adapter_see_house_record=0x7f030073;
+        public static final int adapter_wallet=0x7f030074;
+        public static final int dialog_1=0x7f030075;
+        public static final int dialog_proxy=0x7f030076;
+        public static final int frag_main_consultation=0x7f030077;
+        public static final int frag_main_home=0x7f030078;
+        public static final int frag_main_map_find_house=0x7f030079;
+        public static final int frag_main_mine=0x7f03007a;
+        public static final int frag_news_list=0x7f03007b;
+        public static final int header_company_announcement_detail=0x7f03007c;
+        public static final int item_appointment_msg_left=0x7f03007d;
+        public static final int item_appointment_msg_right=0x7f03007e;
+        public static final int layout_toast=0x7f03007f;
+        public static final int popup_broker_info_consult=0x7f030080;
+        public static final int popup_condition=0x7f030081;
+        public static final int popup_fee_hunter_my_customer=0x7f030082;
+        public static final int popup_fee_hunter_recommend_buy_sell=0x7f030083;
+        public static final int popup_house_detail_agent=0x7f030084;
+        public static final int popup_more_share_attention=0x7f030085;
+        public static final int popup_mortgage_type=0x7f030086;
+        public static final int popup_mortgage_years=0x7f030087;
+        public static final int popup_search_house_type=0x7f030088;
+        public static final int popup_second_hand_house_more=0x7f030089;
+        public static final int popup_updateavatar=0x7f03008a;
+        public static final int popwindow_share=0x7f03008b;
+        public static final int view_city_list_header=0x7f03008c;
+        public static final int view_frag_home_header=0x7f03008d;
+        public static final int view_frag_home_zoom=0x7f03008e;
+        public static final int view_map_point_area=0x7f03008f;
+        public static final int view_map_point_estate=0x7f030090;
+        public static final int view_mortgage_business=0x7f030091;
+        public static final int view_mortgage_funds=0x7f030092;
+        public static final int view_mortgage_funds_business=0x7f030093;
+        public static final int view_mortgage_mix=0x7f030094;
+        public static final int view_mortgage_mix_result=0x7f030095;
+        public static final int view_my_buy_houses_item=0x7f030096;
+        public static final int view_see_house_experience_item=0x7f030097;
     }
     public static final class string {
         /**  关于我们 
          */
-        public static final int act_about_us=0x7f07008c;
-        public static final int act_browse_record=0x7f070070;
+        public static final int act_about_us=0x7f0a008c;
+        public static final int act_browse_record=0x7f0a0070;
         /**  浏览记录   
          */
-        public static final int act_browse_record_back=0x7f07006f;
+        public static final int act_browse_record_back=0x7f0a006f;
         /**  修改密码 
          */
-        public static final int act_change_pwd=0x7f070014;
+        public static final int act_change_pwd=0x7f0a0014;
         /**  城市列表 
          */
-        public static final int act_city_list=0x7f070022;
+        public static final int act_city_list=0x7f0a0022;
         /**  常见问题 
          */
-        public static final int act_common_problems=0x7f07008d;
-        public static final int act_concern_house=0x7f070074;
+        public static final int act_common_problems=0x7f0a008d;
+        public static final int act_concern_house=0x7f0a0074;
         /**  我关注的房源 
          */
-        public static final int act_concern_house_back=0x7f070073;
+        public static final int act_concern_house_back=0x7f0a0073;
         /**  小区详情 
          */
-        public static final int act_court_detail=0x7f07009b;
+        public static final int act_court_detail=0x7f0a009b;
         /**  赏金猎人个人中心 
          */
-        public static final int act_fee_hunter_info=0x7f07008e;
+        public static final int act_fee_hunter_info=0x7f0a008e;
         /**  赏金猎人  赏金信息  
          */
-        public static final int act_fee_hunter_msg=0x7f070095;
+        public static final int act_fee_hunter_msg=0x7f0a0095;
         /**  赏金猎人  我的客户  
          */
-        public static final int act_fee_hunter_my_customer=0x7f07008f;
+        public static final int act_fee_hunter_my_customer=0x7f0a008f;
         /**  赏金猎人  进度详情  
          */
-        public static final int act_fee_hunter_progress_detail=0x7f070093;
+        public static final int act_fee_hunter_progress_detail=0x7f0a0093;
         /**  赏金猎人  推荐客户
          */
-        public static final int act_fee_hunter_recommend_customer=0x7f070092;
+        public static final int act_fee_hunter_recommend_customer=0x7f0a0092;
         /**  赏金猎人  推荐房源
          */
-        public static final int act_fee_hunter_recommend_house_source=0x7f070090;
+        public static final int act_fee_hunter_recommend_house_source=0x7f0a0090;
         /**  赏金猎人  推荐房源的房屋列表  
          */
-        public static final int act_fee_hunter_recommend_house_source_list=0x7f070094;
+        public static final int act_fee_hunter_recommend_house_source_list=0x7f0a0094;
         /**  赏金猎人  推荐业主  变成推荐房源  
          */
-        public static final int act_fee_hunter_recommend_owner=0x7f070098;
+        public static final int act_fee_hunter_recommend_owner=0x7f0a0098;
         /**  赏金猎人  推荐买房卖房    推荐二手房
          */
-        public static final int act_fee_hunter_recommend_second_hand_house=0x7f070091;
+        public static final int act_fee_hunter_recommend_second_hand_house=0x7f0a0091;
         /**  赏金猎人  活动规则  
          */
-        public static final int act_fee_hunter_rule=0x7f070096;
+        public static final int act_fee_hunter_rule=0x7f0a0096;
         /**  赏金猎人  钱包  
          */
-        public static final int act_fee_hunter_wallet=0x7f070097;
+        public static final int act_fee_hunter_wallet=0x7f0a0097;
         /**  意见反馈   
          */
-        public static final int act_feedback=0x7f07005d;
-        public static final int act_feedback_hint=0x7f07005e;
-        public static final int act_feedback_phone_hint=0x7f07005f;
+        public static final int act_feedback=0x7f0a005d;
+        public static final int act_feedback_hint=0x7f0a005e;
+        public static final int act_feedback_phone_hint=0x7f0a005f;
         /**  填写银行卡 
          */
-        public static final int act_fill_bank_card_info=0x7f070083;
+        public static final int act_fill_bank_card_info=0x7f0a0083;
         /**  忘记密码 
          */
-        public static final int act_forget_pwd=0x7f070081;
+        public static final int act_forget_pwd=0x7f0a0081;
         /**  房源信息变动  
          */
-        public static final int act_house_source_info_changes=0x7f07006d;
+        public static final int act_house_source_info_changes=0x7f0a006d;
         /**  推荐房源  列表  （系统根据我的委托找房推荐给我的房）
          */
-        public static final int act_houses_recommended_to_me=0x7f07006e;
+        public static final int act_houses_recommended_to_me=0x7f0a006e;
         /**  我是业主  
          */
-        public static final int act_i_am_owner=0x7f07009a;
+        public static final int act_i_am_owner=0x7f0a009a;
         /**  我要买房 
          */
-        public static final int act_i_want_buy_house=0x7f07008b;
-        public static final int act_main_consultant=0x7f070019;
+        public static final int act_i_want_buy_house=0x7f0a008b;
+        public static final int act_main_consultant=0x7f0a0019;
         /**  主界面 
          */
-        public static final int act_main_exitapp=0x7f070016;
-        public static final int act_main_home_page=0x7f070017;
-        public static final int act_main_map_find_house=0x7f070018;
-        public static final int act_main_me=0x7f07001a;
-        public static final int act_message=0x7f070072;
+        public static final int act_main_exitapp=0x7f0a0016;
+        public static final int act_main_home_page=0x7f0a0017;
+        public static final int act_main_map_find_house=0x7f0a0018;
+        public static final int act_main_me=0x7f0a001a;
+        public static final int act_message=0x7f0a0072;
         /**  消息   
          */
-        public static final int act_message_back=0x7f070071;
-        public static final int act_mortgage_calculator=0x7f070066;
+        public static final int act_message_back=0x7f0a0071;
+        public static final int act_mortgage_calculator=0x7f0a0066;
         /**  房贷计算器   
          */
-        public static final int act_mortgage_calculator_back=0x7f070065;
+        public static final int act_mortgage_calculator_back=0x7f0a0065;
         /**  我的购房 
          */
-        public static final int act_my_bought_houses=0x7f070087;
+        public static final int act_my_bought_houses=0x7f0a0087;
         /**  我的需求 
          */
-        public static final int act_my_demand=0x7f070060;
-        public static final int act_my_demand_advised_house_resources=0x7f070062;
-        public static final int act_my_demand_back=0x7f070061;
+        public static final int act_my_demand=0x7f0a0060;
+        public static final int act_my_demand_advised_house_resources=0x7f0a0062;
+        public static final int act_my_demand_back=0x7f0a0061;
         /**  我的需求 
          */
-        public static final int act_my_demand_info=0x7f070064;
-        public static final int act_my_demand_my_buy_house=0x7f070063;
+        public static final int act_my_demand_info=0x7f0a0064;
+        public static final int act_my_demand_my_buy_house=0x7f0a0063;
         /**  我的房子  通过erp买的房 和 委托住房网卖的房  
          */
-        public static final int act_my_house_list=0x7f07006c;
-        public static final int act_my_house_resources=0x7f070068;
+        public static final int act_my_house_list=0x7f0a006c;
+        public static final int act_my_house_resources=0x7f0a0068;
         /**  我的房源   
          */
-        public static final int act_my_house_resources_back=0x7f070067;
-        public static final int act_my_house_resources_msg_changes=0x7f07006b;
-        public static final int act_my_house_resources_my_house=0x7f070069;
-        public static final int act_my_house_resources_see_house_detail=0x7f07006a;
-        public static final int act_my_proxy=0x7f070076;
+        public static final int act_my_house_resources_back=0x7f0a0067;
+        public static final int act_my_house_resources_msg_changes=0x7f0a006b;
+        public static final int act_my_house_resources_my_house=0x7f0a0069;
+        public static final int act_my_house_resources_see_house_detail=0x7f0a006a;
+        public static final int act_my_proxy=0x7f0a0076;
         /**  我的委托 
          */
-        public static final int act_my_proxy_back=0x7f070075;
-        public static final int act_my_proxy_i_buy_house=0x7f070078;
-        public static final int act_my_proxy_see_my_house=0x7f070079;
-        public static final int act_my_proxy_sell_house=0x7f070077;
+        public static final int act_my_proxy_back=0x7f0a0075;
+        public static final int act_my_proxy_i_buy_house=0x7f0a0078;
+        public static final int act_my_proxy_see_my_house=0x7f0a0079;
+        public static final int act_my_proxy_sell_house=0x7f0a0077;
         /**  周边详情  
          */
-        public static final int act_nearby_detail=0x7f070099;
+        public static final int act_nearby_detail=0x7f0a0099;
         /**  资讯详情 
          */
-        public static final int act_news_detail=0x7f070088;
-        public static final int act_proxy_detail_dial=0x7f070053;
-        public static final int act_proxy_detail_msg=0x7f070054;
+        public static final int act_news_detail=0x7f0a0088;
+        public static final int act_proxy_detail_dial=0x7f0a0053;
+        public static final int act_proxy_detail_msg=0x7f0a0054;
         /**  委托售房 
          */
-        public static final int act_proxy_sell_house=0x7f07008a;
+        public static final int act_proxy_sell_house=0x7f0a008a;
         /**  推荐房源 
          */
-        public static final int act_recommend_house_detail=0x7f070085;
+        public static final int act_recommend_house_detail=0x7f0a0085;
         /**  推荐房源 
          */
-        public static final int act_recommend_house_list=0x7f070086;
+        public static final int act_recommend_house_list=0x7f0a0086;
         /**   
          */
-        public static final int act_residential_transaction_history=0x7f07007e;
+        public static final int act_residential_transaction_history=0x7f0a007e;
         /**  找房神器 
          */
-        public static final int act_search_house_artifact=0x7f07007f;
-        public static final int act_search_house_artifact_addition=0x7f070049;
-        public static final int act_search_house_artifact_back=0x7f070080;
-        public static final int act_search_house_artifact_budget=0x7f070045;
-        public static final int act_search_house_artifact_disposable=0x7f070042;
-        public static final int act_search_house_artifact_four_rooms=0x7f07004e;
+        public static final int act_search_house_artifact=0x7f0a007f;
+        public static final int act_search_house_artifact_addition=0x7f0a0049;
+        public static final int act_search_house_artifact_back=0x7f0a0080;
+        public static final int act_search_house_artifact_budget=0x7f0a0045;
+        public static final int act_search_house_artifact_disposable=0x7f0a0042;
+        public static final int act_search_house_artifact_four_rooms=0x7f0a004e;
         /**  找房神器 
          */
-        public static final int act_search_house_artifact_hint=0x7f070041;
-        public static final int act_search_house_artifact_how_many_rooms=0x7f07004a;
-        public static final int act_search_house_artifact_mortgage=0x7f070043;
-        public static final int act_search_house_artifact_one_room=0x7f07004b;
-        public static final int act_search_house_artifact_requirement=0x7f070044;
-        public static final int act_search_house_artifact_result_change_another=0x7f070052;
-        public static final int act_search_house_artifact_result_title=0x7f070051;
-        public static final int act_search_house_artifact_select_area=0x7f070048;
-        public static final int act_search_house_artifact_select_price=0x7f070046;
-        public static final int act_search_house_artifact_three_rooms=0x7f07004d;
-        public static final int act_search_house_artifact_two_rooms=0x7f07004c;
-        public static final int act_search_house_artifact_where=0x7f070047;
-        public static final int act_search_house_month_pay=0x7f07004f;
-        public static final int act_search_house_month_pay_hint=0x7f070050;
+        public static final int act_search_house_artifact_hint=0x7f0a0041;
+        public static final int act_search_house_artifact_how_many_rooms=0x7f0a004a;
+        public static final int act_search_house_artifact_mortgage=0x7f0a0043;
+        public static final int act_search_house_artifact_one_room=0x7f0a004b;
+        public static final int act_search_house_artifact_requirement=0x7f0a0044;
+        public static final int act_search_house_artifact_result_change_another=0x7f0a0052;
+        public static final int act_search_house_artifact_result_title=0x7f0a0051;
+        public static final int act_search_house_artifact_select_area=0x7f0a0048;
+        public static final int act_search_house_artifact_select_price=0x7f0a0046;
+        public static final int act_search_house_artifact_three_rooms=0x7f0a004d;
+        public static final int act_search_house_artifact_two_rooms=0x7f0a004c;
+        public static final int act_search_house_artifact_where=0x7f0a0047;
+        public static final int act_search_house_month_pay=0x7f0a004f;
+        public static final int act_search_house_month_pay_hint=0x7f0a0050;
         /**  二手房 
          */
-        public static final int act_second_hand_house_back=0x7f07007a;
-        public static final int act_second_hand_house_hint=0x7f07007b;
-        public static final int act_second_hand_house_list=0x7f07007c;
-        public static final int act_second_hand_house_map=0x7f07007d;
+        public static final int act_second_hand_house_back=0x7f0a007a;
+        public static final int act_second_hand_house_hint=0x7f0a007b;
+        public static final int act_second_hand_house_list=0x7f0a007c;
+        public static final int act_second_hand_house_map=0x7f0a007d;
         /**  看房记录 
          */
-        public static final int act_see_house_record=0x7f070089;
+        public static final int act_see_house_record=0x7f0a0089;
         /**  设置    
          */
-        public static final int act_settings=0x7f070055;
-        public static final int act_settings_about_us=0x7f070059;
-        public static final int act_settings_change_pwd=0x7f070056;
-        public static final int act_settings_check_updates=0x7f07005b;
-        public static final int act_settings_clear_cache=0x7f070058;
-        public static final int act_settings_common_questions=0x7f07005a;
-        public static final int act_settings_logout=0x7f07005c;
-        public static final int act_settings_msg_push=0x7f070057;
+        public static final int act_settings=0x7f0a0055;
+        public static final int act_settings_about_us=0x7f0a0059;
+        public static final int act_settings_change_pwd=0x7f0a0056;
+        public static final int act_settings_check_updates=0x7f0a005b;
+        public static final int act_settings_clear_cache=0x7f0a0058;
+        public static final int act_settings_common_questions=0x7f0a005a;
+        public static final int act_settings_logout=0x7f0a005c;
+        public static final int act_settings_msg_push=0x7f0a0057;
         /**  赏金猎人 
          */
-        public static final int act_shangjinlieren=0x7f070082;
+        public static final int act_shangjinlieren=0x7f0a0082;
         /**  赏金猎人个人中心 
          */
-        public static final int act_shangjinlieren_info=0x7f070084;
-        public static final int app_name=0x7f070000;
-        public static final int back=0x7f070001;
-        public static final int broker_login=0x7f070012;
-        public static final int day=0x7f0700a2;
-        public static final int day_t=0x7f0700a3;
-        public static final int ended=0x7f0700ab;
-        public static final int errcode_cancel=0x7f07009d;
-        public static final int errcode_deny=0x7f07009e;
-        public static final int errcode_success=0x7f07009c;
-        public static final int errcode_unknown=0x7f07009f;
-        public static final int forget_pwd=0x7f070011;
+        public static final int act_shangjinlieren_info=0x7f0a0084;
+        public static final int app_name=0x7f0a0000;
+        public static final int back=0x7f0a0001;
+        public static final int broker_login=0x7f0a0012;
+        public static final int day=0x7f0a00a2;
+        public static final int day_t=0x7f0a00a3;
+        public static final int ended=0x7f0a00ab;
+        public static final int errcode_cancel=0x7f0a009d;
+        public static final int errcode_deny=0x7f0a009e;
+        public static final int errcode_success=0x7f0a009c;
+        public static final int errcode_unknown=0x7f0a009f;
+        public static final int forget_pwd=0x7f0a0011;
         /**  咨询  
          */
-        public static final int frag_consultation=0x7f07002b;
-        public static final int frag_consultation_headline=0x7f07002c;
-        public static final int frag_consultation_more=0x7f07002f;
-        public static final int frag_consultation_q_and_a=0x7f07002e;
-        public static final int frag_consultation_shopping_guide=0x7f07002d;
-        public static final int frag_home_find_house_artifact=0x7f07001e;
-        public static final int frag_home_more=0x7f070020;
-        public static final int frag_home_new_house=0x7f07001c;
-        public static final int frag_home_recommend_house_source=0x7f07001f;
-        public static final int frag_home_rent_house=0x7f07001d;
-        public static final int frag_home_search_hint=0x7f070021;
+        public static final int frag_consultation=0x7f0a002b;
+        public static final int frag_consultation_headline=0x7f0a002c;
+        public static final int frag_consultation_more=0x7f0a002f;
+        public static final int frag_consultation_q_and_a=0x7f0a002e;
+        public static final int frag_consultation_shopping_guide=0x7f0a002d;
+        public static final int frag_home_find_house_artifact=0x7f0a001e;
+        public static final int frag_home_more=0x7f0a0020;
+        public static final int frag_home_new_house=0x7f0a001c;
+        public static final int frag_home_recommend_house_source=0x7f0a001f;
+        public static final int frag_home_rent_house=0x7f0a001d;
+        public static final int frag_home_search_hint=0x7f0a0021;
         /**  首页 
          */
-        public static final int frag_home_second_hand_house=0x7f07001b;
+        public static final int frag_home_second_hand_house=0x7f0a001b;
         /**  地图找房 
          */
-        public static final int frag_map_area=0x7f070023;
-        public static final int frag_map_house_type=0x7f070025;
-        public static final int frag_map_locate=0x7f070028;
-        public static final int frag_map_more=0x7f070026;
-        public static final int frag_map_nearby=0x7f07002a;
-        public static final int frag_map_rent_money=0x7f070027;
-        public static final int frag_map_subway=0x7f070029;
-        public static final int frag_map_total_money=0x7f070024;
-        public static final int frag_mine=0x7f070031;
+        public static final int frag_map_area=0x7f0a0023;
+        public static final int frag_map_house_type=0x7f0a0025;
+        public static final int frag_map_locate=0x7f0a0028;
+        public static final int frag_map_more=0x7f0a0026;
+        public static final int frag_map_nearby=0x7f0a002a;
+        public static final int frag_map_rent_money=0x7f0a0027;
+        public static final int frag_map_subway=0x7f0a0029;
+        public static final int frag_map_total_money=0x7f0a0024;
+        public static final int frag_mine=0x7f0a0031;
         /**  个人 
          */
-        public static final int frag_mine_back=0x7f070030;
-        public static final int frag_mine_be_fee_hunter=0x7f070032;
-        public static final int frag_mine_browse_record=0x7f070037;
-        public static final int frag_mine_feedback=0x7f07003c;
-        public static final int frag_mine_house_source_i_attention=0x7f070034;
-        public static final int frag_mine_i_am_customer=0x7f070039;
-        public static final int frag_mine_i_am_owner=0x7f070036;
-        public static final int frag_mine_mortgage_calculator=0x7f07003b;
-        public static final int frag_mine_msg=0x7f070033;
-        public static final int frag_mine_my_demand=0x7f070038;
-        public static final int frag_mine_my_house_resources=0x7f07003a;
-        public static final int frag_mine_my_proxy=0x7f070035;
-        public static final int frag_mine_settings=0x7f07003d;
-        public static final int hour=0x7f0700a4;
-        public static final int input_phone_num=0x7f07000f;
-        public static final int input_pwd=0x7f070010;
-        public static final int lastday=0x7f0700a8;
+        public static final int frag_mine_back=0x7f0a0030;
+        public static final int frag_mine_be_fee_hunter=0x7f0a0032;
+        public static final int frag_mine_browse_record=0x7f0a0037;
+        public static final int frag_mine_feedback=0x7f0a003c;
+        public static final int frag_mine_house_source_i_attention=0x7f0a0034;
+        public static final int frag_mine_i_am_customer=0x7f0a0039;
+        public static final int frag_mine_i_am_owner=0x7f0a0036;
+        public static final int frag_mine_mortgage_calculator=0x7f0a003b;
+        public static final int frag_mine_msg=0x7f0a0033;
+        public static final int frag_mine_my_demand=0x7f0a0038;
+        public static final int frag_mine_my_house_resources=0x7f0a003a;
+        public static final int frag_mine_my_proxy=0x7f0a0035;
+        public static final int frag_mine_settings=0x7f0a003d;
+        public static final int hour=0x7f0a00a4;
+        public static final int input_phone_num=0x7f0a000f;
+        public static final int input_pwd=0x7f0a0010;
+        public static final int lastday=0x7f0a00a8;
         /**  登录界面 
          */
-        public static final int login=0x7f07000d;
-        public static final int minutes=0x7f0700a5;
-        public static final int month=0x7f0700a1;
-        public static final int page_four_desc_one=0x7f07000b;
-        public static final int page_four_desc_two=0x7f07000c;
-        public static final int page_one_desc_one=0x7f070005;
-        public static final int page_one_desc_two=0x7f070006;
-        public static final int page_three_desc_one=0x7f070009;
-        public static final int page_three_desc_two=0x7f07000a;
-        public static final int page_two_desc_one=0x7f070007;
-        public static final int page_two_desc_two=0x7f070008;
-        public static final int popup_update_avatar_cancel=0x7f070040;
-        public static final int popup_update_avatar_from_album=0x7f07003f;
-        public static final int popup_update_avatar_from_camera=0x7f07003e;
+        public static final int login=0x7f0a000d;
+        public static final int minutes=0x7f0a00a5;
+        public static final int month=0x7f0a00a1;
+        public static final int page_four_desc_one=0x7f0a000b;
+        public static final int page_four_desc_two=0x7f0a000c;
+        public static final int page_one_desc_one=0x7f0a0005;
+        public static final int page_one_desc_two=0x7f0a0006;
+        public static final int page_three_desc_one=0x7f0a0009;
+        public static final int page_three_desc_two=0x7f0a000a;
+        public static final int page_two_desc_one=0x7f0a0007;
+        public static final int page_two_desc_two=0x7f0a0008;
+        public static final int popup_update_avatar_cancel=0x7f0a0040;
+        public static final int popup_update_avatar_from_album=0x7f0a003f;
+        public static final int popup_update_avatar_from_camera=0x7f0a003e;
         /**  注册 
          */
-        public static final int register=0x7f070013;
-        public static final int register_account=0x7f07000e;
-        public static final int scroll_down=0x7f070004;
-        public static final int scroll_up=0x7f070003;
-        public static final int second=0x7f0700a6;
+        public static final int register=0x7f0a0013;
+        public static final int register_account=0x7f0a000e;
+        public static final int scroll_down=0x7f0a0004;
+        public static final int scroll_up=0x7f0a0003;
+        public static final int second=0x7f0a00a6;
         /**  智住网协议 
          */
-        public static final int smart_house_protocol=0x7f070015;
+        public static final int smart_house_protocol=0x7f0a0015;
         /**  导航页 
          */
-        public static final int start_find_house=0x7f070002;
-        public static final int today=0x7f0700a7;
-        public static final int unknow=0x7f0700a9;
-        public static final int unstart=0x7f0700aa;
+        public static final int start_find_house=0x7f0a0002;
+        public static final int today=0x7f0a00a7;
+        public static final int unknow=0x7f0a00a9;
+        public static final int unstart=0x7f0a00aa;
         /**  日期时间 
          */
-        public static final int year=0x7f0700a0;
+        public static final int year=0x7f0a00a0;
     }
     public static final class style {
         /** 
@@ -1896,18 +2251,18 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f090000;
+        public static final int AppBaseTheme=0x7f0c0000;
         /**  Application theme. 
          */
-        public static final int AppTheme=0x7f090001;
+        public static final int AppTheme=0x7f0c0001;
         /**  Dialog定义 
          */
-        public static final int DefaultDialogTheme=0x7f090005;
-        public static final int DialogStyle_1=0x7f090003;
-        public static final int GuiderView=0x7f090002;
+        public static final int DefaultDialogTheme=0x7f0c0005;
+        public static final int DialogStyle_1=0x7f0c0003;
+        public static final int GuiderView=0x7f0c0002;
         /**  指定消失的动画xml 
          */
-        public static final int timepopwindow_anim_style=0x7f090004;
+        public static final int timepopwindow_anim_style=0x7f0c0004;
     }
     public static final class styleable {
         /** Attributes that can be used with a AutoDrawableTextView.
@@ -2066,6 +2421,414 @@ containing a value of this type.
           @attr name cn.com.zzwfang:top_width
         */
         public static final int AutoDrawableTextView_top_width = 5;
+        /** Attributes that can be used with a CirclePageIndicator.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CirclePageIndicator_android_background android:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_android_orientation android:orientation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_centered cn.com.zzwfang:centered}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_fillColor cn.com.zzwfang:fillColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_pageColor cn.com.zzwfang:pageColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_radius cn.com.zzwfang:radius}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_snap cn.com.zzwfang:snap}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_strokeColor cn.com.zzwfang:strokeColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CirclePageIndicator_strokeWidth cn.com.zzwfang:strokeWidth}</code></td><td></td></tr>
+           </table>
+           @see #CirclePageIndicator_android_background
+           @see #CirclePageIndicator_android_orientation
+           @see #CirclePageIndicator_centered
+           @see #CirclePageIndicator_fillColor
+           @see #CirclePageIndicator_pageColor
+           @see #CirclePageIndicator_radius
+           @see #CirclePageIndicator_snap
+           @see #CirclePageIndicator_strokeColor
+           @see #CirclePageIndicator_strokeWidth
+         */
+        public static final int[] CirclePageIndicator = {
+            0x010100c4, 0x010100d4, 0x7f01001d, 0x7f01001e,
+            0x7f01001f, 0x7f010020, 0x7f010021, 0x7f010022,
+            0x7f010023
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#background}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+          @attr name android:background
+        */
+        public static final int CirclePageIndicator_android_background = 1;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#orientation}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+          @attr name android:orientation
+        */
+        public static final int CirclePageIndicator_android_orientation = 0;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#centered}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:centered
+        */
+        public static final int CirclePageIndicator_centered = 2;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#fillColor}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:fillColor
+        */
+        public static final int CirclePageIndicator_fillColor = 3;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#pageColor}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:pageColor
+        */
+        public static final int CirclePageIndicator_pageColor = 4;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#radius}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:radius
+        */
+        public static final int CirclePageIndicator_radius = 5;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#snap}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:snap
+        */
+        public static final int CirclePageIndicator_snap = 6;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#strokeColor}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:strokeColor
+        */
+        public static final int CirclePageIndicator_strokeColor = 7;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#strokeWidth}
+          attribute's value can be found in the {@link #CirclePageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:strokeWidth
+        */
+        public static final int CirclePageIndicator_strokeWidth = 8;
+        /** Attributes that can be used with a ComplexPageIndicator.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_ball_Color cn.com.zzwfang:ball_Color}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_ball_radius cn.com.zzwfang:ball_radius}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_ballarm_color cn.com.zzwfang:ballarm_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_ballarm_height cn.com.zzwfang:ballarm_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_ballarm_width cn.com.zzwfang:ballarm_width}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_coodinate_Color cn.com.zzwfang:coodinate_Color}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_coodinate_Size cn.com.zzwfang:coodinate_Size}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_indicator_Color cn.com.zzwfang:indicator_Color}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_indicator_Height cn.com.zzwfang:indicator_Height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_indicator_Width cn.com.zzwfang:indicator_Width}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_mod cn.com.zzwfang:mod}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_smooth cn.com.zzwfang:smooth}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_text_color cn.com.zzwfang:text_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #ComplexPageIndicator_text_size cn.com.zzwfang:text_size}</code></td><td></td></tr>
+           </table>
+           @see #ComplexPageIndicator_ball_Color
+           @see #ComplexPageIndicator_ball_radius
+           @see #ComplexPageIndicator_ballarm_color
+           @see #ComplexPageIndicator_ballarm_height
+           @see #ComplexPageIndicator_ballarm_width
+           @see #ComplexPageIndicator_coodinate_Color
+           @see #ComplexPageIndicator_coodinate_Size
+           @see #ComplexPageIndicator_indicator_Color
+           @see #ComplexPageIndicator_indicator_Height
+           @see #ComplexPageIndicator_indicator_Width
+           @see #ComplexPageIndicator_mod
+           @see #ComplexPageIndicator_smooth
+           @see #ComplexPageIndicator_text_color
+           @see #ComplexPageIndicator_text_size
+         */
+        public static final int[] ComplexPageIndicator = {
+            0x7f010032, 0x7f010033, 0x7f010034, 0x7f010035,
+            0x7f010036, 0x7f010037, 0x7f010038, 0x7f010039,
+            0x7f01003a, 0x7f01003b, 0x7f01003c, 0x7f01003d,
+            0x7f01003e, 0x7f01003f
+        };
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#ball_Color}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:ball_Color
+        */
+        public static final int ComplexPageIndicator_ball_Color = 4;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#ball_radius}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:ball_radius
+        */
+        public static final int ComplexPageIndicator_ball_radius = 3;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#ballarm_color}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:ballarm_color
+        */
+        public static final int ComplexPageIndicator_ballarm_color = 7;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#ballarm_height}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:ballarm_height
+        */
+        public static final int ComplexPageIndicator_ballarm_height = 6;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#ballarm_width}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:ballarm_width
+        */
+        public static final int ComplexPageIndicator_ballarm_width = 5;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#coodinate_Color}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:coodinate_Color
+        */
+        public static final int ComplexPageIndicator_coodinate_Color = 9;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#coodinate_Size}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:coodinate_Size
+        */
+        public static final int ComplexPageIndicator_coodinate_Size = 8;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#indicator_Color}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:indicator_Color
+        */
+        public static final int ComplexPageIndicator_indicator_Color = 2;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#indicator_Height}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:indicator_Height
+        */
+        public static final int ComplexPageIndicator_indicator_Height = 1;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#indicator_Width}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:indicator_Width
+        */
+        public static final int ComplexPageIndicator_indicator_Width = 0;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#mod}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>below</code></td><td>1</td><td></td></tr>
+<tr><td><code>above</code></td><td>2</td><td></td></tr>
+</table>
+          @attr name cn.com.zzwfang:mod
+        */
+        public static final int ComplexPageIndicator_mod = 12;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#smooth}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:smooth
+        */
+        public static final int ComplexPageIndicator_smooth = 13;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#text_color}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:text_color
+        */
+        public static final int ComplexPageIndicator_text_color = 11;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#text_size}
+          attribute's value can be found in the {@link #ComplexPageIndicator} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:text_size
+        */
+        public static final int ComplexPageIndicator_text_size = 10;
         /** Attributes that can be used with a GuiderView.
            <p>Includes the following attributes:</p>
            <table>
@@ -2140,6 +2903,257 @@ containing a value of this type.
           @attr name cn.com.zzwfang:textSize
         */
         public static final int GuiderView_textSize = 3;
+        /** Attributes that can be used with a PagerSlidingTabStrip.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_dividerColor cn.com.zzwfang:dividerColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_dividerPaddingPagerSlidingTabStrip cn.com.zzwfang:dividerPaddingPagerSlidingTabStrip}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_indicatorColor cn.com.zzwfang:indicatorColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_indicatorHeight cn.com.zzwfang:indicatorHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_scrollOffset cn.com.zzwfang:scrollOffset}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_shouldExpand cn.com.zzwfang:shouldExpand}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_tabBackground cn.com.zzwfang:tabBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_tabPaddingLeftRight cn.com.zzwfang:tabPaddingLeftRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_tabTextColor cn.com.zzwfang:tabTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_tabTextSize cn.com.zzwfang:tabTextSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_tabUnselectedTextColor cn.com.zzwfang:tabUnselectedTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_textAllCapsPagerSlidingTabStrip cn.com.zzwfang:textAllCapsPagerSlidingTabStrip}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_underlineColor cn.com.zzwfang:underlineColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_underlineHeight cn.com.zzwfang:underlineHeight}</code></td><td></td></tr>
+           </table>
+           @see #PagerSlidingTabStrip_dividerColor
+           @see #PagerSlidingTabStrip_dividerPaddingPagerSlidingTabStrip
+           @see #PagerSlidingTabStrip_indicatorColor
+           @see #PagerSlidingTabStrip_indicatorHeight
+           @see #PagerSlidingTabStrip_scrollOffset
+           @see #PagerSlidingTabStrip_shouldExpand
+           @see #PagerSlidingTabStrip_tabBackground
+           @see #PagerSlidingTabStrip_tabPaddingLeftRight
+           @see #PagerSlidingTabStrip_tabTextColor
+           @see #PagerSlidingTabStrip_tabTextSize
+           @see #PagerSlidingTabStrip_tabUnselectedTextColor
+           @see #PagerSlidingTabStrip_textAllCapsPagerSlidingTabStrip
+           @see #PagerSlidingTabStrip_underlineColor
+           @see #PagerSlidingTabStrip_underlineHeight
+         */
+        public static final int[] PagerSlidingTabStrip = {
+            0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027,
+            0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b,
+            0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f,
+            0x7f010030, 0x7f010031
+        };
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#dividerColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:dividerColor
+        */
+        public static final int PagerSlidingTabStrip_dividerColor = 2;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#dividerPaddingPagerSlidingTabStrip}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:dividerPaddingPagerSlidingTabStrip
+        */
+        public static final int PagerSlidingTabStrip_dividerPaddingPagerSlidingTabStrip = 5;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#indicatorColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:indicatorColor
+        */
+        public static final int PagerSlidingTabStrip_indicatorColor = 0;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#indicatorHeight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:indicatorHeight
+        */
+        public static final int PagerSlidingTabStrip_indicatorHeight = 3;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#scrollOffset}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:scrollOffset
+        */
+        public static final int PagerSlidingTabStrip_scrollOffset = 7;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#shouldExpand}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:shouldExpand
+        */
+        public static final int PagerSlidingTabStrip_shouldExpand = 9;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#tabBackground}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name cn.com.zzwfang:tabBackground
+        */
+        public static final int PagerSlidingTabStrip_tabBackground = 8;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#tabPaddingLeftRight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:tabPaddingLeftRight
+        */
+        public static final int PagerSlidingTabStrip_tabPaddingLeftRight = 6;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#tabTextColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:tabTextColor
+        */
+        public static final int PagerSlidingTabStrip_tabTextColor = 12;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#tabTextSize}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:tabTextSize
+        */
+        public static final int PagerSlidingTabStrip_tabTextSize = 11;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#tabUnselectedTextColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:tabUnselectedTextColor
+        */
+        public static final int PagerSlidingTabStrip_tabUnselectedTextColor = 13;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#textAllCapsPagerSlidingTabStrip}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:textAllCapsPagerSlidingTabStrip
+        */
+        public static final int PagerSlidingTabStrip_textAllCapsPagerSlidingTabStrip = 10;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#underlineColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:underlineColor
+        */
+        public static final int PagerSlidingTabStrip_underlineColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link cn.com.zzwfang.R.attr#underlineHeight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name cn.com.zzwfang:underlineHeight
+        */
+        public static final int PagerSlidingTabStrip_underlineHeight = 4;
         /** Attributes that can be used with a PathImage.
            <p>Includes the following attributes:</p>
            <table>

@@ -880,4 +880,10 @@ public interface Action {
 	 * @param callback
 	 */
 	void getComplainLabels(ResultHandlerCallback callback); 
+	
+	/**
+	 * 推荐资讯
+	 */
+	void getRecommendNews(ResultHandlerCallback callback);
+	
 }

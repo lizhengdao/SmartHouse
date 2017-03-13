@@ -400,11 +400,15 @@ public class API {
      */
     public static final String POST_COMMENT_COMPANY_ANNOCEMENT_DETAIL = "Notices/Common";
     
-    
     /**
      * 获取投诉标签
      */
     public static final String GET_COMPLAIN_LABELS = "Other/Label";
+    
+    /**
+     * 推荐资讯
+     */
+    public static final String GET_RECOMMEND_NEWS = "News/Recommend";
 
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,7 +20,9 @@ import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.MainActivity;
 import cn.com.zzwfang.activity.NewsDetailActivity;
 import cn.com.zzwfang.adapter.NewsTypeListPagerAdapter;
+import cn.com.zzwfang.adapter.RecommendNewsAdapter;
 import cn.com.zzwfang.bean.IdTitleBean;
+import cn.com.zzwfang.bean.RecommendNewsBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -28,6 +31,7 @@ import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.UnScrollableViewPager;
 import cn.com.zzwfang.view.helper.PopViewHelper;
 import cn.com.zzwfang.view.helper.PopViewHelper.OnNewsMoreSelectedListener;
+import cn.com.zzwfang.view.indicator.CirclePageIndicator;
 
 import com.alibaba.fastjson.JSON;
 
@@ -40,7 +44,8 @@ public class MainNewsFragment extends BaseFragment implements OnCheckedChangeLis
 OnClickListener, OnItemClickListener {
 
 	private TextView tvBack;
-//	private ViewPager pagerTop;
+	private ViewPager pagerRecommendNews;
+	private CirclePageIndicator indicator;
 	private RadioButton rbNewsTypeOne, rbNewsTypeTwo, rbNewsTypeThree, rbMore;
 	private View lineOne, lineTwo, lineThree;
 	private UnScrollableViewPager viewPager;
@@ -50,18 +55,21 @@ OnClickListener, OnItemClickListener {
 	
 	private OnNewsMoreSelectedListener onNewsMoreSelectedListener;
 	
+	private RecommendNewsAdapter recommendNewsAdapter;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_main_consultation, null);
 		initView(view);
 		getNewsType();
+		getRecommendNews();
 		return view;
 	}
 	
 	private void initView(View view) {
 		tvBack = (TextView) view.findViewById(R.id.frag_consultation_back);
-//		pagerTop = (ViewPager) view.findViewById(R.id.pager_consultation);
+		pagerRecommendNews = (ViewPager) view.findViewById(R.id.pager_recommend_news);
 		rbNewsTypeOne = (RadioButton) view.findViewById(R.id.frag_consultation_one_rb);
 		rbNewsTypeTwo = (RadioButton) view.findViewById(R.id.frag_consultation_two_rb);
 		rbNewsTypeThree = (RadioButton) view.findViewById(R.id.frag_consultation_three_rb);
@@ -72,9 +80,12 @@ OnClickListener, OnItemClickListener {
 		lineThree = view.findViewById(R.id.frag_main_news_line_three);
 		
 		viewPager = (UnScrollableViewPager) view.findViewById(R.id.frag_news_pager);
+		indicator = (CirclePageIndicator) view.findViewById(R.id.indicator_header_recommend_news);
 		viewPager.setCanScroll(false);
 		pagerAdapter = new NewsTypeListPagerAdapter(getActivity(), getChildFragmentManager());
 		viewPager.setAdapter(pagerAdapter);
+		
+		indicator.setViewPager(viewPager);
 		
 		tvBack.setOnClickListener(this);
 		rbNewsTypeOne.setOnCheckedChangeListener(this);
@@ -82,6 +93,9 @@ OnClickListener, OnItemClickListener {
 		rbNewsTypeThree.setOnCheckedChangeListener(this);
 //		rbMore.setOnCheckedChangeListener(this);
 		rbMore.setOnClickListener(this);
+		
+		recommendNewsAdapter = new RecommendNewsAdapter(getActivity());
+		pagerRecommendNews.setAdapter(recommendNewsAdapter);
 		
 		onNewsMoreSelectedListener = new OnNewsMoreSelectedListener() {
 
@@ -254,6 +268,32 @@ OnClickListener, OnItemClickListener {
 				ArrayList<IdTitleBean> temp = (ArrayList<IdTitleBean>) JSON.parseArray(result.getData(), IdTitleBean.class);
 				newsTypes.addAll(temp);
 				rendUI();
+			}
+		});
+	}
+	
+	private void getRecommendNews() {
+		ActionImpl actionImpl = ActionImpl.newInstance(getActivity());
+		actionImpl.getRecommendNews(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				Log.i("--->", "getRecommendNews:  " + result.getData());
+				
+				ArrayList<RecommendNewsBean> temp = (ArrayList<RecommendNewsBean>) JSON.parseArray(result.getData(), RecommendNewsBean.class);
 			}
 		});
 	}
