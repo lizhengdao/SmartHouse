@@ -33,7 +33,7 @@ public class API {
 	 */
 	public static final String host = "http://zzwfang.com:7894/";  //  http://110.189.90.40:7894/   http://192.168.1.115:8000/
 
-	//   http://zzwfang.com:7894/    http://47.90.54.170:7003/
+	//   http://zzwfang.com:7894/    http://47.90.54.170:7003/  http://192.168.1.115:8000/
 	/**
 	 * 认证授权接口
 	 */
@@ -409,6 +409,16 @@ public class API {
      * 推荐资讯
      */
     public static final String GET_RECOMMEND_NEWS = "News/Recommend";
+    
+    /**
+     * 获取房源参数
+     */
+    public static final String GET_HOUSE_SOURCE_PARAM = "Other/GetPara";
+    
+    /**
+     * 获取房源排序参数
+     */
+    public static final String GET_HOUSE_SOURCE_SORT = "Other/GetSort";
 
 
 }

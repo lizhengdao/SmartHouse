@@ -30,6 +30,9 @@ import cn.com.zzwfang.adapter.BankProvinceOrCityAdapter;
 import cn.com.zzwfang.adapter.BuildingsAdapter;
 import cn.com.zzwfang.adapter.ConditionAdapter;
 import cn.com.zzwfang.adapter.EstateRoomAdapter;
+import cn.com.zzwfang.adapter.HouseSourceParamAdapter;
+import cn.com.zzwfang.adapter.HouseSourceParamMoreAdapter;
+import cn.com.zzwfang.adapter.HouseSourceSortTypeAdapter;
 import cn.com.zzwfang.adapter.MoreDetailAdapter;
 import cn.com.zzwfang.adapter.MoreTypeAdapter;
 import cn.com.zzwfang.adapter.MortgageYearsAdapter;
@@ -37,9 +40,12 @@ import cn.com.zzwfang.adapter.MyCustomerConditionAdapter;
 import cn.com.zzwfang.adapter.NewsMoreAdapter;
 import cn.com.zzwfang.bean.AgentBean;
 import cn.com.zzwfang.bean.FeeHunterMyCustomerConditionBean;
+import cn.com.zzwfang.bean.FieldNameValueBean;
+import cn.com.zzwfang.bean.HouseSourceParamBean;
 import cn.com.zzwfang.bean.IdNameBean;
 import cn.com.zzwfang.bean.IdNameFloorBean;
 import cn.com.zzwfang.bean.IdTitleBean;
+import cn.com.zzwfang.bean.NameValueBean;
 import cn.com.zzwfang.bean.ProvinceCityBean;
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.util.DevUtils;
@@ -109,6 +115,133 @@ public class PopViewHelper {
             popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
         }
 	}
+	
+	public interface OnHouseSourceParamPickListener {
+		
+		void onHouseSourceParamPick(int fieldPosition, NameValueBean houseSourceParam);
+	}
+	/**
+	 * 房源参数选择
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showPickHouseSourceParamPopWindow(Context context, View anchorView, final int fieldPosition,
+			final ArrayList<HouseSourceParamBean> houseSourceParams, final OnHouseSourceParamPickListener listener) {
+		View view = View.inflate(context, R.layout.popup_condition, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    
+	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+	    
+	    final ArrayList<NameValueBean> values = houseSourceParams.get(fieldPosition).getValues();
+	    HouseSourceParamAdapter adapter = new HouseSourceParamAdapter(context, values);
+	    lstCondition.setAdapter(adapter);
+	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				NameValueBean temp = values.get(position);
+				temp.setSelected(!temp.isSelected());
+				
+				if (temp.isSelected()) {
+					int size = values.size();
+					for (int i = 0; i < size; i++) {
+						if (i != position) {
+							values.get(i).setSelected(false);
+						}
+					}
+				}
+				popupWindow.dismiss();
+				
+				if (listener != null) {
+					listener.onHouseSourceParamPick(fieldPosition, temp);
+				}
+				
+			}
+		});
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	}
+	
+	/**
+	 * 房源参数更多选择
+	 * @param context
+	 * @param anchorView
+	 */
+	public static void showPickHouseSourceParamMorePopWindow(Context context, View anchorView, final int fieldPosition,
+			final ArrayList<HouseSourceParamBean> houseSourceParams, final OnHouseSourceParamPickListener listener) {
+		View view = View.inflate(context, R.layout.popup_condition, null);
+		final PopupWindow popupWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//		final PopupWindow popupWindow = new PopupWindow(view, DevUtils.getScreenTools(context).dip2px(140), LayoutParams.WRAP_CONTENT);
+		popupWindow.setFocusable(true);
+	    popupWindow.setOutsideTouchable(true);
+	    popupWindow.update();
+	    ColorDrawable dw = new ColorDrawable(0000000000);
+	    popupWindow.setBackgroundDrawable(dw);
+	    
+	    
+	    ListView lstCondition = (ListView) view.findViewById(R.id.popup_condition_lst);
+	    
+	    lstCondition.setDivider(null);
+	    lstCondition.setDividerHeight(0);
+	    HouseSourceParamMoreAdapter adapter = new HouseSourceParamMoreAdapter(context, houseSourceParams, new OnHouseSourceParamPickListener() {
+			
+			@Override
+			public void onHouseSourceParamPick(int fieldPosition,
+					NameValueBean houseSourceParam) {
+				// TODO Auto-generated method stub
+				if (listener != null) {
+					listener.onHouseSourceParamPick(fieldPosition, houseSourceParam);
+				}
+				popupWindow.dismiss();
+			}
+		});
+	    lstCondition.setAdapter(adapter);
+	    
+//	    final ArrayList<NameValueBean> values = houseSourceParams.get(fieldPosition).getValues();
+//	    HouseSourceParamAdapter adapter = new HouseSourceParamAdapter(context, values);
+//	    lstCondition.setAdapter(adapter);
+//	    lstCondition.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				NameValueBean temp = values.get(position);
+//				temp.setSelected(!temp.isSelected());
+//				
+//				if (temp.isSelected()) {
+//					int size = values.size();
+//					for (int i = 0; i < size; i++) {
+//						if (i != position) {
+//							values.get(i).setSelected(false);
+//						}
+//					}
+//				}
+//				popupWindow.dismiss();
+//				
+//				if (listener != null) {
+//					listener.onHouseSourceParamPick(fieldPosition, temp);
+//				}
+//				
+//			}
+//		});
+	    if (popupWindow.isShowing()) {
+            popupWindow.dismiss();
+        } else {
+            popupWindow.showAsDropDown(anchorView, (anchorView.getWidth() - popupWindow.getWidth()) / 2, 0);
+        }
+	}
+	
 	
 	/**
 	 * 区域选择
@@ -1707,6 +1840,7 @@ public class PopViewHelper {
         popupWindow.update();
         ColorDrawable dw = new ColorDrawable(00000000);
         popupWindow.setBackgroundDrawable(dw);
+        popupWindow.setAnimationStyle(R.style.timepopwindow_anim_style);
         
         FrameLayout fltWindow = (FrameLayout) view.findViewById(R.id.flt_pop_house_detail_agent);
         LinearLayout lltAgent = (LinearLayout) view.findViewById(R.id.llt_pop_house_detail_agent);
@@ -1837,4 +1971,59 @@ public class PopViewHelper {
 //        dialog.showAtLocation(anchor, Gravity.BOTTOM, 0, 0);
     }
 //==========================经纪人店铺咨询【end】===========================================
+    
+  //==========================房源列表 排序【start】===========================================
+    public interface OnHouseSourceSortTypeClickListener {
+        
+        /**
+         * 房源列表 排序
+         * @param sortType
+         */
+        void onHouseSourceSortTypeClick(FieldNameValueBean sortType);
+    }
+    public static void showHouseSourceSortTypeDialog(Context context, final ArrayList<FieldNameValueBean> sortParamList, final OnHouseSourceSortTypeClickListener listener) {
+        
+    	final Dialog dialog = new Dialog(context, R.style.DefaultDialogTheme);
+        dialog.setContentView(R.layout.dialog_house_source_sort_type);
+        Window win = dialog.getWindow();
+        WindowManager.LayoutParams params = win.getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        win.setAttributes(params);
+        win.setGravity(Gravity.BOTTOM);
+        win.setWindowAnimations(R.style.timepopwindow_anim_style);
+    	
+        ListView lstSortType = (ListView) dialog.findViewById(R.id.lst_adapter_source_sort_type);
+        final HouseSourceSortTypeAdapter adapter = new HouseSourceSortTypeAdapter(context, sortParamList);
+        lstSortType.setAdapter(adapter);
+        
+        lstSortType.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				FieldNameValueBean temp = sortParamList.get(position);
+				temp.setSelected(!temp.isSelected());
+				if (temp.isSelected()) {
+					int size = sortParamList.size();
+					for (int i = 0; i < size; i++) {
+						if (i != position) {
+							sortParamList.get(i).setSelected(false);
+						}
+					}
+				}
+				adapter.notifyDataSetChanged();
+				
+				if (temp.isSelected() && listener != null) {
+					listener.onHouseSourceSortTypeClick(temp);
+					dialog.dismiss();
+				}
+			}
+		});
+        
+        
+        dialog.show();
+    }
+//==========================房源列表 排序【end】===========================================
 }

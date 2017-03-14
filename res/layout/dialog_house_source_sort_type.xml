@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ListView 
+        android:id="@+id/lst_adapter_source_sort_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/color_e2e2e2"
+        android:dividerHeight="0.6dp"/>
+
+</LinearLayout>

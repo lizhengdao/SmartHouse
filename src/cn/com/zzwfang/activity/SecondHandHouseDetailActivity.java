@@ -69,6 +69,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
     public static final String Tencent_app_id = "";
 
 	public static final String INTENT_HOUSE_SOURCE_ID = "house_source_id";
+	public static final String INTENT_HOUSE_NAME = "house_name";
 	private TextView tvBack, tvTitle, tvDetailtitle;  // tvMore
 	private TextView tvTotalPrice, tvHouseType, tvSquare, tvLabel, tvUnitPrice;
 	private TextView tvPartialPrice, tvMonthlyPay, tvFloor, tvDirection,
@@ -96,6 +97,7 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 
 //	private PathImage agentAvatar;
 	private String houseSourceId = null;
+	private String houseName = null;
 
 	private SecondHandHouseDetailBean secondHandHouseDetail;
 	
@@ -119,7 +121,11 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 		apiWeixin.registerApp(Constants.App_Id_Weixin);
 //		tencent = Tencent.createInstance(Tencent_app_id, this.getApplicationContext());
 		initView();
-		houseSourceId = getIntent().getStringExtra(INTENT_HOUSE_SOURCE_ID);
+		
+		Intent intent = getIntent();
+		houseSourceId = intent.getStringExtra(INTENT_HOUSE_SOURCE_ID);
+		houseName = intent.getStringExtra(INTENT_HOUSE_NAME);
+		tvTitle.setText(houseName);
 		getSecondHandHouseDetail();
 	}
 

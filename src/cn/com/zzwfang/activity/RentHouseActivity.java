@@ -1,6 +1,8 @@
 package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,9 +23,11 @@ import android.widget.TextView.OnEditorActionListener;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.RentHouseAdapter;
+import cn.com.zzwfang.bean.FieldNameValueBean;
+import cn.com.zzwfang.bean.HouseSourceParamBean;
+import cn.com.zzwfang.bean.NameValueBean;
 import cn.com.zzwfang.bean.RentHouseBean;
 import cn.com.zzwfang.bean.Result;
-import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
@@ -31,9 +35,10 @@ import cn.com.zzwfang.pullview.AbPullToRefreshView;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnFooterLoadListener;
 import cn.com.zzwfang.pullview.AbPullToRefreshView.OnHeaderRefreshListener;
 import cn.com.zzwfang.util.Jumper;
+import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnRentHouseMoreConditionListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseSourceParamPickListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseSourceSortTypeClickListener;
 
 import com.alibaba.fastjson.JSON;
 
@@ -57,80 +62,42 @@ import com.alibaba.fastjson.JSON;
  *
  */
 public class RentHouseActivity extends BaseActivity implements OnClickListener,
-        OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener {
+        OnHeaderRefreshListener, OnFooterLoadListener, OnItemClickListener,
+        OnHouseSourceSortTypeClickListener, OnHouseSourceParamPickListener {
 
 	public static final String INTENT_KEY_WORDS = "RentHouseActivity.intent_keywords";
     private TextView tvBack;
 
     private EditText edtKeyWords;
     private LinearLayout lltArea, lltRentPrice, lltHouseType, lltMore;
-    private TextView tvArea, tvRentPrice, tvHouseType;
+    private TextView tvArea, tvRentPrice, tvHouseType, tvMore;
     private ImageView imgClearKeyWords;
 
     private AbPullToRefreshView pullView;
     private ListView lstRentHouseView;
+    private AutoDrawableTextView tvSort;
     private RentHouseAdapter adapter;
-
-//    public static final String SalePriceRange = "SalePriceRange";
-    public static final String HouseType = "HouseType";  //  房型
-//    public static final String PrpUsage = "PrpUsage";
-//    public static final String EstateLabel = "EstateLabel";
-//    public static final String EstateStatus = "EstateStatus";
-//    public static final String FloorRange = "FloorRange";
-    public static final String RentPriceRange = "RentPriceRange"; // 租金区间
     
-    //  TODO 面积范围  的字符串还需要问问
-    public static final String SquareRange = "SquareRange";  // 面积范围
-    public static final String Direction = "Direction";  //  朝向
-//    public static final String Sort = "Sort";  // 排序 写死
+    private LinearLayout lltRentHouseSourceParam;
+    private View lineAnchor, lineOne, lineTwo, lineThree;
+
 
     private String cityId = "";
 
     private ArrayList<RentHouseBean> rentHouses = new ArrayList<RentHouseBean>();
 
-    // 区域
-    private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
-    // 总价
-//    private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
-    // 户型
-    private ArrayList<TextValueBean> houseTypes = new ArrayList<TextValueBean>();
-    // 物业类型
-//    private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
-
-    // 特色标签
-//    private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
-    //  售卖状态
-//    private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
-    //  楼层范围
-//    private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-
-    //  租价范围
-    private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-    // 朝向
-    private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-    // 面积
-    private ArrayList<TextValueBean> squareRanges = new ArrayList<TextValueBean>();
-    //  排序
-    private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
-
-    //  区域监听
-    private OnConditionSelectListener onAreaSelectListener;
-    //  租金范围监听
-    private OnConditionSelectListener onRentPriceSelectListener;
-    //  房型监听
-    private OnConditionSelectListener onHouseTypeSelectListener;
-
-    private ArrayList<String> moreType = new ArrayList<String>();
-    private OnRentHouseMoreConditionListener onRentHouseMoreConditionListener;
-
-    private TextValueBean areaCondition;
-    private TextValueBean rentPriceCondition;
-    private TextValueBean squareCondition;
-//    private TextValueBean labelCondition;
-    private TextValueBean roomTypeCondition;
-    private String sort, keyWords, direction;
+    private String keyWords;
     private int pageIndex = 1;
     private int pageTotal = 0;
+    
+    private ArrayList<HouseSourceParamBean> houseSourceParams;
+    
+//  排序参数
+	private ArrayList<FieldNameValueBean> sortParamList;
+	/**
+	 * 排序（已选择的）
+	 */
+	private FieldNameValueBean sortTypeBean;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -154,10 +121,19 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         lltRentPrice = (LinearLayout) findViewById(R.id.act_rent_house_rent_price_llt);
         lltHouseType = (LinearLayout) findViewById(R.id.act_rent_house_type_llt);
         lltMore = (LinearLayout) findViewById(R.id.act_rent_house_more_llt);
+        
+        lineAnchor = findViewById(R.id.line_rent_house_anchor);
+        lineOne = findViewById(R.id.line_rent_house_one);
+        lineTwo = findViewById(R.id.line_rent_house_two);
+        lineThree = findViewById(R.id.line_rent_house_three);
+        
+        lltRentHouseSourceParam = (LinearLayout) findViewById(R.id.llt_rent_house_params);
 
         tvArea = (TextView) findViewById(R.id.act_rent_house_area_tv);
         tvRentPrice = (TextView) findViewById(R.id.act_rent_house_rent_price_tv);
         tvHouseType = (TextView) findViewById(R.id.act_rent_house_type_tv);
+        tvSort = (AutoDrawableTextView) findViewById(R.id.tv_rent_house_sort);
+        tvMore = (TextView) findViewById(R.id.act_rent_house_more_tv);
         
         if (!TextUtils.isEmpty(keyWords)) {
             edtKeyWords.setText(keyWords);
@@ -179,107 +155,30 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
         lstRentHouseView.setAdapter(adapter);
         lstRentHouseView.setOnItemClickListener(this);
         
+        tvSort.setOnClickListener(this);
+        
         edtKeyWords.setOnEditorActionListener(new OnEditorActionListener() {
             
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
                     keyWords = edtKeyWords.getText().toString();
-                    getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                            squareCondition, sort, keyWords, direction,
-                            roomTypeCondition, 10, true);
+                    getRentHouseList(cityId, keyWords, 10, true);
                     return true;
                 }
                 return false;
             }
         });
 
-        onRentPriceSelectListener = new OnConditionSelectListener() {
 
-            @Override
-            public void onConditionSelect(TextValueBean txtValueBean) {
-                rentPriceCondition = txtValueBean;
-                tvRentPrice.setText(txtValueBean.getText());
-                keyWords = edtKeyWords.getText().toString();
-                getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, direction,
-                        roomTypeCondition, 10, true);
-            }
-        };
 
-        onHouseTypeSelectListener = new OnConditionSelectListener() {
-
-            @Override
-            public void onConditionSelect(TextValueBean txtValueBean) {
-                roomTypeCondition = txtValueBean;
-                tvHouseType.setText(txtValueBean.getText());
-                keyWords = edtKeyWords.getText().toString();
-                getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, direction,
-                        roomTypeCondition, 10, true);
-            }
-        };
-
-        onAreaSelectListener = new OnConditionSelectListener() {
-
-            @Override
-            public void onConditionSelect(TextValueBean txtValueBean) {
-                areaCondition = txtValueBean;
-                tvArea.setText(txtValueBean.getText());
-                keyWords = edtKeyWords.getText().toString();
-                getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, direction,
-                        roomTypeCondition, 10, true);
-            }
-        };
-        
-        onRentHouseMoreConditionListener = new OnRentHouseMoreConditionListener() {
-			
-			@Override
-			public void onRentHouseMoreConditon(TextValueBean sortConditionData,
-					TextValueBean squareConditionData,
-					TextValueBean directionConditonData) {
-				// TODO Auto-generated method stub
-				if (sortConditionData != null) {
-					sort = sortConditionData.getValue();
-				}
-				squareCondition = squareConditionData;
-				if (directionConditonData != null) {
-					direction = directionConditonData.getValue();
-				}
-				keyWords = edtKeyWords.getText().toString();
-				getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                        squareCondition, sort, keyWords, direction,
-                        roomTypeCondition, 10, true);
-			}
-		};
     }
 
     private void initData() {
-    	initSortsData();
-        moreType.add("排序");
-        moreType.add("面积范围");
-        moreType.add("朝向");
         
-//        moreType.add("标签");
-//        moreType.add("楼层");
-//        moreType.add("房源编号");
-//        getConditionList(SalePriceRange);
-        getConditionList(HouseType);
-//        getConditionList(PrpUsage);
-//        getConditionList(EstateLabel);
-//        getConditionList(EstateStatus);
-//        getConditionList(FloorRange);
-        getConditionList(RentPriceRange);
-        getConditionList(Direction);
-        getConditionList(SquareRange);
-        
-//        getConditionList(Sort);
-        getAreaList();
-
-        getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                squareCondition, sort, keyWords, direction, roomTypeCondition, 10,
-                true);
+    	getHouseSourceParam();
+    	getHouseSourceSort();
+        getRentHouseList(cityId, keyWords, 10, true);
     }
 
     @Override
@@ -292,27 +191,49 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
             finish();
             break;
         case R.id.act_rent_house_area_llt: // 区域
-            PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
-                    onAreaSelectListener);
+//            PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
+//                    onAreaSelectListener);
+        	if (houseSourceParams != null) {
+				PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 0, houseSourceParams, this);
+			}
             break;
         case R.id.act_rent_house_rent_price_llt: // 租金
-            PopViewHelper.showSelectRentPricePopWindow(this, lltRentPrice,
-                    rentPriceRanges, onRentPriceSelectListener);
+//            PopViewHelper.showSelectRentPricePopWindow(this, lltRentPrice,
+//                    rentPriceRanges, onRentPriceSelectListener);
+        	if (houseSourceParams != null) {
+            	PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 1, houseSourceParams, this);
+			}
             break;
         case R.id.act_rent_house_type_llt: // 房型
-            PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
-                    houseTypes, onHouseTypeSelectListener);
+//            PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
+//                    houseTypes, onHouseTypeSelectListener);
+        	if (houseSourceParams != null) {
+            	PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 2, houseSourceParams, this);
+			}
             break;
         case R.id.act_rent_house_more_llt: // 更多
         	// TODO
 //            PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
 //                    sorts, directions, estateLabels, lltMore);
-        	PopViewHelper.showRentHouseMorePopWindow(this, moreType, sorts,
-        			squareRanges, directions, lltMore, onRentHouseMoreConditionListener);
+//        	PopViewHelper.showRentHouseMorePopWindow(this, moreType, sorts,
+//        			squareRanges, directions, lltMore, onRentHouseMoreConditionListener);
+        	if (houseSourceParams != null) {
+				if (houseSourceParams.size() > 4) {
+					PopViewHelper.showPickHouseSourceParamMorePopWindow(this, lineAnchor, 4, houseSourceParams, this);
+				} else {
+					PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 3, houseSourceParams, this);
+				}
+				
+			}
             break;
         case R.id.act_rent_house_clear_key_wrods:
         	keyWords = "";
         	edtKeyWords.setText("");
+        	break;
+        case R.id.tv_rent_house_sort:  //  排序
+        	if (sortParamList != null) {
+				PopViewHelper.showHouseSourceSortTypeDialog(this, sortParamList, this);
+			}
         	break;
         }
     }
@@ -334,104 +255,45 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
     @Override
     public void onFooterLoad(AbPullToRefreshView view) {
         if (pageIndex > pageTotal) {
-            getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                    squareCondition, sort, keyWords, direction,
-                    roomTypeCondition, 10, false);
+            getRentHouseList(cityId, keyWords, 10, false);
         }
     }
 
     @Override
     public void onHeaderRefresh(AbPullToRefreshView view) {
-        getRentHouseList(cityId, areaCondition, rentPriceCondition,
-                squareCondition, sort, keyWords, direction,
-                roomTypeCondition, 10, true);
+    	keyWords = edtKeyWords.getText().toString();
+        getRentHouseList(cityId, keyWords, 10, true);
     }
 
-    public void getConditionList(final String conditionName) {
-        ActionImpl actionImpl = ActionImpl.newInstance(this);
-        actionImpl.getConditionByName(conditionName,
-                new ResultHandlerCallback() {
 
-                    @Override
-                    public void rc999(RequestEntity entity, Result result) {
 
-                    }
-
-                    @Override
-                    public void rc3001(RequestEntity entity, Result result) {
-
-                    }
-
-                    @Override
-                    public void rc0(RequestEntity entity, Result result) {
-                        ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
-                                .parseArray(result.getData(),
-                                        TextValueBean.class);
-//                        if (SalePriceRange.equals(conditionName)) {
-//                            salePriceRanges.addAll(temp);
-//                        } else 
-                        if (HouseType.equals(conditionName)) {
-                            houseTypes.addAll(temp);
-                        }
-//                        else if (PrpUsage.equals(conditionName)) {
-//                            prpUsages.addAll(temp);
-//                        } else if (EstateLabel.equals(conditionName)) {
-//                            estateLabels.addAll(temp);
-//                        } else if (EstateStatus.equals(conditionName)) {
-//                            estateStatus.addAll(temp);
-//                        } else if (FloorRange.equals(conditionName)) {
-//                            floorRanges.addAll(temp);
-//                        }
-                        else if (RentPriceRange.equals(conditionName)) {
-                            rentPriceRanges.addAll(temp);
-                        } else if (Direction.equals(conditionName)) {
-                            directions.addAll(temp);
-                        } else if (SquareRange.equals(conditionName)) {
-                        	squareRanges.addAll(temp);
-                        }
-//                        else if (Sort.equals(conditionName)) {
-//                            sorts.addAll(temp);
-//                        }
-                    }
-                });
-    }
-
-    private void getAreaList() {
-        ActionImpl actionImpl = ActionImpl.newInstance(this);
-        actionImpl.getAreaList(cityId, new ResultHandlerCallback() {
-
-            @Override
-            public void rc999(RequestEntity entity, Result result) {
-
-            }
-
-            @Override
-            public void rc3001(RequestEntity entity, Result result) {
-
-            }
-
-            @Override
-            public void rc0(RequestEntity entity, Result result) {
-                ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
-                        .parseArray(result.getData(), TextValueBean.class);
-                areas.addAll(temp);
-            }
-        });
-    }
-
-    private void getRentHouseList(String cityId, TextValueBean areaCondition,
-            TextValueBean priceCondition, TextValueBean squareCondition,
-            String sort, String keyWords, String direction,
-            TextValueBean roomTypeCondition, int pageSize,
+    private void getRentHouseList(String cityId, String searchKeyWords, int pageSize,
             final boolean isRefresh) {
+    	
 
         if (isRefresh) {
             pageIndex = 1;
         }
+        
+        HashMap<String, String> requestParams = new HashMap<String, String>();
+        if (houseSourceParams != null) {
+			for (HouseSourceParamBean para : houseSourceParams) {
+				ArrayList<NameValueBean> nameValues = para.getValues();
+				for (NameValueBean nameValueBean : nameValues) {
+					if (nameValueBean.isSelected()) {
+						requestParams.put(para.getFiled(), nameValueBean.getValue());
+						break;
+					}
+				}
+			}
+		}
+        
+        if (sortTypeBean != null) {
+        	requestParams.put(sortTypeBean.getFiled(), sortTypeBean.getValue());
+        }
 
         ActionImpl actionImpl = ActionImpl.newInstance(this);
-        actionImpl.getRentHouseList(cityId, areaCondition, priceCondition,
-                squareCondition, sort, keyWords, direction, roomTypeCondition,
+        actionImpl.getRentHouseList(cityId, requestParams, keyWords,
                 10, pageIndex, new ResultHandlerCallback() {
 
                     @Override
@@ -479,26 +341,156 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
                 });
     }
     
-	/**
-	 * 排序    0：默认     1：租金低到高     2：租金高到低
-	 */
-	private void initSortsData() {
-		TextValueBean tv1 = new TextValueBean();
-		tv1.setText("默认");
-		tv1.setValue("0");
-		tv1.setSelected(true);
-		
-		TextValueBean tv2 = new TextValueBean();
-		tv2.setText("租金低到高");
-		tv2.setValue("1");
-		
-		TextValueBean tv3 = new TextValueBean();
-		tv3.setText("租金高到低");
-		tv3.setValue("2");
-		
-		sorts.add(tv1);
-		sorts.add(tv2);
-		sorts.add(tv3);
+    
+    private void getHouseSourceParam() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getHouseSourceParameter(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO getHouseSourceParam
+//				Log.i("--->", "getHouseSourceParam result: " + result.getData());
+				houseSourceParams = (ArrayList<HouseSourceParamBean>) JSON.parseArray(result.getData(), HouseSourceParamBean.class);
+				if (houseSourceParams != null) {
+					
+					Iterator<HouseSourceParamBean> iterator = houseSourceParams.iterator();
+					while (iterator.hasNext()) {
+						HouseSourceParamBean houseSourceParamBean = iterator.next();
+						if ("售价".equals(houseSourceParamBean.getName())) {
+							iterator.remove();
+						} else {
+                            ArrayList<NameValueBean> values = houseSourceParamBean.getValues();
+							if (values != null && values.size() > 0) {
+								NameValueBean nameValueBean = values.get(0);
+								if ("不限".equals(nameValueBean.getName())) {
+									nameValueBean.setSelected(true);
+								}
+							}
+						}
+					}
+					
+					int size = houseSourceParams.size();
+					if (size == 0) {
+						lltRentHouseSourceParam.setVisibility(View.GONE);
+					} else if (size == 1) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						
+						lltRentPrice.setVisibility(View.GONE);
+						lltHouseType.setVisibility(View.GONE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineOne.setVisibility(View.GONE);
+						lineTwo.setVisibility(View.GONE);
+						lineThree.setVisibility(View.GONE);
+					} else if (size == 2) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvRentPrice.setText(houseSourceParams.get(1).getName());
+						
+						lltArea.setVisibility(View.VISIBLE);
+						lltRentPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.GONE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineTwo.setVisibility(View.GONE);
+						lineThree.setVisibility(View.GONE);
+					} else if (size == 3) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvRentPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+						
+						lltArea.setVisibility(View.VISIBLE);
+						lltRentPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineThree.setVisibility(View.GONE);
+						
+					} else if (size == 4) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvRentPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+						tvMore.setText(houseSourceParams.get(3).getName());
+						
+						lltArea.setVisibility(View.VISIBLE);
+						lltRentPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.VISIBLE);
+					} else if (size > 4) {
+						lltArea.setVisibility(View.VISIBLE);
+						lltRentPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.VISIBLE);
+						
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvRentPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+					}
+				}
+			}
+		});
+	}
+    
+    private void getHouseSourceSort() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getHouseSourceSort(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO getHouseSourceSort
+//				Log.i("--->", "getHouseSourceSort result: " + result.getData());
+				sortParamList = (ArrayList<FieldNameValueBean>) JSON.parseArray(result.getData(), FieldNameValueBean.class);
+				if (sortParamList != null && sortParamList.size() > 0) {
+					
+					
+					sortTypeBean = sortParamList.get(0);
+					sortTypeBean.setSelected(true);
+				}
+			}
+		});
+	}
+    
+	
+	@Override
+	protected int getStatusBarTintResource() {
+		// TODO Auto-generated method stub
+		return R.color.white;
+	}
+
+	@Override
+	public void onHouseSourceSortTypeClick(FieldNameValueBean sortType) {
+		// TODO 排序
+		sortTypeBean = sortType;
+		keyWords = edtKeyWords.getText().toString();
+		getRentHouseList(cityId, keyWords, 10, true);
+	}
+
+	@Override
+	public void onHouseSourceParamPick(int fieldPosition,
+			NameValueBean houseSourceParam) {
+		// TODO 房源参数选择
+		keyWords = edtKeyWords.getText().toString();
+		getRentHouseList(cityId, keyWords, 10, true);
 	}
 
 

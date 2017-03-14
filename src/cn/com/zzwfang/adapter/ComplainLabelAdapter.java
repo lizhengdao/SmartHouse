@@ -20,6 +20,7 @@ public class ComplainLabelAdapter extends BaseAdapter {
 
 	private Context context;
 	private ArrayList<ComplainLabelBean> complainLabels;
+	private ComplainLabelBean complainLabelBeanSelected;
 	
 	public ComplainLabelAdapter(Context context) {
 		this.context = context;
@@ -30,6 +31,10 @@ public class ComplainLabelAdapter extends BaseAdapter {
 		complainLabels.clear();
 		complainLabels.addAll(data);
 		notifyDataSetChanged();
+	}
+	
+	public ComplainLabelBean getSelectedComplainLabel() {
+		return complainLabelBeanSelected;
 	}
 	
 	@Override
@@ -78,6 +83,7 @@ public class ComplainLabelAdapter extends BaseAdapter {
 						ComplainLabelBean complainLabelBeanTemp = complainLabels.get(i);
 						if (i == position) {
 							complainLabelBeanTemp.setSelected(true);
+							complainLabelBeanSelected = complainLabelBeanTemp;
 						} else {
 							complainLabelBeanTemp.setSelected(false);
 						}

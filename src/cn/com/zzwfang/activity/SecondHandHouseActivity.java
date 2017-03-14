@@ -1,8 +1,11 @@
 package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,11 +31,13 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.SecondHandHouseAdapter;
 import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.FieldNameValueBean;
+import cn.com.zzwfang.bean.HouseSourceParamBean;
 import cn.com.zzwfang.bean.MapFindHouseBean;
+import cn.com.zzwfang.bean.NameValueBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SearchHouseItemBean;
 import cn.com.zzwfang.bean.SecondHandHouseBean;
-import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
@@ -45,8 +50,8 @@ import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnSecondHandHouseMoreConditionListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseSourceParamPickListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseSourceSortTypeClickListener;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
@@ -75,11 +80,7 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 
 /**
- * 二手房列表 获取二手房列表页， 输入城市ID、区域ID、朝向、面积、标签、 楼龄（0：不限 1：5年内 2:5-10年 3:10-20年
- * 4:20年以上）、 楼层（0：不限 1：低楼层 2：中楼层 3：高楼层）、 房源编号、 排序（0：默认 1：总价低到高 2：总价高到低 3：面积小到大
- * 4：面积大到小）、 分页大小、页码. 条件： 朝向 Direction 面积范围 标签 楼龄
- * 传1（5年以内），2（5-10），3（10-20），4（大于20） 楼层 传1（低楼层）2（中楼层）3（高楼层） 排序
- * 1（按价格升）、2（按价格降）、3(按面积升)、4（按面积降） 价格 户型
+ * 二手房列表 获取二手房列表页
  * 
  * @author lzd
  * 
@@ -87,28 +88,21 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 public class SecondHandHouseActivity extends BaseActivity implements
 		OnClickListener, OnHeaderRefreshListener, OnFooterLoadListener,
 		OnCheckedChangeListener, OnItemClickListener,
-		OnGetPoiSearchResultListener {
+		OnGetPoiSearchResultListener, OnHouseSourceSortTypeClickListener, OnHouseSourceParamPickListener {
 
-	private int MODE_LIST = 1;
-
-	private int MODE_MAP = 2;
-
-	/**
-	 * 显示列表还是地图
-	 */
-	private int mode = MODE_LIST;
 	public static final String INTENT_KEYWORDS = "second_hand_house_key_words";
 
-	public static final String INTENT_PRO_NUM = "intent_pro_num";
-
-	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType;
+	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
 	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
 	private MapView mapView;
 	private BaiduMap baiduMap;
 	private FrameLayout mapViewFlt;
-	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
+	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby, tvSort;
 	private ImageView imgClearKeyWords;
+	
+	private LinearLayout lltHouseSourceParam;
+	private View lineAnchor, lineOne, lineTwo, lineThree;
 
 	private LinearLayout lltArea, lltTotalPrice, lltHouseType, lltMore;
 	private AbPullToRefreshView pullView;
@@ -121,79 +115,28 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private String cityId = "";
 	private ArrayList<SecondHandHouseBean> secondHandHouses = new ArrayList<SecondHandHouseBean>();
 
-	public static final String SalePriceRange = "SalePriceRange";
-	public static final String HouseType = "HouseType";
-	public static final String PrpUsage = "PrpUsage";
-	public static final String EstateLabel = "SecondLabel"; // SecondLabel
-															// EstateLabel
-	public static final String EstateStatus = "EstateStatus";
-	public static final String FloorRange = "FloorRange";
-	public static final String RentPriceRange = "RentPriceRange";
-	public static final String Direction = "Direction";
-	public static final String Sort = "Sort";
-	public static final String SquareRange = "SquareRange";
+	
+	//  排序参数
+	private ArrayList<FieldNameValueBean> sortParamList;
+	/**
+	 * 排序（已选择的）
+	 */
+	private FieldNameValueBean sortTypeBean;
 
-	// 区域
-	private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
-	// 总价
-	private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
-	// 户型
-	private ArrayList<TextValueBean> houseTypes = new ArrayList<TextValueBean>();
-	// 排序
-	private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
-	// 朝向
-	private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-	// 面积
-	private ArrayList<TextValueBean> squares = new ArrayList<TextValueBean>();
-	// 特色标签
-	private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
-	// 楼龄
-	private ArrayList<TextValueBean> buildingAges = new ArrayList<TextValueBean>();
-	// 楼层范围
-	private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-
-	// 物业类型
-	// private ArrayList<TextValueBean> prpUsages = new
-	// ArrayList<TextValueBean>();
-
-	// 售卖状态
-	private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
-
-	// 租价范围
-	private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-
-	private TextValueBean areaCondition; // 区域
-	private TextValueBean totalPriceCondition; // 总价
-	private TextValueBean houseTypeCondition; // 房型
-
-	// private TextValueBean sortCondition; // 排序
-	// private TextValueBean directionCondition; // 朝向
-	private TextValueBean squareCondition; // 面积
-	private TextValueBean labelCondition; // 标签
-
-	// 区域选择监听
-	private OnConditionSelectListener onAreaSelectListener;
-	// 总价选择监听
-	private OnConditionSelectListener onTotalPriceSelectListener;
-	// 房型选择监听
-	private OnConditionSelectListener onHouseTypeSelectListener;
-	// 更多
-	private ArrayList<String> moreType = new ArrayList<String>();
-	private OnSecondHandHouseMoreConditionListener onSecondHandHouseMoreConditionListener;
-
-	private String buildYear, floor, proNum, sort, direction;
 	private int pageIndex = 1;
 	private int pageTotal = 0;
 	private String key;
+	
+	private ArrayList<HouseSourceParamBean> houseSourceParams;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.act_second_hand_house);
-		cityId = getIntent().getStringExtra(
+		Intent intent = getIntent();
+		cityId = intent.getStringExtra(
 				HomeRecommendHouseAdapter.INTENT_CITY_ID);
-		key = getIntent().getStringExtra(INTENT_KEYWORDS);
-		proNum = getIntent().getStringExtra(INTENT_PRO_NUM);
+		key = intent.getStringExtra(INTENT_KEYWORDS);
 		if (TextUtils.isEmpty(cityId)) {
 			CityBean cityBean = ContentUtils.getCityBean(this);
 			cityId = cityBean.getSiteId();
@@ -215,7 +158,14 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		tvArea = (TextView) findViewById(R.id.act_second_hand_house_area_tv);
 		tvTotalPrice = (TextView) findViewById(R.id.act_second_hand_house_total_price_tv);
 		tvHouseType = (TextView) findViewById(R.id.act_second_hand_house_type_tv);
+		tvMore = (TextView) findViewById(R.id.act_second_hand_house_more_tv);
 		imgClearKeyWords = (ImageView) findViewById(R.id.act_second_hand_house_clear_key_wrods);
+		
+		lltHouseSourceParam = (LinearLayout) findViewById(R.id.llt_second_hand_house_params);
+		lineAnchor = findViewById(R.id.line_second_hand_house_anchor);
+		lineOne = findViewById(R.id.line_second_hand_house_one);
+		lineTwo = findViewById(R.id.line_second_hand_house_two);
+		lineThree = findViewById(R.id.line_second_hand_house_three);
 
 		lltArea = (LinearLayout) findViewById(R.id.act_second_hand_house_area_llt);
 		lltTotalPrice = (LinearLayout) findViewById(R.id.act_second_hand_house_total_price_llt);
@@ -225,6 +175,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		autoTvLocate = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_locate);
 		autoTvSubway = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_subway);
 		autoTvNearby = (AutoDrawableTextView) findViewById(R.id.act_second_hand_house_nearby);
+		
+		tvSort = (AutoDrawableTextView) findViewById(R.id.tv_second_hand_house_sort);
 
 		if (!TextUtils.isEmpty(key)) {
 			edtKeyWords.setText(key);
@@ -270,6 +222,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		autoTvLocate.setOnClickListener(this);
 		autoTvSubway.setOnClickListener(this);
 		autoTvNearby.setOnClickListener(this);
+		tvSort.setOnClickListener(this);
 		
 		imgClearKeyWords.setOnClickListener(this);
 
@@ -284,101 +237,15 @@ public class SecondHandHouseActivity extends BaseActivity implements
 					KeyEvent event) {
 				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 					key = edtKeyWords.getText().toString();
-					getSecondHandHouseList(cityId, areaCondition, direction,
-							squareCondition, labelCondition,
-							totalPriceCondition, houseTypeCondition, buildYear,
-							floor, proNum, sort, key, 10, true);
+					getSecondHandHouseList(cityId, sortTypeBean, key, 10, true);
 					return true;
 				}
 				return false;
 			}
 		});
 
-		onTotalPriceSelectListener = new OnConditionSelectListener() {
 
-			@Override
-			public void onConditionSelect(TextValueBean txtValueBean) {
-				totalPriceCondition = txtValueBean;
-				tvTotalPrice.setText(txtValueBean.getText());
-				key = edtKeyWords.getText().toString();
-				getSecondHandHouseList(cityId, areaCondition, direction,
-						squareCondition, labelCondition, totalPriceCondition,
-						houseTypeCondition, buildYear, floor, proNum, sort,
-						key, 10, true);
-			}
-		};
 
-		onHouseTypeSelectListener = new OnConditionSelectListener() {
-
-			@Override
-			public void onConditionSelect(TextValueBean txtValueBean) {
-				houseTypeCondition = txtValueBean;
-				tvHouseType.setText(txtValueBean.getText());
-				key = edtKeyWords.getText().toString();
-				getSecondHandHouseList(cityId, areaCondition, direction,
-						squareCondition, labelCondition, totalPriceCondition,
-						houseTypeCondition, buildYear, floor, proNum, sort,
-						key, 10, true);
-			}
-		};
-
-		onAreaSelectListener = new OnConditionSelectListener() {
-
-			@Override
-			public void onConditionSelect(TextValueBean txtValueBean) {
-
-				if (areaCondition == null
-						|| areaCondition.getValue() == null
-						|| !areaCondition.getValue().equals(
-								txtValueBean.getValue())) {
-					areaCondition = txtValueBean;
-					tvArea.setText(txtValueBean.getText());
-
-					key = edtKeyWords.getText().toString();
-					getSecondHandHouseList(cityId, areaCondition, direction,
-							squareCondition, labelCondition,
-							totalPriceCondition, houseTypeCondition, buildYear,
-							floor, proNum, sort, key, 10, true);
-
-					getMapFindHouseDataArea();
-				}
-			}
-		};
-
-		onSecondHandHouseMoreConditionListener = new OnSecondHandHouseMoreConditionListener() {
-
-			@Override
-			public void onSecondHandHouseMoreConditon(
-					TextValueBean sortConditionData,
-					TextValueBean directionConditionData,
-					TextValueBean squareConditionData,
-					TextValueBean labelConditionData,
-					TextValueBean buildingAgeConditionData,
-					TextValueBean floorRangeConditionData) {
-				// sortCondition = sortConditionData;
-				if (sortConditionData != null) {
-					sort = sortConditionData.getValue();
-				}
-				// directionCondition = directionConditionData;
-				if (directionConditionData != null) {
-					direction = directionConditionData.getValue();
-				}
-				squareCondition = squareConditionData;
-				labelCondition = labelConditionData;
-				if (buildingAgeConditionData != null) {
-					buildYear = buildingAgeConditionData.getValue();
-				}
-				if (floorRangeConditionData != null) {
-					floor = floorRangeConditionData.getValue();
-				}
-
-				key = edtKeyWords.getText().toString();
-				getSecondHandHouseList(cityId, areaCondition, direction,
-						squareCondition, labelCondition, totalPriceCondition,
-						houseTypeCondition, buildYear, floor, proNum, sort,
-						key, 10, true);
-			}
-		};
 
 		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
@@ -391,9 +258,9 @@ public class SecondHandHouseActivity extends BaseActivity implements
 					MapFindHouseBean area = (MapFindHouseBean) data;
 					if (area != null) {
 						// 点击了某小区域区域 加载该区域楼盘
-						TextValueBean textValueBeanArea = new TextValueBean();
-						textValueBeanArea.setValue(area.getId());
-						areaCondition = textValueBeanArea;
+//						TextValueBean textValueBeanArea = new TextValueBean();
+//						textValueBeanArea.setValue(area.getId());
+//						areaCondition = textValueBeanArea;
 						getMapFindHouseEstate();
 					}
 				} else if (data instanceof SearchHouseItemBean) {
@@ -406,10 +273,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 								.getCityBean(SecondHandHouseActivity.this);
 						cityId = cityBean.getSiteId();
 					}
-					getSecondHandHouseList(cityId, areaCondition, direction,
-							squareCondition, labelCondition,
-							totalPriceCondition, houseTypeCondition, buildYear,
-							floor, proNum, sort, key, 10, true);
+					getSecondHandHouseList(cityId, sortTypeBean, key, 10, true);
 					cbxListAndMap.setChecked(true);
 
 				}
@@ -419,55 +283,14 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		});
 	}
 
-	/**
-	 * 二手房列表 条件： 朝向 Direction 面积范围 标签 楼龄 传1（5年以内），2（5-10），3（10-20），4（大于20） 楼层
-	 * 传1（低楼层）2（中楼层）3（高楼层） 排序 1（按价格升）、2（按价格降）、3(按面积升)、4（按面积降） 价格 户型
-	 * 
-	 * @author lzd
-	 * 
-	 */
-
-	// 排序
-	// 朝向
-	// 面积范围
-	// 标签
-	// 楼龄
-	// 楼层
-
 	private void initData() {
-		moreType.add("排序");
-		initSortsData();
-		moreType.add("朝向");
-		moreType.add("面积");
-		moreType.add("标签");
-		moreType.add("楼龄");
-		initBuildingAgesData();
-		moreType.add("楼层");
-		initFloorRangeData();
 
-		getConditionList(SalePriceRange); // 总价
-		getConditionList(HouseType); // 户型
-		// getConditionList(PrpUsage); // 物业类型
-		getConditionList(EstateLabel); // 特色标签
-		getConditionList(EstateStatus); // 售卖状态
-		// getConditionList(FloorRange); // 楼层范围 现在写死了的，妈的，到底哪个对
-		getConditionList(RentPriceRange); // 租价范围
-		getConditionList(Direction); // 朝向
-		getConditionList(SquareRange);
-		getAreaList();
-		getSecondHandHouseList(cityId, areaCondition, direction,
-				squareCondition, labelCondition, totalPriceCondition,
-				houseTypeCondition, buildYear, floor, proNum, sort, key, 10,
+		getHouseSourceParam();  // 获取房源参数
+		getHouseSourceSort();   //  获取房源排序参数
+		getSecondHandHouseList(cityId, sortTypeBean, key, 10,
 				true);
 	}
 
-	/**
-	 * 二手房列表 条件： 朝向 Direction 面积范围 标签 楼龄 传1（5年以内），2（5-10），3（10-20），4（大于20） 楼层
-	 * 传1（低楼层）2（中楼层）3（高楼层） 排序 1（按价格升）、2（按价格降）、3(按面积升)、4（按面积降） 价格 户型
-	 * 
-	 * @author lzd
-	 * 
-	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -478,23 +301,44 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			finish();
 			break;
 		case R.id.act_second_hand_house_area_llt: // 区域
-			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
-					onAreaSelectListener);
+//			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
+//					onAreaSelectListener);
+			if (houseSourceParams != null) {
+				PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 0, houseSourceParams, this);
+			}
+			
 			break;
 		case R.id.act_second_hand_house_total_price_llt: // 总价
-			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice,
-					salePriceRanges, onTotalPriceSelectListener);
+//			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice,
+//					salePriceRanges, onTotalPriceSelectListener);
+            if (houseSourceParams != null) {
+            	PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 1, houseSourceParams, this);
+			}
+			
 			break;
 		case R.id.act_second_hand_house_type_llt: // 房型
-			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
-					houseTypes, onHouseTypeSelectListener);
+//			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
+//					houseTypes, onHouseTypeSelectListener);
+            if (houseSourceParams != null) {
+            	PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 2, houseSourceParams, this);
+			}
+			
 			break;
 		case R.id.act_second_hand_house_more_llt: // 更多
 			// TODO
-			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
-					sorts, directions, squares, estateLabels, buildingAges,
-					floorRanges, lltMore,
-					onSecondHandHouseMoreConditionListener);
+//			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
+//					sorts, directions, squares, estateLabels, buildingAges,
+//					floorRanges, lltMore,
+//					onSecondHandHouseMoreConditionListener);
+			if (houseSourceParams != null) {
+				if (houseSourceParams.size() > 4) {
+					PopViewHelper.showPickHouseSourceParamMorePopWindow(this, lineAnchor, 4, houseSourceParams, this);
+				} else {
+					PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 3, houseSourceParams, this);
+				}
+				
+			}
+			
 			break;
 		case R.id.act_second_hand_house_locate: // 定位
 			locate();
@@ -520,15 +364,19 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			key = "";
 			edtKeyWords.setText("");
 			break;
+			
+		case R.id.tv_second_hand_house_sort:   //  排序
+			if (sortParamList != null) {
+				PopViewHelper.showHouseSourceSortTypeDialog(this, sortParamList, this);
+			}
+			break;
 		}
 	}
 
 	@Override
 	public void onHeaderRefresh(AbPullToRefreshView view) { // 下拉刷新
-		String keyWords = edtKeyWords.getText().toString();
-		getSecondHandHouseList(cityId, areaCondition, direction,
-				squareCondition, labelCondition, totalPriceCondition,
-				houseTypeCondition, buildYear, floor, proNum, sort, keyWords,
+		key = edtKeyWords.getText().toString();
+		getSecondHandHouseList(cityId, sortTypeBean, key,
 				10, true);
 	}
 
@@ -539,27 +387,38 @@ public class SecondHandHouseActivity extends BaseActivity implements
 			pullView.onFooterLoadFinish();
 			return;
 		}
-		key = edtKeyWords.getText().toString();
-		getSecondHandHouseList(cityId, areaCondition, direction,
-				squareCondition, labelCondition, totalPriceCondition,
-				houseTypeCondition, buildYear, floor, proNum, sort, key, 10,
+		getSecondHandHouseList(cityId, sortTypeBean, key, 10,
 				false);
 
 	}
 
-	private void getSecondHandHouseList(String cityId,
-			TextValueBean areaCondition, String direction,
-			TextValueBean squareCondition, TextValueBean labelCondition,
-			TextValueBean priceCondition, TextValueBean roomTypeCondition,
-			String buildYear, String floor, String proNum, String sort,
+	private void getSecondHandHouseList(String cityId, FieldNameValueBean sortType,
 			String keyWords, int pageSize, final boolean isRefresh) {
 		if (isRefresh) {
 			pageIndex = 1;
 		}
+		
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getSecondHandHouseList(cityId, areaCondition, direction,
-				squareCondition, labelCondition, priceCondition,
-				roomTypeCondition, buildYear, floor, proNum, sort, keyWords,
+		HashMap<String, String> requestParams = new HashMap<String, String>();
+		
+		if (houseSourceParams != null) {
+			for (HouseSourceParamBean para : houseSourceParams) {
+				ArrayList<NameValueBean> nameValues = para.getValues();
+				for (NameValueBean nameValueBean : nameValues) {
+					if (nameValueBean.isSelected()) {
+						requestParams.put(para.getFiled(), nameValueBean.getValue());
+						break;
+					}
+				}
+			}
+		}
+		
+		if (sortType != null) {
+			requestParams.put(sortType.getFiled(), sortType.getValue());
+		}
+		
+		actionImpl.getSecondHandHouseList(cityId, requestParams, keyWords,
 				pageSize, pageIndex, new ResultHandlerCallback() {
 
 					@Override
@@ -582,6 +441,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+//						Log.i("--->", "getSecondHandHouseList result:  " + result.getData());
 						int total = result.getTotal();
 						pageTotal = (int) Math
 								.ceil(((double) total / (double) 10));
@@ -618,6 +478,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 				.putString(
 						SecondHandHouseDetailActivity.INTENT_HOUSE_SOURCE_ID,
 						temp.getId())
+				.putSerializable(SecondHandHouseDetailActivity.INTENT_HOUSE_NAME, temp.getTitle())
 				.jump(this, SecondHandHouseDetailActivity.class);
 	}
 
@@ -626,83 +487,137 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		switch (buttonView.getId()) {
 		case R.id.act_second_hand_house_list_map:
 			if (isChecked) { // 列表
-				mode = MODE_LIST;
 				mapViewFlt.setVisibility(View.GONE);
 				pullView.setVisibility(View.VISIBLE);
+				tvSort.setVisibility(View.VISIBLE);
 			} else { // 地图
-				mode = MODE_MAP;
 				mapViewFlt.setVisibility(View.VISIBLE);
 				pullView.setVisibility(View.GONE);
+				tvSort.setVisibility(View.GONE);
 			}
 			break;
 		}
 	}
 
-	public void getConditionList(final String conditionName) {
+	
+	private void getHouseSourceParam() {
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getConditionByName(conditionName,
-				new ResultHandlerCallback() {
-
-					@Override
-					public void rc999(RequestEntity entity, Result result) {
-
-					}
-
-					@Override
-					public void rc3001(RequestEntity entity, Result result) {
-
-					}
-
-					@Override
-					public void rc0(RequestEntity entity, Result result) {
-						ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
-								.parseArray(result.getData(),
-										TextValueBean.class);
-						if (SalePriceRange.equals(conditionName)) {
-							salePriceRanges.addAll(temp);
-						} else if (HouseType.equals(conditionName)) {
-							houseTypes.addAll(temp);
-						}
-						// else if (PrpUsage.equals(conditionName)) {
-						// prpUsages.addAll(temp);
-						// }
-						else if (EstateLabel.equals(conditionName)) {
-							estateLabels.addAll(temp);
-						} else if (EstateStatus.equals(conditionName)) {
-							estateStatus.addAll(temp);
-						} else if (FloorRange.equals(conditionName)) {
-							floorRanges.addAll(temp);
-						} else if (RentPriceRange.equals(conditionName)) {
-							rentPriceRanges.addAll(temp);
-						} else if (Direction.equals(conditionName)) {
-							directions.addAll(temp);
-						} else if (SquareRange.equals(conditionName)) {
-						    squares.addAll(temp);
-						}
-					}
-				});
-	}
-
-	private void getAreaList() {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getAreaList(cityId, new ResultHandlerCallback() {
-
+		actionImpl.getHouseSourceParameter(new ResultHandlerCallback() {
+			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {
-
 			}
-
+			
 			@Override
 			public void rc3001(RequestEntity entity, Result result) {
-
 			}
-
+			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
-						.parseArray(result.getData(), TextValueBean.class);
-				areas.addAll(temp);
+				// TODO getHouseSourceParam
+//				Log.i("--->", "getHouseSourceParam result: " + result.getData());
+				houseSourceParams = (ArrayList<HouseSourceParamBean>) JSON.parseArray(result.getData(), HouseSourceParamBean.class);
+				if (houseSourceParams != null) {
+					
+					Iterator<HouseSourceParamBean> iterator = houseSourceParams.iterator();
+					while (iterator.hasNext()) {
+						HouseSourceParamBean houseSourceParamBean = iterator.next();
+						if ("租价".equals(houseSourceParamBean.getName())) {
+							iterator.remove();
+						} else {
+							ArrayList<NameValueBean> values = houseSourceParamBean.getValues();
+							
+							if (values != null && values.size() > 0) {
+								NameValueBean nameValueBean = values.get(0);
+								if ("不限".equals(nameValueBean.getName())) {
+									nameValueBean.setSelected(true);
+								}
+							}
+						}
+						
+					}
+					
+					int size = houseSourceParams.size();
+					if (size == 0) {
+						lltHouseSourceParam.setVisibility(View.GONE);
+					} else if (size == 1) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.GONE);
+						lltHouseType.setVisibility(View.GONE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineOne.setVisibility(View.GONE);
+						lineTwo.setVisibility(View.GONE);
+						lineThree.setVisibility(View.GONE);
+					} else if (size == 2) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.GONE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineTwo.setVisibility(View.GONE);
+						lineThree.setVisibility(View.GONE);
+					} else if (size == 3) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineThree.setVisibility(View.GONE);
+						
+					} else if (size == 4) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+						tvMore.setText(houseSourceParams.get(3).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.VISIBLE);
+					} else if (size > 4) {
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.VISIBLE);
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+					}
+				}
+			}
+		});
+	}
+	
+	private void getHouseSourceSort() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getHouseSourceSort(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO getHouseSourceSort
+//				Log.i("--->", "getHouseSourceSort result: " + result.getData());
+				sortParamList = (ArrayList<FieldNameValueBean>) JSON.parseArray(result.getData(), FieldNameValueBean.class);
+				if (sortParamList != null && sortParamList.size() > 0) {
+					
+					
+					sortTypeBean = sortParamList.get(0);
+					sortTypeBean.setSelected(true);
+				}
 			}
 		});
 	}
@@ -738,9 +653,23 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	private void getMapFindHouseDataArea() {
 		
 		String id = null;
-		if (areaCondition != null) {
-			id = areaCondition.getValue();
+		
+		if (houseSourceParams != null) {
+			for (HouseSourceParamBean houseSourceParamBean : houseSourceParams) {
+				if ("区域".equals(houseSourceParamBean.getName())) {
+					ArrayList<NameValueBean> values = houseSourceParamBean.getValues();
+					for (NameValueBean nameValueBean : values) {
+						if (nameValueBean.isSelected()) {
+							id = nameValueBean.getValue();
+							break;
+						}
+					}
+					break;
+				}
+			}
 		}
+		
+		
 		if (TextUtils.isEmpty(id)) {
 			CityBean cityBean = ContentUtils.getCityBean(this);
 			if (cityBean == null) {
@@ -826,9 +755,21 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	 * 获取子区域楼盘数据(调用楼盘搜索列表接口)
 	 */
 	private void getMapFindHouseEstate() {
+		
+		HashMap<String, String> requestParams = new HashMap<String, String>();
+		if (houseSourceParams != null) {
+			for (HouseSourceParamBean para : houseSourceParams) {
+				ArrayList<NameValueBean> nameValues = para.getValues();
+				for (NameValueBean nameValueBean : nameValues) {
+					if (nameValueBean.isSelected()) {
+						requestParams.put(para.getFiled(), nameValueBean.getValue());
+						break;
+					}
+				}
+			}
+		}
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, null,
-				null, labelCondition, null, null, new ResultHandlerCallback() {
+		actionImpl.getSearchHouseList(requestParams, null, new ResultHandlerCallback() {
 
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
@@ -903,95 +844,8 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		return bitmap;
 	}
 
-	/**
-	 * 排序 1（按价格升）、2（按价格降）、3(按面积升)、4（按面积降）
-	 */
-	private void initSortsData() {
-		TextValueBean tv1 = new TextValueBean();
-		tv1.setText("不限");
-		tv1.setValue("");
-		tv1.setSelected(true);
 
-		TextValueBean tv2 = new TextValueBean();
-		tv2.setText("价格升");
-		tv2.setValue("1");
 
-		TextValueBean tv3 = new TextValueBean();
-		tv3.setText("价格降");
-		tv3.setValue("2");
-
-		TextValueBean tv4 = new TextValueBean();
-		tv4.setText("面积升");
-		tv4.setValue("3");
-
-		TextValueBean tv5 = new TextValueBean();
-		tv5.setText("面积降");
-		tv5.setValue("4");
-
-		sorts.add(tv1);
-		sorts.add(tv2);
-		sorts.add(tv3);
-		sorts.add(tv4);
-		sorts.add(tv5);
-	}
-
-	/**
-	 * 楼层 传1（低楼层）2（中楼层）3（高楼层）
-	 */
-	private void initFloorRangeData() {
-		TextValueBean tv1 = new TextValueBean();
-		tv1.setText("不限");
-		tv1.setValue("");
-		tv1.setSelected(true);
-
-		TextValueBean tv2 = new TextValueBean();
-		tv2.setText("低楼层");
-		tv2.setValue("1");
-
-		TextValueBean tv3 = new TextValueBean();
-		tv3.setText("中楼层");
-		tv3.setValue("2");
-
-		TextValueBean tv4 = new TextValueBean();
-		tv4.setText("高楼层");
-		tv4.setValue("3");
-
-		floorRanges.add(tv1);
-		floorRanges.add(tv2);
-		floorRanges.add(tv3);
-		floorRanges.add(tv4);
-	}
-
-	/**
-	 * 楼龄 传1（5年以内），2（5-10），3（10-20），4（大于20）
-	 */
-	private void initBuildingAgesData() {
-		TextValueBean tv1 = new TextValueBean();
-		tv1.setText("不限");
-		tv1.setValue("");
-		tv1.setSelected(true);
-
-		TextValueBean tv2 = new TextValueBean();
-		tv2.setText("5年以内");
-		tv2.setValue("1");
-
-		TextValueBean tv3 = new TextValueBean();
-		tv3.setText("5-10年");
-		tv3.setValue("2");
-
-		TextValueBean tv4 = new TextValueBean();
-		tv4.setText("10-20年");
-		tv4.setValue("3");
-
-		TextValueBean tv5 = new TextValueBean();
-		tv5.setText("大于20年");
-		tv5.setValue("4");
-
-		buildingAges.add(tv1);
-		buildingAges.add(tv2);
-		buildingAges.add(tv3);
-		buildingAges.add(tv4);
-	}
 
 	@Override
 	public void onGetPoiDetailResult(PoiDetailResult result) {
@@ -1096,6 +950,38 @@ public class SecondHandHouseActivity extends BaseActivity implements
 	protected int getStatusBarTintResource() {
 		// TODO Auto-generated method stub
 		return R.color.white;
+	}
+
+	@Override
+	public void onHouseSourceSortTypeClick(FieldNameValueBean sortType) {
+		// TODO 排序
+		sortTypeBean = sortType;
+		key = edtKeyWords.getText().toString();
+		getSecondHandHouseList(cityId, sortTypeBean, key, 10, true);
+		
+	}
+
+	@Override
+	public void onHouseSourceParamPick(int fieldPosition,
+			NameValueBean houseSourceParam) {
+		// TODO 房源参数选择
+		key = edtKeyWords.getText().toString();
+		getSecondHandHouseList(cityId, sortTypeBean,
+				key, 10, true);
+		switch (fieldPosition) {
+		case 0:  // 第一个
+			if (houseSourceParam != null && "区域".equals(houseSourceParam.getName())) {
+				getMapFindHouseDataArea();
+			}
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+			
+		}
 	}
 
 }

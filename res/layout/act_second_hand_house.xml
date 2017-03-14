@@ -43,14 +43,14 @@
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="14sp" />
-            
+
             <ImageView
-                    android:id="@+id/act_second_hand_house_clear_key_wrods"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    android:layout_gravity="right|center_vertical"
-                    android:src="@drawable/ic_cross" />
+                android:id="@+id/act_second_hand_house_clear_key_wrods"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_cross" />
         </FrameLayout>
 
         <LinearLayout
@@ -72,8 +72,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llt_second_hand_house_params"
         android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:weightSum="4" >
 
@@ -90,7 +92,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/frag_map_area"
                 android:textColor="@color/color_383838" />
 
             <ImageView
@@ -101,10 +102,11 @@
         </LinearLayout>
 
         <View
-            android:layout_width="2dp"
+            android:id="@+id/line_second_hand_house_one"
+            android:layout_width="0.6dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/theme_gray" />
 
         <LinearLayout
@@ -120,7 +122,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/frag_map_total_money"
                 android:textColor="@color/color_383838" />
 
             <ImageView
@@ -131,10 +132,11 @@
         </LinearLayout>
 
         <View
-            android:layout_width="2dp"
+            android:id="@+id/line_second_hand_house_two"
+            android:layout_width="0.6dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/theme_gray" />
 
         <LinearLayout
@@ -150,7 +152,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/frag_map_house_type"
                 android:textColor="@color/color_383838" />
 
             <ImageView
@@ -161,10 +162,11 @@
         </LinearLayout>
 
         <View
-            android:layout_width="2dp"
+            android:id="@+id/line_second_hand_house_three"
+            android:layout_width="0.6dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:background="@color/theme_gray" />
 
         <LinearLayout
@@ -192,10 +194,9 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line_second_hand_house_anchor"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="0.6dp"
         android:background="@color/theme_gray" />
 
     <FrameLayout
@@ -284,8 +285,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@color/color_cecece"
-                android:dividerHeight="1dp" />
+                android:dividerHeight="0.6dp" />
         </cn.com.zzwfang.pullview.AbPullToRefreshView>
+
+        <cn.com.zzwfang.view.AutoDrawableTextView
+            android:id="@+id/tv_second_hand_house_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape_house_list_sort_bg"
+            android:drawablePadding="4dp"
+            android:drawableLeft="@drawable/ic_house_sort"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="排序"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:left_height="20dp"
+            app:left_width="20dp" />
+
     </FrameLayout>
 
 </LinearLayout>

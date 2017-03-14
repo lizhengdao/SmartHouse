@@ -1,6 +1,8 @@
 package cn.com.zzwfang.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -28,11 +30,13 @@ import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.HomeRecommendHouseAdapter;
 import cn.com.zzwfang.adapter.NewHouseAdapter;
 import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.bean.FieldNameValueBean;
+import cn.com.zzwfang.bean.HouseSourceParamBean;
 import cn.com.zzwfang.bean.MapFindHouseBean;
+import cn.com.zzwfang.bean.NameValueBean;
 import cn.com.zzwfang.bean.NewHouseBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.SearchHouseItemBean;
-import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
 import cn.com.zzwfang.http.RequestEntity;
@@ -45,8 +49,8 @@ import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.util.Jumper;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 import cn.com.zzwfang.view.helper.PopViewHelper;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnConditionSelectListener;
-import cn.com.zzwfang.view.helper.PopViewHelper.OnNewHouseMoreConditionListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseSourceParamPickListener;
+import cn.com.zzwfang.view.helper.PopViewHelper.OnHouseSourceSortTypeClickListener;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.location.BDLocation;
@@ -98,18 +102,11 @@ import com.baidu.mapapi.search.poi.PoiSearch;
  */
 public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		OnHeaderRefreshListener, OnFooterLoadListener, OnCheckedChangeListener,
-		OnItemClickListener, OnGetPoiSearchResultListener {
+		OnItemClickListener, OnGetPoiSearchResultListener,
+		OnHouseSourceSortTypeClickListener, OnHouseSourceParamPickListener {
 	
 	public static final String INTENT_KEY_WORDS = "NewHouseActivity.intent_key_words";
 
-    private int MODE_LIST = 1;
-	
-	private int MODE_MAP = 2;
-	
-	/**
-	 * 显示列表还是地图
-	 */
-	private int mode = MODE_LIST;
 	private TextView tvBack, tvArea, tvTotalPrice, tvHouseType, tvMore;
 	private EditText edtKeyWords;
 	private CheckBox cbxListAndMap;
@@ -121,6 +118,10 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 	private AbPullToRefreshView pullView;
 	private ListView lstNewHouseView;
+	private AutoDrawableTextView tvSort;
+	
+	private View lineAnchor, lineOne, lineTwo, lineThree;
+	private LinearLayout lltNewHouseSourceParam;
 	
 	private AutoDrawableTextView autoTvLocate, autoTvSubway, autoTvNearby;
 	private PoiSearch mPoiSearch = null;
@@ -131,64 +132,17 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 
 	private String cityId = "";
 
-	public static final String SalePriceRange = "SalePriceRange";
-	public static final String HouseType = "HouseType";
-	
-	// TODO 这个 房屋用途 的字符串是多少要问问
-	public static final String HouseUsage = "House"; // 房屋用途
-	public static final String PrpUsage = "PrpUsage";
-	public static final String EstateLabel = "EstateLabel";
-	public static final String EstateStatus = "EstateStatus";
-	public static final String FloorRange = "FloorRange";
-	public static final String RentPriceRange = "RentPriceRange";
-	public static final String Direction = "Direction";
-	public static final String Sort = "Sort";
-
-	// 区域
-	private ArrayList<TextValueBean> areas = new ArrayList<TextValueBean>();
-	// 总价
-	private ArrayList<TextValueBean> salePriceRanges = new ArrayList<TextValueBean>();
-	// 户型
-	private ArrayList<TextValueBean> houseTypes = new ArrayList<TextValueBean>();
-	// 房屋用途
-	private ArrayList<TextValueBean> houseUsages = new ArrayList<TextValueBean>();
-	// 物业类型
-//	private ArrayList<TextValueBean> prpUsages = new ArrayList<TextValueBean>();
-	// 特色标签
-	private ArrayList<TextValueBean> estateLabels = new ArrayList<TextValueBean>();
-	// 售卖状态
-	private ArrayList<TextValueBean> estateStatus = new ArrayList<TextValueBean>();
-	// 楼层范围
-//	private ArrayList<TextValueBean> floorRanges = new ArrayList<TextValueBean>();
-    // 租价范围
-//	private ArrayList<TextValueBean> rentPriceRanges = new ArrayList<TextValueBean>();
-	//  朝向
-//	private ArrayList<TextValueBean> directions = new ArrayList<TextValueBean>();
-	// 排序
-//	private ArrayList<TextValueBean> sorts = new ArrayList<TextValueBean>();
-
-	// 区域监听
-	private OnConditionSelectListener onAreaSelectListener;
-	// 总价监听
-	private OnConditionSelectListener onTotalPriceSelectListener;
-	// 房型监听
-	private OnConditionSelectListener onHouseTypeSelectListener;
-
-	private ArrayList<String> moreType = new ArrayList<String>();
-	
-	private OnNewHouseMoreConditionListener onNewHouseMoreConditionListener;
-
-	private TextValueBean areaCondition;
-	private TextValueBean totalPriceCondition;
-//	private TextValueBean squareCondition;
-	private TextValueBean labelCondition;   //  特色标签
-	private TextValueBean roomTypeCondition;  //  房屋类型
-	private TextValueBean usageCondition;  // 用途
-	private TextValueBean statusCondition;  // 售卖状态
-	private String proNum;    //  buildYear, floor, sort
 	private int pageIndex = 1;
 	private int pageTotal = 0;
 	private String keyWords;
+	
+//  排序参数
+	private ArrayList<FieldNameValueBean> sortParamList;
+	/**
+	 * 排序（已选择的）
+	 */
+	private FieldNameValueBean sortTypeBean;
+	private ArrayList<HouseSourceParamBean> houseSourceParams;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -222,9 +176,18 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		tvHouseType = (TextView) findViewById(R.id.act_new_house_type_tv);
 		tvMore = (TextView) findViewById(R.id.act_new_house_more_tv);
 		
+		lineAnchor = findViewById(R.id.line_new_house_anchor);
+		lineOne = findViewById(R.id.line_new_house_one);
+		lineTwo = findViewById(R.id.line_new_house_two);
+		lineThree = findViewById(R.id.line_new_house_three);
+		
+		lltNewHouseSourceParam = (LinearLayout) findViewById(R.id.llt_new_house_source_params);
+		
 		autoTvLocate = (AutoDrawableTextView) findViewById(R.id.act_new_house_locate);
 		autoTvSubway = (AutoDrawableTextView) findViewById(R.id.act_new_house_subway);
 		autoTvNearby = (AutoDrawableTextView) findViewById(R.id.act_new_house_nearby);
+		
+		tvSort = (AutoDrawableTextView) findViewById(R.id.tv_new_house_sort);
 		
 		if (!TextUtils.isEmpty(keyWords)) {
             edtKeyWords.setText(keyWords);
@@ -271,10 +234,8 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		autoTvSubway.setOnClickListener(this);
 		autoTvNearby.setOnClickListener(this);
 		imgClearKeyWords.setOnClickListener(this);
+		tvSort.setOnClickListener(this);
 		
-		getNewHouseList(cityId, areaCondition, totalPriceCondition,
-				roomTypeCondition, usageCondition, labelCondition,
-				statusCondition, keyWords, 10, true);
 	}
 
 	private void setListener() {
@@ -285,84 +246,16 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId  == EditorInfo.IME_ACTION_SEARCH) {
 					keyWords = edtKeyWords.getText().toString();
-					getNewHouseList(cityId, areaCondition,
-							totalPriceCondition, roomTypeCondition,
-							usageCondition, labelCondition,
-							statusCondition, keyWords, 10,
-							true);
+					getNewHouseList(cityId, keyWords, 10, true);
 					return true;
 				}
 				return false;
 			}
 		});
 
-		onTotalPriceSelectListener = new OnConditionSelectListener() {
 
-			@Override
-			public void onConditionSelect(TextValueBean txtValueBean) {
-				totalPriceCondition = txtValueBean;
-				tvTotalPrice.setText(txtValueBean.getText());
-				keyWords = edtKeyWords.getText().toString();
-				getNewHouseList(cityId, areaCondition,
-						totalPriceCondition, roomTypeCondition,
-						usageCondition, labelCondition,
-						statusCondition, keyWords, 10,
-						true);
-			}
-		};
 
-		onHouseTypeSelectListener = new OnConditionSelectListener() {
-
-			@Override
-			public void onConditionSelect(TextValueBean txtValueBean) {
-				roomTypeCondition = txtValueBean;
-				tvHouseType.setText(txtValueBean.getText());
-				keyWords = edtKeyWords.getText().toString();
-				getNewHouseList(cityId, areaCondition,
-						totalPriceCondition, roomTypeCondition,
-						usageCondition, labelCondition,
-						statusCondition, keyWords, 10,
-						true);
-			}
-		};
-
-		onAreaSelectListener = new OnConditionSelectListener() {
-
-			@Override
-			public void onConditionSelect(TextValueBean txtValueBean) {
-				if (areaCondition == null || areaCondition.getValue() == null || !areaCondition.getValue().equals(txtValueBean.getValue())) {
-					areaCondition = txtValueBean;
-					tvArea.setText(txtValueBean.getText());
-					getNewHouseList(cityId, areaCondition,
-							totalPriceCondition, roomTypeCondition,
-							usageCondition, labelCondition,
-							statusCondition, keyWords, 10,
-							true);
-					
-				    keyWords = edtKeyWords.getText().toString();
-					getMapFindHouseDataArea();
-				}
-			}
-		};
 		
-		onNewHouseMoreConditionListener = new OnNewHouseMoreConditionListener() {
-			
-			@Override
-			public void onNewHouseMoreConditon(
-					TextValueBean houseUsageConditionData,
-					TextValueBean labelConditionData,
-					TextValueBean saleStatusConditonData) {
-				// TODO Auto-generated method stub
-				usageCondition = houseUsageConditionData;
-				labelCondition = labelConditionData;
-				statusCondition = saleStatusConditonData;
-				getNewHouseList(cityId, areaCondition,
-						totalPriceCondition, roomTypeCondition,
-						usageCondition, labelCondition,
-						statusCondition, keyWords, 10,
-						true);
-			}
-		};
 		
 		baiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
@@ -375,9 +268,8 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 					MapFindHouseBean area = (MapFindHouseBean) data;
 					if (area != null) {
 						// 点击了某小区域区域   加载该区域楼盘
-						TextValueBean textValueBeanArea = new TextValueBean();
-						textValueBeanArea.setValue(area.getId());
-						areaCondition = textValueBeanArea;
+//						TextValueBean textValueBeanArea = new TextValueBean();
+//						textValueBeanArea.setValue(area.getId());
 						getMapFindHouseEstate();
 					}
 				} else if (data instanceof SearchHouseItemBean) {
@@ -390,11 +282,7 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 						cityId = cityBean.getSiteId();
 					}
 					
-					getNewHouseList(cityId, areaCondition,
-							totalPriceCondition, roomTypeCondition,
-							usageCondition, labelCondition,
-							statusCondition, keyWords, 10,
-							true);
+					getNewHouseList(cityId, keyWords, 10, true);
 					cbxListAndMap.setChecked(true);
 				}
 
@@ -405,37 +293,16 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	
 	private void initData() {
 		
-//		moreType.add("排序");
-//		moreType.add("朝向");
-//		moreType.add("面积");
-//		moreType.add("标签");
-//		moreType.add("楼层");
-//		moreType.add("房源编号");
-		moreType.add("房屋用途");
-		moreType.add("特色标签");
-		moreType.add("售卖状态");
-		getConditionList(SalePriceRange);  // 价格范围
-		getConditionList(HouseType);  // 房型
-		getConditionList(HouseUsage);  // 房屋用途
-		
-		getConditionList(PrpUsage);
-		getConditionList(EstateLabel);
-		getConditionList(EstateStatus);
-//		getConditionList(FloorRange);
-//		getConditionList(RentPriceRange);
-//		getConditionList(Direction);
-//		getConditionList(Sort);
-		getAreaList();
-		
+		getHouseSourceParam();  // 获取房源参数
+		getHouseSourceSort();   //  获取房源排序参数
+		keyWords = edtKeyWords.getText().toString().trim();
+		getNewHouseList(cityId, keyWords, 10, true);
 	}
 	
 	@Override
 	public void onHeaderRefresh(AbPullToRefreshView view) {
-		getNewHouseList(cityId, areaCondition,
-				totalPriceCondition, roomTypeCondition,
-				usageCondition, labelCondition,
-				statusCondition, keyWords, 10,
-				true);
+		keyWords = edtKeyWords.getText().toString().trim();
+		getNewHouseList(cityId, keyWords, 10, true);
 	}
 	
 	@Override
@@ -459,28 +326,39 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			pullView.onFooterLoadFinish();
 			return;
 		}
-		getNewHouseList(cityId, areaCondition,
-				totalPriceCondition, roomTypeCondition,
-				usageCondition, labelCondition,
-				statusCondition, keyWords, 10,
-				false);
+		getNewHouseList(cityId, keyWords, 10, false);
 	}
 
 	
 
-	private void getNewHouseList(String cityId, TextValueBean areaCondition,
-			TextValueBean priceCondition, TextValueBean roomTypeCondition,
-			TextValueBean usageCondition, TextValueBean labelCondition,
-			TextValueBean statusCondition, String keyWords, int pageSize,
+	private void getNewHouseList(String cityId, String keyWords, int pageSize,
 			final boolean isRefresh) {
 
 		if (isRefresh) {
 			pageIndex = 1;
 		}
+		
+        HashMap<String, String> requestParams = new HashMap<String, String>();
+		
+		if (houseSourceParams != null) {
+			for (HouseSourceParamBean para : houseSourceParams) {
+				ArrayList<NameValueBean> nameValues = para.getValues();
+				for (NameValueBean nameValueBean : nameValues) {
+					if (nameValueBean.isSelected()) {
+						requestParams.put(para.getFiled(), nameValueBean.getValue());
+						break;
+					}
+				}
+			}
+		}
+		
+		if (sortTypeBean != null) {
+			requestParams.put(sortTypeBean.getFiled(), sortTypeBean.getValue());
+		}
+		
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getNewHouseList(cityId, areaCondition, priceCondition,
-				roomTypeCondition, usageCondition, labelCondition,
-				statusCondition, keyWords, 10, pageIndex, new ResultHandlerCallback() {
+		actionImpl.getNewHouseList(cityId, requestParams, keyWords, 10, pageIndex, new ResultHandlerCallback() {
 
 					@Override
 					public void rc999(RequestEntity entity, Result result) {
@@ -530,24 +408,44 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			finish();
 			break;
 		case R.id.act_new_house_area_llt: // 区域
-			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
-					onAreaSelectListener);
+//			PopViewHelper.showSelectAreaPopWindow(this, lltArea, areas,
+//					onAreaSelectListener);
+			
+			if (houseSourceParams != null) {
+				PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 0, houseSourceParams, this);
+			}
 			break;
 		case R.id.act_new_house_total_price_llt: // 总价
-			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice,
-					salePriceRanges, onTotalPriceSelectListener);
+//			PopViewHelper.showSelectTotalPricePopWindow(this, lltTotalPrice,
+//					salePriceRanges, onTotalPriceSelectListener);
+			
+			if (houseSourceParams != null) {
+            	PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 1, houseSourceParams, this);
+			}
 			break;
 		case R.id.act_new_house_type_llt: // 房型
-			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
-					houseTypes, onHouseTypeSelectListener);
+//			PopViewHelper.showSelectHouseTypePopWindow(this, lltHouseType,
+//					houseTypes, onHouseTypeSelectListener);
+			if (houseSourceParams != null) {
+            	PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 2, houseSourceParams, this);
+			}
 			break;
 		case R.id.act_new_house_more_llt: // 更多
 			// TODO
 //			PopViewHelper.showSecondHandHouseMorePopWindow(this, moreType,
 //					sorts, directions, estateLabels, lltMore);
-			PopViewHelper.showNewHouseMorePopWindow(this, moreType,
-					houseUsages, estateLabels,
-					estateStatus, lltMore, onNewHouseMoreConditionListener);
+//			PopViewHelper.showNewHouseMorePopWindow(this, moreType,
+//					houseUsages, estateLabels,
+//					estateStatus, lltMore, onNewHouseMoreConditionListener);
+			
+			if (houseSourceParams != null) {
+				if (houseSourceParams.size() > 4) {
+					PopViewHelper.showPickHouseSourceParamMorePopWindow(this, lineAnchor, 4, houseSourceParams, this);
+				} else {
+					PopViewHelper.showPickHouseSourceParamPopWindow(this, lineAnchor, 3, houseSourceParams, this);
+				}
+				
+			}
 			break;
 		case R.id.act_new_house_locate:  // 定位
 			locate();
@@ -571,6 +469,11 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 			keyWords = "";
 			edtKeyWords.setText("");
 			break;
+			
+		case R.id.tv_new_house_sort:   // 排序
+			//  TODO  排序
+			
+			break;
 		}
 	}
 
@@ -579,13 +482,13 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		switch (buttonView.getId()) {
 		case R.id.act_new_house_list_map:
 			if (isChecked) { // 列表
-				mode = MODE_LIST;
 				mapViewFlt.setVisibility(View.GONE);
 				pullView.setVisibility(View.VISIBLE);
+				tvSort.setVisibility(View.VISIBLE);
 			} else { // 地图
-				mode = MODE_MAP;
 				mapViewFlt.setVisibility(View.VISIBLE);
 				pullView.setVisibility(View.GONE);
+				tvSort.setVisibility(View.GONE);
 			}
 			break;
 		}
@@ -593,77 +496,6 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	}
 
 
-	public void getConditionList(final String conditionName) {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getConditionByName(conditionName,
-				new ResultHandlerCallback() {
-
-					@Override
-					public void rc999(RequestEntity entity, Result result) {
-
-					}
-
-					@Override
-					public void rc3001(RequestEntity entity, Result result) {
-
-					}
-
-					@Override
-					public void rc0(RequestEntity entity, Result result) {
-						ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON
-								.parseArray(result.getData(),
-										TextValueBean.class);
-						if (SalePriceRange.equals(conditionName)) {
-							salePriceRanges.addAll(temp);
-						} else if (HouseType.equals(conditionName)) {
-							houseTypes.addAll(temp);
-						} else if (HouseUsage.equals(conditionName)) {
-							houseUsages.addAll(temp);
-						}
-//						else if (PrpUsage.equals(conditionName)) {
-//							prpUsages.addAll(temp);
-//						}
-						else if (EstateLabel.equals(conditionName)) {
-							estateLabels.addAll(temp);
-						} else if (EstateStatus.equals(conditionName)) {
-							estateStatus.addAll(temp);
-						}
-						
-//						else if (FloorRange.equals(conditionName)) {
-//							floorRanges.addAll(temp);
-//						} else if (RentPriceRange.equals(conditionName)) {
-//							rentPriceRanges.addAll(temp);
-//						} else if (Direction.equals(conditionName)) {
-//							directions.addAll(temp);
-//						} else if (Sort.equals(conditionName)) {
-//							sorts.addAll(temp);
-//						}
-					}
-				});
-	}
-	
-	private void getAreaList() {
-		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getAreaList(cityId, new ResultHandlerCallback() {
-			
-			@Override
-			public void rc999(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc3001(RequestEntity entity, Result result) {
-				
-			}
-			
-			@Override
-			public void rc0(RequestEntity entity, Result result) {
-				// TODO Auto-generated method stub
-				ArrayList<TextValueBean> temp = (ArrayList<TextValueBean>) JSON.parseArray(result.getData(), TextValueBean.class);
-				areas.addAll(temp);
-			}
-		});
-	}
 
 	@Override
 	protected void onPause() {
@@ -696,8 +528,19 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	private void getMapFindHouseDataArea() {
 		
 		String id = null;
-		if (areaCondition != null) {
-			id = areaCondition.getValue();
+		if (houseSourceParams != null) {
+			for (HouseSourceParamBean houseSourceParamBean : houseSourceParams) {
+				if ("区域".equals(houseSourceParamBean.getName())) {
+					ArrayList<NameValueBean> values = houseSourceParamBean.getValues();
+					for (NameValueBean nameValueBean : values) {
+						if (nameValueBean.isSelected()) {
+							id = nameValueBean.getValue();
+							break;
+						}
+					}
+					break;
+				}
+			}
 		}
 		if (TextUtils.isEmpty(id)) {
 			CityBean cityBean = ContentUtils.getCityBean(this);
@@ -783,9 +626,24 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 	 * 获取子区域楼盘数据(调用楼盘搜索列表接口)
 	 */
 	private void getMapFindHouseEstate() {
+		
+		HashMap<String, String> requestParams = new HashMap<String, String>();
+		if (houseSourceParams != null) {
+			for (HouseSourceParamBean para : houseSourceParams) {
+				ArrayList<NameValueBean> nameValues = para.getValues();
+				for (NameValueBean nameValueBean : nameValues) {
+					if (nameValueBean.isSelected()) {
+						requestParams.put(para.getFiled(), nameValueBean.getValue());
+						break;
+					}
+				}
+			}
+		}
+		
+		keyWords = edtKeyWords.getText().toString();
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.getSearchHouseList(areaCondition, totalPriceCondition, null,
-				null, labelCondition, null, null,
+		actionImpl.getSearchHouseList(requestParams, keyWords,
 				new ResultHandlerCallback() {
 
 					@Override
@@ -961,5 +819,165 @@ public class NewHouseActivity extends BaseActivity implements OnClickListener,
 		}
 	}
 
+	private void getHouseSourceParam() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getHouseSourceParameter(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO getHouseSourceParam
+//				Log.i("--->", "getHouseSourceParam result: " + result.getData());
+				houseSourceParams = (ArrayList<HouseSourceParamBean>) JSON.parseArray(result.getData(), HouseSourceParamBean.class);
+				if (houseSourceParams != null) {
+					
+					Iterator<HouseSourceParamBean> iterator = houseSourceParams.iterator();
+					while (iterator.hasNext()) {
+						HouseSourceParamBean houseSourceParamBean = iterator.next();
+						if ("租价".equals(houseSourceParamBean.getName())) {
+							iterator.remove();
+						} else {
+							ArrayList<NameValueBean> values = houseSourceParamBean.getValues();
+							
+							if (values != null && values.size() > 0) {
+								NameValueBean nameValueBean = values.get(0);
+								if ("不限".equals(nameValueBean.getName())) {
+									nameValueBean.setSelected(true);
+								}
+							}
+						}
+						
+					}
+					
+					int size = houseSourceParams.size();
+					if (size == 0) {
+						lltNewHouseSourceParam.setVisibility(View.GONE);
+					} else if (size == 1) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.GONE);
+						lltHouseType.setVisibility(View.GONE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineOne.setVisibility(View.GONE);
+						lineTwo.setVisibility(View.GONE);
+						lineThree.setVisibility(View.GONE);
+					} else if (size == 2) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.GONE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineTwo.setVisibility(View.GONE);
+						lineThree.setVisibility(View.GONE);
+					} else if (size == 3) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.GONE);
+						
+						lineThree.setVisibility(View.GONE);
+						
+					} else if (size == 4) {
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+						tvMore.setText(houseSourceParams.get(3).getName());
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.VISIBLE);
+					} else if (size > 4) {
+						lltArea.setVisibility(View.VISIBLE);
+						lltTotalPrice.setVisibility(View.VISIBLE);
+						lltHouseType.setVisibility(View.VISIBLE);
+						lltMore.setVisibility(View.VISIBLE);
+						tvArea.setText(houseSourceParams.get(0).getName());
+						tvTotalPrice.setText(houseSourceParams.get(1).getName());
+						tvHouseType.setText(houseSourceParams.get(2).getName());
+					}
+				}
+			}
+		});
+	}
+	
+	private void getHouseSourceSort() {
+		ActionImpl actionImpl = ActionImpl.newInstance(this);
+		actionImpl.getHouseSourceSort(new ResultHandlerCallback() {
+			
+			@Override
+			public void rc999(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc3001(RequestEntity entity, Result result) {
+			}
+			
+			@Override
+			public void rc0(RequestEntity entity, Result result) {
+				// TODO getHouseSourceSort
+//				Log.i("--->", "getHouseSourceSort result: " + result.getData());
+				sortParamList = (ArrayList<FieldNameValueBean>) JSON.parseArray(result.getData(), FieldNameValueBean.class);
+				if (sortParamList != null && sortParamList.size() > 0) {
+					
+					
+					sortTypeBean = sortParamList.get(0);
+					sortTypeBean.setSelected(true);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onHouseSourceParamPick(int fieldPosition,
+			NameValueBean houseSourceParam) {
+		// TODO Auto-generated method stub
+		keyWords = edtKeyWords.getText().toString();
+		getNewHouseList(cityId, keyWords, 10, true);
+		switch (fieldPosition) {
+		case 0:  // 第一个
+			if (houseSourceParam != null && "区域".equals(houseSourceParam.getName())) {
+				getMapFindHouseDataArea();
+			}
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		}
+	}
+
+	@Override
+	public void onHouseSourceSortTypeClick(FieldNameValueBean sortType) {
+		// TODO 排序
+		sortTypeBean = sortType;
+	    keyWords = edtKeyWords.getText().toString();
+		getNewHouseList(cityId, keyWords, 10, true);
+		
+	}
+	
+	@Override
+	protected int getStatusBarTintResource() {
+		// TODO Auto-generated method stub
+		return R.color.white;
+	}
 	
 }

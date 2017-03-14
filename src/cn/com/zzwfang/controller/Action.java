@@ -1,7 +1,7 @@
 package cn.com.zzwfang.controller;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Map;
 
 import cn.com.zzwfang.bean.TextValueBean;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
@@ -149,6 +149,9 @@ public interface Action {
 			TextValueBean usageCondition, TextValueBean labelCondition,
 			TextValueBean statusCondition, String keyWords, int pageSize,
 			int pageNum, ResultHandlerCallback callback);
+	
+	void getNewHouseList(String cityId, Map<String, String> houseSourceParams, String keyWords, int pageSize,
+			int pageNum, ResultHandlerCallback callback);
 
 	/**
 	 * 获取新房详情
@@ -208,6 +211,40 @@ public interface Action {
 			TextValueBean roomTypeCondition, String buildYear, String floor,
 			String proNum, String sort, String key, int pageSize,
 			int pageIndex, ResultHandlerCallback callback);
+	
+	/**
+	 * @param cityId
+	 *            城市ID
+	 * @param areaCondition
+	 *            区域ID
+	 * @param direction
+	 *            朝向
+	 * @param squareCondition
+	 *            面积范围
+	 * @param labelCondition
+	 *            标签
+	 * @param priceCondition
+	 *            价格
+	 * @param roomTypeCondition
+	 *            户型
+	 * @param buildYear
+	 *            楼龄 传1（5年以内），2（5-10），3（10-20），4（大于20）
+	 * @param floor
+	 *            楼层 传1（低楼层）2（中楼层）3（高
+	 * @param proNum
+	 *            房源编号
+	 * @param sort
+	 *            排序 1（按价格升）、2（按价格降）、3(按面积升)、4（按面积降）
+	 * @param key
+	 *            搜索关键字
+	 * @param pageSize
+	 *            分页大小
+	 * @param pageIndex
+	 *            页码
+	 * @param callback
+	 */
+	void getSecondHandHouseList(String cityId, Map<String, String> houseSourceParam, String key, int pageSize,
+			int pageIndex, ResultHandlerCallback callback);
 
 	/**
 	 * @param proId
@@ -243,6 +280,9 @@ public interface Action {
 			TextValueBean priceCondition, TextValueBean squareCondition,
 			String sort, String keyWords, String direction,
 			TextValueBean roomTypeCondition, int pageSize, int pageIndex,
+			ResultHandlerCallback callback);
+	
+	void getRentHouseList(String cityId, Map<String, String> houseSourceParams, String searchKey, int pageSize, int pageIndex,
 			ResultHandlerCallback callback);
 
 	/**
@@ -365,6 +405,8 @@ public interface Action {
 	void getSearchHouseList(TextValueBean area, TextValueBean totalPrice,
 			TextValueBean house, TextValueBean type, TextValueBean label,
 			TextValueBean status, String key, ResultHandlerCallback callback);
+	
+	void getSearchHouseList(Map<String, String> params, String searchKey, ResultHandlerCallback callback);
 
 	/**
 	 * 获取资讯列表
@@ -799,8 +841,10 @@ public interface Action {
 	 * @param type   1(财务)，2（带看），3（进度）
 	 * @param userId
 	 * @param content
+	 * @param labelField   投诉标签 field
+	 * @param labelId    投诉标签 id
 	 */
-	void complain(String id, String type, String userId, String content, ResultHandlerCallback callback);
+	void complain(String id, String type, String userId, String content, String labelField, String labelId, ResultHandlerCallback callback);
 	
 	/**
 	 * 看房经历
@@ -885,5 +929,15 @@ public interface Action {
 	 * 推荐资讯
 	 */
 	void getRecommendNews(ResultHandlerCallback callback);
+	
+	/**
+	 * 获取房源参数
+	 */
+	void getHouseSourceParameter(ResultHandlerCallback callback);
+	
+	/**
+	 * 获取房源排序参数
+	 */
+	void getHouseSourceSort(ResultHandlerCallback callback);
 	
 }

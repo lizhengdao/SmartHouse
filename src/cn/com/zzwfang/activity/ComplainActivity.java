@@ -124,8 +124,17 @@ public class ComplainActivity extends BaseActivity implements OnClickListener {
 			return;
 		}
 		
+		ComplainLabelBean selectedComplainLabel = labelAdapter.getSelectedComplainLabel();
+		
+		String labelField = null;
+		String labelId = null;
+		if (selectedComplainLabel != null) {
+			labelField = selectedComplainLabel.getFiled();
+			labelId = selectedComplainLabel.getId();
+		}
+		
 		ActionImpl actionImpl = ActionImpl.newInstance(this);
-		actionImpl.complain(complainId, complaiType, userId, content, new ResultHandlerCallback() {
+		actionImpl.complain(complainId, complaiType, userId, content, labelField, labelId, new ResultHandlerCallback() {
 			
 			@Override
 			public void rc999(RequestEntity entity, Result result) {

@@ -2,6 +2,8 @@ package cn.com.zzwfang.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
+import java.util.Map;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -663,6 +665,56 @@ public class ActionImpl implements Action {
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
     }
+    
+    @Override
+    public void getNewHouseList(String cityId, Map<String, String> houseSourceParams, String keyWords, int pageSize,
+			int pageNum, ResultHandlerCallback callback) {
+        
+        RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+
+        requestParams.put("siteId", cityId);
+        
+        if (houseSourceParams != null) {
+        	
+        	for (Map.Entry<String, String> entry : houseSourceParams.entrySet()) {
+        		String key = entry.getKey();
+        		String value = entry.getValue();
+        		if (!TextUtils.isEmpty(key)) {
+        			requestParams.put(key, value);
+        		}
+        	}
+        }
+        
+        if (!TextUtils.isEmpty(keyWords)) {
+            requestParams.put("key", keyWords);
+        }
+        requestParams.put("pageSize", pageSize + "");
+        requestParams.put("pageNum", pageNum + "");
+
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_NEW_HOUSE_LIST));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
 
     @Override
     public void getNewHouseDetail(String estateId,
@@ -779,6 +831,54 @@ public class ActionImpl implements Action {
 
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
+    }
+    
+    public void getSecondHandHouseList(String cityId, Map<String, String> houseSourceParam, String searchKey, int pageSize,
+			int pageIndex, ResultHandlerCallback callback) {
+    	RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+
+        requestParams.put("siteId", cityId);
+        if (houseSourceParam != null) {
+        	
+        	for (Map.Entry<String, String> entry : houseSourceParam.entrySet()) {
+        		String key = entry.getKey();
+        		String value = entry.getValue();
+        		if (!TextUtils.isEmpty(key)) {
+        			requestParams.put(key, value);
+        		}
+        	}
+        }
+        
+        if (!TextUtils.isEmpty(searchKey)) {
+            requestParams.put("key", searchKey);
+        }
+        requestParams.put("pageSize", pageSize + "");
+        requestParams.put("pageNum", pageIndex + "");
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_SECNOD_HAND_LIST));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    	
     }
 
     /*
@@ -951,6 +1051,55 @@ public class ActionImpl implements Action {
         DataWorker worker = DataWorker.getWorker(context);
         worker.load(requestEntity);
     }
+    
+    public void getRentHouseList(String cityId, Map<String, String> houseSourceParams, String searchKey, int pageSize, int pageIndex,
+			ResultHandlerCallback callback) {
+    	RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        requestParams.put("siteId", cityId);
+        
+        if (houseSourceParams != null) {
+        	
+        	for (Map.Entry<String, String> entry : houseSourceParams.entrySet()) {
+        		String key = entry.getKey();
+        		String value = entry.getValue();
+        		if (!TextUtils.isEmpty(key)) {
+        			requestParams.put(key, value);
+        		}
+        	}
+        }
+        
+        if (!TextUtils.isEmpty(searchKey)) {
+            requestParams.put("key", searchKey);
+        }
+        
+        requestParams.put("pageSize", pageSize + "");
+        requestParams.put("pageNum", pageIndex + "");
+
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_RENT_HOUSE_LIST));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
+    
 
     @Override
     public void getRentHouseDetail(String proId, ResultHandlerCallback callback) {
@@ -1401,6 +1550,56 @@ public class ActionImpl implements Action {
             SiteId = cityBean.getSiteId();
         }
         requestParams.put("SiteId", SiteId);
+
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        opt.toMemCacheAble = false;
+
+        RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_SEARCH_HOUSE_LIST));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
+                context, "请稍候...");
+        handler.setResultHandlerCallback(callback);
+
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+    }
+    
+    @Override
+    public void getSearchHouseList(Map<String, String> params, String searchKey, ResultHandlerCallback callback) {
+        
+        RequestParams requestParams = new RequestParams();
+        encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
+        if (params != null) {
+        	for (Map.Entry<String, String> entry : params.entrySet()) {
+        		String key = entry.getKey();
+        		String value = entry.getValue();
+        		if (!TextUtils.isEmpty(key)) {
+        			requestParams.put(key, value);
+        		}
+        	}
+        }
+        
+        if (!TextUtils.isEmpty(searchKey)) {
+            requestParams.put("key", searchKey);
+        }
 
         Options opt = new Options();
         opt.fromDiskCacheAble = false;
@@ -3002,7 +3201,7 @@ public class ActionImpl implements Action {
     }
 
     @Override
-    public void complain(String id, String type, String userId, String content,
+    public void complain(String id, String type, String userId, String content, String labelField, String labelId,
             ResultHandlerCallback callback) {
         // TODO Auto-generated method stub
         RequestParams requestParams = new RequestParams();
@@ -3012,6 +3211,10 @@ public class ActionImpl implements Action {
         requestParams.put("type", type);
         requestParams.put("userid", userId);
         requestParams.put("content", content);
+        
+        if (TextUtils.isEmpty(labelField)) {
+        	requestParams.put(labelField, labelId);
+        }
         
         CityBean cityBean = ContentUtils.getCityBean(context);
         String SiteId = "";
@@ -3443,6 +3646,68 @@ public class ActionImpl implements Action {
 
 		RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_RECOMMEND_NEWS));
+//        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ResultHandler handler = new ResultHandler();
+        handler.setResultHandlerCallback(callback);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        // opt.toHttpCacheAble = false;
+        opt.toMemCacheAble = false;
+        
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getHouseSourceParameter(ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		
+		RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+		RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSE_SOURCE_PARAM));
+        requestEntity.setRequestParams(requestParams);
+        requestEntity.setType(RequestEntity.GET);
+
+        ResultHandler handler = new ResultHandler();
+        handler.setResultHandlerCallback(callback);
+        
+        Options opt = new Options();
+        opt.fromDiskCacheAble = false;
+        opt.fromHttpCacheAble = true;
+        opt.fromMemCacheAble = false;
+        opt.toDiskCacheAble = false;
+        // opt.toHttpCacheAble = false;
+        opt.toMemCacheAble = false;
+        
+        requestEntity.setOpts(opt);
+        requestEntity.setProcessCallback(handler);
+
+        DataWorker worker = DataWorker.getWorker(context);
+        worker.load(requestEntity);
+	}
+
+	@Override
+	public void getHouseSourceSort(ResultHandlerCallback callback) {
+		// TODO Auto-generated method stub
+		RequestEntity requestEntity = new RequestEntity();
+        requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSE_SOURCE_SORT));
 //        requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 
