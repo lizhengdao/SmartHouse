@@ -7,6 +7,7 @@ package cn.com.zzwfang.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 /**
  * @author Soo
@@ -67,5 +68,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+    }
+    
+    public interface OnFragmentViewClickListener {
+        void onFragmentViewClick(View view);
     }
 }

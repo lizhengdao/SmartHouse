@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -289,6 +290,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 		getHouseSourceSort();   //  获取房源排序参数
 		getSecondHandHouseList(cityId, sortTypeBean, key, 10,
 				true);
+		getMapFindHouseDataArea();
 	}
 
 	@Override
@@ -441,7 +443,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
-//						Log.i("--->", "getSecondHandHouseList result:  " + result.getData());
+						Log.i("--->", "getSecondHandHouseList result:  " + result.getData());
 						int total = result.getTotal();
 						pageTotal = (int) Math
 								.ceil(((double) total / (double) 10));
@@ -783,11 +785,14 @@ public class SecondHandHouseActivity extends BaseActivity implements
 
 					@Override
 					public void rc0(RequestEntity entity, Result result) {
+						Log.i("--->", "getMapFindHouseEstate result: " + result.getData());
 						estates.clear();
 						ArrayList<SearchHouseItemBean> temp = (ArrayList<SearchHouseItemBean>) JSON
 								.parseArray(result.getData(),
 										SearchHouseItemBean.class);
+						Log.i("--->", "getMapFindHouseEstate temp.size: " + temp.size());
 						estates.addAll(temp);
+//						estates.add(temp.get(0));
 						rendEstate();
 					}
 				});
@@ -818,6 +823,7 @@ public class SecondHandHouseActivity extends BaseActivity implements
 						.icon(bdA).zIndex(9).draggable(true).extraInfo(bundle);
 
 				ooA.animateType(MarkerAnimateType.drop);
+				bmpAreaPoint = null;
 				baiduMap.addOverlay(ooA);
 			}
 			SearchHouseItemBean estate = estates.get(0);

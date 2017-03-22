@@ -85,8 +85,6 @@ OnClickListener, OnItemClickListener {
 		pagerAdapter = new NewsTypeListPagerAdapter(getActivity(), getChildFragmentManager());
 		viewPager.setAdapter(pagerAdapter);
 		
-		indicator.setViewPager(viewPager);
-		
 		tvBack.setOnClickListener(this);
 		rbNewsTypeOne.setOnCheckedChangeListener(this);
 		rbNewsTypeTwo.setOnCheckedChangeListener(this);
@@ -96,6 +94,7 @@ OnClickListener, OnItemClickListener {
 		
 		recommendNewsAdapter = new RecommendNewsAdapter(getActivity());
 		pagerRecommendNews.setAdapter(recommendNewsAdapter);
+		indicator.setViewPager(pagerRecommendNews);
 		
 		onNewsMoreSelectedListener = new OnNewsMoreSelectedListener() {
 
@@ -294,6 +293,7 @@ OnClickListener, OnItemClickListener {
 				Log.i("--->", "getRecommendNews:  " + result.getData());
 				
 				ArrayList<RecommendNewsBean> temp = (ArrayList<RecommendNewsBean>) JSON.parseArray(result.getData(), RecommendNewsBean.class);
+				recommendNewsAdapter.refreshData(temp);
 			}
 		});
 	}

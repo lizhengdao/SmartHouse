@@ -51,12 +51,12 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             app:centered="true"
-            app:fillColor="@color/color_frag_main_mine_status_bar"
+            app:fillColor="#21a535"
             app:paddingEnd="10dp"
             app:paddingStart="10dp"
             app:radius="3dp"
-            app:strokeColor="#cccccc"
             app:strokeWidth="0.8dp" />
+        
     </FrameLayout>
 
     <RadioGroup

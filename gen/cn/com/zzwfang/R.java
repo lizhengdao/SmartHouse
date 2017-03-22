@@ -1548,10 +1548,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int adapter_new_house_square=0x7f0502b5;
         public static final int adapter_new_house_title=0x7f0502b3;
         public static final int adapter_new_more_tv=0x7f0502bf;
-        public static final int adapter_news_item_content=0x7f0502bd;
-        public static final int adapter_news_item_name=0x7f0502bc;
-        public static final int adapter_news_item_photo=0x7f0502bb;
-        public static final int adapter_news_item_time=0x7f0502be;
+        public static final int adapter_news_item_content=0x7f0502bc;
+        public static final int adapter_news_item_name=0x7f0502bb;
+        public static final int adapter_news_item_photo=0x7f0502be;
+        public static final int adapter_news_item_time=0x7f0502bd;
         public static final int adapter_photo_img=0x7f0502c0;
         public static final int adapter_picturebrowse_zmg=0x7f0502c1;
         public static final int adapter_query_after_sale_content=0x7f0502c4;

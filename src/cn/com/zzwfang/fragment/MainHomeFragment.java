@@ -29,6 +29,7 @@ import cn.com.zzwfang.bean.RecommendHouseSourceBean;
 import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.fragment.BaseFragment.OnFragmentViewClickListener;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.location.LocationService;
 import cn.com.zzwfang.location.LocationService.OnLocationListener;
@@ -48,7 +49,8 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
  * @author lzd
  *
  */
-public class MainHomeFragment extends BaseFragment implements OnClickListener, OnItemClickListener, OnGetGeoCoderResultListener {
+public class MainHomeFragment extends BaseFragment implements OnClickListener, OnItemClickListener,
+    OnGetGeoCoderResultListener, OnFragmentViewClickListener {
 
 	/**
 	 * 跳转选择城市
@@ -74,6 +76,8 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	
 	private OnCitySelectedListener onCitySelectedListener;
 	
+	private OnFragmentViewClickListener onFragmentViewClickListener;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -86,6 +90,9 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 	public void onAttach(Activity activity) {
 	    if (activity instanceof cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener) {
 	        onCitySelectedListener = (cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener) activity;
+	    }
+	    if (activity instanceof OnFragmentViewClickListener) {
+	    	onFragmentViewClickListener = (OnFragmentViewClickListener) activity;
 	    }
 	    super.onAttach(activity);
 //	    mSearch = GeoCoder.newInstance();
@@ -293,15 +300,19 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				if (cityBean != null && cityBean.equals(cityBeanSaved)) {
 				    return;
 				}
-				
-				cityId = cityBean.getSiteId();
-				ContentUtils.saveCityBeanData(getActivity(), cityBean);
-				tvLocation.setText(cityBean.getName());
-				adapter.setCityId(cityBean.getSiteId());
-				if (onCitySelectedListener != null) {
-				    onCitySelectedListener.onCitySelected(cityBean);
+				if (cityBean != null) {
+					cityId = cityBean.getSiteId();
+					ContentUtils.saveCityBeanData(getActivity(), cityBean);
+					String cityName = cityBean.getName();
+					tvLocation.setText(cityName);
+					adapter.setCityId(cityBean.getSiteId());
+					adapter.refreshCityName(cityName);
+					if (onCitySelectedListener != null) {
+					    onCitySelectedListener.onCitySelected(cityBean);
+					}
+					getRecommendHouseSourceList(cityBean.getSiteId());
 				}
-				getRecommendHouseSourceList(cityBean.getSiteId());
+				
 			    // 初始化搜索模块，注册事件监听
 //				if (cityBean != null) {
 //				    String cityName = cityBean.getName();
@@ -531,6 +542,14 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
             }
         });
     }
+
+	@Override
+	public void onFragmentViewClick(View view) {
+		// TODO Auto-generated method stub
+		if (onFragmentViewClickListener != null) {
+			onFragmentViewClickListener.onFragmentViewClick(view);
+		}
+	}
 
 	
 }

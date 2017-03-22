@@ -2,11 +2,14 @@ package cn.com.zzwfang.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.zzwfang.R;
+import cn.com.zzwfang.bean.CityBean;
+import cn.com.zzwfang.util.ContentUtils;
 import cn.com.zzwfang.view.AutoDrawableTextView;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -23,11 +26,13 @@ import com.baidu.mapapi.search.core.CityInfo;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.poi.PoiSortType;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
@@ -184,10 +189,33 @@ public class NearbyDetailActivity extends BaseActivity implements
 	}
 
 	private void searchNearby(String keyWords) {
+		
+//		com.baidu.mapapi.search.busline.BusLineSearchOption
 		if (curLatLng != null) {
-			mPoiSearch.searchNearby(new PoiNearbySearchOption()
-					.location(curLatLng).keyword(keyWords).pageNum(10)
-					.radius(10000));
+			if ("地铁".equals(keyWords)) {
+//				String city = ContentUtils.getLocatedCity(this);
+//				mPoiSearch.searchNearby(new PoiNearbySearchOption()
+//				.location(curLatLng).keyword(keyWords).pageNum(10)
+//				.radius(10000).);
+				CityBean cityBean = ContentUtils.getCityBean(this);
+				if (cityBean != null) {
+					String city = cityBean.getName();
+					if (!TextUtils.isEmpty(city)) {
+						mPoiSearch.searchInCity(new PoiCitySearchOption().city(city).keyword(keyWords).pageNum(10).pageCapacity(10));
+					} else {
+						mPoiSearch.searchNearby(new PoiNearbySearchOption()
+						.location(curLatLng).keyword(keyWords).pageNum(10)
+						.radius(10000));
+					}
+					
+				}
+				
+			} else {
+				mPoiSearch.searchNearby(new PoiNearbySearchOption()
+				.location(curLatLng).keyword(keyWords).pageNum(10)
+				.radius(10000));
+			}
+			
 		}
 	}
 

@@ -6,7 +6,8 @@
     <ImageView 
         android:id="@+id/iv_recommend_news"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
     
     <TextView 
         android:id="@+id/tv_recommend_news_content"
@@ -14,6 +15,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="40dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
 
 </FrameLayout>

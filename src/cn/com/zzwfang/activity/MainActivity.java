@@ -18,6 +18,7 @@ import cn.com.zzwfang.bean.Result;
 import cn.com.zzwfang.bean.UserInfoBean;
 import cn.com.zzwfang.controller.ActionImpl;
 import cn.com.zzwfang.controller.ResultHandler.ResultHandlerCallback;
+import cn.com.zzwfang.fragment.BaseFragment.OnFragmentViewClickListener;
 import cn.com.zzwfang.fragment.MainHomeFragment.OnCitySelectedListener;
 import cn.com.zzwfang.http.RequestEntity;
 import cn.com.zzwfang.im.MessagePool;
@@ -33,7 +34,7 @@ import com.easemob.EMCallBack;
 import com.easemob.chat.EMChatManager;
 
 public class MainActivity extends BaseActivity implements OnPageChangeListener,
-        OnClickListener, OnCitySelectedListener, OnNewMessageListener {
+        OnClickListener, OnCitySelectedListener, OnNewMessageListener, OnFragmentViewClickListener {
     
     public interface OnLoginListener {
         void onLongin();
@@ -304,4 +305,14 @@ public class MainActivity extends BaseActivity implements OnPageChangeListener,
             }
         });
     }
+
+	@Override
+	public void onFragmentViewClick(View view) {
+		// TODO Auto-generated method stub
+		switch (view.getId()) {
+		case R.id.frag_home_new_house:  // 非乐山市  跳资讯
+			guiderConsultant.performClick();
+			break;
+		}
+	}
 }

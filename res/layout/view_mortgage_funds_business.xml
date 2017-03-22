@@ -136,14 +136,16 @@
         android:layout_height="1dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@color/color_e2e2e2" />
+        android:background="@color/color_e2e2e2"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp" >
+        android:paddingRight="15dp"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="wrap_content"

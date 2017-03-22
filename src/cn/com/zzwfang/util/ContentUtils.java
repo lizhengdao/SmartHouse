@@ -489,6 +489,17 @@ public final class ContentUtils {
 	}
 	
 	
+	public static String getLocatedCity(Context context) {
+		if (context == null) {
+	        return null;
+	    }
+		
+		SharedPreferences sp = (SharedPreferences) context.getApplicationContext()
+                .getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+		return sp.getString(Constants.CITY_LOCATED, null);
+		
+	}
+	
 	/**
 	 * 用户退出登录，清除登录信息
 	 * @param context

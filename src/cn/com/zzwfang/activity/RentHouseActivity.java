@@ -254,9 +254,11 @@ public class RentHouseActivity extends BaseActivity implements OnClickListener,
 
     @Override
     public void onFooterLoad(AbPullToRefreshView view) {
-        if (pageIndex > pageTotal) {
-            getRentHouseList(cityId, keyWords, 10, false);
-        }
+    	if (pageIndex > pageTotal) {
+			pullView.onFooterLoadFinish();
+			return;
+		}
+    	getRentHouseList(cityId, keyWords, 10, false);
     }
 
     @Override

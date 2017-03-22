@@ -15,10 +15,10 @@ import cn.com.zzwfang.action.ImageAction;
 import cn.com.zzwfang.activity.BaseActivity;
 import cn.com.zzwfang.activity.NewHouseActivity;
 import cn.com.zzwfang.activity.RentHouseActivity;
-import cn.com.zzwfang.activity.SearchHouseArtifactActivity;
 import cn.com.zzwfang.activity.SearchHouseArtifactActivity1;
 import cn.com.zzwfang.activity.SecondHandHouseActivity;
 import cn.com.zzwfang.bean.RecommendHouseSourceBean;
+import cn.com.zzwfang.fragment.BaseFragment.OnFragmentViewClickListener;
 import cn.com.zzwfang.util.Jumper;
 
 public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickListener {
@@ -31,8 +31,19 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
 	
 	private String cityId = "";
 	
+	private String cityName = "";
+	
+	private OnFragmentViewClickListener onFragmentViewClickListener;
+	
+	private TextView tvNewHouse;
+	
 	public void setCityId(String cityId) {
 		this.cityId = cityId;
+	}
+	
+	public void refreshCityName(String cityName) {
+		this.cityName = cityName;
+		notifyDataSetChanged();
 	}
 	
 	/**
@@ -48,6 +59,9 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
 	public HomeRecommendHouseAdapter(Context context, ArrayList<RecommendHouseSourceBean> recommendSources) {
 		this.context = context;
 		this.recommendSources = recommendSources;
+		if (context instanceof OnFragmentViewClickListener) {
+			onFragmentViewClickListener = (OnFragmentViewClickListener) context;
+		}
 	}
 	@Override
 	public int getCount() {
@@ -108,9 +122,15 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
 //            TextView tvSearchHouse = (TextView) convertView.findViewById(R.id.frag_home_search_house);
             
             TextView tvSecondHandHouse = ViewHolder.get(convertView, R.id.frag_home_second_hand_house);
-            TextView tvNewHouse = ViewHolder.get(convertView, R.id.frag_home_new_house);
+            tvNewHouse = ViewHolder.get(convertView, R.id.frag_home_new_house);
             TextView tvRentHouse = ViewHolder.get(convertView, R.id.frag_home_rent_house);
             TextView tvSearchHouse = ViewHolder.get(convertView, R.id.frag_home_search_house);
+            
+            if ("乐山市".equals(cityName)) {
+            	tvNewHouse.setText("新房");
+			} else {
+				tvNewHouse.setText("资讯");
+			}
             
             tvSecondHandHouse.setOnClickListener(this);
             tvNewHouse.setOnClickListener(this);
@@ -157,13 +177,20 @@ public class HomeRecommendHouseAdapter extends BaseAdapter implements OnClickLis
         .jump((BaseActivity)context, SecondHandHouseActivity.class);
 		break;
 	case R.id.frag_home_new_house:   //  新房
-		Jumper.newJumper()
-        .setAheadInAnimation(R.anim.activity_push_in_right)
-        .setAheadOutAnimation(R.anim.activity_alpha_out)
-        .setBackInAnimation(R.anim.activity_alpha_in)
-        .setBackOutAnimation(R.anim.activity_push_out_right)
-        .putString(INTENT_CITY_ID, cityId)
-        .jump((BaseActivity)context, NewHouseActivity.class);
+		if ("乐山市".equals(cityName)) {
+			Jumper.newJumper()
+	        .setAheadInAnimation(R.anim.activity_push_in_right)
+	        .setAheadOutAnimation(R.anim.activity_alpha_out)
+	        .setBackInAnimation(R.anim.activity_alpha_in)
+	        .setBackOutAnimation(R.anim.activity_push_out_right)
+	        .putString(INTENT_CITY_ID, cityId)
+	        .jump((BaseActivity)context, NewHouseActivity.class);
+		} else {
+			if (onFragmentViewClickListener != null) {
+				onFragmentViewClickListener.onFragmentViewClick(tvNewHouse);
+			}
+		}
+		
 		break;
 	case R.id.frag_home_rent_house:   //   租房
 		Jumper.newJumper()

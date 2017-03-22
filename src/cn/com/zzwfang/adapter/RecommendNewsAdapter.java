@@ -95,18 +95,20 @@ public class RecommendNewsAdapter extends PagerAdapter {
         container.addView(convertView);
 
 		
-		
-		return super.instantiateItem(container, position);
+		return convertView;
 	}
 
 	@Override
 	public boolean isViewFromObject(View arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
-		return false;
+		return arg0 == arg1;
+	}
+	
+	@Override
+	public void destroyItem(ViewGroup container, int position, Object object) {
+		// TODO Auto-generated method stub
+		View contentView = (View) object;
+        container.removeView(contentView);
 	}
 	
 	static class ViewHolder {

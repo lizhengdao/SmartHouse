@@ -1149,6 +1149,13 @@ public class ActionImpl implements Action {
         opt.fromMemCacheAble = false;
         opt.toDiskCacheAble = false;
         opt.toMemCacheAble = false;
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
 
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_NEWS_TYPE));
@@ -3632,7 +3639,7 @@ public class ActionImpl implements Action {
         
         RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_COMPLAIN_LABELS));
-//        requestEntity.setRequestParams(requestParams);
+        requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.POST);
 
         ProgressDialogResultHandler handler = new ProgressDialogResultHandler(
@@ -3644,9 +3651,20 @@ public class ActionImpl implements Action {
 	public void getRecommendNews(ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
 
+		RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
 		RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_RECOMMEND_NEWS));
-//        requestEntity.setRequestParams(requestParams);
+        requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 
         ResultHandler handler = new ResultHandler();
@@ -3706,9 +3724,20 @@ public class ActionImpl implements Action {
 	@Override
 	public void getHouseSourceSort(ResultHandlerCallback callback) {
 		// TODO Auto-generated method stub
+		
+		RequestParams requestParams = new RequestParams();
+
+        encryptTimeStamp(requestParams);
+        CityBean cityBean = ContentUtils.getCityBean(context);
+        String SiteId = "";
+        if (cityBean != null) {
+            SiteId = cityBean.getSiteId();
+        }
+        requestParams.put("SiteId", SiteId);
+        
 		RequestEntity requestEntity = new RequestEntity();
         requestEntity.setUrl(getAbsoluteUrl(API.GET_HOUSE_SOURCE_SORT));
-//        requestEntity.setRequestParams(requestParams);
+        requestEntity.setRequestParams(requestParams);
         requestEntity.setType(RequestEntity.GET);
 
         ResultHandler handler = new ResultHandler();
