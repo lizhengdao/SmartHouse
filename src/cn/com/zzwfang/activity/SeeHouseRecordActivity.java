@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -188,6 +189,7 @@ public class SeeHouseRecordActivity extends BaseActivity implements
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
 				// TODO 接口返回的数据看房记录和二手房详情返回的数据结构不一样，明天问问
+				Log.i("--->", "getHouseSourceFollowList: " + result.toString());
 				int total = result.getTotal();
 				pageTotal = (int) Math.ceil(((double)total / (double)10));
 				if (isRefresh) {

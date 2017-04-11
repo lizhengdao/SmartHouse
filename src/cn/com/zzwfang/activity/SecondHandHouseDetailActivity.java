@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
@@ -326,7 +325,9 @@ public class SecondHandHouseDetailActivity extends BaseActivity implements
 //				.putSerializable(SeeHouseRecordActivity.INTENT_RECORD,
 //						secondHandHouseDetail.getInqFollowList())
 //			    .putString(SeeHouseRecordActivity.INTENT_SECOND_HAND_HOUSE_ID, secondHandHouseDetail.getEstateId())
-						.putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, secondHandHouseDetail.getEstateId())
+//						.putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, secondHandHouseDetail.getEstateId())
+				.putString(SeeHouseRecordActivity.INTENT_HOUSE_SOURCE_ID, houseSourceId)
+				
 				.jump(this, SeeHouseRecordActivity.class);
 			}
 			

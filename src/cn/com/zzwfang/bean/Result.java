@@ -78,5 +78,13 @@ public class Result extends BaseBean {
 	public void setData(String data) {
 		this.data = data;
 	}
+
+	@Override
+	public String toString() {
+		return "Result [code=" + code + ", message=" + message + ", total="
+				+ total + ", data=" + data + "]";
+	}
+	
+	
     
 }

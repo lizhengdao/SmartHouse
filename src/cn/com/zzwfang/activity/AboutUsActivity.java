@@ -1,6 +1,7 @@
 package cn.com.zzwfang.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
@@ -37,6 +38,7 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 		WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(false);
+        webSettings.setDefaultTextEncodingName("UTF-8");
 		
 		tvBack.setOnClickListener(this);
 	}
@@ -64,7 +66,8 @@ public class AboutUsActivity extends BaseActivity implements OnClickListener {
 			
 			@Override
 			public void rc0(RequestEntity entity, Result result) {
-				webView.loadData(result.getData(), "text/html", "utf-8");
+				Log.i("--->", "getAboutUsData: " + result.toString());
+				webView.loadData(result.getData(), "text/html; charset=UTF-8", null);
 			}
 		});
 	}

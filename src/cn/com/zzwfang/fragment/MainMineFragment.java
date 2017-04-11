@@ -183,6 +183,7 @@ public class MainMineFragment extends BaseFragment implements
         case R.id.llt_frag_mine_fee_hunter: // 赏金猎人个人中心
             boolean loginStatus = ContentUtils
                     .getUserLoginStatus(getActivity());
+            loginStatus = true;
             if (!loginStatus) {
                 Jumper.newJumper()
                         .setAheadInAnimation(R.anim.activity_push_in_right)

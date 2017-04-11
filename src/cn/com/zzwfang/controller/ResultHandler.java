@@ -88,7 +88,7 @@ public class ResultHandler implements ProcessCallback {
 						break;
 						default:
 						    callback.rc999(entity, r);
-							Log.i("--->", "statusCode == " + statusCode);
+//							Log.i("--->", "statusCode == " + statusCode);
 							break;
 
 					}

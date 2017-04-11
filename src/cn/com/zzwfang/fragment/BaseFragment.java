@@ -5,6 +5,7 @@
 package cn.com.zzwfang.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -29,11 +30,21 @@ public abstract class BaseFragment extends Fragment {
     
 //    protected abstract View onCreateRootView(LayoutInflater inflater, ViewGroup container,
 //            Bundle savedInstanceState);
+	
+	protected Context context;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        this.context = activity;
     }
+    
+    @Override
+    	public void onDetach() {
+    		// TODO Auto-generated method stub
+    		super.onDetach();
+    		this.context = null;
+    	}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

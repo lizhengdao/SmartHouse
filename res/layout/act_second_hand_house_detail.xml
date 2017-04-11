@@ -99,7 +99,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -135,7 +135,7 @@
                     </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
+                        android:layout_width="0.6dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="8dp"
                         android:layout_marginTop="8dp"
@@ -165,7 +165,7 @@
                     </LinearLayout>
 
                     <View
-                        android:layout_width="1dp"
+                        android:layout_width="0.6dp"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="8dp"
                         android:layout_marginTop="8dp"
@@ -197,7 +197,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -225,7 +225,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <FrameLayout
@@ -275,7 +275,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -334,7 +334,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -393,7 +393,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -451,7 +451,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -478,7 +478,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <LinearLayout
@@ -509,7 +509,7 @@
                 <View
                     android:id="@+id/act_second_hand_house_detail_inner_three_dimession_display_line"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <TextView
@@ -525,7 +525,7 @@
                 <View
                     android:id="@+id/act_second_hand_house_detail_sand_table_display_line"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.6dp"
                     android:background="@color/color_e0e0e0" />
 
                 <TextView
@@ -542,7 +542,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <View
@@ -552,7 +552,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <TextView
@@ -571,7 +571,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <TextView
@@ -587,7 +587,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <View
@@ -597,7 +597,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <TextView
@@ -616,7 +616,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <com.baidu.mapapi.map.MapView
@@ -627,7 +627,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <View
@@ -637,7 +637,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <!-- 小区成交历史 -->
@@ -658,7 +658,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <LinearLayout
@@ -719,7 +719,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/color_e0e0e0" />
@@ -751,7 +751,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <TextView
@@ -790,7 +790,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.6dp"
                 android:background="@color/color_e0e0e0" />
 
             <LinearLayout
@@ -815,7 +815,7 @@
                     app:top_width="20dp" />
                 
                 <View 
-                    android:layout_width="1dp"
+                    android:layout_width="0.6dp"
                     android:layout_height="match_parent"
                     android:background="@color/color_e0e0e0"/>
                 

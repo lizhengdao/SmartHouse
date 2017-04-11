@@ -300,6 +300,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
 				if (cityBean != null && cityBean.equals(cityBeanSaved)) {
 				    return;
 				}
+				ContentUtils.saveCityBeanData(context, cityBean);
 				if (cityBean != null) {
 					cityId = cityBean.getSiteId();
 					ContentUtils.saveCityBeanData(getActivity(), cityBean);
@@ -478,6 +479,16 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
                         adapter.setCityId(cityBean.getSiteId());
                         
                         
+                        if (cityBean != null) {
+                	        if (cityBean.isOpenMoney()) {
+                	            imgShangjin.setVisibility(View.VISIBLE);
+                	        } else {
+                	            imgShangjin.setVisibility(View.INVISIBLE);
+                	        }
+                	    } else {
+                	        imgShangjin.setVisibility(View.INVISIBLE);
+                	    }
+                        
                         if (onCitySelectedListener != null) {
                             onCitySelectedListener.onCitySelected(cityBean);
                         }
@@ -515,6 +526,7 @@ public class MainHomeFragment extends BaseFragment implements OnClickListener, O
                 @Override
                 public void rc0(RequestEntity entity, Result result) {
                     // TODO Auto-generated method stub
+//                	Log.i("--->", "getCurrentCityByGps: " + result.toString());
                     String city = result.getData();
                     getAreaList(city);
                 }
