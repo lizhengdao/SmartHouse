@@ -24,18 +24,12 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.overlayutil.BusLineOverlay;
 import com.baidu.mapapi.overlayutil.PoiOverlay;
-import com.baidu.mapapi.search.busline.BusLineResult;
 import com.baidu.mapapi.search.busline.BusLineResult.BusStation;
-import com.baidu.mapapi.search.busline.BusLineSearch;
-import com.baidu.mapapi.search.busline.BusLineSearchOption;
-import com.baidu.mapapi.search.busline.OnGetBusLineSearchResultListener;
 import com.baidu.mapapi.search.core.CityInfo;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
@@ -53,7 +47,7 @@ import com.baidu.mapapi.search.sug.SuggestionSearch;
  */
 public class NearbyDetailActivity extends BaseActivity implements
 		OnClickListener, OnGetPoiSearchResultListener,
-		OnGetSuggestionResultListener, OnGetBusLineSearchResultListener {
+		OnGetSuggestionResultListener {  //  OnGetBusLineSearchResultListener
 	
 	public static final String INTENT_LAT = "intent_lat";
 	
@@ -76,11 +70,11 @@ public class NearbyDetailActivity extends BaseActivity implements
 
 	private LatLng curLatLng;
 	
-	private BusLineSearch busLineSearch;
+//	private BusLineSearch busLineSearch;
 	
-	private List<BusStation>stations;//用于存放某条公交线路中的所有站点信息  
-	private List<String> busLineUidList;//公交路线的uid集合
-	private int buslineIndex = 0;// 标记第几个路线
+//	private List<BusStation>stations;//用于存放某条公交线路中的所有站点信息  
+//	private List<String> busLineUidList;//公交路线的uid集合
+//	private int buslineIndex = 0;// 标记第几个路线
 	
 	private boolean isSearchSubway = false;
 
@@ -120,7 +114,7 @@ public class NearbyDetailActivity extends BaseActivity implements
 
 		mapView.showZoomControls(false);
 		
-		busLineUidList = new ArrayList<String>();
+//		busLineUidList = new ArrayList<String>();
 		
 		// 初始化搜索模块，注册搜索事件监听
 		mPoiSearch = PoiSearch.newInstance();
@@ -131,8 +125,8 @@ public class NearbyDetailActivity extends BaseActivity implements
 		
 		
 		
-		busLineSearch = BusLineSearch.newInstance();
-		busLineSearch.setOnGetBusLineSearchResultListener(this);
+//		busLineSearch = BusLineSearch.newInstance();
+//		busLineSearch.setOnGetBusLineSearchResultListener(this);
 		
 		curLatLng = new LatLng(lat, lng);
 		MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(curLatLng);
@@ -228,7 +222,7 @@ public class NearbyDetailActivity extends BaseActivity implements
 				if (cityBean != null) {
 					String city = cityBean.getName();
 					if (!TextUtils.isEmpty(city)) {
-						Toast.makeText(NearbyDetailActivity.this, "搜索 " + city + keyWords, Toast.LENGTH_LONG).show();
+//						Toast.makeText(NearbyDetailActivity.this, "搜索 " + city + keyWords, Toast.LENGTH_LONG).show();
 //						mPoiSearch.searchInCity(new PoiCitySearchOption().city(city).keyword(keyWords).pageNum(10).pageCapacity(10));
 						
 //						mPoiSearch.searchInCity(new PoiCitySearchOption().city(city).keyword(keyWords));
@@ -384,76 +378,76 @@ public class NearbyDetailActivity extends BaseActivity implements
 		super.onDestroy();
 	}
 
-	@Override
-	public void onGetBusLineResult(BusLineResult busLineResult) {
-		// TODO Auto-generated method stub
-		if (busLineResult.error == SearchResult.ERRORNO.NO_ERROR) {//表示得到结果类型是NO_ERROR,没有错误,就说明返回了公交线路的信息  
-			mBaiduMap.clear();  
-            BusLineOverlay overlay = new MyBuslineOverlay(mBaiduMap);// 用于显示一条公交详情结果的Overlay,定义一个公交线路的图层用于显示公交线路  
-            overlay.setData(busLineResult);  
-            overlay.addToMap();// 将overlay添加到地图上  
-            overlay.zoomToSpan();// 缩放地图，使所有overlay都在合适的视野范围内  
-            mBaiduMap.setOnMarkerClickListener(overlay);  
-            // 公交线路名称  
-             stations =  busLineResult.getStations();//通过getStations方法可以得到该条公交线路中途径的所有的站台  
-        /*  for (int i=0;i<stations.size();i++) { 
-                toast("第"+(i+1)+"站: "+stations.get(i).getTitle()); 
-            } 
-            toast("线路:"+busLineResult.getBusLineName()+"   首班车时间:"+busLineResult.getStartTime()+" 末班车时间："+busLineResult.getEndTime());*/  
-        } else {//否则提示未找到结果  
-            Toast.makeText(NearbyDetailActivity.this, "抱歉，未找到结果",  
-                    Toast.LENGTH_SHORT).show();  
-
-        }  
-    }  
+//	@Override
+//	public void onGetBusLineResult(BusLineResult busLineResult) {
+//		// TODO Auto-generated method stub
+//		if (busLineResult.error == SearchResult.ERRORNO.NO_ERROR) {//表示得到结果类型是NO_ERROR,没有错误,就说明返回了公交线路的信息  
+//			mBaiduMap.clear();  
+//            BusLineOverlay overlay = new MyBuslineOverlay(mBaiduMap);// 用于显示一条公交详情结果的Overlay,定义一个公交线路的图层用于显示公交线路  
+//            overlay.setData(busLineResult);  
+//            overlay.addToMap();// 将overlay添加到地图上  
+//            overlay.zoomToSpan();// 缩放地图，使所有overlay都在合适的视野范围内  
+//            mBaiduMap.setOnMarkerClickListener(overlay);  
+//            // 公交线路名称  
+//             stations =  busLineResult.getStations();//通过getStations方法可以得到该条公交线路中途径的所有的站台  
+//        /*  for (int i=0;i<stations.size();i++) { 
+//                toast("第"+(i+1)+"站: "+stations.get(i).getTitle()); 
+//            } 
+//            toast("线路:"+busLineResult.getBusLineName()+"   首班车时间:"+busLineResult.getStartTime()+" 末班车时间："+busLineResult.getEndTime());*/  
+//        } else {//否则提示未找到结果  
+//            Toast.makeText(NearbyDetailActivity.this, "抱歉，未找到结果",  
+//                    Toast.LENGTH_SHORT).show();  
+//
+//        }  
+//    }  
 	
 	/**
 	 * @author mikyou
 	 * 搜索公交线路
 	 * */
-	private void searchBusline() {
-		if (buslineIndex >= busLineUidList.size()) {//表示上一次的数据buslineIndex没有清空,所以就对buslineIndex进行初始化
-			buslineIndex = 0;
-		}
-		if (buslineIndex >= 0 && buslineIndex < busLineUidList.size()
-				&& busLineUidList.size() > 0) {
-			//下面表示如果检索到了相应的公交线路,就返回true,否则返回false;这里的cityName就是传入的城市名,
-			//cityName是通过MainActivity中的定位得到城市,所以也就实现了默认查询你所处城市的公交路线,
-			//uid就传入通过poiSearch检索到的兴趣点中并筛选出的公交或地铁类型的uid,然后就通过OnGetBusLineSearchResultListener监听器
-			//如果监听有公交线路信息,就返回一个true 
-			CityBean cityBean = ContentUtils.getCityBean(this);
-			if (cityBean != null) {
-				String cityName = cityBean.getName();
-				boolean flag = busLineSearch.searchBusLine((new BusLineSearchOption().city(cityName).uid(busLineUidList.get(buslineIndex))));
-				if (flag) {
-					Toast.makeText(NearbyDetailActivity.this, "检索成功~", 1000)
-					.show();
-				} else {
-					Toast.makeText(NearbyDetailActivity.this, "检索失败~", 1000)
-					.show();
-				}
-				buslineIndex++;
-			}
-			
-		}
-	}
-	
-	class MyBuslineOverlay extends BusLineOverlay {  
-		  
-        public MyBuslineOverlay(BaiduMap arg0) {  
-            super(arg0);  
-        }  
-  
-        /** 
-         * 站点点击事件 
-         */  
-        @Override  
-        public boolean onBusStationClick(int position) {//对显示在地图上的公交图层设置监听事件,position就是传入的是位置序号  
-            MarkerOptions options = (MarkerOptions) getOverlayOptions().get(position);  
-            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newLatLng(options.getPosition()));  
-            Toast.makeText(NearbyDetailActivity.this, stations.get(position).getTitle()+"站", Toast.LENGTH_LONG).show();//实现点击某个站点图标弹出该站点的名称  
-            return true;  
-        }  
-    }  
+//	private void searchBusline() {
+//		if (buslineIndex >= busLineUidList.size()) {//表示上一次的数据buslineIndex没有清空,所以就对buslineIndex进行初始化
+//			buslineIndex = 0;
+//		}
+//		if (buslineIndex >= 0 && buslineIndex < busLineUidList.size()
+//				&& busLineUidList.size() > 0) {
+//			//下面表示如果检索到了相应的公交线路,就返回true,否则返回false;这里的cityName就是传入的城市名,
+//			//cityName是通过MainActivity中的定位得到城市,所以也就实现了默认查询你所处城市的公交路线,
+//			//uid就传入通过poiSearch检索到的兴趣点中并筛选出的公交或地铁类型的uid,然后就通过OnGetBusLineSearchResultListener监听器
+//			//如果监听有公交线路信息,就返回一个true 
+//			CityBean cityBean = ContentUtils.getCityBean(this);
+//			if (cityBean != null) {
+//				String cityName = cityBean.getName();
+//				boolean flag = busLineSearch.searchBusLine((new BusLineSearchOption().city(cityName).uid(busLineUidList.get(buslineIndex))));
+//				if (flag) {
+//					Toast.makeText(NearbyDetailActivity.this, "检索成功~", 1000)
+//					.show();
+//				} else {
+//					Toast.makeText(NearbyDetailActivity.this, "检索失败~", 1000)
+//					.show();
+//				}
+//				buslineIndex++;
+//			}
+//			
+//		}
+//	}
+//	
+//	class MyBuslineOverlay extends BusLineOverlay {  
+//		  
+//        public MyBuslineOverlay(BaiduMap arg0) {  
+//            super(arg0);  
+//        }  
+//  
+//        /** 
+//         * 站点点击事件 
+//         */  
+//        @Override  
+//        public boolean onBusStationClick(int position) {//对显示在地图上的公交图层设置监听事件,position就是传入的是位置序号  
+//            MarkerOptions options = (MarkerOptions) getOverlayOptions().get(position);  
+//            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newLatLng(options.getPosition()));  
+//            Toast.makeText(NearbyDetailActivity.this, stations.get(position).getTitle()+"站", Toast.LENGTH_LONG).show();//实现点击某个站点图标弹出该站点的名称  
+//            return true;  
+//        }  
+//    }  
 
 }

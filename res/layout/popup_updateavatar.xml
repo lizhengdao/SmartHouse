@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom"
-    android:background="#55e0e0e0" >
+    android:background="#e0e0e0" >
     
     <TextView 
         android:id="@+id/popup_update_avatar_from_camera_tv"
@@ -13,11 +13,12 @@
         android:gravity="center"
         android:background="@color/white"
         android:text="@string/popup_update_avatar_from_camera"
+        android:textColor="@color/black"
         android:textSize="16sp"/>
     
     <View 
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.6dp"
         android:background="@color/color_e2e2e2"/>
     
     <TextView 
@@ -38,6 +39,7 @@
         android:gravity="center"
         android:background="@color/white"
         android:text="@string/popup_update_avatar_cancel"
+        android:textColor="@color/black"
         android:textSize="16sp"/>
 
 </LinearLayout>

@@ -3,7 +3,6 @@ package cn.com.zzwfang.activity;
 import java.util.ArrayList;
 
 import com.alibaba.fastjson.JSON;
-import com.tencent.mm.sdk.platformtools.Log;
 
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.CompanyAnnouncementDetailCommentAdapter;

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import cn.com.zzwfang.R;
 import cn.com.zzwfang.adapter.ClientInfoChangeAdapter;
 import cn.com.zzwfang.adapter.HouseSourceInfoChangeAdapter;
-import cn.com.zzwfang.adapter.QueryAfterSaleAdapter;
 import cn.com.zzwfang.bean.ClientInfoChangeBean;
 import cn.com.zzwfang.bean.ClientProgressBean;
 import cn.com.zzwfang.bean.FeeHunterHouseSourceProgress;
